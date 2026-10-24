@@ -34,11 +34,10 @@ a{color:inherit}
 @keyframes shine{from{left:-30%}to{left:130%}}
 .ctc{justify-self:end}.ctc .in{font-size:18px;padding:6px 18px}.ctc .in svg{width:20px;height:20px}
 .noimg{position:absolute;inset:0;display:grid;place-items:center;color:#2c2c2c}.noimg svg{width:40%;height:auto}
-@media(prefers-reduced-motion:reduce){.nv,.nv::before,.nv .in,.nv .in svg{transition:none}.nv:hover::after{animation:none}}
 .hero{position:relative;max-width:100%;margin:auto}
-.hero img{width:100%;height:clamp(250px,46vw,650px);object-fit:cover;object-position:center;display:block}
+.hero img{width:100%;height:clamp(250px,46vw,550px);object-fit:cover;object-position:center;display:block}
 .hero::after{content:"";position:absolute;inset:auto 0 0;height:35%;background:linear-gradient(transparent,var(--bg))}
-.hero .btn{position:absolute;left:50%;bottom:5%;transform:translateX(-50%);z-index:1}
+.hero .btn{position:absolute;left:50%;bottom:6%;transform:translateX(-50%);z-index:1}
 .btn{display:inline-block;border:0;cursor:pointer;font:800 15px "Hanken Grotesk",sans-serif;padding:13px 28px;border-radius:999px;background:var(--gold);color:#000;text-decoration:none}
 .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
 .btn.sm{padding:8px 14px;font-size:13px}.btn.red{background:#c62828;color:#fff}
@@ -99,7 +98,7 @@ input,select,textarea{font:inherit;padding:9px 10px;border:1.5px solid var(--lin
  .info{padding:14px}
 }
 @media(max-width:640px){.top{grid-template-columns:1fr auto}.top nav{grid-column:1/-1;grid-row:2;gap:14px;flex-wrap:wrap}.nv .in{padding:6px 16px;font-size:20px}.ctc .in{font-size:16px;padding:5px 14px}.logo{height:46px}form.f{grid-template-columns:1fr}}
-@media(prefers-reduced-motion:no-preference){.card{transition:transform .15s,border-color .15s}.card:hover{transform:translateY(-3px);border-color:var(--gold)}}
+.card{transition:transform .15s,border-color .15s}.card:hover{transform:translateY(-3px);border-color:var(--gold)}
 
 /* ===== Menú a todo el alto + banners con cambio de color en diagonal ===== */
 .top{padding:0 5vw;gap:0 16px;min-height:70px}
@@ -126,7 +125,6 @@ input,select,textarea{font:inherit;padding:9px 10px;border:1.5px solid var(--lin
  .nv .in{padding:0 12px;font-size:19px}
  .ctc .in{padding:0 16px;font-size:16px}
 }
-@media(prefers-reduced-motion:reduce){.banner::before,.banner h2,.banner p{transition:none}}
 
 /* ===== Formas en diagonal para botones, chips, tarjetas y banners (las fuentes no se tocan) ===== */
 .btn,.wa,.sizes button,.fab,footer .links a{--sk:12px;--P:polygon(var(--sk) 0,100% 0,calc(100% - var(--sk)) 100%,0 100%);border:0!important;border-radius:0!important;clip-path:var(--P);background:var(--o)!important;color:var(--t1)!important;isolation:isolate;box-shadow:none;transition:color .3s}
@@ -159,7 +157,6 @@ footer .links a:hover,footer .links a:focus-visible{--o:var(--gold)}
 .banner{padding:22px calc(22px + var(--sk))}
 @media(min-width:900px){.banner{position:sticky}}
 @media(max-width:640px){.card,.banner{--sk:12px}}
-@media(prefers-reduced-motion:reduce){.btn::before,.wa::before,.sizes button::before,.fab::before,footer .links a::before,.card::after{transition:none}}
 
 /* ===== Efecto de escritura + letras blancas en el menú ===== */
 .tw{position:relative;display:inline-block;white-space:nowrap}
@@ -169,18 +166,15 @@ footer .links a:hover,footer .links a:focus-visible{--o:var(--gold)}
 .tw.done .ty::after{opacity:0;animation:none}
 @keyframes blink{50%{opacity:0}}
 .hero-type{position:absolute;left:0;right:0;bottom:0;z-index:1;text-align:center;color:var(--gold);font-size:clamp(15px,2.4vw,30px);padding:34px 0 8px;background:linear-gradient(transparent,var(--bg) 60%);pointer-events:none;text-shadow:0 2px 10px #000}
-.hero .btn{z-index:3}
-@media(max-width:640px){.hero .btn{bottom:calc(6% + 26px)}}
 .nv .in{color:#fff}
 .nv .in svg{color:var(--gold)}
 .nv:hover .in svg,.nv:focus-visible .in svg{color:#000}
 </style>
 </head>
 <body>
-<header class="top"><a href="#" aria-label="Inicio"><img class="logo" src="C:/Users/ASUS/Documents/logo.png" alt="GORRAX"></a><nav id="nav"></nav><a class="nv ctc" href="#contacto"><span class="in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.6-1.2A9 9 0 1 0 12 3z"/></svg>Contacto</span></a></header>
+<header class="top"><a href="#" aria-label="Inicio"><img class="logo" src="img/logo.png" alt="GORRAX"></a><nav id="nav"></nav><a class="nv ctc" href="#contacto"><span class="in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.6-1.2A9 9 0 1 0 12 3z"/></svg>Contacto</span></a></header>
 
-<section class="hero"><img src="C:/Users/ASUS/Documents/hero.jpg" alt="Gorras y buzos GORRAX">
-  <div class="hero-type hand"><span class="tw" id="tyHero" aria-label="Tu estilo, tu corona"><span class="gh" aria-hidden="true"></span><span class="ty" aria-hidden="true"></span></span></div></section> 
+<section class="hero"><img src="img/hero.jpg" alt="Gorras y buzos GORRAX"><div class="hero-type hand"><span class="tw" id="tyHero" aria-label="Tu estilo, tu corona"><span class="gh" aria-hidden="true">Tu estilo, tu corona</span><span class="ty" aria-hidden="true"></span></span></div></section>
 
 <section class="feat">
   <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15c0-5 3-8 8-8s8 3 8 8z"/><path d="M19 15h3M3 15h16v2H3z"/></svg>Gorras de<br>alta calidad</div>
@@ -226,12 +220,12 @@ footer .links a:hover,footer .links a:focus-visible{--o:var(--gold)}
   </div>
 </dialog>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.9"></script>
 <script>
 /* ====== CONFIGURA AQUÍ ====== */
 const CFG={
-  SUPABASE_URL:'https://TU-PROYECTO.supabase.co',
-  SUPABASE_KEY:'TU_CLAVE_ANON',
+  SUPABASE_URL:'https://lffgkjvftqkztzrcruqf.supabase.co',
+  SUPABASE_KEY:'sb_publishable_ksBAS6laO-jL1ib3Y5uzpA_zDObxFZX',
   WHATSAPP:'573001234567',            // país + número, sin + ni espacios
   STORE:'GORRAX',
   SOCIAL:{Instagram:'',Facebook:'',TikTok:''},   // pega aquí tus enlaces
@@ -380,7 +374,7 @@ function typer(el){
 }
 document.querySelectorAll('.tw').forEach(el=>{
   const t=typer(el);
-  if(matchMedia('(prefers-reduced-motion:reduce)').matches||!('IntersectionObserver' in window)){el.querySelector('.ty').textContent=el.querySelector('.gh').textContent;el.classList.add('done');return}
+  if(!('IntersectionObserver' in window)){el.querySelector('.ty').textContent=el.querySelector('.gh').textContent;el.classList.add('done');return}
   new IntersectionObserver(([e])=>e.isIntersecting?t.run():t.stop(),{threshold:.6}).observe(el);
 });
 
