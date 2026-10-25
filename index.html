@@ -216,8 +216,8 @@ button.nv{padding:0;font:inherit;cursor:pointer;color:inherit}
 .gi img{width:100%;height:100%;object-fit:cover;border-radius:4px;background:#0d0d0d}
 .gi button{position:absolute;top:-7px;right:-7px;width:24px;height:24px;border-radius:50%;border:0;background:#c62828;color:#fff;font-size:16px;line-height:1;cursor:pointer}
 .gi em{position:absolute;left:0;right:0;bottom:0;background:var(--gold);color:#000;font:700 11px "Hanken Grotesk",sans-serif;text-align:center}
-.feat div:last-child{grid-column:1/-1;justify-content:center}
-@media(min-width:760px){.feat{grid-template-columns:repeat(5,1fr)}.feat div:last-child{grid-column:auto;justify-content:flex-start}}
+@media(min-width:760px){.feat{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1100px){.feat{grid-template-columns:repeat(6,1fr)}}
 .ph,[data-theme=light] .ph{background:#fff}
 .noimg,[data-theme=light] .noimg{color:#d3d3d3}
 /* ===== Ventana de fotos: centrada, más pequeña y botón en la esquina ===== */
@@ -238,6 +238,21 @@ dialog{margin:auto}
 [data-theme=light] .wh{color:var(--ink)}
 .crown{display:block;width:50px;height:auto;margin:0 auto 8px;color:#fff}
 [data-theme=light] .crown{color:var(--ink)}
+
+/* ===== Combos, ahorro, segunda foto y menú que filtra ===== */
+#catalogo{scroll-margin-top:84px}
+.nv.on::before{transform:none}
+.nv.on .in,.nv.on .in svg{color:#000}
+.old{margin-left:8px;color:var(--muted);text-decoration:line-through;font-size:14px;font-weight:600}
+.save{margin-left:8px;background:var(--gold);color:#000;font-size:12px;font-weight:800;padding:2px 8px;border-radius:999px;vertical-align:2px;white-space:nowrap}
+.ph .im2{position:absolute;inset:0;z-index:1;opacity:0;transition:opacity .35s}
+.ph .im1{transition:opacity .35s,transform .35s}
+@media(hover:hover){.ph:hover .im2{opacity:1}.ph:hover .im1{opacity:0}}
+.ph.alt .im2{opacity:1}.ph.alt .im1{opacity:0}
+.cbx{border:1.5px dashed var(--line);padding:10px 12px;border-radius:6px}
+.cbx summary{cursor:pointer;font-weight:700;color:var(--gold)}
+.cbg{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;align-items:end;margin-top:10px}
+@media(max-width:640px){.cbg{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -249,7 +264,8 @@ dialog{margin:auto}
   <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15c0-5 3-8 8-8s8 3 8 8z"/><path d="M19 15h3M3 15h16v2H3z"/></svg>Gorras de<br>alta calidad</div>
   <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3.5 4.5 6 2.5 19.5H6l1-9v10.5h10V10.5l1 9h3.5L19.5 6 15 3.5"/><path d="M9 3.5C9.5 2 10.5 1.5 12 1.5s2.5.5 3 2c0 2-1.5 3.5-3 3.5S9 5.5 9 3.5z"/><path d="M10.5 7.5v3M13.5 7.5v3M9.5 14.5h5l.8 4H8.7z"/></svg>Buzos<br>premium</div>
   <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6h12v10H2zM14 9h4l3 3v4h-7"/><circle cx="6" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>Envíos a<br>todo el país</div>
-  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>Estilo<br>garantizado</div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>Estilos<br>únicos</div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>1 Año de<br>garantía</div>
   <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="1.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3M12 15v2"/></svg>Pago 100%<br>seguro</div>
 </section>
 
@@ -275,10 +291,20 @@ dialog{margin:auto}
     <div id="panel" hidden>
       <form id="pf" class="f">
         <input type="hidden" id="pid">
-        <label class="w">Nombre<input id="pn" required></label>
-        <label class="w">Categoría<input id="pc" required placeholder="Elige una o escribe una nueva" autocomplete="off"><div class="sizes cchips" id="cchips"></div></label>
+        <details class="w cbx"><summary>Armar combo (gorra + buzo + reloj con descuento)</summary>
+          <div class="cbg">
+            <label>Gorra<select id="cbG"></select></label>
+            <label>Buzo<select id="cbB"></select></label>
+            <label>Reloj<select id="cbR"></select></label>
+            <label>Descuento %<input type="number" id="cbD" value="10" min="1" max="60"></label>
+            <button type="button" class="btn sm" id="cbGo">Armar combo</button>
+          </div>
+        </details>
+        <label>Nombre<input id="pn" required placeholder="Escribe para buscar o crear" autocomplete="off"></label>
+        <label>Categoría<input id="pc" required placeholder="Elige una o escribe una nueva" autocomplete="off"><div class="sizes cchips" id="cchips"></div></label>
         <label>Precio (COP)<input type="number" id="pp" min="0" step="500" required></label>
-        <label>Tallas (separadas por coma)<input id="ps" placeholder="S, M, L, XL"></label>
+        <label>Precio normal (opcional, muestra el ahorro)<input type="number" id="pcmp" min="0" step="500"></label>
+        <label class="w">Tallas (separadas por coma)<input id="ps" placeholder="S, M, L, XL"></label>
         <label class="w">Descripción<textarea id="pd" rows="2"></textarea></label>
         <label class="w">Fotos (hasta 5; la primera es la portada)<input type="file" id="pimg" accept="image/*" multiple></label>
         <div class="w gal" id="gal"></div>
@@ -307,8 +333,8 @@ const CFG={
   WHATSAPP:'573169606116',            // país + número, sin + ni espacios
   STORE:'GORRAX',
   SOCIAL:{Instagram:'',Facebook:'',TikTok:''},   // pega aquí tus enlaces
-  CAT_ORDER:['gorras','buzos','relojes','zapatos'],
-  CAT_INFO:{gorras:'Visera plana, actitud real.',buzos:'Premium y con corona.',relojes:'Tiempo con estilo.',zapatos:'Pisa con actitud.'}
+  CAT_ORDER:['combos','gorras','buzos','relojes','zapatos'],
+  CAT_INFO:{gorras:'Visera plana, actitud real.',buzos:'Premium y con corona.',relojes:'Tiempo con estilo.',zapatos:'Pisa con actitud.',combos:'Lleva el set completo y ahorra.'}
 };
 /* ============================ */
 const DEMO=CFG.SUPABASE_URL.includes('TU-PROYECTO')||/[?&]demo/.test(location.search); // agrega ?demo a la dirección para ver ejemplos
@@ -363,14 +389,18 @@ const NAVICO={
  gorras:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15v-2.5a8 8 0 0 1 16 0V15"/><path d="M2.5 15h14.5c2.6 0 4.5.8 4.5 2H2.5z"/><path d="M12 4.5v3"/></svg>',
  buzos:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3.5 4.5 6 2.5 19.5H6l1-9v10.5h10V10.5l1 9h3.5L19.5 6 15 3.5"/><path d="M9 3.5C9.5 2 10.5 1.5 12 1.5s2.5.5 3 2c0 2-1.5 3.5-3 3.5S9 5.5 9 3.5z"/><path d="M10.5 7.5v3M13.5 7.5v3M9.5 14.5h5l.8 4H8.7z"/></svg>',
  relojes:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5.5"/><path d="M9 6.5 9.8 2.5h4.4L15 6.5M9 17.5l.8 4h4.4l.8-4M12 9.5V12l1.8 1.2"/></svg>',
+ combos:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16v4H4z"/><path d="M5 13v8h14v-8M12 9v12"/><path d="M12 9C10 9 8 8 8 6.5S9.5 4 11 5l1 1.5M12 9c2 0 4-1 4-2.5S14.5 4 13 5l-1 1.5"/></svg>',
  zapatos:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17v-3c2 0 3-1 4-3l2 1c1 1 2 1 4 1l4 2c2 1 3 2 3 4H3z"/><path d="M9 11l1.5-2"/></svg>',
  otro:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M3 12 12 3h9v9l-9 9z"/><circle cx="16" cy="8" r="1.3"/></svg>'};
+let activeCat=null;
 function render(){
   const groups={};products.forEach(p=>{(groups[p.category]??=[]).push(p)});
   const rank=c=>{const i=CFG.CAT_ORDER.indexOf(slug(c));return i<0?99:i};
   const cats=Object.keys(groups).sort((a,b)=>rank(a)-rank(b));
-  $('nav').innerHTML=cats.map(c=>`<a class="nv" href="#${slug(c)}"><span class="in">${NAVICO[slug(c)]||NAVICO.otro}${esc(c)}</span></a>`).join('');
-  $('catalogo').innerHTML=cats.length?cats.map(c=>`
+  if(activeCat&&!cats.some(c=>slug(c)===activeCat))activeCat=null;
+  const shown=activeCat?cats.filter(c=>slug(c)===activeCat):cats;
+  $('nav').innerHTML=cats.map(c=>`<a class="nv${slug(c)===activeCat?' on':''}" href="#${slug(c)}" data-c="${slug(c)}"><span class="in">${NAVICO[slug(c)]||NAVICO.otro}${esc(c)}</span></a>`).join('');
+  $('catalogo').innerHTML=shown.length?shown.map(c=>`
    <section class="cat" id="${slug(c)}">
     <aside class="banner"><h2>${esc(c)}</h2><p>${esc(CFG.CAT_INFO[slug(c)]||'Nueva colección.')} ${groups[c].length} ${groups[c].length==1?'producto':'productos'}.</p></aside>
     <div class="grid">${groups[c].map(card).join('')}</div>
@@ -379,8 +409,8 @@ function render(){
 function card(p){
   const sizes=(p.sizes||[]);const first=sizes[0]||'';const im=imgs(p);
   return `<article class="card" data-id="${p.id}">
-   <div class="ph"><div class="noimg">${NAVICO[slug(p.category)]||NAVICO.otro}</div>${im[0]?`<img src="${esc(im[0])}" alt="${esc(p.name)}" loading="lazy" onerror="this.remove()">`:''}${im.length>1?`<span class="cnt">${im.length} fotos</span>`:''}${p.available===false?'<span class="tag">Agotado</span>':''}</div>
-   <div class="info"><h3>${esc(p.name)}</h3><div class="price">${money(p.price)}</div>
+   <div class="ph"><div class="noimg">${NAVICO[slug(p.category)]||NAVICO.otro}</div>${im[0]?`<img class="im1" src="${esc(im[0])}" alt="${esc(p.name)}" loading="lazy" onerror="this.remove()">`:''}${im[1]?`<img class="im2" src="${esc(im[1])}" alt="" loading="lazy" onerror="this.remove()">`:''}${im.length>1?`<span class="cnt">${im.length} fotos</span>`:''}${p.available===false?'<span class="tag">Agotado</span>':''}</div>
+   <div class="info"><h3>${esc(p.name)}</h3><div class="price">${money(p.price)}${saveTag(p)}</div>
    ${p.description?`<p class="desc">${esc(p.description)}</p>`:''}
    ${sizes.length?`<div class="sizes" role="group" aria-label="Talla">${sizes.map((s,i)=>`<button type="button" data-s="${esc(s)}" class="${i?'':'on'}">${esc(s)}</button>`).join('')}</div>`:''}
    <a class="wa ${p.available===false?'off':''}" target="_blank" rel="noopener" href="${wa(prodMsg(p,first))}">Pedir por WhatsApp</a></div></article>`;
@@ -422,16 +452,22 @@ $('login').onsubmit=async e=>{e.preventDefault();
   const{error}=await sb.auth.signInWithPassword({email:$('em').value,password:$('pw').value});
   if(error)return say('Correo o contraseña incorrectos.');$('pw').value='';gate(true)};
 $('out').onclick=async()=>{await sb.auth.signOut();gate(false)};
-function alist(){catChips();
-  $('alist').innerHTML=products.length?products.map(p=>`<div class="row">${imgs(p)[0]?`<img src="${esc(imgs(p)[0])}" alt="">`:'<i></i>'}
+const sg=s=>slug(s||'').replace(/^-+|-+$/g,'');
+function alist(){
+  catChips();fillCombo();
+  const q=sg($('pn').value),c=sg($('pc').value),editing=!!$('pid').value;
+  const list=editing?products:products.filter(p=>(!q||sg(p.name).includes(q))&&(!c||sg(p.category).includes(c)));
+  const filtered=!editing&&(q||c);
+  const head=products.length?`<p class="desc" style="margin-bottom:6px">Mostrando ${list.length} de ${products.length} productos${filtered?' &nbsp;<button type="button" class="btn ghost sm" data-clr="1">Quitar filtro</button>':''}</p>`:'';
+  $('alist').innerHTML=head+(list.length?list.map(p=>`<div class="row">${imgs(p)[0]?`<img src="${esc(imgs(p)[0])}" alt="">`:'<i></i>'}
    <div><b>${esc(p.name)}</b><br><small>${esc(p.category)} · ${money(p.price)}${p.available===false?' · Agotado':''}</small></div>
-   <button class="btn ghost sm" data-e="${p.id}">Editar</button><button class="btn red sm" data-d="${p.id}">Eliminar</button></div>`).join(''):'<p class="desc">Aún no hay productos. Crea el primero arriba.</p>';
+   <button class="btn ghost sm" data-e="${p.id}">Editar</button><button class="btn red sm" data-d="${p.id}">Eliminar</button></div>`).join(''):`<p class="desc">${products.length?'Ningún producto coincide: puedes crearlo con el botón Guardar.':'Aún no hay productos. Crea el primero arriba.'}</p>`);
 }
 let keep=[],added=[],removed=[];
 function gal(){
   $('gal').innerHTML=keep.map((u,i)=>`<div class="gi"><img src="${esc(u)}" alt=""><button type="button" data-k="${i}" aria-label="Quitar foto">×</button>${i===0?'<em>Portada</em>':''}</div>`).join('')+added.map((a,i)=>`<div class="gi"><img src="${a.u}" alt=""><button type="button" data-a="${i}" aria-label="Quitar foto">×</button>${!keep.length&&i===0?'<em>Portada</em>':''}</div>`).join('');
 }
-function clear(){$('pf').reset();catChips();$('pid').value='';$('pa').checked=true;keep=[];added=[];removed=[];gal()}
+function clear(){$('pf').reset();alist();$('pid').value='';$('pa').checked=true;keep=[];added=[];removed=[];gal()}
 $('cl').onclick=()=>{clear();say('')};
 $('pimg').onchange=e=>{
   const room=Math.max(5-keep.length-added.length,0),fs=[...e.target.files];
@@ -441,16 +477,17 @@ $('pimg').onchange=e=>{
 $('gal').onclick=e=>{const b=e.target.closest('button');if(!b)return;
   if(b.dataset.k!==undefined)removed.push(keep.splice(+b.dataset.k,1)[0]);else added.splice(+b.dataset.a,1);gal()};
 $('alist').onclick=async e=>{
+  if(e.target.dataset.clr){$('pn').value='';$('pc').value='';alist();return}
   const ed=e.target.dataset.e,dl=e.target.dataset.d;
   if(ed){const p=products.find(x=>String(x.id)===ed);
-    $('pid').value=p.id;$('pn').value=p.name;$('pc').value=p.category;catChips();$('pp').value=p.price;
-    $('ps').value=(p.sizes||[]).join(', ');$('pd').value=p.description||'';$('pa').checked=p.available!==false;
+    $('pid').value=p.id;$('pn').value=p.name;$('pc').value=p.category;alist();$('pp').value=p.price;
+    $('ps').value=(p.sizes||[]).join(', ');$('pcmp').value=p.compare_price||'';$('pd').value=p.description||'';$('pa').checked=p.available!==false;
     keep=[...imgs(p)];added=[];removed=[];gal();say('Editando “'+p.name+'”. Guarda cuando termines.',true);dlg.scrollTo({top:0,behavior:'smooth'})}
   if(dl){const p=products.find(x=>String(x.id)===dl);
     if(!confirm('¿Eliminar “'+p.name+'”? No se puede deshacer.'))return;
     const{error}=await sb.from('products').delete().eq('id',dl);
     if(error)return say('No se pudo eliminar: '+error.message);
-    const all=imgs(p).filter(u=>u.includes('/productos/'));if(all.length)await sb.storage.from('productos').remove(all.map(u=>u.split('/productos/')[1]));
+    const all=imgs(p).filter(u=>u.includes('/productos/')&&!used(u,p.id));if(all.length)await sb.storage.from('productos').remove(all.map(u=>u.split('/productos/')[1]));
     await load();alist();say('Producto eliminado.',true)}
 };
 const shrink=(f,max=1100)=>new Promise(r=>{const i=new Image();i.onload=()=>{const k=Math.min(1,max/Math.max(i.width,i.height)),c=document.createElement('canvas');c.width=i.width*k;c.height=i.height*k;c.getContext('2d').drawImage(i,0,0,c.width,c.height);c.toBlob(r,'image/jpeg',.82)};i.src=URL.createObjectURL(f)});
@@ -458,7 +495,7 @@ $('pf').onsubmit=async e=>{e.preventDefault();$('sv').disabled=true;say('Guardan
   try{
     const id=$('pid').value;
     const row={name:$('pn').value.trim(),category:$('pc').value.trim(),price:Number($('pp').value),
-      sizes:$('ps').value.split(',').map(s=>s.trim()).filter(Boolean),description:$('pd').value.trim(),available:$('pa').checked};
+      sizes:$('ps').value.split(',').map(s=>s.trim()).filter(Boolean),description:$('pd').value.trim(),available:$('pa').checked,compare_price:$('pcmp').value?Number($('pcmp').value):null};
     const urls=[...keep];
     for(const {f} of added){const path=`${Date.now()}-${Math.random().toString(36).slice(2,8)}.jpg`;
       const up=await sb.storage.from('productos').upload(path,await shrink(f),{contentType:'image/jpeg'});
@@ -466,9 +503,9 @@ $('pf').onsubmit=async e=>{e.preventDefault();$('sv').disabled=true;say('Guardan
     row.image_url=urls[0]||null;row.images=urls;
     const save=x=>id?sb.from('products').update(x).eq('id',id):sb.from('products').insert(x);
     let r=await save(row),aviso='';
-    if(r.error&&/images/i.test(r.error.message)){delete row.images;r=await save(row);aviso=' Ejecuta actualizar-fotos.sql en Supabase para guardar varias fotos por producto.'}
+    if(r.error&&/images|compare_price/i.test(r.error.message)){delete row.images;delete row.compare_price;r=await save(row);aviso=' Ejecuta actualizar-tienda.sql en Supabase para guardar varias fotos y el precio de ahorro.'}
     if(r.error)throw r.error;
-    const gone=removed.filter(u=>u&&u.includes('/productos/'));
+    const gone=removed.filter(u=>u&&u.includes('/productos/')&&!used(u,id));
     if(gone.length)await sb.storage.from('productos').remove(gone.map(u=>u.split('/productos/')[1]));
     clear();await load();alist();say('Producto guardado.'+aviso,true);
   }catch(err){say('Error: '+err.message)}
@@ -488,15 +525,15 @@ document.querySelectorAll('.tw').forEach(el=>{
   new IntersectionObserver(([e])=>e.isIntersecting?t.run():t.stop(),{threshold:.6}).observe(el);
 });
 
-const CATS_BASE=['Gorras','Buzos','Relojes','Zapatos'];
+const CATS_BASE=['Combos','Gorras','Buzos','Relojes','Zapatos'];
 function catChips(){
   const seen=new Set(),list=[];
   [...CATS_BASE,...products.map(p=>p.category)].forEach(c=>{const k=slug(c||'');if(c&&!seen.has(k)){seen.add(k);list.push(c)}});
   const cur=slug($('pc').value||'');
   $('cchips').innerHTML=list.map(c=>`<button type="button" data-c="${esc(c)}" class="${slug(c)===cur?'on':''}">${esc(c)}</button>`).join('');
 }
-$('cchips').onclick=e=>{const b=e.target.closest('button');if(!b)return;$('pc').value=b.dataset.c;catChips()};
-$('pc').oninput=catChips;
+$('cchips').onclick=e=>{const b=e.target.closest('button');if(!b)return;$('pc').value=sg($('pc').value)===sg(b.dataset.c)?'':b.dataset.c;alist()};
+$('pc').oninput=alist;$('pn').oninput=alist;
 $('themeBtn').onclick=()=>{const d=document.documentElement,t=d.dataset.theme==='light'?'dark':'light';d.dataset.theme=t;try{localStorage.setItem('theme',t)}catch(e){}};
 
 function imgs(p){return p.images&&p.images.length?p.images:(p.image_url?[p.image_url]:[])}
@@ -506,15 +543,42 @@ function lbShow(i){const a=imgs(lbP);lbI=(i+a.length)%a.length;$('lbI').src=a[lb
   $('lbP').hidden=$('lbN').hidden=a.length<2}
 function lbOpen(id){const p=products.find(x=>String(x.id)===String(id));if(!p||!imgs(p).length)return;
   lbP=p;$('lbPr').textContent=money(p.price);$('lbW').href=wa(prodMsg(p,''));lbShow(0);$('lb').showModal()}
-$('catalogo').addEventListener('click',e=>{const ph=e.target.closest('.ph');if(ph)lbOpen(ph.closest('.card').dataset.id)});
+$('catalogo').addEventListener('click',e=>{const ph=e.target.closest('.ph');if(!ph)return;
+  if(matchMedia('(hover:none)').matches&&ph.querySelector('.im2')&&!ph.classList.contains('alt')){document.querySelectorAll('.ph.alt').forEach(x=>x.classList.remove('alt'));ph.classList.add('alt');return}
+  ph.classList.remove('alt');lbOpen(ph.closest('.card').dataset.id)});
 $('lbP').onclick=()=>lbShow(lbI-1);$('lbN').onclick=()=>lbShow(lbI+1);$('lbX').onclick=()=>$('lb').close();
 $('lbTh').onclick=e=>{const b=e.target.closest('button');if(b)lbShow(+b.dataset.k)};
 $('lb').addEventListener('keydown',e=>{if(e.key==='ArrowLeft')lbShow(lbI-1);if(e.key==='ArrowRight')lbShow(lbI+1)});
-$('lb').addEventListener('click',e=>{if(e.target===$('lb'))$('lb').close()});
+function outsideClose(d){let dn=null;d.addEventListener('pointerdown',e=>{dn=e.target});d.addEventListener('click',e=>{if(e.target===d&&dn===d)d.close()})}
+outsideClose($('lb'));outsideClose(dlg);
 let sx=null;$('lbS').addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
 $('lbS').addEventListener('touchend',e=>{if(sx===null)return;const d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>40)lbShow(lbI+(d<0?1:-1));sx=null});
 DEMO_DATA[6].images=[eb('r-kAAeSwXXho8jHC'),eb('GakAAeSwwhZo8jHD'),eb('PagAAeSwOI9o8jHD')];
 DEMO_DATA[7].images=[eb('zFUAAeSweDhnvWoc'),eb('KUYAAeSwCKZnvWoc'),eb('RfMAAeSwsABnvWod'),eb('RgAAAeSwQ1BnvWod'),eb('MaAAAeSwjvhnvWoe')];
+
+function saveTag(p){const c=Number(p.compare_price),n=Number(p.price);return c>n?`<span class="old">${money(c)}</span><span class="save">Ahorras ${Math.round((1-n/c)*100)}%</span>`:''}
+function used(u,id){return products.some(x=>String(x.id)!==String(id)&&imgs(x).includes(u))}
+function fillCombo(){const map={cbG:'gorras',cbB:'buzos',cbR:'relojes'};
+  for(const id in map){const el=$(id),v=el.value;
+    el.innerHTML='<option value="">— ninguno —</option>'+products.filter(p=>sg(p.category)===map[id]).map(p=>`<option value="${esc(p.id)}">${esc(p.name)} · ${money(p.price)}</option>`).join('');
+    el.value=v}}
+$('cbGo').onclick=()=>{
+  const sel=['cbG','cbB','cbR'].map(id=>products.find(p=>String(p.id)===$(id).value)).filter(Boolean);
+  if(sel.length<2)return say('Elige al menos 2 productos para armar el combo.');
+  const d=Math.min(Math.max(Number($('cbD').value)||10,1),60),sum=sel.reduce((a,p)=>a+Number(p.price),0),price=Math.round(sum*(1-d/100)/1000)*1000;
+  const nm=p=>sg(p.category)==='gorras'?'Gorra':sg(p.category)==='buzos'?'Buzo':'Reloj';
+  const talla=(sel.find(p=>sg(p.category)==='buzos')||{}).sizes||[];
+  clear();
+  $('pn').value='Combo '+sel.map(nm).join(' + ');$('pc').value='Combos';$('pp').value=price;$('pcmp').value=sum;
+  $('ps').value=talla.join(', ');$('pd').value='Incluye: '+sel.map(p=>p.name).join(', ')+`. Ahorras ${d}% comprándolo junto.`;
+  keep=[...new Set(sel.map(p=>imgs(p)[0]).filter(Boolean))].slice(0,5);added=[];removed=[];gal();alist();
+  say('Combo armado: revisa los datos y presiona Guardar producto.',true)};
+$('nav').addEventListener('click',e=>{const a=e.target.closest('a[data-c]');if(!a)return;e.preventDefault();
+  activeCat=activeCat===a.dataset.c?null:a.dataset.c;render();$('catalogo').scrollIntoView({behavior:'smooth',block:'start'})});
+document.querySelector('.top>a').addEventListener('click',e=>{e.preventDefault();activeCat=null;render();window.scrollTo({top:0,behavior:'smooth'})});
+DEMO_DATA.unshift(
+ {id:'k0',name:'Combo Gorra + Buzo + Reloj',category:'Combos',price:Math.round((65000+135000+185000)*.9/1000)*1000,compare_price:385000,sizes:T,description:'Incluye gorra snapback, buzo oversize y reloj clásico. Ahorras 10% comprándolo junto.',image_url:DEMO_DATA[0].image_url,images:[DEMO_DATA[0].image_url,DEMO_DATA[6].image_url,DEMO_DATA[10].image_url],available:true},
+ {id:'k1',name:'Combo Gorra + Buzo',category:'Combos',price:Math.round((62000+148000)*.9/1000)*1000,compare_price:210000,sizes:T,description:'Gorra strapback con corona y buzo canguro premium. Ahorras 10%.',image_url:DEMO_DATA[1].image_url,images:[DEMO_DATA[1].image_url,DEMO_DATA[7].image_url],available:true});
 
 load();
 </script>
