@@ -247,12 +247,15 @@ dialog{margin:auto}
 .save{margin-left:8px;background:var(--gold);color:#000;font-size:12px;font-weight:800;padding:2px 8px;border-radius:999px;vertical-align:2px;white-space:nowrap}
 .ph .im2{position:absolute;inset:0;z-index:1;opacity:0;transition:opacity .35s}
 .ph .im1{transition:opacity .35s,transform .35s}
-@media(hover:hover){.ph:hover .im2{opacity:1}.ph:hover .im1{opacity:0}}
-.ph.alt .im2{opacity:1}.ph.alt .im1{opacity:0}
+@media(hover:hover){.ph.two:hover .im2{opacity:1}.ph.two:hover .im1{opacity:0}}
+.ph.two.alt .im2{opacity:1}.ph.two.alt .im1{opacity:0}
 .cbx{border:1.5px dashed var(--line);padding:10px 12px;border-radius:6px}
 .cbx summary{cursor:pointer;font-weight:700;color:var(--gold)}
 .cbg{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;align-items:end;margin-top:10px}
 @media(max-width:640px){.cbg{grid-template-columns:1fr}}
+.info .price{display:flex;flex-wrap:wrap;align-items:center;gap:2px 8px}
+.info .price .old,.info .price .save{margin-left:0}
+.cnt{display:none}.ph.two .cnt{display:block}
 </style>
 </head>
 <body>
@@ -333,7 +336,7 @@ const CFG={
   WHATSAPP:'573169606116',            // país + número, sin + ni espacios
   STORE:'GORRAX',
   SOCIAL:{Instagram:'',Facebook:'',TikTok:''},   // pega aquí tus enlaces
-  CAT_ORDER:['combos','gorras','buzos','relojes','zapatos'],
+  CAT_ORDER:['gorras','buzos','relojes','combos','zapatos'],
   CAT_INFO:{gorras:'Visera plana, actitud real.',buzos:'Premium y con corona.',relojes:'Tiempo con estilo.',zapatos:'Pisa con actitud.',combos:'Lleva el set completo y ahorra.'}
 };
 /* ============================ */
@@ -394,7 +397,7 @@ const NAVICO={
  otro:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M3 12 12 3h9v9l-9 9z"/><circle cx="16" cy="8" r="1.3"/></svg>'};
 let activeCat=null;
 function render(){
-  const groups={};products.forEach(p=>{(groups[p.category]??=[]).push(p)});
+  const groups={},canon={};products.forEach(p=>{const k=slug(p.category||'');canon[k]??=p.category;(groups[canon[k]]??=[]).push(p)});
   const rank=c=>{const i=CFG.CAT_ORDER.indexOf(slug(c));return i<0?99:i};
   const cats=Object.keys(groups).sort((a,b)=>rank(a)-rank(b));
   if(activeCat&&!cats.some(c=>slug(c)===activeCat))activeCat=null;
@@ -409,7 +412,7 @@ function render(){
 function card(p){
   const sizes=(p.sizes||[]);const first=sizes[0]||'';const im=imgs(p);
   return `<article class="card" data-id="${p.id}">
-   <div class="ph"><div class="noimg">${NAVICO[slug(p.category)]||NAVICO.otro}</div>${im[0]?`<img class="im1" src="${esc(im[0])}" alt="${esc(p.name)}" loading="lazy" onerror="this.remove()">`:''}${im[1]?`<img class="im2" src="${esc(im[1])}" alt="" loading="lazy" onerror="this.remove()">`:''}${im.length>1?`<span class="cnt">${im.length} fotos</span>`:''}${p.available===false?'<span class="tag">Agotado</span>':''}</div>
+   <div class="ph"><div class="noimg">${NAVICO[slug(p.category)]||NAVICO.otro}</div>${im[0]?`<img class="im1" src="${esc(im[0])}" alt="${esc(p.name)}" loading="lazy" onerror="this.remove()">`:''}${im[1]?`<img class="im2" src="${esc(im[1])}" alt="" loading="lazy" onload="this.parentNode.classList.add('two')" onerror="this.remove()">`:''}${im.length>1?`<span class="cnt">${im.length} fotos</span>`:''}${p.available===false?'<span class="tag">Agotado</span>':''}</div>
    <div class="info"><h3>${esc(p.name)}</h3><div class="price">${money(p.price)}${saveTag(p)}</div>
    ${p.description?`<p class="desc">${esc(p.description)}</p>`:''}
    ${sizes.length?`<div class="sizes" role="group" aria-label="Talla">${sizes.map((s,i)=>`<button type="button" data-s="${esc(s)}" class="${i?'':'on'}">${esc(s)}</button>`).join('')}</div>`:''}
@@ -525,7 +528,7 @@ document.querySelectorAll('.tw').forEach(el=>{
   new IntersectionObserver(([e])=>e.isIntersecting?t.run():t.stop(),{threshold:.6}).observe(el);
 });
 
-const CATS_BASE=['Combos','Gorras','Buzos','Relojes','Zapatos'];
+const CATS_BASE=['Gorras','Buzos','Relojes','Combos','Zapatos'];
 function catChips(){
   const seen=new Set(),list=[];
   [...CATS_BASE,...products.map(p=>p.category)].forEach(c=>{const k=slug(c||'');if(c&&!seen.has(k)){seen.add(k);list.push(c)}});
@@ -536,7 +539,7 @@ $('cchips').onclick=e=>{const b=e.target.closest('button');if(!b)return;$('pc').
 $('pc').oninput=alist;$('pn').oninput=alist;
 $('themeBtn').onclick=()=>{const d=document.documentElement,t=d.dataset.theme==='light'?'dark':'light';d.dataset.theme=t;try{localStorage.setItem('theme',t)}catch(e){}};
 
-function imgs(p){return p.images&&p.images.length?p.images:(p.image_url?[p.image_url]:[])}
+function imgs(p){const a=(p.images&&p.images.length?p.images:[p.image_url]).filter(u=>typeof u==='string'&&u.trim());return [...new Set(a)]}
 let lbP=null,lbI=0;
 function lbShow(i){const a=imgs(lbP);lbI=(i+a.length)%a.length;$('lbI').src=a[lbI];$('lbT').textContent=lbP.name;
   $('lbTh').innerHTML=a.length>1?a.map((u,k)=>`<button type="button" data-k="${k}" class="${k===lbI?'on':''}" aria-label="Foto ${k+1}"><img src="${esc(u)}" alt=""></button>`).join(''):'';
@@ -544,7 +547,7 @@ function lbShow(i){const a=imgs(lbP);lbI=(i+a.length)%a.length;$('lbI').src=a[lb
 function lbOpen(id){const p=products.find(x=>String(x.id)===String(id));if(!p||!imgs(p).length)return;
   lbP=p;$('lbPr').textContent=money(p.price);$('lbW').href=wa(prodMsg(p,''));lbShow(0);$('lb').showModal()}
 $('catalogo').addEventListener('click',e=>{const ph=e.target.closest('.ph');if(!ph)return;
-  if(matchMedia('(hover:none)').matches&&ph.querySelector('.im2')&&!ph.classList.contains('alt')){document.querySelectorAll('.ph.alt').forEach(x=>x.classList.remove('alt'));ph.classList.add('alt');return}
+  if(matchMedia('(hover:none)').matches&&ph.classList.contains('two')&&!ph.classList.contains('alt')){document.querySelectorAll('.ph.alt').forEach(x=>x.classList.remove('alt'));ph.classList.add('alt');return}
   ph.classList.remove('alt');lbOpen(ph.closest('.card').dataset.id)});
 $('lbP').onclick=()=>lbShow(lbI-1);$('lbN').onclick=()=>lbShow(lbI+1);$('lbX').onclick=()=>$('lb').close();
 $('lbTh').onclick=e=>{const b=e.target.closest('button');if(b)lbShow(+b.dataset.k)};
