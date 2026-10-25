@@ -435,10 +435,14 @@ dialog{margin:auto}
 .cadd{display:block;width:100%;text-align:center;margin-top:auto}.cadd+.wa{margin-top:0}
 .ctoast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);z-index:30;background:#111;color:#fff;padding:10px 18px;border-radius:999px;font-weight:700;font-size:14px;opacity:0;pointer-events:none;transition:.25s}.ctoast.show{opacity:1;transform:translate(-50%,0)}
 .ccf{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-weight:700;font-size:14px}
+.cartH .cn{position:absolute;top:7px;right:-2px;font-size:11px;padding:0 5px;min-width:18px;line-height:17px;transform:skewX(0)}
+#cartB.bump .in svg{animation:cbump .5s}
+@media(max-width:640px){#cartF{display:none}}
+@media(min-width:641px){.nv.cartH{display:none}}
 </style>
 </head>
 <body>
-<header class="top"><a href="#" aria-label="Inicio"><img class="logo" src="img/logo.png" alt="GORRAX"></a><nav id="nav"></nav><div class="hr"><a class="nv ctc" href="#contacto"><span class="in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.6-1.2A9 9 0 1 0 12 3z"/></svg>Contacto</span></a><button class="nv th" id="themeBtn" type="button" aria-label="Cambiar entre tema claro y oscuro" title="Tema claro / oscuro"><span class="in"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></span></button></div></header>
+<header class="top"><a href="#" aria-label="Inicio"><img class="logo" src="img/logo.png" alt="GORRAX"></a><nav id="nav"></nav><div class="hr"><a class="nv ctc" href="#contacto"><span class="in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.6-1.2A9 9 0 1 0 12 3z"/></svg>Contacto</span></a><button class="nv th" id="themeBtn" type="button" aria-label="Cambiar entre tema claro y oscuro" title="Tema claro / oscuro"><span class="in"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></span></button><button class="nv th cartH" id="cartB" type="button" aria-label="Abrir carrito" title="Carrito"><span class="in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.4 12.2a1 1 0 0 0 1 .8H18a1 1 0 0 0 1-.8L21 8H6"/></svg><b id="cartN" class="cn" hidden>0</b></span></button></div></header>
 
 <section class="hero"><img src="img/herov1.png" alt="Gorras y buzos GORRAX"><div class="hero-type hand"><span class="tw" id="tyHero" data-loop data-white="," aria-label="Tu estilo, tu corona"><span class="gh" aria-hidden="true">Más Que Ropa, Es Actitud!</span><span class="ty" aria-hidden="true"></span></span></div></section>
 
@@ -464,7 +468,7 @@ dialog{margin:auto}
 </footer>
 
 <a class="fab" id="fab" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/></svg>Escríbenos</a>
-<button type="button" class="fab cartb" id="cartB" aria-label="Abrir carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.4 12.2a1 1 0 0 0 1 .8H18a1 1 0 0 0 1-.8L21 8H6"/></svg>Carrito<b id="cartN" class="cn" hidden>0</b></button>
+<button type="button" class="fab cartb" id="cartF" aria-label="Abrir carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.4 12.2a1 1 0 0 0 1 .8H18a1 1 0 0 0 1-.8L21 8H6"/></svg><b id="cartNf" class="cn" hidden>0</b></button>
 <div class="cartO" id="cartO"></div>
 <aside class="cartP" id="cartP" aria-label="Carrito de compras"><div class="cph"><h2>Tu carrito</h2><button type="button" class="btn ghost sm" id="cartX">Cerrar</button></div><div class="cpb" id="cartL"></div><div class="cpf"><div class="ctot" id="cartT"></div><input id="cartNm" placeholder="Tu nombre (opcional)" autocomplete="name"><a class="btn grn dis" id="cartW" target="_blank" rel="noopener">Pedir todo por WhatsApp</a><button type="button" class="btn ghost sm" id="cartC" hidden>Vaciar carrito</button><div class="ccf" id="cartCf" hidden><span>¿Vaciar todo el carrito?</span><button type="button" class="btn red sm" id="cartCy">Sí, vaciar</button><button type="button" class="btn ghost sm" id="cartCn">No</button></div></div></aside>
 <div class="ctoast" id="ct" role="status"></div>
@@ -1032,7 +1036,7 @@ function cMsg(L,code){const{sub,tot}=cTot(L),nm=$('cartNm').value.trim();
 function cartRender(){
   if(products.length){cart=cart.filter(it=>{const l=cLine(it);if(!l||l.max<=0)return false;if(it.q>l.max)it.q=l.max;return true});cSave()}
   const L=cart.map(cLine).filter(Boolean),{n,sub,tot}=cTot(L);
-  $('cartN').textContent=n;$('cartN').hidden=!n;
+  ['cartN','cartNf'].forEach(id=>{$(id).textContent=n;$(id).hidden=!n});
   $('cartL').innerHTML=L.length?L.map((l,i)=>`<div class="ci"><span class="cimg">${l.img?`<img src="${esc(l.img)}" alt="">`:''}</span><div><b>${esc(l.name)}</b><small>${l.sub}</small><div class="cq"><button type="button" data-cq="-1" data-i="${i}" aria-label="Menos">−</button><span>${l.it.q}</span><button type="button" data-cq="1" data-i="${i}" aria-label="Más"${l.it.q>=l.max?' disabled':''}>+</button><button type="button" class="cx" data-cx="${i}">Quitar</button></div></div><div class="cp">${l.unit<l.list?`<s>${money(l.list*l.it.q)}</s>`:''}<b>${money(l.unit*l.it.q)}</b></div></div>`).join(''):'<p class="desc" style="padding:28px 0;text-align:center">Tu carrito está vacío.<br>Agrega productos con «Agregar al carrito».</p>';
   $('cartT').innerHTML=L.length?(sub>tot?`<div class="r"><span>Subtotal</span><span>${money(sub)}</span></div><div class="r"><span>Descuento combos</span><span>-${money(sub-tot)}</span></div>`:'')+`<div class="r tt"><span>Total</span><span>${money(tot)}</span></div>`:'';
   $('cartW').classList.toggle('dis',!L.length);$('cartC').hidden=!L.length||!$('cartCf').hidden;if(!L.length)$('cartCf').hidden=true;
@@ -1041,16 +1045,16 @@ let cTm;const cToast=t=>{const el=$('ct');el.textContent=t;el.classList.add('sho
 function cartAdd(it){const ex=cart.find(x=>cKey(x)===cKey(it)),l=cLine(ex||it),max=l?l.max:0;
   if(max<=0){cToast('Sin stock disponible');return false}
   if(ex){if(ex.q>=max){cToast('Ya tienes todo el stock en el carrito');return false}ex.q=Math.min(max,ex.q+(it.q||1))}else cart.push({...it,q:Math.min(it.q||1,max)});
-  cSave();cartRender();const b=$('cartB');b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump');cToast('Agregado al carrito');return true}
+  cSave();cartRender();['cartB','cartF'].forEach(id=>{const b=$(id);b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump')});cToast('Agregado al carrito');return true}
 const cOpen=o=>{if(o)cartRender();$('cartP').classList.toggle('open',o);$('cartO').classList.toggle('open',o);document.body.style.overflow=o?'hidden':''};
-$('cartB').onclick=()=>cOpen(true);$('cartX').onclick=$('cartO').onclick=()=>cOpen(false);
+$('cartB').onclick=$('cartF').onclick=()=>cOpen(true);$('cartX').onclick=$('cartO').onclick=()=>cOpen(false);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')cOpen(false)});
 $('cartL').onclick=e=>{const q=e.target.dataset.cq,x=e.target.dataset.cx;
   if(q!==undefined){const it=cart[+e.target.dataset.i];if(!it)return;it.q+=+q;if(it.q<1)cart.splice(+e.target.dataset.i,1);cSave();cartRender()}
   if(x!==undefined){cart.splice(+x,1);cSave();cartRender()}};
 $('cartC').onclick=()=>{$('cartC').hidden=true;$('cartCf').hidden=false};
 $('cartCn').onclick=()=>{$('cartCf').hidden=true;$('cartC').hidden=false};
-$('cartCy').onclick=()=>{cart=[];cSave();$('cartCf').hidden=true;cartRender();cToast('Carrito vaciado')};
+$('cartCy').onclick=()=>{cart=[];cSave();$('cartCf').hidden=true;cartRender();cOpen(false);cToast('Carrito vaciado')};
 $('cartW').addEventListener('click',()=>{const L=cart.map(cLine).filter(Boolean);if(!L.length)return;
   const code=newCode(),{n,sub,tot}=cTot(L),nm=$('cartNm').value.trim();$('cartW').href=wa(cMsg(L,code));
   saveOrder({code,type:'carrito',customer:nm||null,qty:n,items:L.flatMap(l=>l.it.t==='c'?l.ps.map((p,j)=>ordItem(p,l.it.parts[j].z,l.it.parts[j].col,l.it.q)):[ordItem(l.ps[0],l.it.z,l.it.col,l.it.q)]),subtotal:sub,discount:sub-tot,total:tot})});
