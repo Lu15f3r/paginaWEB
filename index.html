@@ -256,6 +256,27 @@ dialog{margin:auto}
 .info .price{display:flex;flex-wrap:wrap;align-items:center;gap:2px 8px}
 .info .price .old,.info .price .save{margin-left:0}
 .cnt{display:none}.ph.two .cnt{display:block}
+.ph img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;-webkit-user-drag:none}
+.build{--sk:28px;clip-path:polygon(var(--sk) 0,100% 0,calc(100% - var(--sk)) 100%,0 100%);background:var(--panel);padding:24px calc(22px + var(--sk));margin:10px 0 44px;scroll-margin-top:84px}
+.build h2{font-size:clamp(34px,6vw,52px);color:var(--gold);font-style:italic}
+.build .bsub{color:var(--muted);margin:6px 0 10px}
+.bstep{margin-top:14px;transition:opacity .25s}
+.bstep h3{font-size:16px;margin-bottom:8px}
+.bstep.lock{opacity:.35;pointer-events:none}
+.brow{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 10px}
+.bp{--sk:10px;flex:0 0 122px;display:flex;flex-direction:column;gap:4px;text-align:left;padding:0 0 8px;border:0;cursor:pointer;color:var(--ink);background:var(--bg);font:inherit;clip-path:polygon(var(--sk) 0,100% 0,calc(100% - var(--sk)) 100%,0 100%);transition:background .2s,color .2s}
+.bp .bi{display:block;aspect-ratio:1;background:#fff}
+.bp .bi img{width:100%;height:100%;object-fit:contain;padding:6px;display:block}
+.bp b{font-size:12.5px;line-height:1.2;padding:0 14px 0 10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.bp em{font-style:normal;font-weight:800;color:var(--gold);padding:0 10px}
+.bp:hover{background:var(--line)}
+.bp.on,.bp.on:hover{background:var(--gold);color:#000}
+.bp.on em{color:#000}
+.bs{margin-top:8px}
+.bsum{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:20px}
+.bsum .bt{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px}
+.btn.dis{--o:#3a3a3a;--f1:#3a3a3a;--f2:#3a3a3a;--t1:#888;--t2:#888;pointer-events:none}
+@media(max-width:640px){.build{--sk:12px}}
 </style>
 </head>
 <body>
@@ -335,6 +356,7 @@ const CFG={
   SUPABASE_KEY:'sb_publishable_ksBAS6laO-jL1ib3Y5uzpA_zDObxFZX',
   WHATSAPP:'573169606116',            // país + número, sin + ni espacios
   STORE:'GORRAX',
+  COMBO_DESC:10,   // % de descuento de los combos que arma el cliente
   SOCIAL:{Instagram:'',Facebook:'',TikTok:''},   // pega aquí tus enlaces
   CAT_ORDER:['gorras','buzos','relojes','combos','zapatos'],
   CAT_INFO:{gorras:'Visera plana, actitud real.',buzos:'Premium y con corona.',relojes:'Tiempo con estilo.',zapatos:'Pisa con actitud.',combos:'Lleva el set completo y ahorra.'}
@@ -403,11 +425,13 @@ function render(){
   if(activeCat&&!cats.some(c=>slug(c)===activeCat))activeCat=null;
   const shown=activeCat?cats.filter(c=>slug(c)===activeCat):cats;
   $('nav').innerHTML=cats.map(c=>`<a class="nv${slug(c)===activeCat?' on':''}" href="#${slug(c)}" data-c="${slug(c)}"><span class="in">${NAVICO[slug(c)]||NAVICO.otro}${esc(c)}</span></a>`).join('');
-  $('catalogo').innerHTML=shown.length?shown.map(c=>`
+  const showB=!activeCat||activeCat==='combos';
+  $('catalogo').innerHTML=(showB?'<section class="build" id="armar"></section>':'')+(shown.length?shown.map(c=>`
    <section class="cat" id="${slug(c)}">
     <aside class="banner"><h2>${esc(c)}</h2><p>${esc(CFG.CAT_INFO[slug(c)]||'Nueva colección.')} ${groups[c].length} ${groups[c].length==1?'producto':'productos'}.</p></aside>
     <div class="grid">${groups[c].map(card).join('')}</div>
-   </section>`).join(''):'<div class="empty">Pronto tendremos productos nuevos.</div>';
+   </section>`).join(''):'<div class="empty">Pronto tendremos productos nuevos.</div>');
+  if(showB)renderBuilder();
 }
 function card(p){
   const sizes=(p.sizes||[]);const first=sizes[0]||'';const im=imgs(p);
@@ -419,7 +443,7 @@ function card(p){
    <a class="wa ${p.available===false?'off':''}" target="_blank" rel="noopener" href="${wa(prodMsg(p,first))}">Pedir por WhatsApp</a></div></article>`;
 }
 $('catalogo').addEventListener('click',e=>{
-  const b=e.target.closest('.sizes button');if(!b)return;
+  const b=e.target.closest('.sizes button');if(!b||!b.closest('.card'))return;
   const c=b.closest('.card'),p=products.find(x=>String(x.id)===c.dataset.id);
   c.querySelectorAll('.sizes button').forEach(x=>x.classList.toggle('on',x===b));
   c.querySelector('.wa').href=wa(prodMsg(p,b.dataset.s));
@@ -546,9 +570,26 @@ function lbShow(i){const a=imgs(lbP);lbI=(i+a.length)%a.length;$('lbI').src=a[lb
   $('lbP').hidden=$('lbN').hidden=a.length<2}
 function lbOpen(id){const p=products.find(x=>String(x.id)===String(id));if(!p||!imgs(p).length)return;
   lbP=p;$('lbPr').textContent=money(p.price);$('lbW').href=wa(prodMsg(p,''));lbShow(0);$('lb').showModal()}
+const TOUCH=matchMedia('(hover:none) and (pointer:coarse)');
+let lpT=null,lpX=0,lpY=0;
+$('catalogo').addEventListener('pointerdown',e=>{const ph=e.target.closest('.ph');if(!ph||!TOUCH.matches||e.pointerType!=='touch')return;
+  lpX=e.clientX;lpY=e.clientY;ph._lp=false;clearTimeout(lpT);
+  lpT=setTimeout(()=>{ph._lp=true;if(navigator.vibrate)navigator.vibrate(15);lbOpen(ph.closest('.card').dataset.id)},500)});
+['pointerup','pointercancel'].forEach(t=>$('catalogo').addEventListener(t,()=>clearTimeout(lpT)));
+$('catalogo').addEventListener('pointermove',e=>{if(Math.abs(e.clientX-lpX)>10||Math.abs(e.clientY-lpY)>10)clearTimeout(lpT)});
+$('catalogo').addEventListener('contextmenu',e=>{if(TOUCH.matches&&e.target.closest('.ph'))e.preventDefault()});
 $('catalogo').addEventListener('click',e=>{const ph=e.target.closest('.ph');if(!ph)return;
-  if(matchMedia('(hover:none)').matches&&ph.classList.contains('two')&&!ph.classList.contains('alt')){document.querySelectorAll('.ph.alt').forEach(x=>x.classList.remove('alt'));ph.classList.add('alt');return}
-  ph.classList.remove('alt');lbOpen(ph.closest('.card').dataset.id)});
+  const id=ph.closest('.card').dataset.id;
+  if(TOUCH.matches){
+    if(ph._lp){ph._lp=false;return}
+    const p=products.find(x=>String(x.id)===id),a=p?imgs(p):[];
+    if(a.length>1&&ph.classList.contains('two')){
+      const i=((+ph.dataset.i||0)+1)%a.length;ph.dataset.i=i;
+      const im=ph.querySelector('.im1');if(im)im.src=a[i];
+      const c=ph.querySelector('.cnt');if(c)c.textContent=`${i+1}/${a.length}`;
+      return}
+  }
+  lbOpen(id)});
 $('lbP').onclick=()=>lbShow(lbI-1);$('lbN').onclick=()=>lbShow(lbI+1);$('lbX').onclick=()=>$('lb').close();
 $('lbTh').onclick=e=>{const b=e.target.closest('button');if(b)lbShow(+b.dataset.k)};
 $('lb').addEventListener('keydown',e=>{if(e.key==='ArrowLeft')lbShow(lbI-1);if(e.key==='ArrowRight')lbShow(lbI+1)});
@@ -582,6 +623,35 @@ document.querySelector('.top>a').addEventListener('click',e=>{e.preventDefault()
 DEMO_DATA.unshift(
  {id:'k0',name:'Combo Gorra + Buzo + Reloj',category:'Combos',price:Math.round((65000+135000+185000)*.9/1000)*1000,compare_price:385000,sizes:T,description:'Incluye gorra snapback, buzo oversize y reloj clásico. Ahorras 10% comprándolo junto.',image_url:DEMO_DATA[0].image_url,images:[DEMO_DATA[0].image_url,DEMO_DATA[6].image_url,DEMO_DATA[10].image_url],available:true},
  {id:'k1',name:'Combo Gorra + Buzo',category:'Combos',price:Math.round((62000+148000)*.9/1000)*1000,compare_price:210000,sizes:T,description:'Gorra strapback con corona y buzo canguro premium. Ahorras 10%.',image_url:DEMO_DATA[1].image_url,images:[DEMO_DATA[1].image_url,DEMO_DATA[7].image_url],available:true});
+
+const COMBO_D=CFG.COMBO_DESC||10;
+const BSTEPS=[{k:'g',cat:'gorras',n:'Gorra',t:'1. Elige tu gorra'},{k:'b',cat:'buzos',n:'Buzo',t:'2. Elige tu buzo'},{k:'r',cat:'relojes',n:'Reloj',t:'3. Elige tu reloj'}];
+const bsel={g:null,b:null,r:null},bsz={g:'',b:'',r:''};
+const bList=cat=>products.filter(p=>slug(p.category||'')===cat&&p.available!==false);
+const bProd=k=>bsel[k]==null?null:(products.find(p=>String(p.id)===String(bsel[k]))||null);
+function bTotals(){const sel=BSTEPS.map(s=>bProd(s.k)),sum=sel.reduce((a,p)=>a+(p?Number(p.price):0),0);return{sel,sum,tot:Math.round(sum*(1-COMBO_D/100))}}
+function bMsg(){const{sel,sum,tot}=bTotals();
+  return `Hola ${CFG.STORE}, quiero armar este combo (${COMBO_D}% de descuento):\n`+sel.map((p,i)=>`${i+1}) ${BSTEPS[i].n}: *${p.name}*${bsz[BSTEPS[i].k]?' - Talla: '+bsz[BSTEPS[i].k]:''} - ${money(p.price)}`).join('\n')+`\nSubtotal: ${money(sum)}\nDescuento ${COMBO_D}%: -${money(sum-tot)}\n*Total del combo: ${money(tot)}*\n¿Está disponible?`}
+function renderBuilder(){
+  const el=$('armar');if(!el)return;
+  BSTEPS.forEach(s=>{if(bsel[s.k]!=null&&!bProd(s.k))bsel[s.k]=null});
+  const sc=[...el.querySelectorAll('.brow')].map(r=>r.scrollLeft);
+  const{sel,sum,tot}=bTotals(),full=sel.every(Boolean);
+  el.innerHTML=`<h2>Arma tu combo</h2><p class="bsub">Elige 1 gorra, 1 buzo y 1 reloj y llévate <b>${COMBO_D}% de descuento</b>.</p>`+
+   BSTEPS.map((s,i)=>{const list=bList(s.cat),p=sel[i],locked=i>0&&!sel[i-1];
+     return `<div class="bstep${locked?' lock':''}"><h3>${s.t}</h3>`+
+      (list.length?`<div class="brow">${list.map(x=>`<button type="button" class="bp${p&&String(p.id)===String(x.id)?' on':''}" data-s="${s.k}" data-id="${esc(x.id)}"><span class="bi">${imgs(x)[0]?`<img src="${esc(imgs(x)[0])}" alt="" loading="lazy" onerror="this.remove()">`:''}</span><b>${esc(x.name)}</b><em>${money(x.price)}</em></button>`).join('')}</div>`:'<p class="desc">Pronto tendremos opciones aquí.</p>')+
+      (p&&(p.sizes||[]).length>1?`<div class="sizes bs" data-s="${s.k}">${p.sizes.map(z=>`<button type="button" data-z="${esc(z)}" class="${bsz[s.k]===z?'on':''}">${esc(z)}</button>`).join('')}</div>`:'')+`</div>`}).join('')+
+   `<div class="bsum">${full?`<div class="bt"><span class="old">${money(sum)}</span><b class="price">${money(tot)}</b><span class="save">Ahorras ${COMBO_D}%</span></div>`:'<span class="desc">Elige los 3 productos para ver el precio de tu combo.</span>'}
+    <a class="btn${full?'':' dis'}" id="bwa" target="_blank" rel="noopener"${full?` href="${wa(bMsg())}"`:''}>Pedir combo por WhatsApp</a>
+    <button type="button" class="btn ghost sm" id="bre">Reiniciar</button></div>`;
+  el.querySelectorAll('.brow').forEach((r,i)=>r.scrollLeft=sc[i]||0)}
+$('catalogo').addEventListener('click',e=>{
+  const bp=e.target.closest('.bp');
+  if(bp){const k=bp.dataset.s;bsel[k]=bp.dataset.id;bsz[k]=((bProd(k)||{}).sizes||[])[0]||'';renderBuilder();return}
+  const bz=e.target.closest('.bs button');
+  if(bz){bsz[bz.closest('.bs').dataset.s]=bz.dataset.z;renderBuilder();return}
+  if(e.target.closest('#bre')){bsel.g=bsel.b=bsel.r=null;bsz.g=bsz.b=bsz.r='';renderBuilder()}});
 
 load();
 </script>
