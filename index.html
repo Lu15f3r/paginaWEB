@@ -317,6 +317,90 @@ dialog{margin:auto}
 .st.pendiente{background:#e2b53f;color:#000}.st.confirmado{background:#1fa855;color:#fff}.st.cancelado{background:#555;color:#fff}
 .tb{width:100%;border-collapse:collapse}.tb th,.tb td{padding:8px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}
 .low{color:#ff6b6b;font-weight:800}
+/* ===== Descuento visible, onda en "Arma tu combo", más colores e inventario con semáforo ===== */
+.save{background:#e53935;color:#fff;letter-spacing:.02em}
+.saved{font-size:12.5px;font-weight:700;color:#2ecc71;white-space:nowrap}
+[data-theme=light] .saved{color:#12803f}
+.disc{position:absolute;top:10px;right:10px;z-index:3;display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1;padding:7px 16px 6px;background:#e53935;color:#fff;font:900 24px "Big Shoulders Display",sans-serif;font-style:italic;clip-path:polygon(9px 0,100% 0,calc(100% - 9px) 100%,0 100%);animation:discPulse 2.4s ease-in-out infinite;pointer-events:none}
+.disc small{font:800 9px "Hanken Grotesk",sans-serif;font-style:normal;letter-spacing:.2em}
+@keyframes discPulse{50%{transform:scale(1.08)}}
+.ph.off-disc .disc{display:none}
+/* onda diagonal en la promo (hover con mouse o toque con el dedo) */
+.cpromo{isolation:isolate;overflow:hidden;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.cpromo>*{position:relative;z-index:1}
+.cpromo::before{content:"";position:absolute;z-index:0;top:0;bottom:0;left:-20%;right:-20%;background:var(--gold);transform:translateX(-125%) skewX(-14deg);transition:transform .65s cubic-bezier(.7,0,.2,1)}
+.cpromo::after{content:"";position:absolute;top:0;bottom:0;left:-30%;width:18%;z-index:2;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);transform:skewX(-20deg);opacity:0}
+.cpromo:hover::before,.cpromo.wave::before{transform:translateX(0) skewX(-14deg)}
+.cpromo:hover::after,.cpromo.wave::after{opacity:1;animation:cpShine .9s .1s ease-out both}
+@keyframes cpShine{from{left:-30%}to{left:130%}}
+.cp-s,.cp-h,.cp-l,.cp-s2{transition:color .4s .15s}
+.cpromo:hover .cp-s,.cpromo.wave .cp-s{color:#2a2208}
+.cpromo:hover .cp-h,.cpromo.wave .cp-h,.cpromo:hover .cp-s2,.cpromo.wave .cp-s2,.cpromo:hover .cp-l,.cpromo.wave .cp-l{color:#000}
+.cpromo:hover .cp-l b,.cpromo.wave .cp-l b{animation:none;color:#000}
+.cpromo:hover .cp-badge,.cpromo.wave .cp-badge{background:#000;color:var(--gold);box-shadow:inset 0 0 0 5px #000,inset 0 0 0 7px var(--gold)}
+.cpromo:hover .btn.cyc,.cpromo.wave .btn.cyc{--o:#000;--f1:#000;--f2:#fff;--t1:var(--gold);--t2:#000}
+@media(prefers-reduced-motion:reduce){.disc{animation:none}.cpromo::before{transition:none}}
+/* colores */
+.sw{flex-wrap:wrap}
+.sw button{box-shadow:inset 0 0 0 1px rgba(128,128,128,.55)}
+.sw button[data-col="Blanco"]{border-color:#9a9a9a}
+.sw button[data-col="Negro"]{border-color:#6b6b6b}
+/* inventario con semáforo */
+.stk-in{width:100px;font-weight:800;border-width:2px}
+.stk-in.r{border-color:#ff5252;color:#ff6b6b;background:rgba(255,82,82,.12)}
+.stk-in.y{border-color:#f2c200;color:#f2c200;background:rgba(242,194,0,.12)}
+.stk-in.g{border-color:#2ecc71;color:#2ecc71;background:rgba(46,204,113,.12)}
+[data-theme=light] .stk-in.r{color:#c62828}[data-theme=light] .stk-in.y{color:#8a6a00}[data-theme=light] .stk-in.g{color:#12803f}
+.stk-in.chg{box-shadow:0 0 0 3px rgba(168,123,0,.45)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin:0 0 10px}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.invbar{position:sticky;bottom:0;z-index:3;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:12px 0 4px;margin-top:10px;background:var(--panel);border-top:1px solid var(--line)}
+.invbar .btn:disabled{opacity:.45;cursor:not-allowed}
+.r3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:560px){.r3{grid-template-columns:1fr 1fr}.r3 label:last-child{grid-column:1/-1}}
+.r3 label small{font-weight:500;color:var(--muted)}
+.stkb{display:inline-block;margin-top:3px;font-size:12px;font-weight:800;padding:1px 9px;border-radius:999px;border:1.5px solid}
+.stkb.r{color:#ff6b6b;border-color:#ff5252;background:rgba(255,82,82,.12)}
+.stkb.y{color:#f2c200;border-color:#f2c200;background:rgba(242,194,0,.12)}
+.stkb.g{color:#2ecc71;border-color:#2ecc71;background:rgba(46,204,113,.12)}
+.stkb.n{color:var(--muted);border-color:var(--line)}
+[data-theme=light] .stkb.r{color:#c62828}[data-theme=light] .stkb.y{color:#8a6a00}[data-theme=light] .stkb.g{color:#12803f}
+.tb .btn:disabled{opacity:.4;cursor:not-allowed}
+/* ===== Ajustes: ventajas, botón que late, agotado, colores bloqueados, tallas/colores ===== */
+@media(min-width:760px){.feat{grid-template-columns:repeat(4,1fr)}}
+#promo,#armar{scroll-margin-top:84px}
+.fin{max-width:1600px;margin:auto;padding:0 5vw}
+.btn.cyc{animation:cpBtn 2.8s ease-in-out infinite}
+@keyframes cpBtn{50%{transform:scale(1.12)}}
+.btn.cyc:hover{animation-play-state:paused}
+@media(prefers-reduced-motion:reduce){.btn.cyc{animation:none}}
+.ph .tag{left:calc(var(--sk,28px) + 8px);top:12px;background:#151515;color:#fff;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:4px 18px}
+.card.sold .ph img{filter:grayscale(1);opacity:.5}
+.sw button{position:relative}
+.sw button.off{opacity:.4;cursor:not-allowed}
+.sw button.off::after{content:"";position:absolute;left:2px;right:2px;top:calc(50% - 1px);height:2px;background:#e53935;transform:rotate(-45deg)}
+.sizes button.off,.sizes button.off:hover{--o:var(--line);--f1:var(--panel);--f2:var(--panel);--t1:var(--muted);--t2:var(--muted);opacity:.4;cursor:not-allowed;text-decoration:line-through}
+.sizes button.off::before{display:none}
+.vbox{display:grid;gap:8px;border:1.5px dashed var(--line);padding:12px;border-radius:6px}
+.vrow{display:grid;grid-template-columns:1fr 1fr 90px 40px;gap:8px;align-items:center}
+.vrow .btn{padding:6px 0}
+.invadd{border:1.5px dashed var(--line);padding:12px;border-radius:6px;margin-bottom:14px;display:grid;gap:8px}
+.invadd .ia{display:flex;gap:8px;flex-wrap:wrap}.invadd .ia select,.invadd .ia input{flex:1 1 120px;min-width:0}
+.cdot{display:inline-block;width:11px;height:11px;border-radius:50%;margin:0 5px 0 0;vertical-align:-1px;box-shadow:inset 0 0 0 1px rgba(128,128,128,.6)}
+/* ===== Pedido del armador, botón verde, stock bloqueado ===== */
+.btn.grn:not(.dis){--o:var(--wa);--f1:var(--wa);--f2:#0a0a0a;--t1:#fff;--t2:var(--wa)}
+.bfoot{display:flex;flex-wrap:wrap;align-items:flex-start;gap:16px 32px;margin-top:18px}
+.bfoot .bqt{margin-top:0}
+.bres{flex:1 1 320px;max-width:560px;display:grid;gap:6px;padding:12px 16px;background:var(--bg);font-size:14px}
+.bres h4{font:800 22px "Big Shoulders Display",sans-serif;font-style:italic;color:var(--gold);margin-bottom:2px}
+.bres .r{display:flex;justify-content:space-between;gap:14px}
+.bres .r>span:last-child{white-space:nowrap;font-weight:700}
+.bres .mut{color:var(--muted)}
+.bres .tt{border-top:1px solid var(--line);padding-top:6px;margin-top:2px;font-size:18px;font-weight:800;color:var(--gold)}
+#pst[readonly]{opacity:.65;cursor:not-allowed}
+/* ===== Aviso flotante ===== */
+#toast{position:fixed;left:50%;bottom:96px;z-index:60;max-width:90vw;transform:translate(-50%,16px);opacity:0;pointer-events:none;background:#1fa855;color:#fff;font-weight:800;font-size:15px;text-align:center;padding:12px 28px;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);transition:opacity .25s,transform .25s}
+#toast.show{opacity:1;transform:translate(-50%,0)}
 </style>
 </head>
 <body>
@@ -324,18 +408,19 @@ dialog{margin:auto}
 
 <section class="hero"><img src="img/herov1.png" alt="Gorras y buzos GORRAX"><div class="hero-type hand"><span class="tw" id="tyHero" data-white="," aria-label="Tu estilo, tu corona"><span class="gh" aria-hidden="true">Más Que Ropa, Es Actitud!</span><span class="ty" aria-hidden="true"></span></span></div></section>
 
-<section class="cpromo" id="promo"><div><span class="cp-s">Oferta Por Tiemplo LIMITADO</span><h2 class="cp-h">Arma tu combo</h2><p class="cp-l"><b class="w1">gorra</b> + <b class="w2">buzo</b> + <b class="w3">reloj</b></p><p class="cp-s2">y ahorra</p></div><div class="cp-b"><span class="cp-badge"><span><span id="cpPct">10</span><small>%</small></span><em>DTO</em></span><a class="btn cyc" id="promoBtn" data-c="0" href="#armar">Armar ahora</a></div></section>
+
+<section class="cpromo" id="promo"><div><span class="cp-s">Oferta Por Tiempo LIMITADO</span><h2 class="cp-h">Arma tu combo</h2><p class="cp-l"><b class="w1">gorra</b> + <b class="w2">buzo</b> + <b class="w3">reloj</b></p><p class="cp-s2">y ahorra</p></div><div class="cp-b"><span class="cp-badge"><span><span id="cpPct">10</span><small>%</small></span><em>DTO</em></span><a class="btn cyc" id="promoBtn" data-c="0" href="#armar">Armar ahora</a></div></section>
 
 <section class="feat">
-  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15c0-5 3-8 8-8s8 3 8 8z"/><path d="M19 15h3M3 15h16v2H3z"/></svg>Gorras de<br>alta calidad</div>
-  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3.5 4.5 6 2.5 19.5H6l1-9v10.5h10V10.5l1 9h3.5L19.5 6 15 3.5"/><path d="M9 3.5C9.5 2 10.5 1.5 12 1.5s2.5.5 3 2c0 2-1.5 3.5-3 3.5S9 5.5 9 3.5z"/><path d="M10.5 7.5v3M13.5 7.5v3M9.5 14.5h5l.8 4H8.7z"/></svg>Buzos<br>premium</div>
   <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6h12v10H2zM14 9h4l3 3v4h-7"/><circle cx="6" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>Envíos a<br>todo el país</div>
-  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>Estilos<br>únicos</div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>Calidad<br>garantizada</div>
   <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>1 Año de<br>garantía</div>
   <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="1.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3M12 15v2"/></svg>Pago 100%<br>seguro</div>
 </section>
 
 <main id="catalogo"><div class="empty">Cargando productos…</div></main>
+
+<div class="fin"><section class="build" id="armar" hidden></section></div>
 
 <footer id="contacto">
   <svg class="crown" viewBox="0 0 64 42" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 33 4 10l14 12L32 4l14 18 14-12-3 23z"/><path d="M9 38h46"/></svg>
@@ -369,10 +454,17 @@ dialog{margin:auto}
         </details>
         <label>Nombre<input id="pn" required placeholder="Escribe para buscar o crear" autocomplete="off"></label>
         <label>Categoría<input id="pc" required placeholder="Elige una o escribe una nueva" autocomplete="off"><div class="sizes cchips" id="cchips"></div></label>
-        <label>Precio (COP)<input type="number" id="pp" min="0" step="500" required></label>
-        <label>Precio normal (opcional, muestra el ahorro)<input type="number" id="pcmp" min="0" step="500"></label>
-        <label class="w">Stock (unidades; vacío = sin control)<input type="number" id="pst" min="0" step="1"></label>
-        <label class="w">Tallas (separadas por coma)<input id="ps" placeholder="S, M, L, XL"></label>
+        <div class="w r3">
+          <label>Precio (COP)<input type="number" id="pp" min="0" step="500" required></label>
+          <label>Precio normal <small>(opcional)</small><input type="number" id="pcmp" min="0" step="500"></label>
+          <label>Stock <small>(automático)</small><input type="number" id="pst" min="0" step="1" readonly placeholder="Automático" title="Se calcula con el inventario por talla y color"></label>
+        </div>
+        <div class="w vbox"><b>Inventario por talla y color</b>
+          <small class="desc">Agrega cada talla y color que tengas. Lo que no agregues aparece bloqueado en la tienda.</small>
+          <div id="vrows"></div>
+          <div><button type="button" class="btn ghost sm" id="vadd">+ Agregar talla / color</button> <small id="vnote" class="desc" hidden>El stock total es la suma de estas filas.</small></div>
+          <datalist id="vsz"><option value="S"><option value="M"><option value="L"><option value="XL"><option value="XXL"><option value="Única"></datalist>
+        </div>
         <label class="w">Descripción<textarea id="pd" rows="2"></textarea></label>
         <label class="w">Fotos (hasta 5; la primera es la portada)<input type="file" id="pimg" accept="image/*" multiple></label>
         <div class="w gal" id="gal"></div>
@@ -416,8 +508,15 @@ const slug=s=>s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').re
 const wa=t=>`https://wa.me/${CFG.WHATSAPP}?text=${encodeURIComponent(t)}`;
 let products=[];
 const isAv=p=>p.available!==false&&!(p.stock!=null&&p.stock<=0);
-const COLORS=[['Rojo','#d32f2f'],['Azul','#1e5bc6'],['Amarillo','#f2c200']];
-const swHtml=(cls,sel)=>`<div class="sw ${cls}" role="group" aria-label="Color">${COLORS.map(c=>`<button type="button" data-col="${c[0]}" title="${c[0]}" aria-label="${c[0]}" style="--c:${c[1]}" class="${c[0]===sel?'on':''}"></button>`).join('')}</div>`;
+const COLORS=[['Rojo','#d32f2f'],['Azul','#1e5bc6'],['Amarillo','#f2c200'],['Verde','#1fa855'],['Negro','#111111'],['Blanco','#ffffff'],['Rosado','#ff6fae']];
+const swHtml=(cls,sel,ok)=>`<div class="sw ${cls}" role="group" aria-label="Color">${COLORS.map(c=>{const off=ok&&!ok(c[0]);return `<button type="button" data-col="${c[0]}" title="${c[0]}${off?' (no disponible)':''}" aria-label="${c[0]}${off?' (no disponible)':''}" style="--c:${c[1]}" class="${c[0]===sel&&!off?'on':''}${off?' off':''}"${off?' disabled':''}></button>`}).join('')}</div>`;
+/* inventario por talla y color: variants = [{s:talla, c:color, n:cantidad}] */
+const vars=p=>Array.isArray(p.variants)?p.variants.filter(v=>v&&typeof v==='object').map(v=>({s:String(v.s||''),c:String(v.c||''),n:Math.max(0,Number(v.n)||0)})):[];
+const vSum=a=>a.reduce((t,v)=>t+(Number(v.n)||0),0);
+const vStock=(p,z,c)=>vars(p).filter(v=>(z==null||v.s===z)&&(c==null||v.c===c)).reduce((t,v)=>t+v.n,0);
+const hasVar=p=>vars(p).length>0,hasColors=p=>vars(p).some(v=>v.c);
+const pSizes=p=>[...new Set([...(p.sizes||[]),...vars(p).map(v=>v.s).filter(Boolean)])];
+const firstCol=(p,z)=>(COLORS.find(c=>vStock(p,z,c[0])>0)||[''])[0];
 const newCode=()=>'GX-'+new Date().toISOString().slice(2,10).replace(/-/g,'')+'-'+Math.random().toString(36).slice(2,6).toUpperCase();
 const ordItem=(p,size,color,qty)=>({id:p.id,name:p.name,category:p.category,size:size||null,color:color||null,price:Number(p.price),qty});
 async function saveOrder(o){if(DEMO||!sb)return;try{await sb.from('orders').insert({...o,status:'pendiente'})}catch(e){}}
@@ -478,7 +577,8 @@ function render(){
   const navCats=cats.some(c=>slug(c)==='combos')?cats:[...cats,'Combos'].sort((a,b)=>rank(a)-rank(b));
   $('nav').innerHTML=navCats.map(c=>`<a class="nv${slug(c)===activeCat?' on':''}" href="#${slug(c)}" data-c="${slug(c)}"><span class="in">${NAVICO[slug(c)]||NAVICO.otro}${esc(c)}${slug(c)==='combos'?`<span class="pct">-${COMBO_D}%</span>`:''}</span></a>`).join('');
   const showB=!activeCat||activeCat==='combos';
-  $('catalogo').innerHTML=(showB?'<section class="build" id="armar"></section>':'')+(shown.length?shown.map(c=>`
+  $('armar').hidden=!showB;
+  $('catalogo').innerHTML=(shown.length?shown.map(c=>`
    <section class="cat" id="${slug(c)}">
     <aside class="banner"><h2>${esc(c)}</h2><p>${esc(CFG.CAT_INFO[slug(c)]||'Nueva colección.')} ${groups[c].length} ${groups[c].length==1?'producto':'productos'}.</p></aside>
     <div class="grid">${groups[c].map(card).join('')}</div>
@@ -486,18 +586,26 @@ function render(){
   if(showB)renderBuilder();
 }
 function card(p){
-  const sizes=(p.sizes||[]);const first=sizes[0]||'';const im=imgs(p);
-  return `<article class="card" data-id="${p.id}">
-   <div class="ph"><div class="noimg">${NAVICO[slug(p.category)]||NAVICO.otro}</div>${im[0]?`<img class="im1" src="${esc(im[0])}" alt="${esc(p.name)}" loading="lazy" onerror="this.remove()">`:''}${im[1]?`<img class="im2" src="${esc(im[1])}" alt="" loading="lazy" onload="this.parentNode.classList.add('two')" onerror="this.remove()">`:''}${im.length>1?`<span class="cnt">${im.length} fotos</span>`:''}${!isAv(p)?'<span class="tag">Agotado</span>':''}</div>
+  const hv=hasVar(p),hc=hasColors(p),sizes=pSizes(p);
+  const zOk=z=>!hv||vStock(p,z,null)>0;
+  const z0=sizes.find(zOk)||sizes[0]||'';
+  const zf=sizes.length?z0:null;
+  const c0=hc?firstCol(p,zf):'';
+  const im=imgs(p);
+  return `<article class="card${!isAv(p)?' sold':''}" data-id="${p.id}">
+   <div class="ph"><div class="noimg">${NAVICO[slug(p.category)]||NAVICO.otro}</div>${im[0]?`<img class="im1" src="${esc(im[0])}" alt="${esc(p.name)}" loading="lazy" onerror="this.remove()">`:''}${im[1]?`<img class="im2" src="${esc(im[1])}" alt="" loading="lazy" onload="this.parentNode.classList.add('two')" onerror="this.remove()">`:''}${im.length>1?`<span class="cnt">${im.length} fotos</span>`:''}${!isAv(p)?'<span class="tag">Agotado</span>':''}${discBadge(p)}</div>
    <div class="info"><h3>${esc(p.name)}</h3><div class="price">${money(p.price)}${saveTag(p)}</div>
    ${p.description?`<p class="desc">${esc(p.description)}</p>`:''}
-   ${sizes.length?`<div class="sizes" role="group" aria-label="Talla">${sizes.map((s,i)=>`<button type="button" data-s="${esc(s)}" class="${i?'':'on'}">${esc(s)}</button>`).join('')}</div>`:''}
-   ${slug(p.category)==='buzos'?swHtml('',COLORS[0][0]):''}
-   <a class="wa ${!isAv(p)?'off':''}" target="_blank" rel="noopener" href="${wa(prodMsg(p,first))}">Pedir por WhatsApp</a></div></article>`;
+   ${sizes.length?`<div class="sizes" role="group" aria-label="Talla">${sizes.map(z=>{const off=!zOk(z);return `<button type="button" data-s="${esc(z)}" class="${z===z0?'on':''}${off?' off':''}"${off?' disabled':''}>${esc(z)}</button>`}).join('')}</div>`:''}
+   ${hc?swHtml('',c0,c=>vStock(p,zf,c)>0):''}
+   <a class="wa ${!isAv(p)?'off':''}" target="_blank" rel="noopener" href="${wa(prodMsg(p,z0,c0))}">Pedir por WhatsApp</a></div></article>`;
 }
+function refreshCard(c){const p=products.find(x=>String(x.id)===c.dataset.id),sw=c.querySelector('.sw');if(!p||!sw||!hasVar(p))return;
+  const z=(c.querySelector('.sizes .on')||{dataset:{}}).dataset.s||null,cur=(sw.querySelector('.on')||{dataset:{}}).dataset.col;
+  const ok=col=>vStock(p,z,col)>0;sw.outerHTML=swHtml('',ok(cur)?cur:firstCol(p,z),ok)}
 $('catalogo').addEventListener('click',e=>{
   const b=e.target.closest('.card .sizes button, .card .sw button');
-  if(b)b.parentNode.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b))});
+  if(b){b.parentNode.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));if(b.closest('.sizes'))refreshCard(b.closest('.card'))}});
 $('catalogo').addEventListener('click',e=>{const a=e.target.closest('.card .wa');if(!a)return;
   const c=a.closest('.card'),p=products.find(x=>String(x.id)===c.dataset.id),z=(c.querySelector('.sizes .on')||{dataset:{}}).dataset.s||'',col=(c.querySelector('.sw .on')||{dataset:{}}).dataset.col||'',code=newCode();
   a.href=wa(prodMsg(p,z,col,code));saveOrder({code,type:'producto',qty:1,items:[ordItem(p,z,col,1)],subtotal:+p.price,discount:0,total:+p.price})});
@@ -540,14 +648,22 @@ function alist(){
   const filtered=!editing&&(q||c);
   const head=products.length?`<p class="desc" style="margin-bottom:6px">Mostrando ${list.length} de ${products.length} productos${filtered?' &nbsp;<button type="button" class="btn ghost sm" data-clr="1">Quitar filtro</button>':''}</p>`:'';
   $('alist').innerHTML=head+(list.length?list.map(p=>`<div class="row">${imgs(p)[0]?`<img src="${esc(imgs(p)[0])}" alt="">`:'<i></i>'}
-   <div><b>${esc(p.name)}</b><br><small>${esc(p.category)} · ${money(p.price)}${p.available===false?' · Agotado':''}</small></div>
+   <div><b>${esc(p.name)}</b><br><small>${esc(p.category)} · ${money(p.price)}${p.available===false?' · Agotado':''}</small> <span class="stkb ${stkC(p.stock)||'n'}">${p.stock==null?'Sin control':'Stock: '+p.stock}</span></div>
    <button class="btn ghost sm" data-e="${p.id}">Editar</button><button class="btn red sm" data-d="${p.id}">Eliminar</button></div>`).join(''):`<p class="desc">${products.length?'Ningún producto coincide: puedes crearlo con el botón Guardar.':'Aún no hay productos. Crea el primero arriba.'}</p>`);
 }
+function toast(t){let el=$('toast');if(!el){el=document.createElement('div');el.id='toast';el.setAttribute('role','status');dlg.appendChild(el)}
+  el.textContent=t;el.classList.remove('show');void el.offsetWidth;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('show'),3000)}
+let vlist=[],curSizes=[],legacy='';
+function vRender(){$('vrows').innerHTML=vlist.map((v,i)=>`<div class="vrow" data-i="${i}"><input list="vsz" data-f="s" value="${esc(v.s)}" placeholder="Talla" autocomplete="off"><select data-f="c"><option value="">Sin color</option>${COLORS.map(c=>`<option${c[0]===v.c?' selected':''}>${c[0]}</option>`).join('')}</select><input type="number" min="0" data-f="n" value="${v.n}" placeholder="Cant."><button type="button" class="btn red sm" data-x="${i}" aria-label="Quitar fila">✕</button></div>`).join('');
+  const has=vlist.length>0;$('pst').readOnly=true;$('vnote').hidden=!has;$('pst').value=has?vSum(vlist):legacy}
+$('vadd').onclick=()=>{vlist.push({s:'',c:'',n:0});vRender()};
+$('vrows').oninput=e=>{const r=e.target.closest('.vrow');if(!r||!e.target.dataset.f)return;vlist[+r.dataset.i][e.target.dataset.f]=e.target.value;$('pst').value=vSum(vlist)};
+$('vrows').onclick=e=>{const x=e.target.closest('[data-x]');if(x){vlist.splice(+x.dataset.x,1);vRender()}};
 let keep=[],added=[],removed=[];
 function gal(){
   $('gal').innerHTML=keep.map((u,i)=>`<div class="gi"><img src="${esc(u)}" alt=""><button type="button" data-k="${i}" aria-label="Quitar foto">×</button>${i===0?'<em>Portada</em>':''}</div>`).join('')+added.map((a,i)=>`<div class="gi"><img src="${a.u}" alt=""><button type="button" data-a="${i}" aria-label="Quitar foto">×</button>${!keep.length&&i===0?'<em>Portada</em>':''}</div>`).join('');
 }
-function clear(){$('pf').reset();alist();$('pid').value='';$('pa').checked=true;keep=[];added=[];removed=[];gal()}
+function clear(){$('pf').reset();alist();$('pid').value='';$('pa').checked=true;keep=[];added=[];removed=[];vlist=[];curSizes=[];legacy='';vRender();gal()}
 $('cl').onclick=()=>{clear();say('')};
 $('pimg').onchange=e=>{
   const room=Math.max(5-keep.length-added.length,0),fs=[...e.target.files];
@@ -561,8 +677,8 @@ $('alist').onclick=async e=>{
   const ed=e.target.dataset.e,dl=e.target.dataset.d;
   if(ed){const p=products.find(x=>String(x.id)===ed);
     $('pid').value=p.id;$('pn').value=p.name;$('pc').value=p.category;alist();$('pp').value=p.price;
-    $('ps').value=(p.sizes||[]).join(', ');$('pst').value=p.stock??'';$('pcmp').value=p.compare_price||'';$('pd').value=p.description||'';$('pa').checked=p.available!==false;
-    keep=[...imgs(p)];added=[];removed=[];gal();say('Editando “'+p.name+'”. Guarda cuando termines.',true);dlg.scrollTo({top:0,behavior:'smooth'})}
+    curSizes=[...(p.sizes||[])];legacy=hasVar(p)?'':(p.stock??'');$('pst').value=legacy;$('pcmp').value=p.compare_price||'';$('pd').value=p.description||'';$('pa').checked=p.available!==false;
+    vlist=vars(p).map(v=>({...v}));vRender();keep=[...imgs(p)];added=[];removed=[];gal();say('Editando “'+p.name+'”. Guarda cuando termines.',true);dlg.scrollTo({top:0,behavior:'smooth'})}
   if(dl){const p=products.find(x=>String(x.id)===dl);
     if(!confirm('¿Eliminar “'+p.name+'”? No se puede deshacer.'))return;
     const{error}=await sb.from('products').delete().eq('id',dl);
@@ -575,7 +691,10 @@ $('pf').onsubmit=async e=>{e.preventDefault();$('sv').disabled=true;say('Guardan
   try{
     const id=$('pid').value;
     const row={name:$('pn').value.trim(),category:$('pc').value.trim(),price:Number($('pp').value),
-      sizes:$('ps').value.split(',').map(s=>s.trim()).filter(Boolean),description:$('pd').value.trim(),available:$('pa').checked,stock:$('pst').value===''?null:Number($('pst').value),compare_price:$('pcmp').value?Number($('pcmp').value):null};
+      sizes:[...curSizes],description:$('pd').value.trim(),available:$('pa').checked,stock:$('pst').value===''?null:Number($('pst').value),compare_price:$('pcmp').value?Number($('pcmp').value):null};
+    const dd={};vlist.map(v=>({s:String(v.s).trim(),c:v.c||'',n:Math.max(0,Number(v.n)||0)})).filter(v=>v.s||v.c).forEach(v=>dd[v.s+'|'+v.c]=v);
+    row.variants=Object.values(dd);
+    if(row.variants.length){row.stock=vSum(row.variants);row.sizes=[...new Set(row.variants.map(v=>v.s).filter(Boolean))]}
     const urls=[...keep];
     for(const {f} of added){const path=`${Date.now()}-${Math.random().toString(36).slice(2,8)}.jpg`;
       const up=await sb.storage.from('productos').upload(path,await shrink(f),{contentType:'image/jpeg'});
@@ -583,11 +702,12 @@ $('pf').onsubmit=async e=>{e.preventDefault();$('sv').disabled=true;say('Guardan
     row.image_url=urls[0]||null;row.images=urls;
     const save=x=>id?sb.from('products').update(x).eq('id',id):sb.from('products').insert(x);
     let r=await save(row),aviso='';
-    if(r.error&&/images|compare_price|stock/i.test(r.error.message)){delete row.images;delete row.compare_price;delete row.stock;r=await save(row);aviso=' Ejecuta actualizar-tienda.sql en Supabase para guardar varias fotos y el precio de ahorro.'}
+    if(r.error&&/variants/i.test(r.error.message)){delete row.variants;r=await save(row);aviso=' OJO: las tallas y colores NO se guardaron. Ejecuta actualizar-variantes.sql en Supabase.'}
+    if(r.error&&/images|compare_price|stock/i.test(r.error.message)){delete row.images;delete row.compare_price;delete row.stock;r=await save(row);aviso+=' Ejecuta actualizar-tienda.sql en Supabase para guardar varias fotos y el precio de ahorro.'}
     if(r.error)throw r.error;
     const gone=removed.filter(u=>u&&u.includes('/productos/')&&!used(u,id));
     if(gone.length)await sb.storage.from('productos').remove(gone.map(u=>u.split('/productos/')[1]));
-    clear();await load();alist();say('Producto guardado.'+aviso,true);
+    const msgP=id?'Producto actualizado':'Producto creado';clear();await load();alist();say(msgP+'.'+aviso,true);toast(msgP);
   }catch(err){say('Error: '+err.message)}
   $('sv').disabled=false};
 
@@ -653,7 +773,9 @@ $('lbS').addEventListener('touchend',e=>{if(sx===null)return;const d=e.changedTo
 DEMO_DATA[6].images=[eb('r-kAAeSwXXho8jHC'),eb('GakAAeSwwhZo8jHD'),eb('PagAAeSwOI9o8jHD')];
 DEMO_DATA[7].images=[eb('zFUAAeSweDhnvWoc'),eb('KUYAAeSwCKZnvWoc'),eb('RfMAAeSwsABnvWod'),eb('RgAAAeSwQ1BnvWod'),eb('MaAAAeSwjvhnvWoe')];
 
-function saveTag(p){const c=Number(p.compare_price),n=Number(p.price);return c>n?`<span class="old">${money(c)}</span><span class="save">Ahorras ${Math.round((1-n/c)*100)}%</span>`:''}
+const discPct=p=>{const c=Number(p.compare_price),n=Number(p.price);return c>n&&n>0?Math.round((1-n/c)*100):0};
+function saveTag(p){const c=Number(p.compare_price),n=Number(p.price),d=discPct(p);return d?`<span class="old">${money(c)}</span><span class="save">Descuento -${d}%</span><span class="saved">Ahorras ${money(c-n)}</span>`:''}
+function discBadge(p){const d=discPct(p);return d?`<span class="disc" aria-label="Producto en descuento">-${d}%<small>DESCUENTO</small></span>`:''}
 function used(u,id){return products.some(x=>String(x.id)!==String(id)&&imgs(x).includes(u))}
 function fillCombo(){const map={cbG:'gorras',cbB:'buzos',cbR:'relojes'};
   for(const id in map){const el=$(id),v=el.value;
@@ -667,11 +789,11 @@ $('cbGo').onclick=()=>{
   const talla=(sel.find(p=>sg(p.category)==='buzos')||{}).sizes||[];
   clear();
   $('pn').value='Combo '+sel.map(nm).join(' + ');$('pc').value='Combos';$('pp').value=price;$('pcmp').value=sum;
-  $('ps').value=talla.join(', ');$('pd').value='Incluye: '+sel.map(p=>p.name).join(', ')+`. Ahorras ${d}% comprándolo junto.`;
+  curSizes=[...talla];$('pd').value='Incluye: '+sel.map(p=>p.name).join(', ')+`. Ahorras ${d}% comprándolo junto.`;
   keep=[...new Set(sel.map(p=>imgs(p)[0]).filter(Boolean))].slice(0,5);added=[];removed=[];gal();alist();
   say('Combo armado: revisa los datos y presiona Guardar producto.',true)};
 $('nav').addEventListener('click',e=>{const a=e.target.closest('a[data-c]');if(!a)return;e.preventDefault();
-  activeCat=activeCat===a.dataset.c?null:a.dataset.c;render();$('catalogo').scrollIntoView({behavior:'smooth',block:'start'})});
+  activeCat=activeCat===a.dataset.c?null:a.dataset.c;render();(activeCat==='combos'?$('armar'):$('catalogo')).scrollIntoView({behavior:'smooth',block:'start'})});
 document.querySelector('.top>a').addEventListener('click',e=>{e.preventDefault();activeCat=null;render();window.scrollTo({top:0,behavior:'smooth'})});
 DEMO_DATA.unshift(
  {id:'k0',name:'Combo Gorra + Buzo + Reloj',category:'Combos',price:Math.round((65000+135000+185000)*.9/1000)*1000,compare_price:385000,sizes:T,description:'Incluye gorra snapback, buzo oversize y reloj clásico. Ahorras 10% comprándolo junto.',image_url:DEMO_DATA[0].image_url,images:[DEMO_DATA[0].image_url,DEMO_DATA[6].image_url,DEMO_DATA[10].image_url],available:true},
@@ -679,14 +801,15 @@ DEMO_DATA.unshift(
 
 const COMBO_D=CFG.COMBO_DESC||10;
 const BSTEPS=[{k:'g',cat:'gorras',n:'Gorra',t:'1. Elige tu gorra'},{k:'b',cat:'buzos',n:'Buzo',t:'2. Elige tu buzo'},{k:'r',cat:'relojes',n:'Reloj',t:'3. Elige tu reloj'}];
-const bsel={g:null,b:null,r:null},bsz={g:'',b:'',r:''},bcol={b:''};let bq=1,bnm='';
+const bsel={g:null,b:null,r:null},bsz={g:'',b:'',r:''},bcol={g:'',b:'',r:''};let bq=1,bnm='';
+function bDef(k){const p=bProd(k);if(!p)return;const sz=pSizes(p);bsz[k]=sz.find(z=>!hasVar(p)||vStock(p,z,null)>0)||sz[0]||'';bcol[k]=hasColors(p)?firstCol(p,sz.length?bsz[k]:null):''}
 const bList=cat=>products.filter(p=>slug(p.category||'')===cat&&isAv(p));
 const bProd=k=>bsel[k]==null?null:(products.find(p=>String(p.id)===String(bsel[k]))||null);
 const bMax=()=>{const m=BSTEPS.map(s=>bProd(s.k)).filter(p=>p&&p.stock!=null).map(p=>p.stock);return m.length?Math.max(1,Math.min(...m)):10};
 function bTotals(){const sel=BSTEPS.map(s=>bProd(s.k)),u=sel.reduce((a,p)=>a+(p?Number(p.price):0),0);return{sel,sum:u*bq,tot:Math.round(u*(1-COMBO_D/100))*bq}}
-const bItems=()=>BSTEPS.map(s=>ordItem(bProd(s.k),bsz[s.k],s.k==='b'?bcol.b:'',bq));
+const bItems=()=>BSTEPS.map(s=>ordItem(bProd(s.k),bsz[s.k],bcol[s.k],bq));
 function bMsg(code){const{sel,sum,tot}=bTotals();
-  return `Hola ${CFG.STORE}, quiero armar este combo (${COMBO_D}% de descuento)${bq>1?' x'+bq:''}:\n`+sel.map((p,i)=>{const k=BSTEPS[i].k;return `${i+1}) ${BSTEPS[i].n}: *${p.name}*${bsz[k]?' - Talla: '+bsz[k]:''}${k==='b'&&bcol.b?' - Color: '+bcol.b:''} - ${money(p.price)}`}).join('\n')+`\nSubtotal: ${money(sum)}\nDescuento ${COMBO_D}%: -${money(sum-tot)}\n*Total del combo: ${money(tot)}*${code?'\nPedido: '+code:''}${bnm.trim()?'\nNombre: '+bnm.trim():''}\n¿Está disponible?`}
+  return `Hola ${CFG.STORE}, quiero armar este combo (${COMBO_D}% de descuento)${bq>1?' x'+bq:''}:\n`+sel.map((p,i)=>{const k=BSTEPS[i].k;return `${i+1}) ${BSTEPS[i].n}: *${p.name}*${bsz[k]?' - Talla: '+bsz[k]:''}${bcol[k]?' - Color: '+bcol[k]:''} - ${money(p.price)}`}).join('\n')+`\nSubtotal: ${money(sum)}\nDescuento ${COMBO_D}%: -${money(sum-tot)}\n*Total del combo: ${money(tot)}*${code?'\nPedido: '+code:''}\n¿Está disponible?`}
 function renderBuilder(){
   const el=$('armar');if(!el)return;
   BSTEPS.forEach(s=>{if(bsel[s.k]!=null&&!bProd(s.k))bsel[s.k]=null});bq=Math.min(bq,bMax());
@@ -696,31 +819,35 @@ function renderBuilder(){
    BSTEPS.map((s,i)=>{const list=bList(s.cat),p=sel[i];
      return `<div class="bstep"><h3>${s.t}</h3>`+
       (list.length?`<div class="brow">${list.map(x=>`<button type="button" class="bp${p&&String(p.id)===String(x.id)?' on':''}" aria-pressed="${!!(p&&String(p.id)===String(x.id))}" data-s="${s.k}" data-id="${esc(x.id)}"><span class="bi">${imgs(x)[0]?`<img src="${esc(imgs(x)[0])}" alt="" loading="lazy" onerror="this.remove()">`:''}</span><b>${esc(x.name)}</b><em>${money(x.price)}</em></button>`).join('')}</div>`:'<p class="desc">Pronto tendremos opciones aquí.</p>')+
-      (p&&(p.sizes||[]).length>1?`<div class="sizes bs" data-s="${s.k}">${p.sizes.map(z=>`<button type="button" data-z="${esc(z)}" class="${bsz[s.k]===z?'on':''}">${esc(z)}</button>`).join('')}</div>`:'')+
-      (p&&s.k==='b'?`<div class="bsw"><span>Color:</span> ${swHtml('',bcol.b)}</div>`:'')+`</div>`}).join('')+
-   `<div class="bqt"><span class="qty"><span>Cantidad:</span><button type="button" data-q="-1" aria-label="Menos">−</button>${bq}<button type="button" data-q="1" aria-label="Más">+</button></span><input id="bnm" placeholder="Tu nombre (para identificar el pedido)" value="${esc(bnm)}" autocomplete="name"></div>`+
-   `<div class="bsum">${full?`<div class="bt"><span class="old">${money(sum)}</span><b class="price">${money(tot)}</b><span class="save">Ahorras ${COMBO_D}%</span></div>`:'<span class="desc">Elige los 3 productos para ver el precio de tu combo.</span>'}
-    <a class="btn${full?'':' dis'}" id="bwa" target="_blank" rel="noopener"${full?` href="${wa(bMsg())}"`:''}>Pedir combo por WhatsApp</a>
+      (p&&pSizes(p).length>1?`<div class="sizes bs" data-s="${s.k}">${pSizes(p).map(z=>{const off=hasVar(p)&&vStock(p,z,null)<=0;return `<button type="button" data-z="${esc(z)}" class="${bsz[s.k]===z?'on':''}${off?' off':''}"${off?' disabled':''}>${esc(z)}</button>`}).join('')}</div>`:'')+
+      (p&&hasColors(p)?`<div class="bsw" data-s="${s.k}"><span>Color:</span> ${swHtml('',bcol[s.k],c=>vStock(p,pSizes(p).length?bsz[s.k]:null,c)>0)}</div>`:'')+`</div>`}).join('')+
+   `<div class="bfoot"><div class="bqt"><span class="qty"><span>Cantidad:</span><button type="button" data-q="-1" aria-label="Menos">−</button>${bq}<button type="button" data-q="1" aria-label="Más">+</button></span></div>
+    <div class="bres"><h4>Datos de tu pedido</h4>${BSTEPS.map((s,i)=>{const p=sel[i];return p?`<div class="r"><span><b>${s.n}:</b> ${esc(p.name)}${bsz[s.k]?' · Talla '+esc(bsz[s.k]):''}${bcol[s.k]?' · '+esc(bcol[s.k]):''}</span><span>${money(p.price)}</span></div>`:`<div class="r mut"><span><b>${s.n}:</b> sin elegir</span><span>—</span></div>`}).join('')}
+     <div class="r"><span>Cantidad</span><span>× ${bq}</span></div>
+     ${full?`<div class="r"><span>Subtotal</span><span class="old" style="margin:0">${money(sum)}</span></div><div class="r"><span>Descuento -${COMBO_D}%</span><span>-${money(sum-tot)}</span></div><div class="r tt"><span>Total</span><span>${money(tot)}</span></div>`:'<div class="r mut"><span>Elige los 3 productos para ver el total.</span></div>'}</div></div>`+
+   `<div class="bsum"><a class="btn grn${full?'':' dis'}" id="bwa" target="_blank" rel="noopener"${full?` href="${wa(bMsg())}"`:''}>Pedir por WhatsApp</a>
     <button type="button" class="btn ghost sm" id="bre">Reiniciar</button></div>`;
   el.querySelectorAll('.brow').forEach((r,i)=>r.scrollLeft=sc[i]||0)}
-$('catalogo').addEventListener('click',e=>{
+$('armar').addEventListener('click',e=>{
   const bp=e.target.closest('.bp');
   if(bp){const k=bp.dataset.s;
-    if(String(bsel[k])===bp.dataset.id){bsel[k]=null;bsz[k]='';if(k==='b')bcol.b=''}
-    else{bsel[k]=bp.dataset.id;bsz[k]=((bProd(k)||{}).sizes||[])[0]||'';if(k==='b')bcol.b=COLORS[0][0]}
+    if(String(bsel[k])===bp.dataset.id){bsel[k]=null;bsz[k]='';bcol[k]=''}
+    else{bsel[k]=bp.dataset.id;bDef(k)}
     renderBuilder();return}
   const bz=e.target.closest('.bs button');
-  if(bz){bsz[bz.closest('.bs').dataset.s]=bz.dataset.z;renderBuilder();return}
-  const bc=e.target.closest('.bsw button');if(bc){bcol.b=bc.dataset.col;renderBuilder();return}
+  if(bz){const k=bz.closest('.bs').dataset.s,p=bProd(k);bsz[k]=bz.dataset.z;if(p&&hasColors(p)&&vStock(p,bsz[k],bcol[k])<=0)bcol[k]=firstCol(p,bsz[k]);renderBuilder();return}
+  const bc=e.target.closest('.bsw button');if(bc){bcol[bc.closest('.bsw').dataset.s]=bc.dataset.col;renderBuilder();return}
   const bqb=e.target.closest('[data-q]');if(bqb){bq=Math.max(1,Math.min(bMax(),bq+ +bqb.dataset.q));renderBuilder();return}
-  if(e.target.closest('#bre')){bsel.g=bsel.b=bsel.r=null;bsz.g=bsz.b=bsz.r='';bcol.b='';bq=1;renderBuilder();return}
+  if(e.target.closest('#bre')){bsel.g=bsel.b=bsel.r=null;bsz.g=bsz.b=bsz.r='';bcol.g=bcol.b=bcol.r='';bq=1;renderBuilder();return}
   const w=e.target.closest('#bwa');
   if(w&&!w.classList.contains('dis')){const code=newCode(),{sum,tot}=bTotals();w.href=wa(bMsg(code));
-    saveOrder({code,type:'combo',customer:bnm.trim()||null,qty:bq,items:bItems(),subtotal:sum,discount:sum-tot,total:tot})}});
-$('catalogo').addEventListener('input',e=>{if(e.target.id==='bnm')bnm=e.target.value});
+    saveOrder({code,type:'combo',customer:null,qty:bq,items:bItems(),subtotal:sum,discount:sum-tot,total:tot})}});
 
 $('cpPct').textContent=COMBO_D;
 $('promoBtn').addEventListener('click',e=>{e.preventDefault();activeCat=null;render();const a=$('armar');if(a)a.scrollIntoView({behavior:'smooth',block:'start'})});
+(()=>{const pr=$('promo');let t;const go=()=>{pr.classList.add('wave');clearTimeout(t);t=setTimeout(()=>pr.classList.remove('wave'),2200)};
+  pr.addEventListener('touchstart',go,{passive:true});pr.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse')go()});
+  pr.addEventListener('click',e=>{if(!e.target.closest('#promoBtn'))$('promoBtn').click()})})();
 let cc=0;setInterval(()=>{cc=(cc+1)%3;$('promoBtn').dataset.c=cc},2000);
 $('lbW').addEventListener('click',()=>{const code=newCode();$('lbW').href=wa(prodMsg(lbP,'','',code));saveOrder({code,type:'producto',qty:1,items:[ordItem(lbP,'','',1)],subtotal:+lbP.price,discount:0,total:+lbP.price})});
 
@@ -741,14 +868,79 @@ function rPed(){const L=orders.filter(o=>pfil==='todos'||o.status===pfil);
 $('tPed').onclick=async e=>{const f=e.target.dataset.f;if(f){pfil=f;rPed();return}
   const st=e.target.dataset.o;if(!st)return;
   if(st==='confirmado'&&!confirm('¿Confirmar la venta? Se descontará el inventario.'))return;
+  const o=orders.find(x=>String(x.id)===e.target.dataset.id),prev=o&&o.status;
   e.target.disabled=true;const{error}=await sb.rpc('set_order_status',{p_id:e.target.dataset.id,p_status:st});
   if(error){say(error.message);e.target.disabled=false;return}
-  say('Pedido actualizado.',true);await load();await loadOrders()};
-function rInv(){$('tInv').innerHTML=`<table class="tb"><tr><th>Producto</th><th>Stock</th><th></th></tr>${products.map(p=>`<tr><td>${esc(p.name)}<br><small>${esc(p.category)}</small></td><td><input type="number" min="0" style="width:100px" class="${p.stock!=null&&p.stock<=2?'low':''}" id="s_${esc(p.id)}" value="${p.stock??''}" placeholder="sin control"></td><td><button type="button" class="btn ghost sm" data-s="${esc(p.id)}">Guardar</button></td></tr>`).join('')}</table>`}
-$('tInv').onclick=async e=>{const id=e.target.dataset.s;if(!id)return;const v=$('s_'+id).value;
-  const{error}=await sb.from('products').update({stock:v===''?null:Number(v)}).eq('id',id);
-  if(error)return say('Error: '+error.message+' (¿ejecutaste actualizar-pedidos.sql?)');
-  say('Stock guardado.',true);await load();rInv()};
+  await load();const w=await syncVars(o,prev,st);
+  if(w)say('Pedido actualizado, pero no se pudo ajustar el stock por talla/color: '+w);else say('Pedido actualizado.',true);
+  await loadOrders()};
+let invCat='';
+const stkC=n=>n===''||n==null?'':(Number(n)<=2?'r':Number(n)<=4?'y':'g');
+const dot=c=>{const x=COLORS.find(k=>k[0]===c);return x?`<i class="cdot" style="background:${x[1]}"></i>`:''};
+function invCount(){const n=$('tInv').querySelectorAll('.stk-in.chg').length;const b=$('invAll');if(!b)return;b.disabled=!n;b.textContent=n?`Guardar todos los cambios (${n})`:'Guardar todos los cambios';$('invInfo').textContent=n?`${n} fila${n>1?'s':''} con cambios sin guardar`:'Sin cambios pendientes'}
+function invRows(){return products.flatMap(p=>{const vs=vars(p);
+  if(!vs.length)return[{p,k:'',n:p.stock,sub:esc(p.category)}];
+  return vs.map((v,k)=>({p,k:String(k),n:v.n,sub:`${esc(p.category)} · ${v.s?'Talla '+esc(v.s):'Sin talla'}${v.c?' · '+dot(v.c)+esc(v.c):''}`}))})}
+function rInv(){
+  $('tInv').innerHTML=`<div class="invadd"><b>Agregar prenda al inventario</b>
+    <div class="ia"><select id="iaP">${products.map(p=>`<option value="${esc(p.id)}">${esc(p.name)}</option>`).join('')}</select><input id="iaS" list="vsz" placeholder="Talla" autocomplete="off"><select id="iaC"><option value="">Sin color</option>${COLORS.map(c=>`<option>${c[0]}</option>`).join('')}</select><input id="iaN" type="number" min="0" placeholder="Cantidad"><button type="button" class="btn sm" id="iaB">Agregar</button></div>
+    <small class="desc">Si esa talla y color ya existen, la cantidad se suma a la que ya tienes.</small></div>
+  <div class="tabs" id="invCats"><button type="button" class="btn ghost sm${invCat?'':' on'}" data-ic="">Todas</button>${[...new Map(products.map(p=>[slug(p.category||''),p.category]))].map(([k,n])=>`<button type="button" class="btn ghost sm${invCat===k?' on':''}" data-ic="${esc(k)}">${esc(n)}</button>`).join('')}</div>
+  <div class="legend"><span><i style="background:#ff5252"></i>1-2 unidades (poco)</span><span><i style="background:#f2c200"></i>3-4 unidades</span><span><i style="background:#2ecc71"></i>5 o más</span></div>
+  <table class="tb"><tr><th>Producto</th><th>Stock</th><th></th></tr>${invRows().map(r=>`<tr data-cat="${esc(slug(r.p.category||''))}"${invCat&&slug(r.p.category||'')!==invCat?' hidden':''}><td><b>${esc(r.p.name)}</b><br><small>${r.sub}</small></td><td><input type="number" min="0" class="stk-in ${stkC(r.n)}" data-id="${esc(r.p.id)}" data-k="${r.k}" data-o="${r.n??''}" value="${r.n??''}" placeholder="sin control"></td><td><button type="button" class="btn ghost sm" data-s="${esc(r.p.id)}" data-k="${r.k}" disabled>Guardar</button></td></tr>`).join('')}</table>
+  <div class="invbar"><button type="button" class="btn" id="invAll" disabled>Guardar todos los cambios</button><small id="invInfo" class="desc">Sin cambios pendientes</small></div>`;invCount()}
+$('tInv').oninput=e=>{const i=e.target;if(!i.classList.contains('stk-in'))return;
+  i.classList.remove('r','y','g');const c=stkC(i.value);if(c)i.classList.add(c);
+  i.classList.toggle('chg',i.value!==i.dataset.o);const rb=i.closest('tr').querySelector('[data-s]');if(rb)rb.disabled=i.value===i.dataset.o;invCount()};
+async function saveStock(inputs){const by={};inputs.forEach(i=>(by[i.dataset.id]??=[]).push(i));
+  const R=await Promise.all(Object.entries(by).map(([id,ins])=>{const p=products.find(x=>String(x.id)===id);if(!p)return{};
+    if(ins[0].dataset.k===''){const v=ins[0].value;return sb.from('products').update({stock:v===''?null:Number(v)}).eq('id',id)}
+    const vs=vars(p);ins.forEach(i=>{const x=vs[+i.dataset.k];if(x)x.n=Math.max(0,Number(i.value)||0)});
+    return sb.from('products').update({variants:vs,stock:vSum(vs)}).eq('id',id)}));
+  return R.find(r=>r&&r.error)}
+function invApply(){$('tInv').querySelectorAll('tr[data-cat]').forEach(tr=>tr.hidden=!!invCat&&tr.dataset.cat!==invCat);
+  $('invCats').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.ic===invCat))}
+$('tInv').onchange=e=>{if(e.target.id!=='iaP')return;const p=products.find(x=>String(x.id)===e.target.value);invCat=p?slug(p.category||''):'';invApply()};
+$('tInv').onclick=async e=>{
+  const ic=e.target.closest('[data-ic]');
+  if(ic){invCat=ic.dataset.ic;invApply();
+    if(invCat){const sel=$('iaP'),cur=products.find(x=>String(x.id)===sel.value);
+      if(!cur||slug(cur.category||'')!==invCat){const f=products.find(x=>slug(x.category||'')===invCat);if(f)sel.value=f.id}}
+    return}
+  const rb=e.target.closest('[data-s]');
+  if(rb){const i=$('tInv').querySelector(`.stk-in[data-id="${CSS.escape(rb.dataset.s)}"][data-k="${rb.dataset.k}"]`);if(!i||i.value===i.dataset.o)return;
+    rb.disabled=true;const er=await saveStock([i]);
+    if(er){rb.disabled=false;return say('Error: '+er.error.message+' (¿ejecutaste actualizar-variantes.sql?)')}
+    i.dataset.o=i.value;i.classList.remove('chg');invCount();say('Inventario actualizado.',true);toast('Inventario actualizado');load();return}
+  const ad=e.target.closest('#iaB');
+  if(ad){if($('tInv').querySelector('.stk-in.chg'))return say('Guarda primero los cambios pendientes de la lista.');
+    const p=products.find(x=>String(x.id)===$('iaP').value),z=$('iaS').value.trim(),c=$('iaC').value,nv=$('iaN').value;
+    if(!p)return say('Primero crea un producto.');
+    if(nv===''||Number(nv)<0)return say('Escribe la cantidad.');
+    if(!z&&!c)return say('Indica al menos la talla o el color.');
+    if(!hasVar(p)&&p.stock>0&&!confirm('“'+p.name+'” tenía '+p.stock+' unidades sin talla ni color. Al agregar tallas y colores, el stock se cuenta por talla y color. ¿Continuar?'))return;
+    const vs=vars(p),ix=vs.findIndex(v=>v.s===z&&v.c===c);let now=Math.round(Number(nv));if(ix>=0){vs[ix].n+=now;now=vs[ix].n}else vs.push({s:z,c,n:now});
+    const sizes=z&&!(p.sizes||[]).includes(z)?[...(p.sizes||[]),z]:(p.sizes||[]);
+    ad.disabled=true;const{error}=await sb.from('products').update({variants:vs,stock:vSum(vs),sizes}).eq('id',p.id);ad.disabled=false;
+    if(error)return say(/variants/i.test(error.message)?'Falta la columna de tallas y colores: ejecuta actualizar-variantes.sql en Supabase.':'Error: '+error.message);
+    const keepP=String(p.id),det=[z,c].filter(Boolean).join(' · ');say('Inventario actualizado.',true);toast(`Inventario actualizado: ${det} ahora tiene ${now}`);await load();rInv();$('iaP').value=keepP;return}
+  const b=e.target.closest('#invAll');if(!b)return;
+  const ch=[...$('tInv').querySelectorAll('.stk-in.chg')];if(!ch.length)return;
+  b.disabled=true;b.textContent='Guardando…';
+  const er=await saveStock(ch);
+  if(er){say('Error: '+er.error.message+' (¿ejecutaste actualizar-variantes.sql?)');invCount();return}
+  say('Inventario actualizado.',true);toast(`Inventario actualizado (${ch.length} fila${ch.length>1?'s':''})`);await load();rInv()};
+/* al confirmar o cancelar una venta, también se ajusta el stock por talla y color */
+async function syncVars(o,prev,st){
+  const d=(st==='confirmado'&&prev!=='confirmado')?-1:(prev==='confirmado'&&st!=='confirmado')?1:0;if(!o||!d)return'';
+  const by={};
+  (o.items||[]).forEach(it=>{const p=products.find(x=>String(x.id)===String(it.id));if(!p||!hasVar(p))return;
+    const vs=(by[p.id]??={p,vs:vars(p)}).vs,q=Number(it.qty)||1,z=it.size||'',c=it.color||'';
+    let ix=vs.findIndex(v=>v.s===z&&v.c===c);
+    if(ix<0)ix=vs.findIndex(v=>(!z||v.s===z)&&(!c||v.c===c)&&(d>0||v.n>0));
+    if(ix>=0)vs[ix].n=Math.max(0,vs[ix].n+d*q)});
+  const R=await Promise.all(Object.values(by).map(({p,vs})=>sb.from('products').update({variants:vs,stock:vSum(vs)}).eq('id',p.id)));
+  const bad=R.find(r=>r.error);if(!bad)await load();return bad?bad.error.message:''}
 function rVen(){const C=orders.filter(o=>o.status==='confirmado'),M={};C.forEach(o=>{const m=M[ym(o)]??={n:0,t:0};m.n++;m.t+=Number(o.total)});
   const ms=Object.keys(M).sort().reverse(),sel=vm&&M[vm]?vm:(ms[0]||''),L=C.filter(o=>ym(o)===sel),mn=m=>new Date(m+'-15').toLocaleDateString('es-CO',{month:'long',year:'numeric'});
   $('tVen').innerHTML=`<table class="tb"><tr><th>Mes</th><th>Ventas</th><th>Total vendido</th></tr>${ms.map(m=>`<tr><td><button type="button" class="btn ghost sm${m===sel?' on':''}" data-m="${m}">${mn(m)}</button></td><td>${M[m].n}</td><td><b>${money(M[m].t)}</b></td></tr>`).join('')||'<tr><td colspan="3">Aún no hay ventas confirmadas.</td></tr>'}</table>`+
