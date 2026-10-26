@@ -439,6 +439,11 @@ dialog{margin:auto}
 #cartB.bump .in svg{animation:cbump .5s}
 @media(max-width:640px){#cartF{display:none}}
 @media(min-width:641px){.nv.cartH{display:none}}
+.f .r4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;align-items:end}
+.f .r4 label{font-size:13px;white-space:nowrap}
+.f .r4 input{padding:9px 10px;font-size:14px}
+@media(max-width:560px){.f .r4{grid-template-columns:1fr 1fr}}
+.mg{font-size:13px;font-weight:700;margin:0}.mg.ok{color:#1fa855}.mg.neg{color:#ff6b6b}
 </style>
 </head>
 <body>
@@ -496,11 +501,13 @@ dialog{margin:auto}
         </details>
         <label>Nombre<input id="pn" required placeholder="Escribe para buscar o crear" autocomplete="off"></label>
         <label>Categoría<input id="pc" required placeholder="Elige una o escribe una nueva" autocomplete="off"><div class="sizes cchips" id="cchips"></div></label>
-        <div class="w r3">
-          <label>Precio Oferta<input type="number" id="pp" min="0" step="500" required></label>
-          <label>Precio normal <small>(opcional)</small><input type="number" id="pcmp" min="0" step="500"></label>
-          <label>Stock <small>(automático)</small><input type="number" id="pst" min="0" step="1" readonly placeholder="Automático" title="Se calcula con el inventario por talla y color"></label>
+        <div class="w r4">
+          <label>Valor compra<input type="number" id="pco" min="0" step="500" placeholder="Lo que te costó"></label>
+          <label>Valor venta<input type="number" id="pcmp" min="0" step="500" placeholder="Opcional"></label>
+          <label>Valor venta oferta<input type="number" id="pp" min="0" step="500" required></label>
+          <label>Stock<input type="number" id="pst" min="0" step="1" readonly placeholder="Auto" title="Se calcula con el inventario por talla y color"></label>
         </div>
+        <p class="w mg" id="pmg"></p>
         <div class="w vbox"><b>Inventario por talla y color</b>
           <small class="desc">Agrega cada talla y color que tengas. Lo que no agregues aparece bloqueado en la tienda.</small>
           <div id="vrows"></div>
@@ -677,7 +684,12 @@ async function openAdmin(){
   if(DEMO){alert('Primero conecta Supabase: edita SUPABASE_URL y SUPABASE_KEY en index.html.');return;}
   dlg.showModal();const{data}=await sb.auth.getSession();gate(!!data.session);
 }
-function gate(on){$('login').hidden=on;$('panel').hidden=!on;$('out').hidden=!on;$('admT').textContent=on?'Panel de administración':'Administrador';say('');if(on){alist();loadOrders()}}
+let costs={};
+async function loadCosts(){if(!sb)return;const{data}=await sb.from('product_costs').select('*');costs={};(data||[]).forEach(c=>costs[String(c.product_id)]=c.cost)}
+function updMg(){const c=parseFloat($('pco').value),v=parseFloat($('pp').value),el=$('pmg');if(!(c>=0)||!(v>0)){el.textContent='';el.className='w mg';return}
+  const g=v-c;el.className='w mg '+(g<0?'neg':'ok');el.textContent=g<0?`⚠ Vendes por debajo del costo: pierdes ${money(-g)} por unidad`:`Ganancia por unidad: ${money(g)} · ${Math.round(g/v*100)}% de la venta${c>0?' · '+Math.round(g/c*100)+'% sobre lo que pagaste':''}`}
+$('pco').oninput=$('pp').oninput=updMg;
+function gate(on){$('login').hidden=on;$('panel').hidden=!on;$('out').hidden=!on;$('admT').textContent=on?'Panel de administración':'Administrador';say('');if(on){alist();loadOrders();loadCosts().then(()=>{if($('pid').value)$('pco').value=costs[$('pid').value]??'';updMg()})}}
 $('x').onclick=()=>dlg.close();
 $('login').onsubmit=async e=>{e.preventDefault();
   const{error}=await sb.auth.signInWithPassword({email:$('em').value,password:$('pw').value});
@@ -716,7 +728,7 @@ function gal(){
   const end=(e,ok)=>{if(!d)return;const x=d;d=null;if(!x.on)return;
     const t=ok?tg(e):null;if(t&&t!==x.it){const j=+t.dataset.i,m=keep.splice(x.i,1)[0];keep.splice(j,0,m)}gal()};
   g.addEventListener('pointerup',e=>end(e,true));g.addEventListener('pointercancel',e=>end(e,false))})();
-function clear(){$('pf').reset();alist();$('pid').value='';$('pa').checked=true;keep=[];added=[];removed=[];vlist=[];curSizes=[];legacy='';vRender();gal()}
+function clear(){$('pf').reset();alist();$('pid').value='';$('pa').checked=true;keep=[];added=[];removed=[];vlist=[];curSizes=[];legacy='';vRender();gal();updMg()}
 $('cl').onclick=()=>{clear();say('')};
 $('pimg').onchange=e=>{
   const room=Math.max(5-keep.length,0),fs=[...e.target.files];
@@ -730,7 +742,7 @@ $('alist').onclick=async e=>{
   const ed=e.target.dataset.e,dl=e.target.dataset.d;
   if(ed){const p=products.find(x=>String(x.id)===ed);
     $('pid').value=p.id;$('pn').value=p.name;$('pc').value=p.category;alist();$('pp').value=p.price;
-    curSizes=[...(p.sizes||[])];legacy=hasVar(p)?'':(p.stock??'');$('pst').value=legacy;$('pcmp').value=p.compare_price||'';$('pd').value=p.description||'';$('pa').checked=p.available!==false;
+    curSizes=[...(p.sizes||[])];legacy=hasVar(p)?'':(p.stock??'');$('pst').value=legacy;$('pcmp').value=p.compare_price||'';$('pd').value=p.description||'';$('pa').checked=p.available!==false;$('pco').value=costs[String(p.id)]??'';updMg();
     vlist=vars(p).map(v=>({...v}));vRender();keep=[...imgs(p)];added=[];removed=[];gal();say('Editando “'+p.name+'”. Guarda cuando termines.',true);dlg.scrollTo({top:0,behavior:'smooth'})}
   if(dl){const p=products.find(x=>String(x.id)===dl);
     if(!confirm('¿Eliminar “'+p.name+'”? No se puede deshacer.'))return;
@@ -753,11 +765,13 @@ $('pf').onsubmit=async e=>{e.preventDefault();$('sv').disabled=true;say('Guardan
       const up=await sb.storage.from('productos').upload(path,await shrink(f),{contentType:'image/jpeg'});
       if(up.error)throw up.error;urls.push(sb.storage.from('productos').getPublicUrl(path).data.publicUrl)}
     row.image_url=urls[0]||null;row.images=urls;
-    const save=x=>id?sb.from('products').update(x).eq('id',id):sb.from('products').insert(x);
+    const save=x=>id?sb.from('products').update(x).eq('id',id):sb.from('products').insert(x).select('id');
     let r=await save(row),aviso='';
     if(r.error&&/variants/i.test(r.error.message)){delete row.variants;r=await save(row);aviso=' OJO: las tallas y colores NO se guardaron. Ejecuta actualizar-variantes.sql en Supabase.'}
     if(r.error&&/images|compare_price|stock/i.test(r.error.message)){delete row.images;delete row.compare_price;delete row.stock;r=await save(row);aviso+=' Ejecuta actualizar-tienda.sql en Supabase para guardar varias fotos y el precio de ahorro.'}
     if(r.error)throw r.error;
+    const pid=id||(r.data&&r.data[0]&&r.data[0].id);
+    if(pid!=null){const cv=$('pco').value,cr=await sb.from('product_costs').upsert({product_id:String(pid),cost:cv===''?null:Number(cv)});if(cr.error)aviso+=' El valor de compra NO se guardó: ejecuta actualizar-costos.sql en Supabase.';else costs[String(pid)]=cv===''?null:Number(cv)}
     const gone=removed.filter(u=>u&&u.includes('/productos/')&&!used(u,id));
     if(gone.length)await sb.storage.from('productos').remove(gone.map(u=>u.split('/productos/')[1]));
     const msgP=id?'Producto actualizado':'Producto creado';clear();await load();alist();say(msgP+'.'+aviso,true);toast(msgP);
@@ -964,7 +978,7 @@ function invApply(soft){const rows=[...$('tInv').querySelectorAll('tr[data-cat]'
     const show=inCat&&(!invLow||(i.value!==''&&v<=2))&&(!invQ||hit(tr.textContent,invQ));
     if(!soft)tr.hidden=!show;if(show){vis++;vu+=v}});
   const nm=invCat?((products.find(p=>slug(p.category||'')===invCat)||{}).category||''):'';
-  $('invSum').innerHTML=`Total ${invCat?'de '+esc(nm):'de todo el inventario'}: <b>${u} unidades</b>`+((invLow||invQ)?` · Mostrando ${vis} fila${vis===1?'':'s'} (${vu} unidades)`:'');
+  $('invSum').innerHTML=`Total ${invCat?'de '+esc(nm):'de todo el inventario'}: <b>${u} unidades</b>${(()=>{const R=invRows().filter(r=>!invCat||slug(r.p.category||'')===invCat);const vc=R.reduce((t,r)=>t+(Number(r.n)||0)*(Number(costs[String(r.p.id)])||0),0),vv=R.reduce((t,r)=>t+(Number(r.n)||0)*Number(r.p.price||0),0);return vc?` · Invertido: <b>${money(vc)}</b> · Si lo vendes todo: <b>${money(vv)}</b> (ganancia ${money(vv-vc)})`:''})()}`+((invLow||invQ)?` · Mostrando ${vis} fila${vis===1?'':'s'} (${vu} unidades)`:'');
   $('invCats').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.lw!==undefined?invLow:b.dataset.ic===''?(!invCat&&!invLow):b.dataset.ic===invCat))}
 $('tInv').onchange=e=>{if(e.target.id!=='iaP')return;const p=products.find(x=>String(x.id)===e.target.value);invCat=p?slug(p.category||''):'';invApply()};
 $('tInv').onclick=async e=>{
@@ -1008,10 +1022,10 @@ async function syncVars(o,prev,st){
     if(ix>=0)vs[ix].n=Math.max(0,vs[ix].n+d*q)});
   const R=await Promise.all(Object.values(by).map(({p,vs})=>sb.from('products').update({variants:vs,stock:vSum(vs)}).eq('id',p.id)));
   const bad=R.find(r=>r.error);if(!bad)await load();return bad?bad.error.message:''}
-function rVen(){const C=orders.filter(o=>o.status==='confirmado'),M={};C.forEach(o=>{const m=M[ym(o)]??={n:0,t:0};m.n++;m.t+=Number(o.total)});
+function rVen(){const C=orders.filter(o=>o.status==='confirmado'),M={};C.forEach(o=>{const m=M[ym(o)]??={n:0,t:0,k:0,ct:0,c:0};m.n++;m.t+=Number(o.total);if(o.cost_total!=null){m.k++;m.ct+=Number(o.total);m.c+=Number(o.cost_total)}});
   const ms=Object.keys(M).sort().reverse(),sel=vm&&M[vm]?vm:(ms[0]||''),L=C.filter(o=>ym(o)===sel),mn=m=>new Date(m+'-15').toLocaleDateString('es-CO',{month:'long',year:'numeric'});
-  $('tVen').innerHTML=`<table class="tb"><tr><th>Mes</th><th>Ventas</th><th>Total vendido</th></tr>${ms.map(m=>`<tr><td><button type="button" class="btn ghost sm${m===sel?' on':''}" data-m="${m}">${mn(m)}</button></td><td>${M[m].n}</td><td><b>${money(M[m].t)}</b></td></tr>`).join('')||'<tr><td colspan="3">Aún no hay ventas confirmadas.</td></tr>'}</table>`+
-  (sel?`<h3 class="t" style="margin:18px 0 8px;font-size:24px">Historial · ${mn(sel)}</h3>`+L.map(o=>`<div class="row"><div><b>${esc(o.code)}</b> · <small>${fd(o.confirmed_at||o.created_at)}${o.customer?' · '+esc(o.customer):''}</small><br><small>${itx(o)}</small></div><b>${money(o.total)}</b></div>`).join(''):'')}
+  $('tVen').innerHTML=`<table class="tb"><tr><th>Mes</th><th>Ventas</th><th>Total vendido</th><th>Ganancia</th></tr>${ms.map(m=>`<tr><td><button type="button" class="btn ghost sm${m===sel?' on':''}" data-m="${m}">${mn(m)}</button></td><td>${M[m].n}</td><td><b>${money(M[m].t)}</b></td><td>${M[m].k?`<b style="color:#1fa855">${money(M[m].ct-M[m].c)}</b> <small>${M[m].ct?Math.round((M[m].ct-M[m].c)/M[m].ct*100):0}%</small>`:'—'}${M[m].n>M[m].k&&M[m].k?` <small>(${M[m].n-M[m].k} sin costo)</small>`:''}</td></tr>`).join('')||'<tr><td colspan="4">Aún no hay ventas confirmadas.</td></tr>'}</table>`+
+  (sel?`<h3 class="t" style="margin:18px 0 8px;font-size:24px">Historial · ${mn(sel)}</h3>`+L.map(o=>`<div class="row"><div><b>${esc(o.code)}</b> · <small>${fd(o.confirmed_at||o.created_at)}${o.customer?' · '+esc(o.customer):''}</small><br><small>${itx(o)}</small>${o.cost_total!=null?`<br><small style="color:#1fa855">Ganancia: ${money(o.total-o.cost_total)}</small>`:''}</div><b>${money(o.total)}</b></div>`).join(''):'')}
 $('tVen').onclick=e=>{if(e.target.dataset.m){vm=e.target.dataset.m;rVen()}};
 $('tabs').onclick=e=>{const t=e.target.dataset.t;if(t)showTab(t)};
 
