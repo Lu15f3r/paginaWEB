@@ -7,6 +7,8 @@
 <title>GORRAX | Gorras, buzos, relojes y actitud</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0a'/%3E%3Cpath d='M10 46 6 20l16 12 10-18 10 18 16-12-4 26z' fill='%23e2b53f'/%3E%3Crect x='12' y='50' width='40' height='5' rx='2' fill='%23e2b53f'/%3E%3C/svg%3E">
 <meta name="description" content="Gorras, buzos y relojes con estilo. Pide directo por WhatsApp.">
+<meta name="theme-color" content="#0a0a0a">
+<meta property="og:type" content="website"><meta property="og:title" content="GORRAX | Más que ropa, es actitud"><meta property="og:description" content="Gorras, buzos y relojes. Arma tu combo, ahorra 10% y recibe envío gratis.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=Hanken+Grotesk:wght@400;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">
@@ -444,6 +446,22 @@ dialog{margin:auto}
 .f .r4 input{padding:9px 10px;font-size:14px}
 @media(max-width:560px){.f .r4{grid-template-columns:1fr 1fr}}
 .mg{font-size:13px;font-weight:700;margin:0}.mg.ok{color:#1fa855}.mg.neg{color:#ff6b6b}
+.cp-n{margin-top:10px;font-size:14px;color:var(--muted)}
+.cp-n b,.shipchip{display:inline-block;background:var(--gold);color:#000;padding:2px 12px;margin-right:4px;font-weight:800;clip-path:polygon(7px 0,100% 0,calc(100% - 7px) 100%,0 100%)}
+.totop{position:fixed;left:16px;bottom:16px;z-index:15;width:50px;height:46px;border:0;cursor:pointer;background:var(--gold);color:#000;display:grid;place-items:center;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s,background .2s}
+.totop.show{opacity:1;transform:none;pointer-events:auto}.totop:hover{background:#fff}.totop svg{width:22px;height:22px}
+.cpromo{width:min(900px,92vw);padding:18px calc(var(--sk) + 14px);gap:12px 22px}
+.cp-h{font-size:clamp(44px,7.5vw,76px)}
+.cp-b{gap:14px}
+.cp-badge{width:96px;height:84px;font-size:46px}
+.btn.cyc{font-size:18px;padding:14px 28px}
+.legal{display:flex;gap:6px 18px;flex-wrap:wrap;justify-content:center;margin:0 0 14px;font-size:14px}
+.legal button{background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;font:inherit;padding:4px}
+.legal button:hover{color:var(--gold)}
+#pol{width:min(680px,96vw)}
+.pb{padding:6px 22px 24px;line-height:1.55}
+.pb h4{margin:18px 0 6px;color:var(--gold);font-size:17px}
+.pb p,.pb li{font-size:15px}.pb ul{padding-left:20px;margin:6px 0}.pb a{color:var(--gold)}
 </style>
 </head>
 <body>
@@ -452,7 +470,7 @@ dialog{margin:auto}
 <section class="hero"><img src="img/herov1.png" alt="Gorras y buzos GORRAX"><div class="hero-type hand"><span class="tw" id="tyHero" data-loop data-white="," aria-label="Tu estilo, tu corona"><span class="gh" aria-hidden="true">Más Que Ropa, Es Actitud!</span><span class="ty" aria-hidden="true"></span></span></div></section>
 
 
-<section class="cpromo" id="promo"><div><span class="cp-s">Oferta Por Tiempo LIMITADO</span><h2 class="cp-h">Arma tu combo</h2><p class="cp-l"><b class="w1">gorra</b> + <b class="w2">buzo</b> + <b class="w3">reloj</b></p><p class="cp-s2">y ahorra</p></div><div class="cp-b"><span class="cp-badge"><span><span id="cpPct">10</span><small>%</small></span><em>DTO</em></span><a class="btn cyc" id="promoBtn" data-c="0" href="#armar">Armar ahora</a></div></section>
+<section class="cpromo" id="promo"><div><span class="cp-s">Oferta Por Tiempo LIMITADO</span><h2 class="cp-h">Arma tu combo</h2><p class="cp-l"><b class="w1">gorra</b> + <b class="w2">buzo</b> + <b class="w3">reloj</b></p><p class="cp-s2">y ahorra</p><p class="cp-n"><b>+ Envío gratis</b> El 10% se suma al descuento que ya tenga cada producto.</p></div><div class="cp-b"><span class="cp-badge"><span><span id="cpPct">10</span><small>%</small></span><em>DTO</em></span><a class="btn cyc" id="promoBtn" data-c="0" href="#armar">Armar ahora</a></div></section>
 
 <section class="feat">
   <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6h12v10H2zM14 9h4l3 3v4h-7"/><circle cx="6" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>Envíos a<br>todo el país</div>
@@ -469,6 +487,7 @@ dialog{margin:auto}
   <svg class="crown" viewBox="0 0 64 42" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 33 4 10l14 12L32 4l14 18 14-12-3 23z"/><path d="M9 38h46"/></svg>
   <p class="hand"><span class="tw" id="tyFoot" aria-label="Tu estilo, tu corona"><span class="gh" aria-hidden="true">TU ESTILO, TE CORONA</span><span class="ty" aria-hidden="true"></span></span></p>
   <div class="links" id="social"></div>
+  <nav class="legal" aria-label="Políticas de la tienda"><button type="button" data-pol="env">Envíos y devoluciones</button><button type="button" data-pol="cam">Cambios y garantía</button><button type="button" data-pol="dat">Política de datos</button></nav>
   <span id="secret">© <span id="yr"></span> <span id="stn"></span>. Todos los derechos reservados.</span>
 </footer>
 
@@ -476,6 +495,7 @@ dialog{margin:auto}
 <button type="button" class="fab cartb" id="cartF" aria-label="Abrir carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.4 12.2a1 1 0 0 0 1 .8H18a1 1 0 0 0 1-.8L21 8H6"/></svg><b id="cartNf" class="cn" hidden>0</b></button>
 <div class="cartO" id="cartO"></div>
 <aside class="cartP" id="cartP" aria-label="Carrito de compras"><div class="cph"><h2>Tu carrito</h2><button type="button" class="btn ghost sm" id="cartX">Cerrar</button></div><div class="cpb" id="cartL"></div><div class="cpf"><div class="ctot" id="cartT"></div><input id="cartNm" placeholder="Tu nombre (opcional)" autocomplete="name"><a class="btn grn dis" id="cartW" target="_blank" rel="noopener">Pedir todo por WhatsApp</a><button type="button" class="btn ghost sm" id="cartC" hidden>Vaciar carrito</button><div class="ccf" id="cartCf" hidden><span>¿Vaciar todo el carrito?</span><button type="button" class="btn red sm" id="cartCy">Sí, vaciar</button><button type="button" class="btn ghost sm" id="cartCn">No</button></div></div></aside>
+<button type="button" class="totop" id="toTop" aria-label="Volver arriba"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 <div class="ctoast" id="ct" role="status"></div>
 
 <dialog id="adm">
@@ -525,6 +545,11 @@ dialog{margin:auto}
     </div>
     <p class="msg" id="msg"></p>
   </div>
+</dialog>
+
+<dialog id="pol" aria-labelledby="polT">
+  <div class="dh"><h2 id="polT"></h2><button class="btn ghost sm" id="polX" type="button">Cerrar</button></div>
+  <div class="pb" id="polB"></div>
 </dialog>
 
 <dialog id="lb" aria-label="Fotos del producto">
@@ -873,17 +898,17 @@ const bsel={g:null,b:null,r:null},bsz={g:'',b:'',r:''},bcol={g:'',b:'',r:''};let
 function bDef(k){const p=bProd(k);if(!p)return;const sz=pSizes(p);bsz[k]=sz.find(z=>!hasVar(p)||vStock(p,z,null)>0)||sz[0]||'';bcol[k]=hasColors(p)?firstCol(p,sz.length?bsz[k]:null):''}
 const bList=cat=>products.filter(p=>slug(p.category||'')===cat&&isAv(p));
 const bProd=k=>bsel[k]==null?null:(products.find(p=>String(p.id)===String(bsel[k]))||null);
-const bMax=()=>{const m=BSTEPS.map(s=>bProd(s.k)).filter(p=>p&&p.stock!=null).map(p=>p.stock);return m.length?Math.max(1,Math.min(...m)):10};
-function bTotals(){const sel=BSTEPS.map(s=>bProd(s.k)),u=sel.reduce((a,p)=>a+(p?Number(p.price):0),0);return{sel,sum:u*bq,tot:Math.round(u*(1-COMBO_D/100))*bq}}
+const bMax=()=>{const m=BSTEPS.map(s=>{const p=bProd(s.k);return p?maxOf(p,bsz[s.k],bcol[s.k]):null}).filter(x=>x!=null);return m.length?Math.max(1,Math.min(...m)):10};
+function bTotals(){const sel=BSTEPS.map(s=>bProd(s.k)),u=sel.reduce((a,p)=>a+(p?Number(p.price):0),0);return{sel,sum:u*bq,nor:sel.reduce((a,p)=>a+(p?Math.max(Number(p.compare_price)||0,Number(p.price)):0),0)*bq,tot:Math.round(u*(1-COMBO_D/100))*bq}}
 const bItems=()=>BSTEPS.map(s=>ordItem(bProd(s.k),bsz[s.k],bcol[s.k],bq));
 function bMsg(code){const{sel,sum,tot}=bTotals();
-  return `Hola ${CFG.STORE}, quiero armar este combo (${COMBO_D}% de descuento)${bq>1?' x'+bq:''}:\n`+sel.map((p,i)=>{const k=BSTEPS[i].k;return `${i+1}) ${BSTEPS[i].n}: *${p.name}*${bsz[k]?' - Talla: '+bsz[k]:''}${bcol[k]?' - Color: '+bcol[k]:''} - ${money(p.price)}`}).join('\n')+`\nSubtotal: ${money(sum)}\nDescuento ${COMBO_D}%: -${money(sum-tot)}\n*Total del combo: ${money(tot)}*${code?'\nPedido: '+code:''}\n¿Está disponible?`}
+  return `Hola ${CFG.STORE}, quiero armar este combo (${COMBO_D}% de descuento)${bq>1?' x'+bq:''}:\n`+sel.map((p,i)=>{const k=BSTEPS[i].k;return `${i+1}) ${BSTEPS[i].n}: *${p.name}*${bsz[k]?' - Talla: '+bsz[k]:''}${bcol[k]?' - Color: '+bcol[k]:''} - ${money(p.price)}`}).join('\n')+`\nSubtotal: ${money(sum)}\nDescuento combo ${COMBO_D}% (adicional al de cada producto): -${money(sum-tot)}\nEnvío: GRATIS\n*Total del combo: ${money(tot)}*${code?'\nPedido: '+code:''}\n¿Está disponible?`}
 function renderBuilder(){
   const el=$('armar');if(!el)return;
   BSTEPS.forEach(s=>{if(bsel[s.k]!=null&&!bProd(s.k))bsel[s.k]=null});bq=Math.min(bq,bMax());
   const sc=[...el.querySelectorAll('.brow')].map(r=>r.scrollLeft);
-  const{sel,sum,tot}=bTotals(),full=sel.every(Boolean);
-  el.innerHTML=`<h2>Arma tu combo</h2><p class="bsub">Elige 1 gorra, 1 buzo y 1 reloj y llévate <b>${COMBO_D}% de descuento</b>. Toca de nuevo un producto para quitarlo y cambiarlo.</p>`+
+  const{sel,sum,tot,nor}=bTotals(),full=sel.every(Boolean);
+  el.innerHTML=`<h2>Arma tu combo</h2><p class="bsub">Elige 1 gorra, 1 buzo y 1 reloj y llévate <b>${COMBO_D}% de descuento</b> <b class="shipchip">+ Envío gratis</b>. Se suma al descuento que ya tenga cada producto. Toca de nuevo un producto para quitarlo y cambiarlo.</p>`+
    BSTEPS.map((s,i)=>{const list=bList(s.cat),p=sel[i];
      return `<div class="bstep"><h3>${s.t}</h3>`+
       (list.length?`<div class="brow">${list.map(x=>`<button type="button" class="bp${p&&String(p.id)===String(x.id)?' on':''}" aria-pressed="${!!(p&&String(p.id)===String(x.id))}" data-s="${s.k}" data-id="${esc(x.id)}"><span class="bi">${imgs(x)[0]?`<img src="${esc(imgs(x)[0])}" alt="" loading="lazy" onerror="this.remove()">`:''}</span><b>${esc(x.name)}</b><em>${money(x.price)}</em></button>`).join('')}</div>`:'<p class="desc">Pronto tendremos opciones aquí.</p>')+
@@ -892,7 +917,8 @@ function renderBuilder(){
    `<div class="bfoot"><div class="bqt"><span class="qty"><span>Cantidad:</span><button type="button" data-q="-1" aria-label="Menos">−</button>${bq}<button type="button" data-q="1" aria-label="Más">+</button></span></div>
     <div class="bres"><h4>Datos de tu pedido</h4>${BSTEPS.map((s,i)=>{const p=sel[i];return p?`<div class="r"><span><b>${s.n}:</b> ${esc(p.name)}${bsz[s.k]?' · Talla '+esc(bsz[s.k]):''}${bcol[s.k]?' · '+esc(bcol[s.k]):''}</span><span>${money(p.price)}</span></div>`:`<div class="r mut"><span><b>${s.n}:</b> sin elegir</span><span>—</span></div>`}).join('')}
      <div class="r"><span>Cantidad</span><span>× ${bq}</span></div>
-     ${full?`<div class="r"><span>Subtotal</span><span class="old" style="margin:0">${money(sum)}</span></div><div class="r"><span>Descuento -${COMBO_D}%</span><span>-${money(sum-tot)}</span></div><div class="r tt"><span>Total</span><span>${money(tot)}</span></div>`:'<div class="r mut"><span>Elige los 3 productos para ver el total.</span></div>'}</div></div>`+
+     <div class="r"><span>Envío</span><span><b style="color:var(--wa)">GRATIS</b></span></div>
+     ${full?`<div class="r"><span>Precio normal</span><span class="old" style="margin:0">${money(nor)}</span></div>${nor>sum?`<div class="r"><span>Descuento de cada producto</span><span>-${money(nor-sum)}</span></div>`:''}<div class="r"><span>Descuento combo -${COMBO_D}% (adicional)</span><span>-${money(sum-tot)}</span></div><div class="r tt"><span>Total</span><span>${money(tot)}</span></div><div class="r"><span><b>Ahorras en total</b></span><span><b>${money(nor-tot)}</b></span></div>`:'<div class="r mut"><span>Elige los 3 productos para ver el total.</span></div>'}</div></div>`+
    `<div class="bsum"><button type="button" class="btn ghost${full?'':' dis'}" id="bcart">Agregar al carrito</button>
     <a class="btn grn${full?'':' dis'}" id="bwa" target="_blank" rel="noopener"${full?` href="${wa(bMsg())}"`:''}>Pedir por WhatsApp</a>
     <button type="button" class="btn ghost sm" id="bre">Reiniciar</button></div>`;
@@ -937,11 +963,12 @@ function rPed(){const L=orders.filter(o=>pfil==='todos'||o.status===pfil);
   (L.length?L.map(o=>`<div class="ord"><div style="display:flex;justify-content:space-between;gap:8px"><b>${esc(o.code)}</b><span class="st ${o.status}">${ST[o.status]}</span></div><small>${fd(o.created_at)}${o.customer?' · '+esc(o.customer):''}</small><div>${itx(o)}</div><div><b class="price">${money(o.total)}</b>${o.discount>0?` <small>(dto ${money(o.discount)})</small>`:''}</div><div style="display:flex;gap:8px;flex-wrap:wrap">${o.status!=='confirmado'?`<button type="button" class="btn sm" data-o="confirmado" data-id="${o.id}">Confirmar venta</button>`:`<button type="button" class="btn ghost sm" data-o="pendiente" data-id="${o.id}">Volver a pendiente</button>`}${o.status!=='cancelado'?`<button type="button" class="btn red sm" data-o="cancelado" data-id="${o.id}">Cancelar</button>`:''}</div></div>`).join(''):'<p class="desc">No hay pedidos en esta vista.</p>')}
 $('tPed').onclick=async e=>{const f=e.target.dataset.f;if(f){pfil=f;rPed();return}
   const st=e.target.dataset.o;if(!st)return;
-  if(st==='confirmado'&&!confirm('¿Confirmar la venta? Se descontará el inventario.'))return;
+  if(st==='confirmado'&&!e.target.dataset.arm){const b=e.target,t=b.textContent;b.dataset.arm=1;b.textContent='Toca de nuevo para confirmar';setTimeout(()=>{if(b.isConnected){delete b.dataset.arm;b.textContent=t}},3500);return}
   const o=orders.find(x=>String(x.id)===e.target.dataset.id),prev=o&&o.status;
-  e.target.disabled=true;const{error}=await sb.rpc('set_order_status',{p_id:e.target.dataset.id,p_status:st});
+  e.target.disabled=true;const args={p_id:e.target.dataset.id,p_status:st};let{error}=await sb.rpc('set_order_status_v2',args),srv=true;
+  if(error&&/could not find|does not exist|schema cache/i.test(error.message)){srv=false;({error}=await sb.rpc('set_order_status',args))}
   if(error){say(error.message);e.target.disabled=false;return}
-  await load();const w=await syncVars(o,prev,st);
+  await load();const w=srv?'':await syncVars(o,prev,st);
   if(w)say('Pedido actualizado, pero no se pudo ajustar el stock por talla/color: '+w);else say('Pedido actualizado.',true);
   await loadOrders()};
 let invCat='',invLow=false,invQ='';
@@ -1046,13 +1073,13 @@ const cTot=L=>({n:L.reduce((t,l)=>t+l.it.q,0),sub:L.reduce((t,l)=>t+l.list*l.it.
 function cMsg(L,code){const{sub,tot}=cTot(L),nm=$('cartNm').value.trim();
   return `Hola ${CFG.STORE}, quiero hacer este pedido:\n`+L.map((l,i)=>{const q=l.it.q;
     return l.it.t==='c'?`${i+1}) *${l.name}* (${COMBO_D}% dto) × ${q}\n`+l.ps.map((p,j)=>{const x=l.it.parts[j];return `   • ${p.name}${x.z?' - Talla: '+x.z:''}${x.col?' - Color: '+x.col:''}`}).join('\n')+`\n   = ${money(l.unit*q)}`
-    :`${i+1}) *${l.name}*${l.it.z?' - Talla: '+l.it.z:''}${l.it.col?' - Color: '+l.it.col:''} × ${q} = ${money(l.unit*q)}`}).join('\n')+(sub>tot?`\nSubtotal: ${money(sub)}\nDescuento combos: -${money(sub-tot)}`:'')+`\n*Total: ${money(tot)}*${code?'\nPedido: '+code:''}${nm?'\nNombre: '+nm:''}\n¿Están disponibles?`}
+    :`${i+1}) *${l.name}*${l.it.z?' - Talla: '+l.it.z:''}${l.it.col?' - Color: '+l.it.col:''} × ${q} = ${money(l.unit*q)}`}).join('\n')+(sub>tot?`\nSubtotal: ${money(sub)}\nDescuento combos: -${money(sub-tot)}`:'')+`${L.some(l=>l.it.t==='c')?'\nEnvío: GRATIS (incluye combo)':''}\n*Total: ${money(tot)}*${code?'\nPedido: '+code:''}${nm?'\nNombre: '+nm:''}\n¿Están disponibles?`}
 function cartRender(){
   if(products.length){cart=cart.filter(it=>{const l=cLine(it);if(!l||l.max<=0)return false;if(it.q>l.max)it.q=l.max;return true});cSave()}
   const L=cart.map(cLine).filter(Boolean),{n,sub,tot}=cTot(L);
   ['cartN','cartNf'].forEach(id=>{$(id).textContent=n;$(id).hidden=!n});
   $('cartL').innerHTML=L.length?L.map((l,i)=>`<div class="ci"><span class="cimg">${l.img?`<img src="${esc(l.img)}" alt="">`:''}</span><div><b>${esc(l.name)}</b><small>${l.sub}</small><div class="cq"><button type="button" data-cq="-1" data-i="${i}" aria-label="Menos">−</button><span>${l.it.q}</span><button type="button" data-cq="1" data-i="${i}" aria-label="Más"${l.it.q>=l.max?' disabled':''}>+</button><button type="button" class="cx" data-cx="${i}">Quitar</button></div></div><div class="cp">${l.unit<l.list?`<s>${money(l.list*l.it.q)}</s>`:''}<b>${money(l.unit*l.it.q)}</b></div></div>`).join(''):'<p class="desc" style="padding:28px 0;text-align:center">Tu carrito está vacío.<br>Agrega productos con «Agregar al carrito».</p>';
-  $('cartT').innerHTML=L.length?(sub>tot?`<div class="r"><span>Subtotal</span><span>${money(sub)}</span></div><div class="r"><span>Descuento combos</span><span>-${money(sub-tot)}</span></div>`:'')+`<div class="r tt"><span>Total</span><span>${money(tot)}</span></div>`:'';
+  $('cartT').innerHTML=L.length?(sub>tot?`<div class="r"><span>Subtotal</span><span>${money(sub)}</span></div><div class="r"><span>Descuento combos</span><span>-${money(sub-tot)}</span></div>`:'')+(L.some(l=>l.it.t==='c')?'<div class="r"><span>Envío</span><span><b style="color:var(--wa)">GRATIS</b> (incluye combo)</span></div>':'')+`<div class="r tt"><span>Total</span><span>${money(tot)}</span></div>`:'';
   $('cartW').classList.toggle('dis',!L.length);$('cartC').hidden=!L.length||!$('cartCf').hidden;if(!L.length)$('cartCf').hidden=true;
   if(L.length)$('cartW').href=wa(cMsg(L,''));else $('cartW').removeAttribute('href')}
 let cTm;const cToast=t=>{const el=$('ct');el.textContent=t;el.classList.add('show');clearTimeout(cTm);cTm=setTimeout(()=>el.classList.remove('show'),1800)};
@@ -1075,6 +1102,16 @@ $('cartW').addEventListener('click',()=>{const L=cart.map(cLine).filter(Boolean)
 $('catalogo').addEventListener('click',e=>{const a=e.target.closest('.card .cadd');if(!a||a.classList.contains('dis'))return;
   const c=a.closest('.card'),p=pBy(c.dataset.id),z=(c.querySelector('.sizes .on')||{dataset:{}}).dataset.s||'',col=(c.querySelector('.sw .on')||{dataset:{}}).dataset.col||'';
   if(p&&cartAdd({t:'p',id:p.id,z,col,q:1})){a.textContent='✓ Agregado';setTimeout(()=>a.textContent='Agregar al carrito',1200)}});
+/* ====== POLÍTICAS (edita aquí los plazos) ====== */
+const POL={dias:5,garantia:'1 año'};
+const wl=t=>`<a href="${wa(t)}" target="_blank" rel="noopener">WhatsApp</a>`;
+const POLS={
+ env:{t:'Envíos y devoluciones',h:()=>`<h4>Envíos</h4><p>Enviamos a todo el país. Cuando envías tu pedido por WhatsApp te confirmamos la disponibilidad, el valor del envío, el tiempo estimado de entrega y los medios de pago antes de que pagues.</p><p><b>Los combos (gorra + buzo + reloj) incluyen envío gratis.</b> Si tu pedido lleva un combo, el envío de todo el pedido es gratis.</p><h4>Cómo se confirma tu pedido</h4><p>Lo que envías por WhatsApp es una solicitud. Tu pedido queda confirmado cuando validamos que la talla y el color que elegiste están disponibles.</p><h4>Derecho de retracto</h4><p>Como la compra es a distancia, puedes retractarte dentro de los <b>5 días hábiles</b> siguientes a la entrega (Ley 1480 de 2011, art. 47). Escríbenos por ${wl('Hola, quiero ejercer mi derecho de retracto. Mi código de pedido es: ')}, devuelve el producto sin uso, con sus etiquetas y empaque, y te reintegramos el dinero por el mismo medio de pago. El costo del envío de la devolución lo asume el cliente. No aplica a productos personalizados.</p>`},
+ cam:{t:'Cambios y garantía',h:()=>`<h4>Cambios por talla o color</h4><p>Puedes cambiar tu producto dentro de los ${POL.dias} días hábiles siguientes a la entrega, siempre que esté sin uso, con etiquetas y sujeto a disponibilidad. Escríbenos por ${wl('Hola, quiero hacer un cambio. Mi código de pedido es: ')} con tu código de pedido (empieza por GX-). El envío del cambio lo asume el cliente, salvo que el producto haya llegado equivocado o con defecto.</p><h4>Garantía</h4><p>Todos nuestros productos tienen ${POL.garantia} de garantía por defectos de fabricación o de funcionamiento. No cubre daños por mal uso, accidentes, lavado inadecuado ni desgaste normal.</p><h4>Cómo reclamar</h4><ul><li>Escríbenos por WhatsApp con tu código de pedido.</li><li>Envíanos fotos o un video del problema.</li><li>Revisamos tu caso y, si aplica, lo reparamos, lo cambiamos o te reintegramos el dinero.</li></ul><p>Esto es adicional a los derechos que tienes como consumidor según la Ley 1480 de 2011.</p>`},
+ dat:{t:'Política de datos',h:()=>`<h4>Quién es el responsable</h4><p>${esc(CFG.STORE)} es responsable del tratamiento de tus datos personales, conforme a la Ley 1581 de 2012. Contacto: ${wl('Hola, tengo una consulta sobre mis datos personales')}.</p><h4>Qué datos usamos</h4><p>Tu nombre (opcional), el detalle de tu pedido (productos, tallas, colores y valor) y el número de WhatsApp desde el que nos escribes. La dirección de entrega y los datos de pago los coordinamos directamente por WhatsApp.</p><h4>Para qué los usamos</h4><p>Solo para gestionar tu pedido, la entrega, los cambios y la garantía, y para contactarte sobre ellos. No vendemos ni compartimos tus datos con terceros para publicidad.</p><h4>Dónde se guardan</h4><p>Los pedidos se guardan en un servicio de base de datos en la nube al que solo accede el administrador de la tienda. Tu carrito se guarda en tu propio navegador y no sale de tu dispositivo hasta que envías el pedido. Esta página no usa cookies de publicidad ni de seguimiento.</p><h4>Tus derechos</h4><p>Puedes conocer, actualizar, rectificar y pedir la eliminación de tus datos, o revocar tu autorización, escribiéndonos por WhatsApp.</p>`}};
+document.querySelectorAll('[data-pol]').forEach(b=>b.onclick=()=>{const p=POLS[b.dataset.pol];$('polT').textContent=p.t;$('polB').innerHTML=p.h();$('pol').showModal()});
+$('polX').onclick=()=>$('pol').close();$('pol').addEventListener('click',e=>{if(e.target===$('pol'))$('pol').close()});
+const tt=$('toTop');addEventListener('scroll',()=>tt.classList.toggle('show',scrollY>700),{passive:true});tt.onclick=()=>scrollTo({top:0,behavior:'smooth'});
 load().then(()=>cartRender());
 </script>
 </body>
