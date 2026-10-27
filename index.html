@@ -488,11 +488,29 @@ footer .links a:hover,footer .links a:focus-visible{color:var(--t1)!important}
 .cat:nth-of-type(n) .banner{display:block;padding:0;background:var(--panel)!important;border-color:var(--line)!important}
 .cat .banner .bl{position:absolute;inset:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0;clip-path:none}
 .cat .banner .bl.l{left:0;top:0;bottom:0;right:25%;background:var(--panel)}
-.cat .banner .bl.l h2{color:var(--gold)!important;align-self:center}
-.cat .banner .bl.r{top:0;right:0;bottom:0;width:25%;background:var(--gold);clip-path:polygon(var(--sk) 0,100% 0,100% 100%,0 100%);padding:6px 8px 6px calc(var(--sk)/2 + 6px);text-align:center}
-.cat .banner .bl.r p{margin:0;color:#1a1403!important;font:800 13px/1.15 "Big Shoulders Display",sans-serif;font-style:italic;letter-spacing:.02em;text-transform:uppercase}
+.cat .banner .bl.l h2{color:var(--gold);align-self:center}
+.cat .banner .bl.r{--tb:#1a1403;top:0;right:0;bottom:0;width:25%;background:var(--gold);clip-path:polygon(var(--sk) 0,100% 0,100% 100%,0 100%);padding:6px 8px 6px calc(var(--sk)/2 + 6px);text-align:center}
+.cat .banner .bl.r p{margin:0;color:var(--tb);font:800 13px/1.15 "Big Shoulders Display",sans-serif;font-style:italic;letter-spacing:.02em;text-transform:uppercase}
 [data-theme=light] .cat .banner .bl.r{background:#16161a}
-[data-theme=light] .cat .banner .bl.r p{color:#e2b53f!important}
+[data-theme=light] .cat .banner .bl.r{--tb:#e2b53f}
+/* Barrido automático (el mismo efecto del menú al pasar el mouse) en todos los banners, también los nuevos.
+   La capa .sw es el relleno que se mueve y lleva adentro una copia del texto con el color invertido: así la letra siempre se ve.
+   Para cambiar la velocidad solo cambia --bn (duración de cada vuelta). */
+.cat .banner{--bn:4s}
+.cat .banner .bl{overflow:hidden}
+.cat .banner .sw{position:absolute;inset:-2px -30%;z-index:2;pointer-events:none;transform:translateX(-120%) skewX(-14deg);animation:bnFill var(--bn) cubic-bezier(.7,0,.2,1) infinite}
+.cat .banner .bl.l .sw{background:var(--gold)}
+.cat .banner .bl.r .sw{background:var(--panel)}
+.cat .banner .cp{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:skewX(14deg) translateX(120%);animation:bnCp var(--bn) cubic-bezier(.7,0,.2,1) infinite}
+.cat .banner .bl.l .cp h2{color:#000}
+.cat .banner .bl.r .cp{padding:6px calc(18.75% + 8px) 6px calc(18.75% + var(--sk)/2 + 6px);text-align:center}
+.cat .banner .bl.r .cp p{color:var(--gold)}
+.cat .banner .bl.l::after{content:"";position:absolute;top:0;bottom:0;left:-30%;width:18%;z-index:3;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,255,255,.8),transparent);transform:skewX(-20deg);animation:bnShine var(--bn) linear infinite}
+@media(min-width:900px){.cat .banner .bl.r .cp{padding:10px calc(18.75% + 40px) 10px calc(18.75% + 16px)}}
+@keyframes bnFill{0%{transform:translateX(-120%) skewX(-14deg)}30%,55%{transform:translateX(0) skewX(-14deg)}85%,100%{transform:translateX(120%) skewX(-14deg)}}
+@keyframes bnCp{0%{transform:skewX(14deg) translateX(120%)}30%,55%{transform:skewX(14deg) translateX(0)}85%,100%{transform:skewX(14deg) translateX(-120%)}}
+@keyframes bnShine{0%,6%{left:-30%}34%,100%{left:130%}}
+@media(prefers-reduced-motion:reduce){.cat .banner .sw,.cat .banner .bl.l::after{display:none}}
 @media(min-width:900px){
  .cat .banner{min-height:460px}
  .cat .banner .bl.l{right:0;bottom:25%}
@@ -508,6 +526,25 @@ footer .links a:hover,footer .links a:focus-visible{color:var(--t1)!important}
 #toTop{bottom:70px}
 .ann{background:var(--gold);color:#000;text-align:center;font-weight:700;font-size:14px;padding:7px 12px}
 .fsb{margin-top:10px;font-size:13px}.fsb span{display:block;height:6px;background:var(--line);margin-top:5px}.fsb i{display:block;height:100%;background:var(--gold)}
+/* Panel de administración en celular: ningún campo se sale ni queda cortado */
+@media(max-width:640px){
+ dialog#adm{width:100vw;max-width:100vw;max-height:100dvh;border-radius:0;border-left:0;border-right:0}
+ #adm .dh{flex-wrap:wrap;gap:8px;padding:12px 14px}
+ #adm .dh h2{font-size:26px}
+ #adm .db{padding:14px}
+ form.f{grid-template-columns:minmax(0,1fr)}
+ form.f>*{min-width:0}
+ form.f input:not([type=checkbox]):not([type=radio]),form.f select,form.f textarea{width:100%;min-width:0;max-width:100%}
+ .f .r4{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .f .r4 label{white-space:normal}
+ .cbg{grid-template-columns:minmax(0,1fr)}
+ .vrow{grid-template-columns:minmax(0,.8fr) minmax(0,1.3fr) 58px 40px;gap:6px}
+ .vrow input,.vrow select{padding-left:8px;padding-right:6px}
+ .vrow input,.vrow select{min-width:0;width:100%}
+ #adm .row{flex-wrap:wrap}
+ #adm .row div{flex:1 1 150px}
+ #adm .tb{display:block;overflow-x:auto}
+}
 </style>
 </head>
 <body>
@@ -627,6 +664,7 @@ const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money=n=>new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP',maximumFractionDigits:0}).format(n);
 const slug=s=>s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-');
+const bT=c=>esc(CFG.CAT_INFO[slug(c)]||'Lo mejor de '+CFG.STORE);
 const wa=t=>`https://wa.me/${CFG.WHATSAPP}?text=${encodeURIComponent(t)}`;
 let products=[];
 const isAv=p=>p.available!==false&&!(p.stock!=null&&p.stock<=0);
@@ -702,7 +740,7 @@ function render(){
   $('armar').hidden=!showB;
   $('catalogo').innerHTML=(shown.length?shown.map(c=>`
    <section class="cat" id="${slug(c)}">
-    <aside class="banner"><div class="bl l"><h2 style="--n:${c.length}">${esc(c)}</h2></div><div class="bl r"><p>${esc(CFG.CAT_INFO[slug(c)]||`Lo mejor de ${CFG.STORE}`)}</p></div></aside>
+    <aside class="banner"><div class="bl l"><h2 style="--n:${c.length}">${esc(c)}</h2><div class="sw" aria-hidden="true"><div class="cp"><h2 style="--n:${c.length}">${esc(c)}</h2></div></div></div><div class="bl r"><p>${bT(c)}</p><div class="sw" aria-hidden="true"><div class="cp"><p>${bT(c)}</p></div></div></div></aside>
     <div class="grid">${groups[c].map(card).join('')}</div>
    </section>`).join(''):(activeCat==='combos'?'':'<div class="empty">Pronto tendremos productos nuevos.</div>'));
   if(showB)renderBuilder();
