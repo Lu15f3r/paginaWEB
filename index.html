@@ -547,6 +547,51 @@ footer .links a:hover,footer .links a:focus-visible{color:var(--t1)!important}
  #adm .row div{flex:1 1 150px}
  #adm .tb{display:block;overflow-x:auto}
 }
+
+/* ===== AJUSTES: iconos del footer + banners (gorras/buzos/relojes/combos) ===== */
+/* Iconos: siempre del color de su red social; al pasar el mouse NO cambian de color (ni amarillo ni negro), solo se levantan un poco */
+footer .links a{transition:transform .5s cubic-bezier(.4,0,.2,1)}
+footer .links a[aria-label=Instagram]{--t1:#dc2743;--t2:#dc2743}
+footer .links a[aria-label=Facebook]{--t1:#1877f2;--t2:#1877f2}
+footer .links a[aria-label=TikTok]{--t1:#000;--t2:#000}
+footer .links a[aria-label=TikTok] svg{filter:drop-shadow(1.5px 1.5px 0 #fe2c55) drop-shadow(-1.5px -1.5px 0 #25f4ee)}
+footer .links a[aria-label=WhatsApp]{--t1:#25d366;--t2:#25d366}
+[data-theme=light] footer .links a[aria-label=TikTok]{--t1:#000;--t2:#000}
+html:not([data-theme=light]) footer .links a[aria-label=TikTok]{--t1:#fff;--t2:#fff}
+/* Hover: el borde y el icono se iluminan con el color de la red social */
+@property --bd{syntax:'<color>';inherits:true;initial-value:#888}
+footer .links a{--bd:var(--line);background:var(--bd)!important;transition:--bd .45s ease,transform .45s ease}
+footer .links a[aria-label=Instagram]{--c:#dc2743}
+footer .links a[aria-label=Facebook]{--c:#1877f2}
+footer .links a[aria-label=TikTok]{--c:#25f4ee}
+footer .links a[aria-label=WhatsApp]{--c:#25d366}
+footer .links a:hover,footer .links a:focus-visible{--bd:var(--c);color:var(--t1)!important}
+footer .links a::before,footer .links a:hover::before,footer .links a:focus-visible::before{background-position:100% 0!important;transition:box-shadow .45s ease!important}
+footer .links a:hover::before,footer .links a:focus-visible::before{box-shadow:inset 0 0 12px 1px color-mix(in srgb,var(--c) 55%,transparent)}
+footer .links a svg{transition:filter .45s ease}
+footer .links a:hover svg,footer .links a:focus-visible svg{filter:brightness(1.3) drop-shadow(0 0 5px var(--c))}
+footer .links a[aria-label=TikTok]:hover svg,footer .links a[aria-label=TikTok]:focus-visible svg{filter:brightness(1.3) drop-shadow(1.5px 1.5px 0 #fe2c55) drop-shadow(-1.5px -1.5px 0 #25f4ee) drop-shadow(0 0 5px #25f4ee)}
+footer .links a::after{
+  background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.28) 50%,transparent 62%);
+  transform:translateX(-130%);
+  animation:lshineSoft 2.5s ease-in-out infinite;
+  animation-delay:calc(var(--i,0)*.35s)}
+@keyframes lshineSoft{0%{transform:translateX(-130%)}45%,100%{transform:translateX(130%)}}
+@media(prefers-reduced-motion:reduce){footer .links a::after{animation:none}}
+
+/* Banners: efecto lento y suave. Ciclo = 4.5 s de efecto + 2.5 s de pausa.
+   Todo (relleno, texto contrario y brillo) comparte la misma duración, así van sincronizados.
+   Solo corre mientras el banner está en pantalla y arranca siempre desde cero. */
+.cat .banner{--bn:7s;--ez:cubic-bezier(.45,0,.25,1)}
+.cat .banner>.sw,.cat .banner .cp,.cat .banner::after{animation:none}
+.cat .banner.live>.sw{animation:bnFill2 var(--bn) var(--ez) infinite}
+.cat .banner.live .cp{animation:bnCp2 var(--bn) var(--ez) infinite}
+.cat .banner.live::after{animation:bnShine2 var(--bn) ease-in-out infinite}
+.cat .banner::after{background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);opacity:0}
+.cat .banner.live::after{opacity:1}
+@keyframes bnFill2{0%{transform:translateX(-120%) skewX(-14deg)}20%,42%{transform:translateX(0) skewX(-14deg)}64%,100%{transform:translateX(120%) skewX(-14deg)}}
+@keyframes bnCp2{0%{transform:skewX(14deg) translateX(120%)}20%,42%{transform:skewX(14deg) translateX(0)}64%,100%{transform:skewX(14deg) translateX(-120%)}}
+@keyframes bnShine2{0%{left:-30%}22%,100%{left:130%}}
 </style>
 </head>
 <body>
@@ -1203,7 +1248,10 @@ const POLS={
  dat:{t:'Política de datos',h:()=>`<h4>Quién es el responsable</h4><p>${esc(CFG.STORE)} es responsable del tratamiento de tus datos personales, conforme a la Ley 1581 de 2012. Contacto: ${wl('Hola, tengo una consulta sobre mis datos personales')}.</p><h4>Qué datos usamos</h4><p>Tu nombre (opcional), el detalle de tu pedido (productos, tallas, colores y valor) y el número de WhatsApp desde el que nos escribes. La dirección de entrega y los datos de pago los coordinamos directamente por WhatsApp.</p><h4>Para qué los usamos</h4><p>Solo para gestionar tu pedido, la entrega, los cambios y la garantía, y para contactarte sobre ellos. No vendemos ni compartimos tus datos con terceros para publicidad.</p><h4>Dónde se guardan</h4><p>Los pedidos se guardan en un servicio de base de datos en la nube al que solo accede el administrador de la tienda. Tu carrito se guarda en tu propio navegador y no sale de tu dispositivo hasta que envías el pedido. Esta página no usa cookies de publicidad ni de seguimiento.</p><h4>Tus derechos</h4><p>Puedes conocer, actualizar, rectificar y pedir la eliminación de tus datos, o revocar tu autorización, escribiéndonos por WhatsApp.</p>`}};
 document.querySelectorAll('[data-pol]').forEach(b=>b.onclick=()=>{const p=POLS[b.dataset.pol];$('polT').textContent=p.t;$('polB').innerHTML=p.h();$('pol').showModal()});
 $('polX').onclick=()=>$('pol').close();$('pol').addEventListener('click',e=>{if(e.target===$('pol'))$('pol').close()});
-if(matchMedia('(prefers-reduced-motion:reduce)').matches)$('social').classList.add('brand');else setInterval(()=>$('social').classList.toggle('brand'),1000);
+/* Los banners solo animan cuando se ven (así siempre arrancan desde cero y sincronizados) */
+(()=>{const io=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('live',e.isIntersecting)),{threshold:.25});
+const watch=()=>document.querySelectorAll('.cat .banner:not([data-w])').forEach(b=>{b.dataset.w=1;io.observe(b)});
+const m=document.getElementById('catalogo');if(m)new MutationObserver(watch).observe(m,{childList:true,subtree:true});watch()})();
 $('ann').innerHTML=`Envío GRATIS en compras desde <b>${money(CFG.FREE_SHIP)}</b> y en todos los combos`;$('shipTxt').innerHTML=`Envío gratis desde<br>${money(CFG.FREE_SHIP)}`;
 const tt=$('toTop'),td=$('toDown');
 const maxY=()=>document.documentElement.scrollHeight-innerHeight;
