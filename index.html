@@ -493,24 +493,26 @@ footer .links a:hover,footer .links a:focus-visible{color:var(--t1)!important}
 .cat .banner .bl.r p{margin:0;color:var(--tb);font:800 13px/1.15 "Big Shoulders Display",sans-serif;font-style:italic;letter-spacing:.02em;text-transform:uppercase}
 [data-theme=light] .cat .banner .bl.r{background:#16161a}
 [data-theme=light] .cat .banner .bl.r{--tb:#e2b53f}
-/* Barrido automático (el mismo efecto del menú al pasar el mouse) en todos los banners, también los nuevos.
-   La capa .sw es el relleno que se mueve y lleva adentro una copia del texto con el color invertido: así la letra siempre se ve.
+/* Barrido automático (el mismo efecto del menú al pasar el mouse): UNA sola pasada que cruza todo el banner de un lado al otro.
+   .sw es la ventana que se mueve y lleva adentro (.cp) una copia quieta del banner con los colores invertidos.
    Para cambiar la velocidad solo cambia --bn (duración de cada vuelta). */
 .cat .banner{--bn:4s}
 .cat .banner .bl{overflow:hidden}
-.cat .banner .sw{position:absolute;inset:-2px -30%;z-index:2;pointer-events:none;transform:translateX(-120%) skewX(-14deg);animation:bnFill var(--bn) cubic-bezier(.7,0,.2,1) infinite}
-.cat .banner .bl.l .sw{background:var(--gold)}
-.cat .banner .bl.r .sw{background:var(--panel)}
-.cat .banner .cp{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:skewX(14deg) translateX(120%);animation:bnCp var(--bn) cubic-bezier(.7,0,.2,1) infinite}
-.cat .banner .bl.l .cp h2{color:#000}
-.cat .banner .bl.r .cp{padding:6px calc(18.75% + 8px) 6px calc(18.75% + var(--sk)/2 + 6px);text-align:center}
-.cat .banner .bl.r .cp p{color:var(--gold)}
-.cat .banner .bl.l::after{content:"";position:absolute;top:0;bottom:0;left:-30%;width:18%;z-index:3;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,255,255,.8),transparent);transform:skewX(-20deg);animation:bnShine var(--bn) linear infinite}
-@media(min-width:900px){.cat .banner .bl.r .cp{padding:10px calc(18.75% + 40px) 10px calc(18.75% + 16px)}}
+.cat .banner>.sw{position:absolute;top:0;bottom:0;left:-30%;right:-30%;z-index:2;overflow:hidden;pointer-events:none;transform:translateX(-120%) skewX(-14deg);animation:bnFill var(--bn) cubic-bezier(.7,0,.2,1) infinite}
+.cat .banner .cp{position:absolute;inset:0;transform:skewX(14deg) translateX(120%);animation:bnCp var(--bn) cubic-bezier(.7,0,.2,1) infinite}
+.cat .banner .cp .bl.l{left:18.75%;right:34.375%;top:0;bottom:0;background:var(--gold)}
+.cat .banner .cp .bl.l h2{color:#000}
+.cat .banner .cp .bl.r{left:auto;right:18.75%;width:15.625%;top:0;bottom:0;background:var(--panel)}
+.cat .banner .cp .bl.r p{color:var(--gold)}
+@media(min-width:900px){
+ .cat .banner .cp .bl.l{left:18.75%;right:18.75%;bottom:25%}
+ .cat .banner .cp .bl.r{left:18.75%;right:18.75%;width:auto;top:75%;bottom:0}
+}
+.cat .banner::after{content:"";position:absolute;top:0;bottom:0;left:-30%;width:18%;z-index:3;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,255,255,.8),transparent);transform:skewX(-20deg);animation:bnShine var(--bn) linear infinite}
 @keyframes bnFill{0%{transform:translateX(-120%) skewX(-14deg)}30%,55%{transform:translateX(0) skewX(-14deg)}85%,100%{transform:translateX(120%) skewX(-14deg)}}
 @keyframes bnCp{0%{transform:skewX(14deg) translateX(120%)}30%,55%{transform:skewX(14deg) translateX(0)}85%,100%{transform:skewX(14deg) translateX(-120%)}}
 @keyframes bnShine{0%,6%{left:-30%}34%,100%{left:130%}}
-@media(prefers-reduced-motion:reduce){.cat .banner .sw,.cat .banner .bl.l::after{display:none}}
+@media(prefers-reduced-motion:reduce){.cat .banner>.sw,.cat .banner::after{display:none}}
 @media(min-width:900px){
  .cat .banner{min-height:460px}
  .cat .banner .bl.l{right:0;bottom:25%}
@@ -658,6 +660,8 @@ const CFG={
   CAT_INFO:{gorras:'Visera plana, actitud real.',buzos:'Premium y con corona.',relojes:'Tiempo con estilo.',zapatos:'Pisa con actitud.',combos:'Lleva el set completo y ahorra.'}
 };
 /* ============================ */
+try{if('scrollRestoration' in history)history.scrollRestoration='manual'}catch(e){}
+if(!location.hash)scrollTo(0,0);
 const DEMO=CFG.SUPABASE_URL.includes('TU-PROYECTO')||/[?&]demo/.test(location.search); // agrega ?demo a la dirección para ver ejemplos
 const sb=DEMO?null:supabase.createClient(CFG.SUPABASE_URL,CFG.SUPABASE_KEY);
 const $=id=>document.getElementById(id);
@@ -740,7 +744,7 @@ function render(){
   $('armar').hidden=!showB;
   $('catalogo').innerHTML=(shown.length?shown.map(c=>`
    <section class="cat" id="${slug(c)}">
-    <aside class="banner"><div class="bl l"><h2 style="--n:${c.length}">${esc(c)}</h2><div class="sw" aria-hidden="true"><div class="cp"><h2 style="--n:${c.length}">${esc(c)}</h2></div></div></div><div class="bl r"><p>${bT(c)}</p><div class="sw" aria-hidden="true"><div class="cp"><p>${bT(c)}</p></div></div></div></aside>
+    <aside class="banner"><div class="bl l"><h2 style="--n:${c.length}">${esc(c)}</h2></div><div class="bl r"><p>${bT(c)}</p></div><div class="sw" aria-hidden="true"><div class="cp"><div class="bl l"><h2 style="--n:${c.length}">${esc(c)}</h2></div><div class="bl r"><p>${bT(c)}</p></div></div></div></aside>
     <div class="grid">${groups[c].map(card).join('')}</div>
    </section>`).join(''):(activeCat==='combos'?'':'<div class="empty">Pronto tendremos productos nuevos.</div>'));
   if(showB)renderBuilder();
@@ -1212,7 +1216,7 @@ const goStep=d=>{const y=scrollY,l=stops(),t=d>0?l.find(v=>v>y+12):l.reverse().f
 const tUpd=()=>{tt.classList.toggle('show',scrollY>30);td.classList.toggle('show',scrollY<maxY()-30)};
 tt.onclick=()=>goStep(-1);td.onclick=()=>goStep(1);
 addEventListener('scroll',tUpd,{passive:true});addEventListener('resize',tUpd);tUpd();
-load().then(()=>{cartRender();tUpd()});
+load().then(()=>{cartRender();if(!location.hash&&scrollY<40)scrollTo(0,0);tUpd()});
 </script>
 </body>
 </html>
