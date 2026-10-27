@@ -603,6 +603,14 @@ footer .links a::after{
 
 /* Botón "Arma tu combo": ya no se agranda ni se achica */
 .btn.cyc{animation:none!important;transform:none!important;will-change:transform} /* capa propia: evita que al hacer hover pierda la forma inclinada y salgan líneas negras */
+
+/* Barra superior: la misma línea blanca que cruza las etiquetas (gorras, buzos, relojes, combos).
+   Cruza toda la barra en 3 s y descansa 2.5 s. */
+.top::after{content:"";position:absolute;top:0;bottom:0;left:-30%;width:14%;z-index:6;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
+  transform:skewX(-20deg);animation:topShine 5.5s ease-in-out infinite}
+@keyframes topShine{0%{left:-30%}55%,100%{left:130%}}
+@media(prefers-reduced-motion:reduce){.top::after{animation:none;display:none}}
 </style>
 </head>
 <body>
