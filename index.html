@@ -385,8 +385,6 @@ dialog{margin:auto}
 .vbox{display:grid;gap:8px;border:1.5px dashed var(--line);padding:12px;border-radius:6px}
 .vrow{display:grid;grid-template-columns:1fr 1fr 90px 40px;gap:8px;align-items:center}
 .vrow .btn{padding:6px 0}
-.invadd{border:1.5px dashed var(--line);padding:12px;border-radius:6px;margin-bottom:14px;display:grid;gap:8px}
-.invadd .ia{display:flex;gap:8px;flex-wrap:wrap}.invadd .ia select,.invadd .ia input{flex:1 1 120px;min-width:0}
 .cdot{display:inline-block;width:11px;height:11px;border-radius:50%;margin:0 5px 0 0;vertical-align:-1px;box-shadow:inset 0 0 0 1px rgba(128,128,128,.6)}
 /* ===== Pedido del armador, botón verde, stock bloqueado ===== */
 .btn.grn:not(.dis){--o:var(--wa);--f1:var(--wa);--f2:#0a0a0a;--t1:#fff;--t2:var(--wa)}
@@ -1162,10 +1160,7 @@ function invRows(){return products.flatMap(p=>{const vs=vars(p);
 const catU=k=>invRows().filter(r=>!k||slug(r.p.category||'')===k).reduce((t,r)=>t+(Number(r.n)||0),0);
 const lowN=()=>invRows().filter(r=>r.n!=null&&r.n!==''&&Number(r.n)<=2).length;
 function rInv(){
-  $('tInv').innerHTML=`<div class="invadd"><b>Agregar prenda al inventario</b>
-    <div class="ia"><select id="iaP">${products.map(p=>`<option value="${esc(p.id)}">${esc(p.name)}</option>`).join('')}</select><input id="iaS" list="vsz" placeholder="Talla" autocomplete="off"><select id="iaC"><option value="">Sin color</option>${COLORS.map(c=>`<option>${c[0]}</option>`).join('')}</select><input id="iaN" type="number" min="0" placeholder="Cantidad"><button type="button" class="btn sm" id="iaB">Agregar</button></div>
-    <small class="desc">Si esa talla y color ya existen, la cantidad se suma a la que ya tienes.</small></div>
-  <input id="invQ" type="search" class="invq" placeholder="Buscar en el inventario (producto, talla o color)…" value="${esc(invQ)}" autocomplete="off">
+  $('tInv').innerHTML=`<input id="invQ" type="search" class="invq" placeholder="Buscar en el inventario (producto, talla o color)…" value="${esc(invQ)}" autocomplete="off">
   <div class="tabs" id="invCats"><button type="button" class="btn ghost sm${invCat?'':' on'}" data-ic="">Todas (${catU('')})</button>${[...new Map(products.map(p=>[slug(p.category||''),p.category]))].map(([k,n])=>`<button type="button" class="btn ghost sm${invCat===k?' on':''}" data-ic="${esc(k)}">${esc(n)} (${catU(k)})</button>`).join('')}<button type="button" class="btn ghost sm lowchip${invLow?' on':''}" data-lw="1">Stock bajo (${lowN()})</button></div>
   <p class="desc" id="invSum" style="margin:-4px 0 10px"></p>
   <div class="legend"><span><i style="background:#ff5252"></i>1-2 unidades (poco)</span><span><i style="background:#f2c200"></i>3-4 unidades</span><span><i style="background:#2ecc71"></i>5 o más</span></div>
@@ -1188,31 +1183,16 @@ function invApply(soft){const rows=[...$('tInv').querySelectorAll('tr[data-cat]'
   const nm=invCat?((products.find(p=>slug(p.category||'')===invCat)||{}).category||''):'';
   $('invSum').innerHTML=`Total ${invCat?'de '+esc(nm):'de todo el inventario'}: <b>${u} unidades</b>${(()=>{const R=invRows().filter(r=>!invCat||slug(r.p.category||'')===invCat);const vc=R.reduce((t,r)=>t+(Number(r.n)||0)*(Number(costs[String(r.p.id)])||0),0),vv=R.reduce((t,r)=>t+(Number(r.n)||0)*Number(r.p.price||0),0);return vc?` · Invertido: <b>${money(vc)}</b> · Si lo vendes todo: <b>${money(vv)}</b> (ganancia ${money(vv-vc)})`:''})()}`+((invLow||invQ)?` · Mostrando ${vis} fila${vis===1?'':'s'} (${vu} unidades)`:'');
   $('invCats').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.lw!==undefined?invLow:b.dataset.ic===''?(!invCat&&!invLow):b.dataset.ic===invCat))}
-$('tInv').onchange=e=>{if(e.target.id!=='iaP')return;const p=products.find(x=>String(x.id)===e.target.value);invCat=p?slug(p.category||''):'';invApply()};
 $('tInv').onclick=async e=>{
   const lw=e.target.closest('[data-lw]');if(lw){invLow=!invLow;invApply();return}
   const ic=e.target.closest('[data-ic]');
   if(ic){invCat=ic.dataset.ic;if(!invCat)invLow=false;invApply();
-    if(invCat){const sel=$('iaP'),cur=products.find(x=>String(x.id)===sel.value);
-      if(!cur||slug(cur.category||'')!==invCat){const f=products.find(x=>slug(x.category||'')===invCat);if(f)sel.value=f.id}}
     return}
   const rb=e.target.closest('[data-s]');
   if(rb){const i=$('tInv').querySelector(`.stk-in[data-id="${CSS.escape(rb.dataset.s)}"][data-k="${rb.dataset.k}"]`);if(!i||i.value===i.dataset.o)return;
     rb.disabled=true;const er=await saveStock([i]);
     if(er){rb.disabled=false;return say('Error: '+er.error.message+' (¿ejecutaste actualizar-variantes.sql?)')}
     i.dataset.o=i.value;i.classList.remove('chg');invCount();say('Inventario actualizado.',true);toast('Inventario actualizado');load();return}
-  const ad=e.target.closest('#iaB');
-  if(ad){if($('tInv').querySelector('.stk-in.chg'))return say('Guarda primero los cambios pendientes de la lista.');
-    const p=products.find(x=>String(x.id)===$('iaP').value),z=$('iaS').value.trim(),c=$('iaC').value,nv=$('iaN').value;
-    if(!p)return say('Primero crea un producto.');
-    if(nv===''||Number(nv)<0)return say('Escribe la cantidad.');
-    if(!z&&!c)return say('Indica al menos la talla o el color.');
-    if(!hasVar(p)&&p.stock>0&&!confirm('“'+p.name+'” tenía '+p.stock+' unidades sin talla ni color. Al agregar tallas y colores, el stock se cuenta por talla y color. ¿Continuar?'))return;
-    const vs=vars(p),ix=vs.findIndex(v=>v.s===z&&v.c===c);let now=Math.round(Number(nv));if(ix>=0){vs[ix].n+=now;now=vs[ix].n}else vs.push({s:z,c,n:now});
-    const sizes=z&&!(p.sizes||[]).includes(z)?[...(p.sizes||[]),z]:(p.sizes||[]);
-    ad.disabled=true;const{error}=await sb.from('products').update({variants:vs,stock:vSum(vs),sizes}).eq('id',p.id);ad.disabled=false;
-    if(error)return say(/variants/i.test(error.message)?'Falta la columna de tallas y colores: ejecuta actualizar-variantes.sql en Supabase.':'Error: '+error.message);
-    const keepP=String(p.id),det=[z,c].filter(Boolean).join(' · ');say('Inventario actualizado.',true);toast(`Inventario actualizado: ${det} ahora tiene ${now}`);await load();rInv();$('iaP').value=keepP;return}
   const b=e.target.closest('#invAll');if(!b)return;
   const ch=[...$('tInv').querySelectorAll('.stk-in.chg')];if(!ch.length)return;
   b.disabled=true;b.textContent='Guardando…';
