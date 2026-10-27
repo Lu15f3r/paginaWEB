@@ -450,11 +450,16 @@ dialog{margin:auto}
 .cp-n b,.shipchip{display:inline-block;background:var(--gold);color:#000;padding:2px 12px;margin-right:4px;font-weight:800;clip-path:polygon(7px 0,100% 0,calc(100% - 7px) 100%,0 100%)}
 .totop{position:fixed;left:16px;bottom:16px;z-index:15;width:50px;height:46px;border:0;cursor:pointer;background:var(--gold);color:#000;display:grid;place-items:center;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s,background .2s}
 .totop.show{opacity:1;transform:none;pointer-events:auto}.totop:hover{background:#fff}.totop svg{width:22px;height:22px}
-.cpromo{width:min(900px,92vw);padding:18px calc(var(--sk) + 14px);gap:12px 22px}
-.cp-h{font-size:clamp(44px,7.5vw,76px)}
-.cp-b{gap:14px}
-.cp-badge{width:96px;height:84px;font-size:46px}
-.btn.cyc{font-size:18px;padding:14px 28px}
+.cpromo{width:min(1080px,92vw);padding:22px calc(var(--sk) + 18px);gap:16px 24px}
+.cp-h{font-size:clamp(44px,6vw,76px);white-space:nowrap}
+@media(min-width:1100px){.cpromo{flex-wrap:nowrap}}
+footer .links a{transition:background .4s,color .4s}
+.links.brand a{--t1:#fff}
+.links.brand a[aria-label=Instagram]{--o:#dc2743}.links.brand a[aria-label=Instagram]::before{background:linear-gradient(45deg,#f09433,#dc2743 55%,#bc1888)!important}
+.links.brand a[aria-label=Facebook]{--o:#1877f2}.links.brand a[aria-label=Facebook]::before{background:#1877f2!important}
+.links.brand a[aria-label=TikTok]{--o:#25f4ee}.links.brand a[aria-label=TikTok]::before{background:#000!important}
+.links.brand a[aria-label=TikTok] svg{filter:drop-shadow(1.5px 1.5px 0 #fe2c55) drop-shadow(-1.5px -1.5px 0 #25f4ee)}
+.links.brand a[aria-label=WhatsApp]{--o:#25d366}.links.brand a[aria-label=WhatsApp]::before{background:#25d366!important}
 .legal{display:flex;gap:6px 18px;flex-wrap:wrap;justify-content:center;margin:0 0 14px;font-size:14px}
 .legal button{background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;font:inherit;padding:4px}
 .legal button:hover{color:var(--gold)}
@@ -462,6 +467,12 @@ dialog{margin:auto}
 .pb{padding:6px 22px 24px;line-height:1.55}
 .pb h4{margin:18px 0 6px;color:var(--gold);font-size:17px}
 .pb p,.pb li{font-size:15px}.pb ul{padding-left:20px;margin:6px 0}.pb a{color:var(--gold)}
+.cp-row{display:flex;align-items:center;flex-wrap:wrap;gap:6px 14px;margin-top:2px}.cp-row p{margin:0}
+.totop svg{transition:transform .3s}.totop.dn svg{transform:rotate(180deg)}
+footer .links a::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.6) 50%,transparent 65%);transform:translateX(-130%);animation:lshine 1s linear infinite;animation-delay:calc(var(--i,0)*.12s)}
+footer .links a:nth-child(2){--i:1}footer .links a:nth-child(3){--i:2}footer .links a:nth-child(4){--i:3}
+@keyframes lshine{to{transform:translateX(130%)}}
+@media(prefers-reduced-motion:reduce){footer .links a::after{animation:none}}
 </style>
 </head>
 <body>
@@ -470,7 +481,7 @@ dialog{margin:auto}
 <section class="hero"><img src="img/herov1.png" alt="Gorras y buzos GORRAX"><div class="hero-type hand"><span class="tw" id="tyHero" data-loop data-white="," aria-label="Tu estilo, tu corona"><span class="gh" aria-hidden="true">Más Que Ropa, Es Actitud!</span><span class="ty" aria-hidden="true"></span></span></div></section>
 
 
-<section class="cpromo" id="promo"><div><span class="cp-s">Oferta Por Tiempo LIMITADO</span><h2 class="cp-h">Arma tu combo</h2><p class="cp-l"><b class="w1">gorra</b> + <b class="w2">buzo</b> + <b class="w3">reloj</b></p><p class="cp-s2">y ahorra</p><p class="cp-n"><b>+ Envío gratis</b> El 10% se suma al descuento que ya tenga cada producto.</p></div><div class="cp-b"><span class="cp-badge"><span><span id="cpPct">10</span><small>%</small></span><em>DTO</em></span><a class="btn cyc" id="promoBtn" data-c="0" href="#armar">Armar ahora</a></div></section>
+<section class="cpromo" id="promo"><div><span class="cp-s">Oferta Por Tiempo LIMITADO</span><h2 class="cp-h">Arma tu combo</h2><p class="cp-l"><b class="w1">gorra</b> + <b class="w2">buzo</b> + <b class="w3">reloj</b></p><div class="cp-row"><p class="cp-s2">y ahorra</p><p class="cp-n"><b>+ Envío gratis</b> El 10% se suma al descuento que ya tenga cada producto.</p></div></div><div class="cp-b"><span class="cp-badge"><span><span id="cpPct">10</span><small>%</small></span><em>DTO</em></span><a class="btn cyc" id="promoBtn" data-c="0" href="#armar">Armar ahora</a></div></section>
 
 <section class="feat">
   <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6h12v10H2zM14 9h4l3 3v4h-7"/><circle cx="6" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>Envíos a<br>todo el país</div>
@@ -1111,7 +1122,11 @@ const POLS={
  dat:{t:'Política de datos',h:()=>`<h4>Quién es el responsable</h4><p>${esc(CFG.STORE)} es responsable del tratamiento de tus datos personales, conforme a la Ley 1581 de 2012. Contacto: ${wl('Hola, tengo una consulta sobre mis datos personales')}.</p><h4>Qué datos usamos</h4><p>Tu nombre (opcional), el detalle de tu pedido (productos, tallas, colores y valor) y el número de WhatsApp desde el que nos escribes. La dirección de entrega y los datos de pago los coordinamos directamente por WhatsApp.</p><h4>Para qué los usamos</h4><p>Solo para gestionar tu pedido, la entrega, los cambios y la garantía, y para contactarte sobre ellos. No vendemos ni compartimos tus datos con terceros para publicidad.</p><h4>Dónde se guardan</h4><p>Los pedidos se guardan en un servicio de base de datos en la nube al que solo accede el administrador de la tienda. Tu carrito se guarda en tu propio navegador y no sale de tu dispositivo hasta que envías el pedido. Esta página no usa cookies de publicidad ni de seguimiento.</p><h4>Tus derechos</h4><p>Puedes conocer, actualizar, rectificar y pedir la eliminación de tus datos, o revocar tu autorización, escribiéndonos por WhatsApp.</p>`}};
 document.querySelectorAll('[data-pol]').forEach(b=>b.onclick=()=>{const p=POLS[b.dataset.pol];$('polT').textContent=p.t;$('polB').innerHTML=p.h();$('pol').showModal()});
 $('polX').onclick=()=>$('pol').close();$('pol').addEventListener('click',e=>{if(e.target===$('pol'))$('pol').close()});
-const tt=$('toTop');addEventListener('scroll',()=>tt.classList.toggle('show',scrollY>700),{passive:true});tt.onclick=()=>scrollTo({top:0,behavior:'smooth'});
+if(matchMedia('(prefers-reduced-motion:reduce)').matches)$('social').classList.add('brand');else setInterval(()=>$('social').classList.toggle('brand'),1000);
+const tt=$('toTop'),tUp=()=>scrollY>=400;
+const tUpd=()=>{const up=tUp();tt.classList.toggle('dn',!up);tt.setAttribute('aria-label',up?'Volver arriba':'Ir al final de la página')};
+tt.classList.add('show');tUpd();addEventListener('scroll',tUpd,{passive:true});
+tt.onclick=()=>scrollTo({top:tUp()?0:document.documentElement.scrollHeight,behavior:'smooth'});
 load().then(()=>cartRender());
 </script>
 </body>
