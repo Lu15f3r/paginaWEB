@@ -611,6 +611,12 @@ footer .links a::after{
   transform:skewX(-20deg);animation:topShine 5.5s ease-in-out infinite}
 @keyframes topShine{0%{left:-30%}55%,100%{left:130%}}
 @media(prefers-reduced-motion:reduce){.top::after{animation:none;display:none}}
+
+/* Inventario: varias colores por talla */
+.vgrp{display:grid;gap:6px;padding:8px 0;border-bottom:1px dashed var(--line)}
+.vgrp:last-child{border-bottom:0}
+.vsp{color:var(--muted);font-size:12px;padding-left:6px;align-self:center}
+.vgc{justify-self:start}
 </style>
 </head>
 <body>
@@ -865,9 +871,14 @@ async function openAdmin(){
 }
 let costs={};
 async function loadCosts(){if(!sb)return;const{data}=await sb.from('product_costs').select('*');costs={};(data||[]).forEach(c=>costs[String(c.product_id)]=c.cost)}
-function updMg(){const c=parseFloat($('pco').value),v=parseFloat($('pp').value),el=$('pmg');if(!(c>=0)||!(v>0)){el.textContent='';el.className='w mg';return}
-  const g=v-c;el.className='w mg '+(g<0?'neg':'ok');el.textContent=g<0?`⚠ Vendes por debajo del costo: pierdes ${money(-g)} por unidad`:`Ganancia por unidad: ${money(g)} · ${Math.round(g/v*100)}% de la venta${c>0?' · '+Math.round(g/c*100)+'% sobre lo que pagaste':''}`}
-$('pco').oninput=$('pp').oninput=updMg;
+function updMg(){const c=parseFloat($('pco').value),el=$('pmg'),L=[];let neg=false;
+  const calc=(lab,v)=>{if(!(c>=0)||!(v>0))return;const g=v-c;if(g<0)neg=true;
+    L.push(g<0?`⚠ ${lab}: pierdes ${money(-g)} por unidad (por debajo del costo)`:`${lab}: ganancia ${money(g)} por unidad · ${Math.round(g/v*100)}% de la venta${c>0?' · '+Math.round(g/c*100)+'% sobre lo que pagaste':''}`)};
+  const n=parseFloat($('pcmp').value),o=parseFloat($('pp').value);
+  calc('Valor venta',n);calc(n>0?'Con oferta':'Valor venta oferta',o);
+  if(!L.length){el.textContent='';el.className='w mg';return}
+  el.className='w mg '+(neg?'neg':'ok');el.innerHTML=L.map(esc).join('<br>')}
+$('pco').oninput=$('pcmp').oninput=$('pp').oninput=updMg;
 function gate(on){$('login').hidden=on;$('panel').hidden=!on;$('out').hidden=!on;$('admT').textContent=on?'Panel de administración':'Administrador';say('');if(on){alist();loadOrders();loadCosts().then(()=>{if($('pid').value)$('pco').value=costs[$('pid').value]??'';updMg()})}}
 $('x').onclick=()=>dlg.close();
 $('login').onsubmit=async e=>{e.preventDefault();
@@ -889,11 +900,27 @@ function alist(){
 function toast(t){let el=$('toast');if(!el){el=document.createElement('div');el.id='toast';el.setAttribute('role','status');dlg.appendChild(el)}
   el.textContent=t;el.classList.remove('show');void el.offsetWidth;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('show'),3000)}
 let vlist=[],curSizes=[],legacy='';
-function vRender(){$('vrows').innerHTML=vlist.map((v,i)=>`<div class="vrow" data-i="${i}"><input list="vsz" data-f="s" value="${esc(v.s)}" placeholder="Talla" autocomplete="off"><select data-f="c"><option value="">Sin color</option>${COLORS.map(c=>`<option${c[0]===v.c?' selected':''}>${c[0]}</option>`).join('')}</select><input type="number" min="0" data-f="n" value="${v.n}" placeholder="Cant."><button type="button" class="btn red sm" data-x="${i}" aria-label="Quitar fila">✕</button></div>`).join('');
+let vgid=0;
+/* Inventario: una talla puede tener varios colores. Cada color lleva su propia cantidad. */
+function vRender(){
+  vlist.forEach(v=>{if(!v.g)v.g=v.s?'s:'+v.s:'n'+(++vgid)});
+  const groups=[];vlist.forEach((v,i)=>{let g=groups.find(x=>x.g===v.g);if(!g)groups.push(g={g:v.g,idx:[]});g.idx.push(i)});
+  $('vrows').innerHTML=groups.map(G=>{
+    const used=G.idx.map(i=>vlist[i].c);
+    const rows=G.idx.map((i,k)=>{const v=vlist[i];
+      const sz=k===0?`<input list="vsz" data-f="s" value="${esc(v.s)}" placeholder="Talla" autocomplete="off">`:`<span class="vsp" aria-hidden="true">↳ misma talla</span>`;
+      const opts=COLORS.map(c=>`<option${c[0]===v.c?' selected':''}${c[0]!==v.c&&used.includes(c[0])?' disabled':''}>${c[0]}</option>`).join('');
+      return `<div class="vrow" data-i="${i}">${sz}<select data-f="c"><option value="">Sin color</option>${opts}</select><input type="number" min="0" data-f="n" value="${v.n}" placeholder="Cant."><button type="button" class="btn red sm" data-x="${i}" aria-label="Quitar fila">✕</button></div>`}).join('');
+    const free=COLORS.some(c=>!used.includes(c[0]));
+    return `<div class="vgrp" data-g="${esc(G.g)}">${rows}${free?`<button type="button" class="btn ghost sm vgc" data-gc="${esc(G.g)}">+ otro color para esta talla</button>`:''}</div>`}).join('');
   const has=vlist.length>0;$('pst').readOnly=true;$('vnote').hidden=!has;$('pst').value=has?vSum(vlist):legacy}
-$('vadd').onclick=()=>{vlist.push({s:'',c:'',n:0});vRender()};
-$('vrows').oninput=e=>{const r=e.target.closest('.vrow');if(!r||!e.target.dataset.f)return;vlist[+r.dataset.i][e.target.dataset.f]=e.target.value;$('pst').value=vSum(vlist)};
-$('vrows').onclick=e=>{const x=e.target.closest('[data-x]');if(x){vlist.splice(+x.dataset.x,1);vRender()}};
+$('vadd').onclick=()=>{vlist.push({s:'',c:'',n:0,g:'n'+(++vgid)});vRender()};
+$('vrows').oninput=e=>{const r=e.target.closest('.vrow');if(!r||!e.target.dataset.f)return;const v=vlist[+r.dataset.i],f=e.target.dataset.f;
+  if(f==='s'){vlist.filter(x=>x.g===v.g).forEach(x=>x.s=e.target.value)}else if(f==='n'){v.n=e.target.value}$('pst').value=vSum(vlist)};
+$('vrows').onchange=e=>{const r=e.target.closest('.vrow');if(!r||e.target.dataset.f!=='c')return;vlist[+r.dataset.i].c=e.target.value;vRender()};
+$('vrows').onclick=e=>{const x=e.target.closest('[data-x]');if(x){vlist.splice(+x.dataset.x,1);vRender();return}
+  const a=e.target.closest('[data-gc]');if(a){const g=a.dataset.gc,mine=vlist.filter(v=>v.g===g),used=mine.map(v=>v.c),nc=(COLORS.find(c=>!used.includes(c[0]))||[''])[0];
+    const last=vlist.map(v=>v.g).lastIndexOf(g);vlist.splice(last+1,0,{s:mine[0]?mine[0].s:'',c:nc,n:0,g});vRender()}};
 let keep=[],added=[],removed=[];
 function gal(){
   $('gal').innerHTML=keep.map((x,i)=>`<div class="gi" data-i="${i}"><img src="${esc(typeof x==='string'?x:x.u)}" alt=""><button type="button" data-k="${i}" aria-label="Quitar foto">×</button>${i===0?'<em>Portada</em>':''}</div>`).join('');
