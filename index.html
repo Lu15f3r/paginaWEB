@@ -592,6 +592,17 @@ footer .links a::after{
 @keyframes bnFill2{0%{transform:translateX(-120%) skewX(-14deg)}20%,42%{transform:translateX(0) skewX(-14deg)}64%,100%{transform:translateX(120%) skewX(-14deg)}}
 @keyframes bnCp2{0%{transform:skewX(14deg) translateX(120%)}20%,42%{transform:skewX(14deg) translateX(0)}64%,100%{transform:skewX(14deg) translateX(-120%)}}
 @keyframes bnShine2{0%{left:-30%}22%,100%{left:130%}}
+
+/* Celular: el bloque izquierdo sigue la misma diagonal del bloque derecho (sin franja ni triángulo entre los dos) */
+@media(max-width:899px){
+ .cat .banner .bl.l,.cat .banner .cp .bl.l{clip-path:polygon(0 0,100% 0,calc(100% - var(--sk)) 100%,0 100%)}
+ .cat .banner .bl.l{right:calc(25% - var(--sk) - 2px)}
+ .cat .banner .cp .bl.l{right:calc(34.375% - var(--sk) - 2px)}
+ .cat .banner .bl.r{z-index:1}
+}
+
+/* Botón "Arma tu combo": ya no se agranda ni se achica */
+.btn.cyc{animation:none!important;transform:none!important;will-change:transform} /* capa propia: evita que al hacer hover pierda la forma inclinada y salgan líneas negras */
 </style>
 </head>
 <body>
