@@ -494,19 +494,18 @@ footer .links a:hover,footer .links a:focus-visible{color:var(--t1)!important}
 [data-theme=light] .cat .banner .bl.r{background:#16161a}
 [data-theme=light] .cat .banner .bl.r p{color:#e2b53f!important}
 @media(min-width:900px){
- .cat .banner{min-height:440px}
+ .cat .banner{min-height:460px}
  .cat .banner .bl.l{right:0;bottom:25%}
- .cat .banner .bl.l h2{font-size:min(80px,calc(660px / var(--n,7)))}
- .cat .banner .bl.r{top:75%;left:0;width:auto;clip-path:none;padding:10px 18px}
- .cat .banner .bl.r p{font-size:20px}
+ .cat .banner .bl.l h2{font-size:min(80px,calc(450px / var(--n,7)))}
+ .cat .banner .bl.r{top:75%;left:0;width:auto;clip-path:none;padding:10px 40px 10px 16px}
+ .cat .banner .bl.r p{font-size:18px}
 }
-/* Al pasar el mouse o tocar, el botón del borde llena todo el espacio (sin hueco en la esquina) */
-.hr .nv:last-child{box-shadow:40px 0 0 0 transparent!important;transition:box-shadow .45s,transform .15s}
-.hr .nv:last-child:hover,.hr .nv:last-child:focus-visible,.hr .nv:last-child:active{box-shadow:40px 0 0 0 var(--gold)!important}
-@media(max-width:640px){
- .top nav .nv:first-child{box-shadow:-40px 0 0 0 transparent!important;transition:box-shadow .45s,transform .15s}
- .top nav .nv:first-child:hover,.top nav .nv:first-child:focus-visible,.top nav .nv:first-child:active{box-shadow:-40px 0 0 0 var(--gold)!important}
-}
+/* Los botones de los bordes se extienden fuera de la pantalla: el relleno dorado es el mismo y se anima al mismo tiempo, sin hueco en la esquina */
+.top{overflow:hidden}
+.hr .nv:last-child{margin-right:-40px;padding-right:40px}
+@media(max-width:640px){.top nav .nv:first-child{margin-left:-40px;padding-left:40px}}
+/* Flechas para subir y bajar de sección en sección */
+#toTop{bottom:70px}
 .ann{background:var(--gold);color:#000;text-align:center;font-weight:700;font-size:14px;padding:7px 12px}
 .fsb{margin-top:10px;font-size:13px}.fsb span{display:block;height:6px;background:var(--line);margin-top:5px}.fsb i{display:block;height:100%;background:var(--gold)}
 </style>
@@ -543,7 +542,7 @@ footer .links a:hover,footer .links a:focus-visible{color:var(--t1)!important}
 <button type="button" class="fab cartb" id="cartF" aria-label="Abrir carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.4 12.2a1 1 0 0 0 1 .8H18a1 1 0 0 0 1-.8L21 8H6"/></svg><b id="cartNf" class="cn" hidden>0</b></button>
 <div class="cartO" id="cartO"></div>
 <aside class="cartP" id="cartP" aria-label="Carrito de compras"><div class="cph"><h2>Tu carrito</h2><button type="button" class="btn ghost sm" id="cartX">Cerrar</button></div><div class="cpb" id="cartL"></div><div class="cpf"><div class="ctot" id="cartT"></div><input id="cartNm" placeholder="Tu nombre (opcional)" autocomplete="name"><a class="btn grn dis" id="cartW" target="_blank" rel="noopener">Pedir todo por WhatsApp</a><button type="button" class="btn ghost sm" id="cartC" hidden>Vaciar carrito</button><div class="ccf" id="cartCf" hidden><span>¿Vaciar todo el carrito?</span><button type="button" class="btn red sm" id="cartCy">Sí, vaciar</button><button type="button" class="btn ghost sm" id="cartCn">No</button></div></div></aside>
-<button type="button" class="totop" id="toTop" aria-label="Volver arriba"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+<button type="button" class="totop" id="toTop" aria-label="Subir a la sección anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button><button type="button" class="totop" id="toDown" aria-label="Bajar a la siguiente sección"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></button>
 <div class="ctoast" id="ct" role="status"></div>
 
 <dialog id="adm">
@@ -1164,11 +1163,18 @@ document.querySelectorAll('[data-pol]').forEach(b=>b.onclick=()=>{const p=POLS[b
 $('polX').onclick=()=>$('pol').close();$('pol').addEventListener('click',e=>{if(e.target===$('pol'))$('pol').close()});
 if(matchMedia('(prefers-reduced-motion:reduce)').matches)$('social').classList.add('brand');else setInterval(()=>$('social').classList.toggle('brand'),1000);
 $('ann').innerHTML=`Envío GRATIS en compras desde <b>${money(CFG.FREE_SHIP)}</b> y en todos los combos`;$('shipTxt').innerHTML=`Envío gratis desde<br>${money(CFG.FREE_SHIP)}`;
-const tt=$('toTop'),tUp=()=>scrollY>=400;
-const tUpd=()=>{const up=tUp();tt.classList.toggle('dn',!up);tt.setAttribute('aria-label',up?'Volver arriba':'Ir al final de la página')};
-tt.classList.add('show');tUpd();addEventListener('scroll',tUpd,{passive:true});
-tt.onclick=()=>scrollTo({top:tUp()?0:document.documentElement.scrollHeight,behavior:'smooth'});
-load().then(()=>cartRender());
+const tt=$('toTop'),td=$('toDown');
+const maxY=()=>document.documentElement.scrollHeight-innerHeight;
+const stops=()=>{const h=(document.querySelector('.top')||{}).offsetHeight||0,M=maxY(),ft=document.querySelector('.feat'),c0=document.querySelector('main .cat');
+ const y=e=>Math.min(Math.max(0,Math.round(e.getBoundingClientRect().top+scrollY-h-8)),M);
+ const a=[...document.querySelectorAll('.hero,#promo,main .cat,.fin,footer')].filter(e=>e.offsetHeight).map(e=>e===c0&&ft&&ft.offsetHeight?y(ft):y(e)).concat(0,M).sort((p,q)=>p-q);
+ return a.reduce((l,v)=>{if(l.length&&v-l[l.length-1]<60){if(v===M)l[l.length-1]=v}else l.push(v);return l},[])};
+const goStep=d=>{const y=scrollY,l=stops(),t=d>0?l.find(v=>v>y+12):l.reverse().find(v=>v<y-12);
+ scrollTo({top:t===undefined?(d>0?maxY():0):t,behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'})};
+const tUpd=()=>{tt.classList.toggle('show',scrollY>30);td.classList.toggle('show',scrollY<maxY()-30)};
+tt.onclick=()=>goStep(-1);td.onclick=()=>goStep(1);
+addEventListener('scroll',tUpd,{passive:true});addEventListener('resize',tUpd);tUpd();
+load().then(()=>{cartRender();tUpd()});
 </script>
 </body>
 </html>
