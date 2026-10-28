@@ -1204,7 +1204,8 @@ async function loadOrders(){if(!sb)return;const{data,error}=await sb.from('order
 function showTab(t){tab=t;const m={prod:'tProd',ped:'tPed',inv:'tInv',ven:'tVen'};for(const k in m)$(m[k]).hidden=k!==t;
   $('tabs').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
   if(t!=='prod'&&ordErr&&t!=='inv'){$(m[t]).innerHTML='<p class="msg">No se pudieron leer los pedidos. Ejecuta actualizar-pedidos.sql en Supabase.</p>';return}
-  if(t==='ped')rPed();if(t==='inv')rInv();if(t==='ven')rVen()}
+  if(t==='ped')rPed();if(t==='inv')rInv();if(t==='ven')rVen();
+  if(!showTab.q&&(t==='prod'||t==='inv')){showTab.q=1;load().then(()=>{showTab.q=0;if(tab==='prod')alist();if(tab==='inv'&&!$('tInv').querySelector('.stk-in.chg'))rInv()}).catch(()=>{showTab.q=0})}}
 function rPed(){const L=orders.filter(o=>pfil==='todos'||o.status===pfil);
   $('tPed').innerHTML=`<div class="tabs">${['pendiente','confirmado','cancelado','todos'].map(s=>`<button type="button" class="btn ghost sm${pfil===s?' on':''}" data-f="${s}">${ST[s]||'Todos'} (${s==='todos'?orders.length:orders.filter(o=>o.status===s).length})</button>`).join('')}</div>`+
   (L.length?L.map(o=>`<div class="ord"><div style="display:flex;justify-content:space-between;gap:8px"><b>${esc(o.code)}</b><span class="st ${o.status}">${ST[o.status]}</span></div><small>${fd(o.created_at)}${o.customer?' · '+esc(o.customer):''}</small>${o.checkout?`<small>Tel ${esc(o.checkout.phone)} · ${esc(o.checkout.address)}, ${esc(o.checkout.city)}${o.payment_method?' · Pago: '+esc(o.payment_method):''}</small>`:''}<div>${itx(o)}</div><div><b class="price">${money(o.total)}</b>${o.discount>0?` <small>(dto ${money(o.discount)})</small>`:''}</div><div style="display:flex;gap:8px;flex-wrap:wrap">${o.status!=='confirmado'?`<button type="button" class="btn sm" data-o="confirmado" data-id="${o.id}">Confirmar venta</button>`:`<button type="button" class="btn ghost sm" data-o="pendiente" data-id="${o.id}">Volver a pendiente</button>`}${o.status!=='cancelado'?`<button type="button" class="btn red sm" data-o="cancelado" data-id="${o.id}">Cancelar</button>`:''}</div></div>`).join(''):'<p class="desc">No hay pedidos en esta vista.</p>')}
@@ -1215,9 +1216,9 @@ $('tPed').onclick=async e=>{const f=e.target.dataset.f;if(f){pfil=f;rPed();retur
   e.target.disabled=true;const args={p_id:e.target.dataset.id,p_status:st};let{error}=await sb.rpc('set_order_status_v2',args),srv=true;
   if(error&&/could not find|does not exist|schema cache/i.test(error.message)){srv=false;({error}=await sb.rpc('set_order_status',args))}
   if(error){say(error.message);e.target.disabled=false;return}
-  await load();const w=srv?'':await syncVars(o,prev,st);
+  await Promise.all([load(),loadOrders()]);const w=srv?'':await syncVars(o,prev,st);
   if(w)say('Pedido actualizado, pero no se pudo ajustar el stock por talla/color: '+w);else say('Pedido actualizado.',true);
-  await loadOrders()};
+  alist();showTab(tab)};
 let invCat='',invLow=false,invQ='';
 const stkC=n=>n===''||n==null?'':(Number(n)<=2?'r':Number(n)<=4?'y':'g');
 const dot=c=>{const x=COLORS.find(k=>k[0]===c);return x?`<i class="cdot" style="background:${x[1]}"></i>`:''};
