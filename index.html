@@ -633,7 +633,7 @@ footer .links a::after{
 .fB details[open] summary::after{transform:rotate(225deg);margin-top:4px}
 .fo{padding:0 0 16px}.fo button{display:inline-flex;align-items:center;gap:6px;padding:6px 14px}.fo small{opacity:.7;font-size:11px}
 .fo .cd{width:12px;height:12px;border-radius:50%;border:1px solid #777;flex:none}
-.ff{padding:14px 20px;border-top:1px solid var(--line)}.ff .btn{width:100%;text-align:center}
+.ff{display:flex;gap:10px;padding:14px 20px;border-top:1px solid var(--line)}.ff .btn{flex:1;width:auto;min-width:0;padding:13px 6px;text-align:center;font-size:14px}
 #co{width:min(900px,96vw)}.cog{display:grid;gap:22px}@media(min-width:760px){.cog{grid-template-columns:1.3fr 1fr}}
 .cst{display:flex;gap:8px;margin-bottom:16px}.cst span{flex:1;text-align:center;padding:8px 4px;border-bottom:3px solid var(--line);font-weight:700;font-size:13px;color:var(--muted)}.cst span.on{border-color:var(--gold);color:var(--ink)}
 .cof{display:grid;grid-template-columns:1fr 1fr;gap:12px}.cof label{display:flex;flex-direction:column;gap:4px;font-weight:600;font-size:14px}.cof .w{grid-column:1/-1}
@@ -685,7 +685,7 @@ footer .links a::after{
 <div class="ctoast" id="ct" role="status"></div>
 <button type="button" class="fbtn" id="fFab" aria-label="Abrir filtros"></button>
 <div class="cartO" id="fO"></div>
-<aside class="cartP fP" id="fP" aria-label="Filtros"><div class="fh"><h2>Filtrar por</h2><button type="button" class="btn ghost sm" id="fX" aria-label="Cerrar filtros">Cerrar</button></div><div class="fB" id="fB"></div><div class="ff"><button type="button" class="btn" id="fA">Aplicar filtros</button></div></aside>
+<aside class="cartP fP" id="fP" aria-label="Filtros"><div class="fh"><h2>Filtrar por</h2><button type="button" class="btn ghost sm" id="fX" aria-label="Cerrar filtros">Cerrar</button></div><div class="fB" id="fB"></div><div class="ff"><button type="button" class="btn grn" id="fA">Aplicar filtros</button><button type="button" class="btn red" id="fR0">Quitar filtros</button></div></aside>
 <dialog id="co" aria-labelledby="coT"><div class="dh"><h2 id="coT">Finalizar compra</h2><button class="btn ghost sm" id="coX" type="button">Cerrar</button></div><div class="db" id="coB"></div></dialog>
 
 <dialog id="adm">
@@ -858,8 +858,8 @@ function fR(){const prev=[...$('fB').querySelectorAll('details')].map(d=>d.open)
    +sec(3,'Rangos de precio','r',RNG.map((r,i)=>opt('r',i,r[0],cnt('r',p=>+p.price>=r[1]&&+p.price<=r[2]))).join(''));
   $('fA').textContent=`Aplicar filtros (${products.filter(p=>fOk(p,FD)).length})`}
 function fOpen(o){if(o){FD={t:[...FIL.t],g:[...FIL.g],c:[...FIL.c],r:[...FIL.r]};$('fB').innerHTML='';fR()}$('fP').classList.toggle('open',o);$('fO').classList.toggle('open',o);document.body.style.overflow=o?'hidden':''}
-$('fB').onclick=e=>{const b=e.target.closest('[data-k]');if(!b)return;const k=b.dataset.k,v=k==='r'?+b.dataset.v:b.dataset.v,a=FD[k];FD[k]=a.includes(v)?a.filter(x=>x!==v):[...a,v];fR()};
-$('fX').onclick=()=>fOpen(false);$('fO').onclick=()=>fOpen(false);
+$('fB').onclick=e=>{const b=e.target.closest('[data-k]');if(!b)return;const k=b.dataset.k,v=k==='r'?+b.dataset.v:b.dataset.v,a=FD[k];FD[k]=a.includes(v)?a.filter(x=>x!==v):[...a,v];FIL={t:[...FD.t],g:[...FD.g],c:[...FD.c],r:[...FD.r]};render();fR()};
+$('fX').onclick=()=>fOpen(false);$('fR0').onclick=()=>{FIL=F0();FD=F0();fOpen(false);render()};$('fO').onclick=()=>fOpen(false);
 $('fA').onclick=()=>{FIL=FD;fOpen(false);render();const c=$('catalogo');scrollTo({top:Math.max(0,c.getBoundingClientRect().top+scrollY-90),behavior:'smooth'})};
 $('catalogo').addEventListener('click',e=>{if(e.target.closest('[data-fclr]')){FIL=F0();render()}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')fOpen(false)});
