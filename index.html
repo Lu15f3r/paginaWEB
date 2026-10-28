@@ -618,9 +618,11 @@ footer .links a::after{
 
 /* ===== Filtro + checkout ===== */
 .cat{position:relative}
-.fbtn{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:14;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:46px;height:68px;padding:0;font:800 10px "Hanken Grotesk",sans-serif;background:var(--gold);color:#000;border:0;cursor:pointer;clip-path:polygon(0 0,100% 0,calc(100% - 9px) 100%,0 100%);box-shadow:none}
+.fbtn{position:fixed;left:0;top:50%;transform:translate(-110%,-50%);opacity:0;pointer-events:none;transition:transform .3s,opacity .3s;z-index:14;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:46px;height:68px;padding:0;font:800 10px "Hanken Grotesk",sans-serif;background:var(--gold);color:#000;border:0;cursor:pointer;clip-path:polygon(0 0,100% 0,calc(100% - 9px) 100%,0 100%);box-shadow:none}
+.fbtn.show{transform:translate(0,-50%);opacity:1;pointer-events:auto}
 .fbtn svg{width:21px;height:21px}.fbtn:hover{background:#fff}
 .fbtn .fn{position:absolute;top:3px;right:10px;background:#000;color:var(--gold);border-radius:999px;font-size:10px;min-width:16px;line-height:16px;text-align:center}
+@media(max-width:899px){.fbtn{width:36px;height:52px;font-size:8.5px;gap:2px}.fbtn svg{width:16px;height:16px}.fbtn .fn{top:2px;right:6px;min-width:14px;line-height:14px;font-size:9px}}
 @media(min-width:900px){.fbtn{width:calc(5vw - 6px);min-width:46px;height:72px;font-size:11px}}
 .fP{right:auto;left:0;border-left:0;border-right:1px solid var(--line);transform:translateX(-100%)}.fP.open{transform:none}
 .fh{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:16px 20px;border-bottom:1px solid var(--line)}.fh h2{font-size:34px;color:var(--gold)}
@@ -681,7 +683,7 @@ footer .links a::after{
 <div class="ctoast" id="ct" role="status"></div>
 <button type="button" class="fbtn" id="fFab" aria-label="Abrir filtros"></button>
 <div class="cartO" id="fO"></div>
-<aside class="cartP fP" id="fP" aria-label="Filtros"><div class="fh"><h2>Filtrar por</h2><button type="button" class="lk" id="fC">Quitar filtro</button></div><div class="fB" id="fB"></div><div class="ff"><button type="button" class="btn" id="fA">Aplicar filtros</button></div></aside>
+<aside class="cartP fP" id="fP" aria-label="Filtros"><div class="fh"><h2>Filtrar por</h2><button type="button" class="lk" id="fC">Quitar filtro</button><button type="button" class="btn ghost sm" id="fX" aria-label="Cerrar filtros">Cerrar</button></div><div class="fB" id="fB"></div><div class="ff"><button type="button" class="btn" id="fA">Aplicar filtros</button></div></aside>
 <dialog id="co" aria-labelledby="coT"><div class="dh"><h2 id="coT">Finalizar compra</h2><button class="btn ghost sm" id="coX" type="button">Cerrar</button></div><div class="db" id="coB"></div></dialog>
 
 <dialog id="adm">
@@ -843,6 +845,7 @@ const fOk=(p,f,k)=>(k==='t'||!f.t.length||f.t.includes(slug(p.category||'')))&&(
 const fprods=()=>products.filter(p=>fOk(p,FIL));
 const fBtn=()=>{const n=fN(FIL),b=$('fFab');b.setAttribute('aria-label','Abrir filtros'+(n?' ('+n+' activos)':''));b.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg><span>Filtrar</span><b class="fn"${n?'':' hidden'}>${n}</b>`};
 $('fFab').onclick=()=>fOpen(true);
+if('IntersectionObserver' in window)new IntersectionObserver(([e])=>$('fFab').classList.toggle('show',e.isIntersecting),{rootMargin:'-30% 0px -30% 0px'}).observe($('catalogo'));else $('fFab').classList.add('show');
 function fR(){const prev=[...$('fB').querySelectorAll('details')].map(d=>d.open),cats={};products.forEach(p=>{cats[slug(p.category||'')]??=p.category});
   const cnt=(k,fn)=>products.filter(p=>fOk(p,FD,k)&&fn(p)).length;
   const opt=(k,v,lab,n,x='')=>{const on=FD[k].includes(v);return `<button type="button" data-k="${k}" data-v="${esc(v)}" class="${on?'on':''}${n||on?'':' off'}"${n||on?'':' disabled'}>${x}${esc(lab)} <small>(${n})</small></button>`};
@@ -854,7 +857,7 @@ function fR(){const prev=[...$('fB').querySelectorAll('details')].map(d=>d.open)
   $('fA').textContent=`Aplicar filtros (${products.filter(p=>fOk(p,FD)).length})`}
 function fOpen(o){if(o){FD={t:[...FIL.t],g:[...FIL.g],c:[...FIL.c],r:[...FIL.r]};$('fB').innerHTML='';fR()}$('fP').classList.toggle('open',o);$('fO').classList.toggle('open',o);document.body.style.overflow=o?'hidden':''}
 $('fB').onclick=e=>{const b=e.target.closest('[data-k]');if(!b)return;const k=b.dataset.k,v=k==='r'?+b.dataset.v:b.dataset.v,a=FD[k];FD[k]=a.includes(v)?a.filter(x=>x!==v):[...a,v];fR()};
-$('fC').onclick=()=>{FD=F0();fR()};$('fO').onclick=()=>fOpen(false);
+$('fC').onclick=()=>{FIL=F0();FD=F0();fOpen(false);render()};$('fX').onclick=()=>fOpen(false);$('fO').onclick=()=>fOpen(false);
 $('fA').onclick=()=>{FIL=FD;fOpen(false);render();const c=$('catalogo');scrollTo({top:Math.max(0,c.getBoundingClientRect().top+scrollY-90),behavior:'smooth'})};
 $('catalogo').addEventListener('click',e=>{if(e.target.closest('[data-fclr]')){FIL=F0();render()}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')fOpen(false)});
