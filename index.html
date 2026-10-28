@@ -650,6 +650,8 @@ footer .links a::after{
 .fbtn .fx{position:absolute;top:2px;left:3px;width:18px;height:18px;border-radius:50%;background:#000;color:var(--gold);font:800 10px/18px "Hanken Grotesk",sans-serif;text-align:center}.fbtn .fx:hover{background:#c62828;color:#fff}
 .cfd{width:min(420px,92vw)}.cfd select{width:100%}.lb{display:inline}.xb{display:none}@media(max-width:640px){.lb{display:none}.xb{display:inline;font-size:15px;line-height:1}}
 #cm{width:min(560px,96vw)}#cm .row input{flex:1;min-width:140px}#cm .row small{color:var(--muted)}
+.sub{font-size:12px;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin:-2px 0 4px;font-weight:700}
+.lbd{padding:6px 18px 2px;font-size:14px;line-height:1.45;color:var(--muted)}.lbd b{color:var(--ink)}.lbd .mt{margin-top:4px}
 </style>
 </head>
 <body>
@@ -716,6 +718,8 @@ footer .links a::after{
         </details>
         <label>Nombre<input id="pn" required placeholder="Escribe para buscar o crear" autocomplete="off"></label>
         <label>Categoría<input id="pc" required placeholder="Elige una o escribe una nueva" autocomplete="off"><div class="sizes cchips" id="cchips"></div></label>
+        <label>Subcategoría<input id="psb" placeholder="Elige una o escribe una nueva" autocomplete="off"><div class="sizes cchips" id="sbchips"></div></label>
+        <label>Material<input id="pmt" placeholder="Ej: Algodón 100%, acero inoxidable" autocomplete="off"></label>
         <div class="w"><b style="font-size:14px">Para quién es (puedes marcar varios)</b><div class="sizes cchips" id="gchips" style="margin-top:6px"></div></div>
         <div class="w r4">
           <label>Valor compra<input type="number" id="pco" min="0" step="500" placeholder="Lo que te costó"></label>
@@ -752,6 +756,7 @@ footer .links a::after{
   <div class="dh"><h2 id="lbT"></h2><button class="btn ghost sm" id="lbX" type="button">Cerrar</button></div>
   <div class="stage" id="lbS"><button class="lbn l" id="lbP" type="button" aria-label="Foto anterior">‹</button><img id="lbI" alt=""><button class="lbn r" id="lbN" type="button" aria-label="Foto siguiente">›</button></div>
   <div class="lbt" id="lbTh"></div>
+  <div class="lbd" id="lbD" hidden></div>
   <div class="lbf"><span class="price" id="lbPr"></span><a class="btn" id="lbW" target="_blank" rel="noopener">Pedir por WhatsApp</a></div>
 </dialog>
 
@@ -846,24 +851,25 @@ const NAVICO={
 /* ====== FILTRO ====== */
 const GEN=['Hombre','Mujer','Niño','Niña'],RNG=[['Hasta $50.000',0,5e4],['$50.000 – $100.000',50001,1e5],['$100.000 – $150.000',100001,15e4],['Más de $150.000',150001,Infinity]];
 const gens=p=>Array.isArray(p.genders)?p.genders:[];
-const F0=()=>({t:[],g:[],c:[],r:[]});let FIL=F0(),FD=F0();
-const fN=f=>f.t.length+f.g.length+f.c.length+f.r.length;
-const fOk=(p,f,k)=>(k==='t'||!f.t.length||f.t.includes(slug(p.category||'')))&&(k==='g'||!f.g.length||gens(p).some(x=>f.g.includes(x)))&&(k==='c'||!f.c.length||(hasColors(p)&&f.c.some(c=>vStock(p,null,c)>0)))&&(k==='r'||!f.r.length||f.r.some(i=>+p.price>=RNG[i][1]&&+p.price<=RNG[i][2]));
+const F0=()=>({t:[],g:[],c:[],r:[],s:[]}),cpF=f=>({t:[...f.t],g:[...f.g],c:[...f.c],r:[...f.r],s:[...f.s]});let FIL=F0(),FD=F0();
+const fN=f=>f.t.length+f.g.length+f.c.length+f.r.length+f.s.length;
+const fOk=(p,f,k)=>(k==='t'||!f.t.length||f.t.includes(slug(p.category||'')))&&(k==='s'||!f.s.length||f.s.includes(slug(p.subcategory||'')))&&(k==='g'||!f.g.length||gens(p).some(x=>f.g.includes(x)))&&(k==='c'||!f.c.length||(hasColors(p)&&f.c.some(c=>vStock(p,null,c)>0)))&&(k==='r'||!f.r.length||f.r.some(i=>+p.price>=RNG[i][1]&&+p.price<=RNG[i][2]));
 const fprods=()=>products.filter(p=>fOk(p,FIL));
 const fBtn=()=>{const n=fN(FIL),b=$('fFab');b.setAttribute('aria-label','Abrir filtros'+(n?' ('+n+' activos)':''));b.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg><span>Filtrar</span><b class="fn"${n?'':' hidden'}>${n}</b><span class="fx" role="button" aria-label="Quitar filtros" title="Quitar filtros"${n?'':' hidden'}>✕</span>`};
 $('fFab').onclick=e=>{if(e.target.closest('.fx')){FIL=F0();FD=F0();render();return}fOpen(true)};
 if('IntersectionObserver' in window)new IntersectionObserver(([e])=>$('fFab').classList.toggle('show',e.isIntersecting),{rootMargin:'-30% 0px -30% 0px'}).observe($('catalogo'));else $('fFab').classList.add('show');
-function fR(){const prev=[...$('fB').querySelectorAll('details')].map(d=>d.open),cats={};products.forEach(p=>{cats[slug(p.category||'')]??=p.category});
+function fR(){const prev=[...$('fB').querySelectorAll('details')].map(d=>d.open),cats={},subs={};products.forEach(p=>{cats[slug(p.category||'')]??=p.category;if(p.subcategory)subs[slug(p.subcategory)]??=p.subcategory});
   const cnt=(k,fn)=>products.filter(p=>fOk(p,FD,k)&&fn(p)).length;
   const opt=(k,v,lab,n,x='')=>{const on=FD[k].includes(v);return `<button type="button" data-k="${k}" data-v="${esc(v)}" class="${on?'on':''}${n||on?'':' off'}"${n||on?'':' disabled'}>${x}${esc(lab)} <small>(${n})</small></button>`};
   const sec=(i,t,k,h)=>`<details${(prev.length?prev[i]:FD[k].length)?' open':''}><summary>${t}</summary><div class="fo sizes">${h}</div></details>`;
   $('fB').innerHTML=sec(0,'Tipo de producto','t',Object.entries(cats).map(([sl,c])=>opt('t',sl,c,cnt('t',p=>slug(p.category||'')===sl))).join(''))
-   +sec(1,'Género','g',GEN.map(g=>opt('g',g,g,cnt('g',p=>gens(p).includes(g)))).join(''))
-   +sec(2,'Color','c',COLORS.map(c=>opt('c',c[0],c[0],cnt('c',p=>hasColors(p)&&vStock(p,null,c[0])>0),`<i class="cd" style="background:${c[1]}"></i>`)).join(''))
-   +sec(3,'Rangos de precio','r',RNG.map((r,i)=>opt('r',i,r[0],cnt('r',p=>+p.price>=r[1]&&+p.price<=r[2]))).join(''));
+   +(Object.keys(subs).length?sec(1,'Subcategoría','s',Object.entries(subs).map(([sl,c])=>opt('s',sl,c,cnt('s',p=>slug(p.subcategory||'')===sl))).join('')):'')
+   +sec(2,'Género','g',GEN.map(g=>opt('g',g,g,cnt('g',p=>gens(p).includes(g)))).join(''))
+   +sec(3,'Color','c',COLORS.map(c=>opt('c',c[0],c[0],cnt('c',p=>hasColors(p)&&vStock(p,null,c[0])>0),`<i class="cd" style="background:${c[1]}"></i>`)).join(''))
+   +sec(4,'Rangos de precio','r',RNG.map((r,i)=>opt('r',i,r[0],cnt('r',p=>+p.price>=r[1]&&+p.price<=r[2]))).join(''));
   $('fA').textContent=`Aplicar filtros (${products.filter(p=>fOk(p,FD)).length})`}
-function fOpen(o){if(o){FD={t:[...FIL.t],g:[...FIL.g],c:[...FIL.c],r:[...FIL.r]};$('fB').innerHTML='';fR()}$('fP').classList.toggle('open',o);$('fO').classList.toggle('open',o);document.body.style.overflow=o?'hidden':''}
-$('fB').onclick=e=>{const b=e.target.closest('[data-k]');if(!b)return;const k=b.dataset.k,v=k==='r'?+b.dataset.v:b.dataset.v,a=FD[k];FD[k]=a.includes(v)?a.filter(x=>x!==v):[...a,v];FIL={t:[...FD.t],g:[...FD.g],c:[...FD.c],r:[...FD.r]};render();fR()};
+function fOpen(o){if(o){FD=cpF(FIL);$('fB').innerHTML='';fR()}$('fP').classList.toggle('open',o);$('fO').classList.toggle('open',o);document.body.style.overflow=o?'hidden':''}
+$('fB').onclick=e=>{const b=e.target.closest('[data-k]');if(!b)return;const k=b.dataset.k,v=k==='r'?+b.dataset.v:b.dataset.v,a=FD[k];FD[k]=a.includes(v)?a.filter(x=>x!==v):[...a,v];FIL=cpF(FD);render();fR()};
 $('fX').onclick=()=>fOpen(false);$('fR0').onclick=()=>{FIL=F0();FD=F0();fOpen(false);render()};$('fO').onclick=()=>fOpen(false);
 $('fA').onclick=()=>{FIL=FD;fOpen(false);render();const c=$('catalogo');scrollTo({top:Math.max(0,c.getBoundingClientRect().top+scrollY-90),behavior:'smooth'})};
 $('catalogo').addEventListener('click',e=>{if(e.target.closest('[data-fclr]')){FIL=F0();render()}});
@@ -895,7 +901,7 @@ function card(p){
   const im=imgs(p);
   return `<article class="card${!isAv(p)?' sold':''}" data-id="${p.id}">
    <div class="ph"><div class="noimg">${NAVICO[slug(p.category)]||NAVICO.otro}</div>${im[0]?`<img class="im1" src="${esc(im[0])}" alt="${esc(p.name)}" loading="lazy" onload="this.parentNode.classList.add('ld')" onerror="this.remove()">`:''}${im[1]?`<img class="im2" src="${esc(im[1])}" alt="" loading="lazy" onload="this.parentNode.classList.add('two')" onerror="this.remove()">`:''}${im.length>1?`<span class="cnt">${im.length} fotos</span>`:''}${!isAv(p)?'<span class="tag">Agotado</span>':''}${discBadge(p)}</div>
-   <div class="info"><h3>${esc(p.name)}</h3><div class="price">${money(p.price)}${saveTag(p)}</div>
+   <div class="info"><h3>${esc(p.name)}</h3>${p.subcategory?`<div class="sub">${esc(p.subcategory)}</div>`:''}<div class="price">${money(p.price)}${saveTag(p)}</div>
    ${p.description?`<p class="desc">${esc(p.description)}</p>`:''}
    ${sizes.length?`<div class="sizes" role="group" aria-label="Talla">${sizes.map(z=>{const off=!zOk(z);return `<button type="button" data-s="${esc(z)}" class="${z===z0?'on':''}${off?' off':''}"${off?' disabled':''}>${esc(z)}</button>`}).join('')}</div>`:''}
    ${hc?swHtml('',c0,c=>vStock(p,zf,c)>0):''}
@@ -961,7 +967,7 @@ function alist(){
   const filtered=(!editing&&(q||c))||pq;
   const head=products.length?`<p class="desc" style="margin-bottom:6px">Mostrando ${list.length} de ${products.length} productos${filtered?' &nbsp;<button type="button" class="btn ghost sm" data-clr="1" aria-label="Quitar filtro"><span class="lb">Quitar filtro</span><span class="xb">✕</span></button>':''}</p>`:'';
   $('alist').innerHTML=head+(list.length?list.map(p=>`<div class="row">${imgs(p)[0]?`<img src="${esc(imgs(p)[0])}" alt="">`:'<i></i>'}
-   <div><b>${esc(p.name)}</b><br><small>${esc(p.category)} · ${money(p.price)}${gens(p).length?' · '+esc(gens(p).join('/')):''}${p.available===false?' · Agotado':''}</small> <span class="stkb ${stkC(p.stock)||'n'}">${p.stock==null?'Sin control':'Stock: '+p.stock}</span></div>
+   <div><b>${esc(p.name)}</b><br><small>${esc(p.category)}${p.subcategory?' › '+esc(p.subcategory):''} · ${money(p.price)}${gens(p).length?' · '+esc(gens(p).join('/')):''}${p.available===false?' · Agotado':''}</small> <span class="stkb ${stkC(p.stock)||'n'}">${p.stock==null?'Sin control':'Stock: '+p.stock}</span></div>
    <button class="btn ghost sm" data-e="${p.id}">Editar</button><button class="btn red sm" data-d="${p.id}">Eliminar</button></div>`).join(''):`<p class="desc">${products.length?'Ningún producto coincide: puedes crearlo con el botón Guardar.':'Aún no hay productos. Crea el primero arriba.'}</p>`);
 }
 function toast(t){let el=$('toast');if(!el){el=document.createElement('div');el.id='toast';el.setAttribute('role','status');dlg.appendChild(el)}
@@ -1014,7 +1020,7 @@ $('alist').onclick=async e=>{
   if(e.target.closest('[data-clr]')){$('pn').value='';$('pc').value='';$('pq').value='';alist();return}
   const ed=e.target.dataset.e,dl=e.target.dataset.d;
   if(ed){const p=products.find(x=>String(x.id)===ed);
-    $('pid').value=p.id;$('pn').value=p.name;$('pc').value=p.category;alist();$('pp').value=p.price;
+    $('pid').value=p.id;$('pn').value=p.name;$('psb').value=p.subcategory||'';$('pmt').value=p.material||'';$('pc').value=p.category;alist();$('pp').value=p.price;
     curSizes=[...(p.sizes||[])];curG=[...gens(p)];gChips();legacy=hasVar(p)?'':(p.stock??'');$('pst').value=legacy;$('pcmp').value=p.compare_price||'';$('pd').value=p.description||'';$('pa').checked=p.available!==false;$('pco').value=costs[String(p.id)]??'';updMg();
     vlist=vars(p).map(v=>({...v}));vRender();keep=[...imgs(p)];added=[];removed=[];gal();say('Editando “'+p.name+'”. Guarda cuando termines.',true);dlg.scrollTo({top:0,behavior:'smooth'})}
   if(dl){const p=products.find(x=>String(x.id)===dl);
@@ -1029,7 +1035,7 @@ $('pf').onsubmit=async e=>{e.preventDefault();$('sv').disabled=true;say('Guardan
   try{
     const id=$('pid').value;
     const row={name:$('pn').value.trim(),category:$('pc').value.trim(),price:Number($('pp').value),
-      sizes:[...curSizes],genders:[...curG],description:$('pd').value.trim(),available:$('pa').checked,stock:$('pst').value===''?null:Number($('pst').value),compare_price:$('pcmp').value?Number($('pcmp').value):null};
+      sizes:[...curSizes],genders:[...curG],subcategory:$('psb').value.trim()||null,material:$('pmt').value.trim()||null,description:$('pd').value.trim(),available:$('pa').checked,stock:$('pst').value===''?null:Number($('pst').value),compare_price:$('pcmp').value?Number($('pcmp').value):null};
     const dd={};vlist.map(v=>({s:String(v.s).trim(),c:v.c||'',n:Math.max(0,Number(v.n)||0)})).filter(v=>v.s||v.c).forEach(v=>dd[v.s+'|'+v.c]=v);
     row.variants=Object.values(dd);
     if(row.variants.length){row.stock=vSum(row.variants);row.sizes=[...new Set(row.variants.map(v=>v.s).filter(Boolean))]}
@@ -1041,6 +1047,7 @@ $('pf').onsubmit=async e=>{e.preventDefault();$('sv').disabled=true;say('Guardan
     const save=x=>id?sb.from('products').update(x).eq('id',id):sb.from('products').insert(x).select('id');
     let r=await save(row),aviso='';
     if(r.error&&/genders/i.test(r.error.message)){delete row.genders;r=await save(row);aviso=' OJO: el género NO se guardó. Ejecuta actualizar-genero.sql en Supabase.'}
+    if(r.error&&/subcategory|material/i.test(r.error.message)){delete row.subcategory;delete row.material;r=await save(row);aviso=(aviso||'')+' OJO: subcategoría y material NO se guardaron. Ejecuta actualizar-genero-y-pedidos.sql en Supabase.'}
     if(r.error&&/variants/i.test(r.error.message)){delete row.variants;r=await save(row);aviso=' OJO: las tallas y colores NO se guardaron. Ejecuta actualizar-variantes.sql en Supabase.'}
     if(r.error&&/images|compare_price|stock/i.test(r.error.message)){delete row.images;delete row.compare_price;delete row.stock;r=await save(row);aviso+=' Ejecuta actualizar-tienda.sql en Supabase para guardar varias fotos y el precio de ahorro.'}
     if(r.error)throw r.error;
@@ -1089,8 +1096,13 @@ function catChips(){
   const seen=new Set(),list=[];
   catAll().forEach(c=>{const k=slug(c||'');if(c&&!seen.has(k)){seen.add(k);list.push(c)}});
   const cur=slug($('pc').value||'');
-  $('cchips').innerHTML=list.map(c=>`<button type="button" data-c="${esc(c)}" class="${slug(c)===cur?'on':''}">${esc(c)}</button>`).join('')+'<button type="button" data-mng="1">✎ Editar categorías</button>';
+  $('cchips').innerHTML=list.map(c=>`<button type="button" data-c="${esc(c)}" class="${slug(c)===cur?'on':''}">${esc(c)}</button>`).join('')+'<button type="button" data-mng="1">✎ Editar categorías</button>';sbChips();
 }
+const SUBS_BASE={gorras:['Plana','Curva'],buzos:['Estampados','Con capota','Sin capota','Con cremallera'],relojes:['Deportivos','Clásicos']};
+function sbChips(){const k=slug($('pc').value||''),m=new Map(),cur=slug($('psb').value||'');
+  [...(SUBS_BASE[k]||[]),...products.filter(p=>slug(p.category||'')===k).map(p=>p.subcategory)].forEach(c=>{if(c&&!m.has(slug(c)))m.set(slug(c),c)});
+  $('sbchips').innerHTML=k?[...m.values()].map(c=>`<button type="button" data-sb="${esc(c)}" class="${slug(c)===cur?'on':''}">${esc(c)}</button>`).join('')||'<small>Escribe una subcategoría nueva arriba.</small>':'<small>Elige primero la categoría.</small>'}
+$('sbchips').onclick=e=>{const b=e.target.closest('button');if(!b)return;$('psb').value=slug($('psb').value)===slug(b.dataset.sb)?'':b.dataset.sb;sbChips()};$('psb').oninput=sbChips;
 let curG=[];function gChips(){$('gchips').innerHTML=GEN.map(g=>`<button type="button" data-g="${g}" class="${curG.includes(g)?'on':''}">${g}</button>`).join('')}
 $('gchips').onclick=e=>{const b=e.target.closest('button');if(!b)return;const g=b.dataset.g;curG=curG.includes(g)?curG.filter(x=>x!==g):[...curG,g];gChips()};gChips();
 $('cchips').onclick=e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.mng)return catMng();$('pc').value=sg($('pc').value)===sg(b.dataset.c)?'':b.dataset.c;alist()};
@@ -1103,7 +1115,7 @@ function lbShow(i){const a=imgs(lbP);lbI=(i+a.length)%a.length;$('lbI').src=a[lb
   $('lbTh').innerHTML=a.length>1?a.map((u,k)=>`<button type="button" data-k="${k}" class="${k===lbI?'on':''}" aria-label="Foto ${k+1}"><img src="${esc(u)}" alt=""></button>`).join(''):'';
   $('lbP').hidden=$('lbN').hidden=a.length<2}
 function lbOpen(id){const p=products.find(x=>String(x.id)===String(id));if(!p||!imgs(p).length)return;
-  lbP=p;$('lbPr').textContent=money(p.price);$('lbW').href=wa(prodMsg(p,''));lbShow(0);$('lb').showModal()}
+  lbP=p;{const d=(p.description||'').trim(),h=[d?`<div>${esc(d.length>220?d.slice(0,217)+'…':d)}</div>`:'',p.material?`<div class="mt"><b>Material:</b> ${esc(p.material)}</div>`:'',p.subcategory?`<div class="mt"><b>Tipo:</b> ${esc(p.subcategory)}</div>`:''].join('');$('lbD').innerHTML=h;$('lbD').hidden=!h}$('lbPr').textContent=money(p.price);$('lbW').href=wa(prodMsg(p,''));lbShow(0);$('lb').showModal()}
 const TOUCH=matchMedia('(hover:none) and (pointer:coarse)');
 let lpT=null,lpX=0,lpY=0;
 $('catalogo').addEventListener('pointerdown',e=>{const ph=e.target.closest('.ph');if(!ph||!TOUCH.matches||e.pointerType!=='touch')return;
