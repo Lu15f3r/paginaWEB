@@ -376,7 +376,7 @@ dialog{margin:auto}
 @keyframes cpBtn{0%,100%{transform:scale(.93)}50%{transform:scale(1.1)}}
 @media(prefers-reduced-motion:reduce){.btn.cyc{animation:none}}
 .ph .tag{left:calc(var(--sk,28px) + 8px);top:12px;background:#151515;color:#fff;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:4px 18px}
-.card.sold .ph img{filter:grayscale(1);opacity:.5}
+.card.sold .ph{filter:grayscale(1)}.card.sold .ph .im1{opacity:1}.card.sold .ph::after{content:"";position:absolute;inset:0;z-index:1;background:rgba(255,255,255,.5);pointer-events:none}
 .sw button{position:relative}
 .sw button.off{opacity:.4;cursor:not-allowed}
 .sw button.off::after{content:"";position:absolute;left:2px;right:2px;top:calc(50% - 1px);height:2px;background:#e53935;transform:rotate(-45deg)}
@@ -645,6 +645,8 @@ footer .links a::after{
 .coe{color:#ff6b6b;font-size:13.5px;min-height:20px;margin:6px 0}.cok{text-align:center;display:grid;gap:12px;justify-items:center}.cok h3{font-size:38px;color:var(--gold)}
 .cok .cd2{font:800 22px "Hanken Grotesk",sans-serif;border:1.5px dashed var(--gold);padding:8px 18px}
 .chk2{display:flex;gap:8px;align-items:flex-start;font-size:13.5px;margin-bottom:12px}.chk2 input{accent-color:var(--gold);margin-top:3px}
+@media(max-width:899px){.fbtn{width:40px;height:54px;padding:0 4px 0 0;font-size:8.5px;gap:2px;clip-path:polygon(0 0,100% 0,calc(100% - 6px) 100%,0 100%)}.fbtn svg{width:16px;height:16px}.fbtn .fn{top:2px;right:8px}}
+@media(max-width:640px){.disc{top:6px;right:6px;padding:4px 9px 3px;font-size:15px;gap:1px;clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%)}.disc small{font-size:6px;letter-spacing:.12em}.ph .tag{font-size:9.5px;padding:2px 12px;top:8px;letter-spacing:.05em}}
 </style>
 </head>
 <body>
@@ -675,7 +677,7 @@ footer .links a::after{
   <span id="secret">© <span id="yr"></span> <span id="stn"></span>. Todos los derechos reservados.</span>
 </footer>
 
-<a class="fab" id="fab" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/></svg>Escríbenos</a>
+<a class="fab" id="fab" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.06 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.78h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg>Escríbenos</a>
 <button type="button" class="fab cartb" id="cartF" aria-label="Abrir carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.4 12.2a1 1 0 0 0 1 .8H18a1 1 0 0 0 1-.8L21 8H6"/></svg><b id="cartNf" class="cn" hidden>0</b></button>
 <div class="cartO" id="cartO"></div>
 <aside class="cartP" id="cartP" aria-label="Carrito de compras"><div class="cph"><h2>Tu carrito</h2><button type="button" class="btn ghost sm" id="cartX">Cerrar</button></div><div class="cpb" id="cartL"></div><div class="cpf"><div class="ctot" id="cartT"></div><input id="cartNm" placeholder="Tu nombre (opcional)" autocomplete="name"><button type="button" class="btn dis" id="cartK">Finalizar compra</button><a class="btn grn dis" id="cartW" target="_blank" rel="noopener">Pedir todo por WhatsApp</a><button type="button" class="btn ghost sm" id="cartC" hidden>Vaciar carrito</button><div class="ccf" id="cartCf" hidden><span>¿Vaciar todo el carrito?</span><button type="button" class="btn red sm" id="cartCy">Sí, vaciar</button><button type="button" class="btn ghost sm" id="cartCn">No</button></div></div></aside>
@@ -683,7 +685,7 @@ footer .links a::after{
 <div class="ctoast" id="ct" role="status"></div>
 <button type="button" class="fbtn" id="fFab" aria-label="Abrir filtros"></button>
 <div class="cartO" id="fO"></div>
-<aside class="cartP fP" id="fP" aria-label="Filtros"><div class="fh"><h2>Filtrar por</h2><button type="button" class="lk" id="fC">Quitar filtro</button><button type="button" class="btn ghost sm" id="fX" aria-label="Cerrar filtros">Cerrar</button></div><div class="fB" id="fB"></div><div class="ff"><button type="button" class="btn" id="fA">Aplicar filtros</button></div></aside>
+<aside class="cartP fP" id="fP" aria-label="Filtros"><div class="fh"><h2>Filtrar por</h2><button type="button" class="btn ghost sm" id="fX" aria-label="Cerrar filtros">Cerrar</button></div><div class="fB" id="fB"></div><div class="ff"><button type="button" class="btn" id="fA">Aplicar filtros</button></div></aside>
 <dialog id="co" aria-labelledby="coT"><div class="dh"><h2 id="coT">Finalizar compra</h2><button class="btn ghost sm" id="coX" type="button">Cerrar</button></div><div class="db" id="coB"></div></dialog>
 
 <dialog id="adm">
@@ -785,7 +787,7 @@ const vStock=(p,z,c)=>vars(p).filter(v=>(z==null||v.s===z)&&(c==null||v.c===c)).
 const hasVar=p=>vars(p).length>0,hasColors=p=>vars(p).some(v=>v.c);
 const pSizes=p=>[...new Set([...(p.sizes||[]),...vars(p).map(v=>v.s).filter(Boolean)])];
 const firstCol=(p,z)=>(COLORS.find(c=>vStock(p,z,c[0])>0)||[''])[0];
-const newCode=()=>'GX-'+new Date().toISOString().slice(2,10).replace(/-/g,'')+'-'+Math.random().toString(36).slice(2,6).toUpperCase();
+const newCode=()=>{const d=new Date(),z=n=>String(n).padStart(2,'0');return 'GX-'+z(d.getDate())+z(d.getMonth()+1)+z(d.getFullYear()%100)+'-'+Math.random().toString(36).slice(2,6).toUpperCase()};
 const ordItem=(p,size,color,qty)=>({id:p.id,name:p.name,category:p.category,size:size||null,color:color||null,price:Number(p.price),qty});
 async function saveOrder(o){if(DEMO||!sb)return;try{const r=await sb.from('orders').insert({...o,status:'pendiente'});
   if(r.error&&(o.checkout||o.payment_method)){const{checkout:c,payment_method:pm,...b}=o;b.customer=[o.customer,c&&c.phone,c&&[c.address,c.city,c.dept].filter(Boolean).join(', '),pm&&'Pago: '+pm].filter(Boolean).join(' · ');await sb.from('orders').insert({...b,status:'pendiente'})}}catch(e){}}
@@ -857,7 +859,7 @@ function fR(){const prev=[...$('fB').querySelectorAll('details')].map(d=>d.open)
   $('fA').textContent=`Aplicar filtros (${products.filter(p=>fOk(p,FD)).length})`}
 function fOpen(o){if(o){FD={t:[...FIL.t],g:[...FIL.g],c:[...FIL.c],r:[...FIL.r]};$('fB').innerHTML='';fR()}$('fP').classList.toggle('open',o);$('fO').classList.toggle('open',o);document.body.style.overflow=o?'hidden':''}
 $('fB').onclick=e=>{const b=e.target.closest('[data-k]');if(!b)return;const k=b.dataset.k,v=k==='r'?+b.dataset.v:b.dataset.v,a=FD[k];FD[k]=a.includes(v)?a.filter(x=>x!==v):[...a,v];fR()};
-$('fC').onclick=()=>{FIL=F0();FD=F0();fOpen(false);render()};$('fX').onclick=()=>fOpen(false);$('fO').onclick=()=>fOpen(false);
+$('fX').onclick=()=>fOpen(false);$('fO').onclick=()=>fOpen(false);
 $('fA').onclick=()=>{FIL=FD;fOpen(false);render();const c=$('catalogo');scrollTo({top:Math.max(0,c.getBoundingClientRect().top+scrollY-90),behavior:'smooth'})};
 $('catalogo').addEventListener('click',e=>{if(e.target.closest('[data-fclr]')){FIL=F0();render()}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')fOpen(false)});
@@ -912,7 +914,7 @@ const ICO={
  Instagram:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>',
  Facebook:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8V6.5c0-.7.3-1 1-1h2V2h-3c-3 0-4.5 1.8-4.5 4.4V8H7v3.5h2.5V22H14V11.5h2.7L17 8z"/></svg>',
  TikTok:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 2h-3.2v13.2a2.8 2.8 0 1 1-2.8-2.8c.3 0 .6 0 .8.1V9.2a6 6 0 1 0 5.2 5.9V8.6a7 7 0 0 0 4 1.3V6.7a4 4 0 0 1-4-4.7z"/></svg>',
- WhatsApp:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/></svg>'};
+ WhatsApp:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.06 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.78h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg>'};
 $('social').innerHTML=['Instagram','Facebook','TikTok'].map(n=>{const u=CFG.SOCIAL[n];return `<a href="${u?esc(u):'#'}" ${u?'target="_blank" rel="noopener"':''} aria-label="${n}">${ICO[n]}</a>`}).join('')+`<a href="${wa('Hola, quiero más información.')}" target="_blank" rel="noopener" aria-label="WhatsApp">${ICO.WhatsApp}</a>`;
 $('stn').textContent=CFG.STORE;
 
@@ -1326,7 +1328,7 @@ $('cartCn').onclick=()=>{$('cartCf').hidden=true;$('cartC').hidden=false};
 $('cartCy').onclick=()=>{cart=[];cSave();$('cartCf').hidden=true;cartRender();cOpen(false);cToast('Carrito vaciado')};
 $('cartW').addEventListener('click',()=>{const L=cart.map(cLine).filter(Boolean);if(!L.length)return;
   const code=newCode(),{n,sub,tot}=cTot(L),nm=$('cartNm').value.trim();$('cartW').href=wa(cMsg(L,code));
-  saveOrder({code,type:'carrito',customer:nm||null,qty:n,items:L.flatMap(l=>l.it.t==='c'?l.ps.map((p,j)=>ordItem(p,l.it.parts[j].z,l.it.parts[j].col,l.it.q)):[ordItem(l.ps[0],l.it.z,l.it.col,l.it.q)]),subtotal:sub,discount:sub-tot,total:tot})});
+  saveOrder({code,type:'carrito',customer:nm||null,qty:n,items:L.flatMap(l=>l.it.t==='c'?l.ps.map((p,j)=>ordItem(p,l.it.parts[j].z,l.it.parts[j].col,l.it.q)):[ordItem(l.ps[0],l.it.z,l.it.col,l.it.q)]),subtotal:sub,discount:sub-tot,total:tot});setTimeout(()=>{cart=[];cSave();$('cartNm').value='';cartRender();cOpen(false)},400)});
 $('catalogo').addEventListener('click',e=>{const a=e.target.closest('.card .cadd');if(!a||a.classList.contains('dis'))return;
   const c=a.closest('.card'),p=pBy(c.dataset.id),z=(c.querySelector('.sizes .on')||{dataset:{}}).dataset.s||'',col=(c.querySelector('.sw .on')||{dataset:{}}).dataset.col||'';
   if(p&&cartAdd({t:'p',id:p.id,z,col,q:1})){a.textContent='✓ Agregado';setTimeout(()=>a.textContent='Agregar al carrito',1200)}});
