@@ -704,6 +704,17 @@ footer .links a::after{
 html.nolock{overflow:hidden;scrollbar-gutter:stable}dialog{overscroll-behavior:contain}
 .pv{left:calc(var(--sk)*.6)}.nx{right:calc(var(--sk)*.28)}.pa{--d:calc(var(--sk)*.12);clip-path:polygon(var(--d) 0,100% 0,calc(100% - var(--d)) 100%,0 100%)}
 @media(hover:none){.card:hover{transform:none;border-color:var(--line)}.card:hover .ph img{transform:none}.card:hover::after{transform:scaleX(0)}}
+/* filtro: sin la X en celular; en PC del tamaño del contador */
+@media(max-width:899px){.fbtn .fx{display:none!important}}
+@media(min-width:900px){.fbtn .fx{width:16px;height:16px;font-size:9px;line-height:16px;top:3px;left:8px}}
+/* iconos rápidos: carrito y WhatsApp junto al título */
+.info{position:relative}
+.qa{position:absolute;top:8px;right:20px;display:flex;gap:6px;z-index:3}
+.qa button{width:30px;height:24px;border:0;padding:0;cursor:pointer;display:grid;place-items:center;color:#000;background:var(--gold);clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%);transition:filter .2s,background .2s}
+.qa button svg{width:15px;height:15px}
+.qa .qw{background:#25d366;color:#fff}.qa button:hover{filter:brightness(1.12)}
+.qa button.okk{background:#1fa855;color:#fff}.qa.off{opacity:.4;pointer-events:none}
+.info h3{padding-right:76px}
 </style>
 </head>
 <body>
@@ -954,7 +965,7 @@ function card(p){
   const im=imgs(p);
   return `<article class="card${!isAv(p)?' sold':''}" data-id="${p.id}">
    <div class="ph"><div class="noimg">${NAVICO[slug(p.category)]||NAVICO.otro}</div>${im[0]?`<img class="im1" src="${esc(im[0])}" alt="${esc(p.name)}" loading="lazy" onload="this.parentNode.classList.add('ld')" onerror="this.remove()">`:''}${im[1]?`<img class="im2" src="${esc(im[1])}" alt="" loading="lazy" onload="this.parentNode.classList.add('two')" onerror="this.remove()">`:''}${im.length>1?`<span class="cnt">${im.length} fotos</span><button type="button" class="pa pv" aria-label="Foto anterior">❮</button><button type="button" class="pa nx" aria-label="Foto siguiente">❯</button>`:''}${!isAv(p)?'<span class="tag">Agotado</span>':''}${discBadge(p)}</div>
-   <div class="info"><h3>${esc(p.name)}</h3>${p.subcategory?`<div class="sub">${esc(p.subcategory)}</div>`:''}<div class="prow"><div class="price">${money(p.price)}${saveTag(p)}</div><button type="button" class="pl" aria-label="Ver detalles del producto">+</button></div>
+   <div class="info"><div class="qa${!isAv(p)?' off':''}"><button type="button" class="qc" aria-label="Agregar al carrito" title="Agregar al carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a1 1 0 0 0 1 .8h8.6a1 1 0 0 0 1-.8L20 7H6"/></svg></button><button type="button" class="qw" aria-label="Pedir por WhatsApp" title="Pedir por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/></svg></button></div><h3>${esc(p.name)}</h3>${p.subcategory?`<div class="sub">${esc(p.subcategory)}</div>`:''}<div class="prow"><div class="price">${money(p.price)}${saveTag(p)}</div><button type="button" class="pl" aria-label="Ver detalles del producto">+</button></div>
    ${p.description?`<div class="dr"><p class="desc dclamp">${esc(p.description)}</p>${p.description.length>70?'<button type="button" class="more" aria-label="Ver descripción completa">+</button>':''}</div>`:''}
    ${sizes.length?`<div class="sizes" role="group" aria-label="Talla">${sizes.map(z=>{const off=!zOk(z);return `<button type="button" data-s="${esc(z)}" class="${z===z0?'on':''}${off?' off':''}"${off?' disabled':''}>${esc(z)}</button>`}).join('')}</div>`:''}
    ${hc?swHtml('',c0,c=>vStock(p,zf,c)>0):''}
@@ -1189,6 +1200,13 @@ addEventListener('resize',lbFit);
 function phGo(ph,d){const p=products.find(x=>String(x.id)===ph.closest('.card').dataset.id),a=p?imgs(p):[];if(a.length<2)return;const i=((+ph.dataset.i||0)+d+a.length)%a.length;ph.dataset.i=i;ph._w=i;ph.classList.add('navd');const im=ph.querySelector('.im1'),t=new Image();t.onload=()=>{if(ph._w===i&&im)im.src=a[i]};t.src=a[i];const c=ph.querySelector('.cnt');if(c)c.textContent=`${i+1}/${a.length}`}
 $('catalogo').addEventListener('click',e=>{const b=e.target.closest('.pa');if(!b)return;e.stopImmediatePropagation();e.preventDefault();phGo(b.closest('.ph'),b.classList.contains('nx')?1:-1)},true);
 $('catalogo').addEventListener('click',e=>{const b=e.target.closest('.pl');if(b)lbOpen(b.closest('.card').dataset.id)});
+function phReset(ph){const p=products.find(x=>String(x.id)===ph.closest('.card').dataset.id),a=p?imgs(p):[];ph._w=0;ph.dataset.i=0;ph.classList.remove('navd');
+  const im=ph.querySelector('.im1');if(im&&a[0]){const t=new Image();t.onload=()=>{if(ph._w===0)im.src=a[0]};t.src=a[0]}
+  const c=ph.querySelector('.cnt');if(c)c.textContent=a.length+' fotos'}
+$('catalogo').addEventListener('mouseout',e=>{const ph=e.target.closest&&e.target.closest('.ph');if(!ph||!ph.classList.contains('navd')||(e.relatedTarget&&ph.contains(e.relatedTarget)))return;phReset(ph)});
+$('catalogo').addEventListener('click',e=>{const b=e.target.closest('.qa button');if(!b)return;const c=b.closest('.card');
+  if(b.classList.contains('qc')){const a=c.querySelector('.cadd');if(a)a.click();b.classList.add('okk');setTimeout(()=>b.classList.remove('okk'),1200)}
+  else{const a=c.querySelector('a.wa');if(a)a.click()}});
 const TOUCH=matchMedia('(hover:none) and (pointer:coarse)');
 let lpT=null,lpX=0,lpY=0;
 $('catalogo').addEventListener('pointerdown',e=>{const ph=e.target.closest('.ph');if(!ph||!TOUCH.matches||e.pointerType!=='touch')return;
