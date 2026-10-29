@@ -655,6 +655,18 @@ footer .links a::after{
 .card .dclamp{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .more{display:inline-flex;align-items:center;justify-content:center;width:34px;height:24px;margin:0 0 8px;background:var(--gold);color:#000;border:0;font:800 17px/1 sans-serif;cursor:pointer;clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%)}.more:hover{background:#fff}
 .lbd div:first-child{white-space:pre-line}
+/* ===== compacto ===== */
+.info .price .save{display:none}
+.dr{display:flex;align-items:flex-start;gap:8px;margin:2px 0 6px}.dr .desc{flex:1;min-width:0;margin:0}.dr .more{margin:0;flex:none}
+.acts{display:contents}.cadd svg,.acts .wa svg{width:17px;height:17px;flex:none;vertical-align:-3px;margin-right:6px}.cadd.okk{border-color:var(--wa)}
+#lb .dh,#lb .stage,#lb .lbt,#lb .lbf{flex:none}
+#lb .lbd{flex:0 1 auto;min-height:0;max-height:min(22vh,150px);overflow:auto;font-size:13px;line-height:1.4;padding:6px 16px 2px}
+#lb .lbd .mt{margin-top:3px}
+@media(max-width:640px){
+ .dr .dclamp{-webkit-line-clamp:1}
+ .acts{display:flex;gap:8px;margin-top:auto}.acts .cadd,.acts .wa{flex:1;margin:0;display:flex;align-items:center;justify-content:center;min-height:40px;padding:0}
+ .acts .bt{display:none}.cadd svg,.acts .wa svg{margin:0;width:20px;height:20px}
+}
 </style>
 </head>
 <body>
@@ -905,11 +917,11 @@ function card(p){
   return `<article class="card${!isAv(p)?' sold':''}" data-id="${p.id}">
    <div class="ph"><div class="noimg">${NAVICO[slug(p.category)]||NAVICO.otro}</div>${im[0]?`<img class="im1" src="${esc(im[0])}" alt="${esc(p.name)}" loading="lazy" onload="this.parentNode.classList.add('ld')" onerror="this.remove()">`:''}${im[1]?`<img class="im2" src="${esc(im[1])}" alt="" loading="lazy" onload="this.parentNode.classList.add('two')" onerror="this.remove()">`:''}${im.length>1?`<span class="cnt">${im.length} fotos</span>`:''}${!isAv(p)?'<span class="tag">Agotado</span>':''}${discBadge(p)}</div>
    <div class="info"><h3>${esc(p.name)}</h3>${p.subcategory?`<div class="sub">${esc(p.subcategory)}</div>`:''}<div class="price">${money(p.price)}${saveTag(p)}</div>
-   ${p.description?`<p class="desc dclamp">${esc(p.description)}</p>${imgs(p).length&&p.description.length>70?'<button type="button" class="more" aria-label="Ver descripción completa">+</button>':''}`:''}
+   ${p.description?`<div class="dr"><p class="desc dclamp">${esc(p.description)}</p>${imgs(p).length&&p.description.length>70?'<button type="button" class="more" aria-label="Ver descripción completa">+</button>':''}</div>`:''}
    ${sizes.length?`<div class="sizes" role="group" aria-label="Talla">${sizes.map(z=>{const off=!zOk(z);return `<button type="button" data-s="${esc(z)}" class="${z===z0?'on':''}${off?' off':''}"${off?' disabled':''}>${esc(z)}</button>`}).join('')}</div>`:''}
    ${hc?swHtml('',c0,c=>vStock(p,zf,c)>0):''}
-   <button type="button" class="btn ghost sm cadd${!isAv(p)?' dis':''}">Agregar al carrito</button>
-   <a class="wa ${!isAv(p)?'off':''}" target="_blank" rel="noopener" href="${wa(prodMsg(p,z0,c0))}">Pedir por WhatsApp</a></div></article>`;
+   <div class="acts"><button type="button" class="btn ghost sm cadd${!isAv(p)?' dis':''}" aria-label="Agregar al carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a1 1 0 0 0 1 .8h8.6a1 1 0 0 0 1-.8L20 7H6"/></svg><span class="bt">Agregar al carrito</span></button>
+   <a class="wa ${!isAv(p)?'off':''}" target="_blank" rel="noopener" aria-label="Pedir por WhatsApp" href="${wa(prodMsg(p,z0,c0))}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.06 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.78h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg><span class="bt">Pedir por WhatsApp</span></a></div></div></article>`;
 }
 function refreshCard(c){const p=products.find(x=>String(x.id)===c.dataset.id),sw=c.querySelector('.sw');if(!p||!sw||!hasVar(p))return;
   const z=(c.querySelector('.sizes .on')||{dataset:{}}).dataset.s||null,cur=(sw.querySelector('.on')||{dataset:{}}).dataset.col;
@@ -1118,7 +1130,7 @@ function lbShow(i){const a=imgs(lbP);lbI=(i+a.length)%a.length;$('lbI').src=a[lb
   $('lbTh').innerHTML=a.length>1?a.map((u,k)=>`<button type="button" data-k="${k}" class="${k===lbI?'on':''}" aria-label="Foto ${k+1}"><img src="${esc(u)}" alt=""></button>`).join(''):'';
   $('lbP').hidden=$('lbN').hidden=a.length<2}
 function lbOpen(id){const p=products.find(x=>String(x.id)===String(id));if(!p||!imgs(p).length)return;
-  lbP=p;{const d=(p.description||'').trim(),h=[d?`<div>${esc(d)}</div>`:'',p.material?`<div class="mt"><b>Material:</b> ${esc(p.material)}</div>`:'',p.subcategory?`<div class="mt"><b>Tipo:</b> ${esc(p.subcategory)}</div>`:''].join('');$('lbD').innerHTML=h;$('lbD').hidden=!h}$('lbPr').textContent=money(p.price);$('lbW').href=wa(prodMsg(p,''));lbShow(0);$('lb').showModal()}
+  lbP=p;{const d=(p.description||'').trim(),h=[d?`<div>${esc(d)}</div>`:'',(p.material||p.subcategory)?`<div class="mt">${p.material?`<b>Material:</b> ${esc(p.material)}`:''}${p.material&&p.subcategory?' &nbsp;·&nbsp; ':''}${p.subcategory?`<b>Tipo:</b> ${esc(p.subcategory)}`:''}</div>`:''].join('');$('lbD').innerHTML=h;$('lbD').hidden=!h}$('lbPr').textContent=money(p.price);$('lbW').href=wa(prodMsg(p,''));lbShow(0);$('lb').showModal()}
 const TOUCH=matchMedia('(hover:none) and (pointer:coarse)');
 let lpT=null,lpX=0,lpY=0;
 $('catalogo').addEventListener('pointerdown',e=>{const ph=e.target.closest('.ph');if(!ph||!TOUCH.matches||e.pointerType!=='touch')return;
@@ -1369,7 +1381,7 @@ $('cartW').addEventListener('click',()=>{const L=cart.map(cLine).filter(Boolean)
   saveOrder({code,type:'carrito',customer:nm||null,qty:n,items:L.flatMap(l=>l.it.t==='c'?l.ps.map((p,j)=>ordItem(p,l.it.parts[j].z,l.it.parts[j].col,l.it.q)):[ordItem(l.ps[0],l.it.z,l.it.col,l.it.q)]),subtotal:sub,discount:sub-tot,total:tot});setTimeout(()=>{cart=[];cSave();$('cartNm').value='';cartRender();cOpen(false)},400)});
 $('catalogo').addEventListener('click',e=>{const a=e.target.closest('.card .cadd');if(!a||a.classList.contains('dis'))return;
   const c=a.closest('.card'),p=pBy(c.dataset.id),z=(c.querySelector('.sizes .on')||{dataset:{}}).dataset.s||'',col=(c.querySelector('.sw .on')||{dataset:{}}).dataset.col||'';
-  if(p&&cartAdd({t:'p',id:p.id,z,col,q:1})){a.textContent='✓ Agregado';setTimeout(()=>a.textContent='Agregar al carrito',1200)}});
+  if(p&&cartAdd({t:'p',id:p.id,z,col,q:1})){const t=a.querySelector('.bt');t.textContent='✓ Agregado';a.classList.add('okk');setTimeout(()=>{t.textContent='Agregar al carrito';a.classList.remove('okk')},1200)}});
 
 /* ====== CHECKOUT ====== */
 const PAY=CFG.PAY||{},DEPTS=['Amazonas','Antioquia','Arauca','Atlántico','Bogotá D.C.','Bolívar','Boyacá','Caldas','Caquetá','Casanare','Cauca','Cesar','Chocó','Córdoba','Cundinamarca','Guainía','Guaviare','Huila','La Guajira','Magdalena','Meta','Nariño','Norte de Santander','Putumayo','Quindío','Risaralda','San Andrés y Providencia','Santander','Sucre','Tolima','Valle del Cauca','Vaupés','Vichada'];
