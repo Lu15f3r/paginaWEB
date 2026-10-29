@@ -700,6 +700,10 @@ footer .links a::after{
  .cpromo{--sk:20px;padding:20px calc(var(--sk) + 10px)}.cp-b{flex-wrap:nowrap;gap:12px;width:100%}.cp-badge{width:88px;height:76px;font-size:44px;flex:none}.cp-badge em{font-size:9px}#promoBtn{flex:1;min-width:0;text-align:center;padding:12px 6px;white-space:nowrap}
  #lb .dh{padding:8px 14px}#lb .dh h2{font-size:20px}#lb .lbt{padding:6px 14px 2px}#lb .lbd{padding:4px 14px 0;font-size:12.5px;line-height:1.35}#lb .lbo{padding:4px 14px 2px;gap:8px}#lb .lbf{padding:6px 14px 12px;gap:8px}#lb .lbpr{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
 }
+/* ===== ajustes 4 ===== */
+html.nolock{overflow:hidden;scrollbar-gutter:stable}dialog{overscroll-behavior:contain}
+.pv{left:calc(var(--sk)*.64)}.nx{right:calc(var(--sk)*.36)}
+@media(hover:none){.card:hover{transform:none;border-color:var(--line)}.card:hover .ph img{transform:none}.card:hover::after{transform:scaleX(0)}}
 </style>
 </head>
 <body>
@@ -1160,6 +1164,7 @@ $('themeBtn').onclick=()=>{const d=document.documentElement,t=d.dataset.theme===
 
 function imgs(p){const a=(p.images&&p.images.length?p.images:[p.image_url]).filter(u=>typeof u==='string'&&u.trim());return [...new Set(a)]}
 let lbP=null,lbI=0;
+(()=>{const o=HTMLDialogElement.prototype.showModal;HTMLDialogElement.prototype.showModal=function(){o.call(this);document.documentElement.classList.add('nolock');this.addEventListener('close',()=>{if(!document.querySelector('dialog[open]'))document.documentElement.classList.remove('nolock')},{once:true})}})();
 function lbShow(i){const a=imgs(lbP);document.querySelector('#lb .stage').style.display=a.length?'':'none';$('lbT').textContent=lbP.name;
   if(!a.length){$('lbTh').innerHTML='';return}
   lbI=(i+a.length)%a.length;$('lbI').src=a[lbI];
