@@ -691,6 +691,15 @@ footer .links a::after{
 .pv{left:8px;clip-path:polygon(0 0,100% 0,calc(100% - 6px) 100%,0 100%)}.nx{right:8px;clip-path:polygon(6px 0,100% 0,100% 100%,0 100%)}
 #lb .lbd{flex:none;min-height:auto}
 #lbO .sw{flex-wrap:nowrap;gap:6px}#lbO .sw button{flex:0 1 24px;width:auto;min-width:14px;max-width:24px;height:auto;aspect-ratio:1/1}
+/* ===== ajustes 3 ===== */
+.ph.nv .im2{display:none!important}.ph.nv .im1{opacity:1!important}
+.disc{top:8px;right:8px;padding:5px 11px 4px;font-size:17px;clip-path:polygon(7px 0,100% 0,calc(100% - 7px) 100%,0 100%)}.disc small{font-size:7px}
+#lb{max-height:min(96vh,96dvh)}#lb .stage img{max-height:100%;max-width:100%}
+@media(max-width:640px){
+ .disc{top:6px;right:6px;padding:3px 8px 3px;font-size:13px}.disc small{font-size:5.5px}
+ .cpromo{--sk:20px;padding:20px calc(var(--sk) + 10px)}.cp-b{flex-wrap:nowrap;gap:12px;width:100%}.cp-badge{width:88px;height:76px;font-size:44px;flex:none}.cp-badge em{font-size:9px}#promoBtn{flex:1;min-width:0;text-align:center;padding:12px 6px;white-space:nowrap}
+ #lb .dh{padding:8px 14px}#lb .dh h2{font-size:20px}#lb .lbt{padding:6px 14px 2px}#lb .lbd{padding:4px 14px 0;font-size:12.5px;line-height:1.35}#lb .lbo{padding:4px 14px 2px;gap:8px}#lb .lbf{padding:6px 14px 12px;gap:8px}#lb .lbpr{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+}
 </style>
 </head>
 <body>
@@ -797,7 +806,7 @@ footer .links a::after{
   <div class="lbt" id="lbTh"></div>
   <div class="lbd" id="lbD" hidden></div>
   <div class="lbo" id="lbO"></div>
-  <div class="lbf"><div class="lbpr"><span class="price" id="lbPr"></span><small class="saved" id="lbSv"></small></div><div class="lba"><button type="button" class="btn ghost sm" id="lbC" aria-label="Agregar al carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a1 1 0 0 0 1 .8h8.6a1 1 0 0 0 1-.8L20 7H6"/></svg><span class="bt">Agregar al carrito</span></button><a class="btn" id="lbW" target="_blank" rel="noopener" aria-label="Pedir por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.06 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.78h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg><span class="bt">Pedir por WhatsApp</span></a></div></div>
+  <div class="lbf"><div class="lbpr"><span class="price" id="lbPr"></span><small class="saved" id="lbSv"></small></div><div class="lba"><button type="button" class="btn ghost sm" id="lbC" aria-label="Agregar al carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a1 1 0 0 0 1 .8h8.6a1 1 0 0 0 1-.8L20 7H6"/></svg><span class="bt">Agregar al carrito</span></button><a class="btn grn" id="lbW" target="_blank" rel="noopener" aria-label="Pedir por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.06 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.78h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg><span class="bt">Pedir por WhatsApp</span></a></div></div>
 </dialog>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.9"></script>
@@ -1166,11 +1175,13 @@ $('lbO').onclick=e=>{const b=e.target.closest('button');if(!b||b.disabled)return
 $('lbC').onclick=()=>{const p=lbP;if(!p||!isAv(p))return;if(cartAdd({t:'p',id:p.id,z:LB.z||'',col:LB.c||'',q:1})){const t=$('lbC').querySelector('.bt');t.textContent='✓ Agregado';$('lbC').classList.add('okk');setTimeout(()=>{t.textContent='Agregar al carrito';$('lbC').classList.remove('okk')},1200)}};
 $('lbW').addEventListener('click',()=>{const p=lbP;if(!p||!isAv(p))return;const z=LB.z||'',col=LB.c||'',code=newCode();$('lbW').href=wa(prodMsg(p,z,col,code));saveOrder({code,type:'producto',qty:1,items:[ordItem(p,z,col,1)],subtotal:+p.price,discount:0,total:+p.price})});
 function lbOpen(id){const p=products.find(x=>String(x.id)===String(id));if(!p)return;lbP=p;LB={z:null,c:''};
-  {const d=(p.description||'').trim(),h=[d?`<div>${esc(d)}</div>`:'',(p.material||p.subcategory)?`<div class="mt">${p.material?`<b>Material:</b> ${esc(p.material)}`:''}${p.material&&p.subcategory?' &nbsp;·&nbsp; ':''}${p.subcategory?`<b>Tipo:</b> ${esc(p.subcategory)}`:''}</div>`:''].join('');$('lbD').innerHTML=h;$('lbD').hidden=!h}
+  {const d=(p.description||'').trim(),h=[p.subcategory?`<div class="sub">${esc(p.subcategory)}</div>`:'',d?`<div>${esc(d)}</div>`:'',p.material?`<div class="mt"><b>Material:</b> ${esc(p.material)}</div>`:''].join('');$('lbD').innerHTML=h;$('lbD').hidden=!h}
   const d=discPct(p);$('lbPr').innerHTML=money(p.price)+(d?`<span class="old">${money(p.compare_price)}</span><span class="save">-${d}%</span>`:'');$('lbSv').textContent=d?'Ahorras '+money(Number(p.compare_price)-Number(p.price)):'';
   const av=isAv(p);$('lbC').classList.toggle('dis',!av);$('lbW').classList.toggle('dis',!av);
-  lbOpts();lbShow(0);$('lb').showModal()}
-function phGo(ph,d){const p=products.find(x=>String(x.id)===ph.closest('.card').dataset.id),a=p?imgs(p):[];if(a.length<2)return;const i=((+ph.dataset.i||0)+d+a.length)%a.length;ph.dataset.i=i;const im=ph.querySelector('.im1');if(im){const t=new Image();t.onload=()=>{im.src=a[i]};t.src=a[i]}const c=ph.querySelector('.cnt');if(c)c.textContent=`${i+1}/${a.length}`}
+  lbOpts();lbShow(0);$('lb').showModal();lbFit();requestAnimationFrame(lbFit)}
+function lbFit(){const lb=$('lb'),st=document.querySelector('#lb .stage');if(!lb.open||st.style.display==='none')return;st.style.height='';const over=lb.scrollHeight-lb.clientHeight;if(over>0)st.style.height=Math.max(110,st.offsetHeight-over)+'px'}
+addEventListener('resize',lbFit);
+function phGo(ph,d){const p=products.find(x=>String(x.id)===ph.closest('.card').dataset.id),a=p?imgs(p):[];if(a.length<2)return;const i=((+ph.dataset.i||0)+d+a.length)%a.length;ph.dataset.i=i;ph._w=i;ph.classList.add('nv');const im=ph.querySelector('.im1'),t=new Image();t.onload=()=>{if(ph._w===i&&im)im.src=a[i]};t.src=a[i];const c=ph.querySelector('.cnt');if(c)c.textContent=`${i+1}/${a.length}`}
 $('catalogo').addEventListener('click',e=>{const b=e.target.closest('.pa');if(!b)return;e.stopImmediatePropagation();e.preventDefault();phGo(b.closest('.ph'),b.classList.contains('nx')?1:-1)},true);
 $('catalogo').addEventListener('click',e=>{const b=e.target.closest('.pl');if(b)lbOpen(b.closest('.card').dataset.id)});
 const TOUCH=matchMedia('(hover:none) and (pointer:coarse)');
