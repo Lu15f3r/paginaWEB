@@ -683,6 +683,14 @@ footer .links a::after{
  #lb .stage{height:min(36vh,300px)}#lb .stage img{max-height:min(36vh,300px)}
  #lb .lbf{flex-direction:column;align-items:stretch}.lba .btn{flex:1;min-height:42px}
 }
+/* ===== ajustes: tarjeta mínima en todas las pantallas, flechas, colores ===== */
+.card .dr,.card .sub,.card .saved,.card .sizes,.card .sw,.card .acts{display:none}
+.card .pl{display:inline-flex;align-items:center;justify-content:center;width:34px;height:28px;background:var(--gold);color:#000;border:0;font:800 19px/1 sans-serif;cursor:pointer;clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%)}.card .pl:hover{background:#fff}
+.info{gap:4px}
+.pa{width:24px;height:38px;padding:0;border-radius:0;opacity:1;background:rgba(0,0,0,.55);color:#fff;font:400 15px/1 sans-serif;transition:background .2s,color .2s}.pa:hover{background:var(--gold);color:#000}
+.pv{left:8px;clip-path:polygon(0 0,100% 0,calc(100% - 6px) 100%,0 100%)}.nx{right:8px;clip-path:polygon(6px 0,100% 0,100% 100%,0 100%)}
+#lb .lbd{flex:none;min-height:auto}
+#lbO .sw{flex-wrap:nowrap;gap:6px}#lbO .sw button{flex:0 1 24px;width:auto;min-width:14px;max-width:24px;height:auto;aspect-ratio:1/1}
 </style>
 </head>
 <body>
@@ -932,7 +940,7 @@ function card(p){
   const c0=hc?firstCol(p,zf):'';
   const im=imgs(p);
   return `<article class="card${!isAv(p)?' sold':''}" data-id="${p.id}">
-   <div class="ph"><div class="noimg">${NAVICO[slug(p.category)]||NAVICO.otro}</div>${im[0]?`<img class="im1" src="${esc(im[0])}" alt="${esc(p.name)}" loading="lazy" onload="this.parentNode.classList.add('ld')" onerror="this.remove()">`:''}${im[1]?`<img class="im2" src="${esc(im[1])}" alt="" loading="lazy" onload="this.parentNode.classList.add('two')" onerror="this.remove()">`:''}${im.length>1?`<span class="cnt">${im.length} fotos</span><button type="button" class="pa pv" aria-label="Foto anterior">‹</button><button type="button" class="pa nx" aria-label="Foto siguiente">›</button>`:''}${!isAv(p)?'<span class="tag">Agotado</span>':''}${discBadge(p)}</div>
+   <div class="ph"><div class="noimg">${NAVICO[slug(p.category)]||NAVICO.otro}</div>${im[0]?`<img class="im1" src="${esc(im[0])}" alt="${esc(p.name)}" loading="lazy" onload="this.parentNode.classList.add('ld')" onerror="this.remove()">`:''}${im[1]?`<img class="im2" src="${esc(im[1])}" alt="" loading="lazy" onload="this.parentNode.classList.add('two')" onerror="this.remove()">`:''}${im.length>1?`<span class="cnt">${im.length} fotos</span><button type="button" class="pa pv" aria-label="Foto anterior">❮</button><button type="button" class="pa nx" aria-label="Foto siguiente">❯</button>`:''}${!isAv(p)?'<span class="tag">Agotado</span>':''}${discBadge(p)}</div>
    <div class="info"><h3>${esc(p.name)}</h3>${p.subcategory?`<div class="sub">${esc(p.subcategory)}</div>`:''}<div class="prow"><div class="price">${money(p.price)}${saveTag(p)}</div><button type="button" class="pl" aria-label="Ver detalles del producto">+</button></div>
    ${p.description?`<div class="dr"><p class="desc dclamp">${esc(p.description)}</p>${p.description.length>70?'<button type="button" class="more" aria-label="Ver descripción completa">+</button>':''}</div>`:''}
    ${sizes.length?`<div class="sizes" role="group" aria-label="Talla">${sizes.map(z=>{const off=!zOk(z);return `<button type="button" data-s="${esc(z)}" class="${z===z0?'on':''}${off?' off':''}"${off?' disabled':''}>${esc(z)}</button>`}).join('')}</div>`:''}
