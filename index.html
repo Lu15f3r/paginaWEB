@@ -716,6 +716,16 @@ html.nolock{overflow:hidden;scrollbar-gutter:stable}dialog{overscroll-behavior:c
 .hc{display:flex;align-items:flex-end;gap:3px;height:130px;margin-top:8px;border-bottom:1px solid var(--line)}.hc b{flex:1;background:var(--gold);min-height:2px}.hl{display:flex;gap:3px}.hl span{flex:1;text-align:center;font-size:9px;color:var(--muted);overflow:visible;white-space:nowrap}
 .gk{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin:12px 0}.gk div{border:1px solid var(--line);padding:10px}.gk b{display:block;font-size:20px;color:var(--gold)}
 .vfd{width:min(560px,96vw)}
+/* ===== ajustes: combos ocultos, barra animada, botón verde ===== */
+html.nocombos #promo,html.nocombos #armar,html.nocombos .nv[data-c="combos"]{display:none!important}
+.feat>div{opacity:0;transform:translateY(14px)}
+.feat.in>div{animation:fIn .7s cubic-bezier(.2,.8,.2,1) forwards,fPul 10s ease-in-out infinite;animation-delay:calc(var(--i)*.18s),calc(2.5s + var(--i)*2s)}
+.feat.in>div svg{animation:fIco 10s ease-in-out infinite;animation-delay:calc(2.5s + var(--i)*2s)}
+@keyframes fIn{to{opacity:1;transform:none}}
+@keyframes fPul{0%,14%,100%{transform:none}5%{transform:translateY(-4px)}}
+@keyframes fIco{0%,14%,100%{transform:none}5%{transform:scale(1.18) rotate(-6deg)}}
+@media(prefers-reduced-motion:reduce){.feat>div{opacity:1;transform:none;animation:none!important}.feat>div svg{animation:none!important}}
+.lba .okk{--o:var(--wa);--f1:var(--wa);--f2:var(--wa);--t1:#fff;--t2:#fff;background:var(--wa);color:#fff;border-color:var(--wa)}
 </style>
 </head>
 <body>
@@ -839,9 +849,10 @@ const CFG={
   WHATSAPP:'573169606116',            // país + número, sin + ni espacios
   STORE:'GORRAX',
   FREE_SHIP:150000,   // envío gratis desde este valor de compra (COP)
+  COMBOS_ON:false,   // true = vuelve a mostrar los combos (oferta, menú, armador y categoría)
   COMBO_DESC:10,   // % de descuento de los combos que arma el cliente
   PAY:{online:'',transfer:'',cod:true},   // online: URL de tu función de pago (Wompi / Mercado Pago). transfer: texto con tus cuentas, ej. 'Nequi 3XX XXX XXXX\nBancolombia ahorros ...'. cod: pago contra entrega
-  SOCIAL:{Instagram:'',Facebook:'',TikTok:''},   // pega aquí tus enlaces
+  SOCIAL:{Instagram:'',Facebook:'',TikTok:'',YouTube:''},   // pega aquí tus enlaces
   CAT_ORDER:['gorras','buzos','relojes','combos','zapatos'],
   CAT_INFO:{gorras:'Visera plana, actitud real.',buzos:'Premium y con corona.',relojes:'Tiempo con estilo.',zapatos:'Pisa con actitud.',combos:'Lleva el set completo y ahorra.'}
 };
@@ -924,12 +935,13 @@ const gens=p=>Array.isArray(p.genders)?p.genders:[];
 const F0=()=>({t:[],g:[],c:[],r:[],s:[],d:[]}),cpF=f=>({t:[...f.t],g:[...f.g],c:[...f.c],r:[...f.r],s:[...f.s],d:[...f.d]});const DSC=[[1,'Con descuento'],[10,'10% o más'],[20,'20% o más'],[30,'30% o más']];let FIL=F0(),FD=F0();
 const fN=f=>f.t.length+f.g.length+f.c.length+f.r.length+f.s.length+f.d.length;
 const fOk=(p,f,k)=>(k==='t'||!f.t.length||f.t.includes(slug(p.category||'')))&&(k==='d'||!f.d.length||discPct(p)>=Math.min(...f.d))&&(k==='s'||!f.s.length||f.s.includes(slug(p.subcategory||'')))&&(k==='g'||!f.g.length||gens(p).some(x=>f.g.includes(x)))&&(k==='c'||!f.c.length||(hasColors(p)&&f.c.some(c=>vStock(p,null,c)>0)))&&(k==='r'||!f.r.length||f.r.some(i=>+p.price>=RNG[i][1]&&+p.price<=RNG[i][2]));
-const fprods=()=>products.filter(p=>fOk(p,FIL));
+const vp=()=>CFG.COMBOS_ON?products:products.filter(p=>slug(p.category||'')!=='combos');
+const fprods=()=>vp().filter(p=>fOk(p,FIL));
 const fBtn=()=>{const n=fN(FIL),b=$('fFab');b.setAttribute('aria-label','Abrir filtros'+(n?' ('+n+' activos)':''));b.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg><span>Filtrar</span><b class="fn"${n?'':' hidden'}>${n}</b><span class="fx" role="button" aria-label="Quitar filtros" title="Quitar filtros"${n?'':' hidden'}>✕</span>`};
 $('fFab').onclick=e=>{if(e.target.closest('.fx')){FIL=F0();FD=F0();render();return}fOpen(true)};
 if('IntersectionObserver' in window)new IntersectionObserver(([e])=>$('fFab').classList.toggle('show',e.isIntersecting),{rootMargin:'-30% 0px -30% 0px'}).observe($('catalogo'));else $('fFab').classList.add('show');
-function fR(){const prev=[...$('fB').querySelectorAll('details')].map(d=>d.open),cats={},subs={};products.forEach(p=>{cats[slug(p.category||'')]??=p.category;if(p.subcategory)subs[slug(p.subcategory)]??=p.subcategory});
-  const cnt=(k,fn)=>products.filter(p=>fOk(p,FD,k)&&fn(p)).length;
+function fR(){const prev=[...$('fB').querySelectorAll('details')].map(d=>d.open),cats={},subs={};vp().forEach(p=>{cats[slug(p.category||'')]??=p.category;if(p.subcategory)subs[slug(p.subcategory)]??=p.subcategory});
+  const cnt=(k,fn)=>vp().filter(p=>fOk(p,FD,k)&&fn(p)).length;
   const opt=(k,v,lab,n,x='')=>{const on=FD[k].includes(v);return `<button type="button" data-k="${k}" data-v="${esc(v)}" class="${on?'on':''}${n||on?'':' off'}"${n||on?'':' disabled'}>${x}${esc(lab)} <small>(${n})</small></button>`};
   const sec=(i,t,k,h)=>`<details${(prev.length?prev[i]:FD[k].length)?' open':''}><summary>${t}</summary><div class="fo sizes">${h}</div></details>`;
   $('fB').innerHTML=sec(0,'Tipo de producto','t',Object.entries(cats).map(([sl,c])=>opt('t',sl,c,cnt('t',p=>slug(p.category||'')===sl))).join(''))
@@ -938,7 +950,7 @@ function fR(){const prev=[...$('fB').querySelectorAll('details')].map(d=>d.open)
    +sec(3,'Color','c',COLORS.map(c=>opt('c',c[0],c[0],cnt('c',p=>hasColors(p)&&vStock(p,null,c[0])>0),`<i class="cd" style="background:${c[1]}"></i>`)).join(''))
    +sec(5,'Descuento','d',DSC.map(([v,l])=>opt('d',v,l,cnt('d',p=>discPct(p)>=v))).join(''))
    +sec(4,'Rangos de precio','r',RNG.map((r,i)=>opt('r',i,r[0],cnt('r',p=>+p.price>=r[1]&&+p.price<=r[2]))).join(''));
-  $('fA').textContent=`Aplicar filtros (${products.filter(p=>fOk(p,FD)).length})`}
+  $('fA').textContent=`Aplicar filtros (${vp().filter(p=>fOk(p,FD)).length})`}
 function fOpen(o){if(o){FD=cpF(FIL);$('fB').innerHTML='';fR()}$('fP').classList.toggle('open',o);$('fO').classList.toggle('open',o);document.body.style.overflow=o?'hidden':''}
 $('fB').onclick=e=>{const b=e.target.closest('[data-k]');if(!b)return;const k=b.dataset.k,v=(k==='r'||k==='d')?+b.dataset.v:b.dataset.v,a=FD[k];FD[k]=a.includes(v)?a.filter(x=>x!==v):[...a,v];FIL=cpF(FD);render();fR()};
 $('fX').onclick=()=>fOpen(false);$('fR0').onclick=()=>{FIL=F0();FD=F0();fOpen(false);render()};$('fO').onclick=()=>fOpen(false);
@@ -947,12 +959,12 @@ $('catalogo').addEventListener('click',e=>{if(e.target.closest('[data-fclr]')){F
 document.addEventListener('keydown',e=>{if(e.key==='Escape')fOpen(false)});
 let activeCat=null;
 function render(){
-  const groups={},canon={},allc={};products.forEach(p=>{allc[slug(p.category||'')]??=p.category});const allCats=Object.values(allc);fprods().forEach(p=>{const k=slug(p.category||'');canon[k]??=p.category;(groups[canon[k]]??=[]).push(p)});
+  const groups={},canon={},allc={};products.forEach(p=>{allc[slug(p.category||'')]??=p.category});const allCats=Object.values(allc).filter(c=>CFG.COMBOS_ON||slug(c)!=='combos');fprods().forEach(p=>{const k=slug(p.category||'');canon[k]??=p.category;(groups[canon[k]]??=[]).push(p)});
   const rank=c=>{const i=CFG.CAT_ORDER.indexOf(slug(c));return i<0?99:i};
   const cats=Object.keys(groups).sort((a,b)=>rank(a)-rank(b));
   if(activeCat&&activeCat!=='combos'&&!allCats.some(c=>slug(c)===activeCat))activeCat=null;
   const shown=activeCat?cats.filter(c=>slug(c)===activeCat):cats;
-  const navCats=(allCats.some(c=>slug(c)==='combos')?allCats:[...allCats,'Combos']).sort((a,b)=>rank(a)-rank(b));
+  const navCats=(!CFG.COMBOS_ON||allCats.some(c=>slug(c)==='combos')?allCats:[...allCats,'Combos']).sort((a,b)=>rank(a)-rank(b));
   $('nav').innerHTML=navCats.map(c=>`<a class="nv${slug(c)===activeCat?' on':''}" href="#${slug(c)}" data-c="${slug(c)}"><span class="in">${NAVICO[slug(c)]||NAVICO.otro}${esc(c)}${slug(c)==='combos'?`<span class="pct">-${COMBO_D}%</span>`:''}</span></a>`).join('');
   const showB=!activeCat||activeCat==='combos';
   $('armar').hidden=!showB;
@@ -993,11 +1005,12 @@ $('catalogo').addEventListener('click',e=>{const a=e.target.closest('.card .wa')
 $('yr').textContent=new Date().getFullYear();
 $('fab').href=wa(`Hola ${CFG.STORE}, quiero más información.`);
 const ICO={
+ YouTube:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.27 5 12 5 12 5s-6.27 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.76 1.77C5.73 19 12 19 12 19s6.27 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3z"/></svg>',
  Instagram:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>',
  Facebook:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8V6.5c0-.7.3-1 1-1h2V2h-3c-3 0-4.5 1.8-4.5 4.4V8H7v3.5h2.5V22H14V11.5h2.7L17 8z"/></svg>',
  TikTok:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 2h-3.2v13.2a2.8 2.8 0 1 1-2.8-2.8c.3 0 .6 0 .8.1V9.2a6 6 0 1 0 5.2 5.9V8.6a7 7 0 0 0 4 1.3V6.7a4 4 0 0 1-4-4.7z"/></svg>',
  WhatsApp:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.06 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.78h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg>'};
-$('social').innerHTML=['Instagram','Facebook','TikTok'].map(n=>{const u=CFG.SOCIAL[n];return `<a href="${u?esc(u):'#'}" ${u?'target="_blank" rel="noopener"':''} aria-label="${n}">${ICO[n]}</a>`}).join('')+`<a href="${wa('Hola, quiero más información.')}" target="_blank" rel="noopener" aria-label="WhatsApp">${ICO.WhatsApp}</a>`;
+$('social').innerHTML=['Instagram','Facebook','TikTok','YouTube'].map(n=>{const u=CFG.SOCIAL[n];return `<a href="${u?esc(u):'#'}" ${u?'target="_blank" rel="noopener"':''} aria-label="${n}">${ICO[n]}</a>`}).join('')+`<a href="${wa('Hola, quiero más información.')}" target="_blank" rel="noopener" aria-label="WhatsApp">${ICO.WhatsApp}</a>`;
 $('stn').textContent=CFG.STORE;
 
 /* acceso admin: mantener presionado el texto del pie ~1 segundo */
@@ -1191,6 +1204,7 @@ function lbShow(i){const a=imgs(lbP);document.querySelector('#lb .stage').style.
 let LB={z:null,c:''};
 const inCart=(p,z,c)=>cart.reduce((t,it)=>t+(it.t==='c'?it.parts.filter(x=>String(x.id)===String(p.id)&&(x.z||'')===(z||'')&&(x.col||'')===(c||'')).length*it.q:(String(it.id)===String(p.id)&&(it.z||'')===(z||'')&&(it.col||'')===(c||'')?it.q:0)),0);
 const left=(p,z,c)=>hasVar(p)?vars(p).filter(v=>(z==null||v.s===z)&&(c==null||v.c===c)).reduce((t,v)=>t+Math.max(0,v.n-inCart(p,v.s,v.c)),0):(p.stock==null?99:Math.max(0,p.stock-inCart(p,'','')));
+function lbBtn(){const t=$('lbC').querySelector('.bt');if(t)t.textContent='Agregar al carrito';$('lbC').classList.remove('okk')}
 const lbLab=(z,c)=>[z&&'talla '+z,c].filter(Boolean).join(' · ')||'este producto';
 function lbNext(p,z,c){const sz=pSizes(p),hc=hasColors(p),nc=s=>(COLORS.find(k=>left(p,s,k[0])>0)||[''])[0];
   if(hc&&z!==null){const k=nc(z);if(k&&k!==c)return{z,c:k}}
@@ -1205,17 +1219,17 @@ function lbOpts(){const p=lbP,hv=hasVar(p),hc=hasColors(p),sz=pSizes(p),zOk=z=>!
   if(LB.msg)$('lbO').insertAdjacentHTML('afterbegin',`<p class="lbh warn">${esc(LB.msg)}</p>`);
   if(isAv(p))$('lbC').classList.toggle('dis',left(p,null,null)<=0);
   $('lbW').href=wa(prodMsg(p,LB.z||'',LB.c||''))}
-$('lbO').onclick=e=>{const b=e.target.closest('button');if(!b||b.disabled)return;LB.msg='';let g='';if(b.dataset.s!==undefined){LB.z=b.dataset.s;g='z'}else if(b.dataset.col){LB.c=b.dataset.col;g='c'}
+$('lbO').onclick=e=>{const b=e.target.closest('button');if(!b||b.disabled)return;LB.msg='';lbBtn();let g='';if(b.dataset.s!==undefined){LB.z=b.dataset.s;g='z'}else if(b.dataset.col){LB.c=b.dataset.col;g='c'}
   if(LB.intent&&g&&LB.need)LB.need[g]=false;
   lbOpts();
   if(LB.intent&&LB.need&&!LB.need.z&&!LB.need.c){const k=LB.intent;LB.intent=null;lbOpts();(k==='cart'?$('lbC'):$('lbW')).click()}};
 $('lbC').onclick=()=>{const p=lbP;if(!p||!isAv(p))return;const z=LB.z||'',col=LB.c||'';
-  if(cartAdd({t:'p',id:p.id,z,col,q:1})){const t=$('lbC').querySelector('.bt');t.textContent='✓ Agregado';$('lbC').classList.add('okk');setTimeout(()=>{t.textContent='Agregar al carrito';$('lbC').classList.remove('okk')},1200);LB.msg='';
-    if(left(p,z||null,col||null)<=0){const nx=lbNext(p,z||null,col||null);if(nx){LB.msg=`Agregaste todas las unidades de ${lbLab(z,col)}. Te pasé a ${lbLab(nx.z,nx.c)}.`;LB.z=nx.z;LB.c=nx.c}else LB.msg='Sin stock disponible: ya tienes todas las unidades en tu carrito.'}}
+  if(cartAdd({t:'p',id:p.id,z,col,q:1})){const t=$('lbC').querySelector('.bt');t.textContent='✓ Agregado';$('lbC').classList.add('okk');LB.msg='';
+    if(left(p,z||null,col||null)<=0){const nx=lbNext(p,z||null,col||null);if(nx){LB.z=nx.z;LB.c=nx.c}else LB.msg='Sin stock disponible: ya tienes todas las unidades en tu carrito.'}}
   else{const nx=lbNext(p,z||null,col||null);LB.msg=nx?`Sin stock de ${lbLab(z,col)}. Te pasé a ${lbLab(nx.z,nx.c)}.`:'Sin stock disponible.';if(nx){LB.z=nx.z;LB.c=nx.c}}
   lbOpts()};
 $('lbW').addEventListener('click',()=>{const p=lbP;if(!p||!isAv(p))return;const z=LB.z||'',col=LB.c||'',code=newCode();$('lbW').href=wa(prodMsg(p,z,col,code));saveOrder({code,type:'producto',qty:1,items:[ordItem(p,z,col,1)],subtotal:+p.price,discount:0,total:+p.price})});
-function lbOpen(id){const p=products.find(x=>String(x.id)===String(id));if(!p)return;lbP=p;LB={z:null,c:''};
+function lbOpen(id){const p=products.find(x=>String(x.id)===String(id));if(!p)return;lbP=p;LB={z:null,c:''};lbBtn();
   {const d=(p.description||'').trim(),h=[p.subcategory?`<div class="sub">${esc(p.subcategory)}</div>`:'',d?`<div>${esc(d)}</div>`:'',p.material?`<div class="mt"><b>Material:</b> ${esc(p.material)}</div>`:''].join('');$('lbD').innerHTML=h;$('lbD').hidden=!h}
   const d=discPct(p);$('lbPr').innerHTML=money(p.price)+(d?`<span class="old">${money(p.compare_price)}</span><span class="save">-${d}%</span>`:'');$('lbSv').textContent=d?'Ahorras '+money(Number(p.compare_price)-Number(p.price)):'';
   const av=isAv(p);$('lbC').classList.toggle('dis',!av);$('lbW').classList.toggle('dis',!av);
@@ -1575,9 +1589,9 @@ async function coPlace(){const L=cart.map(cLine).filter(Boolean);if(!L.length)re
 const POL={dias:5,garantia:'1 año'};
 const wl=t=>`<a href="${wa(t)}" target="_blank" rel="noopener">WhatsApp</a>`;
 const POLS={
- env:{t:'Envíos y devoluciones',h:()=>`<h4>Envíos</h4><p>Enviamos a todo el país. Cuando envías tu pedido por WhatsApp te confirmamos la disponibilidad, el valor del envío, el tiempo estimado de entrega y los medios de pago antes de que pagues.</p><p><b>Envío gratis en compras desde ${money(CFG.FREE_SHIP)} y en todos los combos (gorra + buzo + reloj).</b> Si tu pedido lleva un combo o suma ese valor, el envío de todo el pedido es gratis.</p><h4>Cómo se confirma tu pedido</h4><p>Lo que envías por WhatsApp es una solicitud. Tu pedido queda confirmado cuando validamos que la talla y el color que elegiste están disponibles.</p><h4>Derecho de retracto</h4><p>Como la compra es a distancia, puedes retractarte dentro de los <b>5 días hábiles</b> siguientes a la entrega (Ley 1480 de 2011, art. 47). Escríbenos por ${wl('Hola, quiero ejercer mi derecho de retracto. Mi código de pedido es: ')}, devuelve el producto sin uso, con sus etiquetas y empaque, y te reintegramos el dinero por el mismo medio de pago. El costo del envío de la devolución lo asume el cliente. No aplica a productos personalizados.</p>`},
+ env:{t:'Envíos y devoluciones',h:()=>`<h4>Envíos</h4><p>Enviamos a todo el país. Cuando envías tu pedido por WhatsApp te confirmamos la disponibilidad, el valor del envío, el tiempo estimado de entrega y los medios de pago antes de que pagues.</p><p><b>Envío gratis en compras desde ${money(CFG.FREE_SHIP)} ${CFG.COMBOS_ON?' y en todos los combos (gorra + buzo + reloj)':''}.</b> Si tu pedido lleva un combo o suma ese valor, el envío de todo el pedido es gratis.</p><h4>Cómo se confirma tu pedido</h4><p>Lo que envías por WhatsApp es una solicitud. Tu pedido queda confirmado cuando validamos que la talla y el color que elegiste están disponibles.</p><h4>Derecho de retracto</h4><p>Como la compra es a distancia, puedes retractarte dentro de los <b>5 días hábiles</b> siguientes a la entrega (Ley 1480 de 2011, art. 47). Escríbenos por ${wl('Hola, quiero ejercer mi derecho de retracto. Mi código de pedido es: ')}, devuelve el producto sin uso, con sus etiquetas y empaque, y te reintegramos el dinero por el mismo medio de pago. El costo del envío de la devolución lo asume el cliente. No aplica a productos personalizados.</p>`},
  cam:{t:'Cambios y garantía',h:()=>`<h4>Cambios por talla o color</h4><p>Puedes cambiar tu producto dentro de los ${POL.dias} días hábiles siguientes a la entrega, siempre que esté sin uso, con etiquetas y sujeto a disponibilidad. Escríbenos por ${wl('Hola, quiero hacer un cambio. Mi código de pedido es: ')} con tu código de pedido (empieza por GX-). El envío del cambio lo asume el cliente, salvo que el producto haya llegado equivocado o con defecto.</p><h4>Garantía</h4><p>Todos nuestros productos tienen ${POL.garantia} de garantía por defectos de fabricación o de funcionamiento. No cubre daños por mal uso, accidentes, lavado inadecuado ni desgaste normal.</p><h4>Cómo reclamar</h4><ul><li>Escríbenos por WhatsApp con tu código de pedido.</li><li>Envíanos fotos o un video del problema.</li><li>Revisamos tu caso y, si aplica, lo reparamos, lo cambiamos o te reintegramos el dinero.</li></ul><p>Esto es adicional a los derechos que tienes como consumidor según la Ley 1480 de 2011.</p>`},
- qui:{t:'Quiénes somos',h:()=>`<p><b>${esc(CFG.STORE)}</b> es una tienda colombiana de gorras, buzos y relojes con estilo propio: más que ropa, es actitud.</p><h4>Lo que hacemos</h4><p>Seleccionamos productos de buena calidad, con visera plana, cortes cómodos y detalles que se notan, y los enviamos a todo el país.</p><h4>Lo que prometemos</h4><ul><li>Calidad garantizada y ${POL.garantia} de garantía.</li><li>Envío gratis desde ${money(CFG.FREE_SHIP)} y en todos los combos.</li><li>Atención directa por ${wl('Hola, quiero más información')}.</li></ul>`},
+ qui:{t:'Quiénes somos',h:()=>`<p><b>${esc(CFG.STORE)}</b> es una tienda colombiana de gorras, buzos y relojes con estilo propio: más que ropa, es actitud.</p><h4>Lo que hacemos</h4><p>Seleccionamos productos de buena calidad, con visera plana, cortes cómodos y detalles que se notan, y los enviamos a todo el país.</p><h4>Lo que prometemos</h4><ul><li>Calidad garantizada y ${POL.garantia} de garantía.</li><li>Envío gratis desde ${money(CFG.FREE_SHIP)} ${CFG.COMBOS_ON?' y en todos los combos':''}.</li><li>Atención directa por ${wl('Hola, quiero más información')}.</li></ul>`},
  dat:{t:'Política de datos',h:()=>`<h4>Quién es el responsable</h4><p>${esc(CFG.STORE)} es responsable del tratamiento de tus datos personales, conforme a la Ley 1581 de 2012. Contacto: ${wl('Hola, tengo una consulta sobre mis datos personales')}.</p><h4>Qué datos usamos</h4><p>Tu nombre (opcional), el detalle de tu pedido (productos, tallas, colores y valor) y el número de WhatsApp desde el que nos escribes. Si compras con «Finalizar compra», también tu celular, correo y dirección de entrega. Los datos de tarjeta nunca pasan por esta página.</p><h4>Para qué los usamos</h4><p>Solo para gestionar tu pedido, la entrega, los cambios y la garantía, y para contactarte sobre ellos. No vendemos ni compartimos tus datos con terceros para publicidad.</p><h4>Dónde se guardan</h4><p>Los pedidos se guardan en un servicio de base de datos en la nube al que solo accede el administrador de la tienda. Tu carrito se guarda en tu propio navegador y no sale de tu dispositivo hasta que envías el pedido. Esta página no usa cookies de publicidad ni de seguimiento.</p><h4>Tus derechos</h4><p>Puedes conocer, actualizar, rectificar y pedir la eliminación de tus datos, o revocar tu autorización, escribiéndonos por WhatsApp.</p>`}};
 document.querySelectorAll('[data-pol]').forEach(b=>b.onclick=()=>{const p=POLS[b.dataset.pol];$('polT').textContent=p.t;$('polB').innerHTML=p.h();$('pol').showModal()});
 $('polX').onclick=()=>$('pol').close();$('pol').addEventListener('click',e=>{if(e.target===$('pol'))$('pol').close()});
@@ -1585,7 +1599,8 @@ $('polX').onclick=()=>$('pol').close();$('pol').addEventListener('click',e=>{if(
 (()=>{const io=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('live',e.isIntersecting)),{threshold:.25});
 const watch=()=>document.querySelectorAll('.cat .banner:not([data-w])').forEach(b=>{b.dataset.w=1;io.observe(b)});
 const m=document.getElementById('catalogo');if(m)new MutationObserver(watch).observe(m,{childList:true,subtree:true});watch()})();
-$('ann').innerHTML=`Envío GRATIS en compras desde <b>${money(CFG.FREE_SHIP)}</b> y en todos los combos`;$('shipTxt').innerHTML=`Envío gratis desde<br>${money(CFG.FREE_SHIP)}`;
+(()=>{const f=document.querySelector('.feat');if(!f)return;[...f.children].forEach((d,i)=>d.style.setProperty('--i',i));if('IntersectionObserver'in window){const io=new IntersectionObserver(([e])=>{if(e.isIntersecting){f.classList.add('in');io.disconnect()}},{threshold:.35});io.observe(f)}else f.classList.add('in')})();
+$('ann').innerHTML=`Envío GRATIS en compras desde <b>${money(CFG.FREE_SHIP)}</b>${CFG.COMBOS_ON?' y en todos los combos':''}`;$('shipTxt').innerHTML='Envíos a nivel<br>nacional';document.documentElement.classList.toggle('nocombos',!CFG.COMBOS_ON);
 const tt=$('toTop'),td=$('toDown');
 const maxY=()=>document.documentElement.scrollHeight-innerHeight;
 const stops=()=>{const h=(document.querySelector('.top')||{}).offsetHeight||0,M=maxY(),ft=document.querySelector('.feat'),c0=document.querySelector('main .cat');
