@@ -876,7 +876,7 @@ const CFG={
   FREE_SHIP:160000,   // envío gratis desde este valor de compra (COP)
   COMBOS_ON:false,   // true = vuelve a mostrar los combos (oferta, menú, armador y categoría)
   // ▼▼ FOTOS DEL BANNER PRINCIPAL: guarda cada foto en la carpeta img/ y escribe su nombre aquí, separado por comas ▼▼
-  HERO:['img/herov1.png'],   // ejemplo con más fotos: ['img/herov1.png','img/herov2.png','img/herov3.png']
+  HERO:['img/herov1.png','img/banner-cruces.jpg','img/banner-colombia.jpg','img/banner-777.jpg','img/banner-samurai.jpg','img/banner-fugaz.jpg','img/banner-royal.jpg'],   // para agregar más: escribe aquí el nombre de la foto nueva (guardada en la carpeta img/)
   HERO_MS:5000,   // milisegundos entre foto y foto (5000 = 5 segundos)
   COMBO_DESC:10,   // % de descuento de los combos que arma el cliente
   PAY:{online:'',transfer:'',cod:true,cuentas:[{id:'nequi',n:'Nequi',d:''},{id:'bancolombia',n:'Bancolombia',d:''},{id:'daviplata',n:'Daviplata',d:''}]},   // en cuentas pon en d: tu número o cuenta (ej. 'Nequi 3XX XXX XXXX · a nombre de ...'). Si lo dejas vacío se envía por WhatsApp.   // online: URL de tu función de pago (Wompi / Mercado Pago). transfer: texto con tus cuentas, ej. 'Nequi 3XX XXX XXXX\nBancolombia ahorros ...'. cod: pago contra entrega
@@ -1260,7 +1260,7 @@ $('lbO').onclick=e=>{const b=e.target.closest('button');if(!b||b.disabled)return
   lbOpts();
   if(LB.intent&&LB.need&&!LB.need.z&&!LB.need.c){const k=LB.intent;LB.intent=null;lbOpts();(k==='cart'?$('lbC'):$('lbW')).click()}};
 $('lbC').onclick=()=>{const p=lbP;if(!p||!isAv(p))return;const z=LB.z||'',col=LB.c||'';
-  if(cartAdd({t:'p',id:p.id,z,col,q:1})){const t=$('lbC').querySelector('.bt');t.textContent='✓ Agregado';$('lbC').classList.add('okk');LB.msg='';
+  if(cartAdd({t:'p',id:p.id,z,col,q:1})){const t=$('lbC').querySelector('.bt');t.textContent='✓ Agregado';$('lbC').classList.add('okk');LB.msg='';clearTimeout(window._lbT);window._lbT=setTimeout(lbBtn,1200);
     if(left(p,z||null,col||null)<=0){const nx=lbNext(p,z||null,col||null);if(nx){LB.z=nx.z;LB.c=nx.c}else LB.msg='Sin stock disponible: ya tienes todas las unidades en tu carrito.'}}
   else{const nx=lbNext(p,z||null,col||null);LB.msg=nx?`Sin stock de ${lbLab(z,col)}. Te pasé a ${lbLab(nx.z,nx.c)}.`:'Sin stock disponible.';if(nx){LB.z=nx.z;LB.c=nx.c}}
   lbOpts()};
