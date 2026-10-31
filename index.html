@@ -1371,6 +1371,9 @@ html .ph img.dgi,html .ph .dgw{object-fit:cover!important;padding:0!important}
 @media(max-width:760px){.cmh{grid-template-columns:1fr}.cml{grid-template-columns:1fr 1fr}.cml .cmn{grid-column:1/-1}}
 
 .cmpl{display:flex;flex-direction:column;gap:4px}.cmpc{display:flex!important;flex-direction:row!important;align-items:center;gap:8px;font-weight:600}
+.cmpbox{display:grid;gap:8px}.cmpbox input:not([type=checkbox]){width:100%;box-sizing:border-box}
+.f .r4{grid-template-columns:repeat(4,minmax(0,1fr))}.f .r4 label{min-width:0;white-space:normal}.f .r4 input{width:100%;min-width:0;box-sizing:border-box}
+@media(max-width:640px){.f .r4{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 </head>
 <body>
@@ -1458,12 +1461,12 @@ html .ph img.dgi,html .ph .dgw{object-fit:cover!important;padding:0!important}
         <div class="w"><b style="font-size:14px">Para quién es (puedes marcar varios)</b><div class="sizes cchips" id="gchips" style="margin-top:6px"></div></div>
         <div class="w r4">
           <label>Valor compra<input type="number" id="pco" min="0" step="any" inputmode="decimal" placeholder="Lo que te costó"></label>
-          <label class="cmpl">Proveedor <small>(para Compras)</small><input id="pcs" list="cmSl" placeholder="Opcional" autocomplete="off"></label>
-          <label class="cmpc"><input type="checkbox" id="pcr" checked> Anotar en la pestaña Compras lo que ingreso (cantidad × valor compra)</label>
           <label>Valor venta<input type="number" id="pcmp" min="0" step="any" inputmode="decimal" placeholder="Opcional"></label>
           <label>Valor venta oferta<input type="number" id="pp" min="0" step="any" inputmode="decimal" required></label>
           <label>Stock<input type="number" id="pst" min="0" step="1" readonly placeholder="Auto" title="Se calcula con el inventario por talla y color"></label>
         </div>
+        <div class="w cmpbox"><label class="cmpl">Proveedor <small>(opcional, para la pestaña Compras)</small><input id="pcs" list="cmSl" placeholder="A quién le compraste" autocomplete="off"></label>
+          <label class="cmpc"><input type="checkbox" id="pcr" checked> Anotar en Compras lo que ingreso (cantidad × valor compra)</label></div>
         <p class="w mg" id="pmg"></p>
         <div class="w vbox"><b>Inventario por talla y color</b>
           <small class="desc">Agrega cada talla y color que tengas. Lo que no agregues aparece bloqueado en la tienda.</small>
