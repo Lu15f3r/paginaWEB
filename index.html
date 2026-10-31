@@ -826,7 +826,7 @@ html.nocombos #promo,html.nocombos #armar,html.nocombos .nv[data-c="combos"]{dis
 #srchB.act{color:var(--gold)}
 .pays i{transition:background .25s,border-color .25s,box-shadow .25s,transform .25s;cursor:default}
 .pays i:hover{border-color:var(--c);background:color-mix(in srgb,var(--c) 22%,transparent);box-shadow:0 0 14px color-mix(in srgb,var(--c) 55%,transparent);transform:translateY(-2px)}
-/* ===== v7: estilo Melos Caps con el toque GORRAX ===== */
+/* ===== v7: tarjetas grandes tipo catálogo con el toque GORRAX ===== */
 .sectH{max-width:1200px;margin:34px auto 0;padding:0 5vw}
 .sectH h2{display:inline-block;font-size:clamp(24px,3.2vw,34px);text-transform:uppercase;letter-spacing:.03em;padding:6px 26px 4px 14px;background:var(--gold);color:#000;clip-path:polygon(0 0,100% 0,calc(100% - 12px) 100%,0 100%)}
 .cat{margin:18px 0 40px}
@@ -884,6 +884,17 @@ dialog#zv::backdrop{background:#000}
 .faq summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:10px}.faq summary::-webkit-details-marker{display:none}
 .faq summary::after{content:"+";color:var(--gold);font-weight:900;transition:transform .2s}.faq details[open] summary::after{transform:rotate(45deg)}
 .faq p{color:var(--muted);margin-top:8px;font-size:14px}
+/* ===== v8: 3 por fila y más grandes, filtro más grande en PC ===== */
+@media(min-width:900px){
+ .grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:40px 28px}
+ .fbtn{width:48px!important;height:66px!important;font-size:11px!important}.fbtn svg{width:22px!important;height:22px!important}
+ .info h3{font-size:clamp(19px,1.9vw,26px)}.info .prow .price{font-size:20px}
+ .ph .qb{width:44px;height:36px}.ph .qb svg{width:20px;height:20px}
+ .disc{font-size:20px!important;padding:5px 15px 4px!important}
+ .ph .qa{bottom:14px;gap:8px}
+}
+@media(min-width:700px) and (max-width:899px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media(min-width:900px){.fbtn .fx{display:none!important}}
 </style>
 </head>
 <body>
@@ -973,7 +984,7 @@ dialog#zv::backdrop{background:#000}
           <datalist id="vsz"><option value="S"><option value="M"><option value="L"><option value="XL"><option value="XXL"><option value="Única"></datalist>
         </div>
         <label class="w">Descripción<textarea id="pd" rows="2"></textarea></label>
-        <label class="w">Fotos (hasta 5; la primera es la portada · arrastra una foto para cambiar su lugar)<input type="file" id="pimg" accept="image/*" multiple></label>
+        <label class="w">Fotos (hasta 6; la primera es la portada · arrastra una foto para cambiar su lugar)<input type="file" id="pimg" accept="image/*" multiple></label>
         <div class="w gal" id="gal"></div>
         <label class="chk w"><input type="checkbox" id="pa" checked> Disponible</label>
         <div class="w"><button class="btn" id="sv">Guardar producto</button> <button type="button" class="btn ghost" id="cl">Limpiar</button></div>
@@ -1177,7 +1188,7 @@ $('catalogo').addEventListener('click',e=>{const a=e.target.closest('.card .wa')
 $('yr').textContent=new Date().getFullYear();
 $('fab').href=wa(`Hola ${CFG.STORE}, quiero más información.`);
 const ICO={
- YouTube:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.27 5 12 5 12 5s-6.27 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.76 1.77C5.73 19 12 19 12 19s6.27 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3z"/></svg>',
+ YouTube:'<svg viewBox="0 0 24 24" fill="#ff0000"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.27 5 12 5 12 5s-6.27 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.76 1.77C5.73 19 12 19 12 19s6.27 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3z"/></svg>',
  Instagram:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>',
  Facebook:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8V6.5c0-.7.3-1 1-1h2V2h-3c-3 0-4.5 1.8-4.5 4.4V8H7v3.5h2.5V22H14V11.5h2.7L17 8z"/></svg>',
  TikTok:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 2h-3.2v13.2a2.8 2.8 0 1 1-2.8-2.8c.3 0 .6 0 .8.1V9.2a6 6 0 1 0 5.2 5.9V8.6a7 7 0 0 0 4 1.3V6.7a4 4 0 0 1-4-4.7z"/></svg>',
@@ -1266,9 +1277,9 @@ function gal(){
 function clear(){$('pf').reset();alist();$('pid').value='';$('pa').checked=true;keep=[];added=[];removed=[];vlist=[];curSizes=[];legacy='';curG=[];gChips();vRender();gal();updMg()}
 $('cl').onclick=()=>{clear();say('')};
 $('pimg').onchange=e=>{
-  const room=Math.max(5-keep.length,0),fs=[...e.target.files];
+  const room=Math.max(6-keep.length,0),fs=[...e.target.files];
   fs.slice(0,room).forEach(f=>keep.push({f,u:URL.createObjectURL(f)}));
-  if(fs.length>room)say('Máximo 5 fotos por producto.');
+  if(fs.length>room)say('Máximo 6 fotos por producto.');
   e.target.value='';gal()};
 $('gal').onclick=e=>{const b=e.target.closest('button');if(!b)return;
   if(b.dataset.k!==undefined){const x=keep.splice(+b.dataset.k,1)[0];if(typeof x==='string')removed.push(x)}gal()};
@@ -1470,7 +1481,7 @@ $('cbGo').onclick=()=>{
   clear();
   $('pn').value='Combo '+sel.map(nm).join(' + ');$('pc').value='Combos';$('pp').value=price;$('pcmp').value=sum;
   curSizes=[...talla];$('pd').value='Incluye: '+sel.map(p=>p.name).join(', ')+`. Ahorras ${d}% comprándolo junto.`;
-  keep=[...new Set(sel.map(p=>imgs(p)[0]).filter(Boolean))].slice(0,5);added=[];removed=[];gal();alist();
+  keep=[...new Set(sel.map(p=>imgs(p)[0]).filter(Boolean))].slice(0,6);added=[];removed=[];gal();alist();
   say('Combo armado: revisa los datos y presiona Guardar producto.',true)};
 $('nav').addEventListener('click',e=>{const a=e.target.closest('a[data-c]');if(!a)return;e.preventDefault();
   activeCat=activeCat===a.dataset.c?null:a.dataset.c;render();(activeCat==='combos'?$('armar'):$('catalogo')).scrollIntoView({behavior:'smooth',block:'start'})});
