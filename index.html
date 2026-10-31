@@ -39,7 +39,7 @@ a{color:inherit}
 .ctc{justify-self:end}.ctc .in{font-size:18px;padding:6px 18px}.ctc .in svg{width:20px;height:20px}
 .noimg{position:absolute;inset:0;display:grid;place-items:center;color:#2c2c2c}.noimg svg{width:40%;height:auto}
 .hero{position:relative;max-width:100%;margin:auto}
-.hero img{width:100%;height:clamp(250px,46vw,500px);object-fit:cover;object-position:center;display:block}
+.hero img{width:100%;height:auto;aspect-ratio:2080/950;max-height:90vh;object-fit:contain;background:#0a0a0a;display:block}
 .hero::after{content:"";position:absolute;inset:auto 0 0;height:35%;background:linear-gradient(transparent,var(--bg))}
 .hero .btn{position:absolute;left:50%;bottom:6%;transform:translateX(-50%);z-index:1}
 .btn{display:inline-block;border:0;cursor:pointer;font:800 15px "Hanken Grotesk",sans-serif;padding:13px 28px;border-radius:999px;background:var(--gold);color:#000;text-decoration:none}
@@ -741,7 +741,9 @@ html.nocombos #promo,html.nocombos #armar,html.nocombos .nv[data-c="combos"]{dis
 .top{--ink:#fff;--gold:#e2b53f;--line:rgba(255,255,255,.2);background:linear-gradient(180deg,rgba(0,0,0,.62),rgba(0,0,0,.28))!important;-webkit-backdrop-filter:blur(6px) saturate(1.2);backdrop-filter:blur(6px) saturate(1.2);border-bottom:1px solid rgba(255,255,255,.14)}
 .top .nv .in{text-shadow:0 1px 8px rgba(0,0,0,.65)}
 .hero{margin-top:calc(var(--hh,0px)*-1)}
-.hero img{height:calc(clamp(250px,46vw,500px) + var(--hh,0px))}
+.hero img{height:auto;aspect-ratio:2080/950;max-height:90vh;object-fit:contain}
+.hpv,.hnx{top:50%!important}
+@media(max-width:700px){.hero{margin-top:0!important}}
 .hs{display:grid}.hs img{grid-area:1/1;opacity:0;transition:opacity .9s ease}.hs img.on{opacity:1}
 .hpv,.hnx{position:absolute;top:calc(50% + var(--hh,0px)/2);transform:translateY(-50%);z-index:4;width:44px;height:64px;border:0;cursor:pointer;color:#fff;background:rgba(0,0,0,.45);font:800 20px sans-serif;display:grid;place-items:center;transition:background .2s,color .2s}
 .hpv{left:0;clip-path:polygon(0 0,100% 0,calc(100% - 10px) 100%,0 100%)}.hnx{right:0;clip-path:polygon(10px 0,100% 0,100% 100%,0 100%)}
@@ -1049,7 +1051,7 @@ const CFG={
   NAV_ON:false,   // true = vuelve a mostrar el menú de categorías (Gorras, Buzos…) arriba
   COMBOS_ON:false,   // true = vuelve a mostrar los combos (oferta, menú, armador y categoría)
   // ▼▼ FOTOS DEL BANNER PRINCIPAL: guarda cada foto en la carpeta img/ y escribe su nombre aquí, separado por comas ▼▼
-  HERO:['img/herov1.png','img/banner-cruces.jpg','img/banner-colombia.jpg','img/banner-777.jpg','img/banner-samurai.jpg','img/banner-fugaz.jpg','img/banner-royal.jpg'],   // para agregar más: escribe aquí el nombre de la foto nueva (guardada en la carpeta img/)
+  HERO:['img/banner-1.jpg','img/banner-2.jpg','img/banner-3.jpg','img/banner-4.jpg','img/banner-5.jpg','img/herov1.png'],   // para agregar más: escribe aquí el nombre de la foto nueva (guardada en la carpeta img/)
   HERO_MS:3200,   // milisegundos entre foto y foto (2000 = 2 segundos)
   HERO_POS:'center 62%',   // centrado vertical de las fotos del banner (0% = arriba, 50% = centro, 100% = abajo)
   COMBO_DESC:10,   // % de descuento de los combos que arma el cliente
