@@ -1209,18 +1209,12 @@ html[data-font=comic],html[data-font=pixel],html[data-font=espacial],html[data-f
 html[data-font=pixel] body{font-size:18px}html[data-font=pixel] h1,html[data-font=pixel] h2,html[data-font=pixel] h3,html[data-font=pixel] .nv .in,html[data-font=pixel] .sectH h2{font-size:.72em;line-height:1.3}
 /* ===== Corona del footer: titila en neón con el color del tema, en ciclo continuo ===== */
 .crw{position:relative;display:block;width:50px;margin:0 auto 8px}
-.crw .crown{margin:0;--crc:#fff;color:var(--crc);animation:crTit 2.8s infinite}
+.crw .crown{margin:0;--crc:#fff;color:var(--crc);animation:crTit 6s ease-in-out infinite}
 [data-theme=light] .crw .crown{--crc:var(--ink)}
 @keyframes crTit{
- 0%{color:var(--crc);filter:none}
- 6%{color:var(--gold-hd,var(--gold));filter:drop-shadow(0 0 3px var(--gold-hd,var(--gold))) drop-shadow(0 0 10px var(--gold-hd,var(--gold)))}
- 10%{color:var(--crc);filter:none}
- 15%{color:var(--gold-hd,var(--gold));filter:drop-shadow(0 0 3px var(--gold-hd,var(--gold))) drop-shadow(0 0 10px var(--gold-hd,var(--gold)))}
- 19%{color:var(--crc);filter:none}
- 26%,66%{color:var(--gold-hd,var(--gold));filter:drop-shadow(0 0 4px var(--gold-hd,var(--gold))) drop-shadow(0 0 14px var(--gold-hd,var(--gold)))}
- 72%{color:var(--gold-hd,var(--gold));filter:drop-shadow(0 0 2px var(--gold-hd,var(--gold))) drop-shadow(0 0 6px var(--gold-hd,var(--gold)))}
- 78%{color:var(--crc);filter:none}
- 100%{color:var(--crc);filter:none}}
+ 0%,12%{color:var(--crc);filter:none}
+ 38%,58%{color:var(--gold-hd,var(--gold));filter:drop-shadow(0 0 4px var(--gold-hd,var(--gold))) drop-shadow(0 0 14px var(--gold-hd,var(--gold)))}
+ 84%,100%{color:var(--crc);filter:none}}
 @media(prefers-reduced-motion:reduce){.crw .crown{animation:none}}
 
 /* ===== 4 TEMAS MÁS ===== */
@@ -1294,6 +1288,19 @@ html[data-font]{--fm:var(--fh)}
 html body :is(button,input,select,textarea,summary,option,label,small,a,td,th,li,p,span,b,strong,em,div){font-family:inherit}
 html body{font-family:var(--fb),system-ui,sans-serif}
 html body :is(h1,h2,h3,h4,h5,h6){font-family:var(--fh),sans-serif}
+
+/* ===== Celular: botones y descuento más pegados a la esquina; sin saltos ===== */
+@media(max-width:700px){
+ .fab{right:6px!important}.cartb{right:6px!important}
+ .card .disc,.disc{top:3px!important;right:3px!important;padding:3px 8px 2px!important;font-size:14px!important}
+}
+.fab,.fbtn,.totop,.pa{-webkit-transform-style:flat;backface-visibility:hidden}
+.fab,.fbtn,.totop{will-change:transform}
+@media(hover:none){
+ #fab{animation:none!important}
+ .fab:hover{transform:none!important}
+ html[data-hov] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{transform:none!important;filter:none!important;animation:none!important;box-shadow:none!important;opacity:1!important;letter-spacing:inherit!important}
+}
 </style>
 </head>
 <body>
