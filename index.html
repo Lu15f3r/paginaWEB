@@ -1291,7 +1291,7 @@ html body :is(h1,h2,h3,h4,h5,h6){font-family:var(--fh),sans-serif}
 
 /* ===== Celular: botones y descuento más pegados a la esquina; sin saltos ===== */
 @media(max-width:700px){
- .fab{right:6px!important}.cartb{right:6px!important}
+ .fab{right:2px!important}.cartb{right:2px!important}.cartb .cn{right:-2px!important;top:-4px!important}
  .card .disc,.disc{top:3px!important;right:3px!important;padding:3px 8px 2px!important;font-size:14px!important}
 }
 .fab,.fbtn,.totop,.pa{-webkit-transform-style:flat;backface-visibility:hidden}
@@ -1301,6 +1301,10 @@ html body :is(h1,h2,h3,h4,h5,h6){font-family:var(--fh),sans-serif}
  .fab:hover{transform:none!important}
  html[data-hov] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{transform:none!important;filter:none!important;animation:none!important;box-shadow:none!important;opacity:1!important;letter-spacing:inherit!important}
 }
+
+/* ===== Evita que algo que se sale de la pantalla (animaciones, marquesinas) ensanche la página y haga "temblar" los botones fijos ===== */
+html,body{max-width:100%;overflow-x:clip}
+@supports not (overflow:clip){html,body{overflow-x:hidden}}
 </style>
 </head>
 <body>
