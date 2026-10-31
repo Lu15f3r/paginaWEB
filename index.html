@@ -1346,6 +1346,13 @@ html[data-shape=pixel]{--qr:17px;--qb:17px;--dr:17px;--dt:17px;--tx:17px;--ty:17
 @media(max-width:700px){
 .card .disc,.disc{padding:2px 6px 1px!important;font-size:11px!important}
 }
+
+/* ===== Celular: sin carrito/WhatsApp dentro de la foto de la tarjeta ===== */
+@media(max-width:700px){.ph .qa{display:none!important}}
+/* ===== Foto principal del producto: al deslizar, ambas fotos ocupan todo el cuadro (sin franjas oscuras arriba/abajo) ===== */
+#lb .stage,#lbS{background:#fff!important}
+#lbI.dgsw{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;padding:0 52px!important;box-sizing:border-box!important;background:#fff!important;object-fit:contain!important;z-index:3}
+@media(max-width:640px){#lbI.dgsw,#lbS .dgi{padding:0 46px!important}}
 </style>
 </head>
 <body>
@@ -2287,7 +2294,7 @@ const m=document.getElementById('catalogo');if(m)new MutationObserver(watch).obs
  const mk=(src,x,W)=>{const i=document.createElement('img');i.src=src;i.alt='';i.className='dgi';i.draggable=false;i.style.transform=`translateX(${x}px)`;return i};
  const prep=()=>{const s=st,W=s.box.offsetWidth;s.W=W;
   if(s.k==='h'){const H=window.HERO;if(!H||H.im.length<2)return false;s.H=H;s.A=H.im[H.k];s.n=H.im.length;H.stop();s.box.classList.add('nf');s.getB=d=>H.im[(H.k+d+s.n)%s.n]}
-  else if(s.k==='l'){const a=imgs(lbP);if(a.length<2)return false;s.A=$('lbI');s.a=a;s.getB=d=>{const i=mk(a[(lbI+d+a.length)%a.length],0,W);s.box.appendChild(i);return i}}
+  else if(s.k==='l'){const a=imgs(lbP);if(a.length<2)return false;s.A=$('lbI');s.A.classList.add('dgsw');s.a=a;s.getB=d=>{const i=mk(a[(lbI+d+a.length)%a.length],0,W);s.box.appendChild(i);return i}}
   else{const rr=s.k==='r',p=products.find(x=>String(x.id)===(rr?s.box.closest('.rl'):s.box.closest('.card')).dataset.id),a=p?imgs(p):[];if(a.length<2)return false;s.a=a;
    const cur=rr?(+s.box.dataset.i||0):(!s.box.classList.contains('navd')&&matchMedia('(hover:hover)').matches&&s.box.matches(':hover'))?1:(+s.box.dataset.i||0);s.cur=cur;
    s.A=mk(a[cur],0,W);s.A.classList.add('dgw');s.box.appendChild(s.A);s.getB=d=>{const i=mk(a[(cur+d+a.length)%a.length],0,W);i.classList.add('dgw');s.box.appendChild(i);return i}}
@@ -2297,7 +2304,7 @@ const m=document.getElementById('catalogo');if(m)new MutationObserver(watch).obs
  const apply=dx=>{const s=st,d=dx<0?1:-1;setB(d);const W=s.W;s.A.style.transition=s.B.style.transition='none';
   s.A.style.transform=`translateX(${dx}px)`;s.B.style.transform=`translateX(${dx+(d>0?W:-W)}px)`};
  const clean=()=>{const s=st;if(!s)return;if(s.k==='h'){[s.A,s.B].forEach(x=>{if(x){x.style.transform='';x.style.transition='';x.style.opacity=''}});s.box.classList.remove('nf')}
-  else{if(s.k==='l')s.A.style.transform='',s.A.style.transition='';else s.A&&s.A.remove();s.B&&s.B.remove()}};
+  else{if(s.k==='l'){s.A.style.transform='';s.A.style.transition='';s.A.classList.remove('dgsw')}else s.A&&s.A.remove();s.B&&s.B.remove()}};
  document.addEventListener('pointerdown',e=>{if(e.button||st||e.target.closest('button,a,input,select,textarea'))return;
   const h=null,l=e.target.closest('#lbS'),c=e.target.closest('#catalogo .ph'),r=e.target.closest('#lbRel .ri'),k=h?'h':l?'l':c?'c':r?'r':null;if(!k)return;
   st={k,box:h||l||c||r,x:e.clientX,y:e.clientY,on:false,id:e.pointerId,ok:null,d:0}});
