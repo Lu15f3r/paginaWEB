@@ -1240,11 +1240,6 @@ html[data-font=caniuse] :is(h1,h2,h3,h4,.sectH h2,.info h3,.nv .in,.btn,.tag){fo
 html[data-font=caniuse] body{font-weight:300}
 html[data-font=caniuse] :is(.price,b,strong){font-weight:600}
 /* ===== Flechas más pegadas a los bordes ===== */
-.card .pa.pv{left:calc(var(--sk,22px)*.5 + 2px)!important}
-.card .pa.nx{right:calc(var(--sk,22px)*.5 + 2px)!important}
-html[data-shape] .card .pa.pv{left:4px!important}
-html[data-shape] .card .pa.nx{right:4px!important}
-.ra.l{left:4px!important}.ra.r{right:4px!important}
 /* ===== 6 FORMAS MÁS ===== */
 html[data-shape=elipse]{--bp:inset(0 round 50%);--cp:inset(0 round 50% / 18%)}
 html[data-shape=cinta]{--bp:polygon(0 0,100% 0,calc(100% - 10px) 50%,100% 100%,0 100%);--cp:polygon(0 0,100% 0,100% 100%,50% calc(100% - 26px),0 100%)}
@@ -1292,7 +1287,7 @@ html body :is(h1,h2,h3,h4,h5,h6){font-family:var(--fh),sans-serif}
 /* ===== Celular: botones y descuento más pegados a la esquina; sin saltos ===== */
 @media(max-width:700px){
  .fab{right:2px!important}.cartb{right:2px!important}.cartb .cn{right:-2px!important;top:-4px!important}
- .card .disc,.disc{top:3px!important;right:3px!important;padding:3px 8px 2px!important;font-size:14px!important}
+ .card .disc,.disc{padding:3px 8px 2px!important;font-size:14px!important}
 }
 .fab,.fbtn,.totop,.pa{-webkit-transform-style:flat;backface-visibility:hidden}
 .fab,.fbtn,.totop{will-change:transform}
@@ -1307,12 +1302,39 @@ html,body{max-width:100%;overflow-x:clip}
 @supports not (overflow:clip){html,body{overflow-x:hidden}}
 
 /* ===== Botones carrito/WhatsApp dentro de la foto: más a la derecha y un poco más abajo ===== */
-.ph .qa{right:calc(var(--sk,22px)*.85 + 1px)!important;bottom:5px!important}
-html[data-shape] .ph .qa{right:9px!important;bottom:8px!important}
-html[data-shape=pildora] .ph .qa,html[data-shape=arco] .ph .qa,html[data-shape=elipse] .ph .qa{right:18px!important;bottom:14px!important}
 
 /* ===== Celular: tarjetas con menos inclinación para dar más espacio a los botones ===== */
-@media(max-width:700px){#catalogo .card,.card{--sk:9px}}
+
+/* ===== Tarjetas rectas (sin inclinación) + posición de botones según la forma ===== */
+:root{--qr:8px;--qb:8px;--dr:8px;--dt:8px;--tx:8px;--ty:10px;--par:6px}
+@media(max-width:700px){:root{--qr:5px;--qb:5px;--dr:4px;--dt:4px;--tx:5px;--ty:6px;--par:4px}}
+.card{--sk:0px!important;--P:inset(0)}
+.ri{clip-path:inset(0)}
+html .ph .qa{right:var(--qr)!important;bottom:var(--qb)!important}
+html .card .disc,html .ph .disc{right:var(--dr)!important;top:var(--dt)!important}
+html .ph .tag{left:var(--tx)!important;top:var(--ty)!important}
+html .card .pa.pv,html .ra.l{left:var(--par)!important}
+html .card .pa.nx,html .ra.r{right:var(--par)!important}
+html[data-shape=pildora]{--qr:12px;--qb:12px;--dr:12px;--dt:12px;--tx:12px;--ty:12px}
+html[data-shape=cortado]{--qr:15px;--qb:15px;--tx:15px;--ty:13px}
+html[data-shape=hoja]{--qr:13px;--qb:13px;--tx:13px;--ty:13px}
+html[data-shape=diagonal]{--dr:16px;--dt:16px;--qr:16px;--qb:14px}
+html[data-shape=octagono]{--qr:16px;--qb:16px;--dr:16px;--dt:16px;--tx:16px;--ty:16px}
+html[data-shape=hexagono]{--qb:5%;--dt:5%;--ty:5%;--tx:10px}
+html[data-shape=flecha]{--dr:20px;--dt:18px}
+html[data-shape=escudo]{--qb:38px;--qr:14px}
+html[data-shape=gota]{--qr:24px;--qb:24px;--tx:24px;--ty:24px}
+html[data-shape=trapecio]{--dr:30px;--tx:30px;--par:18px;--qr:12px}
+html[data-shape=trapecioinv]{--qr:30px;--par:18px;--qb:8px}
+html[data-shape=esquina]{--tx:24px;--ty:16px}
+html[data-shape=pestana]{--dr:15px;--dt:15px;--tx:15px;--ty:15px}
+html[data-shape=arco]{--dr:min(50px,17%);--dt:min(50px,13%);--tx:min(50px,17%);--ty:min(50px,13%)}
+html[data-shape=elipse]{--qr:18%;--qb:6.5%;--dr:18%;--dt:6.5%;--tx:18%;--ty:6.5%}
+html[data-shape=cinta]{--qb:28px;--qr:8px}
+html[data-shape=muesca]{--par:24px}
+html[data-shape=petalo]{--dr:17px;--dt:17px}
+html[data-shape=ticket]{--par:18px}
+html[data-shape=pixel]{--qr:17px;--qb:17px;--dr:17px;--dt:17px;--tx:17px;--ty:17px}
 </style>
 </head>
 <body>
