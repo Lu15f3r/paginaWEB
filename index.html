@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>try{document.documentElement.dataset.theme=localStorage.getItem("theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}
-var GXF={urbana:"Bebas+Neue&family=Montserrat:wght@400;600;700;800",elegante:"Playfair+Display:wght@700;900&family=Lato:wght@400;700;900",futurista:"Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700",deportiva:"Anton&family=Barlow:wght@400;600;700;800",redondeada:"Fredoka:wght@500;700&family=Nunito:wght@400;700;800",moderna:"Poppins:wght@400;500;600;700;800",impacto:"Archivo+Black&family=Archivo:wght@400;600;700",retro:"Righteous&family=Quicksand:wght@400;600;700",clasica:"Cinzel:wght@600;800&family=Lora:wght@400;600;700",callejera:"Bungee&family=Space+Grotesk:wght@400;600;700",industrial:"Teko:wght@500;600;700&family=Rubik:wght@400;500;700",tecnica:"Russo+One&family=Exo+2:wght@400;600;700",militar:"Black+Ops+One&family=Chakra+Petch:wght@400;600;700",cursiva:"Lobster&family=Open+Sans:wght@400;600;700",condensada:"Oswald:wght@500;700&family=Source+Sans+3:wght@400;600;700",poster:"Staatliches&family=Karla:wght@400;600;700",slab:"Alfa+Slab+One&family=Roboto+Slab:wght@400;600;700",comic:"Bangers&family=Comic+Neue:wght@400;700",pixel:"Press+Start+2P&family=VT323",espacial:"Audiowide&family=Titillium+Web:wght@400;600;700",marcador:"Permanent+Marker&family=Patrick+Hand",moda:"Abril+Fatface&family=DM+Sans:wght@400;500;700",gotica:"UnifrakturCook:wght@700&family=Crimson+Text:wght@400;600;700"};
+var GXF={urbana:"Bebas+Neue&family=Montserrat:wght@400;600;700;800",elegante:"Playfair+Display:wght@700;900&family=Lato:wght@400;700;900",futurista:"Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700",deportiva:"Anton&family=Barlow:wght@400;600;700;800",redondeada:"Fredoka:wght@500;700&family=Nunito:wght@400;700;800",moderna:"Poppins:wght@400;500;600;700;800",impacto:"Archivo+Black&family=Archivo:wght@400;600;700",retro:"Righteous&family=Quicksand:wght@400;600;700",clasica:"Cinzel:wght@600;800&family=Lora:wght@400;600;700",callejera:"Bungee&family=Space+Grotesk:wght@400;600;700",industrial:"Teko:wght@500;600;700&family=Rubik:wght@400;500;700",tecnica:"Russo+One&family=Exo+2:wght@400;600;700",militar:"Black+Ops+One&family=Chakra+Petch:wght@400;600;700",cursiva:"Lobster&family=Open+Sans:wght@400;600;700",condensada:"Oswald:wght@500;700&family=Source+Sans+3:wght@400;600;700",poster:"Staatliches&family=Karla:wght@400;600;700",slab:"Alfa+Slab+One&family=Roboto+Slab:wght@400;600;700",comic:"Bangers&family=Comic+Neue:wght@400;700",pixel:"Press+Start+2P&family=VT323",espacial:"Audiowide&family=Titillium+Web:wght@400;600;700",marcador:"Permanent+Marker&family=Patrick+Hand",moda:"Abril+Fatface&family=DM+Sans:wght@400;500;700",gotica:"UnifrakturCook:wght@700&family=Crimson+Text:wght@400;600;700",caniuse:"Open+Sans:wght@300;400;600;700",pacifico:"Pacifico&family=Nunito:wght@400;700;800",dancing:"Dancing+Script:wght@500;700&family=Quicksand:wght@400;600;700",kaushan:"Kaushan+Script&family=Poppins:wght@400;600;700",satisfy:"Satisfy&family=Lato:wght@400;700",courgette:"Courgette&family=Raleway:wght@400;600;700",italica:"Playfair+Display:ital,wght@1,700;1,900&family=Lora:ital,wght@1,400;1,600"};
 function gxFont(k){if(!GXF[k]||document.getElementById("gxf-"+k))return;var l=document.createElement("link");l.id="gxf-"+k;l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family="+GXF[k]+"&display=swap";document.head.appendChild(l)}
 function gxLook(l){var d=document.documentElement;["pal","shape","font","hov","auto"].forEach(function(a){var v=l&&l[a],def=a==="pal"?"oro":a==="shape"?"sesgado":a==="font"?"original":"ninguno";if(v&&v!==def){d.dataset[a]=v;if(a==="font")gxFont(v)}else delete d.dataset[a]})}
 try{gxLook(JSON.parse(localStorage.getItem("gx_look")||"{}"))}catch(e){}
@@ -1214,6 +1214,72 @@ html[data-font=pixel] body{font-size:18px}html[data-font=pixel] h1,html[data-fon
 @keyframes crFill{0%{clip-path:inset(100% 0 0 0);opacity:0}6%{opacity:.65}66%{clip-path:inset(0 0 0 0);opacity:.65}78%,90%{clip-path:inset(0 0 0 0);opacity:1}100%{clip-path:inset(0 0 0 0);opacity:0}}
 @keyframes crGlow{0%,68%{filter:none}78%{filter:drop-shadow(0 0 4px var(--gold-hd,var(--gold))) drop-shadow(0 0 12px var(--gold-hd,var(--gold)))}90%{filter:drop-shadow(0 0 3px var(--gold-hd,var(--gold))) drop-shadow(0 0 8px var(--gold-hd,var(--gold)))}100%{filter:none}}
 @media(prefers-reduced-motion:reduce){.crw,.crf{animation:none}}
+
+/* ===== 4 TEMAS MÁS ===== */
+html[data-pal=medianoche]{--bg:#060b1c;--panel:#0e1630;--line:#1c2a52;--ink:#eaf0ff;--muted:#8d9ac4;--gold:#f5c451;--gold-hd:#f5c451;--goldrgb:245,196,81;--ann1:#c49c40;--ann2:#f5c451;--annx:#000;--annb:#000}
+html[data-pal=medianoche][data-theme=light]{--bg:#e6eaf6;--panel:#ffffff;--line:#cdd5ea;--ink:#0b1230;--muted:#53608a;--gold:#b8860b;--gold-hd:#f5c451;--goldrgb:184,134,11;--ann1:#936b08;--ann2:#b8860b;--annx:#fff;--annb:#ffe14d}
+html[data-pal=bosque]{--bg:#07100a;--panel:#101c13;--line:#1e3224;--ink:#eef3e4;--muted:#93a98f;--gold:#e6d8a8;--gold-hd:#e6d8a8;--goldrgb:230,216,168;--ann1:#b8ac86;--ann2:#e6d8a8;--annx:#000;--annb:#000}
+html[data-pal=bosque][data-theme=light]{--bg:#e8eee2;--panel:#ffffff;--line:#d0dcc8;--ink:#0e1a11;--muted:#56705a;--gold:#4d7a45;--gold-hd:#e6d8a8;--goldrgb:77,122,69;--ann1:#3d6137;--ann2:#4d7a45;--annx:#fff;--annb:#ffe14d}
+html[data-pal=borgona]{--bg:#12050a;--panel:#200b14;--line:#3d1624;--ink:#fbeef0;--muted:#b2909a;--gold:#f2c185;--gold-hd:#f2c185;--goldrgb:242,193,133;--ann1:#c19a6a;--ann2:#f2c185;--annx:#000;--annb:#000}
+html[data-pal=borgona][data-theme=light]{--bg:#f6e9ec;--panel:#ffffff;--line:#e8d1d7;--ink:#1f0a12;--muted:#70505a;--gold:#a12a47;--gold-hd:#f2c185;--goldrgb:161,42,71;--ann1:#802138;--ann2:#a12a47;--annx:#fff;--annb:#ffe14d}
+html[data-pal=ciruela]{--bg:#0d0710;--panel:#1a0f1f;--line:#33203c;--ink:#f8eefb;--muted:#a995b3;--gold:#c36bd0;--gold-hd:#c36bd0;--goldrgb:195,107,208;--ann1:#9c55a6;--ann2:#c36bd0;--annx:#fff;--annb:#ffe14d}
+html[data-pal=ciruela][data-theme=light]{--bg:#f3eaf6;--panel:#ffffff;--line:#e2d2ea;--ink:#1b0f21;--muted:#6a5575;--gold:#8f3a9e;--gold-hd:#c36bd0;--goldrgb:143,58,158;--ann1:#722e7e;--ann2:#8f3a9e;--annx:#fff;--annb:#ffe14d}
+/* ===== TEMA "CAN I USE" ===== */
+html[data-pal=caniuse]{--bg:#191610;--panel:#302e28;--line:#46443f;--ink:#c1c0bf;--muted:#767471;--gold:#d4741b;--gold-hd:#e8913a;--goldrgb:212,116,27;--ann1:#6a2a01;--ann2:#833502;--annx:#fff;--annb:#ffd08a}
+html[data-pal=caniuse][data-theme=light]{--bg:#f6f5f3;--panel:#ffffff;--line:#dcd8d2;--ink:#2b2926;--muted:#77736c;--gold:#b85e0a;--gold-hd:#e8913a;--goldrgb:184,94,10;--ann1:#8a3a04;--ann2:#a84a0a;--annx:#fff;--annb:#ffd9a8}
+html[data-pal=caniuse] .sectH h2{background:#833502;color:#fff!important}
+html[data-pal=caniuse][data-theme=light] .sectH h2{background:#a84a0a}
+html[data-pal=caniuse] .ann{background:#833502!important;animation:none!important;box-shadow:none}
+html[data-pal=caniuse][data-theme=light] .ann{background:#a84a0a!important}
+html[data-pal=caniuse] .ann .annt{transform:none;text-transform:none;font-weight:600;letter-spacing:0}
+html[data-pal=caniuse] a{color:var(--gold-hd)}
+html[data-font=caniuse]{--fh:"Open Sans";--fb:"Open Sans"}
+html[data-font=caniuse] :is(h1,h2,h3,h4,.sectH h2,.info h3,.nv .in,.btn,.tag){font-weight:400!important;text-transform:none!important;letter-spacing:0!important;font-style:normal!important}
+html[data-font=caniuse] body{font-weight:300}
+html[data-font=caniuse] :is(.price,b,strong){font-weight:600}
+/* ===== Flechas más pegadas a los bordes ===== */
+.card .pa.pv{left:calc(var(--sk,22px)*.5 + 2px)!important}
+.card .pa.nx{right:calc(var(--sk,22px)*.5 + 2px)!important}
+html[data-shape] .card .pa.pv{left:4px!important}
+html[data-shape] .card .pa.nx{right:4px!important}
+.ra.l{left:4px!important}.ra.r{right:4px!important}
+/* ===== 6 FORMAS MÁS ===== */
+html[data-shape=elipse]{--bp:inset(0 round 50%);--cp:inset(0 round 50% / 18%)}
+html[data-shape=cinta]{--bp:polygon(0 0,100% 0,calc(100% - 10px) 50%,100% 100%,0 100%);--cp:polygon(0 0,100% 0,100% 100%,50% calc(100% - 26px),0 100%)}
+html[data-shape=muesca]{--bp:polygon(0 0,100% 0,calc(100% - 8px) 50%,100% 100%,0 100%,8px 50%);--cp:polygon(0 0,100% 0,calc(100% - 18px) 50%,100% 100%,0 100%,18px 50%)}
+html[data-shape=petalo]{--bp:inset(0 round 0 18px 0 18px);--cp:inset(0 round 0 40px 0 40px)}
+html[data-shape=ticket]{--bp:polygon(0 0,100% 0,100% 38%,calc(100% - 6px) 50%,100% 62%,100% 100%,0 100%,0 62%,6px 50%,0 38%);--cp:polygon(0 0,100% 0,100% 45%,calc(100% - 12px) 50%,100% 55%,100% 100%,0 100%,0 55%,12px 50%,0 45%)}
+html[data-shape=pixel]{--bp:polygon(0 6px,6px 6px,6px 0,calc(100% - 6px) 0,calc(100% - 6px) 6px,100% 6px,100% calc(100% - 6px),calc(100% - 6px) calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,6px calc(100% - 6px),0 calc(100% - 6px));--cp:polygon(0 14px,14px 14px,14px 0,calc(100% - 14px) 0,calc(100% - 14px) 14px,100% 14px,100% calc(100% - 14px),calc(100% - 14px) calc(100% - 14px),calc(100% - 14px) 100%,14px 100%,14px calc(100% - 14px),0 calc(100% - 14px))}
+/* ===== 6 TIPOGRAFÍAS MÁS (cursivas / inclinadas) ===== */
+html[data-font=pacifico]{--fh:"Pacifico";--fb:"Nunito"}
+html[data-font=dancing]{--fh:"Dancing Script";--fb:"Quicksand"}
+html[data-font=kaushan]{--fh:"Kaushan Script";--fb:"Poppins"}
+html[data-font=satisfy]{--fh:"Satisfy";--fb:"Lato"}
+html[data-font=courgette]{--fh:"Courgette";--fb:"Raleway"}
+html[data-font=italica]{--fh:"Playfair Display";--fb:"Lora"}
+html[data-font=italica] :is(h1,h2,h3,h4,.sectH h2,.info h3,.nv .in,body){font-style:italic}
+html[data-font=pacifico],html[data-font=kaushan],html[data-font=satisfy],html[data-font=courgette]{font-synthesis:none}
+html[data-font=pacifico] :is(h1,h2,h3,.sectH h2,.info h3,.nv .in),html[data-font=satisfy] :is(h1,h2,h3,.sectH h2,.info h3,.nv .in),html[data-font=kaushan] :is(h1,h2,h3,.sectH h2,.info h3,.nv .in),html[data-font=dancing] :is(h1,h2,h3,.sectH h2,.info h3,.nv .in){text-transform:none!important;letter-spacing:0!important}
+/* ===== 6 EFECTOS MÁS AL PASAR EL MOUSE ===== */
+html[data-hov=fantasma] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{opacity:.7;transform:scale(1.06)}
+html[data-hov=oscurecer] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{filter:brightness(.72)}
+html[data-hov=girox] .gxfx{animation:gxFlipX .7s ease!important}
+html[data-hov=tambalear] .gxfx{animation:gxWob .7s ease!important}
+html[data-hov=espaciar] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{letter-spacing:.14em;transform:scale(1.05)}
+html[data-hov=girar] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{transform:rotate(6deg) scale(1.08)}
+/* ===== 6 EFECTOS AUTOMÁTICOS MÁS ===== */
+html[data-auto=parpadeo] :is(.btn:not(.ghost):not(.sm),.cadd,.wa,.more,.promo-btn,.card .pl){animation:gxBlink 1.6s ease-in-out infinite}
+html[data-auto=flipx] :is(.btn:not(.ghost):not(.sm),.cadd,.wa,.more,.promo-btn,.card .pl){animation:gxFlipX 6s ease-in-out infinite}
+html[data-auto=vaiven] :is(.btn:not(.ghost):not(.sm),.cadd,.wa,.more,.promo-btn,.card .pl){animation:gxSway 2.6s ease-in-out infinite}
+html[data-auto=tambaleo] :is(.btn:not(.ghost):not(.sm),.cadd,.wa,.more,.promo-btn,.card .pl){animation:gxWob 4.5s ease-in-out infinite}
+html[data-auto=pop] :is(.btn:not(.ghost):not(.sm),.cadd,.wa,.more,.promo-btn,.card .pl){animation:gxPop 3.2s ease-out infinite}
+html[data-auto=tono] :is(.btn:not(.ghost):not(.sm),.cadd,.wa,.more,.promo-btn,.card .pl){animation:gxTono 4s ease-in-out infinite}
+@keyframes gxFlipX{0%,70%,100%{transform:perspective(500px) rotateX(0)}85%{transform:perspective(500px) rotateX(180deg)}100%{transform:perspective(500px) rotateX(360deg)}}
+@keyframes gxWob{0%,60%,100%{transform:rotate(0)}66%{transform:rotate(-9deg) translateX(-3px)}72%{transform:rotate(7deg) translateX(3px)}78%{transform:rotate(-5deg)}84%{transform:rotate(3deg)}90%{transform:rotate(0)}}
+@keyframes gxBlink{0%,100%{opacity:1}50%{opacity:.45}}
+@keyframes gxSway{0%,100%{transform:translateX(-4px)}50%{transform:translateX(4px)}}
+@keyframes gxPop{0%,70%,100%{transform:scale(1)}78%{transform:scale(1.18)}86%{transform:scale(.94)}93%{transform:scale(1.05)}}
+@keyframes gxTono{0%,100%{filter:hue-rotate(0)}50%{filter:hue-rotate(40deg) saturate(1.3)}}
 </style>
 </head>
 <body>
@@ -2269,6 +2335,11 @@ const LOOKS=[{id:'oro',n:'Oro Clásico',d:['#0a0a0a','#e2b53f'],l:['#ebebe6','#a
  {id:'menta',n:'Menta',d:['#06100d','#7df0c4'],l:['#e5f3ee','#1fae7e']},
  {id:'sangria',n:'Sangría',d:['#0e0508','#d3184a'],l:['#f5e6ea','#b00f3a']},
  {id:'arena',n:'Arena',d:['#0c0b09','#d8c3a5'],l:['#efeae1','#a78a5e']},
+ {id:'caniuse',n:'Can I use',d:['#191610','#d4741b'],l:['#f6f5f3','#b85e0a']},
+ {id:'medianoche',n:'Medianoche',d:['#060b1c','#f5c451'],l:['#e6eaf6','#b8860b']},
+ {id:'bosque',n:'Bosque',d:['#07100a','#e6d8a8'],l:['#e8eee2','#4d7a45']},
+ {id:'borgona',n:'Borgoña',d:['#12050a','#f2c185'],l:['#f6e9ec','#a12a47']},
+ {id:'ciruela',n:'Ciruela',d:['#0d0710','#c36bd0'],l:['#f3eaf6','#8f3a9e']},
  {id:'cristal',n:'Cristal (transparente)',d:['linear-gradient(135deg,#6e82ff,#ff5ad2 60%,#28d2c8)','#ffffff'],l:['linear-gradient(135deg,#a9b6ff,#ffc0ec 60%,#9ae6e0)','#2a7bd6']}];
 const SHAPES=[{id:'sesgado',n:'Inclinado',c:'polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%)'},
  {id:'cuadrado',n:'Cuadrado',c:'none'},{id:'redondo',n:'Redondeado',c:'inset(0 round 10px)'},
@@ -2285,10 +2356,16 @@ const SHAPES=[{id:'sesgado',n:'Inclinado',c:'polygon(12px 0,100% 0,calc(100% - 1
  {id:'esquina',n:'Una esquina',c:'polygon(12px 0,100% 0,100% 100%,0 100%,0 12px)'},
  {id:'pestana',n:'Pestaña',c:'inset(0 round 14px 14px 0 0)'},
  {id:'arco',n:'Arco',c:'inset(0 round 999px 999px 0 0)'},
- {id:'suave',n:'Casi cuadrado',c:'inset(0 round 4px)'}];
-const FONTS=[{id:'original',n:'Original',f:'"Big Shoulders Display"'},{id:'urbana',n:'Urbana',f:'"Bebas Neue"'},{id:'elegante',n:'Elegante',f:'"Playfair Display"'},{id:'futurista',n:'Futurista',f:'Orbitron'},{id:'deportiva',n:'Deportiva',f:'Anton'},{id:'redondeada',n:'Redondeada',f:'Fredoka'},{id:'moderna',n:'Moderna',f:'Poppins'},{id:'impacto',n:'Impacto',f:'"Archivo Black"'},{id:'retro',n:'Retro',f:'Righteous'},{id:'clasica',n:'Clásica',f:'Cinzel'},{id:'callejera',n:'Callejera',f:'Bungee'},{id:'industrial',n:'Industrial',f:'Teko'},{id:'tecnica',n:'Técnica',f:'"Russo One"'},{id:'militar',n:'Militar',f:'"Black Ops One"'},{id:'cursiva',n:'Cursiva',f:'Lobster'},{id:'condensada',n:'Condensada',f:'Oswald'},{id:'poster',n:'Póster',f:'Staatliches'},{id:'slab',n:'Slab',f:'"Alfa Slab One"'},{id:'comic',n:'Cómic',f:'Bangers'},{id:'pixel',n:'Pixel',f:'"Press Start 2P"'},{id:'espacial',n:'Espacial',f:'Audiowide'},{id:'marcador',n:'Marcador',f:'"Permanent Marker"'},{id:'moda',n:'Moda',f:'"Abril Fatface"'},{id:'gotica',n:'Gótica',f:'UnifrakturCook'}];
-const HOVS=[{id:'ninguno',n:'Relleno (original)',d:'El color se desliza'},{id:'elevar',n:'Elevar',d:'Sube y crece un poco'},{id:'escala',n:'Agrandar',d:'Crece con rebote'},{id:'inclinar',n:'Inclinar',d:'Gira ligeramente'},{id:'neon',n:'Neón',d:'Borde y brillo interior'},{id:'brillo',n:'Destello',d:'Pasa un brillo'},{id:'sacudir',n:'Sacudir',d:'Tiembla de lado a lado'},{id:'rebote',n:'Rebote',d:'Salta una vez'},{id:'giro',n:'Giro 3D',d:'Da una vuelta'},{id:'invertir',n:'Invertir',d:'Colores al revés'},{id:'hundir',n:'Hundir',d:'Se aprieta como botón'},{id:'arcoiris',n:'Arcoíris',d:'Cambia de colores'},{id:'tilt3d',n:'Inclinación 3D',d:'Se voltea en perspectiva'},{id:'estirar',n:'Estirar',d:'Se ensancha'},{id:'saturar',n:'Saturar',d:'Colores más intensos'},{id:'contorno',n:'Contorno',d:'Doble borde blanco y color'},{id:'latir',n:'Latir',d:'Pulsa mientras lo tocas'},{id:'flotar',n:'Flotar',d:'Sube y baja suave'}];
-const AUTOS=[{id:'ninguno',n:'Ninguno',d:'Botones quietos'},{id:'latido',n:'Latido',d:'Crece y encoge'},{id:'respirar',n:'Respirar',d:'Brillo que sube y baja'},{id:'rebote',n:'Rebote',d:'Salta de vez en cuando'},{id:'balanceo',n:'Balanceo',d:'Se mueve de lado a lado'},{id:'brillo',n:'Destello',d:'Brillo que cruza solo'},{id:'flotar',n:'Flotar',d:'Sube y baja suave'},{id:'giro',n:'Giro',d:'Da una vuelta cada tanto'},{id:'neon',n:'Neón',d:'Borde que se enciende'},{id:'sacudida',n:'Sacudida',d:'Tiembla de vez en cuando'},{id:'arcoiris',n:'Arcoíris',d:'Cambia de color lento'},{id:'gelatina',n:'Gelatina',d:'Rebota elástico'}];
+ {id:'suave',n:'Casi cuadrado',c:'inset(0 round 4px)'},
+ {id:'elipse',n:'Elipse',c:'inset(0 round 50%)'},
+ {id:'cinta',n:'Cinta',c:'polygon(0 0,100% 0,calc(100% - 10px) 50%,100% 100%,0 100%)'},
+ {id:'muesca',n:'Muesca',c:'polygon(0 0,100% 0,calc(100% - 8px) 50%,100% 100%,0 100%,8px 50%)'},
+ {id:'petalo',n:'Pétalo',c:'inset(0 round 0 18px 0 18px)'},
+ {id:'ticket',n:'Ticket',c:'polygon(0 0,100% 0,100% 38%,calc(100% - 6px) 50%,100% 62%,100% 100%,0 100%,0 62%,6px 50%,0 38%)'},
+ {id:'pixel',n:'Pixel',c:'polygon(0 6px,6px 6px,6px 0,calc(100% - 6px) 0,calc(100% - 6px) 6px,100% 6px,100% calc(100% - 6px),calc(100% - 6px) calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,6px calc(100% - 6px),0 calc(100% - 6px))'}];
+const FONTS=[{id:'original',n:'Original',f:'"Big Shoulders Display"'},{id:'urbana',n:'Urbana',f:'"Bebas Neue"'},{id:'elegante',n:'Elegante',f:'"Playfair Display"'},{id:'futurista',n:'Futurista',f:'Orbitron'},{id:'deportiva',n:'Deportiva',f:'Anton'},{id:'redondeada',n:'Redondeada',f:'Fredoka'},{id:'moderna',n:'Moderna',f:'Poppins'},{id:'impacto',n:'Impacto',f:'"Archivo Black"'},{id:'retro',n:'Retro',f:'Righteous'},{id:'clasica',n:'Clásica',f:'Cinzel'},{id:'callejera',n:'Callejera',f:'Bungee'},{id:'industrial',n:'Industrial',f:'Teko'},{id:'tecnica',n:'Técnica',f:'"Russo One"'},{id:'militar',n:'Militar',f:'"Black Ops One"'},{id:'cursiva',n:'Cursiva',f:'Lobster'},{id:'condensada',n:'Condensada',f:'Oswald'},{id:'poster',n:'Póster',f:'Staatliches'},{id:'slab',n:'Slab',f:'"Alfa Slab One"'},{id:'comic',n:'Cómic',f:'Bangers'},{id:'pixel',n:'Pixel',f:'"Press Start 2P"'},{id:'espacial',n:'Espacial',f:'Audiowide'},{id:'marcador',n:'Marcador',f:'"Permanent Marker"'},{id:'moda',n:'Moda',f:'"Abril Fatface"'},{id:'gotica',n:'Gótica',f:'UnifrakturCook'},{id:'caniuse',n:'Can I use',f:'"Open Sans"'},{id:'pacifico',n:'Pacifico (cursiva)',f:'Pacifico'},{id:'dancing',n:'Dancing (corrida)',f:'"Dancing Script"'},{id:'kaushan',n:'Kaushan (pincel)',f:'"Kaushan Script"'},{id:'satisfy',n:'Satisfy (cursiva)',f:'Satisfy'},{id:'courgette',n:'Courgette (inclinada)',f:'Courgette'},{id:'italica',n:'Itálica elegante',f:'"Playfair Display"'}];
+const HOVS=[{id:'ninguno',n:'Relleno (original)',d:'El color se desliza'},{id:'elevar',n:'Elevar',d:'Sube y crece un poco'},{id:'escala',n:'Agrandar',d:'Crece con rebote'},{id:'inclinar',n:'Inclinar',d:'Gira ligeramente'},{id:'neon',n:'Neón',d:'Borde y brillo interior'},{id:'brillo',n:'Destello',d:'Pasa un brillo'},{id:'sacudir',n:'Sacudir',d:'Tiembla de lado a lado'},{id:'rebote',n:'Rebote',d:'Salta una vez'},{id:'giro',n:'Giro 3D',d:'Da una vuelta'},{id:'invertir',n:'Invertir',d:'Colores al revés'},{id:'hundir',n:'Hundir',d:'Se aprieta como botón'},{id:'arcoiris',n:'Arcoíris',d:'Cambia de colores'},{id:'tilt3d',n:'Inclinación 3D',d:'Se voltea en perspectiva'},{id:'estirar',n:'Estirar',d:'Se ensancha'},{id:'saturar',n:'Saturar',d:'Colores más intensos'},{id:'contorno',n:'Contorno',d:'Doble borde blanco y color'},{id:'latir',n:'Latir',d:'Pulsa mientras lo tocas'},{id:'flotar',n:'Flotar',d:'Sube y baja suave'},{id:'fantasma',n:'Fantasma',d:'Se vuelve translúcido'},{id:'oscurecer',n:'Oscurecer',d:'Se oscurece al tocarlo'},{id:'girox',n:'Volteo',d:'Voltea una vez'},{id:'tambalear',n:'Tambalear',d:'Se bambolea una vez'},{id:'espaciar',n:'Espaciar',d:'Letras más separadas'},{id:'girar',n:'Girar leve',d:'Se inclina y crece'}];
+const AUTOS=[{id:'ninguno',n:'Ninguno',d:'Botones quietos'},{id:'latido',n:'Latido',d:'Crece y encoge'},{id:'respirar',n:'Respirar',d:'Brillo que sube y baja'},{id:'rebote',n:'Rebote',d:'Salta de vez en cuando'},{id:'balanceo',n:'Balanceo',d:'Se mueve de lado a lado'},{id:'brillo',n:'Destello',d:'Brillo que cruza solo'},{id:'flotar',n:'Flotar',d:'Sube y baja suave'},{id:'giro',n:'Giro',d:'Da una vuelta cada tanto'},{id:'neon',n:'Neón',d:'Borde que se enciende'},{id:'sacudida',n:'Sacudida',d:'Tiembla de vez en cuando'},{id:'arcoiris',n:'Arcoíris',d:'Cambia de color lento'},{id:'gelatina',n:'Gelatina',d:'Rebota elástico'},{id:'parpadeo',n:'Parpadeo',d:'Se apaga y enciende'},{id:'flipx',n:'Volteo',d:'Se voltea cada tanto'},{id:'vaiven',n:'Vaivén',d:'De lado a lado suave'},{id:'tambaleo',n:'Tambaleo',d:'Se bambolea de vez en cuando'},{id:'pop',n:'Pop',d:'Salta y se achica'},{id:'tono',n:'Cambio de tono',d:'El color oscila'}];
 const LK0={pal:'oro',shape:'sesgado',font:'original',hov:'ninguno',auto:'ninguno'};
 let LOOK={...LK0},lookDirty=false;
 try{const c=JSON.parse(localStorage.getItem('gx_look')||'{}');LOOK={...LK0,...c}}catch(e){}
@@ -2305,7 +2382,7 @@ function rApp(){const cur=LOOK;FONTS.forEach(f=>gxFont(f.id));
  <div class="apbar"><button type="button" class="btn" id="apSave">Guardar apariencia</button><button type="button" class="btn ghost sm" id="apMode">Ver en claro / oscuro</button><button type="button" class="btn ghost sm" id="apReset">Volver al original</button></div>
  <p class="desc" id="apMsg" style="margin-top:8px">${lookDirty?'Cambios sin guardar.':''}</p>`}
 $('tApp').onclick=async e=>{const b=e.target.closest('button');if(!b)return;const m=$('apMsg');
- if(b.dataset.k){LOOK[b.dataset.k]=b.dataset.v;lookDirty=true;applyLook(LOOK);rApp();return}
+ if(b.dataset.k){LOOK[b.dataset.k]=b.dataset.v;if(b.dataset.k==='pal'&&b.dataset.v==='caniuse'){LOOK.font='caniuse';LOOK.shape='cuadrado'}lookDirty=true;applyLook(LOOK);rApp();return}
  if(b.id==='apMode'){$('themeBtn').click();return}
  if(b.id==='apReset'){LOOK={...LK0};lookDirty=true;applyLook(LOOK);rApp();return}
  if(b.id==='apSave'){b.disabled=true;m.textContent='Guardando…';
@@ -2316,7 +2393,7 @@ $('tApp').onclick=async e=>{const b=e.target.closest('button');if(!b)return;cons
 
 /* efectos de una sola pasada (giro, sacudir, rebote): se disparan al entrar y no se repiten hasta salir */
 (()=>{const SEL='.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb',H=document.documentElement;
- document.addEventListener('mouseover',e=>{const v=H.dataset.hov;if(v!=='giro'&&v!=='sacudir'&&v!=='rebote')return;const b=e.target.closest&&e.target.closest(SEL);if(!b||b._fx)return;b._fx=1;b.classList.add('gxfx');
+ document.addEventListener('mouseover',e=>{const v=H.dataset.hov;if(v!=='giro'&&v!=='sacudir'&&v!=='rebote'&&v!=='girox'&&v!=='tambalear')return;const b=e.target.closest&&e.target.closest(SEL);if(!b||b._fx)return;b._fx=1;b.classList.add('gxfx');
   const end=()=>{b.classList.remove('gxfx');if(!b.matches(':hover'))b._fx=0};b.addEventListener('animationend',end,{once:true});setTimeout(end,900)});
  document.addEventListener('mouseout',e=>{const b=e.target.closest&&e.target.closest(SEL);if(b&&!b.contains(e.relatedTarget)&&!b.classList.contains('gxfx'))b._fx=0});
 })();
