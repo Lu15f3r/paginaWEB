@@ -1305,6 +1305,14 @@ html body :is(h1,h2,h3,h4,h5,h6){font-family:var(--fh),sans-serif}
 /* ===== Evita que algo que se sale de la pantalla (animaciones, marquesinas) ensanche la página y haga "temblar" los botones fijos ===== */
 html,body{max-width:100%;overflow-x:clip}
 @supports not (overflow:clip){html,body{overflow-x:hidden}}
+
+/* ===== Botones carrito/WhatsApp dentro de la foto: más a la derecha y un poco más abajo ===== */
+.ph .qa{right:calc(var(--sk,22px)*.85 + 1px)!important;bottom:5px!important}
+html[data-shape] .ph .qa{right:9px!important;bottom:8px!important}
+html[data-shape=pildora] .ph .qa,html[data-shape=arco] .ph .qa,html[data-shape=elipse] .ph .qa{right:18px!important;bottom:14px!important}
+
+/* ===== Celular: tarjetas con menos inclinación para dar más espacio a los botones ===== */
+@media(max-width:700px){#catalogo .card,.card{--sk:9px}}
 </style>
 </head>
 <body>
