@@ -1353,6 +1353,9 @@ html[data-shape=pixel]{--qr:17px;--qb:17px;--dr:17px;--dt:17px;--tx:17px;--ty:17
 #lb .stage,#lbS{background:#fff!important}
 #lbI.dgsw{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;padding:0 52px!important;box-sizing:border-box!important;background:#fff!important;object-fit:contain!important;z-index:3}
 @media(max-width:640px){#lbI.dgsw,#lbS .dgi{padding:0 46px!important}}
+
+/* ===== Tarjetas del catálogo: al arrastrar la foto usa el mismo recorte (cover) que la foto fija -> sin franjas oscuras arriba/abajo ===== */
+html .ph img.dgi,html .ph .dgw{object-fit:cover!important;padding:0!important}
 </style>
 </head>
 <body>
