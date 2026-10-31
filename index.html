@@ -910,6 +910,16 @@ body.pv #lb .dh h2{font-size:clamp(26px,3.4vw,40px)!important;text-transform:upp
 .seals{gap:18px!important;padding:14px 0 6px!important;flex-wrap:wrap}
 .seals img{width:78px;height:auto;display:block;filter:drop-shadow(0 3px 6px rgba(0,0,0,.45));transition:transform .25s}.seals img:hover{transform:translateY(-3px) scale(1.05)}
 @media(max-width:640px){.seals img{width:60px}.seals{gap:12px!important;justify-content:center!important}}
+/* ===== v10: encabezado sin fondo + franja de envío llamativa ===== */
+.top{background:transparent!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;border-bottom:0!important;position:relative!important;z-index:6}
+.top .logo,.top .nv svg{filter:drop-shadow(0 1px 5px rgba(0,0,0,.75))}
+.ann{background:linear-gradient(90deg,#c40000,#ff2a2a,#c40000)!important;background-size:200% 100%;animation:annMv 3.5s linear infinite;color:#fff!important;padding:8px 12px!important;font-size:15px!important;letter-spacing:.04em;overflow:hidden;position:relative;box-shadow:0 2px 14px rgba(255,30,30,.45);z-index:7}
+.ann .annt{display:inline-block;transform:skewX(-14deg);font-weight:900;text-transform:uppercase;text-shadow:0 1px 4px rgba(0,0,0,.45)}
+.ann b{color:#ffe14d;font-weight:900}
+@keyframes annMv{to{background-position:200% 0}}
+@media(max-width:640px){.ann{font-size:12.5px!important;padding:7px 8px!important}}
+@media(prefers-reduced-motion:reduce){.ann{animation:none}}
+body.pv .top{background:#0a0a0a!important;position:sticky!important;top:0}
 </style>
 </head>
 <body>
@@ -996,9 +1006,9 @@ body.pv #lb .dh h2{font-size:clamp(26px,3.4vw,40px)!important;text-transform:upp
         <label>Material<input id="pmt" placeholder="Ej: Algodón 100%, acero inoxidable" autocomplete="off"></label>
         <div class="w"><b style="font-size:14px">Para quién es (puedes marcar varios)</b><div class="sizes cchips" id="gchips" style="margin-top:6px"></div></div>
         <div class="w r4">
-          <label>Valor compra<input type="number" id="pco" min="0" step="500" placeholder="Lo que te costó"></label>
-          <label>Valor venta<input type="number" id="pcmp" min="0" step="500" placeholder="Opcional"></label>
-          <label>Valor venta oferta<input type="number" id="pp" min="0" step="500" required></label>
+          <label>Valor compra<input type="number" id="pco" min="0" step="any" inputmode="decimal" placeholder="Lo que te costó"></label>
+          <label>Valor venta<input type="number" id="pcmp" min="0" step="any" inputmode="decimal" placeholder="Opcional"></label>
+          <label>Valor venta oferta<input type="number" id="pp" min="0" step="any" inputmode="decimal" required></label>
           <label>Stock<input type="number" id="pst" min="0" step="1" readonly placeholder="Auto" title="Se calcula con el inventario por talla y color"></label>
         </div>
         <p class="w mg" id="pmg"></p>
@@ -1445,6 +1455,9 @@ let PV_Y=0;
 function pvOpen(){const lb=$('lb');if(!lb.open){PV_Y=scrollY;lb.show();document.body.classList.add('pv');try{history.pushState({pv:1},'')}catch(_){}}scrollTo(0,0)}
 function pvClose(pop){const lb=$('lb');if(!lb.open)return;lb.close();document.body.classList.remove('pv');scrollTo(0,PV_Y||0);if(!pop&&history.state&&history.state.pv){try{history.back()}catch(_){}}}
 addEventListener('popstate',()=>pvClose(true));
+/* preguntas frecuentes: una abierta a la vez y se cierran al tocar fuera */
+{const F=document.querySelector('.faq');F.addEventListener('toggle',e=>{if(e.target.open)F.querySelectorAll('details[open]').forEach(d=>{if(d!==e.target)d.open=false})},true);
+ document.addEventListener('pointerdown',e=>{if(!e.target.closest('.faq details'))F.querySelectorAll('details[open]').forEach(d=>d.open=false)})}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('lb').open&&!document.querySelector('dialog[open]:not(#lb)'))pvClose()});
 document.querySelector('.top').addEventListener('click',e=>{if(document.body.classList.contains('pv')&&e.target.closest('a'))pvClose()});
 $('srQ').addEventListener('input',()=>pvClose());
@@ -1882,7 +1895,7 @@ $('lbQp').onclick=()=>{LB.q=(LB.q||1)+1;LB.msg='';lbOpts()};
 $('hero').style.setProperty('--hp',CFG.HERO_POS||'center 62%');
 
 {const P=CFG.PAY||{},C={Nequi:'#da0081',Bancolombia:'#fdda24',Daviplata:'#ed1c24','Contra entrega':'#ff8a1f','Tarjeta / PSE':'#2f8cff'};$('pays').innerHTML='<span>Medios de pago</span>'+[...(P.cuentas||[]).map(c=>c.n),P.online?'Tarjeta / PSE':null,P.cod!==false?'Contra entrega':null].filter(Boolean).map(n=>`<i style="--c:${C[n]||'var(--gold)'}">${esc(n)}</i>`).join('')}
-$('ann').innerHTML=`Envío GRATIS en compras desde <b>${money(CFG.FREE_SHIP)}</b>${CFG.COMBOS_ON?' y en todos los combos':''}`;buildMq();document.documentElement.classList.toggle('nocombos',!CFG.COMBOS_ON);
+$('ann').innerHTML=`<span class="annt">Envío GRATIS en compras desde <b>${money(CFG.FREE_SHIP)}</b>${CFG.COMBOS_ON?' y en todos los combos':''}</span>`;buildMq();document.documentElement.classList.toggle('nocombos',!CFG.COMBOS_ON);
 const tt=$('toTop'),td=$('toDown');
 const maxY=()=>document.documentElement.scrollHeight-innerHeight;
 const stops=()=>{const h=(document.querySelector('.top')||{}).offsetHeight||0,M=maxY(),ft=document.querySelector('.feat'),c0=document.querySelector('main .cat');
