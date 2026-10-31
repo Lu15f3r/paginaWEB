@@ -3,7 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script>try{document.documentElement.dataset.theme=localStorage.getItem("theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}try{var _l=JSON.parse(localStorage.getItem("gx_look")||"{}");if(_l.pal&&_l.pal!=="oro")document.documentElement.dataset.pal=_l.pal;if(_l.shape&&_l.shape!=="sesgado")document.documentElement.dataset.shape=_l.shape}catch(e){}</script>
+<script>try{document.documentElement.dataset.theme=localStorage.getItem("theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}
+var GXF={urbana:"Bebas+Neue&family=Montserrat:wght@400;600;700;800",elegante:"Playfair+Display:wght@700;900&family=Lato:wght@400;700;900",futurista:"Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700",deportiva:"Anton&family=Barlow:wght@400;600;700;800",redondeada:"Fredoka:wght@500;700&family=Nunito:wght@400;700;800",moderna:"Poppins:wght@400;500;600;700;800"};
+function gxFont(k){if(!GXF[k]||document.getElementById("gxf-"+k))return;var l=document.createElement("link");l.id="gxf-"+k;l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family="+GXF[k]+"&display=swap";document.head.appendChild(l)}
+function gxLook(l){var d=document.documentElement;["pal","shape","font","hov","auto"].forEach(function(a){var v=l&&l[a],def=a==="pal"?"oro":a==="shape"?"sesgado":a==="font"?"original":"ninguno";if(v&&v!==def){d.dataset[a]=v;if(a==="font")gxFont(v)}else delete d.dataset[a]})}
+try{gxLook(JSON.parse(localStorage.getItem("gx_look")||"{}"))}catch(e){}
+</script>
 <title>GORRAX | Gorras, buzos, relojes y actitud</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0a'/%3E%3Cpath d='M10 46 6 20l16 12 10-18 10 18 16-12-4 26z' fill='%23e2b53f'/%3E%3Crect x='12' y='50' width='40' height='5' rx='2' fill='%23e2b53f'/%3E%3C/svg%3E">
 <meta name="description" content="Gorras, buzos y relojes con estilo. Pide directo por WhatsApp.">
@@ -13,19 +18,19 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=Hanken+Grotesk:wght@400;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">
 <style>
-:root{--goldrgb:226,181,63;--bg:#0a0a0a;--panel:#141414;--line:#2a2a2a;--ink:#f3f0e8;--muted:#9b978c;--gold:#e2b53f;--wa:#1fa855}
+:root{--fh:"Big Shoulders Display";--fb:"Hanken Grotesk";--goldrgb:226,181,63;--bg:#0a0a0a;--panel:#141414;--line:#2a2a2a;--ink:#f3f0e8;--muted:#9b978c;--gold:#e2b53f;--wa:#1fa855}
 *{box-sizing:border-box;margin:0}
 [hidden]{display:none!important}
-body{font:16px/1.5 "Hanken Grotesk",system-ui,sans-serif;background:var(--bg);color:var(--ink)}
-h1,h2,h3.t,.hand{font-family:"Big Shoulders Display",Impact,sans-serif;font-weight:900;line-height:.95}
-.hand{font-family:"Permanent Marker","Big Shoulders Display",cursive;font-weight:400;line-height:1.2}
+body{font:16px/1.5 var(--fb),system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+h1,h2,h3.t,.hand{font-family:var(--fh),Impact,sans-serif;font-weight:900;line-height:.95}
+.hand{font-family:"Permanent Marker",var(--fh),cursive;font-weight:400;line-height:1.2}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .top{position:sticky;top:0;z-index:5;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px 16px;padding:8px 5vw;background:rgba(10,10,10,.93);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .logo{height:54px;display:block}
 .top nav{display:flex;gap:22px;justify-content:center}
 .nv{position:relative;display:inline-flex;overflow:hidden;text-decoration:none;color:var(--gold);background:#0f0f0f;border:2px solid var(--gold);transform:skewX(-14deg);transition:box-shadow .3s,transform .15s}
-.nv .in{position:relative;z-index:1;display:flex;align-items:center;gap:9px;padding:8px 22px;transform:skewX(14deg);font:800 22px "Big Shoulders Display",sans-serif;font-style:italic;letter-spacing:.04em;transition:color .3s}
+.nv .in{position:relative;z-index:1;display:flex;align-items:center;gap:9px;padding:8px 22px;transform:skewX(14deg);font:800 22px var(--fh),sans-serif;font-style:italic;letter-spacing:.04em;transition:color .3s}
 .nv .in svg{width:26px;height:26px;transition:transform .45s cubic-bezier(.3,1.8,.5,1)}
 .nv::before{content:"";position:absolute;inset:-2px -30%;background:var(--gold);transform:translateX(-110%);transition:transform .45s cubic-bezier(.7,0,.2,1)}
 .nv::after{content:"";position:absolute;top:0;bottom:0;left:-30%;width:18%;z-index:2;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,255,255,.8),transparent)}
@@ -42,7 +47,7 @@ a{color:inherit}
 .hero img{width:100%;height:auto;aspect-ratio:2080/950;max-height:90vh;object-fit:cover;background:#0a0a0a;display:block}
 .hero::after{content:"";position:absolute;inset:auto 0 0;height:35%;background:linear-gradient(transparent,var(--bg))}
 .hero .btn{position:absolute;left:50%;bottom:6%;transform:translateX(-50%);z-index:1}
-.btn{display:inline-block;border:0;cursor:pointer;font:800 15px "Hanken Grotesk",sans-serif;padding:13px 28px;border-radius:999px;background:var(--gold);color:#000;text-decoration:none}
+.btn{display:inline-block;border:0;cursor:pointer;font:800 15px var(--fb),sans-serif;padding:13px 28px;border-radius:999px;background:var(--gold);color:#000;text-decoration:none}
 .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
 .btn.sm{padding:8px 14px;font-size:13px}.btn.red{background:#c62828;color:#fff}
 .feat{max-width:1200px;margin:0 auto;padding:10px 5vw 0;display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
@@ -65,7 +70,7 @@ main{max-width:1600px;margin:auto;padding:0 5vw}
 .price{font-weight:800;font-size:19px;color:var(--gold)}
 .desc{color:var(--muted);font-size:13.5px}
 .sizes{display:flex;flex-wrap:wrap;gap:6px}
-.sizes button{font:700 13px "Hanken Grotesk",sans-serif;min-width:38px;padding:5px 10px;border:1.5px solid var(--line);background:transparent;color:var(--ink);border-radius:6px;cursor:pointer}
+.sizes button{font:700 13px var(--fb),sans-serif;min-width:38px;padding:5px 10px;border:1.5px solid var(--line);background:transparent;color:var(--ink);border-radius:6px;cursor:pointer}
 .sizes button.on{background:var(--gold);color:#000;border-color:var(--gold)}
 .wa{margin-top:auto;text-align:center;background:var(--wa);color:#fff;text-decoration:none;font-weight:800;font-size:14px;padding:10px;border-radius:6px}
 .wa.off{background:#3a3a3a;color:#888;pointer-events:none}
@@ -217,7 +222,7 @@ button.nv{padding:0;font:inherit;cursor:pointer;color:inherit}
 .gi{position:relative;width:84px;height:104px}
 .gi img{width:100%;height:100%;object-fit:cover;border-radius:4px;background:#0d0d0d}
 .gi button{position:absolute;top:-7px;right:-7px;width:24px;height:24px;border-radius:50%;border:0;background:#c62828;color:#fff;font-size:16px;line-height:1;cursor:pointer}
-.gi em{position:absolute;left:0;right:0;bottom:0;background:var(--gold);color:#000;font:700 11px "Hanken Grotesk",sans-serif;text-align:center}
+.gi em{position:absolute;left:0;right:0;bottom:0;background:var(--gold);color:#000;font:700 11px var(--fb),sans-serif;text-align:center}
 @media(min-width:760px){.feat{grid-template-columns:repeat(3,1fr)}}
 @media(min-width:1100px){.feat{grid-template-columns:repeat(6,1fr)}}
 .ph,[data-theme=light] .ph{background:#fff}
@@ -284,21 +289,21 @@ dialog{margin:auto}
 @keyframes promoShine{0%,55%{left:-30%}100%{left:130%}}
 .promo-btn{background:#000;color:var(--gold);padding:4px 16px;font-size:13px;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:background .25s,color .25s}
 .promo:hover .promo-btn{background:#fff;color:#000}
-.nv .pct{margin-left:6px;background:var(--gold);color:#000;font:800 11px "Hanken Grotesk",sans-serif;font-style:normal;letter-spacing:0;padding:2px 7px;border-radius:999px;animation:pulse 1.6s ease-in-out infinite}
+.nv .pct{margin-left:6px;background:var(--gold);color:#000;font:800 11px var(--fb),sans-serif;font-style:normal;letter-spacing:0;padding:2px 7px;border-radius:999px;animation:pulse 1.6s ease-in-out infinite}
 .nv:hover .pct,.nv.on .pct{background:#000;color:var(--gold)}
 @keyframes pulse{50%{transform:scale(1.15)}}
 
 /* ===== Promo Arma tu combo, colores, cantidad y panel admin ===== */
 .cpromo{--sk:28px;position:relative;width:min(1200px,92vw);margin:18px auto 6px;padding:22px calc(var(--sk) + 18px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 28px;background:var(--panel);clip-path:polygon(var(--sk) 0,100% 0,calc(100% - var(--sk)) 100%,0 100%)}
-.cp-s{font:700 13px "Hanken Grotesk",sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.cp-s{font:700 13px var(--fb),sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
 .cp-h{font-size:clamp(52px,9vw,100px);font-style:italic;color:var(--gold);margin:2px 0}
-.cp-l{font:800 clamp(22px,4vw,40px) "Big Shoulders Display",sans-serif;letter-spacing:.05em;text-transform:uppercase}
+.cp-l{font:800 clamp(22px,4vw,40px) var(--fh),sans-serif;letter-spacing:.05em;text-transform:uppercase}
 .cp-l b{display:inline-block;animation:cpEm 4.5s ease-in-out infinite}.cp-l .w2{animation-delay:1.5s}.cp-l .w3{animation-delay:3s}
 @keyframes cpEm{0%,28%,100%{color:var(--ink);transform:none}12%{color:var(--gold);transform:scale(1.08)}}
 .cp-s2{font-family:"Permanent Marker",cursive;font-size:22px;color:var(--gold);margin-top:2px}
 .cp-b{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
-.cp-badge{display:flex;flex-direction:column;align-items:center;justify-content:center;width:116px;height:98px;background:var(--gold);color:#000;font:900 56px/.9 "Big Shoulders Display",sans-serif;clip-path:polygon(14px 0,100% 0,calc(100% - 14px) 100%,0 100%);box-shadow:inset 0 0 0 5px var(--gold),inset 0 0 0 7px rgba(0,0,0,.55);animation:cpPulse 2.8s ease-in-out infinite;transform:rotate(-3deg)}
-.cp-badge small{font-size:.5em}.cp-badge em{font:800 11px "Hanken Grotesk",sans-serif;font-style:normal;letter-spacing:.2em}
+.cp-badge{display:flex;flex-direction:column;align-items:center;justify-content:center;width:116px;height:98px;background:var(--gold);color:#000;font:900 56px/.9 var(--fh),sans-serif;clip-path:polygon(14px 0,100% 0,calc(100% - 14px) 100%,0 100%);box-shadow:inset 0 0 0 5px var(--gold),inset 0 0 0 7px rgba(0,0,0,.55);animation:cpPulse 2.8s ease-in-out infinite;transform:rotate(-3deg)}
+.cp-badge small{font-size:.5em}.cp-badge em{font:800 11px var(--fb),sans-serif;font-style:normal;letter-spacing:.2em}
 @keyframes cpPulse{50%{transform:rotate(-3deg) scale(1.06)}}
 .btn.cyc{font-size:20px;padding:16px 36px}
 .cyc[data-c="1"]{--o:var(--ink);--f1:var(--ink);--f2:#0a0a0a;--t1:var(--bg);--t2:var(--ink)}
@@ -323,8 +328,8 @@ dialog{margin:auto}
 .save{background:#e53935;color:#fff;letter-spacing:.02em}
 .saved{font-size:12.5px;font-weight:700;color:#2ecc71;white-space:nowrap}
 [data-theme=light] .saved{color:#12803f}
-.disc{position:absolute;top:10px;right:10px;z-index:3;display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1;padding:7px 16px 6px;background:#e53935;color:#fff;font:900 24px "Big Shoulders Display",sans-serif;font-style:italic;clip-path:polygon(9px 0,100% 0,calc(100% - 9px) 100%,0 100%);animation:discPulse 2.4s ease-in-out infinite;pointer-events:none}
-.disc small{font:800 9px "Hanken Grotesk",sans-serif;font-style:normal;letter-spacing:.2em}
+.disc{position:absolute;top:10px;right:10px;z-index:3;display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1;padding:7px 16px 6px;background:#e53935;color:#fff;font:900 24px var(--fh),sans-serif;font-style:italic;clip-path:polygon(9px 0,100% 0,calc(100% - 9px) 100%,0 100%);animation:discPulse 2.4s ease-in-out infinite;pointer-events:none}
+.disc small{font:800 9px var(--fb),sans-serif;font-style:normal;letter-spacing:.2em}
 @keyframes discPulse{50%{transform:scale(1.08)}}
 .ph.off-disc .disc{display:none}
 /* onda diagonal en la promo (hover con mouse o toque con el dedo) */
@@ -391,7 +396,7 @@ dialog{margin:auto}
 .bfoot{display:flex;flex-wrap:wrap;align-items:flex-start;gap:16px 32px;margin-top:18px}
 .bfoot .bqt{margin-top:0}
 .bres{flex:1 1 320px;max-width:560px;display:grid;gap:6px;padding:12px 16px;background:var(--bg);font-size:14px}
-.bres h4{font:800 22px "Big Shoulders Display",sans-serif;font-style:italic;color:var(--gold);margin-bottom:2px}
+.bres h4{font:800 22px var(--fh),sans-serif;font-style:italic;color:var(--gold);margin-bottom:2px}
 .bres .r{display:flex;justify-content:space-between;gap:14px}
 .bres .r>span:last-child{white-space:nowrap;font-weight:700}
 .bres .mut{color:var(--muted)}
@@ -413,9 +418,9 @@ dialog{margin:auto}
 @media(hover:hover){.ph.two:hover .im1{opacity:1}}
 .ph.two.alt .im1{opacity:1}
 .ph.ld .noimg{display:none}
-.cartb{bottom:76px;cursor:pointer;font:800 16px "Hanken Grotesk",sans-serif;--o:var(--gold);--f1:var(--gold);--f2:#0a0a0a;--t1:#000;--t2:var(--gold)}
+.cartb{bottom:76px;cursor:pointer;font:800 16px var(--fb),sans-serif;--o:var(--gold);--f1:var(--gold);--f2:#0a0a0a;--t1:#000;--t2:var(--gold)}
 .cartb svg{width:22px;height:22px}
-.cn{background:#c62828;color:#fff;border-radius:999px;font:800 12px "Hanken Grotesk",sans-serif;padding:1px 7px;min-width:20px;text-align:center}
+.cn{background:#c62828;color:#fff;border-radius:999px;font:800 12px var(--fb),sans-serif;padding:1px 7px;min-width:20px;text-align:center}
 .cartb.bump{animation:cbump .5s}@keyframes cbump{40%{transform:scale(1.18)}}
 .cartO{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .3s}.cartO.open{opacity:1;pointer-events:auto}
 .cartP{position:fixed;top:0;right:0;bottom:0;width:min(430px,100vw);z-index:21;background:var(--panel);border-left:1px solid var(--line);display:flex;flex-direction:column;transform:translateX(100%);visibility:hidden;transition:transform .3s,visibility 0s .3s}
@@ -428,7 +433,7 @@ dialog{margin:auto}
 .cq{display:flex;align-items:center;gap:8px;margin-top:6px}
 .cq button{width:28px;height:28px;border:1.5px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;font:800 16px sans-serif}
 .cq button:disabled{opacity:.35;cursor:not-allowed}
-.cq .cx{width:auto;border:0;font:600 12.5px "Hanken Grotesk",sans-serif;text-decoration:underline;color:var(--muted)}
+.cq .cx{width:auto;border:0;font:600 12.5px var(--fb),sans-serif;text-decoration:underline;color:var(--muted)}
 .cp{text-align:right;display:flex;flex-direction:column}.cp s{color:var(--muted);font-size:12.5px}.cp b{color:var(--gold)}
 .cpf{padding:14px 18px;border-top:1px solid var(--line);display:grid;gap:10px}
 .ctot .r{display:flex;justify-content:space-between}.ctot .tt{font-weight:800;font-size:20px;color:var(--gold)}
@@ -488,7 +493,7 @@ footer .links a:hover,footer .links a:focus-visible{color:var(--t1)!important}
 .cat .banner .bl.l{left:0;top:0;bottom:0;right:25%;background:var(--panel)}
 .cat .banner .bl.l h2{color:var(--gold);align-self:center}
 .cat .banner .bl.r{--tb:#1a1403;top:0;right:0;bottom:0;width:25%;background:var(--gold);clip-path:polygon(var(--sk) 0,100% 0,100% 100%,0 100%);padding:6px 8px 6px calc(var(--sk)/2 + 6px);text-align:center}
-.cat .banner .bl.r p{margin:0;color:var(--tb);font:800 13px/1.15 "Big Shoulders Display",sans-serif;font-style:italic;letter-spacing:.02em;text-transform:uppercase}
+.cat .banner .bl.r p{margin:0;color:var(--tb);font:800 13px/1.15 var(--fh),sans-serif;font-style:italic;letter-spacing:.02em;text-transform:uppercase}
 [data-theme=light] .cat .banner .bl.r{background:#16161a}
 [data-theme=light] .cat .banner .bl.r{--tb:#e2b53f}
 /* Barrido automático (el mismo efecto del menú al pasar el mouse): UNA sola pasada que cruza todo el banner de un lado al otro.
@@ -618,7 +623,7 @@ footer .links a::after{
 
 /* ===== Filtro + checkout ===== */
 .cat{position:relative}
-.fbtn{position:fixed;left:0;top:50%;transform:translate(-110%,-50%);opacity:0;pointer-events:none;transition:transform .3s,opacity .3s;z-index:14;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:46px;height:68px;padding:0;font:800 10px "Hanken Grotesk",sans-serif;background:var(--gold);color:#000;border:0;cursor:pointer;clip-path:polygon(0 0,100% 0,calc(100% - 9px) 100%,0 100%);box-shadow:none}
+.fbtn{position:fixed;left:0;top:50%;transform:translate(-110%,-50%);opacity:0;pointer-events:none;transition:transform .3s,opacity .3s;z-index:14;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:46px;height:68px;padding:0;font:800 10px var(--fb),sans-serif;background:var(--gold);color:#000;border:0;cursor:pointer;clip-path:polygon(0 0,100% 0,calc(100% - 9px) 100%,0 100%);box-shadow:none}
 .fbtn.show{transform:translate(0,-50%);opacity:1;pointer-events:auto}
 .fbtn svg{width:21px;height:21px}.fbtn:hover{background:#fff}
 .fbtn .fn{position:absolute;top:3px;right:10px;background:#000;color:var(--gold);border-radius:999px;font-size:10px;min-width:16px;line-height:16px;text-align:center}
@@ -626,9 +631,9 @@ footer .links a::after{
 @media(min-width:900px){.fbtn{width:calc(5vw - 6px);min-width:46px;height:72px;font-size:11px}}
 .fP{right:auto;left:0;border-left:0;border-right:1px solid var(--line);transform:translateX(-100%)}.fP.open{transform:none}
 .fh{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:16px 20px;border-bottom:1px solid var(--line)}.fh h2{font-size:34px;color:var(--gold)}
-.fh .lk{background:none;border:0;color:var(--ink);text-decoration:underline;cursor:pointer;font:600 13px "Hanken Grotesk",sans-serif}
+.fh .lk{background:none;border:0;color:var(--ink);text-decoration:underline;cursor:pointer;font:600 13px var(--fb),sans-serif}
 .fB{flex:1;overflow:auto;padding:0 20px}.fB details{border-bottom:1px solid var(--line)}
-.fB summary{list-style:none;display:flex;justify-content:space-between;align-items:center;padding:16px 0;font:800 17px "Hanken Grotesk",sans-serif;cursor:pointer}
+.fB summary{list-style:none;display:flex;justify-content:space-between;align-items:center;padding:16px 0;font:800 17px var(--fb),sans-serif;cursor:pointer}
 .fB summary::-webkit-details-marker{display:none}.fB summary::after{content:"";width:9px;height:9px;border:solid currentColor;border-width:0 2px 2px 0;transform:rotate(45deg);transition:transform .25s;margin:-4px 4px 0 0}
 .fB details[open] summary::after{transform:rotate(225deg);margin-top:4px}
 .fo{padding:0 0 16px}.fo button{display:inline-flex;align-items:center;gap:6px;padding:6px 14px}.fo small{opacity:.7;font-size:11px}
@@ -643,11 +648,11 @@ footer .links a::after{
 .cos{border:1px solid var(--line);padding:14px;align-self:start;display:grid;gap:4px}.cos .ci{grid-template-columns:46px 1fr auto;padding:8px 0}.cos .cimg{width:46px;height:56px}
 .cos .r{display:flex;justify-content:space-between}.cos .tt{font-weight:800;font-size:20px;color:var(--gold);margin-top:6px}
 .coe{color:#ff6b6b;font-size:13.5px;min-height:20px;margin:6px 0}.cok{text-align:center;display:grid;gap:12px;justify-items:center}.cok h3{font-size:38px;color:var(--gold)}
-.cok .cd2{font:800 22px "Hanken Grotesk",sans-serif;border:1.5px dashed var(--gold);padding:8px 18px}
+.cok .cd2{font:800 22px var(--fb),sans-serif;border:1.5px dashed var(--gold);padding:8px 18px}
 .chk2{display:flex;gap:8px;align-items:flex-start;font-size:13.5px;margin-bottom:12px}.chk2 input{accent-color:var(--gold);margin-top:3px}
 @media(max-width:899px){.fbtn{width:40px;height:54px;padding:0 4px 0 0;font-size:8.5px;gap:2px;clip-path:polygon(0 0,100% 0,calc(100% - 6px) 100%,0 100%)}.fbtn svg{width:16px;height:16px}.fbtn .fn{top:2px;right:8px}}
 @media(max-width:640px){.disc{top:6px;right:6px;padding:4px 9px 3px;font-size:15px;gap:1px;clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%)}.disc small{font-size:6px;letter-spacing:.12em}.ph .tag{font-size:9.5px;padding:2px 12px;top:8px;letter-spacing:.05em}}
-.fbtn .fx{position:absolute;top:2px;left:3px;width:18px;height:18px;border-radius:50%;background:#000;color:var(--gold);font:800 10px/18px "Hanken Grotesk",sans-serif;text-align:center}.fbtn .fx:hover{background:#c62828;color:#fff}
+.fbtn .fx{position:absolute;top:2px;left:3px;width:18px;height:18px;border-radius:50%;background:#000;color:var(--gold);font:800 10px/18px var(--fb),sans-serif;text-align:center}.fbtn .fx:hover{background:#c62828;color:#fff}
 .cfd{width:min(420px,92vw)}.cfd select{width:100%}.lb{display:inline}.xb{display:none}@media(max-width:640px){.lb{display:none}.xb{display:inline;font-size:15px;line-height:1}}
 #cm{width:min(560px,96vw)}#cm .row input{flex:1;min-width:140px}#cm .row small{color:var(--muted)}
 .sub{font-size:12px;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin:-2px 0 4px;font-weight:700}
@@ -856,7 +861,7 @@ html.nocombos #promo,html.nocombos #armar,html.nocombos .nv[data-c="combos"]{dis
 @media(max-width:640px){.ph .qa{width:auto!important}.ph .qa .qb{flex:none!important;width:28px!important;height:26px!important}}
 /* modal: fotos en grilla, como la referencia */
 .lbg{display:none}
-.rel{margin-top:18px}.rel h4{font:900 18px "Big Shoulders Display",sans-serif;text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px}
+.rel{margin-top:18px}.rel h4{font:900 18px var(--fh),sans-serif;text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px}
 .rg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 .rl{background:none;border:0;color:var(--ink);font:inherit;text-align:center;cursor:pointer;display:grid;gap:4px}
 .ri{display:block;aspect-ratio:4/5;background:#161616;overflow:hidden}.ri img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}.rl:hover .ri img{transform:scale(1.06)}
@@ -881,7 +886,7 @@ dialog#zv::backdrop{background:#000}
 #zv .lbn{position:absolute;top:50%;transform:translateY(-50%);z-index:4}#zv .lbn.l{left:0}#zv .lbn.r{right:110px}
 @media(max-width:640px){#zvM{inset:0 0 86px 0}#zvT{top:auto;left:0;width:auto;height:86px;flex-direction:row;padding:8px;overflow-x:auto;overflow-y:hidden}#zvT button{height:100%;width:auto}#zv .lbn.r{right:0}}
 .faq{max-width:760px;margin:30px auto 10px;padding:0 5vw}
-.faq h3{font:900 22px "Big Shoulders Display",sans-serif;text-transform:uppercase;margin-bottom:10px}
+.faq h3{font:900 22px var(--fh),sans-serif;text-transform:uppercase;margin-bottom:10px}
 .faq details{border-bottom:1px solid var(--line);padding:12px 0}
 .faq summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:10px}.faq summary::-webkit-details-marker{display:none}
 .faq summary::after{content:"+";color:var(--gold);font-weight:900;transition:transform .2s}.faq details[open] summary::after{transform:rotate(45deg)}
@@ -906,7 +911,7 @@ body.pv #lb .dh h2{font-size:clamp(26px,3.4vw,40px)!important;text-transform:upp
 #lb .rel{margin-top:44px;padding-top:6px;border-top:1px solid var(--line)}
 #lb .rel h4{margin:22px 0 14px;font-size:clamp(20px,2.4vw,28px)}
 .ri{position:relative;clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%)}
-.ri .of{position:absolute;top:8px;right:16px;z-index:2;background:#e53935;color:#fff;font:800 11px "Hanken Grotesk",sans-serif;font-style:normal;padding:2px 10px;letter-spacing:.04em;text-transform:uppercase}
+.ri .of{position:absolute;top:8px;right:16px;z-index:2;background:#e53935;color:#fff;font:800 11px var(--fb),sans-serif;font-style:normal;padding:2px 10px;letter-spacing:.04em;text-transform:uppercase}
 .rl b{font-size:13px}.rl:hover b{color:var(--gold)}
 @media(min-width:900px){#lb .rg{grid-template-columns:repeat(5,minmax(0,1fr));gap:18px 14px}#lb .ri{aspect-ratio:1/1.1}}
 .seals{gap:18px!important;padding:14px 0 6px!important;flex-wrap:wrap}
@@ -939,12 +944,12 @@ body.pv .top{background:#0a0a0a!important;position:sticky!important;top:0}
 @media(prefers-reduced-motion:reduce){.fab::after,.fab svg{animation:none!important}}
 
 /* ===== Botones flotantes v2: círculos pequeños, WhatsApp solo con su ícono ===== */
-.fab{width:48px;height:48px;padding:0!important;gap:0;font-size:0;justify-content:center;border-radius:50%!important;clip-path:none!important;right:18px;bottom:18px;filter:none!important;box-shadow:0 6px 16px rgba(0,0,0,.45);transition:transform .2s,box-shadow .2s;overflow:visible}
+.fab{width:44px;height:44px;padding:0!important;gap:0;font-size:0;justify-content:center;border-radius:50%!important;clip-path:none!important;right:18px;bottom:18px;filter:none!important;box-shadow:0 6px 16px rgba(0,0,0,.45);transition:transform .2s,box-shadow .2s;overflow:visible}
 .fab::before,.fab::after{display:none!important}
-.fab svg{width:27px;height:27px;animation:none!important}
+.fab svg{width:25px;height:25px;animation:none!important}
 #fab{background:#25D366!important;color:#fff!important;animation:fabp 2.6s ease-out infinite}
 @keyframes fabp{0%{box-shadow:0 6px 16px rgba(0,0,0,.45),0 0 0 0 rgba(37,211,102,.55)}70%,100%{box-shadow:0 6px 16px rgba(0,0,0,.45),0 0 0 14px rgba(37,211,102,0)}}
-.cartb{width:44px;height:44px;bottom:76px;right:20px;background:var(--gold)!important;color:#000!important}
+.cartb{width:44px;height:44px;bottom:70px;right:18px;background:var(--gold)!important;color:#000!important}
 .cartb svg{width:22px;height:22px}
 .fab:hover{transform:scale(1.1)}#fab:hover{color:#fff!important}.cartb:hover{color:#000!important}
 .cartb .cn{position:absolute;top:-5px;right:-5px;min-width:19px;height:19px;padding:0 5px;border-radius:999px;font-size:11px;line-height:19px;text-align:center;background:#e11d2e;color:#fff;transform:none}
@@ -982,16 +987,64 @@ html[data-shape] .ri,html[data-shape] .build,html[data-shape] .cpromo{clip-path:
 html[data-shape=pildora] .sectH h2,html[data-shape=redondo] .sectH h2{padding-left:18px;padding-right:18px}
 /* ===== Admin: pestaña Apariencia ===== */
 .lkg{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:8px 0 18px}
-.lk{display:flex;flex-direction:column;gap:6px;padding:8px;background:var(--panel);border:2px solid var(--line);color:var(--ink);cursor:pointer;font:700 13px "Hanken Grotesk",sans-serif;text-align:left}
+.lk{display:flex;flex-direction:column;gap:6px;padding:8px;background:var(--panel);border:2px solid var(--line);color:var(--ink);cursor:pointer;font:700 13px var(--fb),sans-serif;text-align:left}
 .lk.on{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold)}
 .lk .sw{display:grid;grid-template-columns:1fr 1fr;height:38px;overflow:hidden;border:1px solid rgba(128,128,128,.4)}
 .lk .sw i{display:flex;align-items:center;justify-content:center}.lk .sw i b{width:16px;height:16px;border-radius:50%;display:block}
 .lk small{font-weight:400;opacity:.7}
 .shg{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin:8px 0 18px}
-.shb{display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px 8px;background:var(--panel);border:2px solid var(--line);color:var(--ink);cursor:pointer;font:700 13px "Hanken Grotesk",sans-serif}
+.shb{display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px 8px;background:var(--panel);border:2px solid var(--line);color:var(--ink);cursor:pointer;font:700 13px var(--fb),sans-serif}
 .shb.on{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold)}
 .shb span{display:block;width:96px;height:34px;background:var(--gold);color:#000;line-height:34px;text-align:center;font-weight:800}
 .apbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:6px}
+
+/* ===== MÁS TEMAS ===== */
+html[data-pal=rosa]{--bg:#0e080b;--panel:#1a1015;--line:#32202a;--ink:#f8eef3;--muted:#a8949f;--gold:#ff4fa3;--gold-hd:#ff4fa3;--goldrgb:255,79,163}
+html[data-pal=rosa][data-theme=light]{--bg:#f5e9ef;--panel:#ffffff;--line:#e6d2dc;--ink:#1c0f16;--muted:#6b5560;--gold:#e0338a;--gold-hd:#ff4fa3;--goldrgb:224,51,138}
+html[data-pal=cian]{--bg:#060d0e;--panel:#0d181a;--line:#1a2e31;--ink:#e9f7f7;--muted:#8aa8aa;--gold:#19d3c5;--gold-hd:#19d3c5;--goldrgb:25,211,197}
+html[data-pal=cian][data-theme=light]{--bg:#e5f1f0;--panel:#ffffff;--line:#c9dedc;--ink:#0b1a1a;--muted:#4f6867;--gold:#0e9f94;--gold-hd:#19d3c5;--goldrgb:14,159,148}
+html[data-pal=lima]{--bg:#090c06;--panel:#131a0c;--line:#25301a;--ink:#f2f8e8;--muted:#9aa88a;--gold:#b6f03c;--gold-hd:#b6f03c;--goldrgb:182,240,60}
+html[data-pal=lima][data-theme=light]{--bg:#eef2e1;--panel:#ffffff;--line:#d6dfc0;--ink:#141a08;--muted:#5a6645;--gold:#7fb800;--gold-hd:#b6f03c;--goldrgb:127,184,0}
+html[data-pal=cobre]{--bg:#0d0907;--panel:#19120e;--line:#31241c;--ink:#f7eee8;--muted:#a8978c;--gold:#d98a57;--gold-hd:#d98a57;--goldrgb:217,138,87}
+html[data-pal=cobre][data-theme=light]{--bg:#f3eae3;--panel:#ffffff;--line:#e2d2c5;--ink:#1b120c;--muted:#6c5949;--gold:#b8602c;--gold-hd:#d98a57;--goldrgb:184,96,44}
+/* ===== FORMA EXTRA: hoja ===== */
+html[data-shape=hoja]{--bp:inset(0 round 16px 2px 16px 2px);--cp:inset(0 round 26px 3px 26px 3px)}
+/* ===== TIPOGRAFÍAS ===== */
+html[data-font=urbana]{--fh:"Bebas Neue";--fb:"Montserrat"}
+html[data-font=elegante]{--fh:"Playfair Display";--fb:"Lato"}
+html[data-font=futurista]{--fh:"Orbitron";--fb:"Rajdhani"}
+html[data-font=deportiva]{--fh:"Anton";--fb:"Barlow"}
+html[data-font=redondeada]{--fh:"Fredoka";--fb:"Nunito"}
+html[data-font=moderna]{--fh:"Poppins";--fb:"Poppins"}
+html[data-font=urbana],html[data-font=deportiva]{font-synthesis:none}
+html[data-font=futurista] h1,html[data-font=futurista] h2,html[data-font=futurista] .nv .in{letter-spacing:.02em}
+/* ===== FLECHAS arriba/abajo con el color del tema ===== */
+.totop{background:var(--gold)!important;color:#000!important}
+.totop:hover{background:var(--ink)!important;color:var(--bg)!important}
+/* ===== EFECTOS AL PASAR EL MOUSE ===== */
+html[data-hov] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb){transition:transform .22s cubic-bezier(.3,1.6,.5,1),color .3s,filter .25s,box-shadow .25s}
+html[data-hov=elevar] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{transform:translateY(-3px) scale(1.04)}
+html[data-hov=escala] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{transform:scale(1.12)}
+html[data-hov=inclinar] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{transform:rotate(-3deg) scale(1.06)}
+html[data-hov=neon] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{box-shadow:inset 0 0 0 2px var(--gold),inset 0 0 18px rgba(var(--goldrgb),.75)!important;filter:brightness(1.15)}
+html[data-hov=brillo] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb),html[data-auto=brillo] :is(.btn:not(.ghost):not(.sm),.cadd,.wa,.more,.promo-btn,.card .pl){position:relative}
+html[data-hov=brillo] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb)::after,html[data-auto=brillo] :is(.btn:not(.ghost):not(.sm),.cadd,.wa,.more,.promo-btn,.card .pl)::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.65) 50%,transparent 65%);transform:translateX(-130%)}
+html[data-hov=brillo] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover::after{transition:transform .65s;transform:translateX(130%)}
+/* ===== EFECTOS AUTOMÁTICOS ===== */
+html[data-auto=latido] :is(.btn:not(.ghost):not(.sm),.cadd,.wa,.more,.promo-btn,.card .pl){animation:gxPul 1.8s ease-in-out infinite}
+html[data-auto=respirar] :is(.btn:not(.ghost):not(.sm),.cadd,.wa,.more,.promo-btn,.card .pl){animation:gxBre 2.4s ease-in-out infinite}
+html[data-auto=rebote] :is(.btn:not(.ghost):not(.sm),.cadd,.wa,.more,.promo-btn,.card .pl){animation:gxReb 2.4s ease infinite}
+html[data-auto=balanceo] :is(.btn:not(.ghost):not(.sm),.cadd,.wa,.more,.promo-btn,.card .pl){animation:gxBal 3.2s ease-in-out infinite}
+html[data-auto=brillo] :is(.btn:not(.ghost):not(.sm),.cadd,.wa,.more,.promo-btn,.card .pl)::after{animation:gxBri 3.2s ease-in-out infinite}
+html[data-auto] :is(.btn:not(.ghost):not(.sm),.cadd,.wa,.more,.promo-btn,.card .pl):hover{animation:none}
+@keyframes gxPul{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+@keyframes gxBre{0%,100%{filter:brightness(1)}50%{filter:brightness(1.3) saturate(1.15)}}
+@keyframes gxReb{0%,55%,100%{transform:translateY(0)}12%{transform:translateY(-7px)}24%{transform:translateY(0)}34%{transform:translateY(-3px)}44%{transform:translateY(0)}}
+@keyframes gxBal{0%,70%,100%{transform:rotate(0)}76%{transform:rotate(-4deg)}82%{transform:rotate(4deg)}88%{transform:rotate(-3deg)}94%{transform:rotate(2deg)}}
+@keyframes gxBri{0%,45%{transform:translateX(-130%)}100%{transform:translateX(130%)}}
+@media(prefers-reduced-motion:reduce){html[data-auto] :is(.btn:not(.ghost):not(.sm),.cadd,.wa,.more,.promo-btn,.card .pl),html[data-auto] :is(.btn:not(.ghost):not(.sm),.cadd,.wa,.more,.promo-btn,.card .pl)::after{animation:none!important}}
+.shb em{font-style:normal;font-weight:400;font-size:11px;opacity:.7;text-align:center}
+.shb span.ft{width:auto;height:auto;background:none;color:var(--ink);font-size:22px;line-height:1.1}
 </style>
 </head>
 <body>
@@ -2029,26 +2082,37 @@ const LOOKS=[{id:'oro',n:'Oro Clásico',d:['#0a0a0a','#e2b53f'],l:['#ebebe6','#a
  {id:'azul',n:'Azul Eléctrico',d:['#070b11','#3da5ff'],l:['#e8eef5','#1b7fe0']},
  {id:'verde',n:'Verde Neón',d:['#080c09','#3ddc84'],l:['#e8f0ea','#1f9d55']},
  {id:'violeta',n:'Violeta Royal',d:['#0a0810','#b78bff'],l:['#efeaf7','#8a52f0']},
- {id:'naranja',n:'Naranja Sunset',d:['#0d0a07','#ff8a1f'],l:['#f4ece3','#d9690a']}];
+ {id:'naranja',n:'Naranja Sunset',d:['#0d0a07','#ff8a1f'],l:['#f4ece3','#d9690a']},
+ {id:'rosa',n:'Rosa Chicle',d:['#0e080b','#ff4fa3'],l:['#f5e9ef','#e0338a']},
+ {id:'cian',n:'Turquesa',d:['#060d0e','#19d3c5'],l:['#e5f1f0','#0e9f94']},
+ {id:'lima',n:'Lima',d:['#090c06','#b6f03c'],l:['#eef2e1','#7fb800']},
+ {id:'cobre',n:'Cobre',d:['#0d0907','#d98a57'],l:['#f3eae3','#b8602c']}];
 const SHAPES=[{id:'sesgado',n:'Inclinado',c:'polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%)'},
  {id:'cuadrado',n:'Cuadrado',c:'none'},{id:'redondo',n:'Redondeado',c:'inset(0 round 10px)'},
- {id:'pildora',n:'Píldora',c:'inset(0 round 999px)'},{id:'cortado',n:'Esquinas cortadas',c:'polygon(9px 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%,0 9px)'}];
-let LOOK={pal:'oro',shape:'sesgado'},lookDirty=false;
-try{const c=JSON.parse(localStorage.getItem('gx_look')||'{}');if(c.pal)LOOK.pal=c.pal;if(c.shape)LOOK.shape=c.shape}catch(e){}
-function applyLook(l){const d=document.documentElement;l.pal&&l.pal!=='oro'?d.dataset.pal=l.pal:delete d.dataset.pal;l.shape&&l.shape!=='sesgado'?d.dataset.shape=l.shape:delete d.dataset.shape}
-if(sb)sb.from('site_settings').select('value').eq('key','look').maybeSingle().then(({data})=>{const v=data&&data.value;if(v&&typeof v==='object'){LOOK={pal:v.pal||'oro',shape:v.shape||'sesgado'};applyLook(LOOK);try{localStorage.setItem('gx_look',JSON.stringify(LOOK))}catch(e){}}}).catch(()=>{});
-function rApp(){const cur=LOOK;
+ {id:'pildora',n:'Píldora',c:'inset(0 round 999px)'},{id:'cortado',n:'Esquinas cortadas',c:'polygon(9px 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%,0 9px)'},
+ {id:'hoja',n:'Hoja',c:'inset(0 round 16px 2px 16px 2px)'}];
+const FONTS=[{id:'original',n:'Original',f:'"Big Shoulders Display"'},{id:'urbana',n:'Urbana',f:'"Bebas Neue"'},{id:'elegante',n:'Elegante',f:'"Playfair Display"'},{id:'futurista',n:'Futurista',f:'Orbitron'},{id:'deportiva',n:'Deportiva',f:'Anton'},{id:'redondeada',n:'Redondeada',f:'Fredoka'},{id:'moderna',n:'Moderna',f:'Poppins'}];
+const HOVS=[{id:'ninguno',n:'Relleno (original)',d:'El color se desliza'},{id:'elevar',n:'Elevar',d:'Sube y crece un poco'},{id:'escala',n:'Agrandar',d:'Crece con rebote'},{id:'inclinar',n:'Inclinar',d:'Gira ligeramente'},{id:'neon',n:'Neón',d:'Borde y brillo interior'},{id:'brillo',n:'Destello',d:'Pasa un brillo'}];
+const AUTOS=[{id:'ninguno',n:'Ninguno',d:'Botones quietos'},{id:'latido',n:'Latido',d:'Crece y encoge'},{id:'respirar',n:'Respirar',d:'Brillo que sube y baja'},{id:'rebote',n:'Rebote',d:'Salta de vez en cuando'},{id:'balanceo',n:'Balanceo',d:'Se mueve de lado a lado'},{id:'brillo',n:'Destello',d:'Brillo que cruza solo'}];
+const LK0={pal:'oro',shape:'sesgado',font:'original',hov:'ninguno',auto:'ninguno'};
+let LOOK={...LK0},lookDirty=false;
+try{const c=JSON.parse(localStorage.getItem('gx_look')||'{}');LOOK={...LK0,...c}}catch(e){}
+const applyLook=l=>gxLook(l);
+try{if(sb)sb.from('site_settings').select('value').eq('key','look').limit(1).then(({data})=>{const v=data&&data[0]&&data[0].value;if(v&&typeof v==='object'){LOOK={...LK0,...v};applyLook(LOOK);try{localStorage.setItem('gx_look',JSON.stringify(LOOK))}catch(e){}}}).catch(()=>{})}catch(e){}
+function rApp(){const cur=LOOK;FONTS.forEach(f=>gxFont(f.id));
+ const grp=(t,d,k,arr,fn)=>`<h3 style="margin:6px 0 2px">${t}</h3><p class="desc">${d}</p><div class="shg">${arr.map(o=>`<button type="button" class="shb${cur[k]===o.id?' on':''}" data-k="${k}" data-v="${o.id}">${fn(o)}<b>${o.n}</b>${o.d?`<em>${o.d}</em>`:''}</button>`).join('')}</div>`;
  $('tApp').innerHTML=`<h3 style="margin:6px 0 2px">Tema de color</h3><p class="desc">Cada tema trae su versión oscura y clara. El visitante cambia entre las dos con el botón sol/luna. Al elegir uno lo ves al instante en la página.</p>
- <div class="lkg">${LOOKS.map(t=>`<button type="button" class="lk${cur.pal===t.id?' on':''}" data-pal="${t.id}"><span class="sw"><i style="background:${t.d[0]}"><b style="background:${t.d[1]}"></b></i><i style="background:${t.l[0]}"><b style="background:${t.l[1]}"></b></i></span>${t.n}<small>Oscuro · Claro</small></button>`).join('')}</div>
- <h3 style="margin:6px 0 2px">Forma de botones y tarjetas</h3>
- <div class="shg">${SHAPES.map(h=>`<button type="button" class="shb${cur.shape===h.id?' on':''}" data-shape="${h.id}"><span style="clip-path:${h.c}">Botón</span>${h.n}</button>`).join('')}</div>
+ <div class="lkg">${LOOKS.map(t=>`<button type="button" class="lk${cur.pal===t.id?' on':''}" data-k="pal" data-v="${t.id}"><span class="sw"><i style="background:${t.d[0]}"><b style="background:${t.d[1]}"></b></i><i style="background:${t.l[0]}"><b style="background:${t.l[1]}"></b></i></span>${t.n}<small>Oscuro · Claro</small></button>`).join('')}</div>
+ ${grp('Forma de botones y tarjetas','','shape',SHAPES,h=>`<span style="clip-path:${h.c}">Botón</span>`)}
+ ${grp('Tipografía','Cambia las letras de títulos y textos de toda la página.','font',FONTS,f=>`<span class="ft" style="font-family:${f.f},sans-serif">Aa Gorras</span>`)}
+ ${grp('Efecto al pasar el mouse','Cómo reaccionan los botones cuando el cursor los toca.','hov',HOVS,()=>'')}
+ ${grp('Efecto automático','Movimiento que hacen solos los botones principales para llamar la atención.','auto',AUTOS,()=>'')}
  <div class="apbar"><button type="button" class="btn" id="apSave">Guardar apariencia</button><button type="button" class="btn ghost sm" id="apMode">Ver en claro / oscuro</button><button type="button" class="btn ghost sm" id="apReset">Volver al original</button></div>
  <p class="desc" id="apMsg" style="margin-top:8px">${lookDirty?'Cambios sin guardar.':''}</p>`}
 $('tApp').onclick=async e=>{const b=e.target.closest('button');if(!b)return;const m=$('apMsg');
- if(b.dataset.pal){LOOK.pal=b.dataset.pal;lookDirty=true;applyLook(LOOK);rApp();return}
- if(b.dataset.shape){LOOK.shape=b.dataset.shape;lookDirty=true;applyLook(LOOK);rApp();return}
+ if(b.dataset.k){LOOK[b.dataset.k]=b.dataset.v;lookDirty=true;applyLook(LOOK);rApp();return}
  if(b.id==='apMode'){$('themeBtn').click();return}
- if(b.id==='apReset'){LOOK={pal:'oro',shape:'sesgado'};lookDirty=true;applyLook(LOOK);rApp();return}
+ if(b.id==='apReset'){LOOK={...LK0};lookDirty=true;applyLook(LOOK);rApp();return}
  if(b.id==='apSave'){b.disabled=true;m.textContent='Guardando…';
   try{localStorage.setItem('gx_look',JSON.stringify(LOOK))}catch(_){}
   const r=await sb.from('site_settings').upsert({key:'look',value:LOOK});b.disabled=false;
