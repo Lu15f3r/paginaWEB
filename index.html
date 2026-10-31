@@ -1356,6 +1356,21 @@ html[data-shape=pixel]{--qr:17px;--qb:17px;--dr:17px;--dt:17px;--tx:17px;--ty:17
 
 /* ===== Tarjetas del catálogo: al arrastrar la foto usa el mismo recorte (cover) que la foto fija -> sin franjas oscuras arriba/abajo ===== */
 html .ph img.dgi,html .ph .dgw{object-fit:cover!important;padding:0!important}
+
+/* ===== Compras ===== */
+.cmf{border:1px solid var(--line);padding:12px;margin:8px 0 14px}
+.cmh{display:grid;grid-template-columns:150px 1fr 1.4fr;gap:10px;margin-bottom:10px}
+.cmf label{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted);font-weight:700;min-width:0}
+.cmf input:not([type=checkbox]){font:inherit;font-size:14px;color:var(--ink);background:var(--panel);border:1px solid var(--line);padding:8px;width:100%;box-sizing:border-box}
+.cml{display:grid;grid-template-columns:2.2fr 1fr 1fr 90px 130px 110px auto;gap:8px;align-items:start;padding:8px 0;border-top:1px dashed var(--line)}
+.cmt{display:flex;flex-direction:column;gap:6px;font-size:12px;color:var(--muted)}.cmt b{font-size:15px;color:var(--ink);padding-top:4px}
+.cmb{min-height:15px;font-weight:700}.cmok{color:#1fa855;font-size:12px;font-weight:800}.cmnew{color:#e08a00;font-size:12px;font-weight:800}
+.cmb2{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin:6px 0}.cmck{flex-direction:row!important;align-items:center;gap:8px!important;font-weight:600!important}
+.cmtot{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:flex-end;font-size:15px;border-top:1px solid var(--line);padding-top:10px}.cmtot b{font-size:20px;color:var(--gold)}
+.cmr{align-items:flex-start;gap:12px}.cmi{margin-top:6px;font-size:14px;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center}
+@media(max-width:760px){.cmh{grid-template-columns:1fr}.cml{grid-template-columns:1fr 1fr}.cml .cmn{grid-column:1/-1}}
+
+.cmpl{display:flex;flex-direction:column;gap:4px}.cmpc{display:flex!important;flex-direction:row!important;align-items:center;gap:8px;font-weight:600}
 </style>
 </head>
 <body>
@@ -1424,7 +1439,7 @@ html .ph img.dgi,html .ph .dgw{object-fit:cover!important;padding:0!important}
       <div class="w"><button class="btn">Entrar</button></div>
     </form>
     <div id="panel" hidden>
-      <div class="tabs" id="tabs"><button type="button" class="btn ghost sm on" data-t="prod">Productos</button><button type="button" class="btn ghost sm" data-t="ped">Pedidos</button><button type="button" class="btn ghost sm" data-t="inv">Inventario</button><button type="button" class="btn ghost sm" data-t="ven">Ventas</button><button type="button" class="btn ghost sm" data-t="gra">Gráfica</button><button type="button" class="btn ghost sm" data-t="app">Apariencia</button></div>
+      <div class="tabs" id="tabs"><button type="button" class="btn ghost sm on" data-t="prod">Productos</button><button type="button" class="btn ghost sm" data-t="ped">Pedidos</button><button type="button" class="btn ghost sm" data-t="inv">Inventario</button><button type="button" class="btn ghost sm" data-t="ven">Ventas</button><button type="button" class="btn ghost sm" data-t="com">Compras</button><button type="button" class="btn ghost sm" data-t="gra">Gráfica</button><button type="button" class="btn ghost sm" data-t="app">Apariencia</button></div>
       <div id="tProd"><form id="pf" class="f">
         <input type="hidden" id="pid">
         <details class="w cbx"><summary>Armar combo (gorra + buzo + reloj con descuento)</summary>
@@ -1443,6 +1458,8 @@ html .ph img.dgi,html .ph .dgw{object-fit:cover!important;padding:0!important}
         <div class="w"><b style="font-size:14px">Para quién es (puedes marcar varios)</b><div class="sizes cchips" id="gchips" style="margin-top:6px"></div></div>
         <div class="w r4">
           <label>Valor compra<input type="number" id="pco" min="0" step="any" inputmode="decimal" placeholder="Lo que te costó"></label>
+          <label class="cmpl">Proveedor <small>(para Compras)</small><input id="pcs" list="cmSl" placeholder="Opcional" autocomplete="off"></label>
+          <label class="cmpc"><input type="checkbox" id="pcr" checked> Anotar en la pestaña Compras lo que ingreso (cantidad × valor compra)</label>
           <label>Valor venta<input type="number" id="pcmp" min="0" step="any" inputmode="decimal" placeholder="Opcional"></label>
           <label>Valor venta oferta<input type="number" id="pp" min="0" step="any" inputmode="decimal" required></label>
           <label>Stock<input type="number" id="pst" min="0" step="1" readonly placeholder="Auto" title="Se calcula con el inventario por talla y color"></label>
@@ -1461,7 +1478,7 @@ html .ph img.dgi,html .ph .dgw{object-fit:cover!important;padding:0!important}
         <div class="w"><button class="btn" id="sv">Guardar producto</button> <button type="button" class="btn ghost" id="cl">Limpiar</button></div>
       </form>
       <div style="margin-top:22px"><input id="pq" type="search" class="invq" placeholder="Buscar productos por nombre o categoría…" autocomplete="off"></div><div style="margin-top:10px" id="alist"></div></div>
-      <div id="tPed" hidden></div><div id="tInv" hidden></div><div id="tVen" hidden></div><div id="tGra" hidden></div><div id="tApp" hidden></div>
+      <div id="tPed" hidden></div><div id="tInv" hidden></div><div id="tVen" hidden></div><div id="tCom" hidden></div><div id="tGra" hidden></div><div id="tApp" hidden></div>
     </div>
     <p class="msg" id="msg"></p>
   </div>
@@ -1682,7 +1699,7 @@ function updMg(){const c=parseFloat($('pco').value),el=$('pmg'),L=[];let neg=fal
   if(!L.length){el.textContent='';el.className='w mg';return}
   el.className='w mg '+(neg?'neg':'ok');el.innerHTML=L.map(esc).join('<br>')}
 $('pco').oninput=$('pcmp').oninput=$('pp').oninput=updMg;
-function gate(on){$('login').hidden=on;$('panel').hidden=!on;$('out').hidden=!on;$('admT').textContent=on?'Panel de administración':'Administrador';say('');if(on){alist();loadOrders();loadCosts().then(()=>{if($('pid').value)$('pco').value=costs[$('pid').value]??'';updMg()})}}
+function gate(on){$('login').hidden=on;$('panel').hidden=!on;$('out').hidden=!on;$('admT').textContent=on?'Panel de administración':'Administrador';say('');if(on){alist();loadOrders();loadPurch();loadCosts().then(()=>{if($('pid').value)$('pco').value=costs[$('pid').value]??'';updMg()})}}
 $('x').onclick=()=>dlg.close();
 $('login').onsubmit=async e=>{e.preventDefault();
   const{error}=await sb.auth.signInWithPassword({email:$('em').value,password:$('pw').value});
@@ -1750,7 +1767,7 @@ $('alist').onclick=async e=>{
   if(e.target.closest('[data-clr]')){$('pn').value='';$('pc').value='';$('pq').value='';alist();return}
   const ed=e.target.dataset.e,dl=e.target.dataset.d;
   if(ed){const p=products.find(x=>String(x.id)===ed);
-    $('pid').value=p.id;$('pn').value=p.name;$('psb').value=p.subcategory||'';$('pmt').value=p.material||'';$('pc').value=p.category;alist();$('pp').value=p.price;
+    $('pid').value=p.id;$('pcr').checked=false;$('pcs').value='';$('pn').value=p.name;$('psb').value=p.subcategory||'';$('pmt').value=p.material||'';$('pc').value=p.category;alist();$('pp').value=p.price;
     curSizes=[...(p.sizes||[])];curG=[...gens(p)];gChips();legacy=hasVar(p)?'':(p.stock??'');$('pst').value=legacy;$('pcmp').value=p.compare_price||'';$('pd').value=p.description||'';$('pa').checked=p.available!==false;$('pco').value=costs[String(p.id)]??'';updMg();
     vlist=vars(p).map(v=>({...v}));vRender();keep=[...imgs(p)];added=[];removed=[];gal();say('Editando “'+p.name+'”. Guarda cuando termines.',true);dlg.scrollTo({top:0,behavior:'smooth'})}
   if(dl){const p=products.find(x=>String(x.id)===dl);
@@ -1785,6 +1802,8 @@ $('pf').onsubmit=async e=>{e.preventDefault();$('sv').disabled=true;say('Guardan
     if(pid!=null){const cv=$('pco').value,cr=await sb.from('product_costs').upsert({product_id:String(pid),cost:cv===''?null:Number(cv)});if(cr.error)aviso+=' El valor de compra NO se guardó: ejecuta actualizar-costos.sql en Supabase.';else costs[String(pid)]=cv===''?null:Number(cv)}
     const gone=removed.filter(u=>u&&u.includes('/productos/')&&!used(u,id));
     if(gone.length)await sb.storage.from('productos').remove(gone.map(u=>u.split('/productos/')[1]));
+    if(window._pp&&!id&&pid!=null)await cmLink(pid);
+    else if($('pcr').checked&&pid!=null){const ps=await cmFromProduct(pid,row,id?products.find(x=>String(x.id)===String(id)):null,$('pco').value,$('pcs').value);if(ps)aviso+=ps}
     const msgP=id?'Producto actualizado':'Producto creado';clear();await load();alist();say(msgP+'.'+aviso,true);toast(msgP);
   }catch(err){say('Error: '+err.message)}
   $('sv').disabled=false};
@@ -2034,10 +2053,10 @@ const fd=d=>new Date(d).toLocaleString('es-CO',{dateStyle:'medium',timeStyle:'sh
 const itx=o=>(o.items||[]).map(i=>`${i.qty>1?i.qty+'× ':''}${esc(i.name)}${i.size?' ('+esc(i.size)+')':''}${i.color?' · '+esc(i.color):''}`).join(' + ');
 const ym=o=>{const d=new Date(o.confirmed_at||o.created_at);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')};
 async function loadOrders(){if(!sb)return;const{data,error}=await sb.from('orders').select('*').order('created_at',{ascending:false});ordErr=!!error;orders=error?[]:data;showTab(tab)}
-function showTab(t){tab=t;const m={prod:'tProd',ped:'tPed',inv:'tInv',ven:'tVen',gra:'tGra',app:'tApp'};for(const k in m)$(m[k]).hidden=k!==t;
+function showTab(t){tab=t;const m={prod:'tProd',ped:'tPed',inv:'tInv',ven:'tVen',com:'tCom',gra:'tGra',app:'tApp'};for(const k in m)$(m[k]).hidden=k!==t;
   $('tabs').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
   if(t!=='prod'&&ordErr&&t!=='inv'&&t!=='app'){$(m[t]).innerHTML='<p class="msg">No se pudieron leer los pedidos. Ejecuta actualizar-pedidos.sql en Supabase.</p>';return}
-  if(t==='ped')rPed();if(t==='inv')rInv();if(t==='ven')rVen();if(t==='gra')rGra();if(t==='app')rApp();
+  if(t==='ped')rPed();if(t==='inv')rInv();if(t==='ven')rVen();if(t==='gra')rGra();if(t==='com')rCom();if(t==='app')rApp();
   if(!showTab.q&&(t==='prod'||t==='inv')){showTab.q=1;load().then(()=>{showTab.q=0;if(tab==='prod')alist();if(tab==='inv'&&!$('tInv').querySelector('.stk-in.chg'))rInv()}).catch(()=>{showTab.q=0})}}
 function rPed(){const L=orders.filter(o=>pfil==='todos'||o.status===pfil);
   $('tPed').innerHTML=`<div class="tabs">${['pendiente','confirmado','cancelado','todos'].map(s=>`<button type="button" class="btn ghost sm${pfil===s?' on':''}" data-f="${s}">${ST[s]||'Todos'} (${s==='todos'?orders.length:orders.filter(o=>o.status===s).length})</button>`).join('')}</div>`+
@@ -2150,6 +2169,85 @@ function rGra(){
   +`<h3 class="t ghd">Sin movimiento <small style="font-size:13px;color:var(--muted)">(nadie los ha pedido)</small></h3><p class="desc">${none.length?none.map(x=>esc(x.name)).join(' · '):'Todos tus productos tuvieron pedidos.'}</p>`}
 $('tGra').onclick=e=>{const g=e.target.dataset.g;if(g){gr=g;if(g!=='custom'){gf='';gt=''}rGra()}};
 setInterval(()=>{const d=new Date().toDateString();if(d!==gDay){gDay=d;if(gr==='today'&&$('tGra')&&$('tGra').innerHTML)rGra()}},20000);
+/* ====== COMPRAS (admin) ====== */
+let purch=[],purchErr=false,cmM=(()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')})(),cmL=[{name:'',s:'',c:'',q:1,u:''}],cmH={d:'',sup:'',note:'',st:true};
+const today0=()=>new Date().toLocaleDateString('sv');
+const nrm=s=>slug(String(s||'')).replace(/-/g,'');
+const pMatch=n=>{const k=nrm(n);return k?products.find(p=>nrm(p.name)===k):null};
+const pOf=it=>(it.product_id!=null&&products.find(p=>String(p.id)===String(it.product_id)))||pMatch(it.name)||null;
+const cmD=d=>new Date(d+'T12:00:00').toLocaleDateString('es-CO',{day:'2-digit',month:'short',year:'numeric'});
+const cmV=it=>[it.size,it.color].filter(Boolean).join(' / ');
+async function loadPurch(){if(!sb)return;const{data,error}=await sb.from('purchases').select('*').order('bought_at',{ascending:false}).order('id',{ascending:false});purchErr=!!error;purch=error?[]:data;if(tab==='com')rCom()}
+/* suma la compra al inventario y guarda el valor de compra del producto */
+async function cmStock(it){const p=pOf(it);if(!p)return{message:'no existe en la tienda'};const q=Math.max(0,Number(it.qty)||0);let upd=null;
+  if(hasVar(p)){const vs=vars(p),z=it.size||'',c=it.color||'';const ix=vs.findIndex(v=>v.s===z&&v.c===c);
+    if(ix>=0)vs[ix].n+=q;else if(z||c)vs.push({s:z,c,n:q});else return{message:'indica talla/color'};upd={variants:vs,stock:vSum(vs)}}
+  else if(p.stock!=null)upd={stock:Number(p.stock)+q};
+  if(upd){const r=await sb.from('products').update(upd).eq('id',p.id);if(r.error)return r.error}
+  if(it.unit!=null&&it.unit!==''){const r=await sb.from('product_costs').upsert({product_id:String(p.id),cost:Number(it.unit)});if(!r.error)costs[String(p.id)]=Number(it.unit)}
+  return null}
+function cmBadge(name){const n=String(name||'').trim();if(!n)return'';const p=pMatch(n);return p?`<span class="cmok">✓ Ya está en tu tienda${hasVar(p)?' · pide talla/color':''}</span>`:`<span class="cmnew">Producto nuevo (aún no está en la tienda)</span>`}
+function rCom(){
+  if(purchErr){$('tCom').innerHTML='<p class="msg">No se pudieron leer las compras. Ejecuta crear-compras.sql en Supabase (SQL Editor) una sola vez.</p>';return}
+  const M={};purch.forEach(c=>{M[c.bought_at.slice(0,7)]=1});const cur=new Date().toISOString().slice(0,7);M[cmM]=1;M[cur]=1;
+  const ms=Object.keys(M).sort().reverse(),mn=m=>new Date(m+'-15').toLocaleDateString('es-CO',{month:'long',year:'numeric'});
+  const L=cmM==='all'?purch:purch.filter(c=>c.bought_at.slice(0,7)===cmM);
+  const inP=o=>cmM==='all'||ym(o)===cmM,V=orders.filter(o=>o.status==='confirmado'&&inP(o));
+  const comp=L.reduce((t,c)=>t+Number(c.total||0),0),vend=V.reduce((t,o)=>t+Number(o.total),0),und=L.reduce((t,c)=>t+(c.items||[]).reduce((a,i)=>a+(Number(i.qty)||0),0),0);
+  const pend=purch.reduce((t,c)=>t+(c.items||[]).filter(i=>!i.stocked&&pOf(i)).length,0),nuev=purch.reduce((t,c)=>t+(c.items||[]).filter(i=>!pOf(i)).length,0);
+  const sups=[...new Set(purch.map(c=>c.supplier).filter(Boolean))];
+  const rows=cmL.map((l,i)=>`<div class="cml" data-i="${i}"><label class="cmn">Producto<input list="cmDl" data-f="name" value="${esc(l.name)}" placeholder="Nombre del producto" autocomplete="off"><small class="cmb">${cmBadge(l.name)}</small></label><label>Talla<input data-f="s" value="${esc(l.s)}" placeholder="Opcional"></label><label>Color<input data-f="c" value="${esc(l.c)}" placeholder="Opcional"></label><label>Cantidad<input type="number" min="1" step="1" data-f="q" value="${l.q}" inputmode="numeric"></label><label>Costo por unidad<input type="number" min="0" step="any" data-f="u" value="${l.u}" inputmode="decimal" placeholder="$"></label><div class="cmt"><small>Subtotal</small><b data-sub>${money((Number(l.q)||0)*(Number(l.u)||0))}</b></div>${cmL.length>1?`<button type="button" class="btn ghost sm" data-a="rm" data-i="${i}" aria-label="Quitar línea">✕</button>`:''}</div>`).join('');
+  $('tCom').innerHTML=`<div class="gk"><div><small>Compras del periodo</small><b>${money(comp)}</b></div><div><small>Unidades compradas</small><b>${und}</b></div><div><small>Vendido (confirmado)</small><b>${money(vend)}</b></div><div><small>Ventas − compras</small><b style="color:${vend-comp<0?'#e53935':'#1fa855'}">${money(vend-comp)}</b></div></div>
+  ${(pend||nuev)?`<p class="desc" style="margin:4px 0 10px">${pend?`<b>${pend}</b> línea(s) de compra con producto existente aún sin sumar al inventario. `:''}${nuev?`<b>${nuev}</b> línea(s) con productos que todavía no están en la tienda.`:''}</p>`:''}
+  <div class="tabs" id="cmMs">${ms.map(m=>`<button type="button" class="btn ghost sm${m===cmM?' on':''}" data-a="mon" data-m="${m}">${mn(m)}</button>`).join('')}<button type="button" class="btn ghost sm${cmM==='all'?' on':''}" data-a="mon" data-m="all">Todo</button></div>
+  <h3 class="t ghd">Registrar compra</h3>
+  <div class="cmf"><div class="cmh"><label>Fecha<input type="date" id="cmDate" value="${cmH.d||today0()}" max="${today0()}"></label><label>Proveedor<input id="cmSup" list="cmSl" value="${esc(cmH.sup)}" placeholder="A quién le compraste" autocomplete="off"></label><label class="cmw">Nota<input id="cmNote" value="${esc(cmH.note)}" placeholder="Opcional (factura, envío…)" autocomplete="off"></label></div>
+  <datalist id="cmDl">${products.map(p=>`<option value="${esc(p.name)}">`).join('')}</datalist><datalist id="cmSl">${sups.map(s=>`<option value="${esc(s)}">`).join('')}</datalist>
+  ${rows}<div class="cmb2"><button type="button" class="btn ghost sm" data-a="add">＋ Agregar otra línea</button><label class="cmck"><input type="checkbox" id="cmSt" ${cmH.st?'checked':''}> Sumar al inventario los productos que ya existen y guardar su valor de compra</label></div>
+  <div class="cmtot">Total de la compra: <b id="cmTot">${money(cmL.reduce((t,l)=>t+(Number(l.q)||0)*(Number(l.u)||0),0))}</b> <button type="button" class="btn" data-a="save">Guardar compra</button></div></div>
+  <h3 class="t ghd">Historial de compras · ${cmM==='all'?'todo':mn(cmM)}</h3>
+  ${L.map(c=>`<div class="row cmr"><div><b>${cmD(c.bought_at)}</b>${c.supplier?' · '+esc(c.supplier):''}${c.note?` <small>(${esc(c.note)})</small>`:''}${(c.items||[]).map((it,ix)=>{const p=pOf(it);return `<div class="cmi">${Number(it.qty)||0} × <b>${esc(it.name)}</b>${cmV(it)?' <small>('+esc(cmV(it))+')</small>':''}${it.unit!=null?' · '+money(it.unit)+' c/u':''} ${it.stocked?'<span class="cmok">✓ En inventario</span>':p?`<span class="cmok">Existe en la tienda</span> <button type="button" class="btn ghost sm" data-a="stk" data-c="${c.id}" data-ix="${ix}">Sumar al inventario</button>`:`<span class="cmnew">No está en la tienda</span> <button type="button" class="btn ghost sm" data-a="new" data-c="${c.id}" data-ix="${ix}">Crear como producto</button>`}</div>`}).join('')}</div><div style="text-align:right"><b>${money(c.total)}</b><br><button type="button" class="btn ghost sm" data-a="del" data-c="${c.id}">Eliminar</button></div></div>`).join('')||'<p class="desc">Aún no hay compras en este periodo.</p>'}`}
+function cmRead(){const g=id=>$(id)?$(id).value:'';cmH={d:g('cmDate'),sup:g('cmSup'),note:g('cmNote'),st:$('cmSt')?$('cmSt').checked:true}}
+async function cmSave(){cmRead();
+  const items=cmL.filter(l=>l.name.trim()&&Number(l.q)>0).map(l=>{const p=pMatch(l.name);return{name:p?p.name:l.name.trim(),product_id:p?p.id:null,size:l.s.trim(),color:l.c.trim(),qty:Number(l.q),unit:l.u===''||l.u==null?null:Number(l.u),stocked:false}});
+  if(!items.length){say('Agrega al menos un producto con su cantidad.');return}
+  const total=items.reduce((t,i)=>t+(i.unit||0)*i.qty,0);say('Guardando compra…',true);
+  const ins=await sb.from('purchases').insert({bought_at:cmH.d||today0(),supplier:cmH.sup.trim()||null,note:cmH.note.trim()||null,items,total}).select('id');
+  if(ins.error){say('Error: '+ins.error.message+' (¿ejecutaste crear-compras.sql?)');return}
+  let warn='';
+  if(cmH.st){for(const it of items){if(!it.product_id)continue;const er=await cmStock(it);if(er)warn+=` ${it.name}: ${er.message}.`;else it.stocked=true}
+    if(items.some(i=>i.stocked)&&ins.data&&ins.data[0]){await sb.from('purchases').update({items}).eq('id',ins.data[0].id);await load()}}
+  cmL=[{name:'',s:'',c:'',q:1,u:''}];cmH={d:'',sup:'',note:'',st:cmH.st};cmM=(cmH.d||today0()).slice(0,7)===cmM?cmM:cmM;
+  await loadPurch();say('Compra guardada.'+(warn?' Revisa:'+warn:''),!warn);toast('Compra guardada');rCom()}
+$('tCom').oninput=e=>{const t=e.target,row=t.closest('.cml');if(!row||!t.dataset.f)return;const l=cmL[+row.dataset.i];l[t.dataset.f]=t.value;
+  if(t.dataset.f==='name')row.querySelector('.cmb').innerHTML=cmBadge(t.value);
+  row.querySelector('[data-sub]').textContent=money((Number(l.q)||0)*(Number(l.u)||0));$('cmTot').textContent=money(cmL.reduce((s,x)=>s+(Number(x.q)||0)*(Number(x.u)||0),0))};
+$('tCom').onclick=async e=>{const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,cid=b.dataset.c,P=cid&&purch.find(x=>String(x.id)===cid);
+  if(a==='mon'){cmM=b.dataset.m;cmRead();rCom();return}
+  if(a==='add'){cmRead();cmL.push({name:'',s:'',c:'',q:1,u:''});rCom();return}
+  if(a==='rm'){cmRead();cmL.splice(+b.dataset.i,1);rCom();return}
+  if(a==='save'){b.disabled=true;await cmSave();b.disabled=false;return}
+  if(a==='del'){if(!b.dataset.ok){b.dataset.ok=1;b.textContent='¿Seguro? Clic otra vez';setTimeout(()=>{b.dataset.ok='';b.textContent='Eliminar'},3500);return}
+    const r=await sb.from('purchases').delete().eq('id',cid);if(r.error){say('Error: '+r.error.message);return}await loadPurch();say('Compra eliminada (el inventario no se modifica).',true);return}
+  if(!P)return;const ix=+b.dataset.ix,it=(P.items||[])[ix];if(!it)return;
+  if(a==='stk'){b.disabled=true;const er=await cmStock(it);if(er){say('No se pudo sumar: '+er.message);b.disabled=false;return}
+    const items=P.items.map((x,k)=>k===ix?{...x,stocked:true,product_id:(pOf(it)||{}).id??x.product_id}:x);const r=await sb.from('purchases').update({items}).eq('id',P.id);if(r.error){say('Error: '+r.error.message);return}
+    await Promise.all([load(),loadPurch()]);say('Sumado al inventario.',true);toast('Inventario actualizado');return}
+  if(a==='new'){clear();$('pn').value=it.name;$('pco').value=it.unit??'';$('pst').value=it.qty;if(it.size||it.color){vlist=[{s:it.size||'',c:it.color||'',n:it.qty}];vRender()}
+    window._pp={id:P.id,ix};showTab('prod');say('Completa categoría, precio y fotos, y guarda: la compra quedará enlazada al producto.',true);$('pn').scrollIntoView({block:'center'})}};
+
+/* al guardar un producto con valor de compra y cantidad, se anota solo en Compras */
+async function cmFromProduct(pid,row,prev,cost,sup){
+  const unit=cost===''||cost==null?null:Number(cost),items=[],base=(n,s,c,q)=>({name:row.name,product_id:pid,size:s||'',color:c||'',qty:q,unit,stocked:true});
+  if(row.variants&&row.variants.length){const old={};(prev?vars(prev):[]).forEach(v=>old[v.s+'|'+v.c]=v.n);row.variants.forEach(v=>{const d=v.n-(old[v.s+'|'+v.c]||0);if(d>0)items.push(base(0,v.s,v.c,d))})}
+  else if(row.stock!=null){const d=Number(row.stock)-Number(prev&&prev.stock||0);if(d>0)items.push(base(0,'','',d))}
+  if(!items.length)return'';
+  const r=await sb.from('purchases').insert({bought_at:today0(),supplier:String(sup||'').trim()||null,note:'Registrada desde Productos',items,total:items.reduce((t,i)=>t+(i.unit||0)*i.qty,0)});
+  if(r.error)return' La compra NO se anotó: ejecuta crear-compras.sql en Supabase.';
+  await loadPurch();return' Anotado en Compras.'}
+async function cmLink(pid){const x=window._pp;window._pp=null;if(!x)return;const P=purch.find(c=>c.id===x.id);if(!P)return;
+  const items=P.items.map((it,k)=>k===x.ix?{...it,product_id:pid,stocked:true}:it);await sb.from('purchases').update({items}).eq('id',P.id);await loadPurch()}
+
 $('tGra').onchange=e=>{if(e.target.id==='gF'||e.target.id==='gT'){gf=$('gF').value;gt=$('gT').value;gr=(gf||gt)?'custom':'today';rGra()}};
 
 /* ====== VENTA EN TIENDA FÍSICA ====== */
