@@ -922,6 +922,11 @@ body.pv #lb .dh h2{font-size:clamp(26px,3.4vw,40px)!important;text-transform:upp
 @media(max-width:640px){.ann{font-size:12.5px!important;padding:7px 8px!important}}
 @media(prefers-reduced-motion:reduce){.ann{animation:none}}
 body.pv .top{background:#0a0a0a!important;position:sticky!important;top:0}
+.ri img.dgi{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:cover!important;z-index:3!important;pointer-events:none;transition:none}
+.ri .dgw{background:#161616}.ri{touch-action:pan-y;cursor:grab}
+.ra{position:absolute;top:50%;transform:translateY(-50%);z-index:4;width:22px;height:34px;padding:0;border:0;background:rgba(0,0,0,.6);color:#fff!important;font:15px/1 sans-serif;cursor:pointer}
+.ra.l{left:12px}.ra.r{right:12px}.ra:hover{background:rgba(0,0,0,.85)}
+.rl{cursor:pointer}
 </style>
 </head>
 <body>
@@ -1053,6 +1058,7 @@ const CFG={
   // ▼▼ FOTOS DEL BANNER PRINCIPAL: guarda cada foto en la carpeta img/ y escribe su nombre aquí, separado por comas ▼▼
   HERO:['img/banner-1.jpg','img/banner-2.jpg','img/banner-3.jpg','img/banner-4.jpg','img/banner-5.jpg','img/herov1.png'],   // para agregar más: escribe aquí el nombre de la foto nueva (guardada en la carpeta img/)
   HERO_MS:3200,   // milisegundos entre foto y foto (2000 = 2 segundos)
+  HERO_OLD:['img/herov1.png','img/banner-cruces.jpg','img/banner-colombia.jpg','img/banner-777.jpg','img/banner-samurai.jpg','img/banner-fugaz.jpg','img/banner-royal.jpg'],   // respaldo: solo se usan si NINGUNA foto de HERO carga
   HERO_POS:'center 62%',   // centrado vertical de las fotos del banner (0% = arriba, 50% = centro, 100% = abajo)
   COMBO_DESC:10,   // % de descuento de los combos que arma el cliente
   PAY:{online:'',transfer:'',cod:true,cuentas:[{id:'nequi',n:'Nequi',d:''},{id:'bancolombia',n:'Bancolombia',d:''},{id:'daviplata',n:'Daviplata',d:''}]},   // en cuentas pon en d: tu número o cuenta (ej. 'Nequi 3XX XXX XXXX · a nombre de ...'). Si lo dejas vacío se envía por WhatsApp.   // online: URL de tu función de pago (Wompi / Mercado Pago). transfer: texto con tus cuentas, ej. 'Nequi 3XX XXX XXXX\nBancolombia ahorros ...'. cod: pago contra entrega
@@ -1450,7 +1456,7 @@ function lbOpen(id,intent){const p=products.find(x=>String(x.id)===String(id));i
   if(intent&&isAv(p)){LB.intent=intent;LB.need={z:true,c:true};lbOpts();if(!LB.need.z&&!LB.need.c){LB.intent=null;lbOpts();(intent==='cart'?$('lbC'):$('lbW')).click();return}}
   $('lbG').innerHTML=imgs(p).map((u,k)=>`<img src="${esc(u)}" data-k="${k}" alt="${esc(p.name)}" loading="lazy" draggable="false">`).join('');
   {const o=products.filter(x=>String(x.id)!==String(p.id)&&isAv(x)).sort((a,b)=>(slug(b.category||'')===slug(p.category||''))-(slug(a.category||'')===slug(p.category||''))).slice(0,8);
-   $('lbRel').innerHTML=o.length?`<h4>Aprovecha para llevar tus preferidas</h4><div class="rg">${o.map(x=>`<button type="button" class="rl" data-id="${esc(x.id)}"><span class="ri">${x.compare_price&&+x.compare_price>+x.price?'<em class="of">Oferta</em>':''}${imgs(x)[0]?`<img src="${esc(imgs(x)[0])}" alt="" loading="lazy">`:''}</span><b>${esc(x.name)}</b><span class="price">${money(x.price)}${x.compare_price&&+x.compare_price>+x.price?`<span class="old">${money(x.compare_price)}</span>`:''}</span></button>`).join('')}</div>`:''}
+   $('lbRel').innerHTML=o.length?`<h4>Aprovecha para llevar tus preferidas</h4><div class="rg">${o.map(x=>{const im=imgs(x);return `<div class="rl" data-id="${esc(x.id)}" role="link" tabindex="0"><span class="ri" data-i="0">${x.compare_price&&+x.compare_price>+x.price?'<em class="of">Oferta</em>':''}${im[0]?`<img src="${esc(im[0])}" alt="" loading="lazy" draggable="false">`:''}${im.length>1?'<button type="button" class="ra l" aria-label="Foto anterior">❮</button><button type="button" class="ra r" aria-label="Foto siguiente">❯</button>':''}</span><b>${esc(x.name)}</b><span class="price">${money(x.price)}${x.compare_price&&+x.compare_price>+x.price?`<span class="old">${money(x.compare_price)}</span>`:''}</span></div>`}).join('')}</div>`:''}
   lbShow(0);pvOpen();lbFit();requestAnimationFrame(lbFit)}
 /* la ficha del producto es una página completa (no una ventana encima) */
 let PV_Y=0;
@@ -1469,7 +1475,9 @@ function zvShow(i){zI=(i+zA.length)%zA.length;const im=$('zvI');im.classList.rem
 function zvOpen(k){zA=imgs(lbP);if(!zA.length)return;zvShow(k);if(!$('zv').open)$('zv').showModal()}
 $('lbG').onclick=e=>{const i=e.target.closest('img');if(i)zvOpen(+i.dataset.k)};
 $('lbS').addEventListener('click',e=>{if(e.target.id==='lbI')zvOpen(lbI)});
-$('lbRel').onclick=e=>{const b=e.target.closest('.rl');if(b)lbOpen(b.dataset.id)};
+function rGo(ri,d){const p=products.find(x=>String(x.id)===ri.closest('.rl').dataset.id),a=p?imgs(p):[];if(a.length<2)return;const i=((+ri.dataset.i||0)+d+a.length)%a.length;ri.dataset.i=i;const im=ri.querySelector('img');if(im)im.src=a[i]}
+$('lbRel').onclick=e=>{const ar=e.target.closest('.ra');if(ar){e.stopPropagation();rGo(ar.closest('.ri'),ar.classList.contains('r')?1:-1);return}const b=e.target.closest('.rl');if(b)lbOpen(b.dataset.id)};
+$('lbRel').onkeydown=e=>{if((e.key==='Enter'||e.key===' ')&&e.target.classList.contains('rl')){e.preventDefault();lbOpen(e.target.dataset.id)}};
 $('zvX').onclick=()=>$('zv').close();$('zvP').onclick=()=>zvShow(zI-1);$('zvN').onclick=()=>zvShow(zI+1);
 $('zvT').onclick=e=>{const b=e.target.closest('button');if(b)zvShow(+b.dataset.k)};
 $('zvI').onclick=e=>{const im=e.currentTarget,r=im.getBoundingClientRect();im.style.transformOrigin=((e.clientX-r.left)/r.width*100)+'% '+((e.clientY-r.top)/r.height*100)+'%';im.classList.toggle('z')};
@@ -1847,8 +1855,8 @@ const m=document.getElementById('catalogo');if(m)new MutationObserver(watch).obs
  const prep=()=>{const s=st,W=s.box.offsetWidth;s.W=W;
   if(s.k==='h'){const H=window.HERO;if(!H||H.im.length<2)return false;s.H=H;s.A=H.im[H.k];s.n=H.im.length;H.stop();s.box.classList.add('nf');s.getB=d=>H.im[(H.k+d+s.n)%s.n]}
   else if(s.k==='l'){const a=imgs(lbP);if(a.length<2)return false;s.A=$('lbI');s.a=a;s.getB=d=>{const i=mk(a[(lbI+d+a.length)%a.length],0,W);s.box.appendChild(i);return i}}
-  else{const p=products.find(x=>String(x.id)===s.box.closest('.card').dataset.id),a=p?imgs(p):[];if(a.length<2)return false;s.a=a;
-   const cur=(!s.box.classList.contains('navd')&&matchMedia('(hover:hover)').matches&&s.box.matches(':hover'))?1:(+s.box.dataset.i||0);s.cur=cur;
+  else{const rr=s.k==='r',p=products.find(x=>String(x.id)===(rr?s.box.closest('.rl'):s.box.closest('.card')).dataset.id),a=p?imgs(p):[];if(a.length<2)return false;s.a=a;
+   const cur=rr?(+s.box.dataset.i||0):(!s.box.classList.contains('navd')&&matchMedia('(hover:hover)').matches&&s.box.matches(':hover'))?1:(+s.box.dataset.i||0);s.cur=cur;
    s.A=mk(a[cur],0,W);s.A.classList.add('dgw');s.box.appendChild(s.A);s.getB=d=>{const i=mk(a[(cur+d+a.length)%a.length],0,W);i.classList.add('dgw');s.box.appendChild(i);return i}}
   return true};
  const setB=d=>{const s=st;if(s.d===d)return;if(s.B){if(s.k!=='h')s.B.remove();else{s.B.style.opacity='';s.B.style.transform=''}}
@@ -1858,8 +1866,8 @@ const m=document.getElementById('catalogo');if(m)new MutationObserver(watch).obs
  const clean=()=>{const s=st;if(!s)return;if(s.k==='h'){[s.A,s.B].forEach(x=>{if(x){x.style.transform='';x.style.transition='';x.style.opacity=''}});s.box.classList.remove('nf')}
   else{if(s.k==='l')s.A.style.transform='',s.A.style.transition='';else s.A&&s.A.remove();s.B&&s.B.remove()}};
  document.addEventListener('pointerdown',e=>{if(e.button||st||e.target.closest('button,a,input,select,textarea'))return;
-  const h=e.target.closest('#hero'),l=e.target.closest('#lbS'),c=e.target.closest('#catalogo .ph'),k=h?'h':l?'l':c?'c':null;if(!k)return;
-  st={k,box:h||l||c,x:e.clientX,y:e.clientY,on:false,id:e.pointerId,ok:null,d:0}});
+  const h=e.target.closest('#hero'),l=e.target.closest('#lbS'),c=e.target.closest('#catalogo .ph'),r=e.target.closest('#lbRel .ri'),k=h?'h':l?'l':c?'c':r?'r':null;if(!k)return;
+  st={k,box:h||l||c||r,x:e.clientX,y:e.clientY,on:false,id:e.pointerId,ok:null,d:0}});
  document.addEventListener('pointermove',e=>{const s=st;if(!s||e.pointerId!==s.id)return;const dx=e.clientX-s.x,dy=e.clientY-s.y;
   if(!s.on){if(Math.abs(dx)<4||Math.abs(dx)<Math.abs(dy)*1.2)return;if(!prep()){st=null;return}s.on=true;try{s.box.setPointerCapture(e.pointerId)}catch(_){}
    if(s.k==='c')window._phDrag=true}
@@ -1871,7 +1879,7 @@ const m=document.getElementById('catalogo');if(m)new MutationObserver(watch).obs
   A.style.transition=B.style.transition=T;
   A.style.transform=`translateX(${go?-d*s.W:0}px)`;B.style.transform=`translateX(${go?0:d*s.W}px)`;
   setTimeout(()=>{
-   if(go){if(s.k==='h'){s.H.go(s.H.k+d);s.H.play()}else if(s.k==='l'){lbShow(lbI+d)}else{phGo(s.box,d)}}
+   if(go){if(s.k==='h'){s.H.go(s.H.k+d);s.H.play()}else if(s.k==='l'){lbShow(lbI+d)}else if(s.k==='r'){rGo(s.box,d)}else{phGo(s.box,d)}}
    else if(s.k==='h')s.H.play();
    clean();if(s.k==='c')setTimeout(()=>{window._phDrag=false},50);st=null},200)};
  document.addEventListener('pointerup',end);document.addEventListener('pointercancel',end);
@@ -1910,7 +1918,10 @@ const tUpd=()=>{tt.classList.toggle('show',scrollY>30);td.classList.toggle('show
 tt.onclick=()=>goStep(-1);td.onclick=()=>goStep(1);
 addEventListener('scroll',tUpd,{passive:true});addEventListener('resize',tUpd);tUpd();
 /* ====== BANNER DE FOTOS ====== */
-(()=>{const S=$('heroS'),list=CFG.HERO&&CFG.HERO.length?CFG.HERO:[...S.querySelectorAll('img')].map(i=>i.getAttribute('src'));
+(()=>{const S=$('heroS'),first=[...S.querySelectorAll('img')].map(i=>i.getAttribute('src')),want=CFG.HERO&&CFG.HERO.length?CFG.HERO:first,probe=u=>new Promise(r=>{const i=new Image();i.onload=()=>r(u);i.onerror=()=>r(null);i.src=u});
+  /* solo se muestran las fotos que sí cargan; si ninguna de HERO carga, usa HERO_OLD para no dejar el banner vacío */
+  Promise.all(want.map(probe)).then(a=>{const ok=a.filter(Boolean);return ok.length?ok:Promise.all((CFG.HERO_OLD||first).map(probe)).then(b=>b.filter(Boolean))}).then(list=>{init(list.length?list:first)});
+  function init(list){
   S.innerHTML=list.map((u,i)=>`<img src="${esc(u)}" alt="GORRAX ${i+1}" class="${i?'':'on'}"${i?' loading="lazy"':''}>`).join('');
   const im=[...S.children],n=im.length,D=$('heroD');let k=0,tm;
   if(n>1){$('heroP').hidden=$('heroN').hidden=D.hidden=false;D.innerHTML=im.map((_,i)=>`<button type="button" aria-label="Foto ${i+1}"></button>`).join('')}
@@ -1920,7 +1931,7 @@ addEventListener('scroll',tUpd,{passive:true});addEventListener('resize',tUpd);t
   D.onclick=e=>{const j=[...D.children].indexOf(e.target.closest('button'));if(j>=0){go(j);play()}};
   const H=$('hero');H.addEventListener('mouseenter',()=>clearInterval(tm));H.addEventListener('mouseleave',play);
   window.HERO={go,play,im,get k(){return k},stop:()=>clearInterval(tm)};
-  go(0);play()})();
+  go(0);play()}})();
 const setHH=()=>document.documentElement.style.setProperty('--hh',document.querySelector('.top').offsetHeight+'px');setHH();addEventListener('resize',setHH);addEventListener('load',setHH);
 
 $('catalogo').addEventListener('click',e=>{const b=e.target.closest('.qb');if(!b)return;e.stopImmediatePropagation();e.preventDefault();if(b.classList.contains('dis'))return;lbOpen(b.closest('.card').dataset.id,b.dataset.go)},true);
