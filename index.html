@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>try{document.documentElement.dataset.theme=localStorage.getItem("theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}
-var GXF={urbana:"Bebas+Neue&family=Montserrat:wght@400;600;700;800",elegante:"Playfair+Display:wght@700;900&family=Lato:wght@400;700;900",futurista:"Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700",deportiva:"Anton&family=Barlow:wght@400;600;700;800",redondeada:"Fredoka:wght@500;700&family=Nunito:wght@400;700;800",moderna:"Poppins:wght@400;500;600;700;800"};
+var GXF={urbana:"Bebas+Neue&family=Montserrat:wght@400;600;700;800",elegante:"Playfair+Display:wght@700;900&family=Lato:wght@400;700;900",futurista:"Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700",deportiva:"Anton&family=Barlow:wght@400;600;700;800",redondeada:"Fredoka:wght@500;700&family=Nunito:wght@400;700;800",moderna:"Poppins:wght@400;500;600;700;800",impacto:"Archivo+Black&family=Archivo:wght@400;600;700",retro:"Righteous&family=Quicksand:wght@400;600;700",clasica:"Cinzel:wght@600;800&family=Lora:wght@400;600;700",callejera:"Bungee&family=Space+Grotesk:wght@400;600;700",industrial:"Teko:wght@500;600;700&family=Rubik:wght@400;500;700"};
 function gxFont(k){if(!GXF[k]||document.getElementById("gxf-"+k))return;var l=document.createElement("link");l.id="gxf-"+k;l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family="+GXF[k]+"&display=swap";document.head.appendChild(l)}
 function gxLook(l){var d=document.documentElement;["pal","shape","font","hov","auto"].forEach(function(a){var v=l&&l[a],def=a==="pal"?"oro":a==="shape"?"sesgado":a==="font"?"original":"ninguno";if(v&&v!==def){d.dataset[a]=v;if(a==="font")gxFont(v)}else delete d.dataset[a]})}
 try{gxLook(JSON.parse(localStorage.getItem("gx_look")||"{}"))}catch(e){}
@@ -1045,6 +1045,47 @@ html[data-auto] :is(.btn:not(.ghost):not(.sm),.cadd,.wa,.more,.promo-btn,.card .
 @media(prefers-reduced-motion:reduce){html[data-auto] :is(.btn:not(.ghost):not(.sm),.cadd,.wa,.more,.promo-btn,.card .pl),html[data-auto] :is(.btn:not(.ghost):not(.sm),.cadd,.wa,.more,.promo-btn,.card .pl)::after{animation:none!important}}
 .shb em{font-style:normal;font-weight:400;font-size:11px;opacity:.7;text-align:center}
 .shb span.ft{width:auto;height:auto;background:none;color:var(--ink);font-size:22px;line-height:1.1}
+
+/* ===== 5 TEMAS MÁS ===== */
+html[data-pal=indigo]{--bg:#07080f;--panel:#0f1120;--line:#1d2040;--ink:#eceeff;--muted:#9096bf;--gold:#7b8cff;--gold-hd:#7b8cff;--goldrgb:123,140,255}
+html[data-pal=indigo][data-theme=light]{--bg:#e9eafa;--panel:#ffffff;--line:#d0d3ee;--ink:#0f1226;--muted:#555a80;--gold:#4655e0;--gold-hd:#7b8cff;--goldrgb:70,85,224}
+html[data-pal=amarillo]{--bg:#0b0a05;--panel:#17150a;--line:#2e2a12;--ink:#faf6e1;--muted:#a8a27a;--gold:#ffe11a;--gold-hd:#ffe11a;--goldrgb:255,225,26}
+html[data-pal=amarillo][data-theme=light]{--bg:#f3f0dc;--panel:#ffffff;--line:#e0dbb8;--ink:#1a1805;--muted:#665f33;--gold:#d4a900;--gold-hd:#ffe11a;--goldrgb:212,169,0}
+html[data-pal=coral]{--bg:#0e0807;--panel:#1a100e;--line:#33201c;--ink:#fbefec;--muted:#ab968f;--gold:#ff6b5a;--gold-hd:#ff6b5a;--goldrgb:255,107,90}
+html[data-pal=coral][data-theme=light]{--bg:#f6eae7;--panel:#ffffff;--line:#e6d3ce;--ink:#1c0f0c;--muted:#6c5650;--gold:#e2503f;--gold-hd:#ff6b5a;--goldrgb:226,80,63}
+html[data-pal=plata]{--bg:#08090b;--panel:#121418;--line:#23272e;--ink:#eef1f6;--muted:#9199a8;--gold:#cfd6e4;--gold-hd:#cfd6e4;--goldrgb:207,214,228}
+html[data-pal=plata][data-theme=light]{--bg:#e8eaee;--panel:#ffffff;--line:#d0d4db;--ink:#12151a;--muted:#555d6b;--gold:#8795b3;--gold-hd:#cfd6e4;--goldrgb:135,149,179}
+html[data-pal=magenta]{--bg:#0d070e;--panel:#1a0f1c;--line:#341d38;--ink:#fbeefc;--muted:#a893ab;--gold:#e040fb;--gold-hd:#e040fb;--goldrgb:224,64,251}
+html[data-pal=magenta][data-theme=light]{--bg:#f5e9f6;--panel:#ffffff;--line:#e5d0e8;--ink:#1c0f1e;--muted:#6a526d;--gold:#b832d4;--gold-hd:#e040fb;--goldrgb:184,50,212}
+/* ===== 6 FORMAS MÁS ===== */
+html[data-shape=diagonal]{--bp:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));--cp:polygon(0 0,calc(100% - 26px) 0,100% 26px,100% 100%,26px 100%,0 calc(100% - 26px))}
+html[data-shape=octagono]{--bp:polygon(8px 0,calc(100% - 8px) 0,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0 calc(100% - 8px),0 8px);--cp:polygon(22px 0,calc(100% - 22px) 0,100% 22px,100% calc(100% - 22px),calc(100% - 22px) 100%,22px 100%,0 calc(100% - 22px),0 22px)}
+html[data-shape=hexagono]{--bp:polygon(10px 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,10px 100%,0 50%);--cp:polygon(0 3%,50% 0,100% 3%,100% 97%,50% 100%,0 97%)}
+html[data-shape=flecha]{--bp:polygon(0 0,calc(100% - 12px) 0,100% 50%,calc(100% - 12px) 100%,0 100%);--cp:polygon(0 0,calc(100% - 30px) 0,100% 30px,100% 100%,0 100%)}
+html[data-shape=escudo]{--bp:polygon(0 0,100% 0,100% 84%,50% 100%,0 84%);--cp:polygon(0 0,100% 0,100% calc(100% - 34px),50% 100%,0 calc(100% - 34px))}
+html[data-shape=gota]{--bp:inset(0 round 999px 4px 999px 4px);--cp:inset(0 round 60px 4px 60px 4px)}
+html[data-shape=escudo] .btn,html[data-shape=escudo] .wa,html[data-shape=escudo] .cadd{padding-bottom:calc(.7em + 4px)}
+/* ===== 5 TIPOGRAFÍAS MÁS ===== */
+html[data-font=impacto]{--fh:"Archivo Black";--fb:"Archivo"}
+html[data-font=retro]{--fh:"Righteous";--fb:"Quicksand"}
+html[data-font=clasica]{--fh:"Cinzel";--fb:"Lora"}
+html[data-font=callejera]{--fh:"Bungee";--fb:"Space Grotesk"}
+html[data-font=industrial]{--fh:"Teko";--fb:"Rubik"}
+html[data-font=impacto],html[data-font=retro],html[data-font=callejera]{font-synthesis:none}
+/* ===== 6 EFECTOS MÁS AL PASAR EL MOUSE ===== */
+html[data-hov=sacudir] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{animation:gxSac .45s ease-in-out!important}
+html[data-hov=rebote] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{animation:gxReb2 .55s ease!important}
+html[data-hov=giro] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{animation:gxGir .7s ease!important}
+html[data-hov=invertir] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{filter:invert(1) hue-rotate(180deg)}
+html[data-hov=hundir] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{transform:scale(.9) translateY(2px);filter:brightness(.9)}
+html[data-hov=arcoiris] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{animation:gxArc 1.2s linear infinite!important}
+@keyframes gxSac{0%,100%{transform:translateX(0)}20%{transform:translateX(-5px) rotate(-2deg)}40%{transform:translateX(5px) rotate(2deg)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+@keyframes gxReb2{0%,100%{transform:translateY(0)}30%{transform:translateY(-9px)}55%{transform:translateY(0)}75%{transform:translateY(-4px)}}
+@keyframes gxGir{0%{transform:perspective(500px) rotateY(0)}100%{transform:perspective(500px) rotateY(360deg)}}
+@keyframes gxArc{0%{filter:hue-rotate(0)}100%{filter:hue-rotate(360deg)}}
+/* banner: puntero normal */
+.hero,.hero img,.hs{cursor:default!important}
+.hero button{cursor:pointer!important}
 </style>
 </head>
 <body>
@@ -2056,8 +2097,7 @@ addEventListener('scroll',tUpd,{passive:true});addEventListener('resize',tUpd);t
   D.onclick=e=>{const j=[...D.children].indexOf(e.target.closest('button'));if(j>=0){go(j);play()}};
   const H=$('hero');H.addEventListener('mouseenter',()=>clearInterval(tm));H.addEventListener('mouseleave',play);
   window.HERO={go,play,im,get k(){return k},stop:()=>clearInterval(tm)};
-  H.addEventListener('mousemove',e=>{if(e.target.closest('button'))return;const r=H.getBoundingClientRect();H.style.cursor=(e.clientX-r.left)>r.width/2?'e-resize':'w-resize'});
-  H.addEventListener('click',e=>{if(e.target.closest('button,a,.dots'))return;const r=H.getBoundingClientRect(),d=(e.clientX-r.left)>r.width/2?1:-1;go(k+d);play()});
+    H.addEventListener('click',e=>{if(e.target.closest('button,a,.dots'))return;const r=H.getBoundingClientRect(),d=(e.clientX-r.left)>r.width/2?1:-1;go(k+d);play()});
   go(0);play()}})();
 const setHH=()=>document.documentElement.style.setProperty('--hh',document.querySelector('.top').offsetHeight+'px');setHH();addEventListener('resize',setHH);addEventListener('load',setHH);
 
@@ -2086,13 +2126,24 @@ const LOOKS=[{id:'oro',n:'Oro Clásico',d:['#0a0a0a','#e2b53f'],l:['#ebebe6','#a
  {id:'rosa',n:'Rosa Chicle',d:['#0e080b','#ff4fa3'],l:['#f5e9ef','#e0338a']},
  {id:'cian',n:'Turquesa',d:['#060d0e','#19d3c5'],l:['#e5f1f0','#0e9f94']},
  {id:'lima',n:'Lima',d:['#090c06','#b6f03c'],l:['#eef2e1','#7fb800']},
- {id:'cobre',n:'Cobre',d:['#0d0907','#d98a57'],l:['#f3eae3','#b8602c']}];
+ {id:'cobre',n:'Cobre',d:['#0d0907','#d98a57'],l:['#f3eae3','#b8602c']},
+ {id:'indigo',n:'Índigo',d:['#07080f','#7b8cff'],l:['#e9eafa','#4655e0']},
+ {id:'amarillo',n:'Amarillo Taxi',d:['#0b0a05','#ffe11a'],l:['#f3f0dc','#d4a900']},
+ {id:'coral',n:'Coral',d:['#0e0807','#ff6b5a'],l:['#f6eae7','#e2503f']},
+ {id:'plata',n:'Plata',d:['#08090b','#cfd6e4'],l:['#e8eaee','#8795b3']},
+ {id:'magenta',n:'Magenta',d:['#0d070e','#e040fb'],l:['#f5e9f6','#b832d4']}];
 const SHAPES=[{id:'sesgado',n:'Inclinado',c:'polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%)'},
  {id:'cuadrado',n:'Cuadrado',c:'none'},{id:'redondo',n:'Redondeado',c:'inset(0 round 10px)'},
  {id:'pildora',n:'Píldora',c:'inset(0 round 999px)'},{id:'cortado',n:'Esquinas cortadas',c:'polygon(9px 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%,0 9px)'},
- {id:'hoja',n:'Hoja',c:'inset(0 round 16px 2px 16px 2px)'}];
-const FONTS=[{id:'original',n:'Original',f:'"Big Shoulders Display"'},{id:'urbana',n:'Urbana',f:'"Bebas Neue"'},{id:'elegante',n:'Elegante',f:'"Playfair Display"'},{id:'futurista',n:'Futurista',f:'Orbitron'},{id:'deportiva',n:'Deportiva',f:'Anton'},{id:'redondeada',n:'Redondeada',f:'Fredoka'},{id:'moderna',n:'Moderna',f:'Poppins'}];
-const HOVS=[{id:'ninguno',n:'Relleno (original)',d:'El color se desliza'},{id:'elevar',n:'Elevar',d:'Sube y crece un poco'},{id:'escala',n:'Agrandar',d:'Crece con rebote'},{id:'inclinar',n:'Inclinar',d:'Gira ligeramente'},{id:'neon',n:'Neón',d:'Borde y brillo interior'},{id:'brillo',n:'Destello',d:'Pasa un brillo'}];
+ {id:'hoja',n:'Hoja',c:'inset(0 round 16px 2px 16px 2px)'},
+ {id:'diagonal',n:'Diagonal',c:'polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px))'},
+ {id:'octagono',n:'Octágono',c:'polygon(8px 0,calc(100% - 8px) 0,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0 calc(100% - 8px),0 8px)'},
+ {id:'hexagono',n:'Hexágono',c:'polygon(10px 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,10px 100%,0 50%)'},
+ {id:'flecha',n:'Flecha',c:'polygon(0 0,calc(100% - 12px) 0,100% 50%,calc(100% - 12px) 100%,0 100%)'},
+ {id:'escudo',n:'Escudo',c:'polygon(0 0,100% 0,100% 84%,50% 100%,0 84%)'},
+ {id:'gota',n:'Gota',c:'inset(0 round 999px 4px 999px 4px)'}];
+const FONTS=[{id:'original',n:'Original',f:'"Big Shoulders Display"'},{id:'urbana',n:'Urbana',f:'"Bebas Neue"'},{id:'elegante',n:'Elegante',f:'"Playfair Display"'},{id:'futurista',n:'Futurista',f:'Orbitron'},{id:'deportiva',n:'Deportiva',f:'Anton'},{id:'redondeada',n:'Redondeada',f:'Fredoka'},{id:'moderna',n:'Moderna',f:'Poppins'},{id:'impacto',n:'Impacto',f:'"Archivo Black"'},{id:'retro',n:'Retro',f:'Righteous'},{id:'clasica',n:'Clásica',f:'Cinzel'},{id:'callejera',n:'Callejera',f:'Bungee'},{id:'industrial',n:'Industrial',f:'Teko'}];
+const HOVS=[{id:'ninguno',n:'Relleno (original)',d:'El color se desliza'},{id:'elevar',n:'Elevar',d:'Sube y crece un poco'},{id:'escala',n:'Agrandar',d:'Crece con rebote'},{id:'inclinar',n:'Inclinar',d:'Gira ligeramente'},{id:'neon',n:'Neón',d:'Borde y brillo interior'},{id:'brillo',n:'Destello',d:'Pasa un brillo'},{id:'sacudir',n:'Sacudir',d:'Tiembla de lado a lado'},{id:'rebote',n:'Rebote',d:'Salta una vez'},{id:'giro',n:'Giro 3D',d:'Da una vuelta'},{id:'invertir',n:'Invertir',d:'Colores al revés'},{id:'hundir',n:'Hundir',d:'Se aprieta como botón'},{id:'arcoiris',n:'Arcoíris',d:'Cambia de colores'}];
 const AUTOS=[{id:'ninguno',n:'Ninguno',d:'Botones quietos'},{id:'latido',n:'Latido',d:'Crece y encoge'},{id:'respirar',n:'Respirar',d:'Brillo que sube y baja'},{id:'rebote',n:'Rebote',d:'Salta de vez en cuando'},{id:'balanceo',n:'Balanceo',d:'Se mueve de lado a lado'},{id:'brillo',n:'Destello',d:'Brillo que cruza solo'}];
 const LK0={pal:'oro',shape:'sesgado',font:'original',hov:'ninguno',auto:'ninguno'};
 let LOOK={...LK0},lookDirty=false;
