@@ -895,6 +895,18 @@ dialog#zv::backdrop{background:#000}
 }
 @media(min-width:700px) and (max-width:899px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
 @media(min-width:900px){.fbtn .fx{display:none!important}}
+/* ===== v9: la ficha del producto es una página completa ===== */
+body.pv .hero,body.pv #promo,body.pv .feat,body.pv .sectH,body.pv #catalogo,body.pv .fin,body.pv .fbtn{display:none!important}
+body.pv .top{background:#0a0a0a!important;position:sticky}
+body.pv #lb{position:static!important;inset:auto!important;transform:none!important;display:block;width:100%!important;max-width:1280px!important;height:auto!important;max-height:none!important;margin:0 auto!important;padding:18px 5vw 10px;border:0!important;border-radius:0!important;background:transparent!important;color:var(--ink);overflow:visible!important;box-shadow:none}
+body.pv #lb .dh{padding:0 0 14px!important;background:transparent!important;border:0!important;display:flex;flex-direction:row-reverse;justify-content:space-between;align-items:center;gap:12px}
+body.pv #lb .dh h2{font-size:clamp(26px,3.4vw,40px)!important;text-transform:uppercase}
+#lb .rel{margin-top:44px;padding-top:6px;border-top:1px solid var(--line)}
+#lb .rel h4{margin:22px 0 14px;font-size:clamp(20px,2.4vw,28px)}
+.ri{position:relative;clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%)}
+.ri .of{position:absolute;top:8px;right:16px;z-index:2;background:#e53935;color:#fff;font:800 11px "Hanken Grotesk",sans-serif;font-style:normal;padding:2px 10px;letter-spacing:.04em;text-transform:uppercase}
+.rl b{font-size:13px}.rl:hover b{color:var(--gold)}
+@media(min-width:900px){#lb .rg{grid-template-columns:repeat(5,minmax(0,1fr));gap:18px 14px}#lb .ri{aspect-ratio:1/1.1}}
 </style>
 </head>
 <body>
@@ -915,6 +927,16 @@ dialog#zv::backdrop{background:#000}
 
 <div class="fin"><section class="build" id="armar" hidden></section></div>
 
+<dialog id="lb" aria-label="Fotos del producto">
+  <div class="dh"><h2 id="lbT"></h2><button class="btn red sm" id="lbX" type="button">← Volver a la tienda</button></div>
+  <div class="lbb"><div class="lbl"><div class="lbg" id="lbG"></div><div class="stage" id="lbS"><button class="lbn l" id="lbP" type="button" aria-label="Foto anterior">‹</button><img id="lbI" alt=""><button class="lbn r" id="lbN" type="button" aria-label="Foto siguiente">›</button></div>
+  <div class="lbt" id="lbTh"></div>
+  </div><div class="lbr"><div class="lbd" id="lbD" hidden></div>
+  <div class="lbo" id="lbO"></div>
+  <div class="lbf"><div class="lbpr"><span class="price" id="lbPr"></span><small class="saved" id="lbSv"></small></div><div class="lba"><span class="lbq" role="group" aria-label="Cantidad"><button type="button" id="lbQm" aria-label="Menos">−</button><b id="lbQn">1</b><button type="button" id="lbQp" aria-label="Más unidades">+</button></span><button type="button" class="btn ghost sm" id="lbC" aria-label="Agregar al carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a1 1 0 0 0 1 .8h8.6a1 1 0 0 0 1-.8L20 7H6"/></svg><span class="bt">Agregar al carrito</span></button><a class="btn grn" id="lbW" target="_blank" rel="noopener" aria-label="Pedir por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.06 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.78h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg><span class="bt">Pedir por WhatsApp</span></a></div></div>
+  <div class="seals" id="lbSeals"></div></div></div>
+  <div class="rel" id="lbRel"></div>
+</dialog>
 <section class="faq" aria-label="Preguntas frecuentes"><h3>Preguntas frecuentes</h3><details><summary>¿Cuánto demora el envío?</summary><p>Enviamos a todo el país. El tiempo depende de tu ciudad; al hacer tu pedido te confirmamos la fecha estimada por WhatsApp.</p></details><details><summary>¿Por dónde realizan los envíos?</summary><p>Despachamos a nivel nacional con transportadora. Te compartimos la guía de seguimiento cuando tu pedido sale.</p></details><details><summary>¿Cómo pago mi pedido?</summary><p>Con Nequi, Bancolombia, Daviplata o contra entrega. Elige tu medio de pago al finalizar la compra.</p></details></section>
 <footer id="contacto">
   <svg class="crown" viewBox="0 0 64 42" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 33 4 10l14 12L32 4l14 18 14-12-3 23z"/><path d="M9 38h46"/></svg>
@@ -1001,15 +1023,6 @@ dialog#zv::backdrop{background:#000}
   <div class="pb" id="polB"></div>
 </dialog>
 
-<dialog id="lb" aria-label="Fotos del producto">
-  <div class="dh"><h2 id="lbT"></h2><button class="btn red sm" id="lbX" type="button">Cerrar</button></div>
-  <div class="lbb"><div class="lbl"><div class="lbg" id="lbG"></div><div class="stage" id="lbS"><button class="lbn l" id="lbP" type="button" aria-label="Foto anterior">‹</button><img id="lbI" alt=""><button class="lbn r" id="lbN" type="button" aria-label="Foto siguiente">›</button></div>
-  <div class="lbt" id="lbTh"></div>
-  </div><div class="lbr"><div class="lbd" id="lbD" hidden></div>
-  <div class="lbo" id="lbO"></div>
-  <div class="lbf"><div class="lbpr"><span class="price" id="lbPr"></span><small class="saved" id="lbSv"></small></div><div class="lba"><span class="lbq" role="group" aria-label="Cantidad"><button type="button" id="lbQm" aria-label="Menos">−</button><b id="lbQn">1</b><button type="button" id="lbQp" aria-label="Más unidades">+</button></span><button type="button" class="btn ghost sm" id="lbC" aria-label="Agregar al carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a1 1 0 0 0 1 .8h8.6a1 1 0 0 0 1-.8L20 7H6"/></svg><span class="bt">Agregar al carrito</span></button><a class="btn grn" id="lbW" target="_blank" rel="noopener" aria-label="Pedir por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.06 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.78h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg><span class="bt">Pedir por WhatsApp</span></a></div></div>
-  <div class="seals" id="lbSeals"></div><div class="rel" id="lbRel"></div></div></div>
-</dialog>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.9"></script>
 <script>
@@ -1024,7 +1037,7 @@ const CFG={
   COMBOS_ON:false,   // true = vuelve a mostrar los combos (oferta, menú, armador y categoría)
   // ▼▼ FOTOS DEL BANNER PRINCIPAL: guarda cada foto en la carpeta img/ y escribe su nombre aquí, separado por comas ▼▼
   HERO:['img/herov1.png','img/banner-cruces.jpg','img/banner-colombia.jpg','img/banner-777.jpg','img/banner-samurai.jpg','img/banner-fugaz.jpg','img/banner-royal.jpg'],   // para agregar más: escribe aquí el nombre de la foto nueva (guardada en la carpeta img/)
-  HERO_MS:2000,   // milisegundos entre foto y foto (2000 = 2 segundos)
+  HERO_MS:3200,   // milisegundos entre foto y foto (2000 = 2 segundos)
   HERO_POS:'center 62%',   // centrado vertical de las fotos del banner (0% = arriba, 50% = centro, 100% = abajo)
   COMBO_DESC:10,   // % de descuento de los combos que arma el cliente
   PAY:{online:'',transfer:'',cod:true,cuentas:[{id:'nequi',n:'Nequi',d:''},{id:'bancolombia',n:'Bancolombia',d:''},{id:'daviplata',n:'Daviplata',d:''}]},   // en cuentas pon en d: tu número o cuenta (ej. 'Nequi 3XX XXX XXXX · a nombre de ...'). Si lo dejas vacío se envía por WhatsApp.   // online: URL de tu función de pago (Wompi / Mercado Pago). transfer: texto con tus cuentas, ej. 'Nequi 3XX XXX XXXX\nBancolombia ahorros ...'. cod: pago contra entrega
@@ -1378,7 +1391,7 @@ $('themeBtn').onclick=()=>{const d=document.documentElement,t=d.dataset.theme===
 
 function imgs(p){const a=(p.images&&p.images.length?p.images:[p.image_url]).filter(u=>typeof u==='string'&&u.trim());return [...new Set(a)]}
 let lbP=null,lbI=0;
-(()=>{const o=HTMLDialogElement.prototype.showModal;HTMLDialogElement.prototype.showModal=function(){o.call(this);document.documentElement.classList.add('nolock');this.addEventListener('close',()=>{if(!document.querySelector('dialog[open]'))document.documentElement.classList.remove('nolock')},{once:true})}})();
+(()=>{const o=HTMLDialogElement.prototype.showModal;HTMLDialogElement.prototype.showModal=function(){o.call(this);document.documentElement.classList.add('nolock');this.addEventListener('close',()=>{if(!document.querySelector('dialog[open]:not(#lb)'))document.documentElement.classList.remove('nolock')},{once:true})}})();
 function lbShow(i){const a=imgs(lbP);document.querySelector('#lb .stage').style.display=a.length?'':'none';$('lbT').textContent=lbP.name;
   if(!a.length){$('lbTh').innerHTML='';return}
   lbI=(i+a.length)%a.length;$('lbI').src=a[lbI];
@@ -1421,9 +1434,17 @@ function lbOpen(id,intent){const p=products.find(x=>String(x.id)===String(id));i
   lbOpts();
   if(intent&&isAv(p)){LB.intent=intent;LB.need={z:true,c:true};lbOpts();if(!LB.need.z&&!LB.need.c){LB.intent=null;lbOpts();(intent==='cart'?$('lbC'):$('lbW')).click();return}}
   $('lbG').innerHTML=imgs(p).map((u,k)=>`<img src="${esc(u)}" data-k="${k}" alt="${esc(p.name)}" loading="lazy" draggable="false">`).join('');
-  {const o=products.filter(x=>String(x.id)!==String(p.id)&&isAv(x)).sort((a,b)=>(slug(b.category||'')===slug(p.category||''))-(slug(a.category||'')===slug(p.category||''))).slice(0,4);
-   $('lbRel').innerHTML=o.length?`<h4>Aprovecha para llevar tus preferidas</h4><div class="rg">${o.map(x=>`<button type="button" class="rl" data-id="${esc(x.id)}"><span class="ri">${imgs(x)[0]?`<img src="${esc(imgs(x)[0])}" alt="" loading="lazy">`:''}</span><b>${esc(x.name)}</b><span class="price">${money(x.price)}${x.compare_price&&+x.compare_price>+x.price?`<span class="old">${money(x.compare_price)}</span>`:''}</span></button>`).join('')}</div>`:''}
-  lbShow(0);if(!$('lb').open)$('lb').showModal();$('lb').scrollTop=0;lbFit();requestAnimationFrame(lbFit)}
+  {const o=products.filter(x=>String(x.id)!==String(p.id)&&isAv(x)).sort((a,b)=>(slug(b.category||'')===slug(p.category||''))-(slug(a.category||'')===slug(p.category||''))).slice(0,8);
+   $('lbRel').innerHTML=o.length?`<h4>Aprovecha para llevar tus preferidas</h4><div class="rg">${o.map(x=>`<button type="button" class="rl" data-id="${esc(x.id)}"><span class="ri">${x.compare_price&&+x.compare_price>+x.price?'<em class="of">Oferta</em>':''}${imgs(x)[0]?`<img src="${esc(imgs(x)[0])}" alt="" loading="lazy">`:''}</span><b>${esc(x.name)}</b><span class="price">${money(x.price)}${x.compare_price&&+x.compare_price>+x.price?`<span class="old">${money(x.compare_price)}</span>`:''}</span></button>`).join('')}</div>`:''}
+  lbShow(0);pvOpen();lbFit();requestAnimationFrame(lbFit)}
+/* la ficha del producto es una página completa (no una ventana encima) */
+let PV_Y=0;
+function pvOpen(){const lb=$('lb');if(!lb.open){PV_Y=scrollY;lb.show();document.body.classList.add('pv');try{history.pushState({pv:1},'')}catch(_){}}scrollTo(0,0)}
+function pvClose(pop){const lb=$('lb');if(!lb.open)return;lb.close();document.body.classList.remove('pv');scrollTo(0,PV_Y||0);if(!pop&&history.state&&history.state.pv){try{history.back()}catch(_){}}}
+addEventListener('popstate',()=>pvClose(true));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('lb').open&&!document.querySelector('dialog[open]:not(#lb)'))pvClose()});
+document.querySelector('.top').addEventListener('click',e=>{if(document.body.classList.contains('pv')&&e.target.closest('a'))pvClose()});
+$('srQ').addEventListener('input',()=>pvClose());
 /* visor a pantalla completa con miniaturas + zoom */
 let zI=0,zA=[];
 function zvShow(i){zI=(i+zA.length)%zA.length;const im=$('zvI');im.classList.remove('z');im.src=zA[zI];$('zvT').innerHTML=zA.map((u,k)=>`<button type="button" data-k="${k}" class="${k===zI?'on':''}"><img src="${esc(u)}" alt=""></button>`).join('');$('zvP').hidden=$('zvN').hidden=zA.length<2}
@@ -1454,11 +1475,11 @@ $('catalogo').addEventListener('pointerdown',e=>{const ph=e.target.closest('.ph'
 $('catalogo').addEventListener('pointermove',e=>{if(Math.abs(e.clientX-lpX)>10||Math.abs(e.clientY-lpY)>10)clearTimeout(lpT)});
 $('catalogo').addEventListener('contextmenu',e=>{if(TOUCH.matches&&e.target.closest('.ph'))e.preventDefault()});
 $('catalogo').addEventListener('click',e=>{const ph=e.target.closest('.ph');if(!ph)return;if(ph._lp){ph._lp=false;return}lbOpen(ph.closest('.card').dataset.id)});
-$('lbP').onclick=()=>lbShow(lbI-1);$('lbN').onclick=()=>lbShow(lbI+1);$('lbX').onclick=()=>$('lb').close();
+$('lbP').onclick=()=>lbShow(lbI-1);$('lbN').onclick=()=>lbShow(lbI+1);$('lbX').onclick=()=>pvClose();
 $('lbTh').onclick=e=>{const b=e.target.closest('button');if(b)lbShow(+b.dataset.k)};
 $('lb').addEventListener('keydown',e=>{if(e.key==='ArrowLeft')lbShow(lbI-1);if(e.key==='ArrowRight')lbShow(lbI+1)});
 function outsideClose(d){let dn=null;d.addEventListener('pointerdown',e=>{dn=e.target});d.addEventListener('click',e=>{if(e.target===d&&dn===d)d.close()})}
-outsideClose($('lb'));outsideClose(dlg);
+outsideClose(dlg);
 let sx=null;$('lbS').addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
 $('lbS').addEventListener('touchend',e=>{if(sx===null)return;const d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>40)lbShow(lbI+(d<0?1:-1));sx=null});
 DEMO_DATA[6].images=[eb('r-kAAeSwXXho8jHC'),eb('GakAAeSwwhZo8jHD'),eb('PagAAeSwOI9o8jHD')];
@@ -1803,7 +1824,7 @@ const watch=()=>document.querySelectorAll('.cat .banner:not([data-w])').forEach(
 const m=document.getElementById('catalogo');if(m)new MutationObserver(watch).observe(m,{childList:true,subtree:true});watch()})();
 (()=>{const f=document.querySelector('.feat');if(!f)return;[...f.children].forEach((d,i)=>d.style.setProperty('--i',i));if('IntersectionObserver'in window){const io=new IntersectionObserver(([e])=>{if(e.isIntersecting){f.classList.add('in');io.disconnect()}},{threshold:.35});io.observe(f)}else f.classList.add('in')})();
 /* ====== ARRASTRAR FOTOS EN VIVO: la foto sigue al mouse/dedo mientras mantienes presionado ====== */
-(()=>{let st=null;const T='transform .25s ease';
+(()=>{let st=null;const T='transform .18s ease-out';
  const mk=(src,x,W)=>{const i=document.createElement('img');i.src=src;i.alt='';i.className='dgi';i.draggable=false;i.style.transform=`translateX(${x}px)`;return i};
  const prep=()=>{const s=st,W=s.box.offsetWidth;s.W=W;
   if(s.k==='h'){const H=window.HERO;if(!H||H.im.length<2)return false;s.H=H;s.A=H.im[H.k];s.n=H.im.length;H.stop();s.box.classList.add('nf');s.getB=d=>H.im[(H.k+d+s.n)%s.n]}
@@ -1822,18 +1843,19 @@ const m=document.getElementById('catalogo');if(m)new MutationObserver(watch).obs
   const h=e.target.closest('#hero'),l=e.target.closest('#lbS'),c=e.target.closest('#catalogo .ph'),k=h?'h':l?'l':c?'c':null;if(!k)return;
   st={k,box:h||l||c,x:e.clientX,y:e.clientY,on:false,id:e.pointerId,ok:null,d:0}});
  document.addEventListener('pointermove',e=>{const s=st;if(!s||e.pointerId!==s.id)return;const dx=e.clientX-s.x,dy=e.clientY-s.y;
-  if(!s.on){if(Math.abs(dx)<7||Math.abs(dx)<Math.abs(dy)*1.2)return;if(!prep()){st=null;return}s.on=true;try{s.box.setPointerCapture(e.pointerId)}catch(_){}
+  if(!s.on){if(Math.abs(dx)<4||Math.abs(dx)<Math.abs(dy)*1.2)return;if(!prep()){st=null;return}s.on=true;try{s.box.setPointerCapture(e.pointerId)}catch(_){}
    if(s.k==='c')window._phDrag=true}
-  e.preventDefault();apply(Math.max(-s.W,Math.min(s.W,dx)))},{passive:false});
+  e.preventDefault();const now=performance.now();if(s.lt&&now>s.lt)s.vx=(e.clientX-s.lx)/(now-s.lt);s.lx=e.clientX;s.lt=now;
+  apply(Math.max(-s.W,Math.min(s.W,dx*(s.k==='h'?1.5:2))))},{passive:false});
  const end=e=>{const s=st;if(!s||(e.pointerId!==undefined&&e.pointerId!==s.id))return;if(!s.on){st=null;return}
-  const dx=e.clientX-s.x,d=dx<0?1:-1,go=e.type==='pointerup'&&Math.abs(dx)>=Math.min(60,s.W*.18);window._dragT=Date.now();
+  const dx=e.clientX-s.x,d=dx<0?1:-1,fast=Math.abs(s.vx||0)>.35&&Math.abs(dx)>8&&(s.vx<0)===(dx<0),go=e.type==='pointerup'&&(fast||Math.abs(dx)>=Math.min(28,s.W*.08));window._dragT=Date.now();
   const A=s.A,B=s.B;if(!B){clean();st=null;return}
   A.style.transition=B.style.transition=T;
   A.style.transform=`translateX(${go?-d*s.W:0}px)`;B.style.transform=`translateX(${go?0:d*s.W}px)`;
   setTimeout(()=>{
    if(go){if(s.k==='h'){s.H.go(s.H.k+d);s.H.play()}else if(s.k==='l'){lbShow(lbI+d)}else{phGo(s.box,d)}}
    else if(s.k==='h')s.H.play();
-   clean();if(s.k==='c')setTimeout(()=>{window._phDrag=false},50);st=null},go||true?260:0)};
+   clean();if(s.k==='c')setTimeout(()=>{window._phDrag=false},50);st=null},200)};
  document.addEventListener('pointerup',end);document.addEventListener('pointercancel',end);
  document.addEventListener('click',e=>{if(Date.now()-(window._dragT||0)<350){window._dragT=0;e.stopPropagation();e.preventDefault()}},true);
  document.addEventListener('dragstart',e=>{if(e.target.closest&&e.target.closest('#hero,#lbS,.ph'))e.preventDefault()})})();
