@@ -1335,6 +1335,17 @@ html[data-shape=muesca]{--par:24px}
 html[data-shape=petalo]{--dr:17px;--dt:17px}
 html[data-shape=ticket]{--par:18px}
 html[data-shape=pixel]{--qr:17px;--qb:17px;--dr:17px;--dt:17px;--tx:17px;--ty:17px}
+
+/* ===== Gráfica: rango de fechas + cantidades sobre las barras ===== */
+.gdr{display:inline-flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin-left:6px;font-size:13px}
+.gdr label{display:inline-flex;gap:6px;align-items:center;color:var(--muted)}
+.gdr input{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);padding:5px 8px}
+.gdr.on input{border-color:var(--gold)}
+.hc{padding-top:16px;box-sizing:content-box}.hc b{position:relative}
+.hc b::before{content:attr(data-n);position:absolute;bottom:100%;left:50%;transform:translateX(-50%);font-size:10px;font-weight:800;color:var(--ink);line-height:1.4}
+@media(max-width:700px){
+.card .disc,.disc{padding:2px 6px 1px!important;font-size:11px!important}
+}
 </style>
 </head>
 <body>
@@ -2097,10 +2108,12 @@ function rVen(){const C=orders.filter(o=>o.status==='confirmado'),M={};C.forEach
   (sel?`<h3 class="t" style="margin:18px 0 8px;font-size:24px">Historial · ${mn(sel)}</h3>`+L.map(o=>`<div class="row"><div><b>${esc(o.code)}</b> · <small>${fd(o.confirmed_at||o.created_at)}${o.customer?' · '+esc(o.customer):''}</small><br><small>${itx(o)}</small>${o.cost_total!=null?`<br><small style="color:#1fa855">Ganancia: ${money(o.total-o.cost_total)}</small>`:''}</div><b>${money(o.total)}</b></div>`).join(''):'')}
 $('tVen').onclick=e=>{if(e.target.id==='vfOpen')return vfOpen();if(e.target.dataset.m){vm=e.target.dataset.m;rVen()}};
 /* ====== GRÁFICA (admin) ====== */
-let gr='30';
+let gr='30',gf='',gt='';
 function rGra(){
-  const days=gr==='all'?36500:+gr,from=Date.now()-days*864e5,tm=o=>new Date(o.confirmed_at||o.created_at).getTime();
-  const S=orders.filter(o=>o.status==='confirmado'&&tm(o)>=from),A=orders.filter(o=>new Date(o.created_at).getTime()>=from);
+  const cu=gr==='custom',days=gr==='all'||cu?36500:+gr;let from=Date.now()-days*864e5,to=Infinity;
+  if(cu){let a=gf||gt,b=gt||gf;if(a&&b&&a>b)[a,b]=[b,a];from=a?new Date(a+'T00:00:00').getTime():0;to=b?new Date(b+'T23:59:59.999').getTime():Infinity}
+  const tm=o=>new Date(o.confirmed_at||o.created_at).getTime(),cr=o=>new Date(o.created_at).getTime();
+  const S=orders.filter(o=>o.status==='confirmado'&&tm(o)>=from&&tm(o)<=to),A=orders.filter(o=>cr(o)>=from&&cr(o)<=to);
   const isF=o=>o.type==='fisica'||/tienda f[ií]sica/i.test(o.customer||''),sum=a=>a.reduce((t,o)=>t+Number(o.total),0);
   const DN=['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'],dw=DN.map(()=>({n:0,t:0})),hr=Array.from({length:24},()=>({n:0,t:0}));
   S.forEach(o=>{const d=new Date(tm(o)),w=(d.getDay()+6)%7,h=d.getHours();dw[w].n++;dw[w].t+=Number(o.total);hr[h].n++;hr[h].t+=Number(o.total)});
@@ -2113,16 +2126,18 @@ function rGra(){
   const zero=[];hr.forEach((x,h)=>{if(!x.n){const l=zero[zero.length-1];l&&l[1]===h-1?l[1]=h:zero.push([h,h])}});
   const best=S.length?DN.filter((_,i)=>dw[i].n===mxD).join(', '):'—',worst=S.length?DN.filter((_,i)=>dw[i].n===mnD).join(', '):'—',peak=S.length?hr.map((x,h)=>x.n===mxH?hl(h):'').filter(Boolean).join(', '):'—';
   const mxS=top('s')[0]?top('s')[0].s:0,mxA=top('a')[0]?top('a')[0].a:0,mxT=Math.max(1,...dw.map(x=>x.t));
-  $('tGra').innerHTML=`<div class="tabs">${[['7','7 días'],['30','30 días'],['90','90 días'],['all','Todo']].map(([k,l])=>`<button type="button" class="btn ghost sm${gr===k?' on':''}" data-g="${k}">${l}</button>`).join('')}</div>`
+  $('tGra').innerHTML=`<div class="tabs">${[['7','7 días'],['30','30 días'],['90','90 días'],['all','Todo']].map(([k,l])=>`<button type="button" class="btn ghost sm${gr===k?' on':''}" data-g="${k}">${l}</button>`).join('')}<span class="gdr${cu?' on':''}"><label>Desde <input type="date" id="gF" value="${gf}" max="${new Date().toLocaleDateString('sv')}"></label><label>Hasta <input type="date" id="gT" value="${gt}" max="${new Date().toLocaleDateString('sv')}"></label>${cu?'<button type="button" class="btn ghost sm" data-g="30">Quitar fechas</button>':''}</span></div>`
   +`<div class="gk"><div><small>Ventas confirmadas</small><b>${S.length}</b></div><div><small>Total vendido</small><b>${money(tot)}</b></div><div><small>Día más fuerte</small><b style="font-size:16px">${best}</b></div><div><small>Día más flojo</small><b style="font-size:16px">${worst}</b></div><div><small>Hora pico</small><b style="font-size:16px">${peak}</b></div></div>`
   +`<h3 class="t ghd">Ventas por día de la semana</h3>${DN.map((d,i)=>bar(d,dw[i].t,mxT,`${dw[i].n} · ${money(dw[i].t)}`)).join('')}`
-  +`<h3 class="t ghd">Ventas por hora</h3><div class="hc">${hr.map((x,h)=>`<b title="${hl(h)}: ${x.n} venta(s) · ${money(x.t)}" style="height:${mxH?Math.round(x.n/mxH*100):0}%"></b>`).join('')}</div><div class="hl">${hr.map((_,h)=>`<span>${h%3===0?hl(h):''}</span>`).join('')}</div>`
+  +`<h3 class="t ghd">Ventas por hora</h3><div class="hc">${hr.map((x,h)=>`<b data-n="${x.n||''}" title="${hl(h)}: ${x.n} venta(s) · ${money(x.t)}" style="height:${mxH?Math.round(x.n/mxH*100):0}%"></b>`).join('')}</div><div class="hl">${hr.map((_,h)=>`<span>${h%3===0?hl(h):''}</span>`).join('')}</div>`
   +`<p class="desc" style="margin-top:6px">${S.length?(zero.length?'Horas sin ventas: '+zero.map(([a,b])=>a===b?hl(a):hl(a)+'–'+hl(b)).join(', '):'Hay ventas en todas las horas.'):'Aún no hay ventas confirmadas en este periodo.'}</p>`
+  +(cu&&S.length?`<h3 class="t ghd">Ventas del rango</h3>${[...S].sort((a,b)=>tm(a)-tm(b)).map(o=>`<div class="gb" style="grid-template-columns:auto 1fr auto"><span class="gl" style="width:auto">${new Date(tm(o)).toLocaleString('es-CO',{day:'2-digit',month:'short',hour:'numeric',minute:'2-digit'})}</span><span class="gl">${esc(o.code||'')}${o.customer?' · '+esc(o.customer):''}</span><b>${money(o.total)}</b></div>`).join('')}`:'')
   +`<h3 class="t ghd">Tienda física vs virtual</h3>${bar('Física',F.length,Math.max(F.length,V.length),`${F.length} · ${money(sum(F))}${tot?' · '+Math.round(sum(F)/tot*100)+'%':''}`,'#1fa855')}${bar('Virtual',V.length,Math.max(F.length,V.length),`${V.length} · ${money(sum(V))}${tot?' · '+Math.round(sum(V)/tot*100)+'%':''}`)}`
   +`<h3 class="t ghd">Más vendidos</h3>${top('s').map(x=>bar(esc(x.name),x.s,mxS,x.s+' u.')).join('')||'<p class="desc">Sin ventas en este periodo.</p>'}`
   +`<h3 class="t ghd">Más preguntados <small style="font-size:13px;color:var(--muted)">(pedidos y consultas por WhatsApp, de cualquier estado)</small></h3>${top('a').map(x=>bar(esc(x.name),x.a,mxA,x.a+' u.','#3b82f6')).join('')||'<p class="desc">Sin pedidos en este periodo.</p>'}`
   +`<h3 class="t ghd">Sin movimiento <small style="font-size:13px;color:var(--muted)">(nadie los ha pedido)</small></h3><p class="desc">${none.length?none.map(x=>esc(x.name)).join(' · '):'Todos tus productos tuvieron pedidos.'}</p>`}
-$('tGra').onclick=e=>{const g=e.target.dataset.g;if(g){gr=g;rGra()}};
+$('tGra').onclick=e=>{const g=e.target.dataset.g;if(g){gr=g;if(g!=='custom'){gf='';gt=''}rGra()}};
+$('tGra').onchange=e=>{if(e.target.id==='gF'||e.target.id==='gT'){gf=$('gF').value;gt=$('gT').value;gr=(gf||gt)?'custom':'30';rGra()}};
 
 /* ====== VENTA EN TIENDA FÍSICA ====== */
 const VF={lines:[]},vfSay=(t,ok)=>{$('vfM').style.color=ok?'#128c4a':'#c62828';$('vfM').textContent=t||''};
