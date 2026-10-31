@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script>try{document.documentElement.dataset.theme=localStorage.getItem("theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
+<script>try{document.documentElement.dataset.theme=localStorage.getItem("theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}try{var _l=JSON.parse(localStorage.getItem("gx_look")||"{}");if(_l.pal&&_l.pal!=="oro")document.documentElement.dataset.pal=_l.pal;if(_l.shape&&_l.shape!=="sesgado")document.documentElement.dataset.shape=_l.shape}catch(e){}</script>
 <title>GORRAX | Gorras, buzos, relojes y actitud</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0a'/%3E%3Cpath d='M10 46 6 20l16 12 10-18 10 18 16-12-4 26z' fill='%23e2b53f'/%3E%3Crect x='12' y='50' width='40' height='5' rx='2' fill='%23e2b53f'/%3E%3C/svg%3E">
 <meta name="description" content="Gorras, buzos y relojes con estilo. Pide directo por WhatsApp.">
@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=Hanken+Grotesk:wght@400;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0a0a;--panel:#141414;--line:#2a2a2a;--ink:#f3f0e8;--muted:#9b978c;--gold:#e2b53f;--wa:#1fa855}
+:root{--goldrgb:226,181,63;--bg:#0a0a0a;--panel:#141414;--line:#2a2a2a;--ink:#f3f0e8;--muted:#9b978c;--gold:#e2b53f;--wa:#1fa855}
 *{box-sizing:border-box;margin:0}
 [hidden]{display:none!important}
 body{font:16px/1.5 "Hanken Grotesk",system-ui,sans-serif;background:var(--bg);color:var(--ink)}
@@ -32,7 +32,7 @@ a{color:inherit}
 .nv:hover::before,.nv:focus-visible::before{transform:none}
 .nv:hover .in,.nv:focus-visible .in{color:#000}
 .nv:hover .in svg,.nv:focus-visible .in svg{transform:rotate(-14deg) scale(1.28)}
-.nv:hover,.nv:focus-visible{box-shadow:0 0 0 2px #0a0a0a,0 0 0 4px var(--gold),0 8px 26px rgba(226,181,63,.4)}
+.nv:hover,.nv:focus-visible{box-shadow:0 0 0 2px #0a0a0a,0 0 0 4px var(--gold),0 8px 26px rgba(var(--goldrgb),.4)}
 .nv:hover::after{animation:shine .7s .12s}
 .nv:active{transform:skewX(-14deg) scale(.95)}
 @keyframes shine{from{left:-30%}to{left:130%}}
@@ -187,7 +187,7 @@ button.nv{padding:0;font:inherit;cursor:pointer;color:inherit}
 [data-theme=light] .nv .in{color:var(--ink)}
 [data-theme=light] .ph{background:linear-gradient(135deg,#e4e4de,#d0d0c8)}
 [data-theme=light] .noimg{color:#c4c4bc}
-[data-theme=light] footer{background:#e2e2dc}
+[data-theme=light] footer{background:color-mix(in srgb,var(--bg) 92%,#000)}
 [data-theme=light] footer .links a{--f1:#fff}
 [data-theme=light] input,[data-theme=light] select,[data-theme=light] textarea{background:#fff}
 [data-theme=light] .prev,[data-theme=light] .row img,[data-theme=light] .row i{background:#e8e8e2}
@@ -639,7 +639,7 @@ footer .links a::after{
 .cof{display:grid;grid-template-columns:1fr 1fr;gap:12px}.cof label{display:flex;flex-direction:column;gap:4px;font-weight:600;font-size:14px}.cof .w{grid-column:1/-1}
 @media(max-width:640px){.cof{grid-template-columns:1fr}}
 .pm{display:grid;gap:10px;margin-bottom:14px}.pm label{display:flex;gap:12px;align-items:flex-start;border:1.5px solid var(--line);padding:12px 14px;cursor:pointer;font-weight:700}
-.pm label:has(input:checked){border-color:var(--gold);background:rgba(226,181,63,.1)}.pm small{display:block;color:var(--muted);font-weight:400;white-space:pre-line}.pm input{margin-top:4px;accent-color:var(--gold)}
+.pm label:has(input:checked){border-color:var(--gold);background:rgba(var(--goldrgb),.1)}.pm small{display:block;color:var(--muted);font-weight:400;white-space:pre-line}.pm input{margin-top:4px;accent-color:var(--gold)}
 .cos{border:1px solid var(--line);padding:14px;align-self:start;display:grid;gap:4px}.cos .ci{grid-template-columns:46px 1fr auto;padding:8px 0}.cos .cimg{width:46px;height:56px}
 .cos .r{display:flex;justify-content:space-between}.cos .tt{font-weight:800;font-size:20px;color:var(--gold);margin-top:6px}
 .coe{color:#ff6b6b;font-size:13.5px;min-height:20px;margin:6px 0}.cok{text-align:center;display:grid;gap:12px;justify-items:center}.cok h3{font-size:38px;color:var(--gold)}
@@ -738,7 +738,7 @@ html.nocombos #promo,html.nocombos #armar,html.nocombos .nv[data-c="combos"]{dis
 .pays{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center;margin:-8px 0 18px;font-size:12px}.pays span{opacity:.7;margin-right:4px}
 .pays i{font-style:normal;font-weight:700;border:1px solid var(--line);padding:3px 10px 3px 8px;border-radius:999px;display:inline-flex;align-items:center;gap:6px}.pays i::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c)}
 /* ===== Encabezado transparente sobre el banner + carrusel de fotos ===== */
-.top{--ink:#fff;--gold:#e2b53f;--line:rgba(255,255,255,.2);background:linear-gradient(180deg,rgba(0,0,0,.62),rgba(0,0,0,.28))!important;-webkit-backdrop-filter:blur(6px) saturate(1.2);backdrop-filter:blur(6px) saturate(1.2);border-bottom:1px solid rgba(255,255,255,.14)}
+.top{--ink:#fff;--gold:var(--gold-hd,#e2b53f);--line:rgba(255,255,255,.2);background:linear-gradient(180deg,rgba(0,0,0,.62),rgba(0,0,0,.28))!important;-webkit-backdrop-filter:blur(6px) saturate(1.2);backdrop-filter:blur(6px) saturate(1.2);border-bottom:1px solid rgba(255,255,255,.14)}
 .top .nv .in{text-shadow:0 1px 8px rgba(0,0,0,.65)}
 .hero{margin-top:calc(var(--hh,0px)*-1)}
 .hero img{height:auto;aspect-ratio:2080/950;max-height:90vh;object-fit:cover}
@@ -809,7 +809,7 @@ html.nocombos #promo,html.nocombos #armar,html.nocombos .nv[data-c="combos"]{dis
 }
 .srd{width:min(560px,94vw)}.srd input{width:100%;margin-bottom:10px}
 .srr{display:grid;grid-template-columns:54px 1fr auto;gap:12px;align-items:center;width:100%;text-align:left;padding:8px 4px;background:none;border:0;border-bottom:1px solid var(--line);color:var(--ink);font:inherit;cursor:pointer}
-.srr:hover{background:rgba(226,181,63,.12)}.srr small{display:block;color:var(--muted)}
+.srr:hover{background:rgba(var(--goldrgb),.12)}.srr small{display:block;color:var(--muted)}
 .srI{width:54px;height:66px;background:#fff;display:block}.srI img{width:100%;height:100%;object-fit:contain;display:block}
 /* ===== v6 ===== */
 .cat{grid-template-columns:1fr!important}
@@ -935,7 +935,7 @@ body.pv .top{background:#0a0a0a!important;position:sticky!important;top:0}
 @keyframes fabsh{0%,55%{left:-45%}100%{left:130%}}
 .fab:not(.cartb) svg{animation:fabw 4.2s ease-in-out infinite;transform-origin:50% 60%}
 @keyframes fabw{0%,70%,100%{transform:rotate(0)}74%{transform:rotate(-14deg) scale(1.12)}80%{transform:rotate(12deg) scale(1.12)}86%{transform:rotate(-8deg)}92%{transform:rotate(0)}}
-.fab:hover{filter:drop-shadow(0 10px 18px rgba(226,181,63,.45)) drop-shadow(0 8px 14px rgba(0,0,0,.5))}
+.fab:hover{filter:drop-shadow(0 10px 18px rgba(var(--goldrgb),.45)) drop-shadow(0 8px 14px rgba(0,0,0,.5))}
 @media(prefers-reduced-motion:reduce){.fab::after,.fab svg{animation:none!important}}
 
 /* ===== Botones flotantes v2: círculos pequeños, WhatsApp solo con su ícono ===== */
@@ -957,6 +957,41 @@ body.pv .top{background:#0a0a0a!important;position:sticky!important;top:0}
 .lbth button{width:52px;height:64px;padding:0;border:2px solid transparent;background:#161616;cursor:pointer;opacity:.75;transition:opacity .2s,border-color .2s,transform .2s;overflow:hidden}
 .lbth button img{width:100%;height:100%;object-fit:cover;display:block}
 .lbth button:hover{opacity:1;transform:scale(1.06)}.lbth button.a{opacity:1;border-color:var(--gold)}}
+
+/* ===== TEMAS DE COLOR (cada uno con oscuro y claro) ===== */
+html[data-pal=rojo]{--bg:#0c0808;--panel:#181010;--line:#302020;--ink:#f5eeee;--muted:#a39494;--gold:#ff4a4a;--gold-hd:#ff4a4a;--goldrgb:255,74,74}
+html[data-pal=rojo][data-theme=light]{--bg:#f3e9e8;--panel:#ffffff;--line:#e0cfcd;--ink:#1a1111;--muted:#6a5757;--gold:#d4262c;--gold-hd:#ff4a4a;--goldrgb:212,38,44}
+html[data-pal=azul]{--bg:#070b11;--panel:#0f1621;--line:#1c2a3b;--ink:#eaf2fb;--muted:#8fa0b4;--gold:#3da5ff;--gold-hd:#3da5ff;--goldrgb:61,165,255}
+html[data-pal=azul][data-theme=light]{--bg:#e8eef5;--panel:#ffffff;--line:#cdd8e4;--ink:#0e1620;--muted:#52606f;--gold:#1b7fe0;--gold-hd:#3da5ff;--goldrgb:27,127,224}
+html[data-pal=verde]{--bg:#080c09;--panel:#101712;--line:#1d2c21;--ink:#ecf6ee;--muted:#8fa596;--gold:#3ddc84;--gold-hd:#3ddc84;--goldrgb:61,220,132}
+html[data-pal=verde][data-theme=light]{--bg:#e8f0ea;--panel:#ffffff;--line:#cddbd1;--ink:#0e1a12;--muted:#536659;--gold:#1f9d55;--gold-hd:#3ddc84;--goldrgb:31,157,85}
+html[data-pal=violeta]{--bg:#0a0810;--panel:#151021;--line:#271e3a;--ink:#f1ecfa;--muted:#a096b8;--gold:#b78bff;--gold-hd:#b78bff;--goldrgb:183,139,255}
+html[data-pal=violeta][data-theme=light]{--bg:#efeaf7;--panel:#ffffff;--line:#d9d0e8;--ink:#17102a;--muted:#5f5575;--gold:#8a52f0;--gold-hd:#b78bff;--goldrgb:138,82,240}
+html[data-pal=naranja]{--bg:#0d0a07;--panel:#18120c;--line:#2f241a;--ink:#f6efe7;--muted:#a39787;--gold:#ff8a1f;--gold-hd:#ff8a1f;--goldrgb:255,138,31}
+html[data-pal=naranja][data-theme=light]{--bg:#f4ece3;--panel:#ffffff;--line:#e3d4c3;--ink:#1a1209;--muted:#6a5a48;--gold:#d9690a;--gold-hd:#ff8a1f;--goldrgb:217,105,10}
+html[data-pal]:not([data-theme=light]) body,html[data-pal][data-theme=light] body{background:var(--bg)}
+/* ===== FORMAS DE BOTONES Y TARJETAS ===== */
+html[data-shape=cuadrado]{--bp:polygon(0 0,100% 0,100% 100%,0 100%);--cp:polygon(0 0,100% 0,100% 100%,0 100%)}
+html[data-shape=redondo]{--bp:inset(0 round 10px);--cp:inset(0 round 18px)}
+html[data-shape=pildora]{--bp:inset(0 round 999px);--cp:inset(0 round 26px)}
+html[data-shape=cortado]{--bp:polygon(9px 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%,0 9px);--cp:polygon(18px 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%,0 18px)}
+html[data-shape] .btn,html[data-shape] .wa,html[data-shape] .sizes button,html[data-shape] footer .links a{--P:var(--bp)}
+html[data-shape] .tag,html[data-shape] .promo-btn,html[data-shape] .cp-n b,html[data-shape] .shipchip,html[data-shape] .disc,html[data-shape] .sectH h2,html[data-shape] .totop,html[data-shape] .more,html[data-shape] .card .pl,html[data-shape] .qb,html[data-shape] .cp-badge,html[data-shape] #toast,html[data-shape] .bp{clip-path:var(--bp)!important}
+html[data-shape] .card,html[data-shape] .banner{--P:var(--cp)}
+html[data-shape] .ri,html[data-shape] .build,html[data-shape] .cpromo{clip-path:var(--cp)!important}
+html[data-shape=pildora] .sectH h2,html[data-shape=redondo] .sectH h2{padding-left:18px;padding-right:18px}
+/* ===== Admin: pestaña Apariencia ===== */
+.lkg{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:8px 0 18px}
+.lk{display:flex;flex-direction:column;gap:6px;padding:8px;background:var(--panel);border:2px solid var(--line);color:var(--ink);cursor:pointer;font:700 13px "Hanken Grotesk",sans-serif;text-align:left}
+.lk.on{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold)}
+.lk .sw{display:grid;grid-template-columns:1fr 1fr;height:38px;overflow:hidden;border:1px solid rgba(128,128,128,.4)}
+.lk .sw i{display:flex;align-items:center;justify-content:center}.lk .sw i b{width:16px;height:16px;border-radius:50%;display:block}
+.lk small{font-weight:400;opacity:.7}
+.shg{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin:8px 0 18px}
+.shb{display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px 8px;background:var(--panel);border:2px solid var(--line);color:var(--ink);cursor:pointer;font:700 13px "Hanken Grotesk",sans-serif}
+.shb.on{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold)}
+.shb span{display:block;width:96px;height:34px;background:var(--gold);color:#000;line-height:34px;text-align:center;font-weight:800}
+.apbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:6px}
 </style>
 </head>
 <body>
@@ -1025,7 +1060,7 @@ body.pv .top{background:#0a0a0a!important;position:sticky!important;top:0}
       <div class="w"><button class="btn">Entrar</button></div>
     </form>
     <div id="panel" hidden>
-      <div class="tabs" id="tabs"><button type="button" class="btn ghost sm on" data-t="prod">Productos</button><button type="button" class="btn ghost sm" data-t="ped">Pedidos</button><button type="button" class="btn ghost sm" data-t="inv">Inventario</button><button type="button" class="btn ghost sm" data-t="ven">Ventas</button><button type="button" class="btn ghost sm" data-t="gra">Gráfica</button></div>
+      <div class="tabs" id="tabs"><button type="button" class="btn ghost sm on" data-t="prod">Productos</button><button type="button" class="btn ghost sm" data-t="ped">Pedidos</button><button type="button" class="btn ghost sm" data-t="inv">Inventario</button><button type="button" class="btn ghost sm" data-t="ven">Ventas</button><button type="button" class="btn ghost sm" data-t="gra">Gráfica</button><button type="button" class="btn ghost sm" data-t="app">Apariencia</button></div>
       <div id="tProd"><form id="pf" class="f">
         <input type="hidden" id="pid">
         <details class="w cbx"><summary>Armar combo (gorra + buzo + reloj con descuento)</summary>
@@ -1062,7 +1097,7 @@ body.pv .top{background:#0a0a0a!important;position:sticky!important;top:0}
         <div class="w"><button class="btn" id="sv">Guardar producto</button> <button type="button" class="btn ghost" id="cl">Limpiar</button></div>
       </form>
       <div style="margin-top:22px"><input id="pq" type="search" class="invq" placeholder="Buscar productos por nombre o categoría…" autocomplete="off"></div><div style="margin-top:10px" id="alist"></div></div>
-      <div id="tPed" hidden></div><div id="tInv" hidden></div><div id="tVen" hidden></div><div id="tGra" hidden></div>
+      <div id="tPed" hidden></div><div id="tInv" hidden></div><div id="tVen" hidden></div><div id="tGra" hidden></div><div id="tApp" hidden></div>
     </div>
     <p class="msg" id="msg"></p>
   </div>
@@ -1635,10 +1670,10 @@ const fd=d=>new Date(d).toLocaleString('es-CO',{dateStyle:'medium',timeStyle:'sh
 const itx=o=>(o.items||[]).map(i=>`${i.qty>1?i.qty+'× ':''}${esc(i.name)}${i.size?' ('+esc(i.size)+')':''}${i.color?' · '+esc(i.color):''}`).join(' + ');
 const ym=o=>{const d=new Date(o.confirmed_at||o.created_at);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')};
 async function loadOrders(){if(!sb)return;const{data,error}=await sb.from('orders').select('*').order('created_at',{ascending:false});ordErr=!!error;orders=error?[]:data;showTab(tab)}
-function showTab(t){tab=t;const m={prod:'tProd',ped:'tPed',inv:'tInv',ven:'tVen',gra:'tGra'};for(const k in m)$(m[k]).hidden=k!==t;
+function showTab(t){tab=t;const m={prod:'tProd',ped:'tPed',inv:'tInv',ven:'tVen',gra:'tGra',app:'tApp'};for(const k in m)$(m[k]).hidden=k!==t;
   $('tabs').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
-  if(t!=='prod'&&ordErr&&t!=='inv'){$(m[t]).innerHTML='<p class="msg">No se pudieron leer los pedidos. Ejecuta actualizar-pedidos.sql en Supabase.</p>';return}
-  if(t==='ped')rPed();if(t==='inv')rInv();if(t==='ven')rVen();if(t==='gra')rGra();
+  if(t!=='prod'&&ordErr&&t!=='inv'&&t!=='app'){$(m[t]).innerHTML='<p class="msg">No se pudieron leer los pedidos. Ejecuta actualizar-pedidos.sql en Supabase.</p>';return}
+  if(t==='ped')rPed();if(t==='inv')rInv();if(t==='ven')rVen();if(t==='gra')rGra();if(t==='app')rApp();
   if(!showTab.q&&(t==='prod'||t==='inv')){showTab.q=1;load().then(()=>{showTab.q=0;if(tab==='prod')alist();if(tab==='inv'&&!$('tInv').querySelector('.stk-in.chg'))rInv()}).catch(()=>{showTab.q=0})}}
 function rPed(){const L=orders.filter(o=>pfil==='todos'||o.status===pfil);
   $('tPed').innerHTML=`<div class="tabs">${['pendiente','confirmado','cancelado','todos'].map(s=>`<button type="button" class="btn ghost sm${pfil===s?' on':''}" data-f="${s}">${ST[s]||'Todos'} (${s==='todos'?orders.length:orders.filter(o=>o.status===s).length})</button>`).join('')}</div>`+
@@ -1987,6 +2022,38 @@ load().then(()=>{cartRender();if(!location.hash&&scrollY<40)scrollTo(0,0);tUpd()
  T.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const im=G.querySelector(`img[data-k="${b.dataset.k}"]`);if(im)im.scrollIntoView({behavior:'smooth',block:'center'})});
  let raf=0;const upd=()=>{raf=0;if(!T.classList.contains('on'))return;const m=innerHeight/2;let best=0,bd=1e9;G.querySelectorAll('img').forEach((im,k)=>{const r=im.getBoundingClientRect();const d=Math.abs(r.top+r.height/2-m);if(d<bd){bd=d;best=k}});[...T.children].forEach((c,k)=>c.classList.toggle('a',k===best))};
  addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(upd)},{passive:true})})();
+
+/* ====== APARIENCIA: temas de color y forma de botones (se guarda en Supabase para todos) ====== */
+const LOOKS=[{id:'oro',n:'Oro Clásico',d:['#0a0a0a','#e2b53f'],l:['#ebebe6','#a87b00']},
+ {id:'rojo',n:'Rojo Fuego',d:['#0c0808','#ff4a4a'],l:['#f3e9e8','#d4262c']},
+ {id:'azul',n:'Azul Eléctrico',d:['#070b11','#3da5ff'],l:['#e8eef5','#1b7fe0']},
+ {id:'verde',n:'Verde Neón',d:['#080c09','#3ddc84'],l:['#e8f0ea','#1f9d55']},
+ {id:'violeta',n:'Violeta Royal',d:['#0a0810','#b78bff'],l:['#efeaf7','#8a52f0']},
+ {id:'naranja',n:'Naranja Sunset',d:['#0d0a07','#ff8a1f'],l:['#f4ece3','#d9690a']}];
+const SHAPES=[{id:'sesgado',n:'Inclinado',c:'polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%)'},
+ {id:'cuadrado',n:'Cuadrado',c:'none'},{id:'redondo',n:'Redondeado',c:'inset(0 round 10px)'},
+ {id:'pildora',n:'Píldora',c:'inset(0 round 999px)'},{id:'cortado',n:'Esquinas cortadas',c:'polygon(9px 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%,0 9px)'}];
+let LOOK={pal:'oro',shape:'sesgado'},lookDirty=false;
+try{const c=JSON.parse(localStorage.getItem('gx_look')||'{}');if(c.pal)LOOK.pal=c.pal;if(c.shape)LOOK.shape=c.shape}catch(e){}
+function applyLook(l){const d=document.documentElement;l.pal&&l.pal!=='oro'?d.dataset.pal=l.pal:delete d.dataset.pal;l.shape&&l.shape!=='sesgado'?d.dataset.shape=l.shape:delete d.dataset.shape}
+if(sb)sb.from('site_settings').select('value').eq('key','look').maybeSingle().then(({data})=>{const v=data&&data.value;if(v&&typeof v==='object'){LOOK={pal:v.pal||'oro',shape:v.shape||'sesgado'};applyLook(LOOK);try{localStorage.setItem('gx_look',JSON.stringify(LOOK))}catch(e){}}}).catch(()=>{});
+function rApp(){const cur=LOOK;
+ $('tApp').innerHTML=`<h3 style="margin:6px 0 2px">Tema de color</h3><p class="desc">Cada tema trae su versión oscura y clara. El visitante cambia entre las dos con el botón sol/luna. Al elegir uno lo ves al instante en la página.</p>
+ <div class="lkg">${LOOKS.map(t=>`<button type="button" class="lk${cur.pal===t.id?' on':''}" data-pal="${t.id}"><span class="sw"><i style="background:${t.d[0]}"><b style="background:${t.d[1]}"></b></i><i style="background:${t.l[0]}"><b style="background:${t.l[1]}"></b></i></span>${t.n}<small>Oscuro · Claro</small></button>`).join('')}</div>
+ <h3 style="margin:6px 0 2px">Forma de botones y tarjetas</h3>
+ <div class="shg">${SHAPES.map(h=>`<button type="button" class="shb${cur.shape===h.id?' on':''}" data-shape="${h.id}"><span style="clip-path:${h.c}">Botón</span>${h.n}</button>`).join('')}</div>
+ <div class="apbar"><button type="button" class="btn" id="apSave">Guardar apariencia</button><button type="button" class="btn ghost sm" id="apMode">Ver en claro / oscuro</button><button type="button" class="btn ghost sm" id="apReset">Volver al original</button></div>
+ <p class="desc" id="apMsg" style="margin-top:8px">${lookDirty?'Cambios sin guardar.':''}</p>`}
+$('tApp').onclick=async e=>{const b=e.target.closest('button');if(!b)return;const m=$('apMsg');
+ if(b.dataset.pal){LOOK.pal=b.dataset.pal;lookDirty=true;applyLook(LOOK);rApp();return}
+ if(b.dataset.shape){LOOK.shape=b.dataset.shape;lookDirty=true;applyLook(LOOK);rApp();return}
+ if(b.id==='apMode'){$('themeBtn').click();return}
+ if(b.id==='apReset'){LOOK={pal:'oro',shape:'sesgado'};lookDirty=true;applyLook(LOOK);rApp();return}
+ if(b.id==='apSave'){b.disabled=true;m.textContent='Guardando…';
+  try{localStorage.setItem('gx_look',JSON.stringify(LOOK))}catch(_){}
+  const r=await sb.from('site_settings').upsert({key:'look',value:LOOK});b.disabled=false;
+  if(r.error){m.style.color='#c62828';m.textContent='No se pudo guardar para todos: '+r.error.message+'. Ejecuta crear-ajustes-apariencia.sql en Supabase (SQL Editor). Mientras tanto queda guardado solo en este navegador.';return}
+  lookDirty=false;m.style.color='#128c4a';m.textContent='Guardado. Todos los visitantes verán este tema.'}};
 </script>
 </body>
 </html>
