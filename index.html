@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>try{document.documentElement.dataset.theme=localStorage.getItem("theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}
-var GXF={urbana:"Bebas+Neue&family=Montserrat:wght@400;600;700;800",elegante:"Playfair+Display:wght@700;900&family=Lato:wght@400;700;900",futurista:"Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700",deportiva:"Anton&family=Barlow:wght@400;600;700;800",redondeada:"Fredoka:wght@500;700&family=Nunito:wght@400;700;800",moderna:"Poppins:wght@400;500;600;700;800",impacto:"Archivo+Black&family=Archivo:wght@400;600;700",retro:"Righteous&family=Quicksand:wght@400;600;700",clasica:"Cinzel:wght@600;800&family=Lora:wght@400;600;700",callejera:"Bungee&family=Space+Grotesk:wght@400;600;700",industrial:"Teko:wght@500;600;700&family=Rubik:wght@400;500;700"};
+var GXF={urbana:"Bebas+Neue&family=Montserrat:wght@400;600;700;800",elegante:"Playfair+Display:wght@700;900&family=Lato:wght@400;700;900",futurista:"Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700",deportiva:"Anton&family=Barlow:wght@400;600;700;800",redondeada:"Fredoka:wght@500;700&family=Nunito:wght@400;700;800",moderna:"Poppins:wght@400;500;600;700;800",impacto:"Archivo+Black&family=Archivo:wght@400;600;700",retro:"Righteous&family=Quicksand:wght@400;600;700",clasica:"Cinzel:wght@600;800&family=Lora:wght@400;600;700",callejera:"Bungee&family=Space+Grotesk:wght@400;600;700",industrial:"Teko:wght@500;600;700&family=Rubik:wght@400;500;700",tecnica:"Russo+One&family=Exo+2:wght@400;600;700",militar:"Black+Ops+One&family=Chakra+Petch:wght@400;600;700",cursiva:"Lobster&family=Open+Sans:wght@400;600;700",condensada:"Oswald:wght@500;700&family=Source+Sans+3:wght@400;600;700",poster:"Staatliches&family=Karla:wght@400;600;700",slab:"Alfa+Slab+One&family=Roboto+Slab:wght@400;600;700"};
 function gxFont(k){if(!GXF[k]||document.getElementById("gxf-"+k))return;var l=document.createElement("link");l.id="gxf-"+k;l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family="+GXF[k]+"&display=swap";document.head.appendChild(l)}
 function gxLook(l){var d=document.documentElement;["pal","shape","font","hov","auto"].forEach(function(a){var v=l&&l[a],def=a==="pal"?"oro":a==="shape"?"sesgado":a==="font"?"original":"ninguno";if(v&&v!==def){d.dataset[a]=v;if(a==="font")gxFont(v)}else delete d.dataset[a]})}
 try{gxLook(JSON.parse(localStorage.getItem("gx_look")||"{}"))}catch(e){}
@@ -1073,9 +1073,6 @@ html[data-font=callejera]{--fh:"Bungee";--fb:"Space Grotesk"}
 html[data-font=industrial]{--fh:"Teko";--fb:"Rubik"}
 html[data-font=impacto],html[data-font=retro],html[data-font=callejera]{font-synthesis:none}
 /* ===== 6 EFECTOS MÁS AL PASAR EL MOUSE ===== */
-html[data-hov=sacudir] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{animation:gxSac .45s ease-in-out!important}
-html[data-hov=rebote] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{animation:gxReb2 .55s ease!important}
-html[data-hov=giro] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{animation:gxGir .7s ease!important}
 html[data-hov=invertir] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{filter:invert(1) hue-rotate(180deg)}
 html[data-hov=hundir] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{transform:scale(.9) translateY(2px);filter:brightness(.9)}
 html[data-hov=arcoiris] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{animation:gxArc 1.2s linear infinite!important}
@@ -1086,6 +1083,97 @@ html[data-hov=arcoiris] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card 
 /* banner: puntero normal */
 .hero,.hero img,.hs{cursor:default!important}
 .hero button{cursor:pointer!important}
+
+/* ===== 5 TEMAS MÁS ===== */
+html[data-pal=vino]{--bg:#0d0709;--panel:#1a0f13;--line:#341d25;--ink:#faeef1;--muted:#ab939a;--gold:#e0405f;--gold-hd:#e0405f;--goldrgb:224,64,95}
+html[data-pal=vino][data-theme=light]{--bg:#f5e8eb;--panel:#ffffff;--line:#e6d0d6;--ink:#1c0d12;--muted:#6c5259;--gold:#b82643;--gold-hd:#e0405f;--goldrgb:184,38,67}
+html[data-pal=cielo]{--bg:#060c10;--panel:#0d1820;--line:#1a2f3d;--ink:#eaf6fc;--muted:#8ca6b5;--gold:#7fd8ff;--gold-hd:#7fd8ff;--goldrgb:127,216,255}
+html[data-pal=cielo][data-theme=light]{--bg:#e6eff4;--panel:#ffffff;--line:#cbdce6;--ink:#0c1920;--muted:#4f6672;--gold:#1e9ad6;--gold-hd:#7fd8ff;--goldrgb:30,154,214}
+html[data-pal=rosegold]{--bg:#0e0908;--panel:#1a1211;--line:#33241f;--ink:#fbf0ec;--muted:#ab9a93;--gold:#f0b8a4;--gold-hd:#f0b8a4;--goldrgb:240,184,164}
+html[data-pal=rosegold][data-theme=light]{--bg:#f4ebe7;--panel:#ffffff;--line:#e5d5cd;--ink:#1c1210;--muted:#6d5b53;--gold:#c4795e;--gold-hd:#f0b8a4;--goldrgb:196,121,94}
+html[data-pal=esmeralda]{--bg:#050d0a;--panel:#0c1a14;--line:#173025;--ink:#e8f8f1;--muted:#86a898;--gold:#10c98a;--gold-hd:#10c98a;--goldrgb:16,201,138}
+html[data-pal=esmeralda][data-theme=light]{--bg:#e4f1ea;--panel:#ffffff;--line:#c8ddd0;--ink:#0a1a12;--muted:#4d6a5a;--gold:#0b9468;--gold-hd:#10c98a;--goldrgb:11,148,104}
+html[data-pal=oliva]{--bg:#0a0b06;--panel:#14160c;--line:#282c18;--ink:#f3f5e6;--muted:#9ea28a;--gold:#b4c25a;--gold-hd:#b4c25a;--goldrgb:180,194,90}
+html[data-pal=oliva][data-theme=light]{--bg:#eff0e1;--panel:#ffffff;--line:#d9dcc0;--ink:#15170a;--muted:#5d6342;--gold:#7b8a2a;--gold-hd:#b4c25a;--goldrgb:123,138,42}
+/* ===== BARRA SUPERIOR con el color del tema ===== */
+html[data-pal=rojo]{--ann1:#cc3b3b;--ann2:#ff4a4a;--annx:#fff;--annb:#ffe14d}
+html[data-pal=rojo][data-theme=light]{--ann1:#a91e23;--ann2:#d4262c;--annx:#fff;--annb:#ffe14d}
+html[data-pal=azul]{--ann1:#3084cc;--ann2:#3da5ff;--annx:#000;--annb:#000}
+html[data-pal=azul][data-theme=light]{--ann1:#1565b3;--ann2:#1b7fe0;--annx:#fff;--annb:#ffe14d}
+html[data-pal=verde]{--ann1:#30b069;--ann2:#3ddc84;--annx:#000;--annb:#000}
+html[data-pal=verde][data-theme=light]{--ann1:#187d44;--ann2:#1f9d55;--annx:#fff;--annb:#ffe14d}
+html[data-pal=violeta]{--ann1:#926fcc;--ann2:#b78bff;--annx:#000;--annb:#000}
+html[data-pal=violeta][data-theme=light]{--ann1:#6e41c0;--ann2:#8a52f0;--annx:#fff;--annb:#ffe14d}
+html[data-pal=naranja]{--ann1:#cc6e18;--ann2:#ff8a1f;--annx:#000;--annb:#000}
+html[data-pal=naranja][data-theme=light]{--ann1:#ad5408;--ann2:#d9690a;--annx:#fff;--annb:#ffe14d}
+html[data-pal=rosa]{--ann1:#cc3f82;--ann2:#ff4fa3;--annx:#fff;--annb:#ffe14d}
+html[data-pal=rosa][data-theme=light]{--ann1:#b3286e;--ann2:#e0338a;--annx:#fff;--annb:#ffe14d}
+html[data-pal=cian]{--ann1:#14a89d;--ann2:#19d3c5;--annx:#000;--annb:#000}
+html[data-pal=cian][data-theme=light]{--ann1:#0b7f76;--ann2:#0e9f94;--annx:#fff;--annb:#ffe14d}
+html[data-pal=lima]{--ann1:#91c030;--ann2:#b6f03c;--annx:#000;--annb:#000}
+html[data-pal=lima][data-theme=light]{--ann1:#659300;--ann2:#7fb800;--annx:#000;--annb:#000}
+html[data-pal=cobre]{--ann1:#ad6e45;--ann2:#d98a57;--annx:#fff;--annb:#ffe14d}
+html[data-pal=cobre][data-theme=light]{--ann1:#934c23;--ann2:#b8602c;--annx:#fff;--annb:#ffe14d}
+html[data-pal=indigo]{--ann1:#6270cc;--ann2:#7b8cff;--annx:#fff;--annb:#ffe14d}
+html[data-pal=indigo][data-theme=light]{--ann1:#3844b3;--ann2:#4655e0;--annx:#fff;--annb:#ffe14d}
+html[data-pal=amarillo]{--ann1:#ccb414;--ann2:#ffe11a;--annx:#000;--annb:#000}
+html[data-pal=amarillo][data-theme=light]{--ann1:#a98700;--ann2:#d4a900;--annx:#000;--annb:#000}
+html[data-pal=coral]{--ann1:#cc5548;--ann2:#ff6b5a;--annx:#fff;--annb:#ffe14d}
+html[data-pal=coral][data-theme=light]{--ann1:#b44032;--ann2:#e2503f;--annx:#fff;--annb:#ffe14d}
+html[data-pal=plata]{--ann1:#a5abb6;--ann2:#cfd6e4;--annx:#000;--annb:#000}
+html[data-pal=plata][data-theme=light]{--ann1:#6c778f;--ann2:#8795b3;--annx:#fff;--annb:#ffe14d}
+html[data-pal=magenta]{--ann1:#b333c8;--ann2:#e040fb;--annx:#fff;--annb:#ffe14d}
+html[data-pal=magenta][data-theme=light]{--ann1:#9328a9;--ann2:#b832d4;--annx:#fff;--annb:#ffe14d}
+html[data-pal=vino]{--ann1:#b3334c;--ann2:#e0405f;--annx:#fff;--annb:#ffe14d}
+html[data-pal=vino][data-theme=light]{--ann1:#931e35;--ann2:#b82643;--annx:#fff;--annb:#ffe14d}
+html[data-pal=cielo]{--ann1:#65accc;--ann2:#7fd8ff;--annx:#000;--annb:#000}
+html[data-pal=cielo][data-theme=light]{--ann1:#187bab;--ann2:#1e9ad6;--annx:#fff;--annb:#ffe14d}
+html[data-pal=rosegold]{--ann1:#c09383;--ann2:#f0b8a4;--annx:#000;--annb:#000}
+html[data-pal=rosegold][data-theme=light]{--ann1:#9c604b;--ann2:#c4795e;--annx:#fff;--annb:#ffe14d}
+html[data-pal=esmeralda]{--ann1:#0ca06e;--ann2:#10c98a;--annx:#000;--annb:#000}
+html[data-pal=esmeralda][data-theme=light]{--ann1:#087653;--ann2:#0b9468;--annx:#fff;--annb:#ffe14d}
+html[data-pal=oliva]{--ann1:#909b48;--ann2:#b4c25a;--annx:#000;--annb:#000}
+html[data-pal=oliva][data-theme=light]{--ann1:#626e21;--ann2:#7b8a2a;--annx:#fff;--annb:#ffe14d}
+html[data-pal] .ann{background:linear-gradient(90deg,var(--ann1),var(--ann2),var(--ann1))!important;background-size:200% 100%;color:var(--annx)!important;box-shadow:0 2px 14px rgba(var(--goldrgb),.55)}
+html[data-pal] .ann b{color:var(--annb)}
+html[data-pal] .ann .annt{text-shadow:none}
+/* ===== 6 FORMAS MÁS ===== */
+html[data-shape=trapecio]{--bp:polygon(12px 0,calc(100% - 12px) 0,100% 100%,0 100%);--cp:polygon(26px 0,calc(100% - 26px) 0,100% 100%,0 100%)}
+html[data-shape=trapecioinv]{--bp:polygon(0 0,100% 0,calc(100% - 12px) 100%,12px 100%);--cp:polygon(0 0,100% 0,calc(100% - 26px) 100%,26px 100%)}
+html[data-shape=esquina]{--bp:polygon(12px 0,100% 0,100% 100%,0 100%,0 12px);--cp:polygon(30px 0,100% 0,100% 100%,0 100%,0 30px)}
+html[data-shape=pestana]{--bp:inset(0 round 14px 14px 0 0);--cp:inset(0 round 34px 34px 0 0)}
+html[data-shape=arco]{--bp:inset(0 round 999px 999px 0 0);--cp:inset(0 round 150px 150px 0 0)}
+html[data-shape=suave]{--bp:inset(0 round 4px);--cp:inset(0 round 6px)}
+/* ===== 6 TIPOGRAFÍAS MÁS ===== */
+html[data-font=tecnica]{--fh:"Russo One";--fb:"Exo 2"}
+html[data-font=militar]{--fh:"Black Ops One";--fb:"Chakra Petch"}
+html[data-font=cursiva]{--fh:"Lobster";--fb:"Open Sans"}
+html[data-font=condensada]{--fh:"Oswald";--fb:"Source Sans 3"}
+html[data-font=poster]{--fh:"Staatliches";--fb:"Karla"}
+html[data-font=slab]{--fh:"Alfa Slab One";--fb:"Roboto Slab"}
+html[data-font=tecnica],html[data-font=militar],html[data-font=cursiva],html[data-font=poster],html[data-font=slab]{font-synthesis:none}
+/* ===== EFECTOS: giro/sacudir/rebote una sola vez (con clase) ===== */
+html[data-hov=giro] .gxfx{animation:gxGir .7s ease!important}
+html[data-hov=sacudir] .gxfx{animation:gxSac .45s ease-in-out!important}
+html[data-hov=rebote] .gxfx{animation:gxReb2 .55s ease!important}
+/* ===== 6 EFECTOS MÁS AL PASAR EL MOUSE ===== */
+html[data-hov=tilt3d] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{transform:perspective(400px) rotateX(14deg) rotateY(-14deg) scale(1.05)}
+html[data-hov=estirar] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{transform:scaleX(1.14) scaleY(.94)}
+html[data-hov=saturar] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{filter:saturate(1.9) contrast(1.15) brightness(1.1)}
+html[data-hov=contorno] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{box-shadow:inset 0 0 0 3px #fff,inset 0 0 0 5px var(--gold)!important}
+html[data-hov=latir] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{animation:gxPul .7s ease-in-out infinite!important}
+html[data-hov=flotar] :is(.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb):hover{animation:gxFlo 1.3s ease-in-out infinite!important}
+/* ===== 6 EFECTOS AUTOMÁTICOS MÁS ===== */
+html[data-auto=flotar] :is(.btn:not(.ghost):not(.sm),.cadd,.wa,.more,.promo-btn,.card .pl){animation:gxFlo 2.4s ease-in-out infinite}
+html[data-auto=giro] :is(.btn:not(.ghost):not(.sm),.cadd,.wa,.more,.promo-btn,.card .pl){animation:gxGir 6s ease-in-out infinite}
+html[data-auto=neon] :is(.btn:not(.ghost):not(.sm),.cadd,.wa,.more,.promo-btn,.card .pl){animation:gxNeo 2s ease-in-out infinite}
+html[data-auto=sacudida] :is(.btn:not(.ghost):not(.sm),.cadd,.wa,.more,.promo-btn,.card .pl){animation:gxSac2 4s ease-in-out infinite}
+html[data-auto=arcoiris] :is(.btn:not(.ghost):not(.sm),.cadd,.wa,.more,.promo-btn,.card .pl){animation:gxArc 5s linear infinite}
+html[data-auto=gelatina] :is(.btn:not(.ghost):not(.sm),.cadd,.wa,.more,.promo-btn,.card .pl){animation:gxGel 3s ease-in-out infinite}
+@keyframes gxFlo{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes gxNeo{0%,100%{box-shadow:inset 0 0 0 0 rgba(var(--goldrgb),0)}50%{box-shadow:inset 0 0 0 3px #fff,inset 0 0 16px 2px rgba(var(--goldrgb),.9)}}
+@keyframes gxSac2{0%,78%,100%{transform:translateX(0)}82%{transform:translateX(-5px) rotate(-2deg)}86%{transform:translateX(5px) rotate(2deg)}90%{transform:translateX(-3px)}94%{transform:translateX(2px)}}
+@keyframes gxGel{0%,60%,100%{transform:scale(1,1)}68%{transform:scale(1.14,.86)}76%{transform:scale(.9,1.1)}84%{transform:scale(1.06,.95)}92%{transform:scale(.98,1.02)}}
 </style>
 </head>
 <body>
@@ -2131,7 +2219,12 @@ const LOOKS=[{id:'oro',n:'Oro Clásico',d:['#0a0a0a','#e2b53f'],l:['#ebebe6','#a
  {id:'amarillo',n:'Amarillo Taxi',d:['#0b0a05','#ffe11a'],l:['#f3f0dc','#d4a900']},
  {id:'coral',n:'Coral',d:['#0e0807','#ff6b5a'],l:['#f6eae7','#e2503f']},
  {id:'plata',n:'Plata',d:['#08090b','#cfd6e4'],l:['#e8eaee','#8795b3']},
- {id:'magenta',n:'Magenta',d:['#0d070e','#e040fb'],l:['#f5e9f6','#b832d4']}];
+ {id:'magenta',n:'Magenta',d:['#0d070e','#e040fb'],l:['#f5e9f6','#b832d4']},
+ {id:'vino',n:'Vino',d:['#0d0709','#e0405f'],l:['#f5e8eb','#b82643']},
+ {id:'cielo',n:'Celeste',d:['#060c10','#7fd8ff'],l:['#e6eff4','#1e9ad6']},
+ {id:'rosegold',n:'Oro Rosa',d:['#0e0908','#f0b8a4'],l:['#f4ebe7','#c4795e']},
+ {id:'esmeralda',n:'Esmeralda',d:['#050d0a','#10c98a'],l:['#e4f1ea','#0b9468']},
+ {id:'oliva',n:'Oliva',d:['#0a0b06','#b4c25a'],l:['#eff0e1','#7b8a2a']}];
 const SHAPES=[{id:'sesgado',n:'Inclinado',c:'polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%)'},
  {id:'cuadrado',n:'Cuadrado',c:'none'},{id:'redondo',n:'Redondeado',c:'inset(0 round 10px)'},
  {id:'pildora',n:'Píldora',c:'inset(0 round 999px)'},{id:'cortado',n:'Esquinas cortadas',c:'polygon(9px 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%,0 9px)'},
@@ -2141,10 +2234,16 @@ const SHAPES=[{id:'sesgado',n:'Inclinado',c:'polygon(12px 0,100% 0,calc(100% - 1
  {id:'hexagono',n:'Hexágono',c:'polygon(10px 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,10px 100%,0 50%)'},
  {id:'flecha',n:'Flecha',c:'polygon(0 0,calc(100% - 12px) 0,100% 50%,calc(100% - 12px) 100%,0 100%)'},
  {id:'escudo',n:'Escudo',c:'polygon(0 0,100% 0,100% 84%,50% 100%,0 84%)'},
- {id:'gota',n:'Gota',c:'inset(0 round 999px 4px 999px 4px)'}];
-const FONTS=[{id:'original',n:'Original',f:'"Big Shoulders Display"'},{id:'urbana',n:'Urbana',f:'"Bebas Neue"'},{id:'elegante',n:'Elegante',f:'"Playfair Display"'},{id:'futurista',n:'Futurista',f:'Orbitron'},{id:'deportiva',n:'Deportiva',f:'Anton'},{id:'redondeada',n:'Redondeada',f:'Fredoka'},{id:'moderna',n:'Moderna',f:'Poppins'},{id:'impacto',n:'Impacto',f:'"Archivo Black"'},{id:'retro',n:'Retro',f:'Righteous'},{id:'clasica',n:'Clásica',f:'Cinzel'},{id:'callejera',n:'Callejera',f:'Bungee'},{id:'industrial',n:'Industrial',f:'Teko'}];
-const HOVS=[{id:'ninguno',n:'Relleno (original)',d:'El color se desliza'},{id:'elevar',n:'Elevar',d:'Sube y crece un poco'},{id:'escala',n:'Agrandar',d:'Crece con rebote'},{id:'inclinar',n:'Inclinar',d:'Gira ligeramente'},{id:'neon',n:'Neón',d:'Borde y brillo interior'},{id:'brillo',n:'Destello',d:'Pasa un brillo'},{id:'sacudir',n:'Sacudir',d:'Tiembla de lado a lado'},{id:'rebote',n:'Rebote',d:'Salta una vez'},{id:'giro',n:'Giro 3D',d:'Da una vuelta'},{id:'invertir',n:'Invertir',d:'Colores al revés'},{id:'hundir',n:'Hundir',d:'Se aprieta como botón'},{id:'arcoiris',n:'Arcoíris',d:'Cambia de colores'}];
-const AUTOS=[{id:'ninguno',n:'Ninguno',d:'Botones quietos'},{id:'latido',n:'Latido',d:'Crece y encoge'},{id:'respirar',n:'Respirar',d:'Brillo que sube y baja'},{id:'rebote',n:'Rebote',d:'Salta de vez en cuando'},{id:'balanceo',n:'Balanceo',d:'Se mueve de lado a lado'},{id:'brillo',n:'Destello',d:'Brillo que cruza solo'}];
+ {id:'gota',n:'Gota',c:'inset(0 round 999px 4px 999px 4px)'},
+ {id:'trapecio',n:'Trapecio',c:'polygon(12px 0,calc(100% - 12px) 0,100% 100%,0 100%)'},
+ {id:'trapecioinv',n:'Trapecio inverso',c:'polygon(0 0,100% 0,calc(100% - 12px) 100%,12px 100%)'},
+ {id:'esquina',n:'Una esquina',c:'polygon(12px 0,100% 0,100% 100%,0 100%,0 12px)'},
+ {id:'pestana',n:'Pestaña',c:'inset(0 round 14px 14px 0 0)'},
+ {id:'arco',n:'Arco',c:'inset(0 round 999px 999px 0 0)'},
+ {id:'suave',n:'Casi cuadrado',c:'inset(0 round 4px)'}];
+const FONTS=[{id:'original',n:'Original',f:'"Big Shoulders Display"'},{id:'urbana',n:'Urbana',f:'"Bebas Neue"'},{id:'elegante',n:'Elegante',f:'"Playfair Display"'},{id:'futurista',n:'Futurista',f:'Orbitron'},{id:'deportiva',n:'Deportiva',f:'Anton'},{id:'redondeada',n:'Redondeada',f:'Fredoka'},{id:'moderna',n:'Moderna',f:'Poppins'},{id:'impacto',n:'Impacto',f:'"Archivo Black"'},{id:'retro',n:'Retro',f:'Righteous'},{id:'clasica',n:'Clásica',f:'Cinzel'},{id:'callejera',n:'Callejera',f:'Bungee'},{id:'industrial',n:'Industrial',f:'Teko'},{id:'tecnica',n:'Técnica',f:'"Russo One"'},{id:'militar',n:'Militar',f:'"Black Ops One"'},{id:'cursiva',n:'Cursiva',f:'Lobster'},{id:'condensada',n:'Condensada',f:'Oswald'},{id:'poster',n:'Póster',f:'Staatliches'},{id:'slab',n:'Slab',f:'"Alfa Slab One"'}];
+const HOVS=[{id:'ninguno',n:'Relleno (original)',d:'El color se desliza'},{id:'elevar',n:'Elevar',d:'Sube y crece un poco'},{id:'escala',n:'Agrandar',d:'Crece con rebote'},{id:'inclinar',n:'Inclinar',d:'Gira ligeramente'},{id:'neon',n:'Neón',d:'Borde y brillo interior'},{id:'brillo',n:'Destello',d:'Pasa un brillo'},{id:'sacudir',n:'Sacudir',d:'Tiembla de lado a lado'},{id:'rebote',n:'Rebote',d:'Salta una vez'},{id:'giro',n:'Giro 3D',d:'Da una vuelta'},{id:'invertir',n:'Invertir',d:'Colores al revés'},{id:'hundir',n:'Hundir',d:'Se aprieta como botón'},{id:'arcoiris',n:'Arcoíris',d:'Cambia de colores'},{id:'tilt3d',n:'Inclinación 3D',d:'Se voltea en perspectiva'},{id:'estirar',n:'Estirar',d:'Se ensancha'},{id:'saturar',n:'Saturar',d:'Colores más intensos'},{id:'contorno',n:'Contorno',d:'Doble borde blanco y color'},{id:'latir',n:'Latir',d:'Pulsa mientras lo tocas'},{id:'flotar',n:'Flotar',d:'Sube y baja suave'}];
+const AUTOS=[{id:'ninguno',n:'Ninguno',d:'Botones quietos'},{id:'latido',n:'Latido',d:'Crece y encoge'},{id:'respirar',n:'Respirar',d:'Brillo que sube y baja'},{id:'rebote',n:'Rebote',d:'Salta de vez en cuando'},{id:'balanceo',n:'Balanceo',d:'Se mueve de lado a lado'},{id:'brillo',n:'Destello',d:'Brillo que cruza solo'},{id:'flotar',n:'Flotar',d:'Sube y baja suave'},{id:'giro',n:'Giro',d:'Da una vuelta cada tanto'},{id:'neon',n:'Neón',d:'Borde que se enciende'},{id:'sacudida',n:'Sacudida',d:'Tiembla de vez en cuando'},{id:'arcoiris',n:'Arcoíris',d:'Cambia de color lento'},{id:'gelatina',n:'Gelatina',d:'Rebota elástico'}];
 const LK0={pal:'oro',shape:'sesgado',font:'original',hov:'ninguno',auto:'ninguno'};
 let LOOK={...LK0},lookDirty=false;
 try{const c=JSON.parse(localStorage.getItem('gx_look')||'{}');LOOK={...LK0,...c}}catch(e){}
@@ -2169,6 +2268,13 @@ $('tApp').onclick=async e=>{const b=e.target.closest('button');if(!b)return;cons
   const r=await sb.from('site_settings').upsert({key:'look',value:LOOK});b.disabled=false;
   if(r.error){m.style.color='#c62828';m.textContent='No se pudo guardar para todos: '+r.error.message+'. Ejecuta crear-ajustes-apariencia.sql en Supabase (SQL Editor). Mientras tanto queda guardado solo en este navegador.';return}
   lookDirty=false;m.style.color='#128c4a';m.textContent='Guardado. Todos los visitantes verán este tema.'}};
+
+/* efectos de una sola pasada (giro, sacudir, rebote): se disparan al entrar y no se repiten hasta salir */
+(()=>{const SEL='.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb',H=document.documentElement;
+ document.addEventListener('mouseover',e=>{const v=H.dataset.hov;if(v!=='giro'&&v!=='sacudir'&&v!=='rebote')return;const b=e.target.closest&&e.target.closest(SEL);if(!b||b._fx)return;b._fx=1;b.classList.add('gxfx');
+  const end=()=>{b.classList.remove('gxfx');if(!b.matches(':hover'))b._fx=0};b.addEventListener('animationend',end,{once:true});setTimeout(end,900)});
+ document.addEventListener('mouseout',e=>{const b=e.target.closest&&e.target.closest(SEL);if(b&&!b.contains(e.relatedTarget)&&!b.classList.contains('gxfx'))b._fx=0});
+})();
 </script>
 </body>
 </html>
