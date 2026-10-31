@@ -937,6 +937,26 @@ body.pv .top{background:#0a0a0a!important;position:sticky!important;top:0}
 @keyframes fabw{0%,70%,100%{transform:rotate(0)}74%{transform:rotate(-14deg) scale(1.12)}80%{transform:rotate(12deg) scale(1.12)}86%{transform:rotate(-8deg)}92%{transform:rotate(0)}}
 .fab:hover{filter:drop-shadow(0 10px 18px rgba(226,181,63,.45)) drop-shadow(0 8px 14px rgba(0,0,0,.5))}
 @media(prefers-reduced-motion:reduce){.fab::after,.fab svg{animation:none!important}}
+
+/* ===== Botones flotantes v2: círculos pequeños, WhatsApp solo con su ícono ===== */
+.fab{width:48px;height:48px;padding:0!important;gap:0;font-size:0;justify-content:center;border-radius:50%!important;clip-path:none!important;right:18px;bottom:18px;filter:none!important;box-shadow:0 6px 16px rgba(0,0,0,.45);transition:transform .2s,box-shadow .2s;overflow:visible}
+.fab::before,.fab::after{display:none!important}
+.fab svg{width:27px;height:27px;animation:none!important}
+#fab{background:#25D366!important;color:#fff!important;animation:fabp 2.6s ease-out infinite}
+@keyframes fabp{0%{box-shadow:0 6px 16px rgba(0,0,0,.45),0 0 0 0 rgba(37,211,102,.55)}70%,100%{box-shadow:0 6px 16px rgba(0,0,0,.45),0 0 0 14px rgba(37,211,102,0)}}
+.cartb{width:44px;height:44px;bottom:76px;right:20px;background:var(--gold)!important;color:#000!important}
+.cartb svg{width:22px;height:22px}
+.fab:hover{transform:scale(1.1)}#fab:hover{color:#fff!important}.cartb:hover{color:#000!important}
+.cartb .cn{position:absolute;top:-5px;right:-5px;min-width:19px;height:19px;padding:0 5px;border-radius:999px;font-size:11px;line-height:19px;text-align:center;background:#e11d2e;color:#fff;transform:none}
+@media(prefers-reduced-motion:reduce){#fab{animation:none}}
+/* ===== Banner: sin difuminado inferior mientras se arrastra ===== */
+.hero::after{transition:opacity .2s}.hero.nf::after{opacity:0}
+/* ===== Miniaturas verticales en la página del producto (escritorio) ===== */
+.lbth{display:none}
+@media(min-width:900px){body.pv .lbth.on{display:flex;flex-direction:column;gap:8px;position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:5}
+.lbth button{width:52px;height:64px;padding:0;border:2px solid transparent;background:#161616;cursor:pointer;opacity:.75;transition:opacity .2s,border-color .2s,transform .2s;overflow:hidden}
+.lbth button img{width:100%;height:100%;object-fit:cover;display:block}
+.lbth button:hover{opacity:1;transform:scale(1.06)}.lbth button.a{opacity:1;border-color:var(--gold)}}
 </style>
 </head>
 <body>
@@ -959,7 +979,7 @@ body.pv .top{background:#0a0a0a!important;position:sticky!important;top:0}
 
 <dialog id="lb" aria-label="Fotos del producto">
   <div class="dh"><h2 id="lbT"></h2><button class="btn red sm" id="lbX" type="button">← Volver a la tienda</button></div>
-  <div class="lbb"><div class="lbl"><div class="lbg" id="lbG"></div><div class="stage" id="lbS"><button class="lbn l" id="lbP" type="button" aria-label="Foto anterior">‹</button><img id="lbI" alt=""><button class="lbn r" id="lbN" type="button" aria-label="Foto siguiente">›</button></div>
+  <div class="lbb"><div class="lbl"><div class="lbth" id="pvTh" aria-label="Miniaturas"></div><div class="lbg" id="lbG"></div><div class="stage" id="lbS"><button class="lbn l" id="lbP" type="button" aria-label="Foto anterior">‹</button><img id="lbI" alt=""><button class="lbn r" id="lbN" type="button" aria-label="Foto siguiente">›</button></div>
   <div class="lbt" id="lbTh"></div>
   </div><div class="lbr"><div class="lbd" id="lbD" hidden></div>
   <div class="lbo" id="lbO"></div>
@@ -977,7 +997,7 @@ body.pv .top{background:#0a0a0a!important;position:sticky!important;top:0}
   <span id="secret">© <span id="yr"></span> <span id="stn"></span>. Todos los derechos reservados.</span>
 </footer>
 
-<a class="fab" id="fab" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.06 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.78h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg>Escríbenos</a>
+<a class="fab" id="fab" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp" title="Escríbenos por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.06 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.78h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg></a>
 <button type="button" class="fab cartb" id="cartF" aria-label="Abrir carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.4 12.2a1 1 0 0 0 1 .8H18a1 1 0 0 0 1-.8L21 8H6"/></svg><b id="cartNf" class="cn" hidden>0</b></button>
 <div class="cartO" id="cartO"></div>
 <aside class="cartP" id="cartP" aria-label="Carrito de compras"><div class="cph"><h2>Tu carrito</h2><button type="button" class="btn red sm" id="cartX">Cerrar</button></div><div class="cpb" id="cartL"></div><div class="cpf"><div class="ctot" id="cartT"></div><input id="cartNm" placeholder="Tu nombre (opcional)" autocomplete="name"><button type="button" class="btn dis" id="cartK">Finalizar compra</button><a class="btn grn dis" id="cartW" target="_blank" rel="noopener">Pedir todo por WhatsApp</a><button type="button" class="btn ghost sm" id="cartC" hidden>Vaciar carrito</button><div class="ccf" id="cartCf" hidden><span>¿Vaciar todo el carrito?</span><button type="button" class="btn red sm" id="cartCy">Sí, vaciar</button><button type="button" class="btn ghost sm" id="cartCn">No</button></div></div></aside>
@@ -1465,6 +1485,7 @@ function lbOpen(id,intent){const p=products.find(x=>String(x.id)===String(id));i
   lbOpts();
   if(intent&&isAv(p)){LB.intent=intent;LB.need={z:true,c:true};lbOpts();if(!LB.need.z&&!LB.need.c){LB.intent=null;lbOpts();(intent==='cart'?$('lbC'):$('lbW')).click();return}}
   $('lbG').innerHTML=imgs(p).map((u,k)=>`<img src="${esc(u)}" data-k="${k}" alt="${esc(p.name)}" loading="lazy" draggable="false">`).join('');
+  {const A=imgs(p),T=$('pvTh');T.innerHTML=A.map((u,k)=>`<button type="button" data-k="${k}" aria-label="Foto ${k+1}"><img src="${esc(u)}" alt="" draggable="false"></button>`).join('');T.classList.toggle('on',A.length>1);T.firstChild&&T.firstChild.classList.add('a')}
   {const o=products.filter(x=>String(x.id)!==String(p.id)&&isAv(x)).sort((a,b)=>(slug(b.category||'')===slug(p.category||''))-(slug(a.category||'')===slug(p.category||''))).slice(0,8);
    $('lbRel').innerHTML=o.length?`<h4>Aprovecha para llevar tus preferidas</h4><div class="rg">${o.map(x=>{const im=imgs(x);return `<div class="rl" data-id="${esc(x.id)}" role="link" tabindex="0"><span class="ri" data-i="0">${x.compare_price&&+x.compare_price>+x.price?'<em class="of">Oferta</em>':''}${im[0]?`<img src="${esc(im[0])}" alt="" loading="lazy" draggable="false">`:''}${im.length>1?'<button type="button" class="ra l" aria-label="Foto anterior">❮</button><button type="button" class="ra r" aria-label="Foto siguiente">❯</button>':''}</span><b>${esc(x.name)}</b><span class="price">${money(x.price)}${x.compare_price&&+x.compare_price>+x.price?`<span class="old">${money(x.compare_price)}</span>`:''}</span></div>`}).join('')}</div>`:''}
   lbShow(0);pvOpen();lbFit();requestAnimationFrame(lbFit)}
@@ -1952,6 +1973,12 @@ $('catalogo').addEventListener('click',e=>{const b=e.target.closest('.qb');if(!b
  q.oninput=run;q.onkeydown=e=>{if(e.key==='Escape'){q.value='';SQ='';render();bx.classList.remove('on');$('srchB').classList.remove('act')}};
  document.addEventListener('pointerdown',e=>{if(!bx.classList.contains('on')||e.target.closest('#sbx,#srchB'))return;bx.classList.remove('on');if(!q.value.trim()){q.value='';if(SQ){SQ='';render()}$('srchB').classList.remove('act')}})}
 load().then(()=>{cartRender();if(!location.hash&&scrollY<40)scrollTo(0,0);tUpd()});
+
+/* miniaturas verticales: clic = ir a la foto; se marca la que está en pantalla */
+(()=>{const T=document.getElementById('pvTh'),G=document.getElementById('lbG');if(!T||!G)return;
+ T.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const im=G.querySelector(`img[data-k="${b.dataset.k}"]`);if(im)im.scrollIntoView({behavior:'smooth',block:'center'})});
+ let raf=0;const upd=()=>{raf=0;if(!T.classList.contains('on'))return;const m=innerHeight/2;let best=0,bd=1e9;G.querySelectorAll('img').forEach((im,k)=>{const r=im.getBoundingClientRect();const d=Math.abs(r.top+r.height/2-m);if(d<bd){bd=d;best=k}});[...T.children].forEach((c,k)=>c.classList.toggle('a',k===best))};
+ addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(upd)},{passive:true})})();
 </script>
 </body>
 </html>
