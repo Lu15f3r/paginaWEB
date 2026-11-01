@@ -6,7 +6,7 @@
 <script>try{document.documentElement.dataset.theme=localStorage.getItem("theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}
 var GXF={urbana:"Bebas+Neue&family=Montserrat:wght@400;600;700;800",elegante:"Playfair+Display:wght@700;900&family=Lato:wght@400;700;900",futurista:"Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700",deportiva:"Anton&family=Barlow:wght@400;600;700;800",redondeada:"Fredoka:wght@500;700&family=Nunito:wght@400;700;800",moderna:"Poppins:wght@400;500;600;700;800",impacto:"Archivo+Black&family=Archivo:wght@400;600;700",retro:"Righteous&family=Quicksand:wght@400;600;700",clasica:"Cinzel:wght@600;800&family=Lora:wght@400;600;700",callejera:"Bungee&family=Space+Grotesk:wght@400;600;700",industrial:"Teko:wght@500;600;700&family=Rubik:wght@400;500;700",tecnica:"Russo+One&family=Exo+2:wght@400;600;700",militar:"Black+Ops+One&family=Chakra+Petch:wght@400;600;700",cursiva:"Lobster&family=Open+Sans:wght@400;600;700",condensada:"Oswald:wght@500;700&family=Source+Sans+3:wght@400;600;700",poster:"Staatliches&family=Karla:wght@400;600;700",slab:"Alfa+Slab+One&family=Roboto+Slab:wght@400;600;700",comic:"Bangers&family=Comic+Neue:wght@400;700",pixel:"Press+Start+2P&family=VT323",espacial:"Audiowide&family=Titillium+Web:wght@400;600;700",marcador:"Permanent+Marker&family=Patrick+Hand",moda:"Abril+Fatface&family=DM+Sans:wght@400;500;700",gotica:"UnifrakturCook:wght@700&family=Crimson+Text:wght@400;600;700",caniuse:"Open+Sans:wght@300;400;600;700",pacifico:"Pacifico&family=Nunito:wght@400;700;800",dancing:"Dancing+Script:wght@500;700&family=Quicksand:wght@400;600;700",kaushan:"Kaushan+Script&family=Poppins:wght@400;600;700",satisfy:"Satisfy&family=Lato:wght@400;700",courgette:"Courgette&family=Raleway:wght@400;600;700",italica:"Playfair+Display:ital,wght@1,700;1,900&family=Lora:ital,wght@1,400;1,600"};
 function gxFont(k){if(!GXF[k]||document.getElementById("gxf-"+k))return;var l=document.createElement("link");l.id="gxf-"+k;l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family="+GXF[k]+"&display=swap";document.head.appendChild(l)}
-function gxLook(l){var d=document.documentElement;["pal","shape","font","hov","auto"].forEach(function(a){var v=l&&l[a],def=a==="pal"?"oro":a==="shape"?"sesgado":a==="font"?"original":"ninguno";if(v&&v!==def){d.dataset[a]=v;if(a==="font")gxFont(v)}else delete d.dataset[a]})}
+function gxLook(l){var d=document.documentElement;["pal","shape","font","hov","auto"].forEach(function(a){var v=l&&l[a],def=a==="pal"?"oro":a==="shape"?"sesgado":a==="font"?"original":"ninguno";if(v&&v!==def){d.dataset[a]=v;if(a==="font")gxFont(v)}else delete d.dataset[a]});var m=d.dataset.theme==="light"?"l":"d",c=(l&&l.c&&l.c[m])||{};["bg","panel","ink","muted","gold"].forEach(function(k){if(c[k])d.style.setProperty("--"+k,c[k]);else d.style.removeProperty("--"+k)});var r=/^#([0-9a-f]{6})$/i.exec(c.gold||"");if(r)d.style.setProperty("--goldrgb",parseInt(r[1].slice(0,2),16)+","+parseInt(r[1].slice(2,4),16)+","+parseInt(r[1].slice(4,6),16));else d.style.removeProperty("--goldrgb");if(c.bg)d.dataset.cbg="1";else delete d.dataset.cbg}
 try{gxLook(JSON.parse(localStorage.getItem("gx_look")||"{}"))}catch(e){}
 </script>
 <title>GORRAX | Gorras, buzos, relojes y actitud</title>
@@ -719,6 +719,16 @@ html.nolock{overflow:hidden;scrollbar-gutter:stable}dialog{overscroll-behavior:c
 @media(max-width:640px){.totop{width:38px;height:34px}.totop svg{width:17px;height:17px}#toTop{bottom:58px}}
 .ghd{margin:18px 0 6px;font-size:22px}.gb{display:grid;grid-template-columns:96px 1fr auto;gap:8px;align-items:center;margin:4px 0}.gl{font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.gt{background:var(--line);height:12px}.gt i{display:block;height:100%;background:var(--gold)}.gv{font-size:12px;color:var(--muted);white-space:nowrap}
 .hc{display:flex;align-items:flex-end;gap:3px;height:130px;margin-top:8px;border-bottom:1px solid var(--line)}.hc b{flex:1;background:var(--gold);min-height:2px}.hl{display:flex;gap:3px}.hl span{flex:1;text-align:center;font-size:9px;color:var(--muted);overflow:visible;white-space:nowrap}
+.clr{display:grid;grid-template-columns:minmax(150px,220px) 48px 1fr auto;gap:10px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--line)}.clr input[type=color]{width:46px;height:34px;padding:0;border:1px solid var(--line);background:none;cursor:pointer}.cpal{display:flex;flex-wrap:wrap;gap:5px}.cs{width:24px;height:24px;border:2px solid rgba(127,127,127,.5);border-radius:50%;padding:0;cursor:pointer}.cs.on{outline:3px solid var(--gold);outline-offset:1px}
+.txq{width:100%;margin:6px 0}.txl{display:grid;gap:8px;max-height:420px;overflow:auto;padding-right:4px}.txr{display:grid;grid-template-columns:1fr auto;gap:4px 8px;align-items:start}.txr small{grid-column:1/-1;color:var(--muted)}.txr textarea{width:100%;resize:vertical}
+.apfix{position:sticky;bottom:0;background:var(--panel);padding:10px 0;margin-top:14px;border-top:1px solid var(--line);z-index:2}
+#txBar{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:2147483000;display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:96vw;padding:10px 14px;background:#111;color:#fff;border:2px solid #ff4d4d;box-shadow:0 8px 30px rgba(0,0,0,.6);font-size:14px}#txBar[hidden]{display:none}#txM{color:#ffd166}
+.txedit .txe{outline:1px dashed #ff4d4d!important;outline-offset:2px;cursor:text}.txedit .txe:hover{background:rgba(255,77,77,.18)}
+html[data-cbg] body,html[data-cbg]{background:var(--bg)!important;background-image:none!important}
+@media(max-width:640px){.clr{grid-template-columns:1fr auto}.clr .cpal{grid-column:1/-1}}
+.xld{width:min(620px,96vw)}.xld .desc{margin-bottom:12px}.xld .xlin input,.xld .xlin select{max-width:100%}.xlin{display:flex;flex-wrap:wrap;gap:12px;align-items:end;margin:6px 0 12px}.xlin label{display:grid;gap:4px;font-weight:600;font-size:14px}.xlin input,.xlin select{min-width:190px}.xlin small,.xlg span{color:var(--muted,#999);font-size:13px}
+.xlg{display:grid;gap:6px;margin:4px 0 12px}.xlg .tabs{margin:0}.xlpv{border:1px solid var(--line);padding:12px 14px;line-height:1.6;background:rgba(127,127,127,.08);margin:6px 0 10px}.xlact{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:6px}
+.cmrg{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin:8px 0 4px}.cmrg label{display:grid;gap:3px;font-size:12px;color:var(--muted,#999)}.cmrg input{min-width:150px}.cmrg small{color:var(--muted,#999);font-size:12px;align-self:center}
 .gk{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin:12px 0}.gk div{border:1px solid var(--line);padding:10px}.gk b{display:block;font-size:20px;color:var(--gold)}
 .vfd{width:min(560px,96vw)}
 /* ===== ajustes: combos ocultos, barra animada, botón verde ===== */
@@ -1379,6 +1389,7 @@ html .ph img.dgi,html .ph .dgw{object-fit:cover!important;padding:0!important}
 .pdw{display:flex;flex-direction:column;gap:6px}.pdl{font-size:14px}
 .pdt{display:flex;flex-wrap:wrap;gap:6px}.pdt button{font:inherit;font-size:13px;font-weight:700;padding:5px 12px;cursor:pointer;background:var(--panel);color:var(--ink);border:1px solid var(--line)}.pdt button:hover{border-color:var(--gold);color:var(--gold)}
 .pde{min-height:120px;max-height:320px;overflow:auto;padding:10px 12px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:15px;line-height:1.55;outline:0}.pde:focus{border-color:var(--gold)}
+.pde{font-synthesis:weight style}.pde b,.pde strong,.lbd b,.lbd strong{font-weight:900;text-shadow:.6px 0 0 currentColor}.pde i,.pde em,.lbd i,.lbd em{font-style:italic}.pde u,.lbd u{text-decoration:underline;text-underline-offset:2px}.pdt button.on{background:var(--gold);color:#000;border-color:var(--gold)}.pdp{margin-top:8px}.pdp small{display:block;color:var(--muted);margin-bottom:4px}.pdp .lbd{border:1px dashed var(--line);padding:10px 12px;min-height:40px;color:var(--ink)}.pdp .lbd:empty:before{content:'(vacío)';color:var(--muted)}
 .pde:empty:before{content:attr(data-ph);color:var(--muted);pointer-events:none}
 .pde ul,.pde ol,.lbd ul,.lbd ol{margin:6px 0 6px 22px;padding:0}.pde ul,.lbd ul{list-style:disc}.pde ol,.lbd ol{list-style:decimal}.pde li,.lbd li{margin:2px 0}.pde p,.lbd p{margin:0 0 6px}
 .lbd div:first-child{white-space:normal}
@@ -1440,6 +1451,9 @@ html .ph img.dgi,html .ph .dgw{object-fit:cover!important;padding:0!important}
 <div id="vfL" style="margin-top:10px"></div>
 <div class="cof" style="margin-top:12px"><label>Cliente (opcional)<input id="vfN" placeholder="Nombre"></label><label>Medio de pago<select id="vfPay"><option>Efectivo</option><option>Nequi</option><option>Daviplata</option><option>Bancolombia</option><option>Transferencia</option><option>Tarjeta (datáfono)</option></select></label></div>
 <div class="coe" id="vfM"></div><button class="btn grn" id="vfS" type="button">Registrar venta</button></div></dialog>
+<div id="txBar" hidden><span>✎ <b>Modo edición de textos:</b> toca cualquier texto con borde rojo punteado para cambiarlo.</span><span id="txM"></span><button type="button" class="btn sm" id="txSave">Guardar para todos</button><button type="button" class="btn ghost sm" id="txDone">Salir y volver al panel</button></div>
+<dialog id="txd" class="xld"><div class="dh"><h2>Cambiar texto</h2></div><div class="db"><p class="desc">Texto original: <b id="txO"></b></p><textarea id="txT" rows="4" style="width:100%" aria-label="Texto nuevo"></textarea><div class="xlact"><button type="button" class="btn ghost" id="txNo">Cancelar</button><button type="button" class="btn ghost" id="txR">↺ Restaurar original</button><button type="button" class="btn" id="txOk">Aplicar</button></div></div></dialog>
+<dialog id="xld" class="xld"><div class="dh"><h2>Exportar a Excel</h2><button class="btn red sm" id="xlX" type="button">Cerrar</button></div><div class="db" id="xlB"></div></dialog>
 <dialog id="cm"><div class="dh"><h2>Categorías</h2><button class="btn red sm" id="cmX" type="button">Cerrar</button></div><div class="db"><p class="desc" style="margin-bottom:8px">Cambia el nombre o elimina categorías. Si tocas Gorras, Buzos, Relojes o Combos, el armador de combos puede quedar sin productos. Las categorías vacías solo se pueden eliminar.</p><div class="coe" id="cmM"></div><div id="cmB"></div></div></dialog>
 <dialog id="co" aria-labelledby="coT"><div class="dh"><h2 id="coT">Finalizar compra</h2><button class="btn red sm" id="coX" type="button">Cerrar</button></div><div class="db" id="coB"></div></dialog>
 
@@ -1475,7 +1489,7 @@ html .ph img.dgi,html .ph .dgw{object-fit:cover!important;padding:0!important}
           <label>Valor venta oferta<input type="number" id="pp" min="0" step="any" inputmode="decimal" required></label>
           <label>Stock<input type="number" id="pst" min="0" step="1" readonly placeholder="Auto" title="Se calcula con el inventario por talla y color"></label>
         </div>
-        <div class="w cmpbox"><label class="cmpl">Proveedor <small>(opcional, para la pestaña Compras)</small><input id="pcs" list="cmSl" placeholder="A quién le compraste" autocomplete="off"></label>
+        <div class="w cmpbox"><label class="cmpl">Proveedor * <small>(obligatorio, se anota en la pestaña Compras)</small><input id="pcs" list="cmSl" placeholder="A quién le compraste" autocomplete="off" required></label>
           <label class="cmpc"><input type="checkbox" id="pcr" checked disabled> Anotar en Compras lo que ingreso (cantidad × valor compra) <small>— en un producto nuevo siempre se anota; al editar, márcalo solo si compraste más</small></label></div>
         <p class="w mg" id="pmg"></p>
         <div class="w vbox"><b>Inventario por talla y color</b>
@@ -1484,7 +1498,7 @@ html .ph img.dgi,html .ph .dgw{object-fit:cover!important;padding:0!important}
           <div><button type="button" class="btn ghost sm" id="vadd">+ Agregar talla / color</button> <small id="vnote" class="desc" hidden>El stock total es la suma de estas filas.</small></div>
           <datalist id="vsz"><option value="S"><option value="M"><option value="L"><option value="XL"><option value="XXL"><option value="Única"></datalist>
         </div>
-        <div class="w pdw"><b class="pdl">Descripción</b><div class="pdt" role="toolbar" aria-label="Formato"><button type="button" data-c="bold" title="Negrita"><b>N</b></button><button type="button" data-c="italic" title="Cursiva"><i>C</i></button><button type="button" data-c="underline" title="Subrayado"><u>S</u></button><button type="button" data-c="insertUnorderedList" title="Lista con viñetas">• Viñetas</button><button type="button" data-c="insertOrderedList" title="Lista numerada">1. Numerada</button><button type="button" data-c="removeFormat" title="Quitar formato">Quitar formato</button></div><div id="pde" class="pde" contenteditable="true" role="textbox" aria-multiline="true" data-ph="Escribe la descripción. Selecciona texto para ponerlo en negrita o cursiva, y usa Viñetas para hacer listas."></div><textarea id="pd" hidden></textarea></div>
+        <div class="w pdw"><b class="pdl">Descripción</b><div class="pdt" role="toolbar" aria-label="Formato"><button type="button" data-c="bold" title="Negrita"><b>N</b></button><button type="button" data-c="italic" title="Cursiva"><i>C</i></button><button type="button" data-c="underline" title="Subrayado"><u>S</u></button><button type="button" data-c="insertUnorderedList" title="Lista con viñetas">• Viñetas</button><button type="button" data-c="insertOrderedList" title="Lista numerada">1. Numerada</button><button type="button" data-c="removeFormat" title="Quitar formato">Quitar formato</button></div><div id="pde" class="pde" contenteditable="true" role="textbox" aria-multiline="true" data-ph="Escribe la descripción. Selecciona texto para ponerlo en negrita o cursiva, y usa Viñetas para hacer listas."></div><div class="pdp"><small>Así se verá en la tienda:</small><div id="pdv" class="lbd"></div></div><textarea id="pd" hidden></textarea></div>
         <label class="w">Fotos (hasta 6; la primera es la portada · arrastra una foto para cambiar su lugar)<input type="file" id="pimg" accept="image/*" multiple></label>
         <div class="w gal" id="gal"></div>
         <label class="chk w"><input type="checkbox" id="pa" checked> Disponible</label>
@@ -1739,7 +1753,7 @@ function alist(){
 function toast(t){let el=$('toast');if(!el){el=document.createElement('div');el.id='toast';el.setAttribute('role','status');dlg.appendChild(el)}
   el.textContent=t;el.classList.remove('show');void el.offsetWidth;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('show'),3000)}
 let vlist=[],curSizes=[],legacy='';
-let vgid=0;
+let vgid=0;const VSZ=['Única','S','M','L','XL','XXL','38','39','40','41','42','43','40 mm','44 mm'];
 /* Inventario: una talla puede tener varios colores. Cada color lleva su propia cantidad. */
 function vRender(){
   vlist.forEach(v=>{if(!v.g)v.g=v.s?'s:'+v.s:'n'+(++vgid)});
@@ -1747,16 +1761,19 @@ function vRender(){
   $('vrows').innerHTML=groups.map(G=>{
     const used=G.idx.map(i=>vlist[i].c);
     const rows=G.idx.map((i,k)=>{const v=vlist[i];
-      const sz=k===0?`<input list="vsz" data-f="s" value="${esc(v.s)}" placeholder="Talla" autocomplete="off">`:`<span class="vsp" aria-hidden="true">↳ misma talla</span>`;
+      const cust=G.idx.some(j=>vlist[j].cu)||(v.s&&!VSZ.includes(v.s));
+      const sz=k===0?(cust?`<input data-f="s" value="${esc(v.s)}" placeholder="Escribe la talla" autocomplete="off">`:`<select data-f="s"><option value="">Talla</option>${VSZ.map(z=>`<option${z===v.s?' selected':''}>${z}</option>`).join('')}<option value="__o">Otra talla…</option></select>`):`<span class="vsp" aria-hidden="true">↳ misma talla</span>`;
       const opts=COLORS.map(c=>`<option${c[0]===v.c?' selected':''}${c[0]!==v.c&&used.includes(c[0])?' disabled':''}>${c[0]}</option>`).join('');
       return `<div class="vrow" data-i="${i}">${sz}<select data-f="c"><option value="">Sin color</option>${opts}</select><input type="number" min="0" data-f="n" value="${v.n}" placeholder="Cant."><button type="button" class="btn red sm" data-x="${i}" aria-label="Quitar fila">✕</button></div>`}).join('');
     const free=COLORS.some(c=>!used.includes(c[0]));
     return `<div class="vgrp" data-g="${esc(G.g)}">${rows}${free?`<button type="button" class="btn ghost sm vgc" data-gc="${esc(G.g)}">+ otro color para esta talla</button>`:''}</div>`}).join('');
   const has=vlist.length>0;$('pst').readOnly=true;$('vnote').hidden=!has;$('pst').value=has?vSum(vlist):legacy}
 $('vadd').onclick=()=>{vlist.push({s:'',c:'',n:0,g:'n'+(++vgid)});vRender()};
-$('vrows').oninput=e=>{const r=e.target.closest('.vrow');if(!r||!e.target.dataset.f)return;const v=vlist[+r.dataset.i],f=e.target.dataset.f;
+$('vrows').oninput=e=>{const r=e.target.closest('.vrow');if(!r||!e.target.dataset.f)return;const v=vlist[+r.dataset.i],f=e.target.dataset.f;if(e.target.value==='__o')return;
   if(f==='s'){vlist.filter(x=>x.g===v.g).forEach(x=>x.s=e.target.value)}else if(f==='n'){v.n=e.target.value}$('pst').value=vSum(vlist)};
-$('vrows').onchange=e=>{const r=e.target.closest('.vrow');if(!r||e.target.dataset.f!=='c')return;vlist[+r.dataset.i].c=e.target.value;vRender()};
+$('vrows').onchange=e=>{const r=e.target.closest('.vrow');if(!r)return;
+  if(e.target.dataset.f==='s'&&e.target.tagName==='SELECT'){const v=vlist[+r.dataset.i];if(e.target.value==='__o'){vlist.filter(x=>x.g===v.g).forEach(x=>{x.cu=true;x.s=''});vRender();const i=$('vrows').querySelector(`.vgrp[data-g="${CSS.escape(v.g)}"] input[data-f="s"]`);if(i)i.focus()}else{vlist.filter(x=>x.g===v.g).forEach(x=>x.s=e.target.value)}return}
+  if(e.target.dataset.f!=='c')return;vlist[+r.dataset.i].c=e.target.value;vRender()};
 $('vrows').onclick=e=>{const x=e.target.closest('[data-x]');if(x){vlist.splice(+x.dataset.x,1);vRender();return}
   const a=e.target.closest('[data-gc]');if(a){const g=a.dataset.gc,mine=vlist.filter(v=>v.g===g),used=mine.map(v=>v.c),nc=(COLORS.find(c=>!used.includes(c[0]))||[''])[0];
     const last=vlist.map(v=>v.g).lastIndexOf(g);vlist.splice(last+1,0,{s:mine[0]?mine[0].s:'',c:nc,n:0,g});vRender()}};
@@ -1787,7 +1804,7 @@ $('alist').onclick=async e=>{
   const mvb=e.target.closest('[data-mv]');if(mvb){mvb.disabled=true;await moveProd(mvb.dataset.id,mvb.dataset.mv);return}
   const ed=e.target.dataset.e,dl=e.target.dataset.d;
   if(ed){const p=products.find(x=>String(x.id)===ed);
-    $('pid').value=p.id;$('pcr').disabled=false;$('pcr').checked=false;$('pcs').value='';$('pn').value=p.name;$('psb').value=p.subcategory||'';$('pmt').value=p.material||'';$('pc').value=p.category;alist();$('pp').value=p.price;
+    $('pid').value=p.id;$('pcr').disabled=false;$('pcr').checked=false;$('pcs').value=lastSup(p);$('pn').value=p.name;$('psb').value=p.subcategory||'';$('pmt').value=p.material||'';$('pc').value=p.category;alist();$('pp').value=p.price;
     curSizes=[...(p.sizes||[])];curG=[...gens(p)];gChips();legacy=hasVar(p)?'':(p.stock??'');$('pst').value=legacy;$('pcmp').value=p.compare_price||'';$('pd').value=p.description||'';$('pa').checked=p.available!==false;$('pco').value=costs[String(p.id)]??'';updMg();
     vlist=vars(p).map(v=>({...v}));vRender();keep=[...imgs(p)];added=[];removed=[];gal();say('Editando “'+p.name+'”. Guarda cuando termines.',true);dlg.scrollTo({top:0,behavior:'smooth'})}
   if(dl){const p=products.find(x=>String(x.id)===dl);
@@ -1798,7 +1815,9 @@ $('alist').onclick=async e=>{
     await load();alist();say('Producto eliminado.',true)}
 };
 const shrink=(f,max=1100)=>new Promise(r=>{const i=new Image();i.onload=()=>{const k=Math.min(1,max/Math.max(i.width,i.height)),c=document.createElement('canvas');c.width=i.width*k;c.height=i.height*k;c.getContext('2d').drawImage(i,0,0,c.width,c.height);c.toBlob(r,'image/jpeg',.82)};i.src=URL.createObjectURL(f)});
-$('pf').onsubmit=async e=>{e.preventDefault();$('sv').disabled=true;say('Guardando…',true);
+$('pcs').addEventListener('invalid',()=>say('El proveedor es obligatorio: escribe a quién le compraste este producto.'));
+const lastSup=p=>{const m=purch.filter(c=>String(c.supplier||'').trim()&&(c.items||[]).some(it=>String(it.product_id)===String(p.id)||nrm(it.name)===nrm(p.name))).sort((a,b)=>String(b.bought_at).localeCompare(String(a.bought_at)));return m[0]?m[0].supplier:''};
+$('pf').onsubmit=async e=>{e.preventDefault();if(!$('pcs').value.trim()){say('El proveedor es obligatorio: escribe a quién le compraste este producto.');$('pcs').focus();$('pcs').scrollIntoView({block:'center'});return}$('sv').disabled=true;say('Guardando…',true);
   try{
     const id=$('pid').value;
     const row={name:$('pn').value.trim(),category:$('pc').value.trim(),price:Number($('pp').value),
@@ -1822,6 +1841,8 @@ $('pf').onsubmit=async e=>{e.preventDefault();$('sv').disabled=true;say('Guardan
     if(pid!=null){const cv=$('pco').value,cr=await sb.from('product_costs').upsert({product_id:String(pid),cost:cv===''?null:Number(cv)});if(cr.error)aviso+=' El valor de compra NO se guardó: ejecuta actualizar-costos.sql en Supabase.';else costs[String(pid)]=cv===''?null:Number(cv)}
     const gone=removed.filter(u=>u&&u.includes('/productos/')&&!used(u,id));
     if(gone.length)await sb.storage.from('productos').remove(gone.map(u=>u.split('/productos/')[1]));
+    if(id&&pid!=null&&$('pcs').value.trim()){const sp=$('pcs').value.trim();try{if(!purch.length)await loadPurch();const mine=purch.filter(c=>!String(c.supplier||'').trim()&&(c.items||[]).some(it=>String(it.product_id)===String(pid)||nrm(it.name)===nrm(row.name)));
+      if(mine.length){const ur=await sb.from('purchases').update({supplier:sp}).in('id',mine.map(c=>c.id));if(!ur.error){aviso+=' Proveedor “'+sp+'” aplicado a '+mine.length+' compra(s) de este producto.';await loadPurch()}}}catch(e){}}
     if(window._pp&&!id&&pid!=null)await cmLink(pid);
     else if((!id||$('pcr').checked)&&pid!=null){const ps=await cmFromProduct(pid,row,id?products.find(x=>String(x.id)===String(id)):null,$('pco').value,$('pcs').value,!id);if(ps)aviso+=ps}
     const msgP=id?'Producto actualizado':'Producto creado';clear();await load();alist();say(msgP+'.'+aviso,true);toast(msgP);
@@ -1830,11 +1851,10 @@ $('pf').onsubmit=async e=>{e.preventDefault();$('sv').disabled=true;say('Guardan
 
 /* efecto de escritura: empieza cuando el texto entra en pantalla */
 function typer(el){
-  const text=el.querySelector('.gh').textContent,t=el.querySelector('.ty');let i=0,tm;
-  const cut=el.dataset.white?text.indexOf(el.dataset.white)+1:0;
-  const paint=s=>{t.innerHTML=cut>0?`<span class="wh">${esc(s.slice(0,cut))}</span>${esc(s.slice(cut))}`:esc(s)};
-  const erase=()=>{if(i>0){i--;paint(text.slice(0,i));tm=setTimeout(erase,35+Math.random()*25)}else tm=setTimeout(step,500)};
-  const step=()=>{if(i<=text.length){paint(text.slice(0,i++));tm=setTimeout(step,80+Math.random()*60)}else tm=setTimeout(()=>{if(el.hasAttribute('data-loop')){i=text.length;erase()}else el.classList.add('done')},el.hasAttribute('data-loop')?3000:1500)};
+  const GH=el.querySelector('.gh'),t=el.querySelector('.ty');let i=0,tm;
+  const paint=s=>{const text=GH.textContent,cut=el.dataset.white?text.indexOf(el.dataset.white)+1:0;t.innerHTML=cut>0?`<span class="wh">${esc(s.slice(0,cut))}</span>${esc(s.slice(cut))}`:esc(s)};
+  const erase=()=>{if(i>0){i--;paint(GH.textContent.slice(0,i));tm=setTimeout(erase,35+Math.random()*25)}else tm=setTimeout(step,500)};
+  const step=()=>{if(i<=GH.textContent.length){paint(GH.textContent.slice(0,i++));tm=setTimeout(step,80+Math.random()*60)}else tm=setTimeout(()=>{if(el.hasAttribute('data-loop')){i=GH.textContent.length;erase()}else el.classList.add('done')},el.hasAttribute('data-loop')?3000:1500)};
   const api={run(){clearTimeout(tm);el.classList.remove('done');i=0;t.textContent='';tm=setTimeout(step,350)},stop(){clearTimeout(tm);t.textContent=''}};return api;
 }
 document.querySelectorAll('.tw').forEach(el=>{
@@ -1845,13 +1865,21 @@ document.querySelectorAll('.tw').forEach(el=>{
 
 const CATS_BASE=['Gorras','Buzos','Relojes','Combos','Zapatos'],CORE=['gorras','buzos','relojes','combos'];
 const hidC=()=>{try{return JSON.parse(localStorage.getItem('gx_cats_hidden')||'[]')}catch(e){return[]}},setHid=a=>{try{localStorage.setItem('gx_cats_hidden',JSON.stringify(a))}catch(e){}};
-function catAll(){const m=new Map(),h=hidC();[...CATS_BASE.filter(c=>!h.includes(slug(c))),...products.map(p=>p.category)].forEach(c=>{const k=slug(c||'');if(c&&!m.has(k))m.set(k,c)});return[...m.values()]}
+const getExtra=()=>{try{return JSON.parse(localStorage.getItem('gx_cats_extra')||'[]')}catch(e){return[]}};
+function extraCats(add,remove){let a=getExtra();if(add&&!a.some(c=>slug(c)===slug(add)))a.push(add);if(remove)a=a.filter(c=>slug(c)!==slug(remove));try{localStorage.setItem('gx_cats_extra',JSON.stringify(a))}catch(e){}
+  if(sb)sb.from('site_settings').upsert({key:'extra_categories',value:a}).then(()=>{},()=>{})}
+async function loadExtraCats(){try{if(!sb)return;const g=await sb.from('site_settings').select('value').eq('key','extra_categories').limit(1);const v=g.data&&g.data[0]&&g.data[0].value;if(Array.isArray(v)){try{localStorage.setItem('gx_cats_extra',JSON.stringify(v))}catch(e){}}}catch(e){}}
+function catAll(){const m=new Map(),h=hidC();[...CATS_BASE.filter(c=>!h.includes(slug(c))),...getExtra(),...products.map(p=>p.category)].forEach(c=>{const k=slug(c||'');if(c&&!m.has(k))m.set(k,c)});return[...m.values()]}
 function askOk(msg,ok,opts){return new Promise(r=>{const d=$('cf');$('cfM').textContent=msg;$('cfS').innerHTML=opts?`<select id="cfV">${opts.map(o=>`<option>${esc(o)}</option>`).join('')}</select>`:'';$('cfY').textContent=ok||'Aceptar';const done=x=>{d.close();r(x)};$('cfY').onclick=()=>done(opts?$('cfV').value:true);$('cfN').onclick=()=>done(false);d.oncancel=e=>{e.preventDefault();done(false)};d.showModal()})}
 const cmSay=(t,ok)=>{$('cmM').textContent=t;$('cmM').style.color=ok?'#1fa855':''};
 const nOf=c=>products.filter(p=>slug(p.category||'')===slug(c)).length;
-function catMng(){$('cmB').innerHTML=catAll().map(c=>`<div class="row" data-c="${esc(c)}"><input class="cmn" value="${esc(c)}"${nOf(c)?'':' disabled'}><small>${nOf(c)} prod.</small><button type="button" class="btn ghost sm" data-a="ren"${nOf(c)?'':' hidden'}>Guardar nombre</button><button type="button" class="btn red sm" data-a="del">Eliminar</button></div>`).join('')||'<p class="desc">No hay categorías.</p>';if(!$('cm').open)$('cm').showModal()}
+function catMng(){$('cmB').innerHTML=`<div class="row cmadd"><input id="cmNew" class="cmn" placeholder="Nueva categoría (ej: Gafas, Medias…)" maxlength="40" autocomplete="off"><button type="button" class="btn sm" data-a="addc">＋ Agregar categoría</button></div>`+catAll().map(c=>`<div class="row" data-c="${esc(c)}"><input class="cmn" value="${esc(c)}"${nOf(c)?'':' disabled'}><small>${nOf(c)} prod.</small><button type="button" class="btn ghost sm" data-a="ren"${nOf(c)?'':' hidden'}>Guardar nombre</button><button type="button" class="btn red sm" data-a="del">Eliminar</button></div>`).join('')||'<p class="desc">No hay categorías.</p>';if(!$('cm').open)$('cm').showModal()}
 $('cmX').onclick=()=>$('cm').close();
-$('cmB').onclick=async e=>{const a=e.target.dataset.a,row=e.target.closest('.row');if(!a||!row||!sb)return;const c=row.dataset.c,ids=products.filter(p=>slug(p.category||'')===slug(c)).map(p=>p.id);
+$('cmB').onkeydown=e=>{if(e.key==='Enter'&&e.target.id==='cmNew'){e.preventDefault();addCat()}};
+function addCat(){const inp=$('cmNew'),n=inp.value.trim().replace(/\s+/g,' ');if(!n)return cmSay('Escribe el nombre de la categoría.');
+  if(catAll().some(c=>slug(c)===slug(n)))return cmSay('Esa categoría ya existe.');
+  const h=hidC().filter(x=>x!==slug(n));setHid(h);extraCats(n);alist();catMng();cmSay('Categoría “'+n+'” agregada. Ya puedes elegirla al crear un producto.',true)}
+$('cmB').onclick=async e=>{const a=e.target.dataset.a,row=e.target.closest('.row');if(a==='addc')return addCat();if(!a||!row||!sb)return;const c=row.dataset.c,ids=products.filter(p=>slug(p.category||'')===slug(c)).map(p=>p.id);
   if(CORE.includes(slug(c))&&!await askOk('“'+c+'” la usa el armador de combos y la sección de la tienda. Si la renombras o eliminas, esa parte puede quedar vacía. ¿Continuar?','Continuar'))return;
   if(a==='ren'){const nw=row.querySelector('.cmn').value.trim();if(!nw||nw===c)return cmSay('Escribe un nombre nuevo.');
     e.target.disabled=true;const{error}=await sb.from('products').update({category:nw}).in('id',ids);e.target.disabled=false;if(error)return cmSay('No se pudo renombrar: '+error.message);
@@ -1860,7 +1888,7 @@ $('cmB').onclick=async e=>{const a=e.target.dataset.a,row=e.target.closest('.row
       const to=await askOk('“'+c+'” tiene '+ids.length+' producto'+(ids.length>1?'s':'')+'. ¿A qué categoría los movemos?','Mover y eliminar',o);if(!to)return;
       const{error}=await sb.from('products').update({category:to}).in('id',ids);if(error)return cmSay('No se pudo mover: '+error.message)}
     else if(!await askOk('¿Eliminar la categoría “'+c+'”?','Eliminar'))return;
-    setHid([...new Set([...hidC(),slug(c)])]);await load();alist();catMng();cmSay('Categoría eliminada.',true)}};
+    setHid([...new Set([...hidC(),slug(c)])]);extraCats(null,c);await load();alist();catMng();cmSay('Categoría eliminada.',true)}};
 function catChips(){
   const seen=new Set(),list=[];
   catAll().forEach(c=>{const k=slug(c||'');if(c&&!seen.has(k)){seen.add(k);list.push(c)}});
@@ -1876,7 +1904,7 @@ let curG=[];function gChips(){$('gchips').innerHTML=GEN.map(g=>`<button type="bu
 $('gchips').onclick=e=>{const b=e.target.closest('button');if(!b)return;const g=b.dataset.g;curG=curG.includes(g)?curG.filter(x=>x!==g):[...curG,g];gChips()};gChips();
 $('cchips').onclick=e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.mng)return catMng();$('pc').value=sg($('pc').value)===sg(b.dataset.c)?'':b.dataset.c;alist()};
 $('pc').oninput=alist;$('pn').oninput=alist;$('pq').oninput=alist;
-$('themeBtn').onclick=()=>{const d=document.documentElement,t=d.dataset.theme==='light'?'dark':'light';d.dataset.theme=t;try{localStorage.setItem('theme',t)}catch(e){}};
+$('themeBtn').onclick=()=>{const d=document.documentElement,t=d.dataset.theme==='light'?'dark':'light';d.dataset.theme=t;try{localStorage.setItem('theme',t)}catch(e){}try{applyLook(LOOK);if($('tApp')&&tab==='app')rApp()}catch(e){}};
 
 function imgs(p){const a=(p.images&&p.images.length?p.images:[p.image_url]).filter(u=>typeof u==='string'&&u.trim());return [...new Set(a)]}
 let lbP=null,lbI=0;
@@ -2153,9 +2181,406 @@ async function syncVars(o,prev,st){
   const bad=R.find(r=>r.error);if(!bad)await load();return bad?bad.error.message:''}
 function rVen(){const C=orders.filter(o=>o.status==='confirmado'),M={};C.forEach(o=>{const m=M[ym(o)]??={n:0,t:0,k:0,ct:0,c:0};m.n++;m.t+=Number(o.total);if(o.cost_total!=null){m.k++;m.ct+=Number(o.total);m.c+=Number(o.cost_total)}});
   const ms=Object.keys(M).sort().reverse(),sel=vm&&M[vm]?vm:(ms[0]||''),L=C.filter(o=>ym(o)===sel),mn=m=>new Date(m+'-15').toLocaleDateString('es-CO',{month:'long',year:'numeric'});
-  $('tVen').innerHTML=`<div style="margin-bottom:10px"><button type="button" class="btn sm" id="vfOpen">＋ Venta en tienda física</button></div><table class="tb"><tr><th>Mes</th><th>Ventas</th><th>Total vendido</th><th>Ganancia</th></tr>${ms.map(m=>`<tr><td><button type="button" class="btn ghost sm${m===sel?' on':''}" data-m="${m}">${mn(m)}</button></td><td>${M[m].n}</td><td><b>${money(M[m].t)}</b></td><td>${M[m].k?`<b style="color:#1fa855">${money(M[m].ct-M[m].c)}</b> <small>${M[m].ct?Math.round((M[m].ct-M[m].c)/M[m].ct*100):0}%</small>`:'—'}${M[m].n>M[m].k&&M[m].k?` <small>(${M[m].n-M[m].k} sin costo)</small>`:''}</td></tr>`).join('')||'<tr><td colspan="4">Aún no hay ventas confirmadas.</td></tr>'}</table>`+
+  $('tVen').innerHTML=`<div style="margin-bottom:10px;display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn sm" id="vfOpen">＋ Venta en tienda física</button><button type="button" class="btn ghost sm" id="xlV">⬇ Exportar a Excel</button></div><table class="tb"><tr><th>Mes</th><th>Ventas</th><th>Total vendido</th><th>Ganancia</th></tr>${ms.map(m=>`<tr><td><button type="button" class="btn ghost sm${m===sel?' on':''}" data-m="${m}">${mn(m)}</button></td><td>${M[m].n}</td><td><b>${money(M[m].t)}</b></td><td>${M[m].k?`<b style="color:#1fa855">${money(M[m].ct-M[m].c)}</b> <small>${M[m].ct?Math.round((M[m].ct-M[m].c)/M[m].ct*100):0}%</small>`:'—'}${M[m].n>M[m].k&&M[m].k?` <small>(${M[m].n-M[m].k} sin costo)</small>`:''}</td></tr>`).join('')||'<tr><td colspan="4">Aún no hay ventas confirmadas.</td></tr>'}</table>`+
   (sel?`<h3 class="t" style="margin:18px 0 8px;font-size:24px">Historial · ${mn(sel)}</h3>`+L.map(o=>`<div class="row"><div><b>${esc(o.code)}</b> · <small>${fd(o.confirmed_at||o.created_at)}${o.customer?' · '+esc(o.customer):''}</small><br><small>${itx(o)}</small>${o.cost_total!=null?`<br><small style="color:#1fa855">Ganancia: ${money(o.total-o.cost_total)}</small>`:''}</div><b>${money(o.total)}</b></div>`).join(''):'')}
-$('tVen').onclick=e=>{if(e.target.id==='vfOpen')return vfOpen();if(e.target.dataset.m){vm=e.target.dataset.m;rVen()}};
+$('tVen').onclick=e=>{if(e.target.id==='vfOpen')return vfOpen();if(e.target.id==='xlV')return xlOpen('ven');if(e.target.dataset.m){vm=e.target.dataset.m;rVen()}};
+const XL_THEME="<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<a:theme xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" name=\"Office Theme\"><a:themeElements><a:clrScheme name=\"Office\"><a:dk1><a:sysClr val=\"windowText\" lastClr=\"000000\"/></a:dk1><a:lt1><a:sysClr val=\"window\" lastClr=\"FFFFFF\"/></a:lt1><a:dk2><a:srgbClr val=\"1F497D\"/></a:dk2><a:lt2><a:srgbClr val=\"EEECE1\"/></a:lt2><a:accent1><a:srgbClr val=\"4F81BD\"/></a:accent1><a:accent2><a:srgbClr val=\"C0504D\"/></a:accent2><a:accent3><a:srgbClr val=\"9BBB59\"/></a:accent3><a:accent4><a:srgbClr val=\"8064A2\"/></a:accent4><a:accent5><a:srgbClr val=\"4BACC6\"/></a:accent5><a:accent6><a:srgbClr val=\"F79646\"/></a:accent6><a:hlink><a:srgbClr val=\"0000FF\"/></a:hlink><a:folHlink><a:srgbClr val=\"800080\"/></a:folHlink></a:clrScheme><a:fontScheme name=\"Office\"><a:majorFont><a:latin typeface=\"Cambria\"/><a:ea typeface=\"\"/><a:cs typeface=\"\"/><a:font script=\"Jpan\" typeface=\"\uff2d\uff33 \uff30\u30b4\u30b7\u30c3\u30af\"/><a:font script=\"Hang\" typeface=\"\ub9d1\uc740 \uace0\ub515\"/><a:font script=\"Hans\" typeface=\"\u5b8b\u4f53\"/><a:font script=\"Hant\" typeface=\"\u65b0\u7d30\u660e\u9ad4\"/><a:font script=\"Arab\" typeface=\"Times New Roman\"/><a:font script=\"Hebr\" typeface=\"Times New Roman\"/><a:font script=\"Thai\" typeface=\"Tahoma\"/><a:font script=\"Ethi\" typeface=\"Nyala\"/><a:font script=\"Beng\" typeface=\"Vrinda\"/><a:font script=\"Gujr\" typeface=\"Shruti\"/><a:font script=\"Khmr\" typeface=\"MoolBoran\"/><a:font script=\"Knda\" typeface=\"Tunga\"/><a:font script=\"Guru\" typeface=\"Raavi\"/><a:font script=\"Cans\" typeface=\"Euphemia\"/><a:font script=\"Cher\" typeface=\"Plantagenet Cherokee\"/><a:font script=\"Yiii\" typeface=\"Microsoft Yi Baiti\"/><a:font script=\"Tibt\" typeface=\"Microsoft Himalaya\"/><a:font script=\"Thaa\" typeface=\"MV Boli\"/><a:font script=\"Deva\" typeface=\"Mangal\"/><a:font script=\"Telu\" typeface=\"Gautami\"/><a:font script=\"Taml\" typeface=\"Latha\"/><a:font script=\"Syrc\" typeface=\"Estrangelo Edessa\"/><a:font script=\"Orya\" typeface=\"Kalinga\"/><a:font script=\"Mlym\" typeface=\"Kartika\"/><a:font script=\"Laoo\" typeface=\"DokChampa\"/><a:font script=\"Sinh\" typeface=\"Iskoola Pota\"/><a:font script=\"Mong\" typeface=\"Mongolian Baiti\"/><a:font script=\"Viet\" typeface=\"Times New Roman\"/><a:font script=\"Uigh\" typeface=\"Microsoft Uighur\"/></a:majorFont><a:minorFont><a:latin typeface=\"Calibri\"/><a:ea typeface=\"\"/><a:cs typeface=\"\"/><a:font script=\"Jpan\" typeface=\"\uff2d\uff33 \uff30\u30b4\u30b7\u30c3\u30af\"/><a:font script=\"Hang\" typeface=\"\ub9d1\uc740 \uace0\ub515\"/><a:font script=\"Hans\" typeface=\"\u5b8b\u4f53\"/><a:font script=\"Hant\" typeface=\"\u65b0\u7d30\u660e\u9ad4\"/><a:font script=\"Arab\" typeface=\"Arial\"/><a:font script=\"Hebr\" typeface=\"Arial\"/><a:font script=\"Thai\" typeface=\"Tahoma\"/><a:font script=\"Ethi\" typeface=\"Nyala\"/><a:font script=\"Beng\" typeface=\"Vrinda\"/><a:font script=\"Gujr\" typeface=\"Shruti\"/><a:font script=\"Khmr\" typeface=\"DaunPenh\"/><a:font script=\"Knda\" typeface=\"Tunga\"/><a:font script=\"Guru\" typeface=\"Raavi\"/><a:font script=\"Cans\" typeface=\"Euphemia\"/><a:font script=\"Cher\" typeface=\"Plantagenet Cherokee\"/><a:font script=\"Yiii\" typeface=\"Microsoft Yi Baiti\"/><a:font script=\"Tibt\" typeface=\"Microsoft Himalaya\"/><a:font script=\"Thaa\" typeface=\"MV Boli\"/><a:font script=\"Deva\" typeface=\"Mangal\"/><a:font script=\"Telu\" typeface=\"Gautami\"/><a:font script=\"Taml\" typeface=\"Latha\"/><a:font script=\"Syrc\" typeface=\"Estrangelo Edessa\"/><a:font script=\"Orya\" typeface=\"Kalinga\"/><a:font script=\"Mlym\" typeface=\"Kartika\"/><a:font script=\"Laoo\" typeface=\"DokChampa\"/><a:font script=\"Sinh\" typeface=\"Iskoola Pota\"/><a:font script=\"Mong\" typeface=\"Mongolian Baiti\"/><a:font script=\"Viet\" typeface=\"Arial\"/><a:font script=\"Uigh\" typeface=\"Microsoft Uighur\"/></a:minorFont></a:fontScheme><a:fmtScheme name=\"Office\"><a:fillStyleLst><a:solidFill><a:schemeClr val=\"phClr\"/></a:solidFill><a:gradFill rotWithShape=\"1\"><a:gsLst><a:gs pos=\"0\"><a:schemeClr val=\"phClr\"><a:tint val=\"50000\"/><a:satMod val=\"300000\"/></a:schemeClr></a:gs><a:gs pos=\"35000\"><a:schemeClr val=\"phClr\"><a:tint val=\"37000\"/><a:satMod val=\"300000\"/></a:schemeClr></a:gs><a:gs pos=\"100000\"><a:schemeClr val=\"phClr\"><a:tint val=\"15000\"/><a:satMod val=\"350000\"/></a:schemeClr></a:gs></a:gsLst><a:lin ang=\"16200000\" scaled=\"1\"/></a:gradFill><a:gradFill rotWithShape=\"1\"><a:gsLst><a:gs pos=\"0\"><a:schemeClr val=\"phClr\"><a:shade val=\"51000\"/><a:satMod val=\"130000\"/></a:schemeClr></a:gs><a:gs pos=\"80000\"><a:schemeClr val=\"phClr\"><a:shade val=\"93000\"/><a:satMod val=\"130000\"/></a:schemeClr></a:gs><a:gs pos=\"100000\"><a:schemeClr val=\"phClr\"><a:shade val=\"94000\"/><a:satMod val=\"135000\"/></a:schemeClr></a:gs></a:gsLst><a:lin ang=\"16200000\" scaled=\"0\"/></a:gradFill></a:fillStyleLst><a:lnStyleLst><a:ln w=\"9525\" cap=\"flat\" cmpd=\"sng\" algn=\"ctr\"><a:solidFill><a:schemeClr val=\"phClr\"><a:shade val=\"95000\"/><a:satMod val=\"105000\"/></a:schemeClr></a:solidFill><a:prstDash val=\"solid\"/></a:ln><a:ln w=\"25400\" cap=\"flat\" cmpd=\"sng\" algn=\"ctr\"><a:solidFill><a:schemeClr val=\"phClr\"/></a:solidFill><a:prstDash val=\"solid\"/></a:ln><a:ln w=\"38100\" cap=\"flat\" cmpd=\"sng\" algn=\"ctr\"><a:solidFill><a:schemeClr val=\"phClr\"/></a:solidFill><a:prstDash val=\"solid\"/></a:ln></a:lnStyleLst><a:effectStyleLst><a:effectStyle><a:effectLst><a:outerShdw blurRad=\"40000\" dist=\"20000\" dir=\"5400000\" rotWithShape=\"0\"><a:srgbClr val=\"000000\"><a:alpha val=\"38000\"/></a:srgbClr></a:outerShdw></a:effectLst></a:effectStyle><a:effectStyle><a:effectLst><a:outerShdw blurRad=\"40000\" dist=\"23000\" dir=\"5400000\" rotWithShape=\"0\"><a:srgbClr val=\"000000\"><a:alpha val=\"35000\"/></a:srgbClr></a:outerShdw></a:effectLst></a:effectStyle><a:effectStyle><a:effectLst><a:outerShdw blurRad=\"40000\" dist=\"23000\" dir=\"5400000\" rotWithShape=\"0\"><a:srgbClr val=\"000000\"><a:alpha val=\"35000\"/></a:srgbClr></a:outerShdw></a:effectLst><a:scene3d><a:camera prst=\"orthographicFront\"><a:rot lat=\"0\" lon=\"0\" rev=\"0\"/></a:camera><a:lightRig rig=\"threePt\" dir=\"t\"><a:rot lat=\"0\" lon=\"0\" rev=\"1200000\"/></a:lightRig></a:scene3d><a:sp3d><a:bevelT w=\"63500\" h=\"25400\"/></a:sp3d></a:effectStyle></a:effectStyleLst><a:bgFillStyleLst><a:solidFill><a:schemeClr val=\"phClr\"/></a:solidFill><a:gradFill rotWithShape=\"1\"><a:gsLst><a:gs pos=\"0\"><a:schemeClr val=\"phClr\"><a:tint val=\"40000\"/><a:satMod val=\"350000\"/></a:schemeClr></a:gs><a:gs pos=\"40000\"><a:schemeClr val=\"phClr\"><a:tint val=\"45000\"/><a:shade val=\"99000\"/><a:satMod val=\"350000\"/></a:schemeClr></a:gs><a:gs pos=\"100000\"><a:schemeClr val=\"phClr\"><a:shade val=\"20000\"/><a:satMod val=\"255000\"/></a:schemeClr></a:gs></a:gsLst><a:path path=\"circle\"><a:fillToRect l=\"50000\" t=\"-80000\" r=\"50000\" b=\"180000\"/></a:path></a:gradFill><a:gradFill rotWithShape=\"1\"><a:gsLst><a:gs pos=\"0\"><a:schemeClr val=\"phClr\"><a:tint val=\"80000\"/><a:satMod val=\"300000\"/></a:schemeClr></a:gs><a:gs pos=\"100000\"><a:schemeClr val=\"phClr\"><a:shade val=\"30000\"/><a:satMod val=\"200000\"/></a:schemeClr></a:gs></a:gsLst><a:path path=\"circle\"><a:fillToRect l=\"50000\" t=\"50000\" r=\"50000\" b=\"50000\"/></a:path></a:gradFill></a:bgFillStyleLst></a:fmtScheme></a:themeElements><a:objectDefaults/><a:extraClrSchemeLst/></a:theme>";
+/* ====== Generador XLSX propio (sin librerías): ZIP + OOXML + gráficas ====== */
+const XL=(()=>{
+const NS='http://schemas.openxmlformats.org/spreadsheetml/2006/main',RNS='http://schemas.openxmlformats.org/officeDocument/2006/relationships';
+const clean=s=>String(s==null?'':s).replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F￾￿]/g,'');
+const ex=s=>clean(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const colL=n=>{let s='';n++;while(n>0){const m=(n-1)%26;s=String.fromCharCode(65+m)+s;n=Math.floor((n-1)/26)}return s};
+const addr=(c,r)=>colL(c)+(r+1),absA=(c,r)=>'$'+colL(c)+'$'+(r+1);
+const qs=n=>"'"+String(n).replace(/'/g,"''")+"'";
+/* ---- ZIP (sin compresión) ---- */
+const T=(()=>{const t=[];for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
+const crc=b=>{let c=0xFFFFFFFF;for(let i=0;i<b.length;i++)c=T[(c^b[i])&255]^(c>>>8);return(c^0xFFFFFFFF)>>>0};
+function zip(files){const enc=new TextEncoder(),parts=[],cd=[];let off=0;
+  const u16=v=>[v&255,(v>>8)&255],u32=v=>[v&255,(v>>8)&255,(v>>16)&255,(v>>>24)&255];
+  for(const f of files){const nm=enc.encode(f.name),d=typeof f.data==='string'?enc.encode(f.data):f.data,c=crc(d);
+    const lh=new Uint8Array([0x50,0x4b,3,4,...u16(20),...u16(0x0800),...u16(0),...u16(0x6000),...u16(0x5821),...u32(c),...u32(d.length),...u32(d.length),...u16(nm.length),...u16(0)]);
+    parts.push(lh,nm,d);
+    cd.push(new Uint8Array([0x50,0x4b,1,2,...u16(20),...u16(20),...u16(0x0800),...u16(0),...u16(0x6000),...u16(0x5821),...u32(c),...u32(d.length),...u32(d.length),...u16(nm.length),...u16(0),...u16(0),...u16(0),...u16(0),...u32(0),...u32(off)]),nm);
+    off+=lh.length+nm.length+d.length}
+  let cs=0;cd.forEach(x=>cs+=x.length);
+  const end=new Uint8Array([0x50,0x4b,5,6,0,0,0,0,...u16(files.length),...u16(files.length),...u32(cs),...u32(off),0,0]);
+  const all=[...parts,...cd,end];let n=0;all.forEach(x=>n+=x.length);const out=new Uint8Array(n);let p=0;all.forEach(x=>{out.set(x,p);p+=x.length});return out}
+/* ---- Estilos ---- */
+function Styles(){const fonts=[],fills=['<fill><patternFill patternType="none"/></fill>','<fill><patternFill patternType="gray125"/></fill>'],borders=[],nf={},xfs=[],keyIx={};let nfN=164;
+  const idx=(arr,x)=>{let i=arr.indexOf(x);if(i<0){arr.push(x);i=arr.length-1}return i};
+  const side=(n,c)=>c?`<${n} style="${c[0]}"><color rgb="FF${c[1]}"/></${n}>`:`<${n}/>`;
+  const st=o=>{const k=JSON.stringify(o);if(keyIx[k]!=null)return keyIx[k];
+    const f=o.font||{};const font=`<font>${f.b?'<b/>':''}${f.i?'<i/>':''}<sz val="${f.sz||10}"/><color rgb="FF${f.color||'1F2937'}"/><name val="Calibri"/><family val="2"/></font>`;
+    const fill=o.fill?`<fill><patternFill patternType="solid"><fgColor rgb="FF${o.fill}"/><bgColor indexed="64"/></patternFill></fill>`:null;
+    const b=o.border||{};const border=`<border>${side('left',b.l)}${side('right',b.r)}${side('top',b.t)}${side('bottom',b.b)}<diagonal/></border>`;
+    let nid=0;if(o.nf){if(nf[o.nf]==null)nf[o.nf]=nfN++;nid=nf[o.nf]}
+    const a=o.al||{};
+    const x=`<xf numFmtId="${nid}" fontId="${idx(fonts,font)}" fillId="${fill?idx(fills,fill):0}" borderId="${idx(borders,border)}" xfId="0" applyNumberFormat="1" applyFont="1" applyFill="1" applyBorder="1" applyAlignment="1"><alignment${a.h?` horizontal="${a.h}"`:''} vertical="${a.v||'center'}"${a.w?' wrapText="1"':''}${a.ind?` indent="${a.ind}"`:''}/></xf>`;
+    xfs.push(x);return keyIx[k]=xfs.length-1};
+  st({});
+  const xml=()=>`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<styleSheet xmlns="${NS}">`+(Object.keys(nf).length?`<numFmts count="${Object.keys(nf).length}">${Object.entries(nf).map(([c,i])=>`<numFmt numFmtId="${i}" formatCode="${ex(c)}"/>`).join('')}</numFmts>`:'')+
+  `<fonts count="${fonts.length}">${fonts.join('')}</fonts><fills count="${fills.length}">${fills.join('')}</fills><borders count="${borders.length}">${borders.join('')}</borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="${xfs.length}">${xfs.join('')}</cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles><dxfs count="0"/><tableStyles count="0" defaultTableStyle="TableStyleMedium9" defaultPivotStyle="PivotStyleLight16"/></styleSheet>`;
+  return{st,xml}}
+/* ---- Hoja ---- */
+class Sheet{constructor(name,o={}){this.name=String(name).slice(0,31);this.cells={};this.cols={};this.rowH={};this.merges=[];this.charts=[];this.o=o;this.maxR=0;this.maxC=0}
+  set(c,r,v,s,f){this.cells[r+','+c]={v,s,f};if(r>this.maxR)this.maxR=r;if(c>this.maxC)this.maxC=c;return this}
+  get(c,r){const x=this.cells[r+','+c];return x?x.v:undefined}
+  merge(c1,r1,c2,r2,s){for(let r=r1;r<=r2;r++)for(let c=c1;c<=c2;c++)if(!this.cells[r+','+c])this.set(c,r,null,s);this.merges.push(addr(c1,r1)+':'+addr(c2,r2))}
+  width(c,w){this.cols[c]=w}height(r,h){this.rowH[r]=h}
+  chart(spec,c1,r1,c2,r2){this.charts.push({spec,c1,r1,c2,r2})}}
+/* ---- Gráficas ---- */
+const CNS='xmlns:c="http://schemas.openxmlformats.org/drawingml/2006/chart" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="'+RNS+'"';
+const rich=(t,sz,b,col)=>`<c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:pPr><a:defRPr sz="${sz}" b="${b?1:0}"/></a:pPr><a:r><a:rPr lang="es-CO" sz="${sz}" b="${b?1:0}"><a:solidFill><a:srgbClr val="${col||'1F2937'}"/></a:solidFill></a:rPr><a:t>${ex(t)}</a:t></a:r></a:p></c:rich></c:tx>`;
+const txPr=(sz,col)=>`<c:txPr><a:bodyPr/><a:lstStyle/><a:p><a:pPr><a:defRPr sz="${sz}"><a:solidFill><a:srgbClr val="${col||'4B5563'}"/></a:solidFill></a:defRPr></a:pPr><a:endParaRPr lang="es-CO"/></a:p></c:txPr>`;
+const fill=c=>`<a:solidFill><a:srgbClr val="${c}"/></a:solidFill>`;
+function refOf(sh,c,r1,r2){return qs(sh.name)+'!'+absA(c,r1)+(r2>r1?':'+absA(c,r2):'')}
+function vals(sh,c,r1,r2){const a=[];for(let r=r1;r<=r2;r++){const v=sh.get(c,r);a.push(v==null?'':v)}return a}
+const strRef=(sh,c,r1,r2)=>{const v=vals(sh,c,r1,r2);return `<c:strRef><c:f>${ex(refOf(sh,c,r1,r2))}</c:f><c:strCache><c:ptCount val="${v.length}"/>${v.map((x,i)=>`<c:pt idx="${i}"><c:v>${ex(x)}</c:v></c:pt>`).join('')}</c:strCache></c:strRef>`};
+const numRef=(sh,c,r1,r2,fmt)=>{const v=vals(sh,c,r1,r2);return `<c:numRef><c:f>${ex(refOf(sh,c,r1,r2))}</c:f><c:numCache><c:formatCode>${ex(fmt||'General')}</c:formatCode><c:ptCount val="${v.length}"/>${v.map((x,i)=>typeof x==='number'&&isFinite(x)?`<c:pt idx="${i}"><c:v>${x}</c:v></c:pt>`:'').join('')}</c:numCache></c:numRef>`};
+const MONEY_AX='[>=1000000]"$"0.0,,"M";[>=1000]"$"0,"K";"$"0';
+function dl(o){if(!o.labels)return'';return `<c:dLbls>${o.lblFmt?`<c:numFmt formatCode="${ex(o.lblFmt)}" sourceLinked="0"/>`:''}<c:spPr><a:noFill/><a:ln><a:noFill/></a:ln></c:spPr>${o.type==='pie'?`<c:txPr><a:bodyPr/><a:lstStyle/><a:p><a:pPr><a:defRPr sz="1000" b="1"><a:solidFill><a:srgbClr val="FFFFFF"/></a:solidFill></a:defRPr></a:pPr><a:endParaRPr lang="es-CO"/></a:p></c:txPr>`:txPr(900,'1F2937')}${o.type==='pie'?'<c:dLblPos val="bestFit"/>':(o.type==='line'?'<c:dLblPos val="t"/>':'<c:dLblPos val="outEnd"/>')}<c:showLegendKey val="0"/><c:showVal val="${o.type==='pie'?0:1}"/><c:showCatName val="0"/><c:showSerName val="0"/><c:showPercent val="${o.type==='pie'?1:0}"/><c:showBubbleSize val="0"/>${o.type==='pie'?'<c:showLeaderLines val="1"/>':''}</c:dLbls>`}
+function chartXml(o){const cat=o.cat,sh=cat.sh;let body='';
+  const sers=o.series.map((s,i)=>{const tx=`<c:tx>${strRef(s.sh||sh,s.nc,s.nr,s.nr)}</c:tx>`,cv=`<c:cat>${strRef(sh,cat.c,cat.r1,cat.r2)}</c:cat><c:val>${numRef(s.sh||sh,s.c,s.r1,s.r2,o.fmt)}</c:val>`;
+    if(o.type==='pie'){const n=cat.r2-cat.r1+1;let dpt='';for(let k=0;k<n;k++)dpt+=`<c:dPt><c:idx val="${k}"/><c:bubble3D val="0"/><c:spPr>${fill(o.colors[k%o.colors.length])}<a:ln w="19050"><a:solidFill><a:srgbClr val="FFFFFF"/></a:solidFill></a:ln></c:spPr></c:dPt>`;
+      return `<c:ser><c:idx val="${i}"/><c:order val="${i}"/>${tx}${dpt}${dl(o)}${cv}</c:ser>`}
+    if(o.type==='line')return `<c:ser><c:idx val="${i}"/><c:order val="${i}"/>${tx}<c:spPr><a:ln w="28575" cap="rnd">${fill(s.color)}<a:round/></a:ln></c:spPr><c:marker><c:symbol val="circle"/><c:size val="5"/><c:spPr>${fill(s.color)}<a:ln w="9525">${fill('FFFFFF')}</a:ln></c:spPr></c:marker>${dl(o)}${cv}<c:smooth val="0"/></c:ser>`;
+    return `<c:ser><c:idx val="${i}"/><c:order val="${i}"/>${tx}<c:spPr>${fill(s.color)}</c:spPr><c:invertIfNegative val="0"/>${dl(o)}${cv}</c:ser>`}).join('');
+  const grid=`<c:majorGridlines><c:spPr><a:ln w="6350"><a:solidFill><a:srgbClr val="E5E7EB"/></a:solidFill></a:ln></c:spPr></c:majorGridlines>`;
+  const axLn=`<c:spPr><a:ln w="9525"><a:solidFill><a:srgbClr val="9CA3AF"/></a:solidFill></a:ln></c:spPr>`;
+  if(o.type==='pie')body=`<c:pieChart><c:varyColors val="1"/>${sers}<c:firstSliceAng val="0"/></c:pieChart>`;
+  else{const hz=o.type==='bar';
+    const chartEl=o.type==='line'?`<c:lineChart><c:grouping val="standard"/><c:varyColors val="0"/>${sers}<c:marker val="1"/><c:axId val="111"/><c:axId val="222"/></c:lineChart>`:`<c:barChart><c:barDir val="${hz?'bar':'col'}"/><c:grouping val="clustered"/><c:varyColors val="0"/>${sers}<c:gapWidth val="${o.gap||60}"/><c:axId val="111"/><c:axId val="222"/></c:barChart>`;
+    body=chartEl+`<c:catAx><c:axId val="111"/><c:scaling><c:orientation val="${hz?'maxMin':'minMax'}"/></c:scaling><c:delete val="0"/><c:axPos val="${hz?'l':'b'}"/><c:numFmt formatCode="General" sourceLinked="0"/><c:majorTickMark val="none"/><c:minorTickMark val="none"/><c:tickLblPos val="nextTo"/>${axLn}${txPr(900)}<c:crossAx val="222"/><c:crosses val="autoZero"/><c:auto val="1"/><c:lblAlgn val="ctr"/><c:lblOffset val="100"/>${o.skip?`<c:tickLblSkip val="${o.skip}"/>`:''}<c:noMultiLvlLbl val="0"/></c:catAx>`+
+    `<c:valAx><c:axId val="222"/><c:scaling><c:orientation val="minMax"/></c:scaling><c:delete val="0"/><c:axPos val="${hz?'b':'l'}"/>${grid}<c:numFmt formatCode="${ex(o.axFmt||MONEY_AX)}" sourceLinked="0"/><c:majorTickMark val="none"/><c:minorTickMark val="none"/><c:tickLblPos val="nextTo"/><c:spPr><a:ln><a:noFill/></a:ln></c:spPr>${txPr(900)}<c:crossAx val="111"/><c:crosses val="${hz?'max':'autoZero'}"/><c:crossBetween val="between"/></c:valAx>`}
+  const legend=(o.series.length>1||o.type==='pie')?`<c:legend><c:legendPos val="${o.type==='pie'?'r':'b'}"/><c:overlay val="0"/>${txPr(900)}</c:legend>`:'';
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<c:chartSpace ${CNS}><c:roundedCorners val="0"/><c:chart><c:title>${rich(o.title,1200,true)}<c:overlay val="0"/></c:title><c:autoTitleDeleted val="0"/><c:plotArea><c:layout/>${body}<c:spPr><a:noFill/></c:spPr></c:plotArea>${legend}<c:plotVisOnly val="1"/><c:dispBlanksAs val="gap"/></c:chart><c:spPr><a:solidFill><a:srgbClr val="FFFFFF"/></a:solidFill><a:ln w="9525"><a:solidFill><a:srgbClr val="D1D5DB"/></a:solidFill></a:ln></c:spPr></c:chartSpace>`}
+/* ---- Hoja XML ---- */
+function sheetXml(sh,ss,i,drawRid,sel){const o=sh.o,rows={};
+  for(const k in sh.cells){const[r,c]=k.split(',').map(Number);(rows[r]??={})[c]=sh.cells[k]}
+  const rs=Object.keys(rows).map(Number).sort((a,b)=>a-b);
+  let sd='';for(const r of rs){const cs=Object.keys(rows[r]).map(Number).sort((a,b)=>a-b);
+    sd+=`<row r="${r+1}"${sh.rowH[r]?` ht="${sh.rowH[r]}" customHeight="1"`:''}>`;
+    for(const c of cs){const x=rows[r][c],a=addr(c,r),s=x.s?` s="${x.s}"`:'';
+      if(x.f!=null){const v=x.v;sd+=typeof v==='string'?`<c r="${a}"${s} t="str"><f>${ex(x.f)}</f><v>${ex(v)}</v></c>`:`<c r="${a}"${s}><f>${ex(x.f)}</f><v>${isFinite(v)?v:0}</v></c>`}
+      else if(x.v==null||x.v==='')sd+=`<c r="${a}"${s}/>`;
+      else if(typeof x.v==='number')sd+=`<c r="${a}"${s}><v>${isFinite(x.v)?x.v:0}</v></c>`;
+      else{const t=clean(x.v).slice(0,32000);sd+=`<c r="${a}"${s} t="s"><v>${ss.id(t)}</v></c>`}}
+    sd+='</row>'}
+  const cols=Object.keys(sh.cols).map(Number).sort((a,b)=>a-b).map(c=>`<col min="${c+1}" max="${c+1}" width="${sh.cols[c]}" customWidth="1"/>`).join('');
+  const pane=o.freeze?`<pane${o.freeze[0]?` xSplit="${o.freeze[0]}"`:''}${o.freeze[1]?` ySplit="${o.freeze[1]}"`:''} topLeftCell="${addr(o.freeze[0],o.freeze[1])}" activePane="${o.freeze[0]&&o.freeze[1]?'bottomRight':o.freeze[1]?'bottomLeft':'topRight'}" state="frozen"/><selection pane="${o.freeze[0]&&o.freeze[1]?'bottomRight':o.freeze[1]?'bottomLeft':'topRight'}"/>`:'';
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<worksheet xmlns="${NS}" xmlns:r="${RNS}"><sheetPr>${o.tab?`<tabColor rgb="FF${o.tab}"/>`:''}<pageSetUpPr fitToPage="1"/></sheetPr><dimension ref="A1:${addr(sh.maxC,sh.maxR)}"/><sheetViews><sheetView${o.grid===false?' showGridLines="0"':''}${sel?' tabSelected="1"':''} workbookViewId="0"${o.zoom?` zoomScale="${o.zoom}" zoomScaleNormal="${o.zoom}"`:''}>${pane}</sheetView></sheetViews><sheetFormatPr defaultRowHeight="15"/>${cols?`<cols>${cols}</cols>`:''}<sheetData>${sd}</sheetData>${o.filter?`<autoFilter ref="${o.filter}"/>`:''}${sh.merges.length?`<mergeCells count="${sh.merges.length}">${sh.merges.map(m=>`<mergeCell ref="${m}"/>`).join('')}</mergeCells>`:''}<pageMargins left="0.5" right="0.5" top="0.6" bottom="0.6" header="0.3" footer="0.3"/><pageSetup orientation="${o.land===false?'portrait':'landscape'}" fitToWidth="1" fitToHeight="0"/>${drawRid?`<drawing r:id="${drawRid}"/>`:''}</worksheet>`}
+function drawingXml(list){return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<xdr:wsDr xmlns:xdr="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">`+list.map((d,i)=>`<xdr:twoCellAnchor><xdr:from><xdr:col>${d.c1}</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>${d.r1}</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from><xdr:to><xdr:col>${d.c2}</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>${d.r2}</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to><xdr:graphicFrame macro=""><xdr:nvGraphicFramePr><xdr:cNvPr id="${i+2}" name="Gráfica ${i+1}"/><xdr:cNvGraphicFramePr/></xdr:nvGraphicFramePr><xdr:xfrm><a:off x="0" y="0"/><a:ext cx="0" cy="0"/></xdr:xfrm><a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/chart"><c:chart xmlns:c="http://schemas.openxmlformats.org/drawingml/2006/chart" xmlns:r="${RNS}" r:id="rId${i+1}"/></a:graphicData></a:graphic></xdr:graphicFrame><xdr:clientData/></xdr:twoCellAnchor>`).join('')+'</xdr:wsDr>'}
+const REL=(a)=>`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${a.map(([id,t,tg])=>`<Relationship Id="${id}" Type="${t}" Target="${tg}"/>`).join('')}</Relationships>`;
+const RT='http://schemas.openxmlformats.org/officeDocument/2006/relationships/';
+function build(sheets,styles,theme,title){
+  const files=[],ssList=[],ssIx={},ss={id:t=>{if(ssIx[t]==null){ssIx[t]=ssList.length;ssList.push(t)}return ssIx[t]}};
+  let ch=0,dr=0;const ct=[],wbSheets=[],wbRels=[],dn=[];
+  sheets.forEach((sh,i)=>{let rid=null;
+    if(sh.charts.length){dr++;rid='rId1';const rels=[];
+      sh.charts.forEach((c,k)=>{ch++;files.push({name:`xl/charts/chart${ch}.xml`,data:chartXml(c.spec)});ct.push(`<Override PartName="/xl/charts/chart${ch}.xml" ContentType="application/vnd.openxmlformats-officedocument.drawingml.chart+xml"/>`);rels.push([`rId${k+1}`,RT+'chart',`../charts/chart${ch}.xml`])});
+      files.push({name:`xl/drawings/drawing${dr}.xml`,data:drawingXml(sh.charts)},{name:`xl/drawings/_rels/drawing${dr}.xml.rels`,data:REL(rels)},{name:`xl/worksheets/_rels/sheet${i+1}.xml.rels`,data:REL([['rId1',RT+'drawing',`../drawings/drawing${dr}.xml`]])});
+      ct.push(`<Override PartName="/xl/drawings/drawing${dr}.xml" ContentType="application/vnd.openxmlformats-officedocument.drawing+xml"/>`)}
+    files.push({name:`xl/worksheets/sheet${i+1}.xml`,data:sheetXml(sh,ss,i,rid,i===0)});
+    ct.push(`<Override PartName="/xl/worksheets/sheet${i+1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`);
+    wbSheets.push(`<sheet name="${ex(sh.name)}" sheetId="${i+1}" r:id="rId${i+1}"/>`);wbRels.push([`rId${i+1}`,RT+'worksheet',`worksheets/sheet${i+1}.xml`]);
+    if(sh.o.filter){const[a,b]=sh.o.filter.split(':');const abs=x=>x.replace(/([A-Z]+)(\d+)/,'$$$1$$$2');dn.push(`<definedName name="_xlnm._FilterDatabase" localSheetId="${i}" hidden="1">${ex(qs(sh.name))}!${abs(a)}:${abs(b)}</definedName>`)}});
+  const n=sheets.length;wbRels.push([`rId${n+1}`,RT+'styles','styles.xml'],[`rId${n+2}`,RT+'theme','theme/theme1.xml'],[`rId${n+3}`,RT+'sharedStrings','sharedStrings.xml']);
+  const now=new Date().toISOString().replace(/\.\d+Z$/,'Z');
+  const sst=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<sst xmlns="${NS}" count="${ssList.length}" uniqueCount="${ssList.length}">${ssList.map(t=>`<si><t xml:space="preserve">${ex(t)}</t></si>`).join('')}</sst>`;
+  const out=[
+   {name:'[Content_Types].xml',data:`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml"/><Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/><Override PartName="/xl/theme/theme1.xml" ContentType="application/vnd.openxmlformats-officedocument.theme+xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/sharedStrings.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml"/>${ct.join('')}</Types>`},
+   {name:'_rels/.rels',data:REL([['rId1',RT+'officeDocument','xl/workbook.xml'],['rId2','http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties','docProps/core.xml'],['rId3',RT+'extended-properties','docProps/app.xml']])},
+   {name:'docProps/app.xml',data:`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties"><Application>Microsoft Excel</Application></Properties>`},
+   {name:'docProps/core.xml',data:`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><dc:title>${ex(title)}</dc:title><dc:creator>GORRAX</dc:creator><dcterms:created xsi:type="dcterms:W3CDTF">${now}</dcterms:created><dcterms:modified xsi:type="dcterms:W3CDTF">${now}</dcterms:modified></cp:coreProperties>`},
+   {name:'xl/workbook.xml',data:`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<workbook xmlns="${NS}" xmlns:r="${RNS}"><workbookPr defaultThemeVersion="124226"/><bookViews><workbookView xWindow="240" yWindow="15" windowWidth="24000" windowHeight="12000" activeTab="0"/></bookViews><sheets>${wbSheets.join('')}</sheets>${dn.length?`<definedNames>${dn.join('')}</definedNames>`:''}<calcPr calcId="124519" fullCalcOnLoad="1"/></workbook>`},
+   {name:'xl/_rels/workbook.xml.rels',data:REL(wbRels)},
+   {name:'xl/styles.xml',data:styles.xml()},{name:'xl/theme/theme1.xml',data:theme},{name:'xl/sharedStrings.xml',data:sst}];
+  return zip([...out,...files])}
+return{Sheet,Styles,build,addr,absA,colL,zip,crc,qs}})();
+
+/* ====== Armado del reporte GORRAX (datos → hojas) ====== */
+function xlReport(D){
+const{Sheet,Styles,build,addr,absA}=XL;
+const MES=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'],MESL=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'],DIA=['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
+const pad=n=>String(n).padStart(2,'0'),P=d=>d.split('-').map(Number);
+const ymd=dt=>dt.getFullYear()+'-'+pad(dt.getMonth()+1)+'-'+pad(dt.getDate());
+const U=d=>{const[y,m,x]=P(d);return Date.UTC(y,m-1,x)},fromU=t=>{const x=new Date(t);return x.getUTCFullYear()+'-'+pad(x.getUTCMonth()+1)+'-'+pad(x.getUTCDate())};
+const add=(d,n)=>fromU(U(d)+n*864e5);
+const wd=d=>(new Date(U(d)).getUTCDay()+6)%7;
+const serial=d=>U(d)/864e5+25569;
+const serialDT=dt=>Date.UTC(dt.getFullYear(),dt.getMonth(),dt.getDate(),dt.getHours(),dt.getMinutes(),dt.getSeconds())/864e5+25569;
+const num=x=>{x=Number(x);return isFinite(x)?x:0};
+const arr=x=>{if(Array.isArray(x))return x;try{const j=JSON.parse(x);return Array.isArray(j)?j:[]}catch(e){return[]}};
+const from=D.from,to=D.to,G=D.group,multiY=from.slice(0,4)!==to.slice(0,4);
+const dts=o=>new Date(o.confirmed_at||o.created_at);
+const isF=o=>o.type==='fisica'||/tienda f[ií]sica/i.test(o.customer||'');
+const inR=d=>d>=from&&d<=to;
+/* período */
+const pk=d=>{if(G==='day')return d;if(G==='week')return add(d,-wd(d));if(G==='fortnight')return d.slice(0,7)+(P(d)[2]<=15?'-01':'-16');return d.slice(0,7)+'-01'};
+const nxt=k=>{if(G==='day')return add(k,1);if(G==='week')return add(k,7);if(G==='fortnight'){if(k.endsWith('-01'))return k.slice(0,7)+'-16';return nxtM(k)}return nxtM(k)};
+const nxtM=k=>{let[y,m]=P(k);m++;if(m>12){m=1;y++}return y+'-'+pad(m)+'-01'};
+const yy=k=>multiY?' '+k.slice(2,4):'';
+const plabel=k=>{const[y,m,d]=P(k);if(G==='day')return pad(d)+' '+MES[m-1]+yy(k);if(G==='week'){const e=add(k,6),[y2,m2,d2]=P(e);return pad(d)+' '+MES[m-1]+' – '+pad(d2)+' '+MES[m2-1]+yy(e)}
+  if(G==='fortnight')return(d===1?'1ª':'2ª')+' quincena '+MES[m-1]+' '+(multiY?y:String(y).slice(2));return MESL[m-1]+' '+y};
+const periods=[];{let k=pk(from);const last=pk(to);let g=0;while(k<=last&&g++<5000){periods.push(k);k=nxt(k)}}
+const GN={day:'Día',week:'Semana',fortnight:'Quincena',month:'Mes'}[G];
+/* datos filtrados */
+const V=D.orders.filter(o=>o.status==='confirmado'&&inR(ymd(dts(o)))).sort((a,b)=>dts(a)-dts(b));
+const A=D.orders.filter(o=>inR(ymd(new Date(o.created_at)))).sort((a,b)=>new Date(a.created_at)-new Date(b.created_at));
+const C=D.purch.filter(c=>inR(c.bought_at)).sort((a,b)=>a.bought_at<b.bought_at?-1:a.bought_at>b.bought_at?1:0);
+const cat=it=>{if(it.category)return it.category;const p=D.products.find(p=>String(p.id)===String(it.id));return p&&p.category||'Sin categoría'};
+const cost=o=>{if(o.cost_total!=null)return num(o.cost_total);let t=0;arr(o.items).forEach(i=>{t+=num(i.qty)*num(D.costs[String(i.id)])});return t};
+const units=o=>arr(o.items).reduce((t,i)=>t+num(i.qty),0)||num(o.qty);
+const itx=o=>arr(o.items).map(i=>num(i.qty)+'× '+i.name+([i.size,i.color].filter(Boolean).length?' ('+[i.size,i.color].filter(Boolean).join(' / ')+')':'')).join('; ');
+const cust=o=>String(o.customer||'').replace(/^Tienda f[ií]sica\s*·?\s*/i,'')||(isF(o)?'Mostrador':'—');
+/* estilos */
+const S=Styles(),st=S.st;
+const INK='1F2937',CR='B1103A',GO='E0A800',GR='15803D',RD='B91C1C',LG='F3F4F6',GL='FEF3C7',BD=['thin','D1D5DB'];
+const box={l:BD,r:BD,t:BD,b:BD},NF={m:'"$"#,##0',i:'#,##0',p:'0.0%',d:'dd/mm/yyyy',t:'hh:mm',dt:'dd/mm/yyyy hh:mm'};
+const X={
+ title:st({font:{b:1,sz:20,color:'FFFFFF'},fill:INK,al:{h:'left',ind:1}}),
+ sub:st({font:{i:1,sz:10,color:'E5E7EB'},fill:INK,al:{h:'left',ind:1}}),
+ gold:st({fill:GO}),
+ sec:st({font:{b:1,sz:13,color:CR},border:{b:['medium',CR]}}),
+ hdr:st({font:{b:1,sz:10,color:'FFFFFF'},fill:CR,border:box,al:{h:'center',w:1}}),
+ txt:st({border:box}),txtw:st({border:box,al:{w:1,v:'top'}}),ctr:st({border:box,al:{h:'center'}}),
+ int:st({border:box,nf:NF.i}),mon:st({border:box,nf:NF.m}),pct:st({border:box,nf:NF.p}),
+ date:st({border:box,nf:NF.d,al:{h:'center'}}),time:st({border:box,nf:NF.t,al:{h:'center'}}),
+ monG:st({border:box,nf:NF.m,font:{b:1,color:GR}}),
+ tTxt:st({font:{b:1},fill:GL,border:{l:BD,r:BD,t:['medium',CR],b:BD}}),
+ tInt:st({font:{b:1},fill:GL,nf:NF.i,border:{l:BD,r:BD,t:['medium',CR],b:BD}}),
+ tMon:st({font:{b:1},fill:GL,nf:NF.m,border:{l:BD,r:BD,t:['medium',CR],b:BD}}),
+ tPct:st({font:{b:1},fill:GL,nf:NF.p,border:{l:BD,r:BD,t:['medium',CR],b:BD}}),
+ kL:st({font:{b:1,sz:9,color:'6B7280'},fill:LG,al:{h:'center'},border:{l:BD,r:BD,t:['medium',CR]}}),
+ kM:st({font:{b:1,sz:20,color:INK},fill:LG,nf:NF.m,al:{h:'center'},border:{l:BD,r:BD}}),
+ kI:st({font:{b:1,sz:20,color:INK},fill:LG,nf:NF.i,al:{h:'center'},border:{l:BD,r:BD}}),
+ kP:st({font:{b:1,sz:20,color:INK},fill:LG,nf:NF.p,al:{h:'center'},border:{l:BD,r:BD}}),
+ kS:st({font:{i:1,sz:9,color:'6B7280'},fill:LG,al:{h:'center'},border:{l:BD,r:BD,b:BD}}),
+ note:st({font:{i:1,sz:9,color:'6B7280'},al:{w:1,v:'top'}}),
+ guide:st({font:{sz:10},al:{w:1,v:'top'}}),guideB:st({font:{b:1,sz:10,color:CR},al:{v:'top'}}),
+ ok:st({border:box,font:{b:1,color:GR},al:{h:'center'}}),pe:st({border:box,font:{b:1,color:'B45309'},al:{h:'center'}}),no:st({border:box,font:{b:1,color:RD},al:{h:'center'}})
+};
+const stSt={confirmado:X.ok,pendiente:X.pe,cancelado:X.no},stN={confirmado:'Confirmado',pendiente:'Pendiente',cancelado:'Cancelado'};
+const banner=(sh,w,t,s)=>{sh.set(0,0,t,X.title);sh.merge(0,0,w,0,X.title);sh.height(0,34);sh.set(0,1,s,X.sub);sh.merge(0,1,w,1,X.sub);sh.height(1,20);sh.set(0,2,null,X.gold);sh.merge(0,2,w,2,X.gold);sh.height(2,4)};
+const fR=d=>{const[y,m,x]=P(d);return pad(x)+'/'+pad(m)+'/'+y};
+const subT='Período: '+fR(from)+' al '+fR(to);
+const NOW=D.now||new Date();
+const headers=(sh,r,list)=>{list.forEach((h,c)=>sh.set(c,r,h,X.hdr));sh.height(r,30)};
+const widths=(sh,w)=>w.forEach((x,c)=>sh.width(c,x));
+/* ===== Por período ===== */
+const sP=new Sheet('Por período',{tab:CR,freeze:[1,4],grid:true});
+banner(sP,9,'Resultados por '+GN.toLowerCase(),subT+' · filas agrupadas por '+GN.toLowerCase());
+headers(sP,3,['Período','Pedidos','Uds. vendidas','Ventas','Costo vendido','Ganancia','Margen','Compras','Uds. compradas','Balance (ventas − compras)']);
+const agg={};periods.forEach(k=>agg[k]={n:0,u:0,v:0,c:0,cp:0,uc:0});
+V.forEach(o=>{const a=agg[pk(ymd(dts(o)))];if(!a)return;a.n++;a.u+=units(o);a.v+=num(o.total);a.c+=cost(o)});
+C.forEach(c=>{const a=agg[pk(c.bought_at)];if(!a)return;a.cp+=num(c.total);a.uc+=arr(c.items).reduce((t,i)=>t+num(i.qty),0)});
+const r0=4;periods.forEach((k,i)=>{const r=r0+i,a=agg[k],R=r+1;
+  sP.set(0,r,plabel(k),X.txt);sP.set(1,r,a.n,X.int);sP.set(2,r,a.u,X.int);sP.set(3,r,a.v,X.mon);sP.set(4,r,a.c,X.mon);
+  sP.set(5,r,a.v-a.c,X.monG,`D${R}-E${R}`);sP.set(6,r,a.v?(a.v-a.c)/a.v:0,X.pct,`IF(D${R}=0,0,F${R}/D${R})`);
+  sP.set(7,r,a.cp,X.mon);sP.set(8,r,a.uc,X.int);sP.set(9,r,a.v-a.cp,X.mon,`D${R}-H${R}`)});
+const rl=r0+periods.length-1,rt=rl+1,T={n:0,u:0,v:0,c:0,cp:0,uc:0};Object.values(agg).forEach(a=>{for(const k in T)T[k]+=a[k]});
+const sum=(c,)=>`SUM(${addr(c,r0)}:${addr(c,rl)})`;
+sP.set(0,rt,'TOTAL',X.tTxt);[[1,'n',X.tInt],[2,'u',X.tInt],[3,'v',X.tMon],[4,'c',X.tMon],[7,'cp',X.tMon],[8,'uc',X.tInt]].forEach(([c,k,s])=>sP.set(c,rt,T[k],s,sum(c)));
+const RT_=rt+1;sP.set(5,rt,T.v-T.c,X.tMon,`D${RT_}-E${RT_}`);sP.set(6,rt,T.v?(T.v-T.c)/T.v:0,X.tPct,`IF(D${RT_}=0,0,F${RT_}/D${RT_})`);sP.set(9,rt,T.v-T.cp,X.tMon,`D${RT_}-H${RT_}`);
+sP.set(0,rt+2,'Ganancia = ventas − costo de lo vendido (con el costo guardado en cada venta). Balance = lo vendido menos lo invertido en compras del mismo período.',X.note);sP.merge(0,rt+2,9,rt+2,X.note);sP.height(rt+2,28);
+widths(sP,[24,10,12,15,15,15,10,15,13,20]);
+/* ===== Ventas ===== */
+const sV=new Sheet('Ventas',{tab:'1FA855',freeze:[3,5]});
+banner(sV,10,'Ventas confirmadas',subT+' · '+V.length+' venta(s)');
+headers(sV,4,['Fecha','Hora','Código','Cliente','Tipo','Productos','Uds.','Total','Costo','Ganancia','Margen']);
+const v0=5;V.forEach((o,i)=>{const r=v0+i,R=r+1,d=dts(o),c=cost(o),t=num(o.total);
+  sV.set(0,r,serial(ymd(d)),X.date);sV.set(1,r,(d.getHours()*3600+d.getMinutes()*60+d.getSeconds())/86400,X.time);sV.set(2,r,o.code||'',X.ctr);sV.set(3,r,cust(o),X.txt);sV.set(4,r,isF(o)?'Física':'Virtual',X.ctr);
+  sV.set(5,r,itx(o),X.txtw);sV.set(6,r,units(o),X.int);sV.set(7,r,t,X.mon);sV.set(8,r,c,X.mon);sV.set(9,r,t-c,X.monG,`H${R}-I${R}`);sV.set(10,r,t?(t-c)/t:0,X.pct,`IF(H${R}=0,0,J${R}/H${R})`)});
+const vl=v0+Math.max(V.length,1)-1;
+if(!V.length)sV.set(0,v0,'Sin ventas confirmadas en este período',X.note);
+const vt=(c,fn)=>`SUBTOTAL(109,${addr(c,v0)}:${addr(c,vl)})`;
+sV.set(0,3,'TOTAL (según filtro)',X.tTxt);sV.merge(0,3,5,3,X.tTxt);
+const sv={u:0,t:0,c:0};V.forEach(o=>{sv.u+=units(o);sv.t+=num(o.total);sv.c+=cost(o)});
+sV.set(6,3,sv.u,X.tInt,vt(6));sV.set(7,3,sv.t,X.tMon,vt(7));sV.set(8,3,sv.c,X.tMon,vt(8));sV.set(9,3,sv.t-sv.c,X.tMon,'H4-I4');sV.set(10,3,sv.t?(sv.t-sv.c)/sv.t:0,X.tPct,'IF(H4=0,0,J4/H4)');
+sV.o.filter=`A5:K${vl+1}`;widths(sV,[12,8,12,24,10,52,7,14,14,14,10]);
+/* ===== Detalle ventas ===== */
+const sD=new Sheet('Detalle ventas',{tab:'3B82F6',freeze:[3,4]});
+const lines=[];V.forEach(o=>arr(o.items).forEach(i=>lines.push({o,i})));
+banner(sD,8,'Detalle de ventas por producto',subT+' · '+lines.length+' línea(s)');
+headers(sD,3,['Fecha','Código','Producto','Categoría','Talla','Color','Cant.','Precio','Subtotal']);
+lines.forEach(({o,i},k)=>{const r=4+k,R=r+1;sD.set(0,r,serial(ymd(dts(o))),X.date);sD.set(1,r,o.code||'',X.ctr);sD.set(2,r,i.name||'',X.txt);sD.set(3,r,cat(i),X.txt);sD.set(4,r,i.size||'',X.ctr);sD.set(5,r,i.color||'',X.ctr);sD.set(6,r,num(i.qty),X.int);sD.set(7,r,num(i.price),X.mon);sD.set(8,r,num(i.qty)*num(i.price),X.mon,`G${R}*H${R}`)});
+if(!lines.length)sD.set(0,4,'Sin ventas confirmadas en este período',X.note);
+sD.o.filter=`A4:I${4+Math.max(lines.length,1)}`;widths(sD,[12,12,34,16,9,14,8,14,15]);
+/* ===== Compras ===== */
+const sC=new Sheet('Compras',{tab:GO,freeze:[3,5]});
+const cl=[];C.forEach(c=>{const it=arr(c.items);if(!it.length)cl.push({c,i:null});else it.forEach(i=>cl.push({c,i}))});
+banner(sC,9,'Compras / reposición de mercancía',subT+' · '+C.length+' compra(s)');
+headers(sC,4,['Fecha','Proveedor','Nota','Producto','Talla','Color','Cant.','Costo unitario','Subtotal','En inventario']);
+cl.forEach(({c,i},k)=>{const r=5+k,R=r+1;sC.set(0,r,serial(c.bought_at),X.date);sC.set(1,r,c.supplier||'—',X.txt);sC.set(2,r,c.note||'',X.txt);
+  if(i){sC.set(3,r,i.name||'',X.txt);sC.set(4,r,i.size||'',X.ctr);sC.set(5,r,i.color||'',X.ctr);sC.set(6,r,num(i.qty),X.int);sC.set(7,r,i.unit==null?0:num(i.unit),X.mon);sC.set(8,r,num(i.qty)*(i.unit==null?0:num(i.unit)),X.mon,`G${R}*H${R}`);sC.set(9,r,i.stocked?'Sí':'No',i.stocked?X.ok:X.pe)}
+  else{sC.set(3,r,'(sin detalle)',X.txt);sC.set(4,r,'',X.txt);sC.set(5,r,'',X.txt);sC.set(6,r,0,X.int);sC.set(7,r,0,X.mon);sC.set(8,r,num(c.total),X.mon);sC.set(9,r,'',X.txt)}});
+const cLast=5+Math.max(cl.length,1)-1;if(!cl.length)sC.set(0,5,'Sin compras en este período',X.note);
+const cs=(c)=>`SUBTOTAL(109,${addr(c,5)}:${addr(c,cLast)})`;
+sC.set(0,3,'TOTAL (según filtro)',X.tTxt);sC.merge(0,3,5,3,X.tTxt);
+sC.set(6,3,cl.reduce((t,x)=>t+(x.i?num(x.i.qty):0),0),X.tInt,cs(6));sC.set(7,3,null,X.tTxt);sC.set(8,3,cl.reduce((t,x)=>t+(x.i?num(x.i.qty)*(x.i.unit==null?0:num(x.i.unit)):num(x.c.total)),0),X.tMon,cs(8));sC.set(9,3,null,X.tTxt);
+sC.o.filter=`A5:J${cLast+1}`;widths(sC,[12,20,24,34,9,14,8,15,15,13]);
+/* ===== Pedidos ===== */
+const sO=new Sheet('Pedidos',{tab:'8B5CF6',freeze:[3,4]});
+banner(sO,9,'Todos los pedidos (pendientes, confirmados y cancelados)',subT+' · por fecha de creación · '+A.length+' pedido(s)');
+headers(sO,3,['Fecha','Hora','Código','Estado','Tipo','Cliente','Productos','Uds.','Total','Confirmado el']);
+A.forEach((o,i)=>{const r=4+i,d=new Date(o.created_at);sO.set(0,r,serial(ymd(d)),X.date);sO.set(1,r,(d.getHours()*3600+d.getMinutes()*60+d.getSeconds())/86400,X.time);sO.set(2,r,o.code||'',X.ctr);sO.set(3,r,stN[o.status]||o.status||'',stSt[o.status]||X.ctr);sO.set(4,r,isF(o)?'Física':'Virtual',X.ctr);sO.set(5,r,cust(o),X.txt);sO.set(6,r,itx(o),X.txtw);sO.set(7,r,units(o),X.int);sO.set(8,r,num(o.total),X.mon);
+  if(o.confirmed_at)sO.set(9,r,serialDT(new Date(o.confirmed_at)),st({border:box,nf:NF.dt,al:{h:'center'}}));else sO.set(9,r,'—',X.ctr)});
+if(!A.length)sO.set(0,4,'Sin pedidos en este período',X.note);
+sO.o.filter=`A4:J${4+Math.max(A.length,1)}`;widths(sO,[12,8,12,13,10,24,52,7,14,17]);
+/* ===== Productos ===== */
+const sR=new Sheet('Productos',{tab:'0EA5E9',freeze:[1,4]});
+const PR={};const gp=(n,c)=>PR[n]??={n,c:c||'',u:0,v:0,uc:0,cp:0};
+V.forEach(o=>arr(o.items).forEach(i=>{const p=gp(i.name,cat(i));p.u+=num(i.qty);p.v+=num(i.qty)*num(i.price)}));
+C.forEach(c=>arr(c.items).forEach(i=>{const pp=D.products.find(p=>String(p.id)===String(i.product_id))||D.products.find(p=>p.name===i.name);const p=gp(i.name,pp&&pp.category);p.uc+=num(i.qty);p.cp+=num(i.qty)*(i.unit==null?0:num(i.unit))}));
+const prods=Object.values(PR).sort((a,b)=>b.v-a.v||b.u-a.u||b.uc-a.uc);
+banner(sR,7,'Rendimiento por producto',subT+' · ordenado por ventas');
+headers(sR,3,['Producto','Categoría','Uds. vendidas','Ventas','% de las ventas','Uds. compradas','Compras','Stock actual']);
+const stockOf=n=>{const p=D.products.find(p=>p.name===n);return p&&p.stock!=null?num(p.stock):null};
+prods.forEach((p,k)=>{const r=4+k,R=r+1,tr=4+prods.length+1;sR.set(0,r,p.n,X.txt);sR.set(1,r,p.c,X.txt);sR.set(2,r,p.u,X.int);sR.set(3,r,p.v,X.mon);sR.set(4,r,T.v?p.v/T.v:0,X.pct,`IF(D${tr}=0,0,D${R}/D${tr})`);sR.set(5,r,p.uc,X.int);sR.set(6,r,p.cp,X.mon);const s=stockOf(p.n);sR.set(7,r,s==null?'—':s,s==null?X.ctr:X.int)});
+if(!prods.length)sR.set(0,4,'Sin movimientos en este período',X.note);
+const pr0=4,prl=4+Math.max(prods.length,1)-1,prt=prl+1;
+sR.set(0,prt,'TOTAL',X.tTxt);sR.set(1,prt,null,X.tTxt);[[2,'u',X.tInt],[3,'v',X.tMon],[5,'uc',X.tInt],[6,'cp',X.tMon]].forEach(([c,k,s])=>sR.set(c,prt,prods.reduce((t,p)=>t+p[k],0),s,`SUM(${addr(c,pr0)}:${addr(c,prl)})`));
+sR.set(4,prt,T.v?1:0,X.tPct,`SUM(${addr(4,pr0)}:${addr(4,prl)})`);sR.set(7,prt,null,X.tTxt);
+sR.o.filter=`A4:H${prl+1}`;widths(sR,[34,16,13,15,13,14,15,12]);
+/* ===== Inventario ===== */
+const sI=new Sheet('Inventario',{tab:'F97316',freeze:[1,4]});
+banner(sI,8,'Inventario actual',"Foto del inventario al "+fR(ymd(NOW))+' (no depende del período)');
+headers(sI,3,['Producto','Categoría','Talla','Color','Stock','Costo','Precio venta','Valor a costo','Valor a precio venta']);
+const il=[];[...D.products].sort((a,b)=>String(a.category).localeCompare(String(b.category))||String(a.name).localeCompare(String(b.name))).forEach(p=>{const vs=arr(p.variants);const c=D.costs[String(p.id)];const pr=num(p.price);
+  if(vs.length)vs.forEach(v=>il.push({p,s:v.s||'',c:v.c||'',n:num(v.n),cost:c,pr}));else il.push({p,s:'',c:'',n:p.stock==null?null:num(p.stock),cost:c,pr})});
+il.forEach((x,k)=>{const r=4+k,R=r+1;sI.set(0,r,x.p.name,X.txt);sI.set(1,r,x.p.category||'',X.txt);sI.set(2,r,x.s,X.ctr);sI.set(3,r,x.c,X.ctr);
+  if(x.n==null)sI.set(4,r,'Sin límite',X.ctr);else sI.set(4,r,x.n,X.int);
+  sI.set(5,r,x.cost==null?0:num(x.cost),X.mon);sI.set(6,r,x.pr,X.mon);
+  sI.set(7,r,x.n==null||x.cost==null?0:x.n*num(x.cost),X.mon,`IF(ISNUMBER(E${R}),E${R}*F${R},0)`);sI.set(8,r,x.n==null?0:x.n*x.pr,X.mon,`IF(ISNUMBER(E${R}),E${R}*G${R},0)`)});
+const il0=4,ill=4+Math.max(il.length,1)-1,ilt=ill+1;
+if(!il.length)sI.set(0,4,'Sin productos',X.note);
+const ist={s:0,c:0,p:0};il.forEach(x=>{if(x.n!=null){ist.s+=x.n;ist.c+=x.cost==null?0:x.n*num(x.cost);ist.p+=x.n*x.pr}});
+sI.set(0,ilt,'TOTAL',X.tTxt);[1,2,3,5,6].forEach(c=>sI.set(c,ilt,null,X.tTxt));
+sI.set(4,ilt,ist.s,X.tInt,`SUM(${addr(4,il0)}:${addr(4,ill)})`);sI.set(7,ilt,ist.c,X.tMon,`SUM(${addr(7,il0)}:${addr(7,ill)})`);sI.set(8,ilt,ist.p,X.tMon,`SUM(${addr(8,il0)}:${addr(8,ill)})`);
+sI.o.filter=`A4:I${ill+1}`;widths(sI,[34,16,9,14,10,14,14,16,18]);
+/* ===== Análisis (datos de las gráficas) ===== */
+const sA=new Sheet('Análisis',{tab:'6B7280',grid:true});
+banner(sA,11,'Datos de apoyo para las gráficas',subT);
+let ar=3;const blocks={};
+const block=(key,title,hd,rows,fmts)=>{sA.set(0,ar,title,X.sec);sA.merge(0,ar,hd.length-1,ar,X.sec);ar++;headers(sA,ar,hd);ar++;const r1=ar;
+  const data=rows.length?rows:[hd.map((_,i)=>i?0:'(sin datos)')];
+  data.forEach(row=>{row.forEach((v,c)=>sA.set(c,ar,v,fmts[c]));ar++});blocks[key]={r1,r2:ar-1};ar+=2};
+const hrs=[...Array(24)].map(()=>({n:0,v:0})),wds=[...Array(7)].map(()=>({n:0,v:0}));
+V.forEach(o=>{const d=dts(o),h=hrs[d.getHours()],w=wds[wd(ymd(d))];h.n++;h.v+=num(o.total);w.n++;w.v+=num(o.total)});
+block('hr','Ventas por hora del día',['Hora','Pedidos','Ventas'],hrs.map((h,i)=>[pad(i)+':00',h.n,h.v]),[X.ctr,X.int,X.mon]);
+block('wd','Ventas por día de la semana',['Día','Pedidos','Ventas'],wds.map((w,i)=>[DIA[i],w.n,w.v]),[X.ctr,X.int,X.mon]);
+const fs=V.filter(isF),vs_=V.filter(o=>!isF(o));
+block('ty','Tienda física vs virtual',['Tipo','Pedidos','Ventas'],[['Física',fs.length,fs.reduce((t,o)=>t+num(o.total),0)],['Virtual',vs_.length,vs_.reduce((t,o)=>t+num(o.total),0)]],[X.txt,X.int,X.mon]);
+const stc={pendiente:0,confirmado:0,cancelado:0};A.forEach(o=>{if(stc[o.status]!=null)stc[o.status]++});
+block('es','Estado de los pedidos creados en el período',['Estado','Pedidos'],Object.keys(stc).map(k=>[stN[k],stc[k]]),[X.txt,X.int]);
+const top=prods.filter(p=>p.u>0).sort((a,b)=>b.u-a.u||b.v-a.v).slice(0,10);
+block('tp','Top 10 productos más vendidos',['Producto','Unidades','Ventas'],top.map(p=>[p.n,p.u,p.v]),[X.txt,X.int,X.mon]);
+const CT={};lines.forEach(({i})=>{const c=cat(i);CT[c]=(CT[c]||0)+num(i.qty)*num(i.price)});
+block('ca','Ventas por categoría',['Categoría','Ventas'],Object.entries(CT).sort((a,b)=>b[1]-a[1]).map(([k,v])=>[k,v]),[X.txt,X.mon]);
+const SP={};C.forEach(c=>{const k=c.supplier||'Sin proveedor';SP[k]=(SP[k]||0)+num(c.total)});
+block('sp','Compras por proveedor',['Proveedor','Compras'],Object.entries(SP).sort((a,b)=>b[1]-a[1]).slice(0,10).map(([k,v])=>[k,v]),[X.txt,X.mon]);
+widths(sA,[34,13,15,4,4,4,4,4,4,4,4,4]);
+/* ===== Resumen ===== */
+const sR0=new Sheet('Resumen',{tab:INK,grid:false,zoom:90});
+const W=13;banner(sR0,W,'GORRAX · Reporte de ventas y compras',subT+'  ·  Agrupado por '+GN.toLowerCase()+'  ·  Generado el '+fR(ymd(NOW))+' '+pad(NOW.getHours())+':'+pad(NOW.getMinutes()));
+widths(sR0,[2,...Array(12).fill(12.5),2]);
+sR0.set(1,4,'Indicadores clave',X.sec);sR0.merge(1,4,12,4,X.sec);
+const PP=qsN=>XL.qs('Por período')+'!';const tot=rt+1,pp=PP();
+const gan=T.v-T.c;
+const nPend=stc.pendiente,nCan=stc.cancelado;
+const card=(c,r,label,val,fmt,f,sub)=>{sR0.set(c,r,label,X.kL);sR0.merge(c,r,c+2,r,X.kL);sR0.set(c,r+1,val,X[fmt],f);sR0.merge(c,r+1,c+2,r+1,X[fmt]);sR0.set(c,r+2,sub,X.kS);sR0.merge(c,r+2,c+2,r+2,X.kS)};
+const K=(l)=>pp+'$'+l+'$'+tot;
+card(1,5,'VENTAS CONFIRMADAS',T.v,'kM',K('D'),T.n+' pedido(s) confirmado(s)');
+card(4,5,'PEDIDOS CONFIRMADOS',T.n,'kI',K('B'),nPend+' pendiente(s) · '+nCan+' cancelado(s)');
+card(7,5,'TICKET PROMEDIO',T.n?T.v/T.n:0,'kM',`IF(${K('B')}=0,0,${K('D')}/${K('B')})`,'Venta promedio por pedido');
+card(10,5,'GANANCIA BRUTA',gan,'kM',K('F'),'Ventas − costo de lo vendido');
+card(1,9,'COMPRAS (INVERSIÓN)',T.cp,'kM',K('H'),C.length+' compra(s) registrada(s)');
+card(4,9,'UNIDADES COMPRADAS',T.uc,'kI',K('I'),'Mercancía repuesta en el período');
+card(7,9,'BALANCE VENTAS − COMPRAS',T.v-T.cp,'kM',K('J'),T.v-T.cp>=0?'Entró más de lo que se invirtió':'Se invirtió más de lo vendido');
+card(10,9,'MARGEN DE GANANCIA',T.v?gan/T.v:0,'kP',K('G'),'Ganancia ÷ ventas');
+[5,6,9,10].forEach(r=>sR0.height(r,r===6||r===10?36:16));sR0.height(7,15);sR0.height(11,15);
+sR0.set(1,13,'Gráficas',X.sec);sR0.merge(1,13,12,13,X.sec);
+const BL=blocks,sAn=sA,sPp=sP;
+const palette=['B1103A','E0A800','1FA855','3B82F6','8B5CF6','F97316','0EA5E9','6B7280','EC4899','14B8A6'];
+const cN=(sh,c,r)=>({sh,c,r1:r,r2:r});
+const pr1=r0,pr2=rl;
+sR0.chart({type:'col',title:'Ventas, compras y ganancia por '+GN.toLowerCase(),cat:{sh:sPp,c:0,r1:pr1,r2:pr2},series:[{c:3,r1:pr1,r2:pr2,nc:3,nr:3,color:'B1103A',sh:sPp},{c:7,r1:pr1,r2:pr2,nc:3,nr:7,color:'E0A800',sh:sPp},{c:5,r1:pr1,r2:pr2,nc:3,nr:5,color:'1FA855',sh:sPp}].map(s=>({...s,nr:3,nc:s.c})),gap:50,skip:periods.length>20?Math.ceil(periods.length/20):0},1,14,13,30);
+const b=BL;
+sR0.chart({type:'col',title:'Ventas por hora del día',cat:{sh:sAn,c:0,r1:b.hr.r1,r2:b.hr.r2},series:[{sh:sAn,c:2,r1:b.hr.r1,r2:b.hr.r2,nc:2,nr:b.hr.r1-1,color:'B1103A'}],gap:40,skip:2},1,31,7,47);
+sR0.chart({type:'col',title:'Ventas por día de la semana',cat:{sh:sAn,c:0,r1:b.wd.r1,r2:b.wd.r2},series:[{sh:sAn,c:2,r1:b.wd.r1,r2:b.wd.r2,nc:2,nr:b.wd.r1-1,color:'E0A800'}],labels:true,lblFmt:MONEYK(),gap:40},7,31,13,47);
+sR0.chart({type:'bar',title:'Top 10 productos más vendidos (unidades)',cat:{sh:sAn,c:0,r1:b.tp.r1,r2:b.tp.r2},series:[{sh:sAn,c:1,r1:b.tp.r1,r2:b.tp.r2,nc:1,nr:b.tp.r1-1,color:'3B82F6'}],labels:true,axFmt:'#,##0',lblFmt:'#,##0',gap:40},1,48,7,66);
+sR0.chart({type:'pie',title:'Tienda física vs virtual',cat:{sh:sAn,c:0,r1:b.ty.r1,r2:b.ty.r2},series:[{sh:sAn,c:2,r1:b.ty.r1,r2:b.ty.r2,nc:2,nr:b.ty.r1-1}],labels:true,colors:['1FA855','3B82F6']},7,48,13,57);
+sR0.chart({type:'pie',title:'Estado de los pedidos',cat:{sh:sAn,c:0,r1:b.es.r1,r2:b.es.r2},series:[{sh:sAn,c:1,r1:b.es.r1,r2:b.es.r2,nc:1,nr:b.es.r1-1}],labels:true,colors:['F59E0B','1FA855','B91C1C']},7,57,13,66);
+sR0.chart({type:'pie',title:'Ventas por categoría',cat:{sh:sAn,c:0,r1:b.ca.r1,r2:b.ca.r2},series:[{sh:sAn,c:1,r1:b.ca.r1,r2:b.ca.r2,nc:1,nr:b.ca.r1-1}],labels:true,colors:palette},1,67,7,83);
+sR0.chart({type:'bar',title:'Compras por proveedor',cat:{sh:sAn,c:0,r1:b.sp.r1,r2:b.sp.r2},series:[{sh:sAn,c:1,r1:b.sp.r1,r2:b.sp.r2,nc:1,nr:b.sp.r1-1,color:'E0A800'}],labels:true,lblFmt:MONEYK(),gap:40},7,67,13,83);
+const gr=85;sR0.set(1,gr,'Qué contiene este archivo',X.sec);sR0.merge(1,gr,12,gr,X.sec);
+[['Por período','Ventas, costo, ganancia, margen, compras y balance agrupados por '+GN.toLowerCase()+', con totales.'],['Ventas','Cada pedido confirmado: fecha, hora, cliente, tipo, productos, total, costo y ganancia. Usa los filtros del encabezado; el TOTAL se recalcula solo.'],['Detalle ventas','Una fila por producto vendido (talla, color, cantidad, precio).'],['Compras','Cada compra a proveedores con producto, cantidad, costo unitario y si ya se sumó al inventario.'],['Pedidos','Todos los pedidos creados en el período, con su estado (pendiente, confirmado, cancelado).'],['Productos','Qué se vendió y compró por producto, y el stock actual.'],['Inventario','Stock actual por talla/color y su valor a costo y a precio de venta.'],['Análisis','Tablas que alimentan las gráficas (hora, día de la semana, top productos…).']].forEach(([a,t],k)=>{const r=gr+1+k;sR0.set(1,r,a,X.guideB);sR0.merge(1,r,2,r,X.guideB);sR0.set(3,r,t,X.guide);sR0.merge(3,r,12,r,X.guide);sR0.height(r,18)});
+function MONEYK(){return'[>=1000000]"$"0.0,,"M";[>=1000]"$"0,"K";"$"0'}
+const sheets=[sR0,sP,sV,sD,sC,sO,sR,sI,sA];
+sheets.forEach(sh=>sh.charts.forEach(c=>{c.spec.series.forEach(s=>{s.sh=s.sh||sh});}));
+return build(sheets,S,D.theme,'GORRAX · Reporte '+from+' a '+to)}
+
+/* ====== Exportar a Excel: cuadro de fechas ====== */
+const XS={mode:'mes',d:'',w:'',s:'',m:'',f:'',t:'',g:'day',busy:false};
+const XMODES=[['dia','Por día'],['sem','Por semana'],['q15','Por 15 días'],['mes','Por mes'],['rng','Rango libre'],['all','Todo']];
+const XGRP=[['day','Día'],['week','Semana'],['fortnight','Quincena'],['month','Mes']];
+const xMes=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+const xLoc=o=>new Date(o).toLocaleDateString('sv');
+function xRange(){const t=today0();let f,e;
+  if(XS.mode==='dia'){f=e=XS.d||t}
+  else if(XS.mode==='sem'){const b=XS.w||t,wd=(new Date(b+'T12:00:00').getDay()+6)%7;f=dAdd(b,-wd);e=dAdd(f,6)}
+  else if(XS.mode==='q15'){f=XS.s||dAdd(t,-14);e=dAdd(f,14)}
+  else if(XS.mode==='mes'){const m=XS.m||t.slice(0,7),[y,mo]=m.split('-').map(Number);f=m+'-01';e=m+'-'+String(new Date(y,mo,0).getDate()).padStart(2,'0')}
+  else if(XS.mode==='rng'){f=XS.f||dAdd(t,-29);e=XS.t||t;if(f>e){const x=f;f=e;e=x}}
+  else{const ds=[...orders.map(o=>xLoc(o.confirmed_at||o.created_at)),...orders.map(o=>xLoc(o.created_at)),...purch.map(c=>c.bought_at)].filter(Boolean).sort();f=ds[0]||t;e=t>(ds[ds.length-1]||'')?t:ds[ds.length-1]}
+  return{f,t:e}}
+const xSpan=r=>Math.round((new Date(r.t+'T12:00:00')-new Date(r.f+'T12:00:00'))/864e5)+1;
+function xGroup(r){let g=XS.mode==='dia'?'day':XS.g;const n=xSpan(r);if(g==='day'&&n>400)g='week';if(g==='week'&&n>1500)g='month';return g}
+const xFmt=d=>{const[y,m,x]=d.split('-');return x+'/'+m+'/'+y};
+function xCount(r){const V=orders.filter(o=>o.status==='confirmado'&&xLoc(o.confirmed_at||o.created_at)>=r.f&&xLoc(o.confirmed_at||o.created_at)<=r.t),A=orders.filter(o=>xLoc(o.created_at)>=r.f&&xLoc(o.created_at)<=r.t),C=purch.filter(c=>c.bought_at>=r.f&&c.bought_at<=r.t);
+  return{v:V.length,a:A.length,c:C.length,t:V.reduce((s,o)=>s+Number(o.total||0),0),cp:C.reduce((s,c)=>s+Number(c.total||0),0)}}
+function xOpen(ctx){const t=today0();
+  if(!XS.d){XS.d=t;XS.w=t;XS.s=dAdd(t,-14);XS.m=t.slice(0,7);XS.f=dAdd(t,-29);XS.t=t}
+  if(cmM==='r'){XS.mode='rng';XS.f=cmF;XS.t=cmT}else if(/^\d{4}-\d{2}$/.test(cmM)&&ctx==='com'){XS.mode='mes';XS.m=cmM}else if(cmM==='all'&&ctx==='com'){XS.mode='all'}
+  XS.busy=false;xR();$('xld').showModal()}
+function xR(){const r=xRange(),c=xCount(r),g=xGroup(r),n=xSpan(r);
+  const months=[];{const d=new Date();for(let i=0;i<30;i++){const x=new Date(d.getFullYear(),d.getMonth()-i,1);months.push(x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0'))}}
+  if(XS.m&&!months.includes(XS.m))months.push(XS.m);
+  const inp={dia:`<label>Día<input type="date" id="xlD" value="${XS.d}" max="${today0()}"></label>`,
+   sem:`<label>Cualquier día de la semana<input type="date" id="xlW" value="${XS.w}" max="${today0()}"></label><small>Se exporta de lunes a domingo: <b>${xFmt(r.f)} → ${xFmt(r.t)}</b></small>`,
+   q15:`<label>Primer día<input type="date" id="xlS" value="${XS.s}" max="${today0()}"></label><button type="button" class="btn ghost sm" data-x="l15">Últimos 15 días</button><small>Se exportan 15 días: <b>${xFmt(r.f)} → ${xFmt(r.t)}</b></small>`,
+   mes:`<label>Mes<select id="xlM">${months.map(m=>`<option value="${m}"${m===XS.m?' selected':''}>${xMes[+m.slice(5)-1]} ${m.slice(0,4)}</option>`).join('')}</select></label>`,
+   rng:`<label>Desde<input type="date" id="xlF" value="${XS.f}" max="${today0()}"></label><label>Hasta<input type="date" id="xlT" value="${XS.t}" max="${today0()}"></label>`,
+   all:`<small>Desde el primer movimiento (<b>${xFmt(r.f)}</b>) hasta hoy.</small>`}[XS.mode];
+  $('xlB').innerHTML=`<p class="desc">Elige cómo quieres filtrar y las fechas. El Excel incluye ventas, compras, pedidos, productos, inventario y gráficas.</p>
+  <div class="tabs" id="xlMd">${XMODES.map(([k,l])=>`<button type="button" class="btn ghost sm${XS.mode===k?' on':''}" data-x="m" data-k="${k}">${l}</button>`).join('')}</div>
+  <div class="xlin">${inp}</div>
+  ${XS.mode==='dia'?'':`<div class="xlg"><span>Filas del reporte por:</span><div class="tabs">${XGRP.map(([k,l])=>`<button type="button" class="btn ghost sm${g===k?' on':''}" data-x="g" data-k="${k}">${l}</button>`).join('')}</div></div>`}
+  <div class="xlpv"><b>${xFmt(r.f)}${r.f===r.t?'':' → '+xFmt(r.t)}</b> · ${n} día(s)<br>${c.v} venta(s) confirmada(s) por <b>${money(c.t)}</b> · ${c.c} compra(s) por <b>${money(c.cp)}</b> · ${c.a} pedido(s) en total${g!==XS.g&&XS.mode!=='dia'?'<br><small>Se agrupó por '+XGRP.find(x=>x[0]===g)[1].toLowerCase()+' porque el rango es largo.</small>':''}</div>
+  <p class="msg" id="xlMsg"></p>
+  <div class="xlact"><button type="button" class="btn ghost" data-x="x">Cancelar</button><button type="button" class="btn" data-x="go"${XS.busy?' disabled':''}>${XS.busy?'Generando…':'⬇ Descargar Excel'}</button></div>`}
+$('xld').onclick=async e=>{const b=e.target.closest('[data-x]');if(!b)return;const a=b.dataset.x;
+  if(a==='x'){$('xld').close();return}
+  if(a==='m'){XS.mode=b.dataset.k;if(XS.mode==='rng'||XS.mode==='all'){const r=xRange();XS.g=xSpan(r)<=31?'day':xSpan(r)<=120?'week':'month'}else if(XS.mode==='mes')XS.g='day';else XS.g='day';xR();return}
+  if(a==='g'){XS.g=b.dataset.k;xR();return}
+  if(a==='l15'){XS.s=dAdd(today0(),-14);xR();return}
+  if(a==='go'&&!XS.busy)xGo()};
+$('xlX').onclick=()=>$('xld').close();
+$('xld').onchange=e=>{const i=e.target,v=i.value;if(!v)return;
+  if(i.id==='xlD')XS.d=v;else if(i.id==='xlW')XS.w=v;else if(i.id==='xlS')XS.s=v;else if(i.id==='xlM')XS.m=v;else if(i.id==='xlF')XS.f=v;else if(i.id==='xlT')XS.t=v;else return;
+  if(XS.mode==='rng'){const r=xRange();XS.g=xSpan(r)<=31?'day':xSpan(r)<=120?'week':'month'}xR()};
+async function xGo(){const r=xRange(),g=xGroup(r),msg=t=>{const m=$('xlMsg');if(m)m.textContent=t};
+  XS.busy=true;xR();
+  try{try{await Promise.all([loadPurch(),loadCosts()])}catch(e){}
+    await new Promise(k=>setTimeout(k,30));
+    const buf=xlReport({orders,purch,products,costs,from:r.f,to:r.t,group:g,theme:XL_THEME,now:new Date()});
+    const blob=new Blob([buf],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=url;a.download=`GORRAX-reporte_${r.f}_a_${r.t}.xlsx`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),4000);
+    XS.busy=false;$('xld').close();toast('Excel descargado')}
+  catch(err){XS.busy=false;xR();msg('No se pudo generar el Excel: '+(err&&err.message||err))}}
+function xlOpen(ctx){xOpen(ctx)}
+
 /* ====== GRÁFICA (admin) ====== */
 let gr='today',gf='',gt='',gDay=new Date().toDateString();
 function rGra(){
@@ -2204,13 +2629,15 @@ async function moveProd(id,dir){
   await load();alist();say('Orden actualizado en la tienda.',true)}
 /* ===== Descripción con formato (negrita, cursiva, viñetas) ===== */
 (()=>{const pd=$('pd'),pde=$('pde'),vd=Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype,'value');
-  Object.defineProperty(pd,'value',{get(){return vd.get.call(pd)},set(v){vd.set.call(pd,v);pde.innerHTML=descHTML(v)}});
-  const sync=()=>vd.set.call(pd,(!pde.textContent.trim()&&!pde.querySelector('li'))?'':cleanDesc(pde.innerHTML));
+  Object.defineProperty(pd,'value',{get(){return vd.get.call(pd)},set(v){vd.set.call(pd,v);pde.innerHTML=descHTML(v);pv()}});
+  const pv=()=>{$('pdv').innerHTML=descHTML(vd.get.call(pd))},st=()=>{document.querySelectorAll('.pdt button[data-c]').forEach(b=>{let on=false;try{on=['bold','italic','underline','insertUnorderedList','insertOrderedList'].includes(b.dataset.c)&&document.activeElement===pde&&document.queryCommandState(b.dataset.c)}catch(e){}b.classList.toggle('on',on)})};
+  const sync=()=>{vd.set.call(pd,(!pde.textContent.trim()&&!pde.querySelector('li'))?'':cleanDesc(pde.innerHTML));pv();st()};
+  document.addEventListener('selectionchange',st);
   pde.addEventListener('input',sync);
   pde.addEventListener('paste',e=>{e.preventDefault();document.execCommand('insertText',false,(e.clipboardData||window.clipboardData).getData('text/plain'))});
   const tb=document.querySelector('.pdt');tb.addEventListener('mousedown',e=>{if(e.target.closest('button'))e.preventDefault()});
-  tb.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;pde.focus();document.execCommand(b.dataset.c);sync()});
-  $('pf').addEventListener('reset',()=>setTimeout(()=>{pde.innerHTML=descHTML(vd.get.call(pd))},0))})();
+  tb.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;pde.focus();document.execCommand(b.dataset.c);sync();pde.focus();st()});
+  $('pf').addEventListener('reset',()=>setTimeout(()=>{pde.innerHTML=descHTML(vd.get.call(pd));pv()},0))})();
 
 /* ===== Productos que ya existían -> se agregan a Compras (una sola vez, sin duplicar) ===== */
 const cmMissing=()=>{const linked=new Set();purch.forEach(c=>(c.items||[]).forEach(i=>{const p=pOf(i);if(p)linked.add(String(p.id))}));return products.filter(p=>!linked.has(String(p.id)))};
@@ -2220,12 +2647,13 @@ async function cmBackfill(){const miss=cmMissing();if(!miss.length)return 0;cons
   const rows=Object.entries(by).map(([d,items])=>({bought_at:d,supplier:null,note:'Inventario inicial (producto que ya estaba en la tienda)',items,total:items.reduce((t,i)=>t+(i.unit||0)*i.qty,0)}));
   const r=await sb.from('purchases').insert(rows);if(r.error)return -1;await loadPurch();return miss.length}
 async function cmAuto(){if(cmAuto.busy||cmAuto.done||purchErr||!sb||!products.length||DEMO)return;cmAuto.busy=1;
+  loadExtraCats().then(()=>{try{alist()}catch(e){}});
   try{const g=await sb.from('site_settings').select('value').eq('key','compras_init').limit(1);
     if(!g.error){if(!(g.data&&g.data.length)){const n=await cmBackfill();if(n>=0){await sb.from('site_settings').upsert({key:'compras_init',value:{at:new Date().toISOString(),n}});if(n)say(`Se agregaron a Compras ${n} producto(s) que ya existían.`,true)}}}
     cmAuto.done=1}catch(_){}
   cmAuto.busy=0;if(tab==='com')rCom()}
 /* ====== COMPRAS (admin) ====== */
-let purch=[],purchErr=false,cmM=(()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')})(),cmL=[{name:'',s:'',c:'',q:1,u:''}],cmH={d:'',sup:'',note:'',st:true};
+let purch=[],purchErr=false,cmM=(()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')})(),cmL=[{name:'',s:'',c:'',q:1,u:''}],cmH={d:'',sup:'',note:'',st:true},cmP='',cmF='',cmT='';
 const today0=()=>new Date().toLocaleDateString('sv');
 const nrm=s=>slug(String(s||'')).replace(/-/g,'');
 const pMatch=n=>{const k=nrm(n);return k?products.find(p=>nrm(p.name)===k):null};
@@ -2242,29 +2670,36 @@ async function cmStock(it){const p=pOf(it);if(!p)return{message:'no existe en la
   if(it.unit!=null&&it.unit!==''){const r=await sb.from('product_costs').upsert({product_id:String(p.id),cost:Number(it.unit)});if(!r.error)costs[String(p.id)]=Number(it.unit)}
   return null}
 function cmBadge(name){const n=String(name||'').trim();if(!n)return'';const p=pMatch(n);return p?`<span class="cmok">✓ Ya está en tu tienda${hasVar(p)?' · pide talla/color':''}</span>`:`<span class="cmnew">Producto nuevo (aún no está en la tienda)</span>`}
+function cmRange(){const t=today0();if(cmM==='r')return{f:cmF<=cmT?cmF:cmT,t:cmF<=cmT?cmT:cmF};if(/^\d{4}-\d{2}$/.test(cmM)){const[y,m]=cmM.split('-').map(Number),l=new Date(y,m,0).getDate();return{f:cmM+'-01',t:cmM+'-'+String(l).padStart(2,'0')}}return{f:t.slice(0,7)+'-01',t}}
+const dAdd=(d,n)=>{const x=new Date(d+'T12:00:00');x.setDate(x.getDate()+n);return x.toLocaleDateString('sv')};
 function rCom(){
   if(purchErr){$('tCom').innerHTML='<p class="msg">No se pudieron leer las compras. Ejecuta crear-compras.sql en Supabase (SQL Editor) una sola vez.</p>';return}
-  const M={};purch.forEach(c=>{M[c.bought_at.slice(0,7)]=1});const cur=new Date().toISOString().slice(0,7);M[cmM]=1;M[cur]=1;
+  const M={};purch.forEach(c=>{M[c.bought_at.slice(0,7)]=1});const cur=today0().slice(0,7);if(/^\d{4}-\d{2}$/.test(cmM))M[cmM]=1;M[cur]=1;
   const ms=Object.keys(M).sort().reverse(),mn=m=>new Date(m+'-15').toLocaleDateString('es-CO',{month:'long',year:'numeric'});
-  const L=cmM==='all'?purch:purch.filter(c=>c.bought_at.slice(0,7)===cmM);
-  const inP=o=>cmM==='all'||ym(o)===cmM,V=orders.filter(o=>o.status==='confirmado'&&inP(o));
+  const rg=cmRange(),inD=d=>cmM==='all'||(d>=rg.f&&d<=rg.t);
+  const L=purch.filter(c=>inD(c.bought_at));
+  const lcl=o=>new Date(o.confirmed_at||o.created_at).toLocaleDateString('sv');
+  const V=orders.filter(o=>o.status==='confirmado'&&inD(lcl(o)));
+  const lbl=cmM==='all'?'todo':cmM==='r'?(rg.f===rg.t?cmD(rg.f):cmD(rg.f)+' → '+cmD(rg.t)):mn(cmM);
   const comp=L.reduce((t,c)=>t+Number(c.total||0),0),vend=V.reduce((t,o)=>t+Number(o.total),0),und=L.reduce((t,c)=>t+(c.items||[]).reduce((a,i)=>a+(Number(i.qty)||0),0),0);
   const pend=purch.reduce((t,c)=>t+(c.items||[]).filter(i=>!i.stocked&&pOf(i)).length,0),nuev=purch.reduce((t,c)=>t+(c.items||[]).filter(i=>!pOf(i)).length,0);
   const sups=[...new Set(purch.map(c=>c.supplier).filter(Boolean))],um=cmMissing().length;cmAuto();
   const rows=cmL.map((l,i)=>`<div class="cml" data-i="${i}"><label class="cmn">Producto<input list="cmDl" data-f="name" value="${esc(l.name)}" placeholder="Nombre del producto" autocomplete="off"><small class="cmb">${cmBadge(l.name)}</small></label><label>Talla<input data-f="s" value="${esc(l.s)}" placeholder="Opcional"></label><label>Color<input data-f="c" value="${esc(l.c)}" placeholder="Opcional"></label><label>Cantidad<input type="number" min="1" step="1" data-f="q" value="${l.q}" inputmode="numeric"></label><label>Costo por unidad<input type="number" min="0" step="any" data-f="u" value="${l.u}" inputmode="decimal" placeholder="$"></label><div class="cmt"><small>Subtotal</small><b data-sub>${money((Number(l.q)||0)*(Number(l.u)||0))}</b></div>${cmL.length>1?`<button type="button" class="btn ghost sm" data-a="rm" data-i="${i}" aria-label="Quitar línea">✕</button>`:''}</div>`).join('');
-  $('tCom').innerHTML=`<div class="gk"><div><small>Compras del periodo</small><b>${money(comp)}</b></div><div><small>Unidades compradas</small><b>${und}</b></div><div><small>Vendido (confirmado)</small><b>${money(vend)}</b></div><div><small>Ventas − compras</small><b style="color:${vend-comp<0?'#e53935':'#1fa855'}">${money(vend-comp)}</b></div></div>
+  $('tCom').innerHTML=`<div class="gk"><div><small>Compras · ${lbl}</small><b>${money(comp)}</b></div><div><small>Unidades compradas</small><b>${und}</b></div><div><small>Vendido (confirmado)</small><b>${money(vend)}</b></div><div><small>Ventas − compras</small><b style="color:${vend-comp<0?'#e53935':'#1fa855'}">${money(vend-comp)}</b></div></div>
   ${um?`<p class="desc" style="margin:4px 0 10px"><b>${um}</b> producto(s) de la tienda aún no están en Compras. <button type="button" class="btn sm" data-a="bf">Agregarlos a Compras</button></p>`:''}
   ${(pend||nuev)?`<p class="desc" style="margin:4px 0 10px">${pend?`<b>${pend}</b> línea(s) de compra con producto existente aún sin sumar al inventario. `:''}${nuev?`<b>${nuev}</b> línea(s) con productos que todavía no están en la tienda.`:''}</p>`:''}
-  <div class="tabs" id="cmMs">${ms.map(m=>`<button type="button" class="btn ghost sm${m===cmM?' on':''}" data-a="mon" data-m="${m}">${mn(m)}</button>`).join('')}<button type="button" class="btn ghost sm${cmM==='all'?' on':''}" data-a="mon" data-m="all">Todo</button></div>
+  <div class="tabs" id="cmPs">${[['today','Hoy'],['7','Últimos 7 días'],['15','Últimos 15 días'],['30','Últimos 30 días']].map(([k,t])=>`<button type="button" class="btn ghost sm${cmM==='r'&&cmP===k?' on':''}" data-a="pre" data-k="${k}">${t}</button>`).join('')}<button type="button" class="btn ghost sm${cmM==='all'?' on':''}" data-a="mon" data-m="all">Todo</button><button type="button" class="btn ghost sm" data-a="xl">⬇ Exportar a Excel</button></div>
+  <div class="tabs" id="cmMs">${ms.map(m=>`<button type="button" class="btn ghost sm${m===cmM?' on':''}" data-a="mon" data-m="${m}">${mn(m)}</button>`).join('')}</div>
+  <div class="cmrg"><label>Desde<input type="date" id="cmF" value="${rg.f}" max="${today0()}"></label><label>Hasta<input type="date" id="cmT" value="${rg.t}" max="${today0()}"></label>${cmM==='r'?'<button type="button" class="btn ghost sm" data-a="rq">Quitar filtro</button>':''}<small>Filtra compras, vendido y balance por días.</small></div>
   <h3 class="t ghd">Registrar compra</h3>
-  <div class="cmf"><div class="cmh"><label>Fecha<input type="date" id="cmDate" value="${cmH.d||today0()}" max="${today0()}"></label><label>Proveedor<input id="cmSup" list="cmSl" value="${esc(cmH.sup)}" placeholder="A quién le compraste" autocomplete="off"></label><label class="cmw">Nota<input id="cmNote" value="${esc(cmH.note)}" placeholder="Opcional (factura, envío…)" autocomplete="off"></label></div>
+  <div class="cmf"><div class="cmh"><label>Fecha<input type="date" id="cmDate" value="${cmH.d||today0()}" max="${today0()}"></label><label>Proveedor *<input id="cmSup" required list="cmSl" value="${esc(cmH.sup)}" placeholder="A quién le compraste" autocomplete="off"></label><label class="cmw">Nota<input id="cmNote" value="${esc(cmH.note)}" placeholder="Opcional (factura, envío…)" autocomplete="off"></label></div>
   <datalist id="cmDl">${products.map(p=>`<option value="${esc(p.name)}">`).join('')}</datalist><datalist id="cmSl">${sups.map(s=>`<option value="${esc(s)}">`).join('')}</datalist>
   ${rows}<div class="cmb2"><button type="button" class="btn ghost sm" data-a="add">＋ Agregar otra línea</button><label class="cmck"><input type="checkbox" id="cmSt" ${cmH.st?'checked':''}> Sumar al inventario los productos que ya existen y guardar su valor de compra</label></div>
   <div class="cmtot">Total de la compra: <b id="cmTot">${money(cmL.reduce((t,l)=>t+(Number(l.q)||0)*(Number(l.u)||0),0))}</b> <button type="button" class="btn" data-a="save">Guardar compra</button></div></div>
-  <h3 class="t ghd">Historial de compras · ${cmM==='all'?'todo':mn(cmM)}</h3>
+  <h3 class="t ghd">Historial de compras · ${lbl}</h3>
   ${L.map(c=>`<div class="row cmr"><div><b>${cmD(c.bought_at)}</b>${c.supplier?' · '+esc(c.supplier):''}${c.note?` <small>(${esc(c.note)})</small>`:''}${(c.items||[]).map((it,ix)=>{const p=pOf(it);return `<div class="cmi">${Number(it.qty)||0} × <b>${esc(it.name)}</b>${cmV(it)?' <small>('+esc(cmV(it))+')</small>':''}${it.unit!=null?' · '+money(it.unit)+' c/u':''} ${it.stocked?'<span class="cmok">✓ En inventario</span>':p?`<span class="cmok">Existe en la tienda</span> <button type="button" class="btn ghost sm" data-a="stk" data-c="${c.id}" data-ix="${ix}">Sumar al inventario</button>`:`<span class="cmnew">No está en la tienda</span> <button type="button" class="btn ghost sm" data-a="new" data-c="${c.id}" data-ix="${ix}">Crear como producto</button>`}</div>`}).join('')}</div><div style="text-align:right"><b>${money(c.total)}</b><br><button type="button" class="btn ghost sm" data-a="del" data-c="${c.id}">Eliminar</button></div></div>`).join('')||'<p class="desc">Aún no hay compras en este periodo.</p>'}`}
 function cmRead(){const g=id=>$(id)?$(id).value:'';cmH={d:g('cmDate'),sup:g('cmSup'),note:g('cmNote'),st:$('cmSt')?$('cmSt').checked:true}}
-async function cmSave(){cmRead();
+async function cmSave(){cmRead();if(!cmH.sup.trim()){say('El proveedor es obligatorio.');const e=$('cmSup');if(e){e.focus();e.scrollIntoView({block:'center'})}return}
   const items=cmL.filter(l=>l.name.trim()&&Number(l.q)>0).map(l=>{const p=pMatch(l.name);return{name:p?p.name:l.name.trim(),product_id:p?p.id:null,size:l.s.trim(),color:l.c.trim(),qty:Number(l.q),unit:l.u===''||l.u==null?null:Number(l.u),stocked:false}});
   if(!items.length){say('Agrega al menos un producto con su cantidad.');return}
   const total=items.reduce((t,i)=>t+(i.unit||0)*i.qty,0);say('Guardando compra…',true);
@@ -2275,12 +2710,16 @@ async function cmSave(){cmRead();
     if(items.some(i=>i.stocked)&&ins.data&&ins.data[0]){await sb.from('purchases').update({items}).eq('id',ins.data[0].id);await load()}}
   cmL=[{name:'',s:'',c:'',q:1,u:''}];cmH={d:'',sup:'',note:'',st:cmH.st};cmM=(cmH.d||today0()).slice(0,7)===cmM?cmM:cmM;
   await loadPurch();say('Compra guardada.'+(warn?' Revisa:'+warn:''),!warn);toast('Compra guardada');rCom()}
+$('tCom').onchange=e=>{if(e.target.id==='cmF'||e.target.id==='cmT'){const f=$('cmF').value,t=$('cmT').value;if(!f||!t)return;cmF=f;cmT=t;cmM='r';cmP='';cmRead();rCom()}};
 $('tCom').oninput=e=>{const t=e.target,row=t.closest('.cml');if(!row||!t.dataset.f)return;const l=cmL[+row.dataset.i];l[t.dataset.f]=t.value;
   if(t.dataset.f==='name')row.querySelector('.cmb').innerHTML=cmBadge(t.value);
   row.querySelector('[data-sub]').textContent=money((Number(l.q)||0)*(Number(l.u)||0));$('cmTot').textContent=money(cmL.reduce((s,x)=>s+(Number(x.q)||0)*(Number(x.u)||0),0))};
 $('tCom').onclick=async e=>{const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,cid=b.dataset.c,P=cid&&purch.find(x=>String(x.id)===cid);
   if(a==='bf'){b.disabled=true;const n=await cmBackfill();say(n<0?'No se pudo agregar (¿ejecutaste crear-compras.sql?).':`Se agregaron a Compras ${n} producto(s).`,n>=0);rCom();return}
   if(a==='mon'){cmM=b.dataset.m;cmRead();rCom();return}
+  if(a==='pre'){const k=b.dataset.k,t=today0();cmP=k;cmM='r';cmT=t;cmF=k==='today'?t:dAdd(t,-(+k-1));cmRead();rCom();return}
+  if(a==='rq'){cmM=today0().slice(0,7);cmP='';cmRead();rCom();return}
+  if(a==='xl'){xlOpen('com');return}
   if(a==='add'){cmRead();cmL.push({name:'',s:'',c:'',q:1,u:''});rCom();return}
   if(a==='rm'){cmRead();cmL.splice(+b.dataset.i,1);rCom();return}
   if(a==='save'){b.disabled=true;await cmSave();b.disabled=false;return}
@@ -2609,7 +3048,67 @@ const LK0={pal:'oro',shape:'sesgado',font:'original',hov:'ninguno',auto:'ninguno
 let LOOK={...LK0},lookDirty=false;
 try{const c=JSON.parse(localStorage.getItem('gx_look')||'{}');LOOK={...LK0,...c}}catch(e){}
 const applyLook=l=>gxLook(l);
-try{if(sb)sb.from('site_settings').select('value').eq('key','look').limit(1).then(({data})=>{const v=data&&data[0]&&data[0].value;if(v&&typeof v==='object'){LOOK={...LK0,...v};applyLook(LOOK);try{localStorage.setItem('gx_look',JSON.stringify(LOOK))}catch(e){}}}).catch(()=>{})}catch(e){}
+try{if(sb)sb.from('site_settings').select('value').eq('key','look').limit(1).then(({data})=>{const v=data&&data[0]&&data[0].value;if(v&&typeof v==='object'){LOOK={...LK0,...v};applyLook(LOOK);try{txApply()}catch(e){}try{localStorage.setItem('gx_look',JSON.stringify(LOOK))}catch(e){}}}).catch(()=>{})}catch(e){}
+/* ====== Colores y textos a tu gusto ====== */
+const CROLES=[['bg','Fondo de la página'],['panel','Fondo de tarjetas y paneles'],['ink','Letras principales'],['muted','Letras secundarias (descripciones)'],['gold','Títulos y detalles destacados']];
+const CPAL=['#ffffff','#f3f0e8','#d9d9d9','#9b978c','#555555','#000000','#0a0a0a','#141414','#e2b53f','#f5c451','#ff7a1a','#ff5252','#d3184a','#ec4899','#8b5cf6','#3b82f6','#14b8a6','#1fa855','#7df0c4','#d8c3a5'];
+const curMode=()=>document.documentElement.dataset.theme==='light'?'l':'d';
+const getC=k=>{const c=LOOK.c&&LOOK.c[curMode()];return(c&&c[k])||''};
+const cssVar=k=>getComputedStyle(document.documentElement).getPropertyValue('--'+k).trim();
+const toHex=v=>{v=String(v).trim();if(/^#[0-9a-f]{6}$/i.test(v))return v.toLowerCase();if(/^#[0-9a-f]{3}$/i.test(v))return'#'+v.slice(1).split('').map(x=>x+x).join('').toLowerCase();const m=v.match(/\d+(\.\d+)?/g);if(m&&m.length>=3&&/^rgb/i.test(v))return'#'+m.slice(0,3).map(x=>(+x|0).toString(16).padStart(2,'0')).join('');return'#000000'};
+function setC(k,v){LOOK.c=LOOK.c||{d:{},l:{}};const m=curMode();LOOK.c[m]=LOOK.c[m]||{};if(v)LOOK.c[m][k]=v;else delete LOOK.c[m][k];lookDirty=true;applyLook(LOOK)}
+function colorsUI(){return `<h3 style="margin:18px 0 2px">Colores a tu gusto</h3><p class="desc">Estás editando el modo <b>${curMode()==='l'?'CLARO':'OSCURO'}</b> (cámbialo con “Ver en claro / oscuro”). Elige un color de la paleta o usa el cuadro de color para cualquier tono. Lo ves al instante.</p>`+
+ CROLES.map(([k,t])=>{const v=getC(k),cur=v||toHex(cssVar(k));return `<div class="clr"><b>${t}</b><input type="color" value="${cur}" data-ck="${k}" aria-label="${esc(t)}"><div class="cpal">${CPAL.map(c=>`<button type="button" class="cs${v.toLowerCase()===c?' on':''}" style="background:${c}" data-cs="${k}" data-v="${c}" title="${c}" aria-label="${c}"></button>`).join('')}</div><button type="button" class="btn ghost sm" data-cr="${k}"${v?'':' hidden'}>↺ Original</button></div>`}).join('')+
+ `<div class="apbar"><button type="button" class="btn ghost sm" id="clrAll">↺ Quitar todos mis colores (este modo)</button></div>`}
+/* textos */
+const TXN=new Set();
+const TX_BAD='SCRIPT,STYLE,NOSCRIPT,TEXTAREA,SELECT,OPTION,INPUT,TITLE,CODE';
+function txOk(n,o){const t=String(o!=null?o:n.nodeValue).trim();if(t.length<2||!/[A-Za-zÁÉÍÓÚÑáéíóúñ]/.test(t))return false;const p=n.parentElement;if(!p||TX_BAD.includes(p.tagName)||p.namespaceURI!=='http://www.w3.org/1999/xhtml')return false;
+  if(p.closest('#adm,#txBar,#txd,.sizes,.ty,[data-noedit],[contenteditable]'))return false;if(products.some(x=>x.name===t))return false;return true}
+function txNodes(){const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT),a=[];while(w.nextNode())a.push(w.currentNode);return a}
+function txApply(){const tx=LOOK.tx||{};if(!Object.keys(tx).length&&!TXN.size)return;
+  txNodes().forEach(n=>{if(n._o!==undefined&&n.nodeValue!==n._r){n._o=undefined;TXN.delete(n)}
+    const o=n._o!==undefined?n._o:n.nodeValue;if(!txOk(n,o))return;const k=o.trim(),rep=tx[k];
+    if(rep!==undefined){const nv=o.replace(k,()=>rep);if(n.nodeValue!==nv){if(n._o===undefined)n._o=o;n._r=nv;n.nodeValue=nv;TXN.add(n)}}
+    else if(n._o!==undefined){n.nodeValue=n._o;n._o=undefined;TXN.delete(n)}});
+  TXN.forEach(n=>{if(!n.isConnected)TXN.delete(n)})}
+function setTx(key,val){LOOK.tx=LOOK.tx||{};if(!String(val).trim()||val.trim()===key)delete LOOK.tx[key];else LOOK.tx[key]=val.trim();lookDirty=true;txApply()}
+const txOrig=n=>(n._o!==undefined?n._o:n.nodeValue).trim();
+let TXK=[];
+function txListR(){const q=sg($('txQ')?$('txQ').value:''),m=new Map();txNodes().forEach(n=>{if(txOk(n,n._o!==undefined?n._o:null)){const k=txOrig(n);if(!m.has(k))m.set(k,1)}});
+  TXK=[...m.keys()].filter(k=>!q||sg(k).includes(q)||sg((LOOK.tx||{})[k]||'').includes(q));const ed=Object.keys(LOOK.tx||{}).length;
+  $('txL').innerHTML=(TXK.slice(0,60).map((k,i)=>{const cur=(LOOK.tx||{})[k];return `<div class="txr"><small>${esc(k.length>90?k.slice(0,90)+'…':k)}</small><textarea rows="${Math.min(4,Math.max(1,Math.ceil((cur||k).length/60)))}" data-ti="${i}">${esc(cur!==undefined?cur:k)}</textarea><button type="button" class="btn ghost sm" data-tr="${i}"${cur!==undefined?'':' hidden'} title="Volver al texto original">↺</button></div>`}).join('')||'<p class="desc">No se encontró ese texto.</p>')+(TXK.length>60?`<p class="desc">Mostrando 60 de ${TXK.length}. Escribe en el buscador para encontrar otros.</p>`:'');
+  $('txN').textContent=ed?ed+' texto(s) cambiado(s).':'Aún no has cambiado textos.'}
+function textsUI(){return `<h3 style="margin:18px 0 2px">Textos de la página</h3><p class="desc">Cambia cualquier texto de la tienda (títulos, botones, avisos, pie de página…). Puedes tocarlo directamente en la página o buscarlo en la lista. Los nombres y descripciones de productos se editan en la pestaña Productos.</p>
+ <div class="apbar"><button type="button" class="btn" id="txStart">✎ Editar tocando la página</button><button type="button" class="btn ghost sm" id="txAll">↺ Restaurar todos los textos</button></div>
+ <input id="txQ" class="txq" placeholder="Buscar un texto para cambiarlo…" autocomplete="off"><p class="desc" id="txN"></p><div id="txL" class="txl"></div>`}
+async function lookSave(){try{localStorage.setItem('gx_look',JSON.stringify(LOOK))}catch(_){}
+  const r=await sb.from('site_settings').upsert({key:'look',value:LOOK});
+  if(r.error)return{ok:false,msg:'No se pudo guardar para todos: '+r.error.message+'. Ejecuta crear-ajustes-apariencia.sql en Supabase (SQL Editor). Mientras tanto queda guardado solo en este navegador.'};
+  lookDirty=false;return{ok:true,msg:'Guardado. Todos los visitantes verán estos cambios.'}}
+/* modo edición tocando la página */
+const txE=new Set();
+function txMark(on){txE.forEach(e=>e.classList.remove('txe'));txE.clear();if(!on)return;txNodes().forEach(n=>{let t=null;if(txOk(n,n._o!==undefined?n._o:null)){const p=n.parentElement;if(p.closest('.tw')){t=p.closest('.tw')}else t=p;if(t&&t.getBoundingClientRect().width>0){t.classList.add('txe');txE.add(t)}}})}
+function txStart(){$('adm').close();document.body.classList.add('txedit');$('txBar').hidden=false;$('txM').textContent='';txMark(true)}
+function txStop(){document.body.classList.remove('txedit');$('txBar').hidden=true;txMark(false);$('adm').showModal();showTab('app')}
+let txCur=null;
+function txNodeAt(e){let n=null;
+  try{if(document.caretRangeFromPoint){const r=document.caretRangeFromPoint(e.clientX,e.clientY);if(r&&r.startContainer.nodeType===3)n=r.startContainer}else if(document.caretPositionFromPoint){const c=document.caretPositionFromPoint(e.clientX,e.clientY);if(c&&c.offsetNode&&c.offsetNode.nodeType===3)n=c.offsetNode}}catch(_){}
+  const tw=(n&&n.parentElement&&n.parentElement.closest('.tw'))||e.target.closest('.tw');
+  if(tw){n=[...tw.querySelector('.gh').childNodes].find(x=>x.nodeType===3)||null}
+  else if(!n||!txOk(n,n._o!==undefined?n._o:null)){n=null;const w=document.createTreeWalker(e.target,NodeFilter.SHOW_TEXT);while(w.nextNode()){const x=w.currentNode;if(txOk(x,x._o!==undefined?x._o:null)){n=x;break}}}
+  return n&&n.isConnected?n:null}
+document.addEventListener('click',e=>{if(!document.body.classList.contains('txedit'))return;if(e.target.closest('#txBar,#txd'))return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();const n=txNodeAt(e);
+  if(!n){$('txM').textContent='Ahí no hay un texto editable. Toca un texto con borde rojo punteado.';return}
+  $('txM').textContent='';const k=txOrig(n);txCur=k;$('txO').textContent=k.length>140?k.slice(0,140)+'…':k;$('txT').value=(LOOK.tx||{})[k]!==undefined?LOOK.tx[k]:k;$('txR').hidden=(LOOK.tx||{})[k]===undefined;$('txd').showModal();$('txT').focus();$('txT').select()},true);
+$('txOk').onclick=()=>{setTx(txCur,$('txT').value);$('txd').close();txMark(true)};
+$('txR').onclick=()=>{setTx(txCur,'');$('txd').close();txMark(true)};
+$('txNo').onclick=()=>$('txd').close();
+$('txDone').onclick=()=>txStop();
+$('txSave').onclick=async()=>{const b=$('txSave');b.disabled=true;$('txM').textContent='Guardando…';const r=await lookSave();b.disabled=false;$('txM').textContent=r.msg};
+(()=>{let t=0;new MutationObserver(ms=>{if(!ms.some(m=>{const n=m.target,el=n.nodeType===3?n.parentElement:n;return !(el&&el.closest&&el.closest('.ty,#adm,#txBar,#txd'))}))return;clearTimeout(t);t=setTimeout(txApply,60)}).observe(document.body,{childList:true,subtree:true,characterData:true})})();
+txApply();
+
 function rApp(){const cur=LOOK;FONTS.forEach(f=>gxFont(f.id));
  const grp=(t,d,k,arr,fn)=>`<h3 style="margin:6px 0 2px">${t}</h3><p class="desc">${d}</p><div class="shg">${arr.map(o=>`<button type="button" class="shb${cur[k]===o.id?' on':''}" data-k="${k}" data-v="${o.id}">${fn(o)}<b>${o.n}</b>${o.d?`<em>${o.d}</em>`:''}</button>`).join('')}</div>`;
  $('tApp').innerHTML=`<h3 style="margin:6px 0 2px">Tema de color</h3><p class="desc">Cada tema trae su versión oscura y clara. El visitante cambia entre las dos con el botón sol/luna. Al elegir uno lo ves al instante en la página.</p>
@@ -2618,17 +3117,26 @@ function rApp(){const cur=LOOK;FONTS.forEach(f=>gxFont(f.id));
  ${grp('Tipografía','Cambia las letras de títulos y textos de toda la página.','font',FONTS,f=>`<span class="ft" style="font-family:${f.f},sans-serif">Aa Gorras</span>`)}
  ${grp('Efecto al pasar el mouse','Cómo reaccionan los botones cuando el cursor los toca.','hov',HOVS,()=>'')}
  ${grp('Efecto automático','Movimiento que hacen solos los botones principales para llamar la atención.','auto',AUTOS,()=>'')}
- <div class="apbar"><button type="button" class="btn" id="apSave">Guardar apariencia</button><button type="button" class="btn ghost sm" id="apMode">Ver en claro / oscuro</button><button type="button" class="btn ghost sm" id="apReset">Volver al original</button></div>
- <p class="desc" id="apMsg" style="margin-top:8px">${lookDirty?'Cambios sin guardar.':''}</p>`}
+ ${colorsUI()}
+ ${textsUI()}
+ <div class="apbar apfix"><button type="button" class="btn" id="apSave">Guardar apariencia</button><button type="button" class="btn ghost sm" id="apMode">Ver en claro / oscuro</button><button type="button" class="btn red sm" id="apReset">Volver al tema original</button></div>
+ <p class="desc" id="apMsg" style="margin-top:8px">${lookDirty?'Cambios sin guardar.':''}</p>`;txListR()}
 $('tApp').onclick=async e=>{const b=e.target.closest('button');if(!b)return;const m=$('apMsg');
  if(b.dataset.k){LOOK[b.dataset.k]=b.dataset.v;if(b.dataset.k==='pal'&&b.dataset.v==='caniuse'){LOOK.font='caniuse';LOOK.shape='cuadrado'}lookDirty=true;applyLook(LOOK);rApp();return}
+ if(b.dataset.cs){setC(b.dataset.cs,b.dataset.v);rApp();return}
+ if(b.dataset.cr){setC(b.dataset.cr,'');rApp();return}
+ if(b.id==='clrAll'){const m=curMode();if(LOOK.c)LOOK.c[m]={};lookDirty=true;applyLook(LOOK);rApp();return}
+ if(b.id==='txStart'){txStart();return}
+ if(b.id==='txAll'){if(!await askOk('¿Restaurar todos los textos de la página a como venían?','Restaurar'))return;LOOK.tx={};lookDirty=true;txApply();rApp();return}
+ if(b.dataset.tr!==undefined){const k=TXK[+b.dataset.tr];setTx(k,'');rApp();return}
  if(b.id==='apMode'){$('themeBtn').click();return}
- if(b.id==='apReset'){LOOK={...LK0};lookDirty=true;applyLook(LOOK);rApp();return}
- if(b.id==='apSave'){b.disabled=true;m.textContent='Guardando…';
-  try{localStorage.setItem('gx_look',JSON.stringify(LOOK))}catch(_){}
-  const r=await sb.from('site_settings').upsert({key:'look',value:LOOK});b.disabled=false;
-  if(r.error){m.style.color='#c62828';m.textContent='No se pudo guardar para todos: '+r.error.message+'. Ejecuta crear-ajustes-apariencia.sql en Supabase (SQL Editor). Mientras tanto queda guardado solo en este navegador.';return}
-  lookDirty=false;m.style.color='#128c4a';m.textContent='Guardado. Todos los visitantes verán este tema.'}};
+ if(b.id==='apReset'){if(!await askOk('Esto devuelve TODO al tema original: color, forma, letra, efectos, tus colores y tus textos cambiados. ¿Continuar? (Luego pulsa Guardar apariencia para que se aplique a todos)','Volver al original'))return;LOOK={...LK0};lookDirty=true;applyLook(LOOK);txApply();rApp();return}
+ if(b.id==='apSave'){b.disabled=true;m.textContent='Guardando…';const r=await lookSave();b.disabled=false;m.style.color=r.ok?'#128c4a':'#c62828';m.textContent=r.msg}};
+$('tApp').oninput=e=>{const t=e.target;
+ if(t.dataset.ck){setC(t.dataset.ck,t.value);return}
+ if(t.id==='txQ'){txListR();return}
+ if(t.dataset.ti!==undefined){setTx(TXK[+t.dataset.ti],t.value);const r=t.closest('.txr').querySelector('[data-tr]');if(r)r.hidden=(LOOK.tx||{})[TXK[+t.dataset.ti]]===undefined;$('txN').textContent=Object.keys(LOOK.tx||{}).length+' texto(s) cambiado(s).'}};
+$('tApp').onchange=e=>{if(e.target.dataset.ck)rApp()};
 
 /* efectos de una sola pasada (giro, sacudir, rebote): se disparan al entrar y no se repiten hasta salir */
 (()=>{const SEL='.btn,.wa,.sizes button,.cadd,.more,.promo-btn,.card .pl,.qb',H=document.documentElement;
