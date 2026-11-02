@@ -1397,13 +1397,16 @@ dialog#adm[data-dock=left] .cmh,dialog#adm[data-dock=right] .cmh{grid-template-c
 /* ===== Descripción con formato + orden de productos ===== */
 .pdw{display:flex;flex-direction:column;gap:6px}.pdl{font-size:14px}
 .pdt{display:flex;flex-wrap:wrap;gap:6px}.pdt button{font:inherit;font-size:13px;font-weight:700;padding:5px 12px;cursor:pointer;background:var(--panel);color:var(--ink);border:1px solid var(--line)}.pdt button:hover{border-color:var(--gold);color:var(--gold)}
-.pde{min-height:120px;max-height:320px;overflow:auto;padding:10px 12px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:15px;line-height:1.55;outline:0}.pde:focus{border-color:var(--gold)}
+.pde{min-height:120px;max-height:320px;overflow:auto;padding:10px 12px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font-size:14px;line-height:1.45;outline:0}.pde b,.pde strong{color:var(--ink)}.pde:focus{border-color:var(--gold)}
 .desc i,.desc em,.dclamp i{font-style:italic}.desc b,.dclamp b{font-weight:800}.desc u,.dclamp u{text-decoration:underline}.pde{font-synthesis:weight style}.pde b,.pde strong,.lbd b,.lbd strong{font-weight:900;text-shadow:.6px 0 0 currentColor}.pde i,.pde em,.lbd i,.lbd em{font-style:italic}.pde u,.lbd u{text-decoration:underline;text-underline-offset:2px}.pdt button.on{background:var(--gold);color:#000;border-color:var(--gold)}.pdp{margin-top:8px}.pdp small{display:block;color:var(--muted);margin-bottom:4px}.pdp .lbd{border:1px dashed var(--line);padding:10px 12px;min-height:40px;color:var(--ink)}.pdp .lbd:empty:before{content:'(vacío)';color:var(--muted)}
 .pde:empty:before{content:attr(data-ph);color:var(--muted);pointer-events:none}
 .pde ul,.pde ol,.lbd ul,.lbd ol{margin:6px 0 6px 22px;padding:0}.pde ul,.lbd ul{list-style:disc}.pde ol,.lbd ol{list-style:decimal}.pde li,.lbd li{margin:2px 0}.pde p,.lbd p{margin:0 0 6px}
 .lbd div:first-child{white-space:normal}
 .mvb{display:flex;gap:4px;align-items:center}.mvb .btn{padding:6px 9px;min-width:34px}.pos{min-width:24px;text-align:center;font-weight:800;color:var(--gold);font-size:14px}
 @media(max-width:640px){#alist .row{flex-wrap:wrap}.mvb{order:5;width:100%;justify-content:flex-end}}
+#lb .lbf .lba{margin-left:auto;gap:6px}#lb .lbf .lba .btn{margin-left:0}
+@media(max-width:700px){#lb .lbf .lba{margin-left:0}}
+@media(min-width:701px){#adm .dh{display:grid!important;grid-template-columns:auto 1fr;grid-template-areas:'dock act' 'ttl ttl';align-items:center;row-gap:6px}#adm .dh h2{grid-area:ttl;margin:0}#adm .dh .dock{grid-area:dock;margin:0;justify-self:start}#adm .dh>div:last-child{grid-area:act;justify-self:end;display:flex;gap:8px;align-items:center}}
 </style>
 </head>
 <body>
@@ -1507,13 +1510,13 @@ dialog#adm[data-dock=left] .cmh,dialog#adm[data-dock=right] .cmh{grid-template-c
           <div><button type="button" class="btn ghost sm" id="vadd">+ Agregar talla / color</button> <small id="vnote" class="desc" hidden>El stock total es la suma de estas filas.</small></div>
           <datalist id="vsz"><option value="S"><option value="M"><option value="L"><option value="XL"><option value="XXL"><option value="Única"></datalist>
         </div>
-        <div class="w pdw"><b class="pdl">Descripción</b><div class="pdt" role="toolbar" aria-label="Formato"><button type="button" data-c="bold" title="Negrita"><b>N</b></button><button type="button" data-c="italic" title="Cursiva"><i>C</i></button><button type="button" data-c="underline" title="Subrayado"><u>S</u></button><button type="button" data-c="insertUnorderedList" title="Lista con viñetas">• Viñetas</button><button type="button" data-c="insertOrderedList" title="Lista numerada">1. Numerada</button><button type="button" data-c="removeFormat" title="Quitar formato">Quitar formato</button></div><div id="pde" class="pde" contenteditable="true" role="textbox" aria-multiline="true" data-ph="Escribe la descripción. Selecciona texto para ponerlo en negrita o cursiva, y usa Viñetas para hacer listas."></div><div class="pdp"><small>Así se verá en la tienda:</small><div id="pdv" class="lbd"></div></div><textarea id="pd" hidden></textarea></div>
+        <div class="w pdw"><b class="pdl">Descripción</b><div class="pdt" role="toolbar" aria-label="Formato"><button type="button" data-c="bold" title="Negrita"><b>N</b></button><button type="button" data-c="italic" title="Cursiva"><i>C</i></button><button type="button" data-c="underline" title="Subrayado"><u>S</u></button><button type="button" data-c="insertUnorderedList" title="Lista con viñetas">• Viñetas</button><button type="button" data-c="insertOrderedList" title="Lista numerada">1. Numerada</button><button type="button" data-c="removeFormat" title="Quitar formato">Quitar formato</button></div><div id="pde" class="pde" contenteditable="true" role="textbox" aria-multiline="true" data-ph="Escribe la descripción. Selecciona texto para ponerlo en negrita o cursiva, y usa Viñetas para hacer listas."></div><textarea id="pd" hidden></textarea></div>
         <label class="w">Fotos (hasta 6; la primera es la portada · arrastra una foto para cambiar su lugar)<input type="file" id="pimg" accept="image/*" multiple></label>
         <div class="w gal" id="gal"></div>
         <label class="chk w"><input type="checkbox" id="pa" checked> Disponible</label>
         <div class="w"><button class="btn" id="sv">Guardar producto</button> <button type="button" class="btn ghost" id="cl">Limpiar</button></div>
       </form>
-      <div style="margin-top:22px"><input id="pq" type="search" class="invq" placeholder="Buscar productos por nombre o categoría…" autocomplete="off"></div><div style="margin-top:10px" id="alist"></div></div>
+      <div style="margin-top:22px"><input id="pq" type="search" class="invq" placeholder="Buscar productos por nombre o categoría…" autocomplete="off"><div style="margin-top:8px"><button type="button" class="btn ghost sm" data-xl="prod">⬇ Exportar productos a Excel</button></div></div><div style="margin-top:10px" id="alist"></div></div>
       <div id="tPed" hidden></div><div id="tInv" hidden></div><div id="tVen" hidden></div><div id="tCom" hidden></div><div id="tGas" hidden></div><div id="tGra" hidden></div><div id="tApp" hidden></div>
     </div>
     <p class="msg" id="msg"></p>
@@ -2119,7 +2122,7 @@ function showTab(t){tab=t;const m={prod:'tProd',ped:'tPed',inv:'tInv',ven:'tVen'
   if(t==='ped')rPed();if(t==='inv')rInv();if(t==='ven')rVen();if(t==='gra')rGra();if(t==='com')rCom();if(t==='gas'){rGas();if(!exps.length&&!expErr)loadExps()}if(t==='app')rApp();
   if(!showTab.q&&(t==='prod'||t==='inv')){showTab.q=1;load().then(()=>{showTab.q=0;if(tab==='prod')alist();if(tab==='inv'&&!$('tInv').querySelector('.stk-in.chg'))rInv()}).catch(()=>{showTab.q=0})}}
 function rPed(){const L=orders.filter(o=>pfil==='todos'||o.status===pfil);
-  $('tPed').innerHTML=`<div class="tabs">${['pendiente','confirmado','cancelado','todos'].map(s=>`<button type="button" class="btn ghost sm${pfil===s?' on':''}" data-f="${s}">${ST[s]||'Todos'} (${s==='todos'?orders.length:orders.filter(o=>o.status===s).length})</button>`).join('')}</div>`+
+  $('tPed').innerHTML=`<div class="tabs">${['pendiente','confirmado','cancelado','todos'].map(s=>`<button type="button" class="btn ghost sm${pfil===s?' on':''}" data-f="${s}">${ST[s]||'Todos'} (${s==='todos'?orders.length:orders.filter(o=>o.status===s).length})</button>`).join('')}<button type="button" class="btn ghost sm" data-xl="ped">⬇ Excel</button></div>`+
   (L.length?L.map(o=>`<div class="ord"><div style="display:flex;justify-content:space-between;gap:8px"><b>${esc(o.code)}</b><span class="st ${o.status}">${ST[o.status]}</span></div><small>${fd(o.created_at)}${o.customer?' · '+esc(o.customer):''}</small>${o.checkout?`<small>Tel ${esc(o.checkout.phone)} · ${esc(o.checkout.address)}, ${esc(o.checkout.city)}${o.payment_method?' · Pago: '+esc(o.payment_method):''}</small>`:''}<div>${itx(o)}</div><div><b class="price">${money(o.total)}</b>${o.discount>0?` <small>(dto ${money(o.discount)})</small>`:''}</div><div style="display:flex;gap:8px;flex-wrap:wrap">${o.status!=='confirmado'?`<button type="button" class="btn sm" data-o="confirmado" data-id="${o.id}">Confirmar venta</button>`:`<button type="button" class="btn ghost sm" data-o="pendiente" data-id="${o.id}">Volver a pendiente</button>`}${o.status!=='cancelado'?`<button type="button" class="btn red sm" data-o="cancelado" data-id="${o.id}">Cancelar</button>`:''}</div></div>`).join(''):'<p class="desc">No hay pedidos en esta vista.</p>')}
 $('tPed').onclick=async e=>{const f=e.target.dataset.f;if(f){pfil=f;rPed();return}
   const st=e.target.dataset.o;if(!st)return;
@@ -2141,7 +2144,7 @@ function invRows(){return products.flatMap(p=>{const vs=vars(p);
 const catU=k=>invRows().filter(r=>!k||slug(r.p.category||'')===k).reduce((t,r)=>t+(Number(r.n)||0),0);
 const lowN=()=>invRows().filter(r=>r.n!=null&&r.n!==''&&Number(r.n)<=2).length;
 function rInv(){
-  $('tInv').innerHTML=`<input id="invQ" type="search" class="invq" placeholder="Buscar en el inventario (producto, talla o color)…" value="${esc(invQ)}" autocomplete="off">
+  $('tInv').innerHTML=`<input id="invQ" type="search" class="invq" placeholder="Buscar en el inventario (producto, talla o color)…" value="${esc(invQ)}" autocomplete="off"><div style="margin:8px 0"><button type="button" class="btn ghost sm" data-xl="inv">⬇ Exportar inventario a Excel</button></div>
   <div class="tabs" id="invCats"><button type="button" class="btn ghost sm${invCat?'':' on'}" data-ic="">Todas (${catU('')})</button>${[...new Map(products.map(p=>[slug(p.category||''),p.category]))].map(([k,n])=>`<button type="button" class="btn ghost sm${invCat===k?' on':''}" data-ic="${esc(k)}">${esc(n)} (${catU(k)})</button>`).join('')}<button type="button" class="btn ghost sm lowchip${invLow?' on':''}" data-lw="1">Stock bajo (${lowN()})</button></div>
   <p class="desc" id="invSum" style="margin:-4px 0 10px"></p>
   <div class="legend"><span><i style="background:#ff5252"></i>1-2 unidades (poco)</span><span><i style="background:#f2c200"></i>3-4 unidades</span><span><i style="background:#2ecc71"></i>5 o más</span></div>
@@ -2486,9 +2489,18 @@ sI.o.filter=`A4:I${ill+1}`;widths(sI,[34,16,9,14,10,14,14,16,18]);
 const sA=new Sheet('Análisis',{tab:'6B7280',grid:true});
 banner(sA,11,'Datos de apoyo para las gráficas',subT);
 let ar=3;const blocks={};
-const block=(key,title,hd,rows,fmts)=>{sA.set(0,ar,title,X.sec);sA.merge(0,ar,hd.length-1,ar,X.sec);ar++;headers(sA,ar,hd);ar++;const r1=ar;
+const SC=D.scope||'all',OKB={ventas:['pp','hr','wd','ty','tp','ca'],compras:['pp','sp'],gastos:['pp','gt'],pedidos:['pp','es','ot'],productos:['tp','ca'],inventario:['ic']}[SC]||null;
+const block=(key,title,hd,rows,fmts)=>{if(OKB&&!OKB.includes(key))return;sA.set(0,ar,title,X.sec);sA.merge(0,ar,hd.length-1,ar,X.sec);ar++;headers(sA,ar,hd);ar++;const r1=ar;
   const data=rows.length?rows:[hd.map((_,i)=>i?0:'(sin datos)')];
   data.forEach(row=>{row.forEach((v,c)=>sA.set(c,ar,v,fmts[c]));ar++});blocks[key]={r1,r2:ar-1};ar+=2};
+if(SC!=='all'){const ao={};periods.forEach(k=>ao[k]=0);A.forEach(o=>{const k=pk(ymd(new Date(o.created_at)));if(k in ao)ao[k]++});
+ const ppH={ventas:['Período','Pedidos','Ventas','Ganancia'],compras:['Período','Compras','Uds. compradas'],gastos:['Período','Gastos'],pedidos:['Período','Pedidos creados']}[SC],
+ ppR={ventas:k=>[plabel(k),agg[k].n,agg[k].v,agg[k].v-agg[k].c],compras:k=>[plabel(k),agg[k].cp,agg[k].uc],gastos:k=>[plabel(k),agg[k].ex],pedidos:k=>[plabel(k),ao[k]]}[SC],
+ ppF={ventas:[X.txt,X.int,X.mon,X.mon],compras:[X.txt,X.mon,X.int],gastos:[X.txt,X.mon],pedidos:[X.txt,X.int]}[SC];
+ if(ppH)block('pp','Resultados por '+GN.toLowerCase(),ppH,periods.map(ppR),ppF);
+ const fa=A.filter(isF);block('ot','Tienda física vs virtual (todos los pedidos)',['Tipo','Pedidos'],[['Física',fa.length],['Virtual',A.length-fa.length]],[X.txt,X.int]);
+ const IC={};il.forEach(x=>{const c=x.p.category||'Sin categoría';const o=IC[c]??={u:0,v:0};if(x.n!=null){o.u+=x.n;o.v+=x.n*(x.cost==null?0:num(x.cost))}});
+ block('ic','Inventario por categoría',['Categoría','Unidades','Valor a costo'],Object.entries(IC).sort((a,b)=>b[1].v-a[1].v).map(([k,o])=>[k,o.u,o.v]),[X.txt,X.int,X.mon])}
 const hrs=[...Array(24)].map(()=>({n:0,v:0})),wds=[...Array(7)].map(()=>({n:0,v:0}));
 V.forEach(o=>{const d=dts(o),h=hrs[d.getHours()],w=wds[wd(ymd(d))];h.n++;h.v+=num(o.total);w.n++;w.v+=num(o.total)});
 block('hr','Ventas por hora del día',['Hora','Pedidos','Ventas'],hrs.map((h,i)=>[pad(i)+':00',h.n,h.v]),[X.ctr,X.int,X.mon]);
@@ -2507,7 +2519,7 @@ const GT={};X_.forEach(e=>{const k=e.category||'Otros';GT[k]=(GT[k]||0)+num(e.am
 block('gt','Gastos por tipo',['Tipo de gasto','Gastos'],Object.entries(GT).sort((a,b)=>b[1]-a[1]).map(([k,v])=>[k,v]),[X.txt,X.mon]);
 widths(sA,[34,13,15,4,4,4,4,4,4,4,4,4]);
 /* ===== Resumen ===== */
-const sR0=new Sheet('Resumen',{tab:INK,grid:false,zoom:90});
+const resAll=()=>{const sR0=new Sheet('Resumen',{tab:INK,grid:false,zoom:90});
 const W=13;banner(sR0,W,'GORRAX · Reporte de ventas y compras',subT+'  ·  Agrupado por '+GN.toLowerCase()+'  ·  Generado el '+fR(ymd(NOW))+' '+pad(NOW.getHours())+':'+pad(NOW.getMinutes()));
 widths(sR0,[2,...Array(12).fill(12.5),2]);
 sR0.set(1,4,'Indicadores clave',X.sec);sR0.merge(1,4,12,4,X.sec);
@@ -2548,13 +2560,73 @@ sR0.chart({type:'pie',title:'Gastos por tipo',cat:{sh:sAn,c:0,r1:b.gt.r1,r2:b.gt
 sR0.chart({type:'line',title:'Ganancia neta por '+GN.toLowerCase(),cat:{sh:sPp,c:0,r1:pr1,r2:pr2},series:[{sh:sPp,c:11,r1:pr1,r2:pr2,nc:11,nr:3,color:'1FA855'}],skip:periods.length>20?Math.ceil(periods.length/20):0},7,88,13,104);
 const gr=106;sR0.set(1,gr,'Qué contiene este archivo',X.sec);sR0.merge(1,gr,12,gr,X.sec);
 [['Por período','Ventas, costo, ganancia, margen, compras y balance agrupados por '+GN.toLowerCase()+', con totales.'],['Ventas','Cada pedido confirmado: fecha, hora, cliente, tipo, productos, total, costo y ganancia. Usa los filtros del encabezado; el TOTAL se recalcula solo.'],['Detalle ventas','Una fila por producto vendido (talla, color, cantidad, precio).'],['Gastos','Arriendo, servicios, envíos y otros gastos del negocio, con su tipo y monto.'],['Compras','Cada compra a proveedores con producto, cantidad, costo unitario y si ya se sumó al inventario.'],['Pedidos','Todos los pedidos creados en el período, con su estado (pendiente, confirmado, cancelado).'],['Productos','Qué se vendió y compró por producto, y el stock actual.'],['Inventario','Stock actual por talla/color y su valor a costo y a precio de venta.'],['Análisis','Tablas que alimentan las gráficas (hora, día de la semana, top productos…).']].forEach(([a,t],k)=>{const r=gr+1+k;sR0.set(1,r,a,X.guideB);sR0.merge(1,r,2,r,X.guideB);sR0.set(3,r,t,X.guide);sR0.merge(3,r,12,r,X.guide);sR0.height(r,18)});
+return sR0};
+const resScoped=()=>{const palette=['B1103A','E0A800','1FA855','3B82F6','8B5CF6','F97316','0EA5E9','6B7280','EC4899','14B8A6'];
+const sR0=new Sheet('Resumen',{tab:INK,grid:false,zoom:90});
+const TT={ventas:'ventas',compras:'compras',gastos:'gastos',pedidos:'pedidos',productos:'productos',inventario:'inventario'}[SC];
+const sub2=SC==='inventario'?"Foto del inventario al "+fR(ymd(NOW))+' (no depende del período)':subT+(['ventas','compras','gastos','pedidos'].includes(SC)?'  ·  Agrupado por '+GN.toLowerCase():'')+'  ·  Generado el '+fR(ymd(NOW))+' '+pad(NOW.getHours())+':'+pad(NOW.getMinutes());
+const W=13;banner(sR0,W,'GORRAX · Reporte de '+TT,sub2);
+widths(sR0,[2,...Array(12).fill(12.5),2]);
+sR0.set(1,4,'Indicadores clave',X.sec);sR0.merge(1,4,12,4,X.sec);
+const card=(c,r,label,val,fmt,f,sub)=>{sR0.set(c,r,label,X.kL);sR0.merge(c,r,c+2,r,X.kL);sR0.set(c,r+1,val,X[fmt],f||undefined);sR0.merge(c,r+1,c+2,r+1,X[fmt]);sR0.set(c,r+2,sub||'',X.kS);sR0.merge(c,r+2,c+2,r+2,X.kS)};
+const q=n=>XL.qs(n)+'!';
+const rng=(sh,c,r1,r2)=>q(sh)+absA(c,r1)+':'+absA(c,r2);
+const cnt=(sh,c,r1,n)=>n?`SUBTOTAL(103,${rng(sh,c,r1,r1+n-1)})`:null;
+let cards=[],charts=[],guide=[];
+const days=Math.max(1,Math.round((U(to)-U(from))/864e5)+1);
+if(SC==='ventas'){const n=V.length,e=v0+Math.max(n,1)-1,gan=sv.t-sv.c;
+ cards=[['VENTAS CONFIRMADAS',sv.t,'kM',q('Ventas')+'H4',n+' pedido(s) confirmado(s)'],['PEDIDOS CONFIRMADOS',n,'kI',cnt('Ventas',2,v0,n)||'0','En el período'],['UNIDADES VENDIDAS',sv.u,'kI',q('Ventas')+'G4','Productos entregados'],['TICKET PROMEDIO',n?sv.t/n:0,'kM',`IF(${n}=0,0,${q('Ventas')}H4/${n})`,'Venta promedio por pedido'],
+  ['COSTO DE LO VENDIDO',sv.c,'kM',q('Ventas')+'I4','Según costo guardado'],['GANANCIA BRUTA',gan,'kM',q('Ventas')+'J4','Ventas − costo'],['MARGEN DE GANANCIA',sv.t?gan/sv.t:0,'kP',q('Ventas')+'K4','Ganancia ÷ ventas'],['VENTAS TIENDA FÍSICA',fs.reduce((t,o)=>t+num(o.total),0),'kM',`SUMIF(${rng('Ventas',4,v0,e)},"Física",${rng('Ventas',7,v0,e)})`,fs.length+' pedido(s) en mostrador']];
+ charts=[['col','Ventas y ganancia por '+GN.toLowerCase(),'pp',[[2,'B1103A'],[3,'1FA855']],'full',1],['col','Ventas por hora del día','hr',[[2,'B1103A']],'L',0,2],['col','Ventas por día de la semana','wd',[[2,'E0A800']],'R',0],['bar','Top 10 productos más vendidos (unidades)','tp',[[1,'3B82F6']],'L',0],['pie','Tienda física vs virtual','ty',[[2]],'R',0,0,['1FA855','3B82F6']],['pie','Ventas por categoría','ca',[[1]],'L',0,0,palette]];
+ guide=[['Ventas','Cada pedido confirmado: fecha, hora, cliente, tipo, productos, total, costo y ganancia (con filtros).'],['Detalle ventas','Una fila por producto vendido (talla, color, cantidad, precio).'],['Análisis','Tablas que alimentan las gráficas.']]}
+else if(SC==='compras'){const n=cl.length,e=cLast,tot=cl.reduce((t,x)=>t+(x.i?num(x.i.qty)*(x.i.unit==null?0:num(x.i.unit)):num(x.c.total)),0),uni=cl.reduce((t,x)=>t+(x.i?num(x.i.qty):0),0),sup=new Set(C.map(c=>c.supplier||'Sin proveedor')).size,sin=cl.filter(x=>x.i&&!x.i.stocked).length,big=C.reduce((m,c)=>Math.max(m,num(c.total)),0);
+ cards=[['COMPRAS (INVERSIÓN)',tot,'kM',q('Compras')+'I4',C.length+' compra(s) registrada(s)'],['UNIDADES COMPRADAS',uni,'kI',q('Compras')+'G4','Mercancía repuesta'],['COSTO PROMEDIO POR UNIDAD',uni?tot/uni:0,'kM',`IF(${q('Compras')}G4=0,0,${q('Compras')}I4/${q('Compras')}G4)`,'Inversión ÷ unidades'],['COMPRA MÁS GRANDE',big,'kM',null,'Total de una sola compra'],
+  ['PROVEEDORES',sup,'kI',null,'Distintos en el período'],['LÍNEAS SIN SUMAR A INVENTARIO',sin,'kI',`COUNTIF(${rng('Compras',9,5,e)},"No")`,'Marcadas “No” en la hoja Compras']];
+ charts=[['col','Compras por '+GN.toLowerCase(),'pp',[[1,'E0A800']],'full',1],['bar','Compras por proveedor','sp',[[1,'E0A800']],'L',0],['col','Unidades compradas por '+GN.toLowerCase(),'pp',[[2,'3B82F6']],'R',1]];
+ guide=[['Compras','Cada compra a proveedores con producto, cantidad, costo unitario y si ya se sumó al inventario.'],['Análisis','Tablas que alimentan las gráficas.']]}
+else if(SC==='gastos'){const n=X_.length,e=gl,tot=X_.reduce((t,x)=>t+num(x.amount),0),big=X_.reduce((m,x)=>Math.max(m,num(x.amount)),0),tp=Object.keys(GT).length;
+ cards=[['TOTAL DE GASTOS',tot,'kM',q('Gastos')+'D4',n+' gasto(s) registrado(s)'],['Nº DE GASTOS',n,'kI',cnt('Gastos',3,5,n)||'0','En el período'],['PROMEDIO POR GASTO',n?tot/n:0,'kM',`IF(${n}=0,0,${q('Gastos')}D4/${n})`,'Total ÷ cantidad'],['GASTO MÁS GRANDE',big,'kM',n?`MAX(${rng('Gastos',3,5,e)})`:null,'Un solo gasto'],
+  ['TIPOS DE GASTO',tp,'kI',null,'Distintos en el período'],['PROMEDIO POR DÍA',tot/days,'kM',`${q('Gastos')}D4/${days}`,days+' día(s) del período']];
+ charts=[['col','Gastos por '+GN.toLowerCase(),'pp',[[1,'EF4444']],'full',1],['pie','Gastos por tipo','gt',[[1]],'L',0,0,palette],['bar','Gastos por tipo (monto)','gt',[[1,'EF4444']],'R',0]];
+ guide=[['Gastos','Arriendo, servicios, envíos y otros gastos, con su tipo y monto (con filtros).'],['Análisis','Tablas que alimentan las gráficas.']]}
+else if(SC==='pedidos'){const n=A.length,e=4+Math.max(n,1)-1,vsum=s=>A.filter(o=>o.status===s).reduce((t,o)=>t+num(o.total),0),sc=(s,L)=>`COUNTIF(${rng('Pedidos',3,4,e)},"${L}")`,ss=(L)=>`SUMIF(${rng('Pedidos',3,4,e)},"${L}",${rng('Pedidos',8,4,e)})`;
+ cards=[['PEDIDOS CREADOS',n,'kI',null,'En el período'],['PENDIENTES',stc.pendiente,'kI',sc(0,'Pendiente'),'Por confirmar'],['CONFIRMADOS',stc.confirmado,'kI',sc(0,'Confirmado'),'Ventas cerradas'],['CANCELADOS',stc.cancelado,'kI',sc(0,'Cancelado'),'No concretados'],
+  ['VALOR CONFIRMADO',vsum('confirmado'),'kM',ss('Confirmado'),'Suma de pedidos confirmados'],['VALOR PENDIENTE',vsum('pendiente'),'kM',ss('Pendiente'),'Por cobrar'],['VALOR CANCELADO',vsum('cancelado'),'kM',ss('Cancelado'),'Se dejó de vender']];
+ charts=[['col','Pedidos creados por '+GN.toLowerCase(),'pp',[[1,'8B5CF6']],'full',1],['pie','Estado de los pedidos','es',[[1]],'L',0,0,['F59E0B','1FA855','B91C1C']],['pie','Tienda física vs virtual (todos los pedidos)','ot',[[1]],'R',0,0,['1FA855','3B82F6']]];
+ guide=[['Pedidos','Todos los pedidos del período con su estado (pendiente, confirmado, cancelado).'],['Análisis','Tablas que alimentan las gráficas.']]}
+else if(SC==='productos'){const n=prods.length,e=prl,su=k=>prods.reduce((t,p)=>t+p[k],0);
+ cards=[['PRODUCTOS CON MOVIMIENTO',n,'kI',null,'Vendidos o comprados'],['UNIDADES VENDIDAS',su('u'),'kI',q('Productos')+absA(2,prt),'En el período'],['VENTAS',su('v'),'kM',q('Productos')+absA(3,prt),'Suma de todos los productos'],['UNIDADES COMPRADAS',su('uc'),'kI',q('Productos')+absA(5,prt),'Mercancía repuesta'],['COMPRAS',su('cp'),'kM',q('Productos')+absA(6,prt),'Inversión en el período']];
+ charts=[['bar','Top 10 productos más vendidos (unidades)','tp',[[1,'3B82F6']],'L',0],['pie','Ventas por categoría','ca',[[1]],'R',0,0,palette],['bar','Top 10: ventas en dinero','tp',[[2,'1FA855']],'L',0]];
+ guide=[['Productos','Qué se vendió y compró por producto, y el stock actual.'],['Análisis','Tablas que alimentan las gráficas.']]}
+else{const n=il.length,e=ill,ag=il.filter(x=>x.n===0).length,sl=il.filter(x=>x.n==null).length;
+ cards=[['UNIDADES EN STOCK',ist.s,'kI',q('Inventario')+absA(4,ilt),'Suma de todas las tallas/colores'],['VALOR A COSTO',ist.c,'kM',q('Inventario')+absA(7,ilt),'Lo que costó la mercancía'],['VALOR A PRECIO DE VENTA',ist.p,'kM',q('Inventario')+absA(8,ilt),'Si se vende todo'],['GANANCIA POTENCIAL',ist.p-ist.c,'kM',`${q('Inventario')}${absA(8,ilt)}-${q('Inventario')}${absA(7,ilt)}`,'Precio de venta − costo'],
+  ['PRODUCTOS',D.products.length,'kI',null,'En el catálogo'],['LÍNEAS TALLA/COLOR',n,'kI',null,'Filas del inventario'],['AGOTADOS',ag,'kI',n?`COUNTIF(${rng('Inventario',4,il0,e)},0)`:null,'Con stock en 0'],['SIN LÍMITE DE STOCK',sl,'kI',n?`COUNTIF(${rng('Inventario',4,il0,e)},"Sin límite")`:null,'Stock no controlado']];
+ charts=[['col','Unidades en stock por categoría','ic',[[1,'F97316']],'L',0],['pie','Valor a costo por categoría','ic',[[2]],'R',0,0,palette]];
+ guide=[['Inventario','Stock actual por talla/color y su valor a costo y a precio de venta.'],['Análisis','Tablas que alimentan las gráficas.']]}
+cards.forEach(([l,v,f,fm,s],k)=>{const row=5+4*Math.floor(k/4),col=1+3*(k%4);card(col,row,l,v,f,fm,s)});
+const nr=Math.ceil(cards.length/4);[...Array(nr)].forEach((_,i)=>{const r=5+4*i;sR0.height(r,16);sR0.height(r+1,36);sR0.height(r+2,15)});
+let cr=5+4*nr;sR0.set(1,cr,'Gráficas',X.sec);sR0.merge(1,cr,12,cr,X.sec);cr++;
+let first=true,rowTop=cr;
+charts.forEach(([type,title,key,ser,pos,per,skipN,cols])=>{const b=blocks[key];if(!b)return;
+ const full=pos==='full';let c1=1,c2=13;if(!full){c1=pos==='L'?1:7;c2=pos==='L'?7:13}
+ if(pos!=='R'){if(!first)rowTop+=17}first=false;
+ const sp={type,title,cat:{sh:sA,c:0,r1:b.r1,r2:b.r2},series:ser.map(([c,color])=>({sh:sA,c,r1:b.r1,r2:b.r2,nc:c,nr:b.r1-1,color})),gap:40};
+ if(type==='pie'){sp.labels=true;sp.colors=cols}else if(type==='bar'){sp.labels=true;sp.gap=40}else{sp.gap=50;if(per&&periods.length>20)sp.skip=Math.ceil(periods.length/20);else if(skipN)sp.skip=skipN}
+ if(key==='wd'||key==='sp'||(key==='gt'&&type==='bar')){sp.labels=true;sp.lblFmt=MONEYK()}
+ if(key==='tp'&&ser[0][0]===1){sp.axFmt='#,##0';sp.lblFmt='#,##0'}
+ sR0.chart(sp,c1,rowTop,c2,rowTop+16)});
+const gr=rowTop+18;sR0.set(1,gr,'Qué contiene este archivo',X.sec);sR0.merge(1,gr,12,gr,X.sec);
+guide.unshift(['Resumen','Indicadores y gráficas de esta sección.']);
+guide.forEach(([a,t],k)=>{const r=gr+1+k;sR0.set(1,r,a,X.guideB);sR0.merge(1,r,2,r,X.guideB);sR0.set(3,r,t,X.guide);sR0.merge(3,r,12,r,X.guide);sR0.height(r,18)});
+return sR0};
+const sR0=SC==='all'?resAll():resScoped();
 function MONEYK(){return'[>=1000000]"$"0.0,,"M";[>=1000]"$"0,"K";"$"0'}
-const sheets=[sR0,sP,sV,sD,sC,sG,sO,sR,sI,sA];
+const sheets=SC==='all'?[sR0,sP,sV,sD,sC,sG,sO,sR,sI,sA]:{ventas:[sR0,sV,sD,sA],compras:[sR0,sC,sA],gastos:[sR0,sG,sA],pedidos:[sR0,sO,sA],productos:[sR0,sR,sA],inventario:[sR0,sI,sA]}[SC];
 sheets.forEach(sh=>sh.charts.forEach(c=>{c.spec.series.forEach(s=>{s.sh=s.sh||sh});}));
-return build(sheets,S,D.theme,'GORRAX · Reporte '+from+' a '+to)}
-
+return build(sheets,S,D.theme,'GORRAX · Reporte'+(SC==='all'?'':' de '+SC)+' '+from+' a '+to)}
 /* ====== Exportar a Excel: cuadro de fechas ====== */
-const XS={mode:'mes',d:'',w:'',s:'',m:'',f:'',t:'',g:'day',busy:false};
+const XS={sc:'all',mode:'mes',d:'',w:'',s:'',m:'',f:'',t:'',g:'day',busy:false};
+const XSC=[['all','Todo junto'],['ventas','Ventas'],['compras','Compras'],['gastos','Gastos'],['pedidos','Pedidos'],['productos','Productos'],['inventario','Inventario']],XCTX={ven:'ventas',com:'compras',gas:'gastos',ped:'pedidos',prod:'productos',inv:'inventario'};
 const XMODES=[['dia','Por día'],['sem','Por semana'],['q15','Por 15 días'],['mes','Por mes'],['rng','Rango libre'],['all','Todo']];
 const XGRP=[['day','Día'],['week','Semana'],['fortnight','Quincena'],['month','Mes']];
 const xMes=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
@@ -2575,7 +2647,7 @@ function xCount(r){const V=orders.filter(o=>o.status==='confirmado'&&xLoc(o.conf
 function xOpen(ctx){const t=today0();
   if(!XS.d){XS.d=t;XS.w=t;XS.s=dAdd(t,-14);XS.m=t.slice(0,7);XS.f=dAdd(t,-29);XS.t=t}
   if(cmM==='r'){XS.mode='rng';XS.f=cmF;XS.t=cmT}else if(/^\d{4}-\d{2}$/.test(cmM)&&ctx==='com'){XS.mode='mes';XS.m=cmM}else if(cmM==='all'&&ctx==='com'){XS.mode='all'}
-  XS.busy=false;xR();$('xld').showModal()}
+  XS.sc=XCTX[ctx]||'all';XS.busy=false;xR();$('xld').showModal()}
 function xR(){const r=xRange(),c=xCount(r),g=xGroup(r),n=xSpan(r);
   const months=[];{const d=new Date();for(let i=0;i<30;i++){const x=new Date(d.getFullYear(),d.getMonth()-i,1);months.push(x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0'))}}
   if(XS.m&&!months.includes(XS.m))months.push(XS.m);
@@ -2585,16 +2657,21 @@ function xR(){const r=xRange(),c=xCount(r),g=xGroup(r),n=xSpan(r);
    mes:`<label>Mes<select id="xlM">${months.map(m=>`<option value="${m}"${m===XS.m?' selected':''}>${xMes[+m.slice(5)-1]} ${m.slice(0,4)}</option>`).join('')}</select></label>`,
    rng:`<label>Desde<input type="date" id="xlF" value="${XS.f}" max="${today0()}"></label><label>Hasta<input type="date" id="xlT" value="${XS.t}" max="${today0()}"></label>`,
    all:`<small>Desde el primer movimiento (<b>${xFmt(r.f)}</b>) hasta hoy.</small>`}[XS.mode];
-  $('xlB').innerHTML=`<p class="desc">Elige cómo quieres filtrar y las fechas. El Excel incluye ventas, compras, pedidos, productos, inventario y gráficas.</p>
+  const pvT={all:`${c.v} venta(s) confirmada(s) por <b>${money(c.t)}</b> · ${c.c} compra(s) por <b>${money(c.cp)}</b> · ${c.e} gasto(s) por <b>${money(c.et)}</b> · ${c.a} pedido(s) en total`,ventas:`${c.v} venta(s) confirmada(s) por <b>${money(c.t)}</b>`,compras:`${c.c} compra(s) por <b>${money(c.cp)}</b>`,gastos:`${c.e} gasto(s) por <b>${money(c.et)}</b>`,pedidos:`${c.a} pedido(s) en total`,productos:`${c.v} venta(s) y ${c.c} compra(s) en el período`}[XS.sc];
+  const scN=XSC.find(x=>x[0]===XS.sc)[1],noDate=XS.sc==='inventario';
+  $('xlB').innerHTML=`<p class="desc">Elige qué exportar: una sola sección o todo junto en un mismo Excel con gráficas.</p>
+  <div class="xlg"><span>¿Qué exportar?</span><div class="tabs" id="xlSc">${XSC.map(([k,l])=>`<button type="button" class="btn ghost sm${XS.sc===k?' on':''}" data-x="sc" data-k="${k}">${l}</button>`).join('')}</div></div>
+  ${noDate?'<p class="desc">El inventario es una foto de hoy: no depende de fechas.</p>':`
   <div class="tabs" id="xlMd">${XMODES.map(([k,l])=>`<button type="button" class="btn ghost sm${XS.mode===k?' on':''}" data-x="m" data-k="${k}">${l}</button>`).join('')}</div>
   <div class="xlin">${inp}</div>
-  ${XS.mode==='dia'?'':`<div class="xlg"><span>Filas del reporte por:</span><div class="tabs">${XGRP.map(([k,l])=>`<button type="button" class="btn ghost sm${g===k?' on':''}" data-x="g" data-k="${k}">${l}</button>`).join('')}</div></div>`}
-  <div class="xlpv"><b>${xFmt(r.f)}${r.f===r.t?'':' → '+xFmt(r.t)}</b> · ${n} día(s)<br>${c.v} venta(s) confirmada(s) por <b>${money(c.t)}</b> · ${c.c} compra(s) por <b>${money(c.cp)}</b> · ${c.e} gasto(s) por <b>${money(c.et)}</b> · ${c.a} pedido(s) en total${g!==XS.g&&XS.mode!=='dia'?'<br><small>Se agrupó por '+XGRP.find(x=>x[0]===g)[1].toLowerCase()+' porque el rango es largo.</small>':''}</div>
+  ${XS.mode==='dia'||['productos','inventario'].includes(XS.sc)?'':`<div class="xlg"><span>Filas del reporte por:</span><div class="tabs">${XGRP.map(([k,l])=>`<button type="button" class="btn ghost sm${g===k?' on':''}" data-x="g" data-k="${k}">${l}</button>`).join('')}</div></div>`}
+  <div class="xlpv"><b>${xFmt(r.f)}${r.f===r.t?'':' → '+xFmt(r.t)}</b> · ${n} día(s)<br>${pvT}${g!==XS.g&&XS.mode!=='dia'?'<br><small>Se agrupó por '+XGRP.find(x=>x[0]===g)[1].toLowerCase()+' porque el rango es largo.</small>':''}</div>`}
   <p class="msg" id="xlMsg"></p>
   <div class="xlact"><button type="button" class="btn ghost" data-x="x">Cancelar</button><button type="button" class="btn" data-x="go"${XS.busy?' disabled':''}>${XS.busy?'Generando…':'⬇ Descargar Excel'}</button></div>`}
 $('xld').onclick=async e=>{const b=e.target.closest('[data-x]');if(!b)return;const a=b.dataset.x;
   if(a==='x'){$('xld').close();return}
   if(a==='m'){XS.mode=b.dataset.k;if(XS.mode==='rng'||XS.mode==='all'){const r=xRange();XS.g=xSpan(r)<=31?'day':xSpan(r)<=120?'week':'month'}else if(XS.mode==='mes')XS.g='day';else XS.g='day';xR();return}
+  if(a==='sc'){XS.sc=b.dataset.k;xR();return}
   if(a==='g'){XS.g=b.dataset.k;xR();return}
   if(a==='l15'){XS.s=dAdd(today0(),-14);xR();return}
   if(a==='go'&&!XS.busy)xGo()};
@@ -2606,13 +2683,13 @@ async function xGo(){const r=xRange(),g=xGroup(r),msg=t=>{const m=$('xlMsg');if(
   XS.busy=true;xR();
   try{try{await Promise.all([loadPurch(),loadCosts(),loadExps()])}catch(e){}
     await new Promise(k=>setTimeout(k,30));
-    const buf=xlReport({orders,purch,expenses:exps,products,costs,from:r.f,to:r.t,group:g,theme:XL_THEME,now:new Date()});
+    const buf=xlReport({orders,purch,expenses:exps,products,costs,from:r.f,to:r.t,group:g,scope:XS.sc,theme:XL_THEME,now:new Date()});
     const blob=new Blob([buf],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}),url=URL.createObjectURL(blob),a=document.createElement('a');
-    a.href=url;a.download=`GORRAX-reporte_${r.f}_a_${r.t}.xlsx`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),4000);
+    a.href=url;a.download=XS.sc==='inventario'?`GORRAX-inventario_${today0()}.xlsx`:`GORRAX-${XS.sc==='all'?'reporte':XS.sc}_${r.f}_a_${r.t}.xlsx`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),4000);
     XS.busy=false;$('xld').close();toast('Excel descargado')}
   catch(err){XS.busy=false;xR();msg('No se pudo generar el Excel: '+(err&&err.message||err))}}
 function xlOpen(ctx){xOpen(ctx)}
-
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-xl]');if(b)xlOpen(b.dataset.xl)});
 /* ====== GRÁFICA (admin) ====== */
 let gr='today',gf='',gt='',gDay=new Date().toDateString();
 function rGra(){
@@ -2662,15 +2739,15 @@ async function moveProd(id,dir){
   await load();alist();say('Orden actualizado en la tienda.',true)}
 /* ===== Descripción con formato (negrita, cursiva, viñetas) ===== */
 (()=>{const pd=$('pd'),pde=$('pde'),vd=Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype,'value');
-  Object.defineProperty(pd,'value',{get(){return vd.get.call(pd)},set(v){vd.set.call(pd,v);pde.innerHTML=descHTML(v);pv()}});
-  const pv=()=>{$('pdv').innerHTML=descHTML(vd.get.call(pd))},st=()=>{document.querySelectorAll('.pdt button[data-c]').forEach(b=>{let on=false;try{on=['bold','italic','underline','insertUnorderedList','insertOrderedList'].includes(b.dataset.c)&&document.activeElement===pde&&document.queryCommandState(b.dataset.c)}catch(e){}b.classList.toggle('on',on)})};
-  const sync=()=>{vd.set.call(pd,(!pde.textContent.trim()&&!pde.querySelector('li'))?'':cleanDesc(pde.innerHTML));pv();st()};
+  Object.defineProperty(pd,'value',{get(){return vd.get.call(pd)},set(v){vd.set.call(pd,v);pde.innerHTML=descHTML(v)}});
+  const st=()=>{document.querySelectorAll('.pdt button[data-c]').forEach(b=>{let on=false;try{on=['bold','italic','underline','insertUnorderedList','insertOrderedList'].includes(b.dataset.c)&&document.activeElement===pde&&document.queryCommandState(b.dataset.c)}catch(e){}b.classList.toggle('on',on)})};
+  const sync=()=>{vd.set.call(pd,(!pde.textContent.trim()&&!pde.querySelector('li'))?'':cleanDesc(pde.innerHTML));st()};
   document.addEventListener('selectionchange',st);
   pde.addEventListener('input',sync);
   pde.addEventListener('paste',e=>{e.preventDefault();document.execCommand('insertText',false,(e.clipboardData||window.clipboardData).getData('text/plain'))});
   const tb=document.querySelector('.pdt');tb.addEventListener('mousedown',e=>{if(e.target.closest('button'))e.preventDefault()});
   tb.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;pde.focus();document.execCommand(b.dataset.c);sync();pde.focus();st()});
-  $('pf').addEventListener('reset',()=>setTimeout(()=>{pde.innerHTML=descHTML(vd.get.call(pd));pv()},0))})();
+  $('pf').addEventListener('reset',()=>setTimeout(()=>{pde.innerHTML=descHTML(vd.get.call(pd))},0))})();
 
 /* ===== Productos que ya existían -> se agregan a Compras (una sola vez, sin duplicar) ===== */
 const cmMissing=()=>{const linked=new Set();purch.forEach(c=>(c.items||[]).forEach(i=>{const p=pOf(i);if(p)linked.add(String(p.id))}));return products.filter(p=>!linked.has(String(p.id)))};
@@ -2778,17 +2855,17 @@ function rGas(){
   const M={};exps.forEach(e=>{M[e.spent_at.slice(0,7)]=1});const cur=today0().slice(0,7);if(/^\d{4}-\d{2}$/.test(gsM))M[gsM]=1;M[cur]=1;
   const ms=Object.keys(M).sort().reverse(),mn=m=>new Date(m+'-15').toLocaleDateString('es-CO',{month:'long',year:'numeric'});
   const rg=gsRange(),inD=d=>gsM==='all'||(d>=rg.f&&d<=rg.t),lcl=o=>new Date(o.confirmed_at||o.created_at).toLocaleDateString('sv');
-  const E=exps.filter(e=>inD(e.spent_at)),V=orders.filter(o=>o.status==='confirmado'&&inD(lcl(o))),C=purch.filter(c=>inD(c.bought_at));
-  const gasto=E.reduce((t,e)=>t+Number(e.amount||0),0),vend=V.reduce((t,o)=>t+Number(o.total||0),0),bruta=vend-V.reduce((t,o)=>t+ordCost(o),0),neta=bruta-gasto,comp=C.reduce((t,c)=>t+Number(c.total||0),0);
+  const E=exps.filter(e=>inD(e.spent_at));
+  const gasto=E.reduce((t,e)=>t+Number(e.amount||0),0);
   const lbl=gsM==='all'?'todo':gsM==='r'?(rg.f===rg.t?cmD(rg.f):cmD(rg.f)+' → '+cmD(rg.t)):mn(gsM);
   const T={};E.forEach(e=>{const k=e.category||'Otros';T[k]=(T[k]||0)+Number(e.amount||0)});const tl=Object.entries(T).sort((a,b)=>b[1]-a[1]),mx=tl.length?tl[0][1]:0;
   const bar=(l,n,m,v)=>`<div class="gb"><span class="gl">${esc(l)}</span><div class="gt"><i style="width:${m?Math.max(2,Math.round(n/m*100)):0}%"></i></div><span class="gv">${v}</span></div>`;
   const types=gsTypes(),other=gsH.cat==='__o';
-  $('tGas').innerHTML=`<div class="gk"><div><small>Ventas · ${lbl}</small><b>${money(vend)}</b></div><div><small>Ganancia bruta</small><b style="color:#1fa855">${money(bruta)}</b></div><div><small>Gastos</small><b style="color:#e53935">${money(gasto)}</b></div><div><small>Ganancia neta (− gastos)</small><b style="color:${neta<0?'#e53935':'#1fa855'}">${money(neta)}</b></div></div>
-  <p class="desc" style="margin:0 0 8px">En este periodo también compraste mercancía por <b>${money(comp)}</b> (se ve en la pestaña Compras). La ganancia neta = ventas − costo de lo vendido − gastos.</p>
+  const topT=tl.length?tl[0]:null;
+  $('tGas').innerHTML=`<div class="gk"><div><small>Total gastos · ${lbl}</small><b style="color:#e53935">${money(gasto)}</b></div><div><small>Nº de gastos</small><b>${E.length}</b></div><div><small>Promedio por gasto</small><b>${money(E.length?gasto/E.length:0)}</b></div><div><small>Mayor tipo</small><b>${topT?esc(topT[0]):'—'}</b></div></div>
   <div class="tabs" id="gsPs">${[['today','Hoy'],['7','Últimos 7 días'],['15','Últimos 15 días'],['30','Últimos 30 días']].map(([k,t])=>`<button type="button" class="btn ghost sm${gsM==='r'&&gsP===k?' on':''}" data-a="pre" data-k="${k}">${t}</button>`).join('')}<button type="button" class="btn ghost sm${gsM==='all'?' on':''}" data-a="mon" data-m="all">Todo</button><button type="button" class="btn ghost sm" data-a="xl">⬇ Exportar a Excel</button></div>
   <div class="tabs" id="gsMs">${ms.map(m=>`<button type="button" class="btn ghost sm${m===gsM?' on':''}" data-a="mon" data-m="${m}">${mn(m)}</button>`).join('')}</div>
-  <div class="cmrg"><label>Desde<input type="date" id="gsF" value="${rg.f}" max="${today0()}"></label><label>Hasta<input type="date" id="gsT" value="${rg.t}" max="${today0()}"></label>${gsM==='r'?'<button type="button" class="btn ghost sm" data-a="rq">Quitar filtro</button>':''}<small>Filtra gastos y ganancia por días.</small></div>
+  <div class="cmrg"><label>Desde<input type="date" id="gsF" value="${rg.f}" max="${today0()}"></label><label>Hasta<input type="date" id="gsT" value="${rg.t}" max="${today0()}"></label>${gsM==='r'?'<button type="button" class="btn ghost sm" data-a="rq">Quitar filtro</button>':''}<small>Filtra los gastos por días.</small></div>
   <h3 class="t ghd">Registrar gasto</h3>
   <div class="tabs gsq">${types.map(t=>`<button type="button" class="btn ghost sm" data-a="gq" data-t="${esc(t)}">＋ ${esc(t)}</button>`).join('')}<button type="button" class="btn sm" data-a="gnew">＋ Nuevo tipo de gasto</button></div>
   <div class="cmf"><div class="cmh"><label>Fecha<input type="date" id="gsDate" value="${gsH.d||today0()}" max="${today0()}"></label><label>Tipo de gasto<select id="gsCat">${types.map(t=>`<option${t===gsH.cat?' selected':''}>${esc(t)}</option>`).join('')}<option value="__o"${other?' selected':''}>＋ Otro tipo (escribir)…</option></select></label>${other?`<label>Nombre del nuevo tipo<input id="gsOther" value="${esc(gsH.other)}" placeholder="Ej: Publicidad, Empaques…" maxlength="40" autocomplete="off"></label>`:''}<label>Monto<input type="number" min="0" step="any" id="gsAmt" value="${gsH.amt}" inputmode="decimal" placeholder="$"></label><label class="cmw">Nota<input id="gsNote" value="${esc(gsH.note)}" placeholder="Opcional (mes que pagas, referencia…)" autocomplete="off"></label></div>
