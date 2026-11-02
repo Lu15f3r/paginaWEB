@@ -1404,9 +1404,11 @@ dialog#adm[data-dock=left] .cmh,dialog#adm[data-dock=right] .cmh{grid-template-c
 .lbd div:first-child{white-space:normal}
 .mvb{display:flex;gap:4px;align-items:center}.mvb .btn{padding:6px 9px;min-width:34px}.pos{min-width:24px;text-align:center;font-weight:800;color:var(--gold);font-size:14px}
 @media(max-width:640px){#alist .row{flex-wrap:wrap}.mvb{order:5;width:100%;justify-content:flex-end}}
-#lb .lbf .lba{margin-left:auto;gap:6px}#lb .lbf .lba .btn{margin-left:0}
+#lb .lbf{justify-content:flex-start}#lb .lbf .lba{margin-left:0;gap:6px}#lb .lbf .lba .btn{margin-left:0}
 @media(max-width:700px){#lb .lbf .lba{margin-left:0}}
 @media(min-width:701px){#adm .dh{display:grid!important;grid-template-columns:auto 1fr;grid-template-areas:'dock act' 'ttl ttl';align-items:center;row-gap:6px}#adm .dh h2{grid-area:ttl;margin:0}#adm .dh .dock{grid-area:dock;margin:0;justify-self:start}#adm .dh>div:last-child{grid-area:act;justify-self:end;display:flex;gap:8px;align-items:center}}
+.gavs{display:grid;gap:6px;margin:0 0 10px}.gav{padding:8px 12px;border:1px solid var(--line);border-left:4px solid #f59e0b;background:var(--panel);font-size:14px}.gav.late{border-left-color:#e53935}.gav.soon{border-left-color:#f59e0b}.gav.near{border-left-color:var(--gold)}.plr small{color:var(--muted)}
+[data-xl],[data-a="xl"],#xlV{background:#1fa855!important;color:#fff!important;border-color:#1fa855!important;margin-left:auto}#tInv>div:has([data-xl]),#tProd div:has(>[data-xl]){display:flex;justify-content:flex-end}
 </style>
 </head>
 <body>
@@ -1478,6 +1480,7 @@ dialog#adm[data-dock=left] .cmh,dialog#adm[data-dock=right] .cmh{grid-template-c
       <div class="w"><button class="btn">Entrar</button></div>
     </form>
     <div id="panel" hidden>
+      <div id="gAv" class="gavs" hidden></div>
       <div class="tabs" id="tabs"><button type="button" class="btn ghost sm on" data-t="prod">Productos</button><button type="button" class="btn ghost sm" data-t="ped">Pedidos</button><button type="button" class="btn ghost sm" data-t="inv">Inventario</button><button type="button" class="btn ghost sm" data-t="ven">Ventas</button><button type="button" class="btn ghost sm" data-t="com">Compras</button><button type="button" class="btn ghost sm" data-t="gas">Gastos</button><button type="button" class="btn ghost sm" data-t="gra">Gráfica</button><button type="button" class="btn ghost sm" data-t="app">Apariencia</button></div>
       <div id="tProd"><form id="pf" class="f">
         <input type="hidden" id="pid">
@@ -1744,7 +1747,7 @@ function updMg(){const c=parseFloat($('pco').value),el=$('pmg'),L=[];let neg=fal
   if(!L.length){el.textContent='';el.className='w mg';return}
   el.className='w mg '+(neg?'neg':'ok');el.innerHTML=L.map(esc).join('<br>')}
 $('pco').oninput=$('pcmp').oninput=$('pp').oninput=updMg;
-function gate(on){$('login').hidden=on;$('panel').hidden=!on;$('out').hidden=!on;$('admT').textContent=on?'Panel de administración':'Administrador';say('');if(on){alist();loadOrders();loadPurch();loadExps();loadCosts().then(()=>{if($('pid').value)$('pco').value=costs[$('pid').value]??'';updMg()})}}
+function gate(on){$('login').hidden=on;$('panel').hidden=!on;$('out').hidden=!on;$('admT').textContent=on?'Panel de administración':'Administrador';say('');if(on){alist();loadOrders();loadPurch();loadExps();loadPlans();loadCosts().then(()=>{if($('pid').value)$('pco').value=costs[$('pid').value]??'';updMg()})}}
 $('x').onclick=()=>dlg.close();
 $('login').onsubmit=async e=>{e.preventDefault();
   const{error}=await sb.auth.signInWithPassword({email:$('em').value,password:$('pw').value});
@@ -2116,10 +2119,10 @@ const fd=d=>new Date(d).toLocaleString('es-CO',{dateStyle:'medium',timeStyle:'sh
 const itx=o=>(o.items||[]).map(i=>`${i.qty>1?i.qty+'× ':''}${esc(i.name)}${i.size?' ('+esc(i.size)+')':''}${i.color?' · '+esc(i.color):''}`).join(' + ');
 const ym=o=>{const d=new Date(o.confirmed_at||o.created_at);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')};
 async function loadOrders(){if(!sb)return;const{data,error}=await sb.from('orders').select('*').order('created_at',{ascending:false});ordErr=!!error;orders=error?[]:data;showTab(tab)}
-function showTab(t){tab=t;const m={prod:'tProd',ped:'tPed',inv:'tInv',ven:'tVen',com:'tCom',gas:'tGas',gra:'tGra',app:'tApp'};for(const k in m)$(m[k]).hidden=k!==t;
+function showTab(t){const _pt=tab;tab=t;const m={prod:'tProd',ped:'tPed',inv:'tInv',ven:'tVen',com:'tCom',gas:'tGas',gra:'tGra',app:'tApp'};for(const k in m)$(m[k]).hidden=k!==t;
   $('tabs').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
   if(t!=='prod'&&ordErr&&t!=='inv'&&t!=='app'&&t!=='gas'&&t!=='com'){$(m[t]).innerHTML='<p class="msg">No se pudieron leer los pedidos. Ejecuta actualizar-pedidos.sql en Supabase.</p>';return}
-  if(t==='ped')rPed();if(t==='inv')rInv();if(t==='ven')rVen();if(t==='gra')rGra();if(t==='com')rCom();if(t==='gas'){rGas();if(!exps.length&&!expErr)loadExps()}if(t==='app')rApp();
+  if(t==='ped')rPed();if(t==='inv')rInv();if(t==='ven')rVen();if(t==='gra')rGra();if(t==='com'){if(_pt!=='com'){cmM='all';cmP='';cmC=''}rCom()}if(t==='gas'){rGas();if(!exps.length&&!expErr)loadExps();if(!plLoaded)loadPlans()}if(t==='app')rApp();
   if(!showTab.q&&(t==='prod'||t==='inv')){showTab.q=1;load().then(()=>{showTab.q=0;if(tab==='prod')alist();if(tab==='inv'&&!$('tInv').querySelector('.stk-in.chg'))rInv()}).catch(()=>{showTab.q=0})}}
 function rPed(){const L=orders.filter(o=>pfil==='todos'||o.status===pfil);
   $('tPed').innerHTML=`<div class="tabs">${['pendiente','confirmado','cancelado','todos'].map(s=>`<button type="button" class="btn ghost sm${pfil===s?' on':''}" data-f="${s}">${ST[s]||'Todos'} (${s==='todos'?orders.length:orders.filter(o=>o.status===s).length})</button>`).join('')}<button type="button" class="btn ghost sm" data-xl="ped">⬇ Excel</button></div>`+
@@ -2763,7 +2766,7 @@ async function cmAuto(){if(cmAuto.busy||cmAuto.done||purchErr||!sb||!products.le
     cmAuto.done=1}catch(_){}
   cmAuto.busy=0;if(tab==='com')rCom()}
 /* ====== COMPRAS (admin) ====== */
-let purch=[],purchErr=false,cmM=(()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')})(),cmL=[{name:'',s:'',c:'',q:1,u:''}],cmH={d:'',sup:'',note:'',st:true,ship:''},cmP='',cmF='',cmT='';
+let purch=[],purchErr=false,cmM='all',cmC='',cmL=[{name:'',s:'',c:'',q:1,u:''}],cmH={d:'',sup:'',note:'',st:true,ship:''},cmP='',cmF='',cmT='';
 const today0=()=>new Date().toLocaleDateString('sv');
 const nrm=s=>slug(String(s||'')).replace(/-/g,'');
 const pMatch=n=>{const k=nrm(n);return k?products.find(p=>nrm(p.name)===k):null};
@@ -2787,11 +2790,13 @@ function rCom(){
   const M={};purch.forEach(c=>{M[c.bought_at.slice(0,7)]=1});const cur=today0().slice(0,7);if(/^\d{4}-\d{2}$/.test(cmM))M[cmM]=1;M[cur]=1;
   const ms=Object.keys(M).sort().reverse(),mn=m=>new Date(m+'-15').toLocaleDateString('es-CO',{month:'long',year:'numeric'});
   const rg=cmRange(),inD=d=>cmM==='all'||(d>=rg.f&&d<=rg.t);
-  const L=purch.filter(c=>inD(c.bought_at));
+  const cats=[...new Set(products.map(p=>p.category).filter(Boolean))],catOf=it=>{const p=pOf(it);return(p&&p.category)||'Sin categoría'};
+  if(cmC&&!cats.includes(cmC)&&cmC!=='Sin categoría')cmC='';
+  const L0=purch.filter(c=>inD(c.bought_at)),L=cmC?L0.map(c=>{const its=(c.items||[]).map((it,k)=>({...it,_ix:k})).filter(it=>catOf(it)===cmC);return{...c,items:its,total:its.reduce((t,i)=>t+(Number(i.qty)||0)*(i.unit==null?0:Number(i.unit)),0)}}).filter(c=>c.items.length):L0;
   const lcl=o=>new Date(o.confirmed_at||o.created_at).toLocaleDateString('sv');
   const V=orders.filter(o=>o.status==='confirmado'&&inD(lcl(o)));
   const lbl=cmM==='all'?'todo':cmM==='r'?(rg.f===rg.t?cmD(rg.f):cmD(rg.f)+' → '+cmD(rg.t)):mn(cmM);
-  const comp=L.reduce((t,c)=>t+Number(c.total||0),0),vend=V.reduce((t,o)=>t+Number(o.total),0),und=L.reduce((t,c)=>t+(c.items||[]).reduce((a,i)=>a+(Number(i.qty)||0),0),0);
+  const comp=L.reduce((t,c)=>t+Number(c.total||0),0),vend=cmC?V.reduce((t,o)=>t+(Array.isArray(o.items)?o.items:[]).filter(i=>(i.category||(products.find(p=>String(p.id)===String(i.id))||{}).category||'Sin categoría')===cmC).reduce((a,i)=>a+(Number(i.qty)||0)*(Number(i.price)||0),0),0):V.reduce((t,o)=>t+Number(o.total),0),und=L.reduce((t,c)=>t+(c.items||[]).reduce((a,i)=>a+(Number(i.qty)||0),0),0);
   const pend=purch.reduce((t,c)=>t+(c.items||[]).filter(i=>!i.stocked&&pOf(i)).length,0),nuev=purch.reduce((t,c)=>t+(c.items||[]).filter(i=>!pOf(i)).length,0);
   const sups=[...new Set(purch.map(c=>c.supplier).filter(Boolean))],um=cmMissing().length;cmAuto();
   const rows=cmL.map((l,i)=>`<div class="cml" data-i="${i}"><label class="cmn">Producto<input list="cmDl" data-f="name" value="${esc(l.name)}" placeholder="Nombre del producto" autocomplete="off"><small class="cmb">${cmBadge(l.name)}</small></label><label>Talla<input data-f="s" value="${esc(l.s)}" placeholder="Opcional"></label><label>Color<input data-f="c" value="${esc(l.c)}" placeholder="Opcional"></label><label>Cantidad<input type="number" min="1" step="1" data-f="q" value="${l.q}" inputmode="numeric"></label><label>Costo por unidad<input type="number" min="0" step="any" data-f="u" value="${l.u}" inputmode="decimal" placeholder="$"></label><div class="cmt"><small>Subtotal</small><b data-sub>${money((Number(l.q)||0)*(Number(l.u)||0))}</b></div>${cmL.length>1?`<button type="button" class="btn ghost sm" data-a="rm" data-i="${i}" aria-label="Quitar línea">✕</button>`:''}</div>`).join('');
@@ -2799,6 +2804,7 @@ function rCom(){
   ${um?`<p class="desc" style="margin:4px 0 10px"><b>${um}</b> producto(s) de la tienda aún no están en Compras. <button type="button" class="btn sm" data-a="bf">Agregarlos a Compras</button></p>`:''}
   ${(pend||nuev)?`<p class="desc" style="margin:4px 0 10px">${pend?`<b>${pend}</b> línea(s) de compra con producto existente aún sin sumar al inventario. `:''}${nuev?`<b>${nuev}</b> línea(s) con productos que todavía no están en la tienda.`:''}</p>`:''}
   <div class="tabs" id="cmPs">${[['today','Hoy'],['7','Últimos 7 días'],['15','Últimos 15 días'],['30','Últimos 30 días']].map(([k,t])=>`<button type="button" class="btn ghost sm${cmM==='r'&&cmP===k?' on':''}" data-a="pre" data-k="${k}">${t}</button>`).join('')}<button type="button" class="btn ghost sm${cmM==='all'?' on':''}" data-a="mon" data-m="all">Todo</button><button type="button" class="btn ghost sm" data-a="xl">⬇ Exportar a Excel</button></div>
+  <div class="tabs" id="cmCs"><small style="align-self:center;color:var(--muted)">Categoría:</small><button type="button" class="btn ghost sm${cmC?'':' on'}" data-a="cat" data-cat="">Todas</button>${cats.map(c=>`<button type="button" class="btn ghost sm${cmC===c?' on':''}" data-a="cat" data-cat="${esc(c)}">${esc(c)}</button>`).join('')}</div>
   <div class="tabs" id="cmMs">${ms.map(m=>`<button type="button" class="btn ghost sm${m===cmM?' on':''}" data-a="mon" data-m="${m}">${mn(m)}</button>`).join('')}</div>
   <div class="cmrg"><label>Desde<input type="date" id="cmF" value="${rg.f}" max="${today0()}"></label><label>Hasta<input type="date" id="cmT" value="${rg.t}" max="${today0()}"></label>${cmM==='r'?'<button type="button" class="btn ghost sm" data-a="rq">Quitar filtro</button>':''}<small>Filtra compras, vendido y balance por días.</small></div>
   <h3 class="t ghd">Registrar compra</h3>
@@ -2807,7 +2813,7 @@ function rCom(){
   ${rows}<div class="cmb2"><button type="button" class="btn ghost sm" data-a="add">＋ Agregar otra línea</button><label class="cmck"><input type="checkbox" id="cmSt" ${cmH.st?'checked':''}> Sumar al inventario los productos que ya existen y guardar su valor de compra</label></div>
   <div class="cmtot">Total de la compra: <b id="cmTot">${money(cmL.reduce((t,l)=>t+(Number(l.q)||0)*(Number(l.u)||0),0))}</b> <button type="button" class="btn" data-a="save">Guardar compra</button></div></div>
   <h3 class="t ghd">Historial de compras · ${lbl}</h3>
-  ${L.map(c=>`<div class="row cmr"><div><b>${cmD(c.bought_at)}</b>${c.supplier?' · '+esc(c.supplier):''}${c.note?` <small>(${esc(c.note)})</small>`:''}${(c.items||[]).map((it,ix)=>{const p=pOf(it);return `<div class="cmi">${Number(it.qty)||0} × <b>${esc(it.name)}</b>${cmV(it)?' <small>('+esc(cmV(it))+')</small>':''}${it.unit!=null?' · '+money(it.unit)+' c/u':''} ${it.stocked?'<span class="cmok">✓ En inventario</span>':p?`<span class="cmok">Existe en la tienda</span> <button type="button" class="btn ghost sm" data-a="stk" data-c="${c.id}" data-ix="${ix}">Sumar al inventario</button>`:`<span class="cmnew">No está en la tienda</span> <button type="button" class="btn ghost sm" data-a="new" data-c="${c.id}" data-ix="${ix}">Crear como producto</button>`}</div>`}).join('')}</div><div style="text-align:right"><b>${money(c.total)}</b><br><button type="button" class="btn ghost sm" data-a="del" data-c="${c.id}">Eliminar</button></div></div>`).join('')||'<p class="desc">Aún no hay compras en este periodo.</p>'}`}
+  ${L.map(c=>`<div class="row cmr"><div><b>${cmD(c.bought_at)}</b>${c.supplier?' · '+esc(c.supplier):''}${c.note?` <small>(${esc(c.note)})</small>`:''}${(c.items||[]).map((it,ix0)=>{const ix=it._ix!=null?it._ix:ix0;const p=pOf(it);return `<div class="cmi">${Number(it.qty)||0} × <b>${esc(it.name)}</b>${cmV(it)?' <small>('+esc(cmV(it))+')</small>':''}${it.unit!=null?' · '+money(it.unit)+' c/u':''} ${it.stocked?'<span class="cmok">✓ En inventario</span>':p?`<span class="cmok">Existe en la tienda</span> <button type="button" class="btn ghost sm" data-a="stk" data-c="${c.id}" data-ix="${ix}">Sumar al inventario</button>`:`<span class="cmnew">No está en la tienda</span> <button type="button" class="btn ghost sm" data-a="new" data-c="${c.id}" data-ix="${ix}">Crear como producto</button>`}</div>`}).join('')}</div><div style="text-align:right"><b>${money(c.total)}</b>${cmC?'':`<br><button type="button" class="btn ghost sm" data-a="del" data-c="${c.id}">Eliminar</button>`}</div></div>`).join('')||'<p class="desc">Aún no hay compras en este periodo.</p>'}`}
 function cmRead(){const g=id=>$(id)?$(id).value:'';cmH={d:g('cmDate'),sup:g('cmSup'),note:g('cmNote'),st:$('cmSt')?$('cmSt').checked:true,ship:g('cmShip')}}
 async function cmSave(){cmRead();if(!cmH.sup.trim()){say('El proveedor es obligatorio.');const e=$('cmSup');if(e){e.focus();e.scrollIntoView({block:'center'})}return}
   const items=cmL.filter(l=>l.name.trim()&&Number(l.q)>0).map(l=>{const p=pMatch(l.name);return{name:p?p.name:l.name.trim(),product_id:p?p.id:null,size:l.s.trim(),color:l.c.trim(),qty:Number(l.q),unit:l.u===''||l.u==null?null:Number(l.u),stocked:false}});
@@ -2827,6 +2833,7 @@ $('tCom').oninput=e=>{const t=e.target,row=t.closest('.cml');if(!row||!t.dataset
   row.querySelector('[data-sub]').textContent=money((Number(l.q)||0)*(Number(l.u)||0));$('cmTot').textContent=money(cmL.reduce((s,x)=>s+(Number(x.q)||0)*(Number(x.u)||0),0))};
 $('tCom').onclick=async e=>{const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,cid=b.dataset.c,P=cid&&purch.find(x=>String(x.id)===cid);
   if(a==='bf'){b.disabled=true;const n=await cmBackfill();say(n<0?'No se pudo agregar (¿ejecutaste crear-compras.sql?).':`Se agregaron a Compras ${n} producto(s).`,n>=0);rCom();return}
+  if(a==='cat'){cmC=b.dataset.cat||'';cmRead();rCom();return}
   if(a==='mon'){cmM=b.dataset.m;cmRead();rCom();return}
   if(a==='pre'){const k=b.dataset.k,t=today0();cmP=k;cmM='r';cmT=t;cmF=k==='today'?t:dAdd(t,-(+k-1));cmRead();rCom();return}
   if(a==='rq'){cmM=today0().slice(0,7);cmP='';cmRead();rCom();return}
@@ -2864,8 +2871,8 @@ function rGas(){
   const topT=tl.length?tl[0]:null;
   $('tGas').innerHTML=`<div class="gk"><div><small>Total gastos · ${lbl}</small><b style="color:#e53935">${money(gasto)}</b></div><div><small>Nº de gastos</small><b>${E.length}</b></div><div><small>Promedio por gasto</small><b>${money(E.length?gasto/E.length:0)}</b></div><div><small>Mayor tipo</small><b>${topT?esc(topT[0]):'—'}</b></div></div>
   <div class="tabs" id="gsPs">${[['today','Hoy'],['7','Últimos 7 días'],['15','Últimos 15 días'],['30','Últimos 30 días']].map(([k,t])=>`<button type="button" class="btn ghost sm${gsM==='r'&&gsP===k?' on':''}" data-a="pre" data-k="${k}">${t}</button>`).join('')}<button type="button" class="btn ghost sm${gsM==='all'?' on':''}" data-a="mon" data-m="all">Todo</button><button type="button" class="btn ghost sm" data-a="xl">⬇ Exportar a Excel</button></div>
-  <div class="tabs" id="gsMs">${ms.map(m=>`<button type="button" class="btn ghost sm${m===gsM?' on':''}" data-a="mon" data-m="${m}">${mn(m)}</button>`).join('')}</div>
   <div class="cmrg"><label>Desde<input type="date" id="gsF" value="${rg.f}" max="${today0()}"></label><label>Hasta<input type="date" id="gsT" value="${rg.t}" max="${today0()}"></label>${gsM==='r'?'<button type="button" class="btn ghost sm" data-a="rq">Quitar filtro</button>':''}<small>Filtra los gastos por días.</small></div>
+  ${plHTML(types)}
   <h3 class="t ghd">Registrar gasto</h3>
   <div class="tabs gsq">${types.map(t=>`<button type="button" class="btn ghost sm" data-a="gq" data-t="${esc(t)}">＋ ${esc(t)}</button>`).join('')}<button type="button" class="btn sm" data-a="gnew">＋ Nuevo tipo de gasto</button></div>
   <div class="cmf"><div class="cmh"><label>Fecha<input type="date" id="gsDate" value="${gsH.d||today0()}" max="${today0()}"></label><label>Tipo de gasto<select id="gsCat">${types.map(t=>`<option${t===gsH.cat?' selected':''}>${esc(t)}</option>`).join('')}<option value="__o"${other?' selected':''}>＋ Otro tipo (escribir)…</option></select></label>${other?`<label>Nombre del nuevo tipo<input id="gsOther" value="${esc(gsH.other)}" placeholder="Ej: Publicidad, Empaques…" maxlength="40" autocomplete="off"></label>`:''}<label>Monto<input type="number" min="0" step="any" id="gsAmt" value="${gsH.amt}" inputmode="decimal" placeholder="$"></label><label class="cmw">Nota<input id="gsNote" value="${esc(gsH.note)}" placeholder="Opcional (mes que pagas, referencia…)" autocomplete="off"></label></div>
@@ -2874,8 +2881,8 @@ function rGas(){
   <h3 class="t ghd">Historial de gastos · ${lbl}</h3>
   ${E.map(e=>`<div class="row cmr"><div><b>${esc(e.category)}</b> · ${cmD(e.spent_at)}${e.note?` <small>(${esc(e.note)})</small>`:''}</div><div style="text-align:right"><b>${money(e.amount)}</b><br><button type="button" class="btn ghost sm" data-a="gdel" data-id="${e.id}">Eliminar</button></div></div>`).join('')||'<p class="desc">Aún no hay gastos en este periodo. Usa los botones “＋” de arriba para registrar el primero.</p>'}`}
 function gsRead(){const g=id=>$(id)?$(id).value:'';gsH={d:g('gsDate')||gsH.d,cat:$('gsCat')?$('gsCat').value:gsH.cat,other:$('gsOther')?$('gsOther').value:gsH.other,amt:g('gsAmt'),note:g('gsNote')}}
-$('tGas').onchange=e=>{const i=e.target;if(i.id==='gsF'||i.id==='gsT'){const f=$('gsF').value,t=$('gsT').value;if(!f||!t)return;gsF=f;gsT=t;gsM='r';gsP='';gsRead();rGas();return}if(i.id==='gsCat'){gsRead();rGas();if(gsH.cat==='__o'&&$('gsOther'))$('gsOther').focus()}};
-$('tGas').onclick=async e=>{const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a;
+$('tGas').onchange=e=>{const i=e.target;if(i.id==='gsF'||i.id==='gsT'){const f=$('gsF').value,t=$('gsT').value;if(!f||!t)return;gsF=f;gsT=t;gsM='r';gsP='';gsRead();rGas();return}if(i.id==='plCat'||i.id==='plFreq'){gsRead();plRead();rGas();return}if(i.id==='gsCat'){gsRead();rGas();if(gsH.cat==='__o'&&$('gsOther'))$('gsOther').focus()}};
+$('tGas').onclick=async e=>{const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a;if(a.startsWith('pl')){plClick(a,b);return}
   if(a==='mon'){gsM=b.dataset.m;gsRead();rGas();return}
   if(a==='pre'){const k=b.dataset.k,t=today0();gsP=k;gsM='r';gsT=t;gsF=k==='today'?t:dAdd(t,-(+k-1));gsRead();rGas();return}
   if(a==='rq'){gsM=today0().slice(0,7);gsP='';gsRead();rGas();return}
@@ -2889,6 +2896,73 @@ $('tGas').onclick=async e=>{const b=e.target.closest('[data-a]');if(!b)return;co
     gsH={d:gsH.d,cat,other:'',amt:'',note:''};await loadExps();say('Gasto guardado: '+cat+' por '+money(amt)+'.',true);toast('Gasto guardado');return}
   if(a==='gdel'){if(!b.dataset.ok){b.dataset.ok=1;b.textContent='¿Seguro? Clic otra vez';setTimeout(()=>{b.dataset.ok='';b.textContent='Eliminar'},3500);return}
     const r=await sb.from('expenses').delete().eq('id',b.dataset.id);if(r.error){say('Error: '+r.error.message);return}await loadExps();say('Gasto eliminado.',true)}};
+
+/* ===== Pagos recurrentes: mensuales (servicios) y anuales (dominio) con recordatorios ===== */
+let plans=[],plErr=false,plLoaded=false,plH={cat:'',freq:'mensual',day:'1',f:'',t:'',est:''},plPay=null,plToast=false;
+const pdiff=(a,b)=>Math.round((new Date(b+'T12:00:00')-new Date(a+'T12:00:00'))/864e5),p2=n=>String(n).padStart(2,'0');
+const plDue=(p,y,m)=>{const last=new Date(y,m,0).getDate();return y+'-'+p2(m)+'-'+p2(Math.min(Math.max(1,+p.due_day||1),last))};
+const plMes=k=>new Date(k+'-15T12:00:00').toLocaleDateString('es-CO',{month:'long',year:'numeric'});
+function plInfo(p){const t=today0(),paid=p.paid||{};
+  if(p.freq==='anual'){const k=p.end_date,d=pdiff(t,k);return{key:k,due:k,days:d,paid:!!paid[k],ent:paid[k]||null,anual:true}}
+  const [y,m]=t.split('-').map(Number),cur=y+'-'+p2(m),cd=(p.created_at||t).slice(0,10);
+  const py=m===1?y-1:y,pm=m===1?12:m-1,ny=m===12?y+1:y,nm=m===12?1:m+1;
+  const mk=(yy,mm)=>({k:yy+'-'+p2(mm),due:plDue(p,yy,mm)});
+  const L=[mk(py,pm),mk(y,m),mk(ny,nm)].filter((c,i)=>i>0||c.due>=cd);
+  const pend=L.find(c=>!paid[c.k]);
+  return{key:pend?pend.k:cur,due:pend?pend.due:L[L.length-1].due,days:pend?pdiff(t,pend.due):999,paid:!pend,curEnt:paid[cur]||null,cur,anual:false}}
+function plAlerts(){return plans.map(p=>({p,i:plInfo(p)})).filter(({i})=>!i.paid&&i.days<=(i.anual?30:7)).sort((a,b)=>a.i.days-b.i.days)}
+const plWhen=d=>d<0?'vencido hace '+(-d)+' día(s)':d===0?'vence HOY':'vence en '+d+' día(s)';
+function avisos(){const A=plAlerts(),el=$('gAv'),tb=document.querySelector('#tabs [data-t="gas"]');
+  if(tb)tb.textContent='Gastos'+(A.length?' ('+A.length+')':'');
+  if(!el)return;
+  el.hidden=!A.length;
+  el.innerHTML=A.map(({p,i})=>`<div class="gav ${i.days<0?'late':i.days<=7?'soon':'near'}">${i.days<0?'⚠':'🔔'} <b>${esc(p.category)}</b>: ${plWhen(i.days)} (${cmD(i.due)}) · aún sin marcar como pagado${i.anual&&i.days>7?' · aviso de 1 mes':''}</div>`).join('');
+  if(A.length&&!plToast&&!$('panel').hidden){plToast=true;toast('Tienes '+A.length+' pago(s) por revisar en Gastos')}}
+async function loadPlans(){if(!sb)return;const{data,error}=await sb.from('expense_plans').select('*').order('id');plErr=!!error;plans=error?[]:(data||[]).map(p=>({...p,paid:(typeof p.paid==='string'?JSON.parse(p.paid||'{}'):p.paid)||{}}));plLoaded=true;avisos();if(tab==='gas')rGas()}
+function plRead(){const g=id=>$(id)?$(id).value:null;plH={cat:g('plCat')||plH.cat,freq:g('plFreq')||plH.freq,day:g('plDay')??plH.day,f:g('plF')??plH.f,t:g('plT')??plH.t,est:g('plEst')??plH.est}}
+function plHTML(types){
+  if(plErr)return`<h3 class="t ghd">Pagos recurrentes</h3><p class="msg">Para activar los recordatorios ejecuta una sola vez <b>crear-recordatorios.sql</b> en Supabase (SQL Editor).</p>`;
+  const f=plH.freq,cat=plH.cat||types[0];
+  const rows=plans.map(p=>{const i=plInfo(p),col=i.paid?'#1fa855':i.days<0?'#e53935':i.days<=(i.anual?30:7)?'#f59e0b':'var(--muted)';
+    let st;
+    if(i.anual)st=i.paid?`<span style="color:#1fa855">✔ Pagado ${i.ent&&i.ent.a?'('+money(i.ent.a)+') ':''}· cubre hasta ${cmD(p.end_date)}</span>`:`<span style="color:${col}">${plWhen(i.days)} · vence ${cmD(i.due)}</span>`;
+    else st=(i.curEnt?`<span style="color:#1fa855">✔ ${plMes(i.cur)} pagado${i.curEnt.a?' ('+money(i.curEnt.a)+')':''}</span> · `:'')+(i.paid?`próximo: ${cmD(i.due)}`:`<span style="color:${col}">${plMes(i.key)}: ${plWhen(i.days)} (${cmD(i.due)})</span>`);
+    const desc=i.anual?`Anual · ${cmD(p.start_date)} → ${cmD(p.end_date)}`:`Mensual · día ${p.due_day}`;
+    const paying=plPay&&plPay.id===p.id;
+    const btns=paying?'':(i.anual?(i.paid?`<button type="button" class="btn sm" data-a="plren" data-id="${p.id}">Renovar +1 año</button> <button type="button" class="btn ghost sm" data-a="plundo" data-id="${p.id}" data-k="${esc(i.key)}">Deshacer pago</button>`:`<button type="button" class="btn sm" data-a="plpay" data-id="${p.id}" data-k="${esc(i.key)}">Marcar pagado</button>`)
+      :(`${i.paid?'':`<button type="button" class="btn sm" data-a="plpay" data-id="${p.id}" data-k="${esc(i.key)}">Marcar pagado</button> `}${i.curEnt?`<button type="button" class="btn ghost sm" data-a="plundo" data-id="${p.id}" data-k="${esc(i.cur)}">Deshacer pago</button> `:''}`))+` <button type="button" class="btn ghost sm" data-a="pldel" data-id="${p.id}">Quitar</button>`;
+    const pf=paying?`<div class="cmh" style="margin-top:8px"><label>Monto pagado<input type="number" min="0" step="any" id="plpA" value="${esc(plPay.a)}" inputmode="decimal" placeholder="$"></label><label>Fecha de pago<input type="date" id="plpD" value="${plPay.d}" max="${today0()}"></label></div><div style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end"><button type="button" class="btn ghost sm" data-a="plcan">Cancelar</button><button type="button" class="btn sm" data-a="plok">Confirmar pago</button></div>`:'';
+    return`<div class="row cmr plr"><div style="flex:1"><b>${esc(p.category)}</b> · <small>${desc}</small><br><small>${st}</small>${pf}</div><div style="text-align:right">${btns}</div></div>`}).join('')||'<p class="desc">Aún no tienes pagos recurrentes. Agrega abajo el arriendo, agua, luz, internet (mensuales) o el dominio (anual) y te aviso antes de que venzan.</p>';
+  return`<h3 class="t ghd">Pagos recurrentes (con recordatorio)</h3><p class="desc" style="margin:0 0 8px">Mensuales: te aviso 7 días antes si no los has marcado como pagados. Anuales (dominio): 1 mes antes y 1 semana antes. Los avisos salen al abrir el panel. Al pagar escribes el monto real (los servicios cambian) y se anota solo en tus gastos.</p>${rows}
+  <div class="cmf" style="margin-top:10px"><b>＋ Nuevo pago recurrente</b><div class="cmh" style="margin-top:8px"><label>Tipo de gasto<select id="plCat">${types.map(t=>`<option${t===cat?' selected':''}>${esc(t)}</option>`).join('')}</select></label><label>Se paga<select id="plFreq"><option value="mensual"${f==='mensual'?' selected':''}>Cada mes</option><option value="anual"${f==='anual'?' selected':''}>Una vez al año</option></select></label>
+  ${f==='mensual'?`<label>Día del mes en que vence<input type="number" min="1" max="31" id="plDay" value="${esc(plH.day)}" inputmode="numeric"></label>`:`<label>Desde<input type="date" id="plF" value="${esc(plH.f)}"></label><label>Hasta (vencimiento)<input type="date" id="plT" value="${esc(plH.t)}"></label>`}
+  <label>Monto habitual (opcional)<input type="number" min="0" step="any" id="plEst" value="${esc(plH.est)}" inputmode="decimal" placeholder="$"></label></div>
+  <div class="cmtot"><button type="button" class="btn" data-a="plnew">Guardar pago recurrente</button></div></div>`}
+async function plClick(a,b){const id=b.dataset.id,P=plans.find(x=>String(x.id)===String(id||(plPay&&plPay.id)));
+  if(a==='plnew'){gsRead();plRead();const cat=plH.cat;let row;
+    if(plH.freq==='mensual'){const d=Math.round(Number(plH.day));if(!(d>=1&&d<=31)){say('Escribe el día del mes (1 a 31).');return}row={category:cat,freq:'mensual',due_day:d}}
+    else{if(!plH.f||!plH.t){say('Elige las fechas Desde y Hasta.');return}if(plH.t<plH.f){say('La fecha “Hasta” debe ser después de “Desde”.');return}row={category:cat,freq:'anual',start_date:plH.f,end_date:plH.t}}
+    row.est=Number(plH.est)>0?Number(plH.est):null;row.paid={};
+    const r=await sb.from('expense_plans').insert(row);if(r.error){say('No se pudo guardar: '+r.error.message+' (¿ejecutaste crear-recordatorios.sql?)');return}
+    plH={...plH,day:'1',f:'',t:'',est:''};await loadPlans();say('Pago recurrente guardado: '+cat+'.',true);return}
+  if(!P)return;
+  if(a==='plpay'){gsRead();plPay={id:P.id,k:b.dataset.k,a:P.est||'',d:today0()};rGas();if($('plpA'))$('plpA').focus();return}
+  if(a==='plcan'){plPay=null;rGas();return}
+  if(a==='plok'){const amt=Number($('plpA').value),d=$('plpD').value||today0();if(!(amt>0)){say('Escribe el monto que pagaste.');$('plpA').focus();return}
+    b.disabled=true;const lab=P.freq==='anual'?'anual hasta '+cmD(P.end_date):plMes(plPay.k);
+    const e=await sb.from('expenses').insert({spent_at:d,category:P.category,amount:amt,note:'Pago '+lab}).select('id');
+    if(e.error){b.disabled=false;say('No se pudo anotar el gasto: '+e.error.message);return}
+    const eid=e.data&&e.data[0]?e.data[0].id:null,paid={...(P.paid||{}),[plPay.k]:{d,a:amt,eid}};
+    const r=await sb.from('expense_plans').update({paid,est:amt}).eq('id',P.id);if(r.error){b.disabled=false;say('Error: '+r.error.message);return}
+    plPay=null;await loadExps();await loadPlans();say(P.category+' marcado como pagado: '+money(amt)+'. Ya está en tus gastos.',true);return}
+  if(a==='plundo'){if(!b.dataset.ok){b.dataset.ok=1;b.textContent='¿Seguro? Clic otra vez';setTimeout(()=>{b.dataset.ok='';b.textContent='Deshacer pago'},3500);return}
+    const k=b.dataset.k,ent=(P.paid||{})[k],paid={...P.paid};delete paid[k];
+    if(ent&&ent.eid)await sb.from('expenses').delete().eq('id',ent.eid);
+    const r=await sb.from('expense_plans').update({paid}).eq('id',P.id);if(r.error){say('Error: '+r.error.message);return}await loadExps();await loadPlans();say('Pago deshecho (se quitó también de tus gastos).',true);return}
+  if(a==='plren'){const y=d=>{const x=new Date(d+'T12:00:00');x.setFullYear(x.getFullYear()+1);return x.toLocaleDateString('sv')};
+    const r=await sb.from('expense_plans').update({start_date:y(P.start_date),end_date:y(P.end_date)}).eq('id',P.id);if(r.error){say('Error: '+r.error.message);return}await loadPlans();say('Renovado: ahora vence el '+cmD(y(P.end_date))+'.',true);return}
+  if(a==='pldel'){if(!b.dataset.ok){b.dataset.ok=1;b.textContent='¿Seguro? Clic otra vez';setTimeout(()=>{b.dataset.ok='';b.textContent='Quitar'},3500);return}
+    const r=await sb.from('expense_plans').delete().eq('id',P.id);if(r.error){say('Error: '+r.error.message);return}await loadPlans();say('Pago recurrente quitado (los gastos ya anotados se conservan).',true)}}
 
 /* al guardar un producto con valor de compra y cantidad, se anota solo en Compras */
 async function cmFromProduct(pid,row,prev,cost,sup,force){
