@@ -1840,7 +1840,7 @@ $('pf').onsubmit=async e=>{e.preventDefault();if(!$('pcs').value.trim()){say('El
       sizes:[...curSizes],genders:[...curG],subcategory:$('psb').value.trim()||null,material:$('pmt').value.trim()||null,description:$('pd').value.trim(),available:$('pa').checked,stock:$('pst').value===''?null:Number($('pst').value),compare_price:$('pcmp').value?Number($('pcmp').value):null};
     const dd={};vlist.map(v=>({s:String(v.s).trim(),c:v.c||'',n:Math.max(0,Number(v.n)||0)})).filter(v=>v.s||v.c).forEach(v=>dd[v.s+'|'+v.c]=v);
     row.variants=Object.values(dd);
-    {const so=products.map(p=>Number(p.sort_order)).filter(Number.isFinite);row.sort_order=(so.length?Math.min(...so):0)-10}
+    if(!id){const so=products.map(p=>Number(p.sort_order)).filter(Number.isFinite);row.sort_order=(so.length?Math.min(...so):0)-10}
     if(row.variants.length){row.stock=vSum(row.variants);row.sizes=[...new Set(row.variants.map(v=>v.s).filter(Boolean))]}
     const urls=[];
     for(const x of keep){if(typeof x==='string'){urls.push(x);continue}const f=x.f,path=`${Date.now()}-${Math.random().toString(36).slice(2,8)}.jpg`;
