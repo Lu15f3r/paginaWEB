@@ -1409,6 +1409,7 @@ dialog#adm[data-dock=left] .cmh,dialog#adm[data-dock=right] .cmh{grid-template-c
 @media(min-width:701px){#adm .dh{display:grid!important;grid-template-columns:auto 1fr;grid-template-areas:'dock act' 'ttl ttl';align-items:center;row-gap:6px}#adm .dh h2{grid-area:ttl;margin:0}#adm .dh .dock{grid-area:dock;margin:0;justify-self:start}#adm .dh>div:last-child{grid-area:act;justify-self:end;display:flex;gap:8px;align-items:center}}
 .gavs{display:grid;gap:6px;margin:0 0 10px}.gav{padding:8px 12px;border:1px solid var(--line);border-left:4px solid #f59e0b;background:var(--panel);font-size:14px}.gav.late{border-left-color:#e53935}.gav.soon{border-left-color:#f59e0b}.gav.near{border-left-color:var(--gold)}.plr small{color:var(--muted)}
 [data-xl],[data-a="xl"],#xlV{background:#1fa855!important;color:#fff!important;border-color:#1fa855!important;margin-left:auto}#tInv>div:has([data-xl]),#tProd div:has(>[data-xl]){display:flex;justify-content:flex-end}
+#alist .row[data-id]{cursor:pointer}#alist .row[data-id]:hover{background:rgba(127,127,127,.08)}#alist .row.dragging{opacity:.4}#alist .row.dtop{box-shadow:0 -3px 0 var(--gold)}#alist .row.dbot{box-shadow:0 3px 0 var(--gold)}
 </style>
 </head>
 <body>
@@ -1761,7 +1762,7 @@ function alist(){
   const pq=$('pq').value.trim(),base=editing?products:products.filter(p=>(!q||sg(p.name).includes(q))&&(!c||sg(p.category).includes(c))),list=base.filter(p=>!pq||hit(p.name+' '+p.category,pq));
   const filtered=(!editing&&(q||c))||pq;
   const head=products.length?`<p class="desc" style="margin-bottom:6px">Mostrando ${list.length} de ${products.length} productos${filtered?' &nbsp;<button type="button" class="btn red sm" data-clr="1" aria-label="Quitar filtro"><span class="lb">Quitar filtro</span><span class="xb">✕</span></button>':''}</p>`:'';
-  $('alist').innerHTML=head+(list.length?list.map(p=>`<div class="row">${imgs(p)[0]?`<img src="${esc(imgs(p)[0])}" alt="">`:'<i></i>'}
+  $('alist').innerHTML=head+(list.length?list.map(p=>`<div class="row" data-id="${p.id}" draggable="true" title="Clic para editar · arrastra para cambiar de posición">${imgs(p)[0]?`<img src="${esc(imgs(p)[0])}" alt="">`:'<i></i>'}
    <div><b>${esc(p.name)}</b><br><small>${esc(p.category)}${p.subcategory?' › '+esc(p.subcategory):''} · ${money(p.price)}${gens(p).length?' · '+esc(gens(p).join('/')):''}${p.available===false?' · Agotado':''}</small> <span class="stkb ${stkC(p.stock)||'n'}">${p.stock==null?'Sin control':'Stock: '+p.stock}</span></div>
    <div class="mvb"><span class="pos" title="Posición en la tienda">${products.indexOf(p)+1}</span><button type="button" class="btn ghost sm" data-mv="top" data-id="${p.id}" title="Poner de primero" aria-label="Poner de primero">⤒</button><button type="button" class="btn ghost sm" data-mv="up" data-id="${p.id}" title="Subir un puesto" aria-label="Subir">▲</button><button type="button" class="btn ghost sm" data-mv="down" data-id="${p.id}" title="Bajar un puesto" aria-label="Bajar">▼</button><button type="button" class="btn ghost sm" data-mv="bottom" data-id="${p.id}" title="Mandar al final" aria-label="Mandar al final">⤓</button></div>
    <button class="btn ghost sm" data-e="${p.id}">Editar</button><button class="btn red sm" data-d="${p.id}">Eliminar</button></div>`).join(''):`<p class="desc">${products.length?'Ningún producto coincide: puedes crearlo con el botón Guardar.':'Aún no hay productos. Crea el primero arriba.'}</p>`);
@@ -1818,7 +1819,8 @@ $('gal').onclick=e=>{const b=e.target.closest('button');if(!b)return;
 $('alist').onclick=async e=>{
   if(e.target.closest('[data-clr]')){$('pn').value='';$('pc').value='';$('pq').value='';alist();return}
   const mvb=e.target.closest('[data-mv]');if(mvb){mvb.disabled=true;await moveProd(mvb.dataset.id,mvb.dataset.mv);return}
-  const ed=e.target.dataset.e,dl=e.target.dataset.d;
+  const rowEl=e.target.closest('.row[data-id]');let ed=e.target.dataset.e;const dl=e.target.dataset.d;
+  if(!ed&&!dl&&rowEl&&!e.target.closest('button,.mvb,a,input')&&!window.getSelection().toString())ed=rowEl.dataset.id;
   if(ed){const p=products.find(x=>String(x.id)===ed);
     $('pid').value=p.id;$('pcr').disabled=false;$('pcr').checked=false;$('pcs').value=lastSup(p);$('pn').value=p.name;$('psb').value=p.subcategory||'';$('pmt').value=p.material||'';$('pc').value=p.category;alist();$('pp').value=p.price;
     curSizes=[...(p.sizes||[])];curG=[...gens(p)];gChips();legacy=hasVar(p)?'':(p.stock??'');$('pst').value=legacy;$('pcmp').value=p.compare_price||'';$('pd').value=p.description||'';$('pa').checked=p.available!==false;$('pco').value=costs[String(p.id)]??'';updMg();
@@ -2734,12 +2736,24 @@ async function moveProd(id,dir){
   if(dir==='top'){g.splice(g.indexOf(String(id)),1);g.unshift(String(id))}
   else if(dir==='bottom'){g.splice(g.indexOf(String(id)),1);g.push(String(id))}
   else{const j=dir==='up'?i-1:i+1;if(j<0||j>=vis.length){alist();return}const a=g.indexOf(String(id)),b=g.indexOf(vis[j]);[g[a],g[b]]=[g[b],g[a]]}
+  await saveOrder(g)}
+async function saveOrder(g){
   const byId=Object.fromEntries(products.map(p=>[String(p.id),p]));
   if(DEMO){products=g.map(k=>byId[k]);render();alist();return}
   const ups=[];g.forEach((k,n)=>{const v=(n+1)*10;if(Number(byId[k].sort_order)!==v)ups.push(sb.from('products').update({sort_order:v}).eq('id',byId[k].id))});
   const R=await Promise.all(ups),bad=R.find(r=>r.error);
   if(bad){say('No se pudo guardar el orden: '+bad.error.message+' (¿ejecutaste actualizar-orden.sql en Supabase?)');alist();return}
   await load();alist();say('Orden actualizado en la tienda.',true)}
+/* arrastrar productos con el mouse para cambiar su posición */
+(()=>{const L=$('alist');let dId=null;
+  const clr=()=>L.querySelectorAll('.dtop,.dbot,.dragging').forEach(x=>x.classList.remove('dtop','dbot','dragging'));
+  L.addEventListener('dragstart',e=>{const r=e.target.closest&&e.target.closest('.row[data-id]');if(!r){return}dId=r.dataset.id;r.classList.add('dragging');try{e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',dId)}catch(_){}});
+  L.addEventListener('dragover',e=>{if(!dId)return;const r=e.target.closest('.row[data-id]');if(!r)return;e.preventDefault();L.querySelectorAll('.dtop,.dbot').forEach(x=>x.classList.remove('dtop','dbot'));if(r.dataset.id===dId)return;const b=r.getBoundingClientRect();r.classList.add(e.clientY<b.top+b.height/2?'dtop':'dbot')});
+  L.addEventListener('drop',async e=>{if(!dId)return;const r=e.target.closest('.row[data-id]');e.preventDefault();const id=dId;dId=null;if(!r||r.dataset.id===id){clr();return}
+    const b=r.getBoundingClientRect(),after=e.clientY>=b.top+b.height/2,tid=r.dataset.id;clr();
+    const g=products.map(p=>String(p.id));g.splice(g.indexOf(String(id)),1);const t=g.indexOf(String(tid));g.splice(after?t+1:t,0,String(id));
+    await saveOrder(g)});
+  L.addEventListener('dragend',()=>{dId=null;clr()})})();
 /* ===== Descripción con formato (negrita, cursiva, viñetas) ===== */
 (()=>{const pd=$('pd'),pde=$('pde'),vd=Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype,'value');
   Object.defineProperty(pd,'value',{get(){return vd.get.call(pd)},set(v){vd.set.call(pd,v);pde.innerHTML=descHTML(v)}});
@@ -3293,6 +3307,7 @@ async function vhClear(){const C=orders.filter(o=>o.status==='confirmado'),t=C.r
   let d0='center';try{d0=localStorage.getItem('gx_dock')||'center'}catch(e){}if(!['left','right','full','center'].includes(d0))d0='center';set(d0);
   $('dock').onclick=e=>{const b=e.target.closest('button');if(b)set(b.dataset.d)}})();
 /* Ctrl+S guarda lo que estés editando */
+document.addEventListener('keydown',e=>{if(e.ctrlKey&&!e.altKey&&!e.shiftKey&&(e.code==='Space'||e.key===' ')){e.preventDefault();const A=$('adm');if(A.open)A.close();else if(!document.body.classList.contains('txedit'))openAdmin();return}});
 document.addEventListener('keydown',e=>{if(!((e.ctrlKey||e.metaKey)&&String(e.key).toLowerCase()==='s'))return;
   if(document.body.classList.contains('txedit')){e.preventDefault();if($('txd').open)$('txOk').click();else $('txSave').click();return}
   if(!$('adm').open)return;e.preventDefault();
