@@ -1410,6 +1410,8 @@ dialog#adm[data-dock=left] .cmh,dialog#adm[data-dock=right] .cmh{grid-template-c
 .gavs{display:grid;gap:6px;margin:0 0 10px}.gav{padding:8px 12px;border:1px solid var(--line);border-left:4px solid #f59e0b;background:var(--panel);font-size:14px}.gav.late{border-left-color:#e53935}.gav.soon{border-left-color:#f59e0b}.gav.near{border-left-color:var(--gold)}.plr small{color:var(--muted)}
 .btn[data-xl],.btn[data-a="xl"],.btn#xlV,.btn.ghost[data-xl],.btn.ghost[data-a="xl"]{--o:#1fa855;--f1:#1fa855;--f2:#168a45;--t1:#fff;--t2:#fff;margin-left:auto}.btn.ghost[data-xl]:hover,.btn.ghost[data-a="xl"]:hover,.btn#xlV:hover{--o:#168a45}#tInv>div:has([data-xl]),#tProd div:has(>[data-xl]){display:flex;justify-content:flex-end}
 #alist .row[data-id]{cursor:pointer}#alist .row[data-id]:hover{background:rgba(127,127,127,.08)}#alist .row.dragging{opacity:.4}#alist .row.dtop{box-shadow:0 -3px 0 var(--gold)}#alist .row.dbot{box-shadow:0 3px 0 var(--gold)}
+dialog:focus,dialog:focus-visible,#lb:focus,#lb:focus-visible{outline:0!important}
+body.sq .hero,body.sq #promo,body.sq .feat,body.sq .sectH{display:none!important}body.sq #catalogo{padding-top:24px}
 </style>
 </head>
 <body>
@@ -1641,7 +1643,8 @@ const F0=()=>({t:[],g:[],c:[],r:[],s:[],d:[],p:null}),cpF=f=>({t:[...f.t],g:[...
 const fN=f=>f.t.length+f.g.length+f.c.length+f.r.length+f.s.length+f.d.length+(f.p?1:0);
 const fOk=(p,f,k)=>(k==='t'||!f.t.length||f.t.includes(slug(p.category||'')))&&(k==='p'||!f.p||(+p.price>=f.p[0]&&+p.price<=f.p[1]))&&(k==='d'||!f.d.length||discPct(p)>=Math.min(...f.d))&&(k==='s'||!f.s.length||f.s.includes(slug(p.subcategory||'')))&&(k==='g'||!f.g.length||gens(p).some(x=>f.g.includes(x)))&&(k==='c'||!f.c.length||(hasColors(p)&&f.c.some(c=>vStock(p,null,c)>0)))&&(k==='r'||!f.r.length||f.r.some(i=>+p.price>=RNG[i][1]&&+p.price<=RNG[i][2]));
 const vp=()=>CFG.COMBOS_ON?products:products.filter(p=>slug(p.category||'')!=='combos');
-let SQ='';const fprods=()=>vp().filter(p=>fOk(p,FIL)&&(!SQ||hit(p.name+' '+p.category+' '+(p.subcategory||'')+' '+(p.material||''),SQ)));
+const hitS=(t,q)=>{const ws=sg(t).split('-').filter(Boolean);return sg(q).split('-').filter(Boolean).every(w=>w.length>=3?ws.some(x=>x.includes(w)):ws.some(x=>x.startsWith(w)))};
+let SQ='';const fprods=()=>vp().filter(p=>fOk(p,FIL)&&(!SQ||hitS(p.name+' '+p.category+' '+(p.subcategory||'')+' '+(p.material||''),SQ)));
 const fBtn=()=>{const n=fN(FIL),b=$('fFab');b.setAttribute('aria-label','Abrir filtros'+(n?' ('+n+' activos)':''));b.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg><span>Filtrar</span><b class="fn"${n?'':' hidden'}>${n}</b><span class="fx" role="button" aria-label="Quitar filtros" title="Quitar filtros"${n?'':' hidden'}>✕</span>`};
 $('fFab').onclick=e=>{if(e.target.closest('.fx')){FIL=F0();FD=F0();render();return}fOpen(true)};
 if('IntersectionObserver' in window)new IntersectionObserver(([e])=>$('fFab').classList.toggle('show',e.isIntersecting),{rootMargin:'-30% 0px -30% 0px'}).observe($('catalogo'));else $('fFab').classList.add('show');
@@ -3222,10 +3225,11 @@ const setHH=()=>document.documentElement.style.setProperty('--hh',document.query
 $('catalogo').addEventListener('click',e=>{const b=e.target.closest('.qb');if(!b)return;e.stopImmediatePropagation();e.preventDefault();if(b.classList.contains('dis'))return;lbOpen(b.closest('.card').dataset.id,b.dataset.go)},true);
 /* ====== BUSCADOR EN VIVO (filtra el catálogo mientras escribes) ====== */
 {const bx=$('sbx'),q=$('srQ');let first=true;
- const run=()=>{SQ=q.value.trim();render();if(SQ&&first){first=false;const c=$('catalogo');if(c.getBoundingClientRect().top>innerHeight*.7||c.getBoundingClientRect().bottom<0)c.scrollIntoView({behavior:'smooth',block:'start'})}if(!SQ)first=true};
- $('srchB').onclick=()=>{const on=!bx.classList.contains('on');bx.classList.toggle('on',on);if(on){$('srchB').classList.add('act');setTimeout(()=>q.focus(),120)}else{q.value='';$('srchB').classList.remove('act');if(SQ){SQ='';render()}}};
- q.oninput=run;q.onkeydown=e=>{if(e.key==='Escape'){q.value='';SQ='';render();bx.classList.remove('on');$('srchB').classList.remove('act')}};
- document.addEventListener('pointerdown',e=>{if(!bx.classList.contains('on')||e.target.closest('#sbx,#srchB'))return;bx.classList.remove('on');if(!q.value.trim()){q.value='';if(SQ){SQ='';render()}$('srchB').classList.remove('act')}})}
+ const sqCls=()=>{const was=document.body.classList.contains('sq');document.body.classList.toggle('sq',!!SQ);if(!!SQ!==was)scrollTo(0,0)};
+ const run=()=>{SQ=q.value.trim();render();sqCls()};
+ $('srchB').onclick=()=>{const on=!bx.classList.contains('on');bx.classList.toggle('on',on);if(on){$('srchB').classList.add('act');setTimeout(()=>q.focus(),120)}else{q.value='';$('srchB').classList.remove('act');if(SQ){SQ='';render();sqCls()}}};
+ q.oninput=run;q.onkeydown=e=>{if(e.key==='Escape'){q.value='';SQ='';render();sqCls();bx.classList.remove('on');$('srchB').classList.remove('act')}};
+ document.addEventListener('pointerdown',e=>{if(!bx.classList.contains('on')||e.target.closest('#sbx,#srchB'))return;bx.classList.remove('on');if(!q.value.trim()){q.value='';if(SQ){SQ='';render();sqCls()}$('srchB').classList.remove('act')}})}
 load().then(()=>{cartRender();if(!location.hash&&scrollY<40)scrollTo(0,0);tUpd()});
 
 /* miniaturas verticales: clic = ir a la foto; se marca la que está en pantalla */
