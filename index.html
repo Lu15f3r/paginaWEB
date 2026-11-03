@@ -889,7 +889,7 @@ html.nocombos #promo,html.nocombos #armar,html.nocombos .nv[data-c="combos"]{dis
  .lbb{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)!important}
  #lb .stage,#lbTh{display:none!important}
  .lbg{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:6px}
- .lbg img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;cursor:zoom-in;background:#161616;transition:filter .2s}.lbg img:hover{filter:brightness(1.08)}
+ .lbg{align-items:start}.lbg img{width:100%;height:auto;aspect-ratio:auto;object-fit:contain;display:block;cursor:zoom-in;background:#161616;transition:filter .2s}.lbg img:hover{filter:brightness(1.08)}
  .rg{grid-template-columns:repeat(4,1fr)}
  .rel{grid-column:1/-1}
 }
@@ -1412,6 +1412,12 @@ dialog#adm[data-dock=left] .cmh,dialog#adm[data-dock=right] .cmh{grid-template-c
 #alist .row[data-id]{cursor:pointer}#alist .row[data-id]:hover{background:rgba(127,127,127,.08)}#alist .row.dragging{opacity:.4}#alist .row.dtop{box-shadow:0 -3px 0 var(--gold)}#alist .row.dbot{box-shadow:0 3px 0 var(--gold)}
 dialog:focus,dialog:focus-visible,#lb:focus,#lb:focus-visible{outline:0!important}
 body.sq .hero,body.sq #promo,body.sq .feat,body.sq .sectH{display:none!important}body.sq #catalogo{padding-top:24px}
+.nv.th::after{display:none!important}
+.nv.th:not(.on):not(.act):hover::before,.nv.th:not(.on):not(.act):focus-visible::before{transform:translateX(-110%)!important}
+.nv.th:not(.on):not(.act):hover .in,.nv.th:not(.on):not(.act):focus-visible .in{color:inherit!important}
+.nv.th:hover,.nv.th:focus-visible{box-shadow:none!important}
+.nv.th .in svg{transition:transform .25s ease,filter .25s ease}
+.nv.th:not(.on):not(.act):hover .in svg,.nv.th:not(.on):not(.act):focus-visible .in svg{color:var(--gold)!important;transform:scale(1.28)!important;filter:drop-shadow(0 0 2px currentColor) drop-shadow(0 0 7px currentColor) drop-shadow(0 0 15px currentColor)}
 </style>
 </head>
 <body>
