@@ -1441,12 +1441,16 @@ html:not([data-font]) :is(.btn,.nv,th,.sizes button){font-size:.88em}
 
 /* Filtrar separado del borde */
 .fbtn{padding:0 10px 0 14px!important;width:72px!important}
-@media(max-width:899px){.fbtn{width:56px!important;padding:0 8px 0 10px!important}}
+@media(max-width:899px){.fbtn{width:38px!important;height:46px!important;padding:0 4px 0 6px!important;font-size:7.5px!important}.fbtn svg{width:14px!important;height:14px!important}}
 /* Logo con giro infinito y brillo */
-@keyframes gxSpin{0%{transform:perspective(500px) rotateY(0)}100%{transform:perspective(500px) rotateY(360deg)}}
+@keyframes gxSpin{0%{transform:perspective(500px) rotateY(0)}49.9%{transform:perspective(500px) rotateY(90deg)}50.1%{transform:perspective(500px) rotateY(-90deg)}100%{transform:perspective(500px) rotateY(0)}}
 @keyframes gxGlow{0%,100%{filter:drop-shadow(0 0 4px rgba(255,184,20,.5)) brightness(1)}50%{filter:drop-shadow(0 0 16px rgba(255,200,60,1)) drop-shadow(0 0 30px rgba(255,150,0,.7)) brightness(1.25)}}
 .top .logo,img.crown{animation:gxSpin 6s linear infinite!important;filter:none!important;transform-origin:50% 50%;will-change:transform}
 @media(prefers-reduced-motion:reduce){.top .logo,img.crown{animation:none!important}}
+
+/* Celular: botones de la ficha del producto sin cortarse */
+@media(max-width:700px){#lb .lba{flex-wrap:wrap;gap:8px}#lb .lba>*{min-width:0}#lb .lba .btn,#lb .lba .wa{font-size:12px;letter-spacing:0;padding:10px 12px;flex:1 1 130px;white-space:normal;text-align:center;display:flex;align-items:center;justify-content:center;line-height:1.15}#lb .lba .lbq{flex:0 0 auto}}
+@media(min-width:900px){.top .logo{width:92px!important;height:auto!important;max-height:none!important}}
 </style>
 </head>
 <body>
