@@ -1445,8 +1445,8 @@ html:not([data-font]) :is(.btn,.nv,th,.sizes button){font-size:.88em}
 /* Logo con giro infinito y brillo */
 @keyframes gxSpin{0%{transform:perspective(500px) rotateY(0)}100%{transform:perspective(500px) rotateY(360deg)}}
 @keyframes gxGlow{0%,100%{filter:drop-shadow(0 0 4px rgba(255,184,20,.5)) brightness(1)}50%{filter:drop-shadow(0 0 16px rgba(255,200,60,1)) drop-shadow(0 0 30px rgba(255,150,0,.7)) brightness(1.25)}}
-.top .logo,img.crown{animation:gxSpin 6s linear infinite,gxGlow 2.4s ease-in-out infinite!important;transform-origin:50% 50%;will-change:transform,filter}
-@media(prefers-reduced-motion:reduce){.top .logo,img.crown{animation:gxGlow 3s ease-in-out infinite!important}}
+.top .logo,img.crown{animation:gxSpin 6s linear infinite!important;filter:none!important;transform-origin:50% 50%;will-change:transform}
+@media(prefers-reduced-motion:reduce){.top .logo,img.crown{animation:none!important}}
 </style>
 </head>
 <body>
