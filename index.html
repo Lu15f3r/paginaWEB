@@ -17,13 +17,13 @@ try{gxLook(JSON.parse(localStorage.getItem("gx_look")||"{}"))}catch(e){}
 <meta property="og:type" content="website"><meta property="og:title" content="GORRAX | Más que gorras, es actitud"><meta property="og:description" content="Gorras, buzos y relojes. Arma tu combo, ahorra 10% y recibe envío gratis.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=Hanken+Grotesk:wght@400;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&family=Exo+2:wght@400;600;700&family=Big+Shoulders+Display:wght@800;900&family=Hanken+Grotesk:wght@400;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">
 <style>
-:root{--fm:"Permanent Marker";--fh:"Big Shoulders Display";--fb:"Hanken Grotesk";--goldrgb:226,181,63;--bg:#0a0a0a;--panel:#141414;--line:#2a2a2a;--ink:#f3f0e8;--muted:#9b978c;--gold:#e2b53f;--wa:#1fa855}
+:root{--fm:"Orbitron";--fh:"Orbitron";--fb:"Exo 2";--goldrgb:255,184,20;--bg:#070605;--panel:#12100a;--line:#2e2615;--ink:#f6f1e4;--muted:#aaa28d;--gold:#ffb814;--silver:#c9ced6;--gx:linear-gradient(135deg,#ffe07a 0%,#ffb814 45%,#e07b00 100%);--wa:#1fa855}
 *{box-sizing:border-box;margin:0}
 [hidden]{display:none!important}
 body{font:16px/1.5 var(--fb),system-ui,sans-serif;background:var(--bg);color:var(--ink)}
-h1,h2,h3.t,.hand{font-family:var(--fh),Impact,sans-serif;font-weight:900;line-height:.95}
+h1,h2,h3.t,.hand{font-family:var(--fh),Impact,sans-serif;font-weight:900;line-height:1.05;font-style:italic;letter-spacing:.01em}
 .hand{font-family:var(--fm),var(--fh),cursive;font-weight:400;line-height:1.2}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--gold);outline-offset:2px}
@@ -188,7 +188,7 @@ button.nv{padding:0;font:inherit;cursor:pointer;color:inherit}
 [data-theme=light] .th .sun{display:none}
 [data-theme=light] .th .moon{display:block}
 .cchips{margin-top:8px}
-[data-theme=light]{--bg:#ebebe6;--panel:#ffffff;--line:#d5d5ce;--ink:#16161a;--muted:#5d5a52;--gold:#a87b00}
+[data-theme=light]{--bg:#eeebe3;--panel:#ffffff;--line:#d9d3c2;--ink:#14110a;--muted:#5f5846;--gold:#b87400;--silver:#6b7280}
 [data-theme=light] .top{background:rgba(235,235,230,.94)}
 [data-theme=light] .nv .in{color:var(--ink)}
 [data-theme=light] .ph{background:linear-gradient(135deg,#e4e4de,#d0d0c8)}
@@ -1419,6 +1419,15 @@ body.sq .hero,body.sq #promo,body.sq .feat,body.sq .sectH{display:none!important
 .nv.th:hover,.nv.th:focus-visible,.nv.th.act{box-shadow:none!important}
 .nv.th .in svg{transition:transform .25s ease,filter .25s ease}
 .nv.th:hover .in svg,.nv.th:focus-visible .in svg,.nv.th.act .in svg{color:var(--gold)!important;transform:scale(1.28)!important;filter:drop-shadow(0 0 2px currentColor) drop-shadow(0 0 7px currentColor) drop-shadow(0 0 15px currentColor)}
+
+/* ===== Tema GX (colores y letra del logo) ===== */
+html:not([data-pal]) .btn:not(.ghost):not(.red):not(.wa){--o:linear-gradient(135deg,#ffe07a,#ffb814 50%,#e07b00);--f1:#ffb814;--f2:#070605;--t1:#1a0f00}
+html:not([data-pal]) body{background:radial-gradient(1200px 500px at 50% -120px,rgba(255,184,20,.10),transparent 70%),var(--bg);background-attachment:fixed}
+html:not([data-pal]) h1,html:not([data-pal]) h2{background:linear-gradient(180deg,#fff 0%,var(--silver) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+html:not([data-pal])[data-theme=light] h1,html:not([data-pal])[data-theme=light] h2{background:none;-webkit-text-fill-color:currentColor}
+html:not([data-pal]) h2::after{filter:drop-shadow(0 0 6px rgba(255,184,20,.6))}
+html:not([data-pal]) .logo{filter:drop-shadow(0 0 8px rgba(255,184,20,.35))}
+html:not([data-pal]) .card,html:not([data-pal]) .pc{border-color:#2e2615}
 </style>
 </head>
 <body>
