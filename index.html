@@ -1427,17 +1427,26 @@ html:not([data-pal]) body{background:radial-gradient(1200px 500px at 50% -120px,
 html:not([data-pal]) h1,html:not([data-pal]) h2{background:linear-gradient(180deg,#fff 0%,var(--silver) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 html:not([data-pal])[data-theme=light] h1,html:not([data-pal])[data-theme=light] h2{background:none;-webkit-text-fill-color:currentColor}
 html:not([data-pal]) h2::after{filter:drop-shadow(0 0 6px rgba(255,184,20,.6))}
-html:not([data-pal]) .logo{filter:drop-shadow(0 0 8px rgba(255,184,20,.35))}
+
 html:not([data-pal]) .card,html:not([data-pal]) .pc{border-color:#2e2615}
 
 /* Letra GX en todo el sitio */
 html:not([data-font]) body,html:not([data-font]) body *:not(svg):not(svg *):not(img):not(code):not(pre){font-style:italic!important}
-img.crown{width:92px!important;max-width:40vw;height:auto;color:inherit;animation:none!important;filter:drop-shadow(0 0 10px rgba(255,184,20,.45))}
+img.crown{width:92px!important;max-width:40vw;height:auto;color:inherit;filter:drop-shadow(0 0 10px rgba(255,184,20,.45))}
 html:not([data-font]) :is(.lbd,.desc,.pde,.dclamp,.pdp) *{font-family:var(--fb),sans-serif}
 html:not([data-font]) :is(.btn,.nv,button.btn,th,.chip,.chips button,.sizes button,summary,footer .links a){font-family:var(--fh),var(--fb),sans-serif;letter-spacing:.02em}
 html:not([data-font]) :is(.btn,.nv,th,.sizes button){font-size:.88em}
 #cartP .btn{display:flex;align-items:center;justify-content:center;text-align:center;width:100%}#cartP .btn.sm{width:auto}
 #cartW.btn.grn:not(.dis){--o:var(--wa)!important;--f1:var(--wa);--f2:#0a0a0a;--t1:#fff;--t2:var(--wa);background:var(--wa)!important;color:#fff!important;border-color:var(--wa)}
+
+/* Filtrar separado del borde */
+.fbtn{padding:0 10px 0 14px!important;width:72px!important}
+@media(max-width:899px){.fbtn{width:56px!important;padding:0 8px 0 10px!important}}
+/* Logo con giro infinito y brillo */
+@keyframes gxSpin{0%{transform:perspective(500px) rotateY(0)}100%{transform:perspective(500px) rotateY(360deg)}}
+@keyframes gxGlow{0%,100%{filter:drop-shadow(0 0 4px rgba(255,184,20,.5)) brightness(1)}50%{filter:drop-shadow(0 0 16px rgba(255,200,60,1)) drop-shadow(0 0 30px rgba(255,150,0,.7)) brightness(1.25)}}
+.top .logo,img.crown{animation:gxSpin 6s linear infinite,gxGlow 2.4s ease-in-out infinite!important;transform-origin:50% 50%;will-change:transform,filter}
+@media(prefers-reduced-motion:reduce){.top .logo,img.crown{animation:gxGlow 3s ease-in-out infinite!important}}
 </style>
 </head>
 <body>
