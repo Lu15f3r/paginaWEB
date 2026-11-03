@@ -1413,11 +1413,11 @@ dialog#adm[data-dock=left] .cmh,dialog#adm[data-dock=right] .cmh{grid-template-c
 dialog:focus,dialog:focus-visible,#lb:focus,#lb:focus-visible{outline:0!important}
 body.sq .hero,body.sq #promo,body.sq .feat,body.sq .sectH{display:none!important}body.sq #catalogo{padding-top:24px}
 .nv.th::after{display:none!important}
-.nv.th:not(.on):not(.act):hover::before,.nv.th:not(.on):not(.act):focus-visible::before{transform:translateX(-110%)!important}
-.nv.th:not(.on):not(.act):hover .in,.nv.th:not(.on):not(.act):focus-visible .in{color:inherit!important}
-.nv.th:hover,.nv.th:focus-visible{box-shadow:none!important}
+.nv.th::before,.nv.th:hover::before,.nv.th:focus-visible::before,.nv.th.act::before,.nv.th.on::before{transform:translateX(-110%)!important}
+.nv.th:hover .in,.nv.th:focus-visible .in,.nv.th.act .in,.nv.th.on .in{color:inherit!important}
+.nv.th:hover,.nv.th:focus-visible,.nv.th.act{box-shadow:none!important}
 .nv.th .in svg{transition:transform .25s ease,filter .25s ease}
-.nv.th:not(.on):not(.act):hover .in svg,.nv.th:not(.on):not(.act):focus-visible .in svg{color:var(--gold)!important;transform:scale(1.28)!important;filter:drop-shadow(0 0 2px currentColor) drop-shadow(0 0 7px currentColor) drop-shadow(0 0 15px currentColor)}
+.nv.th:hover .in svg,.nv.th:focus-visible .in svg,.nv.th.act .in svg{color:var(--gold)!important;transform:scale(1.28)!important;filter:drop-shadow(0 0 2px currentColor) drop-shadow(0 0 7px currentColor) drop-shadow(0 0 15px currentColor)}
 </style>
 </head>
 <body>
@@ -1851,7 +1851,7 @@ $('pf').onsubmit=async e=>{e.preventDefault();if(!$('pcs').value.trim()){say('El
       sizes:[...curSizes],genders:[...curG],subcategory:$('psb').value.trim()||null,material:$('pmt').value.trim()||null,description:$('pd').value.trim(),available:$('pa').checked,stock:$('pst').value===''?null:Number($('pst').value),compare_price:$('pcmp').value?Number($('pcmp').value):null};
     const dd={};vlist.map(v=>({s:String(v.s).trim(),c:v.c||'',n:Math.max(0,Number(v.n)||0)})).filter(v=>v.s||v.c).forEach(v=>dd[v.s+'|'+v.c]=v);
     row.variants=Object.values(dd);
-    if(!id){const so=products.map(p=>Number(p.sort_order)).filter(Number.isFinite);row.sort_order=(so.length?Math.min(...so):0)-10}
+    /* producto nuevo: sin posición guardada = queda al final; editar no cambia su lugar */
     if(row.variants.length){row.stock=vSum(row.variants);row.sizes=[...new Set(row.variants.map(v=>v.s).filter(Boolean))]}
     const urls=[];
     for(const x of keep){if(typeof x==='string'){urls.push(x);continue}const f=x.f,path=`${Date.now()}-${Math.random().toString(36).slice(2,8)}.jpg`;
