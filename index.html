@@ -1429,6 +1429,11 @@ html:not([data-pal])[data-theme=light] h1,html:not([data-pal])[data-theme=light]
 html:not([data-pal]) h2::after{filter:drop-shadow(0 0 6px rgba(255,184,20,.6))}
 html:not([data-pal]) .logo{filter:drop-shadow(0 0 8px rgba(255,184,20,.35))}
 html:not([data-pal]) .card,html:not([data-pal]) .pc{border-color:#2e2615}
+
+/* Letra GX en todo el sitio */
+html:not([data-font]) body,html:not([data-font]) body :is(p,span,a,li,td,th,small,b,strong,label,input,select,textarea,button,summary,div,h1,h2,h3,h4,h5,h6,dt,dd){font-style:italic}
+html:not([data-font]) :is(.btn,.nv,button.btn,th,.chip,.chips button,.sizes button,summary,footer .links a){font-family:var(--fh),var(--fb),sans-serif;letter-spacing:.02em}
+html:not([data-font]) :is(.btn,.nv,th,.sizes button){font-size:.88em}
 </style>
 </head>
 <body>
