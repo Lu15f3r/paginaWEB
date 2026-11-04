@@ -3452,24 +3452,23 @@ $('txSave').onclick=async()=>{const b=$('txSave');b.disabled=true;$('txM').textC
 txApply();
 
 /* ====== Fondo de la página (imagen o formas abstractas con movimiento) ====== */
-const BGS=[{id:'curvas',n:'Curvas'},{id:'ondas',n:'Ondas'},{id:'burbujas',n:'Burbujas'},{id:'aurora',n:'Aurora'},{id:'diagonales',n:'Diagonales'},{id:'anillos',n:'Anillos'}];
+const BGS=[{id:'curvas',n:'Curvas'},{id:'ondas',n:'Ondas'},{id:'burbujas',n:'Burbujas'},{id:'cintas',n:'Cintas'},{id:'dunas',n:'Dunas'},{id:'organico',n:'Orgánico'}];
 const BG0={m:'none',s:'curvas',c0:'#3b1f8f',c1:'#6d3be0',c2:'#ffffff',mv:'mouse',dim:0,url:''};
 const bgGet=l=>({...BG0,...((l&&l.bg)||{})});
 function bgAbs(s,c0,c1,c2){
  const W=1600,H=1000;let a='',b='',c='';
-  if(s==='aurora'){
-  a=`<ellipse cx="300" cy="260" rx="560" ry="360" fill="${c1}" opacity=".75" filter="url(#bgbl)"/>`;
-  b=`<ellipse cx="1300" cy="320" rx="520" ry="340" fill="${c2}" opacity=".35" filter="url(#bgbl)"/>`;
-  c=`<ellipse cx="850" cy="860" rx="700" ry="300" fill="${c1}" opacity=".6" filter="url(#bgbl)"/><ellipse cx="1450" cy="900" rx="320" ry="200" fill="${c2}" opacity=".3" filter="url(#bgbl)"/>`}
- else if(s==='diagonales'){
-  a=`<polygon points="-100,1100 700,-100 1050,-100 250,1100" fill="${c1}" opacity=".85"/>`;
-  b=`<polygon points="500,1100 1300,-100 1500,-100 700,1100" fill="${c2}" opacity=".22"/>`;
-  c=`<polygon points="1000,1100 1700,80 1700,420 1300,1100" fill="${c1}" opacity=".7"/><polygon points="-100,300 300,-100 -100,-100" fill="${c2}" opacity=".3"/>`}
- else if(s==='anillos'){
-  const R=(x,y,rs,col,o)=>rs.map(r=>`<circle cx="${x}" cy="${y}" r="${r}" fill="none" stroke="${col}" stroke-width="${r>300?30:18}" opacity="${o}"/>`).join('');
-  a=R(380,380,[140,260,380,500],c1,.8);
-  b=R(1280,640,[120,240,360,480],c2,.3);
-  c=`<circle cx="380" cy="380" r="70" fill="${c1}" opacity=".95"/><circle cx="1280" cy="640" r="60" fill="${c2}" opacity=".6"/>`}
+  if(s==='cintas'){
+  a=`<path d="M-100 700 C 300 300 700 900 1100 450 S 1600 200 1750 300 L1750 520 C 1500 420 1250 760 900 800 S 300 640 -100 960Z" fill="${c1}" opacity=".9"/>`;
+  b=`<path d="M-100 380 C 250 80 650 560 1000 240 S 1500 -20 1750 80 L1750 200 C 1450 140 1200 420 900 480 S 250 260 -100 560Z" fill="${c2}" opacity=".3"/>`;
+  c=`<path d="M-100 940 C 350 760 700 1100 1100 880 S 1550 760 1750 840 V1100 H-100Z" fill="${c1}" opacity=".7"/><path d="M200 -100 C 500 200 300 420 620 560 S 900 300 1000 -100Z" fill="${c2}" opacity=".16"/>`}
+ else if(s==='dunas'){
+  a=`<path d="M-100 520 C 250 380 500 560 850 470 S 1450 300 1750 420 V1100 H-100Z" fill="${c1}" opacity=".5"/>`;
+  b=`<path d="M-100 660 C 300 520 600 760 1000 640 S 1500 540 1750 640 V1100 H-100Z" fill="${c1}" opacity=".8"/><circle cx="1230" cy="250" r="110" fill="${c2}" opacity=".5"/>`;
+  c=`<path d="M-100 820 C 350 700 650 900 1050 800 S 1500 740 1750 820 V1100 H-100Z" fill="${c2}" opacity=".3"/><path d="M-100 930 C 300 860 700 1020 1100 940 S 1500 900 1750 960 V1100 H-100Z" fill="${c1}" opacity=".95"/>`}
+ else if(s==='organico'){
+  a=`<path d="M200 120 C 420 40 640 160 650 340 S 520 640 300 620 S -20 420 40 260 S 100 160 200 120Z" fill="${c1}" opacity=".85"/>`;
+  b=`<path d="M1000 300 C 1250 180 1560 280 1580 520 S 1380 900 1100 860 S 780 560 850 420 S 900 340 1000 300Z" fill="${c2}" opacity=".25"/>`;
+  c=`<path d="M560 700 C 700 640 860 720 860 860 S 740 1020 600 990 S 440 780 560 700Z" fill="${c1}" opacity=".9"/><circle cx="1400" cy="150" r="80" fill="${c2}" opacity=".45"/><circle cx="260" cy="880" r="55" fill="${c2}" opacity=".4"/>`}
  else if(s==='ondas'){
   a=`<path d="M-100 620 C 200 520 450 760 800 640 S 1400 520 1750 640 V1100 H-100Z" fill="${c1}" opacity=".85"/>`;
   b=`<path d="M-100 760 C 250 660 520 900 900 770 S 1450 700 1750 790 V1100 H-100Z" fill="${c2}" opacity=".28"/>`;
