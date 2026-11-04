@@ -1621,7 +1621,7 @@ const CFG={
   NAV_ON:false,   // true = vuelve a mostrar el menú de categorías (Gorras, Buzos…) arriba
   COMBOS_ON:false,   // true = vuelve a mostrar los combos (oferta, menú, armador y categoría)
   // ▼▼ FOTOS DEL BANNER PRINCIPAL: guarda cada foto en la carpeta img/ y escribe su nombre aquí, separado por comas ▼▼
-  HERO:['img/banner-1.jpg','img/banner-2.jpg','img/banner-3.jpg','img/banner-4.jpg','img/banner-5.jpg','img/banner-6.jpg'],   // para agregar más: escribe aquí el nombre de la foto nueva (guardada en la carpeta img/)
+  HERO:['img/banner-1','img/banner-2','img/banner-3','img/banner-4','img/banner-5','img/banner-6'],   // sin extensión: sirve .png, .jpg o .webp   // para agregar más: escribe aquí el nombre de la foto nueva (guardada en la carpeta img/)
   HERO_MS:3200,   // milisegundos entre foto y foto (2000 = 2 segundos)
   HERO_OLD:['img/herov1.png','img/banner-cruces.jpg','img/banner-colombia.jpg','img/banner-777.jpg','img/banner-samurai.jpg','img/banner-fugaz.jpg','img/banner-royal.jpg'],   // respaldo: solo se usan si NINGUNA foto de HERO carga
   HERO_POS:'center 62%',   // centrado vertical de las fotos del banner (0% = arriba, 50% = centro, 100% = abajo)
@@ -3315,7 +3315,7 @@ const tUpd=()=>{tt.classList.toggle('show',scrollY>30);td.classList.toggle('show
 tt.onclick=()=>goStep(-1);td.onclick=()=>goStep(1);
 addEventListener('scroll',tUpd,{passive:true});addEventListener('resize',tUpd);tUpd();
 /* ====== BANNER DE FOTOS ====== */
-(()=>{const S=$('heroS'),first=[...S.querySelectorAll('img')].map(i=>i.getAttribute('src')),want=CFG.HERO&&CFG.HERO.length?CFG.HERO:first,probe=u=>new Promise(r=>{const i=new Image();i.onload=()=>r(u);i.onerror=()=>r(null);i.src=u});
+(()=>{const S=$('heroS'),first=[...S.querySelectorAll('img')].map(i=>i.getAttribute('src')),want=CFG.HERO&&CFG.HERO.length?CFG.HERO:first,probe1=u=>new Promise(r=>{const i=new Image();i.onload=()=>r(u);i.onerror=()=>r(null);i.src=u}),probe=async u=>{if(/\.[a-z0-9]{3,4}$/i.test(u))return probe1(u);for(const x of ['.png','.jpg','.webp','.jpeg','.PNG','.JPG','.WEBP']){const r=await probe1(u+x);if(r)return r}return null};
   /* solo se muestran las fotos que sí cargan; si ninguna de HERO carga, usa HERO_OLD para no dejar el banner vacío */
   Promise.all(want.map(probe)).then(a=>{const ok=a.filter(Boolean);return ok.length?ok:Promise.all((CFG.HERO_OLD||first).map(probe)).then(b=>b.filter(Boolean))}).then(list=>{init(list.length?list:first)});
   function init(list){
