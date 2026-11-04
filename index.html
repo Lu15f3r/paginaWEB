@@ -1593,7 +1593,7 @@ html[data-cbg] footer,body.hasbg footer,html[data-cbg][data-theme=light] footer{
         <label class="chk w"><input type="checkbox" id="pa" checked> Disponible</label>
         <div class="w"><button class="btn" id="sv">Guardar producto</button> <button type="button" class="btn ghost" id="cl">Limpiar</button></div>
       </form>
-      <div style="margin-top:22px"><input id="pq" type="search" class="invq" placeholder="Buscar productos por nombre o categoría…" autocomplete="off"><div style="margin-top:8px"><button type="button" class="btn ghost sm" data-xl="prod">⬇ Exportar productos a Excel</button></div></div><div style="margin-top:10px" id="alist"></div></div>
+      <div style="margin-top:22px"><input id="pq" type="search" class="invq" placeholder="Buscar productos por nombre, categoría o proveedor…" autocomplete="off"><div style="margin-top:8px"><button type="button" class="btn ghost sm" data-xl="prod">⬇ Exportar productos a Excel</button></div></div><div style="margin-top:10px" id="alist"></div></div>
       <div id="tPed" hidden></div><div id="tInv" hidden></div><div id="tVen" hidden></div><div id="tCom" hidden></div><div id="tGas" hidden></div><div id="tGra" hidden></div><div id="tApp" hidden></div>
     </div>
     <p class="msg" id="msg"></p>
@@ -1830,14 +1830,16 @@ $('login').onsubmit=async e=>{e.preventDefault();
 $('out').onclick=async()=>{await sb.auth.signOut();gate(false)};
 const sg=s=>slug(s||'').replace(/^-+|-+$/g,'');
 const hit=(t,q)=>{const x=sg(t);return sg(q).split('-').filter(Boolean).every(w=>x.includes(w))};
+const supsOf=p=>{const m=new Set();purch.forEach(c=>{const sp=String(c.supplier||'').trim();if(sp&&(c.items||[]).some(it=>String(it.product_id)===String(p.id)||nrm(it.name)===nrm(p.name)))m.add(sp)});return[...m]};
 function alist(){
+  if(!alist._pl&&typeof sb!=='undefined'&&sb){alist._pl=1;loadPurch().then(()=>{if(tab==='prod')alist()}).catch(()=>{})}
   catChips();fillCombo();
   const q=sg($('pn').value),c=sg($('pc').value),editing=!!$('pid').value;
-  const pq=$('pq').value.trim(),base=editing?products:products.filter(p=>(!q||sg(p.name).includes(q))&&(!c||sg(p.category).includes(c))),list=base.filter(p=>!pq||hit(p.name+' '+p.category,pq));
+  const pq=$('pq').value.trim(),base=editing?products:products.filter(p=>(!q||sg(p.name).includes(q))&&(!c||sg(p.category).includes(c))),list=base.filter(p=>!pq||hit(p.name+' '+p.category+' '+supsOf(p).join(' '),pq));
   const filtered=(!editing&&(q||c))||pq;
   const head=products.length?`<p class="desc" style="margin-bottom:6px">Mostrando ${list.length} de ${products.length} productos${filtered?' &nbsp;<button type="button" class="btn red sm" data-clr="1" aria-label="Quitar filtro"><span class="lb">Quitar filtro</span><span class="xb">✕</span></button>':''}</p>`:'';
   $('alist').innerHTML=head+(list.length?list.map(p=>`<div class="row" data-id="${p.id}" draggable="true" title="Clic para editar · arrastra para cambiar de posición">${imgs(p)[0]?`<img src="${esc(imgs(p)[0])}" alt="">`:'<i></i>'}
-   <div><b>${esc(p.name)}</b><br><small>${esc(p.category)}${p.subcategory?' › '+esc(p.subcategory):''} · ${money(p.price)}${gens(p).length?' · '+esc(gens(p).join('/')):''}${p.available===false?' · Agotado':''}</small> <span class="stkb ${stkC(p.stock)||'n'}">${p.stock==null?'Sin control':'Stock: '+p.stock}</span></div>
+   <div><b>${esc(p.name)}</b><br><small>${esc(p.category)}${p.subcategory?' › '+esc(p.subcategory):''} · ${money(p.price)}${gens(p).length?' · '+esc(gens(p).join('/')):''}${p.available===false?' · Agotado':''}${supsOf(p).length?' · Prov.: '+esc(supsOf(p).join(', ')):''}</small> <span class="stkb ${stkC(p.stock)||'n'}">${p.stock==null?'Sin control':'Stock: '+p.stock}</span></div>
    <div class="mvb"><span class="pos" title="Posición en la tienda">${products.indexOf(p)+1}</span><button type="button" class="btn ghost sm" data-mv="top" data-id="${p.id}" title="Poner de primero" aria-label="Poner de primero">⤒</button><button type="button" class="btn ghost sm" data-mv="up" data-id="${p.id}" title="Subir un puesto" aria-label="Subir">▲</button><button type="button" class="btn ghost sm" data-mv="down" data-id="${p.id}" title="Bajar un puesto" aria-label="Bajar">▼</button><button type="button" class="btn ghost sm" data-mv="bottom" data-id="${p.id}" title="Mandar al final" aria-label="Mandar al final">⤓</button></div>
    <button class="btn ghost sm" data-e="${p.id}">Editar</button><button class="btn red sm" data-d="${p.id}">Eliminar</button></div>`).join(''):`<p class="desc">${products.length?'Ningún producto coincide: puedes crearlo con el botón Guardar.':'Aún no hay productos. Crea el primero arriba.'}</p>`);
 }
@@ -1933,7 +1935,7 @@ $('pf').onsubmit=async e=>{e.preventDefault();if(!$('pcs').value.trim()){say('El
     if(r.error&&/images|compare_price|stock/i.test(r.error.message)){delete row.images;delete row.compare_price;delete row.stock;r=await save(row);aviso+=' Ejecuta actualizar-tienda.sql en Supabase para guardar varias fotos y el precio de ahorro.'}
     if(r.error)throw r.error;
     const pid=id||(r.data&&r.data[0]&&r.data[0].id);
-    if(pid!=null){const cv=$('pco').value,cr=await sb.from('product_costs').upsert({product_id:String(pid),cost:cv===''?null:Number(cv)});if(cr.error)aviso+=' El valor de compra NO se guardó: ejecuta actualizar-costos.sql en Supabase.';else costs[String(pid)]=cv===''?null:Number(cv)}
+    if(pid!=null){const cv=$('pco').value,cr=await sb.from('product_costs').upsert({product_id:String(pid),cost:cv===''?null:Number(cv)});if(cr.error)aviso+=' El valor de compra NO se guardó: ejecuta actualizar-costos.sql en Supabase.';else{costs[String(pid)]=cv===''?null:Number(cv);if(id&&cv!==''){try{const n=await cmSyncCost(pid,row.name,Number(cv));if(n)aviso+=` Valor de compra actualizado en ${n} compra(s) de este producto.`}catch(_){}}}}
     const gone=removed.filter(u=>u&&u.includes('/productos/')&&!used(u,id));
     if(gone.length)await sb.storage.from('productos').remove(gone.map(u=>u.split('/productos/')[1]));
     if(id&&pid!=null&&$('pcs').value.trim()){const sp=$('pcs').value.trim();try{if(!purch.length)await loadPurch();const mine=purch.filter(c=>!String(c.supplier||'').trim()&&(c.items||[]).some(it=>String(it.product_id)===String(pid)||nrm(it.name)===nrm(row.name)));
@@ -2848,6 +2850,29 @@ async function cmBackfill(){const miss=cmMissing();if(!miss.length)return 0;cons
     const its=hasVar(p)?vars(p).filter(v=>v.n>0).map(v=>mk(v.s,v.c,v.n)):(Number(p.stock)>0?[mk('','',Number(p.stock))]:[]);if(!its.length)its.push(mk('','',0));(by[d]??=[]).push(...its)});
   const rows=Object.entries(by).map(([d,items])=>({bought_at:d,supplier:null,note:'Inventario inicial (producto que ya estaba en la tienda)',items,total:items.reduce((t,i)=>t+(i.unit||0)*i.qty,0)}));
   const r=await sb.from('purchases').insert(rows);if(r.error)return -1;await loadPurch();return miss.length}
+/* si cambias el valor de compra de un producto, las compras de ese producto se actualizan */
+async function cmSyncCost(pid,name,unit){if(!sb||!isFinite(unit))return 0;if(!purch.length)await loadPurch();let n=0;
+  for(const c of purch){const its=c.items||[];let ch=false;
+    const ni=its.map(it=>{const m=(it.product_id!=null&&String(it.product_id)===String(pid))||(it.product_id==null&&nrm(it.name)===nrm(name));if(m&&Number(it.qty)>0&&Number(it.unit)!==unit){ch=true;return{...it,unit}}return it});
+    if(ch){const total=ni.reduce((t,i)=>t+(Number(i.unit)||0)*(Number(i.qty)||0),0),r=await sb.from('purchases').update({items:ni,total}).eq('id',c.id);if(!r.error)n++}}
+  if(n)await loadPurch();return n}
+/* cuadre: unidades ingresadas (stock + vendidas) × valor de compra  vs  lo registrado en Compras */
+function cmCuadre(){const sold={};orders.filter(o=>o.status==='confirmado').forEach(o=>(Array.isArray(o.items)?o.items:[]).forEach(i=>{sold[String(i.id)]=(sold[String(i.id)]||0)+(Number(i.qty)||0)}));
+  const by={};purch.forEach(c=>(c.items||[]).forEach(it=>{const p=pOf(it);if(!p)return;const o=by[String(p.id)]||(by[String(p.id)]={q:0,v:0});const q=Number(it.qty)||0;o.q+=q;o.v+=q*(Number(it.unit)||0)}));
+  const rows=[],nocost=[];let want=0,have=0;
+  products.forEach(p=>{const k=String(p.id),cost=costs[k],o=by[k]||{q:0,v:0},ing=(Number(p.stock)||0)+(sold[k]||0);
+    if(cost==null||cost===''){if(ing>0)nocost.push(p.name);have+=o.v;return}
+    const should=ing*Number(cost);want+=should;have+=o.v;const miss=Math.max(0,ing-o.q);
+    if(miss>0||Math.abs(should-o.v)>0.5)rows.push({p,cost:Number(cost),ing,bought:o.q,should,have:o.v,miss})});
+  return{rows,nocost,want,have}}
+async function cmCuadreFix(){const Z=cmCuadre();let fixed=0;
+  for(const c of purch){const its=c.items||[];let ch=false;
+    const ni=its.map(it=>{const p=pOf(it);if(!p)return it;const cost=costs[String(p.id)];if(cost==null||cost==='')return it;if(Number(it.qty)>0&&Number(it.unit)!==Number(cost)){ch=true;return{...it,unit:Number(cost)}}return it});
+    if(ch){const total=ni.reduce((t,i)=>t+(Number(i.unit)||0)*(Number(i.qty)||0),0),r=await sb.from('purchases').update({items:ni,total}).eq('id',c.id);if(!r.error)fixed++}}
+  const items=Z.rows.filter(r=>r.miss>0).map(r=>({name:r.p.name,product_id:r.p.id,size:'',color:'',qty:r.miss,unit:r.cost,stocked:true}));
+  let added=0;if(items.length){const r=await sb.from('purchases').insert({bought_at:today0(),supplier:'Ajuste de cuadre',note:'Ajuste de cuadre (unidades ingresadas que no tenían compra)',items,total:items.reduce((t,i)=>t+i.unit*i.qty,0)});if(!r.error)added=items.length;else return -1}
+  await loadPurch();return{fixed,added}}
+
 async function cmAuto(){if(cmAuto.busy||cmAuto.done||purchErr||!sb||!products.length||DEMO)return;cmAuto.busy=1;
   loadExtraCats().then(()=>{try{alist()}catch(e){}});
   try{const g=await sb.from('site_settings').select('value').eq('key','compras_init').limit(1);
@@ -2890,6 +2915,7 @@ function rCom(){
   const sups=[...new Set(purch.map(c=>c.supplier).filter(Boolean))],um=cmMissing().length;cmAuto();
   const rows=cmL.map((l,i)=>`<div class="cml" data-i="${i}"><label class="cmn">Producto<input list="cmDl" data-f="name" value="${esc(l.name)}" placeholder="Nombre del producto" autocomplete="off"><small class="cmb">${cmBadge(l.name)}</small></label><label>Talla<input data-f="s" value="${esc(l.s)}" placeholder="Opcional"></label><label>Color<input data-f="c" value="${esc(l.c)}" placeholder="Opcional"></label><label>Cantidad<input type="number" min="1" step="1" data-f="q" value="${l.q}" inputmode="numeric"></label><label>Costo por unidad<input type="number" min="0" step="any" data-f="u" value="${l.u}" inputmode="decimal" placeholder="$"></label><div class="cmt"><small>Subtotal</small><b data-sub>${money((Number(l.q)||0)*(Number(l.u)||0))}</b></div>${cmL.length>1?`<button type="button" class="btn ghost sm" data-a="rm" data-i="${i}" aria-label="Quitar línea">✕</button>`:''}</div>`).join('');
   $('tCom').innerHTML=`<div class="gk"><div><small>Compras · ${lbl}</small><b>${money(comp)}</b></div><div><small>Unidades compradas</small><b>${und}</b></div><div><small>Vendido (confirmado)</small><b>${money(vend)}</b></div><div><small>Ventas − compras</small><b style="color:${vend-comp<0?'#e53935':'#1fa855'}">${money(vend-comp)}</b></div></div>
+  ${(()=>{const Z=cmCuadre();const d=Z.want-Z.have;return `<div class="cmq" style="border:1px solid var(--line);background:var(--panel);padding:10px 14px;margin:6px 0 12px"><b>Cuadre de compras</b> · Lo ingresado (unidades × valor de compra): <b>${money(Z.want)}</b> · Registrado en Compras: <b>${money(Z.have)}</b> · Diferencia: <b style="color:${Math.abs(d)<1?'#1fa855':'#e53935'}">${money(d)}</b>${Z.rows.length?`<br><small>Productos que no cuadran:</small><ul style="margin:4px 0 8px 18px;font-size:13px">${Z.rows.slice(0,25).map(r=>`<li><b>${esc(r.p.name)}</b>: ingresadas ${r.ing} u. (${money(r.should)}) · en compras ${r.bought} u. (${money(r.have)})${r.cost?'':''}</li>`).join('')}</ul><button type="button" class="btn sm" data-a="cuadre">Corregir para que cuadre</button>`:'<br><small>✓ Todo cuadra.</small>'}${Z.nocost.length?`<br><small style="color:#e53935">Sin valor de compra (no se pueden cuadrar): ${Z.nocost.slice(0,12).map(esc).join(', ')}${Z.nocost.length>12?'…':''}</small>`:''}</div>`})()}
   ${um?`<p class="desc" style="margin:4px 0 10px"><b>${um}</b> producto(s) de la tienda aún no están en Compras. <button type="button" class="btn sm" data-a="bf">Agregarlos a Compras</button></p>`:''}
   ${(pend||nuev)?`<p class="desc" style="margin:4px 0 10px">${pend?`<b>${pend}</b> línea(s) de compra con producto existente aún sin sumar al inventario. `:''}${nuev?`<b>${nuev}</b> línea(s) con productos que todavía no están en la tienda.`:''}</p>`:''}
   <div class="tabs" id="cmPs">${[['today','Hoy'],['7','Últimos 7 días'],['15','Últimos 15 días'],['30','Últimos 30 días']].map(([k,t])=>`<button type="button" class="btn ghost sm${cmM==='r'&&cmP===k?' on':''}" data-a="pre" data-k="${k}">${t}</button>`).join('')}<button type="button" class="btn ghost sm${cmM==='all'?' on':''}" data-a="mon" data-m="all">Todo</button><button type="button" class="btn ghost sm" data-a="xl">⬇ Exportar a Excel</button></div>
@@ -2921,6 +2947,7 @@ $('tCom').oninput=e=>{const t=e.target,row=t.closest('.cml');if(!row||!t.dataset
   if(t.dataset.f==='name')row.querySelector('.cmb').innerHTML=cmBadge(t.value);
   row.querySelector('[data-sub]').textContent=money((Number(l.q)||0)*(Number(l.u)||0));$('cmTot').textContent=money(cmL.reduce((s,x)=>s+(Number(x.q)||0)*(Number(x.u)||0),0))};
 $('tCom').onclick=async e=>{const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,cid=b.dataset.c,P=cid&&purch.find(x=>String(x.id)===cid);
+  if(a==='cuadre'){const Z=cmCuadre();if(!await askOk(`Se va a poner a cada compra el valor de compra actual de su producto y se agregará una compra de ajuste con las unidades ingresadas que no tenían compra (${Z.rows.filter(r=>r.miss>0).length} producto(s)). Diferencia actual: ${money(Z.want-Z.have)}. ¿Continuar?`,'Corregir'))return;b.disabled=true;const r=await cmCuadreFix();say(r===-1?'No se pudo guardar el ajuste (¿ejecutaste crear-compras.sql?).':`Listo: ${r.fixed} compra(s) con valor actualizado y ${r.added} producto(s) agregados al ajuste.`,r!==-1);rCom();return}
   if(a==='bf'){b.disabled=true;const n=await cmBackfill();say(n<0?'No se pudo agregar (¿ejecutaste crear-compras.sql?).':`Se agregaron a Compras ${n} producto(s).`,n>=0);rCom();return}
   if(a==='cat'){cmC=b.dataset.cat||'';cmRead();rCom();return}
   if(a==='mon'){cmM=b.dataset.m;cmRead();rCom();return}
