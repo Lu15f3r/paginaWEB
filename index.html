@@ -1482,6 +1482,7 @@ body.hasbg main,body.hasbg .info,body.hasbg section:not(.hero),body.hasbg footer
 html[data-cbg] footer,body.hasbg footer,html[data-cbg][data-theme=light] footer{background:transparent!important}
 #gxBg{height:100vh;height:100lvh}
 @media(max-width:640px){footer .hand{font-size:clamp(13px,4.4vw,22px);padding:0 16px;line-height:1.25}.tw{white-space:normal;max-width:100%}.tw .ty{left:0;right:0}}
+.mdb{display:inline-block;background:var(--gold);color:#000;padding:2px 10px;margin-right:6px;font-style:italic}
 </style>
 </head>
 <body>
@@ -3398,7 +3399,7 @@ const getC=k=>{const c=LOOK.c&&LOOK.c[curMode()];return(c&&c[k])||''};
 const cssVar=k=>getComputedStyle(document.documentElement).getPropertyValue('--'+k).trim();
 const toHex=v=>{v=String(v).trim();if(/^#[0-9a-f]{6}$/i.test(v))return v.toLowerCase();if(/^#[0-9a-f]{3}$/i.test(v))return'#'+v.slice(1).split('').map(x=>x+x).join('').toLowerCase();const m=v.match(/\d+(\.\d+)?/g);if(m&&m.length>=3&&/^rgb/i.test(v))return'#'+m.slice(0,3).map(x=>(+x|0).toString(16).padStart(2,'0')).join('');return'#000000'};
 function setC(k,v){LOOK.c=LOOK.c||{d:{},l:{}};const m=curMode();LOOK.c[m]=LOOK.c[m]||{};if(v)LOOK.c[m][k]=v;else delete LOOK.c[m][k];lookDirty=true;applyLook(LOOK)}
-function colorsUI(){return `<h3 style="margin:18px 0 2px">Colores a tu gusto</h3><p class="desc">Estás editando el modo <b>${curMode()==='l'?'CLARO':'OSCURO'}</b> (cámbialo con “Ver en claro / oscuro”). Elige un color de la paleta o usa el cuadro de color para cualquier tono. Lo ves al instante.</p>`+
+function colorsUI(){return `<h3 style="margin:18px 0 2px">Colores a tu gusto</h3><p class="desc"><b class="mdb">${curMode()==='l'?'☀ Editando el modo CLARO':'🌙 Editando el modo OSCURO'}</b> Los colores se guardan por separado para claro y oscuro: se edita el modo que se esté viendo ahora (cámbialo con el botón “Ver en claro / oscuro” de abajo o con el sol/luna de la página). Elige un color de la paleta o usa el cuadro de color para cualquier tono. Lo ves al instante.</p>`+
  CROLES.map(([k,t])=>{const v=getC(k),cur=v||toHex(cssVar(k));return `<div class="clr"><b>${t}</b><span class="hxr"><input type="color" value="${cur}" data-ck="${k}" aria-label="${esc(t)}"><input type="text" data-ch="${k}" value="${cur}" maxlength="7" placeholder="#RRGGBB" aria-label="${esc(t)} en hexadecimal"></span><div class="cpal">${CPAL.map(c=>`<button type="button" class="cs${v.toLowerCase()===c?' on':''}" style="background:${c}" data-cs="${k}" data-v="${c}" title="${c}" aria-label="${c}"></button>`).join('')}</div><button type="button" class="btn ghost sm" data-cr="${k}"${v?'':' hidden'}>↺ Original</button></div>`}).join('')+
  `<div class="apbar"><button type="button" class="btn ghost sm" id="clrAll">↺ Quitar todos mis colores (este modo)</button></div>`}
 /* textos */
@@ -3416,13 +3417,13 @@ function txApply(){const tx=LOOK.tx||{};if(!Object.keys(tx).length&&!TXN.size)re
 function setTx(key,val){LOOK.tx=LOOK.tx||{};if(!String(val).trim()||val.trim()===key)delete LOOK.tx[key];else LOOK.tx[key]=val.trim();lookDirty=true;txApply()}
 const txOrig=n=>(n._o!==undefined?n._o:n.nodeValue).trim();
 let TXK=[];
-function txListR(){const q=sg($('txQ')?$('txQ').value:''),m=new Map();txNodes().forEach(n=>{if(txOk(n,n._o!==undefined?n._o:null)){const k=txOrig(n);if(!m.has(k))m.set(k,1)}});
+function txListR(){if(!$('txL')){const e=Object.keys(LOOK.tx||{}).length;if($('txN'))$('txN').textContent=e?e+' texto(s) cambiado(s).':'Aún no has cambiado textos.';return}const q=sg($('txQ')?$('txQ').value:''),m=new Map();txNodes().forEach(n=>{if(txOk(n,n._o!==undefined?n._o:null)){const k=txOrig(n);if(!m.has(k))m.set(k,1)}});
   TXK=[...m.keys()].filter(k=>!q||sg(k).includes(q)||sg((LOOK.tx||{})[k]||'').includes(q));const ed=Object.keys(LOOK.tx||{}).length;
   $('txL').innerHTML=(TXK.slice(0,60).map((k,i)=>{const cur=(LOOK.tx||{})[k];return `<div class="txr"><small>${esc(k.length>90?k.slice(0,90)+'…':k)}</small><textarea rows="${Math.min(4,Math.max(1,Math.ceil((cur||k).length/60)))}" data-ti="${i}">${esc(cur!==undefined?cur:k)}</textarea><button type="button" class="btn ghost sm" data-tr="${i}"${cur!==undefined?'':' hidden'} title="Volver al texto original">↺</button></div>`}).join('')||'<p class="desc">No se encontró ese texto.</p>')+(TXK.length>60?`<p class="desc">Mostrando 60 de ${TXK.length}. Escribe en el buscador para encontrar otros.</p>`:'');
   $('txN').textContent=ed?ed+' texto(s) cambiado(s).':'Aún no has cambiado textos.'}
-function textsUI(){return `<h3 style="margin:18px 0 2px">Textos de la página</h3><p class="desc">Cambia cualquier texto de la tienda (títulos, botones, avisos, pie de página…). Puedes tocarlo directamente en la página o buscarlo en la lista. Los nombres y descripciones de productos se editan en la pestaña Productos.</p>
+function textsUI(){return `<h3 style="margin:18px 0 2px">Textos de la página</h3><p class="desc">Cambia cualquier texto de la tienda (títulos, botones, avisos, pie de página…). Pulsa «Editar tocando la página» y toca el texto que quieras cambiar. Los nombres y descripciones de productos se editan en la pestaña Productos.</p>
  <div class="apbar"><button type="button" class="btn" id="txStart">✎ Editar tocando la página</button><button type="button" class="btn ghost sm" id="txAll">↺ Restaurar todos los textos</button></div>
- <input id="txQ" class="txq" placeholder="Buscar un texto para cambiarlo…" autocomplete="off"><p class="desc" id="txN"></p><div id="txL" class="txl"></div>`}
+ <p class="desc" id="txN"></p>`}
 async function lookSave(){try{localStorage.setItem('gx_look',JSON.stringify(LOOK))}catch(_){}
   const r=await sb.from('site_settings').upsert({key:'look',value:LOOK});
   if(r.error)return{ok:false,msg:'No se pudo guardar para todos: '+r.error.message+'. Ejecuta crear-ajustes-apariencia.sql en Supabase (SQL Editor). Mientras tanto queda guardado solo en este navegador.'};
@@ -3451,12 +3452,25 @@ $('txSave').onclick=async()=>{const b=$('txSave');b.disabled=true;$('txM').textC
 txApply();
 
 /* ====== Fondo de la página (imagen o formas abstractas con movimiento) ====== */
-const BGS=[{id:'curvas',n:'Curvas'},{id:'ondas',n:'Ondas'},{id:'burbujas',n:'Burbujas'}];
+const BGS=[{id:'curvas',n:'Curvas'},{id:'ondas',n:'Ondas'},{id:'burbujas',n:'Burbujas'},{id:'aurora',n:'Aurora'},{id:'diagonales',n:'Diagonales'},{id:'anillos',n:'Anillos'}];
 const BG0={m:'none',s:'curvas',c0:'#3b1f8f',c1:'#6d3be0',c2:'#ffffff',mv:'mouse',dim:0,url:''};
 const bgGet=l=>({...BG0,...((l&&l.bg)||{})});
 function bgAbs(s,c0,c1,c2){
  const W=1600,H=1000;let a='',b='',c='';
- if(s==='ondas'){
+  if(s==='aurora'){
+  a=`<ellipse cx="300" cy="260" rx="560" ry="360" fill="${c1}" opacity=".75" filter="url(#bgbl)"/>`;
+  b=`<ellipse cx="1300" cy="320" rx="520" ry="340" fill="${c2}" opacity=".35" filter="url(#bgbl)"/>`;
+  c=`<ellipse cx="850" cy="860" rx="700" ry="300" fill="${c1}" opacity=".6" filter="url(#bgbl)"/><ellipse cx="1450" cy="900" rx="320" ry="200" fill="${c2}" opacity=".3" filter="url(#bgbl)"/>`}
+ else if(s==='diagonales'){
+  a=`<polygon points="-100,1100 700,-100 1050,-100 250,1100" fill="${c1}" opacity=".85"/>`;
+  b=`<polygon points="500,1100 1300,-100 1500,-100 700,1100" fill="${c2}" opacity=".22"/>`;
+  c=`<polygon points="1000,1100 1700,80 1700,420 1300,1100" fill="${c1}" opacity=".7"/><polygon points="-100,300 300,-100 -100,-100" fill="${c2}" opacity=".3"/>`}
+ else if(s==='anillos'){
+  const R=(x,y,rs,col,o)=>rs.map(r=>`<circle cx="${x}" cy="${y}" r="${r}" fill="none" stroke="${col}" stroke-width="${r>300?30:18}" opacity="${o}"/>`).join('');
+  a=R(380,380,[140,260,380,500],c1,.8);
+  b=R(1280,640,[120,240,360,480],c2,.3);
+  c=`<circle cx="380" cy="380" r="70" fill="${c1}" opacity=".95"/><circle cx="1280" cy="640" r="60" fill="${c2}" opacity=".6"/>`}
+ else if(s==='ondas'){
   a=`<path d="M-100 620 C 200 520 450 760 800 640 S 1400 520 1750 640 V1100 H-100Z" fill="${c1}" opacity=".85"/>`;
   b=`<path d="M-100 760 C 250 660 520 900 900 770 S 1450 700 1750 790 V1100 H-100Z" fill="${c2}" opacity=".28"/>`;
   c=`<path d="M-100 330 C 250 230 600 450 950 330 S 1450 230 1750 330 V-100 H-100Z" fill="${c2}" opacity=".16"/>`}
@@ -3468,7 +3482,7 @@ function bgAbs(s,c0,c1,c2){
   a=`<path d="M560 -60 H1760 V1060 H1100 C 800 1060 640 860 520 660 L 360 380 C 260 200 380 -60 560 -60Z" fill="${c1}" opacity=".9"/>`;
   b=`<circle cx="360" cy="260" r="330" fill="${c2}" opacity=".16"/><circle cx="1450" cy="700" r="420" fill="${c2}" opacity=".13"/>`;
   c=`<circle cx="1180" cy="330" r="150" fill="${c1}" opacity=".95"/><circle cx="420" cy="860" r="110" fill="${c2}" opacity=".22"/><path d="M-60 900 C 250 800 420 1020 700 960 L 700 1100 H-60Z" fill="${c1}" opacity=".6"/>`}
- const L=(d,k,x)=>`<div class="px" style="--d:${d}"><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice"><g class="fl${k}">${x}</g></svg></div>`;
+ const L=(d,k,x)=>`<div class="px" style="--d:${d}"><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice"><defs><filter id="bgbl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="70"/></filter></defs><g class="fl${k}">${x}</g></svg></div>`;
  return `<div style="position:absolute;inset:0;background:${c0}"></div>`+L(14,1,a)+L(26,2,b)+L(42,3,c)}
 let bgMv={x:0,y:0,tx:0,ty:0,raf:0,on:false};
 function bgLoop(){const el=$('gxBg');if(!el||!bgMv.on){bgMv.raf=0;return}bgMv.x+=(bgMv.tx-bgMv.x)*.07;bgMv.y+=(bgMv.ty-bgMv.y)*.07;el.style.setProperty('--mx',bgMv.x.toFixed(3));el.style.setProperty('--my',bgMv.y.toFixed(3));bgMv.raf=requestAnimationFrame(bgLoop)}
@@ -3505,14 +3519,6 @@ function favUI(){return `<h3 style="margin:6px 0 2px">★ Mis favoritos</h3><p c
  <div class="favl">${FAV.length?FAV.map((f,i)=>`<div class="fv"><b>★ ${esc(f.name)}</b><button type="button" class="btn ghost sm" data-fa="${i}">Aplicar</button><button type="button" class="btn red sm" data-fd="${i}">Borrar</button></div>`).join(''):'<p class="desc">Aún no tienes favoritos guardados.</p>'}</div>`}
 
 bgApply(LOOK);
-/* guardado automático: lo que cambias en Apariencia se guarda y aplica a todos de una vez */
-let asBusy=false,asFail='';
-setInterval(async()=>{if(asBusy||!lookDirty)return;const now=JSON.stringify(LOOK);if(now===asFail)return;
- if(!($('adm')&&$('adm').open)&&!document.body.classList.contains('txedit'))return;
- asBusy=true;let r;try{r=await lookSave()}catch(e){r={ok:false,msg:String(e)}}asBusy=false;
- const m=$('apMsg'),t=$('txM');
- if(r.ok){asFail='';toast('Guardado: ya lo ven todos');if(m){m.style.color='#128c4a';m.textContent='Guardado automáticamente.'}if(t&&document.body.classList.contains('txedit'))t.textContent='Guardado automáticamente.'}
- else{asFail=now;toast('No se pudo guardar para todos');if(m){m.style.color='#c62828';m.textContent=r.msg}}},1200);
 
 function rApp(){const cur=LOOK;FONTS.forEach(f=>gxFont(f.id));
  const grp=(t,d,k,arr,fn)=>`<h3 style="margin:6px 0 2px">${t}</h3><p class="desc">${d}</p><div class="shg">${arr.map(o=>`<button type="button" class="shb${cur[k]===o.id?' on':''}" data-k="${k}" data-v="${o.id}">${fn(o)}<b>${o.n}</b>${o.d?`<em>${o.d}</em>`:''}</button>`).join('')}</div>`;
@@ -3525,8 +3531,8 @@ function rApp(){const cur=LOOK;FONTS.forEach(f=>gxFont(f.id));
  ${colorsUI()}
  ${bgUI()}
  ${textsUI()}
- <div class="apbar apfix"><button type="button" class="btn" id="apSave">Guardar apariencia</button><button type="button" class="btn ghost sm" id="apMode">Ver en claro / oscuro</button><button type="button" class="btn red sm" id="apReset">Volver al tema original</button></div>
- <p class="desc" id="apMsg" style="margin-top:8px">${lookDirty?'Guardando…':'Los cambios se guardan solos.'}</p>`;txListR()}
+ <div class="apbar apfix"><button type="button" class="btn" id="apSave">Guardar apariencia</button><button type="button" class="btn ghost sm" id="apMode">Ver en claro / oscuro (ahora: ${curMode()==='l'?'☀ claro':'🌙 oscuro'})</button><button type="button" class="btn red sm" id="apReset">Volver al tema original</button></div>
+ <p class="desc" id="apMsg" style="margin-top:8px">${lookDirty?'Cambios sin guardar. Pulsa «Guardar apariencia» o Ctrl+S.':''}</p>`;txListR()}
 $('tApp').onclick=async e=>{const b=e.target.closest('button');if(!b)return;const m=$('apMsg');
  if(b.dataset.k){LOOK[b.dataset.k]=b.dataset.v;if(b.dataset.k==='pal'&&b.dataset.v==='caniuse'){LOOK.font='caniuse';LOOK.shape='cuadrado'}lookDirty=true;applyLook(LOOK);rApp();return}
  if(b.dataset.cs){setC(b.dataset.cs,b.dataset.v);rApp();return}
