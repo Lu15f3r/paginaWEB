@@ -3452,12 +3452,20 @@ $('txSave').onclick=async()=>{const b=$('txSave');b.disabled=true;$('txM').textC
 txApply();
 
 /* ====== Fondo de la página (imagen o formas abstractas con movimiento) ====== */
-const BGS=[{id:'curvas',n:'Curvas'},{id:'ondas',n:'Ondas'},{id:'burbujas',n:'Burbujas'},{id:'cintas',n:'Cintas'},{id:'dunas',n:'Dunas'},{id:'organico',n:'Orgánico'}];
+const BGS=[{id:'curvas',n:'Curvas'},{id:'ondas',n:'Ondas'},{id:'burbujas',n:'Burbujas'},{id:'cintas',n:'Cintas'},{id:'dunas',n:'Dunas'},{id:'organico',n:'Orgánico'},{id:'cunas',n:'Cuñas'},{id:'flechas',n:'Flechas'}];
 const BG0={m:'none',s:'curvas',c0:'#3b1f8f',c1:'#6d3be0',c2:'#ffffff',mv:'mouse',dim:0,url:''};
 const bgGet=l=>({...BG0,...((l&&l.bg)||{})});
 function bgAbs(s,c0,c1,c2){
  const W=1600,H=1000;let a='',b='',c='';
-  if(s==='cintas'){
+  if(s==='cunas'){
+  a=`<path d="M-100 -100 L200 -100 C330 120 520 300 650 465 C520 640 320 860 190 1100 L-100 1100Z" fill="${c1}" opacity=".95"/>`;
+  b=`<path d="M-100 -100 L430 -100 C570 150 790 350 930 500 C780 690 570 910 420 1100 L-100 1100Z" fill="${c2}" opacity=".16"/><circle cx="1180" cy="230" r="130" fill="${c2}" opacity=".3"/>`;
+  c=`<path d="M1700 520 C1450 550 1170 630 960 705 C1070 810 1200 960 1290 1100 L1700 1100Z" fill="${c2}" opacity=".22"/><path d="M1700 600 C1500 625 1290 685 1110 760 C1190 850 1280 980 1350 1100 L1700 1100Z" fill="${c1}" opacity=".95"/>`}
+ else if(s==='flechas'){
+  a=`<path d="M-100 -100 L560 -100 C700 130 900 330 1010 500 C880 700 700 920 560 1100 L-100 1100Z" fill="${c2}" opacity=".13"/><path d="M-100 -100 L380 -100 C500 120 680 300 790 470 C670 660 500 880 380 1100 L-100 1100Z" fill="${c1}" opacity=".55"/>`;
+  b=`<path d="M-100 -100 L200 -100 C310 100 450 250 560 440 C450 620 310 840 200 1100 L-100 1100Z" fill="${c1}" opacity=".95"/>`;
+  c=`<path d="M1700 -100 L1700 360 C1560 330 1380 230 1220 80 L1170 -100Z" fill="${c1}" opacity=".7"/><path d="M1700 560 C1480 600 1230 690 1050 770 C1140 870 1230 990 1300 1100 L1700 1100Z" fill="${c2}" opacity=".28"/><path d="M1700 700 C1540 730 1370 790 1230 850 C1290 930 1350 1020 1400 1100 L1700 1100Z" fill="${c1}" opacity=".95"/>`}
+ else if(s==='cintas'){
   a=`<path d="M-100 700 C 300 300 700 900 1100 450 S 1600 200 1750 300 L1750 520 C 1500 420 1250 760 900 800 S 300 640 -100 960Z" fill="${c1}" opacity=".9"/>`;
   b=`<path d="M-100 380 C 250 80 650 560 1000 240 S 1500 -20 1750 80 L1750 200 C 1450 140 1200 420 900 480 S 250 260 -100 560Z" fill="${c2}" opacity=".3"/>`;
   c=`<path d="M-100 940 C 350 760 700 1100 1100 880 S 1550 760 1750 840 V1100 H-100Z" fill="${c1}" opacity=".7"/><path d="M200 -100 C 500 200 300 420 620 560 S 900 300 1000 -100Z" fill="${c2}" opacity=".16"/>`}
