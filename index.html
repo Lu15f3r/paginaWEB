@@ -1479,10 +1479,13 @@ body.hasbg main,body.hasbg .info,body.hasbg section:not(.hero),body.hasbg footer
 .bgr button.on{outline:2px solid var(--gold)}
 .favl{display:grid;gap:6px;margin:8px 0}.favl .fv{display:flex;gap:8px;align-items:center;border:1px solid var(--line);padding:6px 10px;background:var(--panel)}.favl .fv b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis}
 .hxr{display:inline-flex;align-items:center;gap:4px}.hxr input{width:92px;font-family:monospace;padding:6px 8px;border:1px solid var(--line);background:var(--panel);color:var(--ink)}.hxr input.bad{border-color:#e53935}
-html[data-cbg] footer,body.hasbg footer,html[data-cbg][data-theme=light] footer{background:transparent!important}
+html[data-cbg] footer,body.hasbg footer{background:rgba(0,0,0,.62)!important;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border-top:2px solid rgba(var(--goldrgb),.55)!important;margin-top:0}
+html[data-cbg][data-theme=light] footer,[data-theme=light] body.hasbg footer{background:rgba(200,200,210,.62)!important}
 #gxBg{height:100vh;height:100lvh}
 @media(max-width:640px){footer .hand{font-size:clamp(13px,4.4vw,22px);padding:0 16px;line-height:1.25}.tw{white-space:normal;max-width:100%}.tw .ty{left:0;right:0}}
 .mdb{display:inline-block;background:var(--gold);color:#000;padding:2px 10px;margin-right:6px;font-style:italic}
+#txBar{cursor:move;touch-action:none;user-select:none}#txBar button{cursor:pointer}.txg{background:#ff4d4d;color:#000;font-weight:800;padding:2px 8px;font-size:12px}
+@media(max-width:640px){.tw .ty::after{width:0!important;margin-left:3px;background:none!important;box-shadow:0 0 0 1px var(--gold)}}
 </style>
 </head>
 <body>
@@ -1539,7 +1542,7 @@ html[data-cbg] footer,body.hasbg footer,html[data-cbg][data-theme=light] footer{
 <div id="vfL" style="margin-top:10px"></div>
 <div class="cof" style="margin-top:12px"><label>Cliente (opcional)<input id="vfN" placeholder="Nombre"></label><label>Medio de pago<select id="vfPay"><option>Efectivo</option><option>Nequi</option><option>Daviplata</option><option>Bancolombia</option><option>Transferencia</option><option>Tarjeta (datáfono)</option></select></label></div>
 <div class="coe" id="vfM"></div><button class="btn grn" id="vfS" type="button">Registrar venta</button></div></dialog>
-<div id="txBar" hidden><span>✎ <b>Modo edición de textos:</b> toca cualquier texto con borde rojo punteado para cambiarlo.</span><span id="txM"></span><button type="button" class="btn sm" id="txSave">Guardar para todos</button><button type="button" class="btn ghost sm" id="txDone">Salir y volver al panel</button></div>
+<div id="txBar" hidden><span class="txg" title="Arrastra para mover">⠿ Arrastra</span><span>✎ <b>Modo edición de textos:</b> toca cualquier texto con borde rojo punteado para cambiarlo. Precios, descuentos y cantidades no se pueden editar aquí.</span><span id="txM"></span><button type="button" class="btn sm" id="txSave">Guardar para todos</button><button type="button" class="btn ghost sm" id="txDone">Salir y volver al panel</button></div>
 <dialog id="txd" class="xld"><div class="dh"><h2>Cambiar texto</h2></div><div class="db"><p class="desc">Texto original: <b id="txO"></b></p><textarea id="txT" rows="4" style="width:100%" aria-label="Texto nuevo"></textarea><div class="xlact"><button type="button" class="btn ghost" id="txNo">Cancelar</button><button type="button" class="btn ghost" id="txR">↺ Restaurar original</button><button type="button" class="btn" id="txOk">Aplicar</button></div></div></dialog>
 <dialog id="xld" class="xld"><div class="dh"><h2>Exportar a Excel</h2><button class="btn red sm" id="xlX" type="button">Cerrar</button></div><div class="db" id="xlB"></div></dialog>
 <dialog id="cm"><div class="dh"><h2>Categorías</h2><button class="btn red sm" id="cmX" type="button">Cerrar</button></div><div class="db"><p class="desc" style="margin-bottom:8px">Cambia el nombre o elimina categorías. Si tocas Gorras, Buzos, Relojes o Combos, el armador de combos puede quedar sin productos. Las categorías vacías solo se pueden eliminar.</p><div class="coe" id="cmM"></div><div id="cmB"></div></div></dialog>
@@ -3444,7 +3447,7 @@ function colorsUI(){return `<h3 style="margin:18px 0 2px">Colores a tu gusto</h3
 const TXN=new Set();
 const TX_BAD='SCRIPT,STYLE,NOSCRIPT,TEXTAREA,SELECT,OPTION,INPUT,TITLE,CODE';
 function txOk(n,o){const t=String(o!=null?o:n.nodeValue).trim();if(t.length<2||!/[A-Za-zÁÉÍÓÚÑáéíóúñ]/.test(t))return false;const p=n.parentElement;if(!p||TX_BAD.includes(p.tagName)||p.namespaceURI!=='http://www.w3.org/1999/xhtml')return false;
-  if(p.closest('#adm,#txBar,#txd,.sizes,.ty,[data-noedit],[contenteditable]'))return false;if(products.some(x=>x.name===t))return false;return true}
+  if(p.closest('#adm,#txBar,#txd,.sizes,.ty,[data-noedit],[contenteditable],.price,.old,.saved,.of,.disc,.pct,.cp-badge,.ctot,.lbpr,.qty,.lbq,.ph .of'))return false;if(/\d/.test(t))return false;if(products.some(x=>x.name===t))return false;return true}
 function txNodes(){const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT),a=[];while(w.nextNode())a.push(w.currentNode);return a}
 function txApply(){const tx=LOOK.tx||{};if(!Object.keys(tx).length&&!TXN.size)return;
   txNodes().forEach(n=>{if(n._o!==undefined&&n.nodeValue!==n._r){n._o=undefined;TXN.delete(n)}
@@ -3488,6 +3491,11 @@ $('txDone').onclick=()=>txStop();
 $('txSave').onclick=async()=>{const b=$('txSave');b.disabled=true;$('txM').textContent='Guardando…';const r=await lookSave();b.disabled=false;$('txM').textContent=r.msg};
 (()=>{let t=0;new MutationObserver(ms=>{if(!ms.some(m=>{const n=m.target,el=n.nodeType===3?n.parentElement:n;return !(el&&el.closest&&el.closest('.ty,#adm,#txBar,#txd'))}))return;clearTimeout(t);t=setTimeout(txApply,60)}).observe(document.body,{childList:true,subtree:true,characterData:true})})();
 txApply();
+/* barra del modo edición: se puede mover */
+(()=>{const bar=$('txBar');let d=null;
+ bar.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;const r=bar.getBoundingClientRect();bar.style.left=r.left+'px';bar.style.top=r.top+'px';bar.style.bottom='auto';bar.style.transform='none';d={dx:e.clientX-r.left,dy:e.clientY-r.top};try{bar.setPointerCapture(e.pointerId)}catch(_){}e.preventDefault()});
+ bar.addEventListener('pointermove',e=>{if(!d)return;const w=bar.offsetWidth,h=bar.offsetHeight;bar.style.left=Math.max(0,Math.min(innerWidth-w,e.clientX-d.dx))+'px';bar.style.top=Math.max(0,Math.min(innerHeight-h,e.clientY-d.dy))+'px'});
+ const end=()=>{d=null};bar.addEventListener('pointerup',end);bar.addEventListener('pointercancel',end)})();
 
 /* ====== Fondo de la página (imagen o formas abstractas con movimiento) ====== */
 const BGS=[{id:'curvas',n:'Curvas'},{id:'ondas',n:'Ondas'},{id:'burbujas',n:'Burbujas'},{id:'cintas',n:'Cintas'},{id:'dunas',n:'Dunas'},{id:'organico',n:'Orgánico'},{id:'cunas',n:'Cuñas'},{id:'flechas',n:'Flechas'}];
