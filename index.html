@@ -1491,6 +1491,11 @@ html[data-cbg][data-theme=light] footer,[data-theme=light] body.hasbg footer{bac
 .mdb{display:inline-block;background:var(--gold);color:#000;padding:2px 10px;margin-right:6px;font-style:italic}
 #txBar{cursor:move;touch-action:none;user-select:none}#txBar button{cursor:pointer}.txg{background:#ff4d4d;color:#000;font-weight:800;padding:2px 8px;font-size:12px}
 @media(max-width:640px){.tw .ty::after{width:0!important;margin-left:3px;background:none!important;box-shadow:0 0 0 1px var(--gold)}}
+
+/* efecto de aparición al hacer scroll (sube y baja) */
+.rv{opacity:0;translate:0 34px;scale:.985;transition:opacity .65s ease var(--rd,0s),translate .65s cubic-bezier(.2,.7,.2,1) var(--rd,0s),scale .65s ease var(--rd,0s),transform .15s,border-color .15s}
+.rv.in{opacity:1;translate:0 0;scale:1}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;translate:none;scale:none;transition:none}}
 </style>
 </head>
 <body>
@@ -1521,7 +1526,7 @@ html[data-cbg][data-theme=light] footer,[data-theme=light] body.hasbg footer{bac
   <div class="seals" id="lbSeals"></div></div></div>
   <div class="rel" id="lbRel"></div>
 </dialog>
-<section class="faq" aria-label="Preguntas frecuentes"><h3>Preguntas frecuentes</h3><details><summary>¿Cuánto demora el envío?</summary><p>Enviamos a todo el país. El tiempo depende de tu ciudad; al hacer tu pedido te confirmamos la fecha estimada por WhatsApp.</p></details><details><summary>¿Por dónde realizan los envíos?</summary><p>Despachamos a nivel nacional con transportadora. Te compartimos la guía de seguimiento cuando tu pedido sale.</p></details><details><summary>¿Cómo pago mi pedido?</summary><p>Con Nequi, Bancolombia, Daviplata o contra entrega. Elige tu medio de pago al finalizar la compra.</p></details></section>
+<section class="faq" aria-label="Preguntas frecuentes"><h3>Preguntas frecuentes</h3><details><summary>¿Cuánto demora el envío?</summary><p>Enviamos a todo el país. El tiempo depende de tu ciudad; al hacer tu pedido te confirmamos la fecha estimada por WhatsApp.</p></details><details><summary>¿Por dónde realizan los envíos?</summary><p>Despachamos a nivel nacional con transportadora. Te compartimos la guía de seguimiento cuando tu pedido sale.</p></details><details><summary>¿Cómo pago mi pedido?</summary><p>Con Nequi, Bancolombia o contra entrega. Elige tu medio de pago al finalizar la compra.</p></details></section>
 <footer id="contacto">
   <span class="crw"><img class="crown" src="img/logo.webp?v=4" alt="GX" data-c="img/logo.png,img/Logo.webp,img/Logo.png" onerror="gxNext(this)"></span>
   <p class="hand"><span class="tw" id="tyFoot" aria-label="Tu estilo, habla por ti"><span class="gh" aria-hidden="true">TU ESTILO, HABLA POR TI</span><span class="ty" aria-hidden="true"></span></span></p>
@@ -1545,7 +1550,7 @@ html[data-cbg][data-theme=light] footer,[data-theme=light] body.hasbg footer{bac
 <dialog id="vf" class="vfd"><div class="dh"><h2>Venta en tienda</h2><button class="btn red sm" id="vfX" type="button">Cerrar</button></div><div class="db">
 <div class="cof"><label class="w">Producto<select id="vfP"></select></label><label id="vfZw">Talla<select id="vfZ"></select></label><label id="vfCw">Color<select id="vfC"></select></label><label>Cantidad<input id="vfQ" type="number" min="1" value="1"></label><label>Precio unitario<input id="vfPr" type="number" min="0" step="500"></label><div class="w"><button class="btn ghost sm" id="vfA" type="button">Agregar a la venta</button></div></div>
 <div id="vfL" style="margin-top:10px"></div>
-<div class="cof" style="margin-top:12px"><label>Cliente (opcional)<input id="vfN" placeholder="Nombre"></label><label>Medio de pago<select id="vfPay"><option>Efectivo</option><option>Nequi</option><option>Daviplata</option><option>Bancolombia</option><option>Transferencia</option><option>Tarjeta (datáfono)</option></select></label></div>
+<div class="cof" style="margin-top:12px"><label>Cliente (opcional)<input id="vfN" placeholder="Nombre"></label><label>Medio de pago<select id="vfPay"><option>Efectivo</option><option>Nequi</option><option>Bancolombia</option><option>Transferencia</option><option>Tarjeta (datáfono)</option></select></label></div>
 <div class="coe" id="vfM"></div><button class="btn grn" id="vfS" type="button">Registrar venta</button></div></dialog>
 <div id="txBar" hidden><span class="txg" title="Arrastra para mover">⠿ Arrastra</span><span>✎ <b>Modo edición de textos:</b> toca cualquier texto con borde rojo punteado para cambiarlo. Precios, descuentos y cantidades no se pueden editar aquí.</span><span id="txM"></span><button type="button" class="btn sm" id="txSave">Guardar para todos</button><button type="button" class="btn ghost sm" id="txDone">Salir y volver al panel</button></div>
 <dialog id="txd" class="xld"><div class="dh"><h2>Cambiar texto</h2></div><div class="db"><p class="desc">Texto original: <b id="txO"></b></p><textarea id="txT" rows="4" style="width:100%" aria-label="Texto nuevo"></textarea><div class="xlact"><button type="button" class="btn ghost" id="txNo">Cancelar</button><button type="button" class="btn ghost" id="txR">↺ Restaurar original</button><button type="button" class="btn" id="txOk">Aplicar</button></div></div></dialog>
@@ -1631,7 +1636,7 @@ const CFG={
   HERO_OLD:['img/herov1.png','img/banner-cruces.jpg','img/banner-colombia.jpg','img/banner-777.jpg','img/banner-samurai.jpg','img/banner-fugaz.jpg','img/banner-royal.jpg'],   // respaldo: solo se usan si NINGUNA foto de HERO carga
   HERO_POS:'center 62%',   // centrado vertical de las fotos del banner (0% = arriba, 50% = centro, 100% = abajo)
   COMBO_DESC:10,   // % de descuento de los combos que arma el cliente
-  PAY:{online:'',transfer:'',cod:true,cuentas:[{id:'nequi',n:'Nequi',d:''},{id:'bancolombia',n:'Bancolombia',d:''},{id:'daviplata',n:'Daviplata',d:''}]},   // en cuentas pon en d: tu número o cuenta (ej. 'Nequi 3XX XXX XXXX · a nombre de ...'). Si lo dejas vacío se envía por WhatsApp.   // online: URL de tu función de pago (Wompi / Mercado Pago). transfer: texto con tus cuentas, ej. 'Nequi 3XX XXX XXXX\nBancolombia ahorros ...'. cod: pago contra entrega
+  PAY:{online:'',transfer:'',cod:true,cuentas:[{id:'nequi',n:'Nequi',d:''},{id:'bancolombia',n:'Bancolombia',d:''}]},   // en cuentas pon en d: tu número o cuenta (ej. 'Nequi 3XX XXX XXXX · a nombre de ...'). Si lo dejas vacío se envía por WhatsApp.   // online: URL de tu función de pago (Wompi / Mercado Pago). transfer: texto con tus cuentas, ej. 'Nequi 3XX XXX XXXX\nBancolombia ahorros ...'. cod: pago contra entrega
   SOCIAL:{Instagram:'',Facebook:'https://www.facebook.com/gorraxcolombia',TikTok:'',YouTube:''},   // pega aquí tus enlaces
   CAT_ORDER:['gorras','buzos','relojes','combos','zapatos'],
   CAT_INFO:{gorras:'Visera plana, actitud real.',buzos:'Premium y con corona.',relojes:'Tiempo con estilo.',zapatos:'Pisa con actitud.',combos:'Lleva el set completo y ahorra.'}
@@ -3642,6 +3647,14 @@ $('tApp').onchange=async e=>{const t=e.target;if(t.dataset.ck)rApp();
  document.addEventListener('mouseover',e=>{const v=H.dataset.hov;if(v!=='giro'&&v!=='sacudir'&&v!=='rebote'&&v!=='girox'&&v!=='tambalear')return;const b=e.target.closest&&e.target.closest(SEL);if(!b||b._fx)return;b._fx=1;b.classList.add('gxfx');
   const end=()=>{b.classList.remove('gxfx');if(!b.matches(':hover'))b._fx=0};b.addEventListener('animationend',end,{once:true});setTimeout(end,900)});
  document.addEventListener('mouseout',e=>{const b=e.target.closest&&e.target.closest(SEL);if(b&&!b.contains(e.relatedTarget)&&!b.classList.contains('gxfx'))b._fx=0});
+})();
+</script>
+<script>
+(function(){if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+var SEL='.cpromo,.sectH,.cat .banner,.card,.faq,footer .crw,footer .hand,footer .links,footer .pays,footer .legal,footer .cp,.build';
+var io=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle('in',e.isIntersecting)})},{threshold:.08,rootMargin:'0px 0px -5% 0px'});
+function scan(r){try{(r||document).querySelectorAll(SEL).forEach(function(el,i){if(el.__rv||el.closest('dialog'))return;el.__rv=1;el.classList.add('rv');var g=el.parentElement;if(el.classList.contains('card')&&g){var k=Array.prototype.indexOf.call(g.children,el);el.style.setProperty('--rd',(k%4*0.07).toFixed(2)+'s')}io.observe(el)})}catch(e){}}
+scan();var m=document.getElementById('catalogo');if(m)new MutationObserver(function(){scan(m)}).observe(m,{childList:true,subtree:true});
 })();
 </script>
 </body>
