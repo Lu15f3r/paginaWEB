@@ -1498,6 +1498,10 @@ html[data-cbg][data-theme=light] footer,[data-theme=light] body.hasbg footer{bac
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;translate:none;scale:none;transition:none}}
 
 .feat .mq svg{filter:drop-shadow(0 0 7px rgba(255,184,20,.45));border-radius:15px}
+
+/* banner más angosto en PC y sin recortar las fotos */
+.hero img{aspect-ratio:var(--ar,2080/950)!important;object-fit:contain!important;max-height:none!important}
+@media(min-width:1000px){.hero{max-width:calc(100% - 200px)!important}}
 </style>
 </head>
 <body>
@@ -3347,10 +3351,11 @@ addEventListener('scroll',tUpd,{passive:true});addEventListener('resize',tUpd);t
   if(same){f0.setAttribute('alt','');f0.classList.add('on');const rest=list.slice(1).map((u,i)=>`<img src="${esc(u)}" alt="" loading="lazy" decoding="async">`).join('');S.innerHTML='';S.appendChild(f0);S.insertAdjacentHTML('beforeend',rest)}
   else S.innerHTML=list.map((u,i)=>`<img src="${esc(u)}" alt="" class="${i?'':'on'}"${i?' loading="lazy" decoding="async"':' fetchpriority="high"'}>`).join('');
   const im=[...S.children],n=im.length,D=$('heroD');let k=0,tm;
+  const H0=document.getElementById('hero');
   const bars=img=>{try{const w=img.naturalWidth,h=img.naturalHeight;if(!w||!h)return;const c=document.createElement('canvas'),W=48,H=Math.max(24,Math.round(48*h/w));c.width=W;c.height=H;const x=c.getContext('2d');x.drawImage(img,0,0,W,H);const d=x.getImageData(0,0,W,H).data;
   const dark=y=>{let m=0;for(let i=0;i<W;i++){const o=(y*W+i)*4;m=Math.max(m,d[o],d[o+1],d[o+2])}return m<42};
   let t=0,bt=0;while(t<H*.4&&dark(t))t++;while(bt<H*.4&&dark(H-1-bt))bt++;
-  const cut=(t+bt)/H;if(cut<.04)return;
+  const cut=(t+bt)/H;if(img===im[0]){const e=cut<.04?0:cut;H0.style.setProperty('--ar',((w/h)/(1-e)).toFixed(4))}if(cut<.04)return;
   const z=Math.min(1/(1-cut),1.6),ar=(w/h)/(2080/950);img.style.setProperty('--z',Math.max(1,z*Math.min(1,ar>1?1:1)).toFixed(3));
   const cy=(t+(H-bt))/2/H*100;img.style.objectPosition='center '+cy.toFixed(1)+'%'}catch(e){}};
   im.forEach(i=>{i.complete&&i.naturalWidth?bars(i):i.addEventListener('load',()=>bars(i),{once:true})});
