@@ -3252,7 +3252,7 @@ let cTm;const cToast=t=>{const el=$('ct');el.textContent=t;el.classList.add('sho
 function cartAdd(it){const ex=cart.find(x=>cKey(x)===cKey(it)),l=cLine(ex||it),max=l?l.max:0;
   if(max<=0){cToast('Sin stock disponible');return false}
   if(ex){if(ex.q>=max){cToast('Ya tienes todo el stock en el carrito');return false}ex.q=Math.min(max,ex.q+(it.q||1))}else cart.push({...it,q:Math.min(it.q||1,max)});
-  cSave();cartRender();['cartB','cartF'].forEach(id=>{const b=$(id);b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump')});cToast('Agregado al carrito');try{(window.dataLayer=window.dataLayer||[]).push({event:'agregar_carrito',pagina:location.hash||'/'})}catch(e){}return true}
+  cSave();cartRender();['cartB','cartF'].forEach(id=>{const b=$(id);b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump')});cToast('Agregado al carrito');try{const pr=it.t==='p'?products.find(x=>String(x.id)===String(it.id)):null;(window.dataLayer=window.dataLayer||[]).push({event:'agregar_carrito',pagina:location.hash||'/',producto:pr?pSlug(pr):(it.t==='c'?'combo':''),nombre:pr?String(pr.name||''):(it.t==='c'?'Combo':''),cantidad:it.q||1,talla:it.z||'',color:it.col||'',valor:pr?Number(pr.price)*(it.q||1):0})}catch(e){}return true}
 const cOpen=o=>{if(o)cartRender();$('cartP').classList.toggle('open',o);$('cartO').classList.toggle('open',o);document.body.style.overflow=o?'hidden':''};
 $('cartB').onclick=$('cartF').onclick=()=>cOpen(true);$('cartX').onclick=$('cartO').onclick=()=>cOpen(false);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')cOpen(false)});
