@@ -1535,6 +1535,7 @@ html[data-cbg][data-theme=light] footer,[data-theme=light] body.hasbg footer{bac
 
 
 [data-theme=light] .top .logo,[data-theme=light] img.crown{filter:drop-shadow(0 0 2px rgba(255,255,255,.55))!important}
+html.vt::view-transition-old(root),html.vt::view-transition-new(root){animation:none;mix-blend-mode:normal}html.vt::view-transition-old(root){z-index:1}html.vt::view-transition-new(root){z-index:2}
 </style>
 </head>
 <body>
@@ -2056,7 +2057,16 @@ let curG=[];function gChips(){$('gchips').innerHTML=GEN.map(g=>`<button type="bu
 $('gchips').onclick=e=>{const b=e.target.closest('button');if(!b)return;const g=b.dataset.g;curG=curG.includes(g)?curG.filter(x=>x!==g):[...curG,g];gChips()};gChips();
 $('cchips').onclick=e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.mng)return catMng();$('pc').value=sg($('pc').value)===sg(b.dataset.c)?'':b.dataset.c;alist()};
 $('pc').oninput=alist;$('pn').oninput=alist;$('pq').oninput=alist;
-$('themeBtn').onclick=()=>{const d=document.documentElement,t=d.dataset.theme==='light'?'dark':'light';d.dataset.theme=t;try{localStorage.setItem('theme',t)}catch(e){}try{applyLook(LOOK);if($('tApp')&&tab==='app')rApp()}catch(e){}};
+$('themeBtn').onclick=()=>{const d=document.documentElement,t=d.dataset.theme==='light'?'dark':'light';
+const ap=()=>{d.dataset.theme=t;try{localStorage.setItem('theme',t)}catch(e){}try{applyLook(LOOK);if($('tApp')&&tab==='app')rApp()}catch(e){}};
+let r=null;try{r=$('themeBtn').getBoundingClientRect()}catch(e){}
+const x=r?r.left+r.width/2:innerWidth-30,y=r?r.top+r.height/2:30;
+if(!document.startViewTransition||matchMedia('(prefers-reduced-motion:reduce)').matches){ap();return}
+const R=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));
+d.classList.add('vt');
+let vt;try{vt=document.startViewTransition(()=>{ap()})}catch(e){d.classList.remove('vt');ap();return}
+vt.ready.then(()=>{d.animate({clipPath:['circle(0px at '+x+'px '+y+'px)','circle('+R+'px at '+x+'px '+y+'px)']},{duration:650,easing:'cubic-bezier(.4,0,.2,1)',pseudoElement:'::view-transition-new(root)'})}).catch(()=>{});
+vt.finished.finally(()=>d.classList.remove('vt'));};
 
 function imgs(p){const a=(p.images&&p.images.length?p.images:[p.image_url]).filter(u=>typeof u==='string'&&u.trim());return [...new Set(a)]}
 let lbP=null,lbI=0;
