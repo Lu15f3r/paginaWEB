@@ -1515,6 +1515,24 @@ html[data-cbg][data-theme=light] footer,[data-theme=light] body.hasbg footer{bac
 @media(min-width:900px){.top .logo{width:auto!important;height:66px!important;max-height:none!important}}
 @media(max-width:899px){.top .logo{width:auto!important;height:46px!important}}
 .crw{width:110px!important}img.crown{width:110px!important;max-width:45vw}
+
+/* buscar y tema dentro de la barra de envío gratis */
+.ann{position:sticky!important;top:0;padding-right:max(86px,9vw)!important;padding-left:max(86px,9vw)!important}
+.top{top:var(--annh,0px)!important}
+.ann>.hr{position:absolute;right:max(8px,1.2vw);top:0;bottom:0;display:flex;align-items:center;gap:0;align-self:auto;justify-self:auto}
+.ann .hr .nv{background:transparent!important;border:0!important;margin:0!important;padding:0!important;transform:none!important;color:inherit!important;min-height:0!important;align-self:center;box-shadow:none!important;overflow:visible;flex:none}
+.ann .hr .nv .in{padding:0 7px!important;font-size:16px;display:flex;align-items:center;transform:none!important}
+.ann .hr .nv svg{width:20px;height:20px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
+.ann .hr .nv:hover{opacity:.75}
+.ann .sbx.on{margin-right:4px}
+.ann .sbx input{font-size:13px;padding:5px 8px;color:inherit;background:rgba(0,0,0,.25)}
+
+.ann .hr .nv::before,.ann .hr .nv::after{display:none!important}
+@media(max-width:640px){.ann{padding-left:8px!important;padding-right:110px!important;font-size:11.5px!important}.ann .hr .nv .in{padding:0 5px!important}.ann .hr .nv svg{width:19px;height:19px}}
+
+.ann .hr .nv,.ann .hr .nv svg,.ann .hr .nv .in{color:#fff!important}
+[data-theme=light] .ann .hr .nv,[data-theme=light] .ann .hr .nv svg,[data-theme=light] .ann .hr .nv .in{color:#1b1306!important}
+[data-theme=light] .ann .hr .nv svg{filter:none}
 </style>
 </head>
 <body>
@@ -3343,7 +3361,7 @@ $('lbQp').onclick=()=>{LB.q=(LB.q||1)+1;LB.msg='';lbOpts()};
 $('hero').style.setProperty('--hp',CFG.HERO_POS||'center 62%');
 
 {const P=CFG.PAY||{},C={Nequi:'#da0081',Bancolombia:'#fdda24',Daviplata:'#ed1c24','Contra entrega':'#ff8a1f','Tarjeta / PSE':'#2f8cff'};$('pays').innerHTML='<span>Medios de pago</span>'+[...(P.cuentas||[]).map(c=>c.n),P.online?'Tarjeta / PSE':null,P.cod!==false?'Contra entrega':null].filter(Boolean).map(n=>`<i style="--c:${C[n]||'var(--gold)'}">${esc(n)}</i>`).join('')}
-$('ann').innerHTML=`<span class="annt">Envío GRATIS en compras desde <b>${money(CFG.FREE_SHIP)}</b>${CFG.COMBOS_ON?' y en todos los combos':''}</span>`;buildMq();document.documentElement.classList.toggle('nocombos',!CFG.COMBOS_ON);
+$('ann').innerHTML=`<span class="annt">Envío GRATIS en compras desde <b>${money(CFG.FREE_SHIP)}</b>${CFG.COMBOS_ON?' y en todos los combos':''}</span>`;buildMq();document.documentElement.classList.toggle('nocombos',!CFG.COMBOS_ON);{const A=$('ann'),hr=document.querySelector('header.top .hr');if(hr&&A)A.appendChild(hr);const sa=()=>document.documentElement.style.setProperty('--annh',(A?A.offsetHeight:0)+'px');sa();addEventListener('resize',sa);addEventListener('load',sa);try{new ResizeObserver(sa).observe(A)}catch(e){}}
 const tt=$('toTop'),td=$('toDown');
 const maxY=()=>document.documentElement.scrollHeight-innerHeight;
 const stops=()=>{const h=(document.querySelector('.top')||{}).offsetHeight||0,M=maxY(),ft=document.querySelector('.feat'),c0=document.querySelector('main .cat');
