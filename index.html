@@ -1539,6 +1539,14 @@ html.vt::view-transition-old(root),html.vt::view-transition-new(root){animation:
 .btn.ghost.cadd,.btn.ghost#lbC,.bsum .btn.ghost#bcart{--o:var(--gold);--f1:var(--gold);--f2:#0a0a0a;--t1:#000;--t2:var(--gold)}.btn.ghost.cadd.okk,.btn.ghost#lbC.okk{--o:#1fa855;--f1:#1fa855;--f2:#1fa855;--t1:#fff;--t2:#fff}
 /* Carrito: solo se mueve «Pedir todo por WhatsApp», no «Finalizar compra» */
 html[data-auto] #cartK,html[data-auto] #cartK::after{animation:none!important}
+.ann .ai{display:inline-block;vertical-align:-4px;width:22px;height:22px;margin:0 9px;color:#fff;filter:drop-shadow(0 1px 3px rgba(0,0,0,.45));transform:skewX(14deg)}
+.ann .ai svg{width:100%;height:100%;display:block}
+.ann .ai.l svg{animation:annTr 2.2s ease-in-out infinite}
+.ann .ai.r svg{animation:annSp 1.6s ease-in-out infinite}
+@keyframes annTr{0%,100%{transform:translateX(-3px)}50%{transform:translateX(4px)}}
+@keyframes annSp{0%,100%{transform:scale(.85) rotate(0)}50%{transform:scale(1.2) rotate(18deg)}}
+@media(prefers-reduced-motion:reduce){.ann .ai svg{animation:none!important}}
+@media(max-width:640px){.ann .ai{width:17px;height:17px;margin:0 5px;vertical-align:-3px}}
 </style>
 </head>
 <body>
@@ -3376,7 +3384,7 @@ $('lbQp').onclick=()=>{LB.q=(LB.q||1)+1;LB.msg='';lbOpts()};
 $('hero').style.setProperty('--hp',CFG.HERO_POS||'center 62%');
 
 {const P=CFG.PAY||{},C={Nequi:'#da0081',Bancolombia:'#fdda24',Daviplata:'#ed1c24','Contra entrega':'#ff8a1f','Tarjeta / PSE':'#2f8cff'};$('pays').innerHTML='<span>Medios de pago</span>'+[...(P.cuentas||[]).map(c=>c.n),P.online?'Tarjeta / PSE':null,P.cod!==false?'Contra entrega':null].filter(Boolean).map(n=>`<i style="--c:${C[n]||'var(--gold)'}">${esc(n)}</i>`).join('')}
-$('ann').innerHTML=`<span class="annt">Envío GRATIS en compras desde <b>${money(CFG.FREE_SHIP)}</b>${CFG.COMBOS_ON?' y en todos los combos':''}</span>`;buildMq();document.documentElement.classList.toggle('nocombos',!CFG.COMBOS_ON);{const A=$('ann'),hr=document.querySelector('header.top .hr');if(hr&&A)A.appendChild(hr);const sa=()=>document.documentElement.style.setProperty('--annh',(A?A.offsetHeight:0)+'px');sa();addEventListener('resize',sa);addEventListener('load',sa);try{new ResizeObserver(sa).observe(A)}catch(e){}}
+$('ann').innerHTML=`<span class="annt"><i class="ai l"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 6h13v10H1z"/><path d="M14 9h4l4 4v3h-8z"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></i>Envío GRATIS en compras desde <b>${money(CFG.FREE_SHIP)}</b>${CFG.COMBOS_ON?' y en todos los combos':''}<i class="ai r"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/><path d="M19 3l.8 2.2L22 6l-2.2.8L19 9l-.8-2.2L16 6l2.2-.8z" opacity=".9"/></svg></i></span>`;buildMq();document.documentElement.classList.toggle('nocombos',!CFG.COMBOS_ON);{const A=$('ann'),hr=document.querySelector('header.top .hr');if(hr&&A)A.appendChild(hr);const sa=()=>document.documentElement.style.setProperty('--annh',(A?A.offsetHeight:0)+'px');sa();addEventListener('resize',sa);addEventListener('load',sa);try{new ResizeObserver(sa).observe(A)}catch(e){}}
 const tt=$('toTop'),td=$('toDown');
 const maxY=()=>document.documentElement.scrollHeight-innerHeight;
 const stops=()=>{const h=(document.querySelector('.top')||{}).offsetHeight||0,M=maxY(),ft=document.querySelector('.feat'),c0=document.querySelector('main .cat');
