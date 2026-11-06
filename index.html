@@ -775,7 +775,6 @@ html.nocombos #promo,html.nocombos #armar,html.nocombos .nv[data-c="combos"]{dis
 .hero{margin-top:calc(var(--hh,0px)*-1)}
 .hero img{height:auto;aspect-ratio:2080/950;max-height:90vh;object-fit:cover}
 .hpv,.hnx{top:50%!important}
-@media(max-width:700px){.hero{margin-top:0!important}}
 .hs{display:grid}.hs img{grid-area:1/1;opacity:0;transition:opacity .9s ease}.hs img.on{opacity:1}
 .hpv,.hnx{position:absolute;top:calc(50% + var(--hh,0px)/2);transform:translateY(-50%);z-index:4;width:44px;height:64px;border:0;cursor:pointer;color:#fff;background:rgba(0,0,0,.45);font:800 20px sans-serif;display:grid;place-items:center;transition:background .2s,color .2s}
 .hpv{left:0;clip-path:polygon(0 0,100% 0,calc(100% - 10px) 100%,0 100%)}.hnx{right:0;clip-path:polygon(10px 0,100% 0,100% 100%,0 100%)}
@@ -1545,6 +1544,10 @@ html[data-auto] #cartK,html[data-auto] #cartK::after{animation:none!important}
 @keyframes annSp{0%,100%{transform:translateX(0) scale(1)}50%{transform:translateX(4px) scale(1.1)}}
 @media(prefers-reduced-motion:reduce){.ann .ai img{animation:none!important}}
 @media(max-width:640px){.ann .ai{width:21px;height:21px;margin:-3px 4px;vertical-align:-5px}}
+.sbx input::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none;display:block;width:20px;height:20px;margin-left:6px;cursor:pointer;opacity:1;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='11' fill='%23fff'/%3E%3Cpath d='M7.5 7.5l9 9M16.5 7.5l-9 9' stroke='%23c40000' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))}
+.sbx.on{width:min(250px,48vw)}
+/* Logo del footer: el peso visual del GX queda a la derecha; se corre un poco a la izquierda para verse centrado */
+img.crown{translate:-3.5% 0}
 </style>
 </head>
 <body>
@@ -3429,7 +3432,7 @@ $('catalogo').addEventListener('click',e=>{const b=e.target.closest('.qb');if(!b
  const run=()=>{SQ=q.value.trim();render();sqCls()};
  $('srchB').onclick=()=>{const on=!bx.classList.contains('on');bx.classList.toggle('on',on);if(on){$('srchB').classList.add('act');setTimeout(()=>q.focus(),120)}else{q.value='';$('srchB').classList.remove('act');if(SQ){SQ='';render();sqCls()}}};
  q.oninput=run;q.onkeydown=e=>{if(e.key==='Escape'){q.value='';SQ='';render();sqCls();bx.classList.remove('on');$('srchB').classList.remove('act')}};
- document.addEventListener('pointerdown',e=>{if(!bx.classList.contains('on')||e.target.closest('#sbx,#srchB'))return;bx.classList.remove('on');if(!q.value.trim()){q.value='';if(SQ){SQ='';render();sqCls()}$('srchB').classList.remove('act')}})}
+ document.addEventListener('pointerdown',e=>{if(!bx.classList.contains('on')||e.target.closest('#sbx,#srchB'))return;if(q.value.trim())return;bx.classList.remove('on');if(!q.value.trim()){q.value='';if(SQ){SQ='';render();sqCls()}$('srchB').classList.remove('act')}})}
 load().then(()=>{try{const L=(products||[]).filter(p=>isAv(p)).map(p=>({"@type":"Product",name:p.name,image:imgs(p),description:descText(p.description||p.name).slice(0,300),brand:{"@type":"Brand",name:"GORRAX"},offers:{"@type":"Offer",priceCurrency:"COP",price:String(Math.round(Number(p.price))),availability:"https://schema.org/InStock",url:location.origin+'/#'+pSlug(p)}}));if(L.length){const sc=document.createElement('script');sc.type='application/ld+json';sc.textContent=JSON.stringify({"@context":"https://schema.org","@graph":L});document.head.appendChild(sc)}}catch(e){}cartRender();{const q=pByHash();if(q){PV_NOPUSH=true;lbOpen(q.id);PV_NOPUSH=false}}if(!location.hash&&scrollY<40)scrollTo(0,0);tUpd()});
 
 /* miniaturas verticales: clic = ir a la foto; se marca la que está en pantalla */
