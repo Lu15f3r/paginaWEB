@@ -1864,7 +1864,7 @@ sec.addEventListener('contextmenu',e=>e.preventDefault());
 
 /* ====== ADMIN ====== */
 const dlg=$('adm'),say=(t,ok)=>{$('msg').style.color=ok?'#128c4a':'#c62828';$('msg').textContent=t||''};
-async function openAdmin(){
+async function openAdmin(){try{localStorage.setItem('gx_me','1')}catch(e){}
   if(DEMO){alert('Primero conecta Supabase: edita SUPABASE_URL y SUPABASE_KEY en index.html.');return;}
   dlg.showModal();const{data}=await sb.auth.getSession();gate(!!data.session);
 }
@@ -2123,7 +2123,7 @@ let PV_Y=0;
 const pSlug=q=>{const b=slug(q.name||'producto').replace(/-/g,'')||('p'+q.id);const d=products.filter(x=>(slug(x.name||'producto').replace(/-/g,'')||('p'+x.id))===b);return d.length>1?b+d.findIndex(x=>String(x.id)===String(q.id))+1:b};
 const pByHash=()=>{const h=decodeURIComponent((location.hash||'').slice(1)).toLowerCase();return h?products.find(x=>pSlug(x)===h):null};
 let PV_NOPUSH=false;
-function pvOpen(){const lb=$('lb'),u='#'+(lbP?pSlug(lbP):'');if(!lb.open){PV_Y=scrollY;lb.show();document.body.classList.add('pv');if(!PV_NOPUSH){try{history.pushState({pv:1},'',u)}catch(_){}}else{try{history.replaceState({pv:0},'',u)}catch(_){}}}else{try{history.replaceState(history.state,'',u)}catch(_){}}scrollTo(0,0)}
+function pvOpen(){const lb=$('lb'),u='#'+(lbP?pSlug(lbP):'');if(!lb.open){PV_Y=scrollY;lb.show();document.body.classList.add('pv');if(!PV_NOPUSH){try{history.pushState({pv:1},'',u)}catch(_){}}else{try{history.replaceState({pv:0},'',u)}catch(_){}}}else{try{history.replaceState(history.state,'',u)}catch(_){}}scrollTo(0,0);try{(window.dataLayer=window.dataLayer||[]).push({event:'ver_producto',producto:lbP?pSlug(lbP):'',nombre:lbP?String(lbP.name||''):''})}catch(_){}}
 function pvUrl(){try{if(pByHash())history.replaceState(history.state,'',location.pathname+location.search)}catch(_){}}
 function pvClose(pop){const lb=$('lb');if(!lb.open)return;lb.close();document.body.classList.remove('pv');scrollTo(0,PV_Y||0);if(!pop&&history.state&&history.state.pv){try{history.back()}catch(_){}}else pvUrl()}
 addEventListener('popstate',()=>{const q=pByHash();if(q&&!$('lb').open){PV_NOPUSH=true;lbOpen(q.id);PV_NOPUSH=false}else if(!q)pvClose(true)});
@@ -3748,12 +3748,13 @@ var st=document.createElement('style');st.id='gxAsp';st.textContent=out;document
 
 /* Google Tag Manager (GTM-M5H3CJ8V): carga diferida, no bloquea la página */
 (function(){var W=window;W.dataLayer=W.dataLayer||[];var ev=function(n,o){try{W.dataLayer.push(Object.assign({event:n},o||{}))}catch(e){}};
-var done=0;function load(){if(done)return;done=1;W.dataLayer.push({'gtm.start':Date.now(),event:'gtm.js'});var g=document.createElement('script');g.async=true;g.src='https://www.googletagmanager.com/gtm.js?id=GTM-M5H3CJ8V';document.head.appendChild(g)}
+try{var q=new URLSearchParams(location.search);if(q.get('yo')==='1')localStorage.setItem('gx_me','1');if(q.get('yo')==='0')localStorage.removeItem('gx_me')}catch(e){}
+var me=false;try{me=localStorage.getItem('gx_me')==='1'}catch(e){}
+var done=me?1:0;function load(){if(done)return;done=1;W.dataLayer.push({'gtm.start':Date.now(),event:'gtm.js'});var g=document.createElement('script');g.async=true;g.src='https://www.googletagmanager.com/gtm.js?id=GTM-M5H3CJ8V';document.head.appendChild(g)}
 function later(){var f=function(){('requestIdleCallback'in W)?requestIdleCallback(load,{timeout:3000}):setTimeout(load,2000)};if(document.readyState==='complete')f();else W.addEventListener('load',f)}
 later();['pointerdown','scroll','keydown'].forEach(function(t){W.addEventListener(t,load,{once:true,passive:true})});
 document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="wa.me"],a[href*="whatsapp"]');if(!a)return;ev('clic_whatsapp',{pagina:location.hash||'/'})},true);
-W.addEventListener('hashchange',function(){if(location.hash&&location.hash.length>1)ev('ver_producto',{producto:decodeURIComponent(location.hash.slice(1))})});
-if(location.hash&&location.hash.length>1)ev('ver_producto',{producto:decodeURIComponent(location.hash.slice(1))})})();
+})();
 </script>
 </body>
 </html>
