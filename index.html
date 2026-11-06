@@ -3745,6 +3745,17 @@ Object.keys(EF).forEach(function(k){var n=EF[k][0],D=EF[k][1],r=KF[n];if(!r)retu
   fr.forEach(function(f){var t=f.p*D/100;if(f.p>ga&&f.p<gb)return;var t2=f.p>=gb?t-idle+ni:t;body+=(Math.round(t2/P*10000)/100)+'%{'+f.s+'}'});
   out+='@keyframes '+n+'_'+sp+'{'+body+'}html[data-auto='+k+'][data-aspd='+sp+'] :is('+SEL+')'+(k==='brillo'?'::after':'')+'{animation-name:'+n+'_'+sp+'!important;animation-duration:'+P.toFixed(3)+'s!important}\n'})});
 var st=document.createElement('style');st.id='gxAsp';st.textContent=out;document.head.appendChild(st)}catch(e){}})();
+
+/* Google Tag Manager (GTM-M5H3CJ8V): carga diferida, no bloquea la página */
+(function(){var W=window;W.dataLayer=W.dataLayer||[];var ev=function(n,o){try{W.dataLayer.push(Object.assign({event:n},o||{}))}catch(e){}};
+var done=0;function load(){if(done)return;done=1;W.dataLayer.push({'gtm.start':Date.now(),event:'gtm.js'});var g=document.createElement('script');g.async=true;g.src='https://www.googletagmanager.com/gtm.js?id=GTM-M5H3CJ8V';document.head.appendChild(g)}
+function later(){var f=function(){('requestIdleCallback'in W)?requestIdleCallback(load,{timeout:3000}):setTimeout(load,2000)};if(document.readyState==='complete')f();else W.addEventListener('load',f)}
+later();['pointerdown','scroll','keydown'].forEach(function(t){W.addEventListener(t,load,{once:true,passive:true})});
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="wa.me"],a[href*="whatsapp"],.cadd,#lbC,[data-go="cart"],[data-go="wa"],.qb.qc,.qb.qw');if(!a)return;
+ var h=a.getAttribute('href')||'',wa=/wa\.me|whatsapp/i.test(h)||a.classList.contains('wa')||a.classList.contains('qw')||a.dataset.go==='wa'||a.id==='lbW';
+ ev(wa?'clic_whatsapp':'agregar_carrito',{pagina:location.hash||'/'})},true);
+W.addEventListener('hashchange',function(){if(location.hash&&location.hash.length>1)ev('ver_producto',{producto:decodeURIComponent(location.hash.slice(1))})});
+if(location.hash&&location.hash.length>1)ev('ver_producto',{producto:decodeURIComponent(location.hash.slice(1))})})();
 </script>
 </body>
 </html>
