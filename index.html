@@ -3235,7 +3235,7 @@ let cTm;const cToast=t=>{const el=$('ct');el.textContent=t;el.classList.add('sho
 function cartAdd(it){const ex=cart.find(x=>cKey(x)===cKey(it)),l=cLine(ex||it),max=l?l.max:0;
   if(max<=0){cToast('Sin stock disponible');return false}
   if(ex){if(ex.q>=max){cToast('Ya tienes todo el stock en el carrito');return false}ex.q=Math.min(max,ex.q+(it.q||1))}else cart.push({...it,q:Math.min(it.q||1,max)});
-  cSave();cartRender();['cartB','cartF'].forEach(id=>{const b=$(id);b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump')});cToast('Agregado al carrito');return true}
+  cSave();cartRender();['cartB','cartF'].forEach(id=>{const b=$(id);b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump')});cToast('Agregado al carrito');try{(window.dataLayer=window.dataLayer||[]).push({event:'agregar_carrito',pagina:location.hash||'/'})}catch(e){}return true}
 const cOpen=o=>{if(o)cartRender();$('cartP').classList.toggle('open',o);$('cartO').classList.toggle('open',o);document.body.style.overflow=o?'hidden':''};
 $('cartB').onclick=$('cartF').onclick=()=>cOpen(true);$('cartX').onclick=$('cartO').onclick=()=>cOpen(false);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')cOpen(false)});
@@ -3751,9 +3751,7 @@ var st=document.createElement('style');st.id='gxAsp';st.textContent=out;document
 var done=0;function load(){if(done)return;done=1;W.dataLayer.push({'gtm.start':Date.now(),event:'gtm.js'});var g=document.createElement('script');g.async=true;g.src='https://www.googletagmanager.com/gtm.js?id=GTM-M5H3CJ8V';document.head.appendChild(g)}
 function later(){var f=function(){('requestIdleCallback'in W)?requestIdleCallback(load,{timeout:3000}):setTimeout(load,2000)};if(document.readyState==='complete')f();else W.addEventListener('load',f)}
 later();['pointerdown','scroll','keydown'].forEach(function(t){W.addEventListener(t,load,{once:true,passive:true})});
-document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="wa.me"],a[href*="whatsapp"],.cadd,#lbC,[data-go="cart"],[data-go="wa"],.qb.qc,.qb.qw');if(!a)return;
- var h=a.getAttribute('href')||'',wa=/wa\.me|whatsapp/i.test(h)||a.classList.contains('wa')||a.classList.contains('qw')||a.dataset.go==='wa'||a.id==='lbW';
- ev(wa?'clic_whatsapp':'agregar_carrito',{pagina:location.hash||'/'})},true);
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="wa.me"],a[href*="whatsapp"]');if(!a)return;ev('clic_whatsapp',{pagina:location.hash||'/'})},true);
 W.addEventListener('hashchange',function(){if(location.hash&&location.hash.length>1)ev('ver_producto',{producto:decodeURIComponent(location.hash.slice(1))})});
 if(location.hash&&location.hash.length>1)ev('ver_producto',{producto:decodeURIComponent(location.hash.slice(1))})})();
 </script>
