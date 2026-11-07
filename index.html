@@ -1567,6 +1567,7 @@ footer .links a:active,footer .links a:focus-visible{transform:translateY(-3px)!
 @keyframes edFlash{0%,100%{background:transparent}20%,60%{background:rgba(245,196,81,.38)}40%,80%{background:transparent}}
 #alist .row.ed{animation:edFlash 1.5s ease-out 1}
 #alist .row[data-id]{scroll-margin-top:150px}
+#alist .btn.ghost.on-ed{--o:var(--gold)!important;--f1:var(--gold)!important;--f2:var(--gold)!important;--t1:#000!important;--t2:#000!important;color:#000!important}
 </style>
 </head>
 <body>
@@ -1902,7 +1903,7 @@ function alist(){
   const HTML=head+(list.length?list.map(p=>`<div class="row" data-id="${p.id}" draggable="true" title="Clic para editar · arrastra para cambiar de posición">${imgs(p)[0]?`<img src="${esc(imgs(p)[0])}" alt="">`:'<i></i>'}
    <div><b>${esc(p.name)}</b><br><small>${esc(p.category)}${p.subcategory?' › '+esc(p.subcategory):''} · ${money(p.price)}${gens(p).length?' · '+esc(gens(p).join('/')):''}${p.available===false?' · Agotado':''}${supsOf(p).length?' · Prov.: '+esc(supsOf(p).join(', ')):''}</small> <span class="stkb ${stkC(p.stock)||'n'}">${p.stock==null?'Sin control':'Stock: '+p.stock}</span></div>
    <div class="mvb"><span class="pos" title="Posición en la tienda">${products.indexOf(p)+1}</span><button type="button" class="btn ghost sm" data-mv="top" data-id="${p.id}" title="Poner de primero" aria-label="Poner de primero">⤒</button><button type="button" class="btn ghost sm" data-mv="up" data-id="${p.id}" title="Subir un puesto" aria-label="Subir">▲</button><button type="button" class="btn ghost sm" data-mv="down" data-id="${p.id}" title="Bajar un puesto" aria-label="Bajar">▼</button><button type="button" class="btn ghost sm" data-mv="bottom" data-id="${p.id}" title="Mandar al final" aria-label="Mandar al final">⤓</button></div>
-   <button class="btn ghost sm" data-e="${p.id}">Editar</button><button class="btn red sm" data-d="${p.id}">Eliminar</button></div>`).join(''):`<p class="desc">${products.length?'Ningún producto coincide: puedes crearlo con el botón Guardar.':'Aún no hay productos. Crea el primero arriba.'}</p>`);
+   <button class="btn ghost sm${editing&&String(p.id)===String($('pid').value)?' on-ed':''}" data-e="${p.id}">${editing&&String(p.id)===String($('pid').value)?'Editando':'Editar'}</button><button class="btn red sm" data-d="${p.id}">Eliminar</button></div>`).join(''):`<p class="desc">${products.length?'Ningún producto coincide: puedes crearlo con el botón Guardar.':'Aún no hay productos. Crea el primero arriba.'}</p>`);
   /* el formulario se queda dentro de la lista, justo debajo del producto que se edita (sin moverlo para no perder el cursor) */
   {const L=$('alist'),f=$('pf'),home=$('tProd'),tp=document.createElement('template');tp.innerHTML=HTML;
    const nodes=[...tp.content.childNodes],eid=editing?String($('pid').value):'',idx=nodes.findIndex(n=>n.nodeType===1&&n.dataset&&n.dataset.id===eid);
@@ -1952,7 +1953,7 @@ function gal(){
   const end=(e,ok)=>{if(!d)return;const x=d;d=null;if(!x.on)return;
     const t=ok?tg(e):null;if(t&&t!==x.it){const j=+t.dataset.i,m=keep.splice(x.i,1)[0];keep.splice(j,0,m)}gal()};
   g.addEventListener('pointerup',e=>end(e,true));g.addEventListener('pointercancel',e=>end(e,false))})();
-function clear(){$('pf').reset();$('pcr').checked=true;$('pcr').disabled=true;alist();$('pid').value='';$('pa').checked=true;keep=[];added=[];removed=[];vlist=[];curSizes=[];legacy='';curG=[];gChips();vRender();gal();updMg()}
+function clear(){$('pf').reset();$('pcr').checked=true;$('pcr').disabled=true;$('pid').value='';alist();$('pa').checked=true;keep=[];added=[];removed=[];vlist=[];curSizes=[];legacy='';curG=[];gChips();vRender();gal();updMg()}
 $('cl').onclick=()=>{clear();say('')};
 $('pimg').onchange=e=>{
   const room=Math.max(6-keep.length,0),fs=[...e.target.files].sort((a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true,sensitivity:'base'}));
@@ -1967,6 +1968,7 @@ $('alist').onclick=async e=>{
   const mvb=e.target.closest('[data-mv]');if(mvb){mvb.disabled=true;await moveProd(mvb.dataset.id,mvb.dataset.mv);return}
   const rowEl=e.target.closest('.row[data-id]');let ed=e.target.dataset.e;const dl=e.target.dataset.d;
   if(!ed&&!dl&&rowEl&&!e.target.closest('button,.mvb,a,input')&&!window.getSelection().toString())ed=rowEl.dataset.id;
+  if(ed&&String($('pid').value)===String(ed)){clear();say('');return}
   if(ed){const p=products.find(x=>String(x.id)===ed);
     $('pid').value=p.id;$('pcr').disabled=false;$('pcr').checked=false;$('pcs').value=lastSup(p);$('pn').value=p.name;$('psb').value=p.subcategory||'';$('pmt').value=p.material||'';$('pc').value=p.category;alist();$('pp').value=p.price;
     curSizes=[...(p.sizes||[])];curG=[...gens(p)];gChips();legacy=hasVar(p)?'':(p.stock??'');$('pst').value=legacy;$('pcmp').value=p.compare_price||'';$('pd').value=p.description||'';$('pa').checked=p.available!==false;$('pco').value=costs[String(p.id)]??'';updMg();
