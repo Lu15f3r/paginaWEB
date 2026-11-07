@@ -3678,6 +3678,8 @@ function later(){var f=function(){('requestIdleCallback'in W)?requestIdleCallbac
 later();['pointerdown','scroll','keydown'].forEach(function(t){W.addEventListener(t,load,{once:true,passive:true})});
 document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="wa.me"],a[href*="whatsapp"]');if(!a)return;ev('clic_whatsapp',{pagina:location.hash||'/'})},true);
 })();
+/* limpia de la barra de direcciones los códigos de seguimiento (fbclid, utm…), después de que Analytics ya los leyó */
+addEventListener('load',()=>setTimeout(()=>{try{const u=new URL(location.href),k=[...u.searchParams.keys()].filter(x=>/^(fbclid|gclid|igshid|_r|_t|utm_.+|mibextid|ttclid)$/i.test(x));if(!k.length)return;k.forEach(x=>u.searchParams.delete(x));history.replaceState(history.state,'',u.pathname+(u.search||'')+u.hash)}catch(e){}},4000));
 </script>
 </body>
 </html>
