@@ -1565,7 +1565,7 @@ footer .links a:active,footer .links a:focus-visible{transform:translateY(-3px)!
 /* editar producto en el mismo lugar de la lista */
 #alist>#pf{margin:4px 0 16px;padding:14px 0 16px}
 @keyframes edFlash{0%,100%{background:transparent}20%,60%{background:rgba(245,196,81,.38)}40%,80%{background:transparent}}
-#alist .row.ed{animation:edFlash 1s ease-out 1}
+#alist .row.ed{animation:edFlash 1.5s ease-out 1}
 #alist .row[data-id]{scroll-margin-top:150px}
 </style>
 </head>
@@ -1970,7 +1970,7 @@ $('alist').onclick=async e=>{
   if(ed){const p=products.find(x=>String(x.id)===ed);
     $('pid').value=p.id;$('pcr').disabled=false;$('pcr').checked=false;$('pcs').value=lastSup(p);$('pn').value=p.name;$('psb').value=p.subcategory||'';$('pmt').value=p.material||'';$('pc').value=p.category;alist();$('pp').value=p.price;
     curSizes=[...(p.sizes||[])];curG=[...gens(p)];gChips();legacy=hasVar(p)?'':(p.stock??'');$('pst').value=legacy;$('pcmp').value=p.compare_price||'';$('pd').value=p.description||'';$('pa').checked=p.available!==false;$('pco').value=costs[String(p.id)]??'';updMg();
-    vlist=vars(p).map(v=>({...v}));vRender();keep=[...imgs(p)];added=[];removed=[];gal();say('Editando “'+p.name+'”. Guarda cuando termines.',true);{const r=$('alist').querySelector('.row.ed');if(r)setTimeout(()=>r.scrollIntoView({behavior:'smooth',block:'start'}),30)}}
+    vlist=vars(p).map(v=>({...v}));vRender();keep=[...imgs(p)];added=[];removed=[];gal();say('Editando “'+p.name+'”. Guarda cuando termines.',true);{const r=$('alist').querySelector('.row.ed');if(r)setTimeout(()=>{const t=r.getBoundingClientRect().top;if(t<160||t>innerHeight*.55)r.scrollIntoView({behavior:'smooth',block:'start'})},30)}}
   if(dl){const p=products.find(x=>String(x.id)===dl);
     if(!await askOk('¿Eliminar “'+p.name+'”? No se puede deshacer.','Eliminar'))return;
     const{error}=await sb.from('products').delete().eq('id',dl);
