@@ -1571,14 +1571,14 @@ footer .links a:active,footer .links a:focus-visible{transform:translateY(-3px)!
 <section class="hero" id="hero" aria-roledescription="carrusel" aria-label="Banner principal"><div class="hs" id="heroS"><img src="img/banner-1.webp" alt="" class="on" fetchpriority="high" decoding="async"></div><button type="button" class="hpv" id="heroP" aria-label="Foto anterior" hidden>❮</button><button type="button" class="hnx" id="heroN" aria-label="Foto siguiente" hidden>❯</button><div class="hdt" id="heroD" hidden></div><div class="hero-type hand"><span class="tw" id="tyHero" data-loop data-white="," aria-label="Tu estilo, tu corona"><span class="gh" aria-hidden="true">Más Que Gorras, Es Actitud!</span><span class="ty" aria-hidden="true"></span></span></div></section>
 
 
-<section class="cpromo" id="promo"><div><span class="cp-s">Oferta Por Tiempo LIMITADO</span><h2 class="cp-h">Arma tu combo</h2><p class="cp-l"><b class="w1">gorra</b> + <b class="w2">buzo</b> + <b class="w3">reloj</b></p><div class="cp-row"><p class="cp-s2">y ahorra</p><p class="cp-n"><b>+ Envío gratis</b> El 10% se suma al descuento que ya tenga cada producto.</p></div></div><div class="cp-b"><span class="cp-badge"><span><span id="cpPct">10</span><small>%</small></span><em>DTO</em></span><a class="btn cyc" id="promoBtn" data-c="0" href="#armar">Armar ahora</a></div></section>
+
 
 <section class="feat" aria-label="Beneficios de la tienda"><ul class="mq" id="mq"></ul></section>
 
 <div class="sectH"><h2>Última colección</h2></div>
 <main id="catalogo"><div class="empty">Cargando productos…</div></main>
 
-<div class="fin"><section class="build" id="armar" hidden></section></div>
+
 
 <dialog id="lb" aria-label="Fotos del producto">
   <div class="dh"><h2 id="lbT"></h2><button class="btn red sm" id="lbX" type="button">← Volver a la tienda</button></div>
@@ -1619,7 +1619,7 @@ footer .links a:active,footer .links a:focus-visible{transform:translateY(-3px)!
 <div id="txBar" hidden><span class="txg" title="Arrastra para mover">⠿ Arrastra</span><span>✎ <b>Modo edición de textos:</b> toca cualquier texto con borde rojo punteado para cambiarlo. Precios, descuentos y cantidades no se pueden editar aquí.</span><span id="txM"></span><button type="button" class="btn sm" id="txSave">Guardar para todos</button><button type="button" class="btn ghost sm" id="txDone">Salir y volver al panel</button></div>
 <dialog id="txd" class="xld"><div class="dh"><h2>Cambiar texto</h2></div><div class="db"><p class="desc">Texto original: <b id="txO"></b></p><textarea id="txT" rows="4" style="width:100%" aria-label="Texto nuevo"></textarea><div class="xlact"><button type="button" class="btn ghost" id="txNo">Cancelar</button><button type="button" class="btn ghost" id="txR">↺ Restaurar original</button><button type="button" class="btn" id="txOk">Aplicar</button></div></div></dialog>
 <dialog id="xld" class="xld"><div class="dh"><h2>Exportar a Excel</h2><button class="btn red sm" id="xlX" type="button">Cerrar</button></div><div class="db" id="xlB"></div></dialog>
-<dialog id="cm"><div class="dh"><h2>Categorías</h2><button class="btn red sm" id="cmX" type="button">Cerrar</button></div><div class="db"><p class="desc" style="margin-bottom:8px">Cambia el nombre o elimina categorías. Si tocas Gorras, Buzos, Relojes o Combos, el armador de combos puede quedar sin productos. Las categorías vacías solo se pueden eliminar.</p><div class="coe" id="cmM"></div><div id="cmB"></div></div></dialog>
+<dialog id="cm"><div class="dh"><h2>Categorías</h2><button class="btn red sm" id="cmX" type="button">Cerrar</button></div><div class="db"><p class="desc" style="margin-bottom:8px">Cambia el nombre o elimina categorías. Las categorías vacías solo se pueden eliminar.</p><div class="coe" id="cmM"></div><div id="cmB"></div></div></dialog>
 <dialog id="co" aria-labelledby="coT"><div class="dh"><h2 id="coT">Finalizar compra</h2><button class="btn red sm" id="coX" type="button">Cerrar</button></div><div class="db" id="coB"></div></dialog>
 
 <dialog id="adm">
@@ -1635,15 +1635,7 @@ footer .links a:active,footer .links a:focus-visible{transform:translateY(-3px)!
       <div class="tabs" id="tabs"><button type="button" class="btn ghost sm on" data-t="prod">Productos</button><button type="button" class="btn ghost sm" data-t="ped">Pedidos</button><button type="button" class="btn ghost sm" data-t="inv">Inventario</button><button type="button" class="btn ghost sm" data-t="ven">Ventas</button><button type="button" class="btn ghost sm" data-t="com">Compras</button><button type="button" class="btn ghost sm" data-t="gas">Gastos</button><button type="button" class="btn ghost sm" data-t="gra">Gráfica</button><button type="button" class="btn ghost sm" data-t="app">Apariencia</button></div>
       <div id="tProd"><form id="pf" class="f">
         <input type="hidden" id="pid">
-        <details class="w cbx"><summary>Armar combo (gorra + buzo + reloj con descuento)</summary>
-          <div class="cbg">
-            <label>Gorra<select id="cbG"></select></label>
-            <label>Buzo<select id="cbB"></select></label>
-            <label>Reloj<select id="cbR"></select></label>
-            <label>Descuento %<input type="number" id="cbD" value="10" min="1" max="60"></label>
-            <button type="button" class="btn sm" id="cbGo">Armar combo</button>
-          </div>
-        </details>
+        
         <label>Nombre<input id="pn" required placeholder="Escribe para buscar o crear" autocomplete="off"></label>
         <label>Categoría<input id="pc" required placeholder="Elige una o escribe una nueva" autocomplete="off"><div class="sizes cchips" id="cchips"></div></label>
         <label>Subcategoría<input id="psb" placeholder="Elige una o escribe una nueva" autocomplete="off"><div class="sizes cchips" id="sbchips"></div></label>
@@ -1692,18 +1684,16 @@ const CFG={
   WHATSAPP:'573332571326',            // país + número, sin + ni espacios
   STORE:'GORRAX',
   FREE_SHIP:160000,   // envío gratis desde este valor de compra (COP)
-  NAV_ON:false,   // true = vuelve a mostrar el menú de categorías (Gorras, Buzos…) arriba
-  COMBOS_ON:false,   // true = vuelve a mostrar los combos (oferta, menú, armador y categoría)
+  NAV_ON:false,   // true = vuelve a mostrar el menú de categorías (Gorras…) arriba
   // ▼▼ FOTOS DEL BANNER PRINCIPAL: guarda cada foto en la carpeta img/ y escribe su nombre aquí, separado por comas ▼▼
   HERO:['img/banner-1.webp','img/banner-2.webp','img/banner-3.webp','img/banner-4.webp','img/banner-5.webp','img/banner-6.webp','img/banner-7.webp'],   // sin extensión: sirve .png, .jpg o .webp   // para agregar más: escribe aquí el nombre de la foto nueva (guardada en la carpeta img/)
   HERO_MS:3200,   // milisegundos entre foto y foto (2000 = 2 segundos)
   HERO_OLD:['img/herov1.png','img/banner-cruces.jpg','img/banner-colombia.jpg','img/banner-777.jpg','img/banner-samurai.jpg','img/banner-fugaz.jpg','img/banner-royal.jpg'],   // respaldo: solo se usan si NINGUNA foto de HERO carga
   HERO_POS:'center 62%',   // centrado vertical de las fotos del banner (0% = arriba, 50% = centro, 100% = abajo)
-  COMBO_DESC:10,   // % de descuento de los combos que arma el cliente
   PAY:{online:'',transfer:'',cod:true,cuentas:[{id:'nequi',n:'Nequi',d:''},{id:'bancolombia',n:'Bancolombia',d:''}]},   // en cuentas pon en d: tu número o cuenta (ej. 'Nequi 3XX XXX XXXX · a nombre de ...'). Si lo dejas vacío se envía por WhatsApp.   // online: URL de tu función de pago (Wompi / Mercado Pago). transfer: texto con tus cuentas, ej. 'Nequi 3XX XXX XXXX\nBancolombia ahorros ...'. cod: pago contra entrega
   SOCIAL:{Instagram:'https://www.instagram.com/gorraxcolombia/',Facebook:'https://www.facebook.com/gorraxcolombia',TikTok:'',YouTube:''},   // pega aquí tus enlaces
-  CAT_ORDER:['gorras','buzos','relojes','combos','zapatos'],
-  CAT_INFO:{gorras:'Visera plana, actitud real.',buzos:'Premium y con corona.',relojes:'Tiempo con estilo.',zapatos:'Pisa con actitud.',combos:'Lleva el set completo y ahorra.'}
+  CAT_ORDER:['gorras'],
+  CAT_INFO:{gorras:'Visera plana, actitud real.'}
 };
 /* ============================ */
 try{if('scrollRestoration' in history)history.scrollRestoration='manual'}catch(e){}
@@ -1753,21 +1743,7 @@ const DEMO_DATA=[
   ['Fitted plana cerrada',89000,['7 1/4','7 3/8','7 1/2'],'Ajuste exacto, sin broche.'],
   ['Trucker plana de malla',55000,U,'Parte trasera de malla, más fresca.'],
   ['Snapback plana edición oro',72000,U,'Bordado dorado. Edición limitada.',false]]),
- ...mk('b','Buzos',[
-  ['Buzo oversize negro',135000,T,'Algodón frisado, capota doble.'],
-  ['Buzo canguro premium',148000,T,'Bolsillo frontal, felpa suave.'],
-  ['Buzo cuello redondo',115000,['M','L'],'Corte clásico, puño reforzado.'],
-  ['Buzo heavyweight con capota',159000,T,'Tela gruesa de 400 g, cordón plano.',false]]),
- ...mk('r','Relojes',[
-  ['Reloj clásico negro y dorado',185000,W,'Caja de acero, correa de silicona, resistente al agua.'],
-  ['Reloj buceo negro y dorado',240000,['44 mm'],'Cuarzo, bisel giratorio, resistente a 100 m.'],
-  ['Reloj deportivo LED',120000,W,'Cronómetro, luz LED y alarma.'],
-  ['Reloj minimalista de cuero',210000,['38 mm','42 mm'],'Esfera limpia y correa de cuero.']]),
- ...mk('z','Zapatos',[
-  ['Tenis urbanos negros',210000,Z,'Suela antideslizante y plantilla acolchada.'],
-  ['Zapatilla cuero negro y gris',245000,Z,'Cuero genuino, ligera y cómoda.'],
-  ['Tenis running deportivos',189000,Z,'Malla transpirable para uso diario.'],
-  ['Zapatilla casual blanca',199000,['39','40','41'],'Estilo limpio, combina con todo.',false]])
+
 ];
 
 function prodMsg(p,size,color,code,q){return `Hola ${CFG.STORE}, me interesa este producto:\n*${p.name}* (${p.category})\n${size?'Talla: '+size+'\n':''}${color?'Color: '+color+'\n':''}${q>1?'Cantidad: '+q+'\n':''}Precio: ${money(p.price)}${q>1?' c/u':''}${+p.price*(q||1)>=CFG.FREE_SHIP?'\nEnvío: GRATIS':''}${code?'\nPedido: '+code:''}\n¿Está disponible?`}
@@ -1791,7 +1767,7 @@ const gens=p=>Array.isArray(p.genders)?p.genders:[];
 const F0=()=>({t:[],g:[],c:[],r:[],s:[],d:[],p:null}),cpF=f=>({t:[...f.t],g:[...f.g],c:[...f.c],r:[...f.r],s:[...f.s],d:[...f.d],p:f.p?[...f.p]:null});const DSC=[[1,'Con descuento'],[10,'10% o más'],[20,'20% o más'],[30,'30% o más']];let FIL=F0(),FD=F0();
 const fN=f=>f.t.length+f.g.length+f.c.length+f.r.length+f.s.length+f.d.length+(f.p?1:0);
 const fOk=(p,f,k)=>(k==='t'||!f.t.length||f.t.includes(slug(p.category||'')))&&(k==='p'||!f.p||(+p.price>=f.p[0]&&+p.price<=f.p[1]))&&(k==='d'||!f.d.length||discPct(p)>=Math.min(...f.d))&&(k==='s'||!f.s.length||f.s.includes(slug(p.subcategory||'')))&&(k==='g'||!f.g.length||gens(p).some(x=>f.g.includes(x)))&&(k==='c'||!f.c.length||(hasColors(p)&&f.c.some(c=>vStock(p,null,c)>0)))&&(k==='r'||!f.r.length||f.r.some(i=>+p.price>=RNG[i][1]&&+p.price<=RNG[i][2]));
-const vp=()=>CFG.COMBOS_ON?products:products.filter(p=>slug(p.category||'')!=='combos');
+const vp=()=>products;
 const hitS=(t,q)=>{const ws=sg(t).split('-').filter(Boolean);return sg(q).split('-').filter(Boolean).every(w=>w.length>=3?ws.some(x=>x.includes(w)):ws.some(x=>x.startsWith(w)))};
 let SQ='';const fprods=()=>vp().filter(p=>fOk(p,FIL)&&(!SQ||hitS(p.name+' '+p.category+' '+(p.subcategory||'')+' '+(p.material||''),SQ)));
 const fBtn=()=>{const n=fN(FIL),b=$('fFab');b.setAttribute('aria-label','Abrir filtros'+(n?' ('+n+' activos)':''));b.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg><span>Filtrar</span><b class="fn"${n?'':' hidden'}>${n}</b><span class="fx" role="button" aria-label="Quitar filtros" title="Quitar filtros"${n?'':' hidden'}>✕</span>`};
@@ -1824,20 +1800,19 @@ $('catalogo').addEventListener('click',e=>{if(e.target.closest('[data-fclr]')){F
 document.addEventListener('keydown',e=>{if(e.key==='Escape')fOpen(false)});
 let activeCat=null;
 function render(){
-  const groups={},canon={},allc={};products.forEach(p=>{allc[slug(p.category||'')]??=p.category});const allCats=Object.values(allc).filter(c=>CFG.COMBOS_ON||slug(c)!=='combos');fprods().forEach(p=>{const k=slug(p.category||'');canon[k]??=p.category;(groups[canon[k]]??=[]).push(p)});
+  const groups={},canon={},allc={};products.forEach(p=>{allc[slug(p.category||'')]??=p.category});const allCats=Object.values(allc).filter(Boolean);fprods().forEach(p=>{const k=slug(p.category||'');canon[k]??=p.category;(groups[canon[k]]??=[]).push(p)});
   const rank=c=>{const i=CFG.CAT_ORDER.indexOf(slug(c));return i<0?99:i};
   const cats=Object.keys(groups).sort((a,b)=>rank(a)-rank(b));
   if(activeCat&&activeCat!=='combos'&&!allCats.some(c=>slug(c)===activeCat))activeCat=null;
   const shown=activeCat?cats.filter(c=>slug(c)===activeCat):cats;
-  const navCats=(!CFG.COMBOS_ON||allCats.some(c=>slug(c)==='combos')?allCats:[...allCats,'Combos']).sort((a,b)=>rank(a)-rank(b));
-  $('nav').innerHTML=CFG.NAV_ON===false?'':navCats.map(c=>`<a class="nv${slug(c)===activeCat?' on':''}" href="#${slug(c)}" data-c="${slug(c)}"><span class="in">${NAVICO[slug(c)]||NAVICO.otro}${esc(c)}${slug(c)==='combos'?`<span class="pct">-${COMBO_D}%</span>`:''}</span></a>`).join('');
+  const navCats=allCats.sort((a,b)=>rank(a)-rank(b));
+  $('nav').innerHTML=CFG.NAV_ON===false?'':navCats.map(c=>`<a class="nv${slug(c)===activeCat?' on':''}" href="#${slug(c)}" data-c="${slug(c)}"><span class="in">${NAVICO[slug(c)]||NAVICO.otro}${esc(c)}</span></a>`).join('');
   const showB=!activeCat||activeCat==='combos';
-  $('armar').hidden=!showB;
   $('catalogo').innerHTML=(shown.length?shown.map(c=>`
    <section class="cat" id="${slug(c)}">
         <div class="grid">${groups[c].map(card).join('')}</div>
    </section>`).join(''):(activeCat==='combos'?'':(SQ&&!fN(FIL)?'<div class="empty">Ninguna gorra coincide con «'+esc(SQ)+'».</div>':fN(FIL)?'<div class="empty">Ningún producto coincide con tu filtro.<br><br><button type="button" class="btn sm" data-fclr="1">Quitar filtros</button></div>':'<div class="empty">Pronto tendremos productos nuevos.</div>')));
-  fBtn();if(showB)renderBuilder();
+  fBtn();
   try{document.querySelectorAll('#catalogo .card .im1').forEach((im,i)=>{if(i<8){im.loading='eager';im.fetchPriority='high';im.decoding='async'}})}catch(e){}
 }
 function card(p){
@@ -1912,7 +1887,7 @@ const hit=(t,q)=>{const x=sg(t);return sg(q).split('-').filter(Boolean).every(w=
 const supsOf=p=>{const m=new Set();purch.forEach(c=>{const sp=String(c.supplier||'').trim();if(sp&&(c.items||[]).some(it=>String(it.product_id)===String(p.id)||nrm(it.name)===nrm(p.name)))m.add(sp)});return[...m]};
 function alist(){
   if(!alist._pl&&typeof sb!=='undefined'&&sb){alist._pl=1;loadPurch().then(()=>{if(tab==='prod')alist()}).catch(()=>{})}
-  catChips();fillCombo();
+  catChips();
   const q=sg($('pn').value),c=sg($('pc').value),editing=!!$('pid').value;
   const pq=$('pq').value.trim(),base=editing?products:products.filter(p=>(!q||sg(p.name).includes(q))&&(!c||sg(p.category).includes(c))),list=base.filter(p=>!pq||hit(p.name+' '+p.category+' '+supsOf(p).join(' '),pq));
   const filtered=(!editing&&(q||c))||pq;
@@ -2040,7 +2015,7 @@ document.querySelectorAll('.tw').forEach(el=>{
   new IntersectionObserver(([e])=>e.isIntersecting?t.run():t.stop(),{threshold:.6}).observe(el);
 });
 
-const CATS_BASE=['Gorras','Buzos','Relojes','Combos','Zapatos'],CORE=['gorras','buzos','relojes','combos'];
+const CATS_BASE=['Gorras'],CORE=['gorras'];
 const hidC=()=>{try{return JSON.parse(localStorage.getItem('gx_cats_hidden')||'[]')}catch(e){return[]}},setHid=a=>{try{localStorage.setItem('gx_cats_hidden',JSON.stringify(a))}catch(e){}};
 const getExtra=()=>{try{return JSON.parse(localStorage.getItem('gx_cats_extra')||'[]')}catch(e){return[]}};
 function extraCats(add,remove){let a=getExtra();if(add&&!a.some(c=>slug(c)===slug(add)))a.push(add);if(remove)a=a.filter(c=>slug(c)!==slug(remove));try{localStorage.setItem('gx_cats_extra',JSON.stringify(a))}catch(e){}
@@ -2057,7 +2032,7 @@ function addCat(){const inp=$('cmNew'),n=inp.value.trim().replace(/\s+/g,' ');if
   if(catAll().some(c=>slug(c)===slug(n)))return cmSay('Esa categoría ya existe.');
   const h=hidC().filter(x=>x!==slug(n));setHid(h);extraCats(n);alist();catMng();cmSay('Categoría “'+n+'” agregada. Ya puedes elegirla al crear un producto.',true)}
 $('cmB').onclick=async e=>{const a=e.target.dataset.a,row=e.target.closest('.row');if(a==='addc')return addCat();if(!a||!row||!sb)return;const c=row.dataset.c,ids=products.filter(p=>slug(p.category||'')===slug(c)).map(p=>p.id);
-  if(CORE.includes(slug(c))&&!await askOk('“'+c+'” la usa el armador de combos y la sección de la tienda. Si la renombras o eliminas, esa parte puede quedar vacía. ¿Continuar?','Continuar'))return;
+  if(CORE.includes(slug(c))&&!await askOk('“'+c+'” es la categoría principal de la tienda. Si la renombras o eliminas, esa parte puede quedar vacía. ¿Continuar?','Continuar'))return;
   if(a==='ren'){const nw=row.querySelector('.cmn').value.trim();if(!nw||nw===c)return cmSay('Escribe un nombre nuevo.');
     e.target.disabled=true;const{error}=await sb.from('products').update({category:nw}).in('id',ids);e.target.disabled=false;if(error)return cmSay('No se pudo renombrar: '+error.message);
     await load();alist();catMng();return cmSay('Categoría renombrada a “'+nw+'”.',true)}
@@ -2072,7 +2047,7 @@ function catChips(){
   const cur=slug($('pc').value||'');
   $('cchips').innerHTML=list.map(c=>`<button type="button" data-c="${esc(c)}" class="${slug(c)===cur?'on':''}">${esc(c)}</button>`).join('')+'<button type="button" data-mng="1">✎ Editar categorías</button>';sbChips();
 }
-const SUBS_BASE={gorras:['Plana','Curva'],buzos:['Estampados','Con capota','Sin capota','Con cremallera'],relojes:['Deportivos','Clásicos']};
+const SUBS_BASE={gorras:['Plana','Curva']};
 function sbChips(){const k=slug($('pc').value||''),m=new Map(),cur=slug($('psb').value||'');
   [...(SUBS_BASE[k]||[]),...products.filter(p=>slug(p.category||'')===k).map(p=>p.subcategory)].forEach(c=>{if(c&&!m.has(slug(c)))m.set(slug(c),c)});
   $('sbchips').innerHTML=k?[...m.values()].map(c=>`<button type="button" data-sb="${esc(c)}" class="${slug(c)===cur?'on':''}">${esc(c)}</button>`).join('')||'<small>Escribe una subcategoría nueva arriba.</small>':'<small>Elige primero la categoría.</small>'}
@@ -2201,88 +2176,18 @@ function outsideClose(d){let dn=null;d.addEventListener('pointerdown',e=>{dn=e.t
 outsideClose(dlg);
 let sx=null;$('lbS').addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
 $('lbS').addEventListener('touchend',e=>{if(sx===null)return;const d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>40)lbShow(lbI+(d<0?1:-1));sx=null});
-DEMO_DATA[6].images=[eb('r-kAAeSwXXho8jHC'),eb('GakAAeSwwhZo8jHD'),eb('PagAAeSwOI9o8jHD')];
-DEMO_DATA[7].images=[eb('zFUAAeSweDhnvWoc'),eb('KUYAAeSwCKZnvWoc'),eb('RfMAAeSwsABnvWod'),eb('RgAAAeSwQ1BnvWod'),eb('MaAAAeSwjvhnvWoe')];
 
 const discPct=p=>{const c=Number(p.compare_price),n=Number(p.price);return c>n&&n>0?Math.round((1-n/c)*100):0};
 function saveTag(p){const c=Number(p.compare_price),n=Number(p.price),d=discPct(p);return d?`<span class="old">${money(c)}</span><span class="save">Descuento -${d}%</span><span class="saved">Ahorras ${money(c-n)}</span>`:''}
 function discBadge(p){const d=discPct(p);return d?`<span class="disc" aria-label="Producto en descuento">-${d}%<small>DESCUENTO</small></span>`:''}
 function used(u,id){return products.some(x=>String(x.id)!==String(id)&&imgs(x).includes(u))}
-function fillCombo(){const map={cbG:'gorras',cbB:'buzos',cbR:'relojes'};
-  for(const id in map){const el=$(id),v=el.value;
-    el.innerHTML='<option value="">— ninguno —</option>'+products.filter(p=>sg(p.category)===map[id]).map(p=>`<option value="${esc(p.id)}">${esc(p.name)} · ${money(p.price)}</option>`).join('');
-    el.value=v}}
-$('cbGo').onclick=()=>{
-  const sel=['cbG','cbB','cbR'].map(id=>products.find(p=>String(p.id)===$(id).value)).filter(Boolean);
-  if(sel.length<2)return say('Elige al menos 2 productos para armar el combo.');
-  const d=Math.min(Math.max(Number($('cbD').value)||10,1),60),sum=sel.reduce((a,p)=>a+Number(p.price),0),price=Math.round(sum*(1-d/100)/1000)*1000;
-  const nm=p=>sg(p.category)==='gorras'?'Gorra':sg(p.category)==='buzos'?'Buzo':'Reloj';
-  const talla=(sel.find(p=>sg(p.category)==='buzos')||{}).sizes||[];
-  clear();
-  $('pn').value='Combo '+sel.map(nm).join(' + ');$('pc').value='Combos';$('pp').value=price;$('pcmp').value=sum;
-  curSizes=[...talla];$('pd').value='Incluye: '+sel.map(p=>p.name).join(', ')+`. Ahorras ${d}% comprándolo junto.`;
-  keep=[...new Set(sel.map(p=>imgs(p)[0]).filter(Boolean))].slice(0,6);added=[];removed=[];gal();alist();
-  say('Combo armado: revisa los datos y presiona Guardar producto.',true)};
 $('nav').addEventListener('click',e=>{const a=e.target.closest('a[data-c]');if(!a)return;e.preventDefault();
-  activeCat=activeCat===a.dataset.c?null:a.dataset.c;render();(activeCat==='combos'?$('armar'):$('catalogo')).scrollIntoView({behavior:'smooth',block:'start'})});
+  activeCat=activeCat===a.dataset.c?null:a.dataset.c;render();$('catalogo').scrollIntoView({behavior:'smooth',block:'start'})});
 document.querySelector('.top>a').addEventListener('click',e=>{e.preventDefault();activeCat=null;render();window.scrollTo({top:0,behavior:'smooth'})});
-DEMO_DATA.unshift(
- {id:'k0',name:'Combo Gorra + Buzo + Reloj',category:'Combos',price:Math.round((65000+135000+185000)*.9/1000)*1000,compare_price:385000,sizes:T,description:'Incluye gorra snapback, buzo oversize y reloj clásico. Ahorras 10% comprándolo junto.',image_url:DEMO_DATA[0].image_url,images:[DEMO_DATA[0].image_url,DEMO_DATA[6].image_url,DEMO_DATA[10].image_url],available:true},
- {id:'k1',name:'Combo Gorra + Buzo',category:'Combos',price:Math.round((62000+148000)*.9/1000)*1000,compare_price:210000,sizes:T,description:'Gorra strapback con corona y buzo canguro premium. Ahorras 10%.',image_url:DEMO_DATA[1].image_url,images:[DEMO_DATA[1].image_url,DEMO_DATA[7].image_url],available:true});
 
-const COMBO_D=CFG.COMBO_DESC||10;
-const BSTEPS=[{k:'g',cat:'gorras',n:'Gorra',t:'1. Elige tu gorra'},{k:'b',cat:'buzos',n:'Buzo',t:'2. Elige tu buzo'},{k:'r',cat:'relojes',n:'Reloj',t:'3. Elige tu reloj'}];
-const bsel={g:null,b:null,r:null},bsz={g:'',b:'',r:''},bcol={g:'',b:'',r:''};let bq=1,bnm='';
-function bDef(k){const p=bProd(k);if(!p)return;const sz=pSizes(p);bsz[k]=sz.find(z=>!hasVar(p)||vStock(p,z,null)>0)||sz[0]||'';bcol[k]=hasColors(p)?firstCol(p,sz.length?bsz[k]:null):''}
-const bList=cat=>products.filter(p=>slug(p.category||'')===cat&&isAv(p));
-const bProd=k=>bsel[k]==null?null:(products.find(p=>String(p.id)===String(bsel[k]))||null);
-const bMax=()=>{const m=BSTEPS.map(s=>{const p=bProd(s.k);return p?maxOf(p,bsz[s.k],bcol[s.k]):null}).filter(x=>x!=null);return m.length?Math.max(1,Math.min(...m)):10};
-function bTotals(){const sel=BSTEPS.map(s=>bProd(s.k)),u=sel.reduce((a,p)=>a+(p?Number(p.price):0),0);return{sel,sum:u*bq,nor:sel.reduce((a,p)=>a+(p?Math.max(Number(p.compare_price)||0,Number(p.price)):0),0)*bq,tot:Math.round(u*(1-COMBO_D/100))*bq}}
-const bItems=()=>BSTEPS.map(s=>ordItem(bProd(s.k),bsz[s.k],bcol[s.k],bq));
-function bMsg(code){const{sel,sum,tot}=bTotals();
-  return `Hola ${CFG.STORE}, quiero armar este combo (${COMBO_D}% de descuento)${bq>1?' x'+bq:''}:\n`+sel.map((p,i)=>{const k=BSTEPS[i].k;return `${i+1}) ${BSTEPS[i].n}: *${p.name}*${bsz[k]?' - Talla: '+bsz[k]:''}${bcol[k]?' - Color: '+bcol[k]:''} - ${money(p.price)}`}).join('\n')+`\nSubtotal: ${money(sum)}\nDescuento combo ${COMBO_D}% (adicional al de cada producto): -${money(sum-tot)}\nEnvío: GRATIS\n*Total del combo: ${money(tot)}*${code?'\nPedido: '+code:''}\n¿Está disponible?`}
-function renderBuilder(){
-  const el=$('armar');if(!el)return;
-  BSTEPS.forEach(s=>{if(bsel[s.k]!=null&&!bProd(s.k))bsel[s.k]=null});bq=Math.min(bq,bMax());
-  const sc=[...el.querySelectorAll('.brow')].map(r=>r.scrollLeft);
-  const{sel,sum,tot,nor}=bTotals(),full=sel.every(Boolean);
-  el.innerHTML=`<h2>Arma tu combo</h2><p class="bsub">Elige 1 gorra, 1 buzo y 1 reloj y llévate <b>${COMBO_D}% de descuento</b> <b class="shipchip">+ Envío gratis</b>. Se suma al descuento que ya tenga cada producto. Toca de nuevo un producto para quitarlo y cambiarlo.</p>`+
-   BSTEPS.map((s,i)=>{const list=bList(s.cat),p=sel[i];
-     return `<div class="bstep"><h3>${s.t}</h3>`+
-      (list.length?`<div class="brow">${list.map(x=>`<button type="button" class="bp${p&&String(p.id)===String(x.id)?' on':''}" aria-pressed="${!!(p&&String(p.id)===String(x.id))}" data-s="${s.k}" data-id="${esc(x.id)}"><span class="bi">${imgs(x)[0]?`<img src="${esc(imgs(x)[0])}" alt="" loading="lazy" onerror="this.remove()">`:''}</span><b>${esc(x.name)}</b><em>${money(x.price)}</em></button>`).join('')}</div>`:'<p class="desc">Pronto tendremos opciones aquí.</p>')+
-      (p&&pSizes(p).length>1?`<div class="sizes bs" data-s="${s.k}">${pSizes(p).map(z=>{const off=hasVar(p)&&vStock(p,z,null)<=0;return `<button type="button" data-z="${esc(z)}" class="${bsz[s.k]===z?'on':''}${off?' off':''}"${off?' disabled':''}>${esc(z)}</button>`}).join('')}</div>`:'')+
-      (p&&hasColors(p)?`<div class="bsw" data-s="${s.k}"><span>Color:</span> ${swHtml('',bcol[s.k],c=>vStock(p,pSizes(p).length?bsz[s.k]:null,c)>0)}</div>`:'')+`</div>`}).join('')+
-   `<div class="bfoot"><div class="bqt"><span class="qty"><span>Cantidad:</span><button type="button" data-q="-1" aria-label="Menos">−</button>${bq}<button type="button" data-q="1" aria-label="Más">+</button></span></div>
-    <div class="bres"><h4>Datos de tu pedido</h4>${BSTEPS.map((s,i)=>{const p=sel[i];return p?`<div class="r"><span><b>${s.n}:</b> ${esc(p.name)}${bsz[s.k]?' · Talla '+esc(bsz[s.k]):''}${bcol[s.k]?' · '+esc(bcol[s.k]):''}</span><span>${money(p.price)}</span></div>`:`<div class="r mut"><span><b>${s.n}:</b> sin elegir</span><span>—</span></div>`}).join('')}
-     <div class="r"><span>Cantidad</span><span>× ${bq}</span></div>
-     <div class="r"><span>Envío</span><span><b style="color:var(--wa)">GRATIS</b></span></div>
-     ${full?`<div class="r"><span>Precio normal</span><span class="old" style="margin:0">${money(nor)}</span></div>${nor>sum?`<div class="r"><span>Descuento de cada producto</span><span>-${money(nor-sum)}</span></div>`:''}<div class="r"><span>Descuento combo -${COMBO_D}% (adicional)</span><span>-${money(sum-tot)}</span></div><div class="r tt"><span>Total</span><span>${money(tot)}</span></div><div class="r"><span><b>Ahorras en total</b></span><span><b>${money(nor-tot)}</b></span></div>`:'<div class="r mut"><span>Elige los 3 productos para ver el total.</span></div>'}</div></div>`+
-   `<div class="bsum"><button type="button" class="btn ghost${full?'':' dis'}" id="bcart">Agregar al carrito</button>
-    <a class="btn grn${full?'':' dis'}" id="bwa" target="_blank" rel="noopener"${full?` href="${wa(bMsg())}"`:''}>Pedir por WhatsApp</a>
-    <button type="button" class="btn ghost sm" id="bre">Reiniciar</button></div>`;
-  el.querySelectorAll('.brow').forEach((r,i)=>r.scrollLeft=sc[i]||0)}
-$('armar').addEventListener('click',e=>{
-  const bp=e.target.closest('.bp');
-  if(bp){const k=bp.dataset.s;
-    if(String(bsel[k])===bp.dataset.id){bsel[k]=null;bsz[k]='';bcol[k]=''}
-    else{bsel[k]=bp.dataset.id;bDef(k)}
-    renderBuilder();return}
-  const bz=e.target.closest('.bs button');
-  if(bz){const k=bz.closest('.bs').dataset.s,p=bProd(k);bsz[k]=bz.dataset.z;if(p&&hasColors(p)&&vStock(p,bsz[k],bcol[k])<=0)bcol[k]=firstCol(p,bsz[k]);renderBuilder();return}
-  const bc=e.target.closest('.bsw button');if(bc){bcol[bc.closest('.bsw').dataset.s]=bc.dataset.col;renderBuilder();return}
-  const bqb=e.target.closest('[data-q]');if(bqb){bq=Math.max(1,Math.min(bMax(),bq+ +bqb.dataset.q));renderBuilder();return}
-  if(e.target.closest('#bre')){bsel.g=bsel.b=bsel.r=null;bsz.g=bsz.b=bsz.r='';bcol.g=bcol.b=bcol.r='';bq=1;renderBuilder();return}
-  const bcb=e.target.closest('#bcart');if(bcb){if(!bcb.classList.contains('dis'))cartAdd({t:'c',parts:BSTEPS.map(s=>({id:bsel[s.k],z:bsz[s.k]||'',col:bcol[s.k]||''})),q:bq});return}
-  const w=e.target.closest('#bwa');
-  if(w&&!w.classList.contains('dis')){const code=newCode(),{sum,tot}=bTotals();w.href=wa(bMsg(code));
-    saveOrder({code,type:'combo',customer:null,qty:bq,items:bItems(),subtotal:sum,discount:sum-tot,total:tot})}});
 
-$('cpPct').textContent=COMBO_D;
-$('promoBtn').addEventListener('click',e=>{e.preventDefault();activeCat=null;render();const a=$('armar');if(a)a.scrollIntoView({behavior:'smooth',block:'start'})});
-(()=>{const pr=$('promo');let t;const go=()=>{pr.classList.add('wave');clearTimeout(t);t=setTimeout(()=>pr.classList.remove('wave'),2200)};
-  pr.addEventListener('touchstart',go,{passive:true});pr.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse')go()});
-  pr.addEventListener('click',e=>{if(!e.target.closest('#promoBtn'))$('promoBtn').click()})})();
-let cc=0;setInterval(()=>{cc=(cc+1)%3;$('promoBtn').dataset.c=cc},2000);
+
+
 
 /* ====== PEDIDOS, INVENTARIO Y VENTAS (admin) ====== */
 let orders=[],ordErr=false,tab='prod',pfil='pendiente',vm='';
@@ -3233,17 +3138,12 @@ const pBy=id=>products.find(x=>String(x.id)===String(id));
 const maxOf=(p,z,c)=>hasVar(p)?vStock(p,z||null,c||null):(p.stock==null?99:p.stock);
 const cKey=it=>it.t==='c'?'c|'+it.parts.map(x=>[x.id,x.z,x.col].join(',')).join('|'):['p',it.id,it.z,it.col].join('|');
 function cLine(it){
-  if(it.t==='c'){const ps=it.parts.map(x=>pBy(x.id));if(ps.some(p=>!p))return null;
-    const list=ps.reduce((t,p)=>t+Number(p.price),0),unit=Math.round(list*(1-COMBO_D/100));
-    const max=Math.min(...it.parts.map((x,i)=>isAv(ps[i])?maxOf(ps[i],x.z,x.col):0));
-    return{it,ps,name:'Combo '+BSTEPS.map(s=>s.n).join(' + '),sub:it.parts.map((x,i)=>esc(ps[i].name)+(x.z?' · '+esc(x.z):'')+(x.col?' · '+esc(x.col):'')).join('<br>'),img:imgs(ps[0])[0],unit,list,max}}
   const p=pBy(it.id);if(!p)return null;
   return{it,ps:[p],name:p.name,sub:[it.z&&'Talla '+esc(it.z),it.col&&esc(it.col)].filter(Boolean).join(' · '),img:imgs(p)[0],unit:Number(p.price),list:Number(p.price),max:isAv(p)?maxOf(p,it.z,it.col):0}}
 const cTot=L=>({n:L.reduce((t,l)=>t+l.it.q,0),sub:L.reduce((t,l)=>t+l.list*l.it.q,0),tot:L.reduce((t,l)=>t+l.unit*l.it.q,0)});
 function cMsg(L,code){const{sub,tot}=cTot(L),nm=$('cartNm').value.trim();
   return `Hola ${CFG.STORE}, quiero hacer este pedido:\n`+L.map((l,i)=>{const q=l.it.q;
-    return l.it.t==='c'?`${i+1}) *${l.name}* (${COMBO_D}% dto) × ${q}\n`+l.ps.map((p,j)=>{const x=l.it.parts[j];return `   • ${p.name}${x.z?' - Talla: '+x.z:''}${x.col?' - Color: '+x.col:''}`}).join('\n')+`\n   = ${money(l.unit*q)}`
-    :`${i+1}) *${l.name}*${l.it.z?' - Talla: '+l.it.z:''}${l.it.col?' - Color: '+l.it.col:''} × ${q} = ${money(l.unit*q)}`}).join('\n')+(sub>tot?`\nSubtotal: ${money(sub)}\nDescuento combos: -${money(sub-tot)}`:'')+`${cFree(L,tot)?'\nEnvío: GRATIS':''}\n*Total: ${money(tot)}*${code?'\nPedido: '+code:''}${nm?'\nNombre: '+nm:''}\n¿Están disponibles?`}
+    return `${i+1}) *${l.name}*${l.it.z?' - Talla: '+l.it.z:''}${l.it.col?' - Color: '+l.it.col:''} × ${q} = ${money(l.unit*q)}`}).join('\n')+(sub>tot?`\nSubtotal: ${money(sub)}\nDescuento combos: -${money(sub-tot)}`:'')+`${cFree(L,tot)?'\nEnvío: GRATIS':''}\n*Total: ${money(tot)}*${code?'\nPedido: '+code:''}${nm?'\nNombre: '+nm:''}\n¿Están disponibles?`}
 const cFree=(L,t)=>L.some(l=>l.it.t==='c')||t>=CFG.FREE_SHIP;
 const shipHtml=(L,t)=>cFree(L,t)?'<div class="r"><span>Envío</span><span><b style="color:var(--wa)">GRATIS</b></span></div>':'<div class="fsb"><small>Agrega '+money(CFG.FREE_SHIP-t)+' más y el envío es <b>gratis</b></small><span><i style="width:'+Math.min(100,Math.round(t/CFG.FREE_SHIP*100))+'%"></i></span></div>';
 function cartRender(){
@@ -3324,9 +3224,9 @@ async function coPlace(){const L=cart.map(cLine).filter(Boolean);if(!L.length)re
 const POL={dias:5,garantia:'1 año'};
 const wl=t=>`<a href="${wa(t)}" target="_blank" rel="noopener">WhatsApp</a>`;
 const POLS={
- env:{t:'Envíos y devoluciones',h:()=>`<h4>Envíos</h4><p>Enviamos a todo el país. Cuando envías tu pedido por WhatsApp te confirmamos la disponibilidad, el valor del envío, el tiempo estimado de entrega y los medios de pago antes de que pagues.</p><p><b>Envío gratis en compras desde ${money(CFG.FREE_SHIP)} ${CFG.COMBOS_ON?' y en todos los combos (gorra + buzo + reloj)':''}.</b> Si tu pedido lleva un combo o suma ese valor, el envío de todo el pedido es gratis.</p><h4>Cómo se confirma tu pedido</h4><p>Lo que envías por WhatsApp es una solicitud. Tu pedido queda confirmado cuando validamos que la talla y el color que elegiste están disponibles.</p><h4>Derecho de retracto</h4><p>Como la compra es a distancia, puedes retractarte dentro de los <b>5 días hábiles</b> siguientes a la entrega (Ley 1480 de 2011, art. 47). Escríbenos por ${wl('Hola, quiero ejercer mi derecho de retracto. Mi código de pedido es: ')}, devuelve el producto sin uso, con sus etiquetas y empaque, y te reintegramos el dinero por el mismo medio de pago. El costo del envío de la devolución lo asume el cliente. No aplica a productos personalizados.</p>`},
+ env:{t:'Envíos y devoluciones',h:()=>`<h4>Envíos</h4><p>Enviamos a todo el país. Cuando envías tu pedido por WhatsApp te confirmamos la disponibilidad, el valor del envío, el tiempo estimado de entrega y los medios de pago antes de que pagues.</p><p><b>Envío gratis en compras desde ${money(CFG.FREE_SHIP)}.</b> Si tu pedido suma ese valor, el envío de todo el pedido es gratis.</p><h4>Cómo se confirma tu pedido</h4><p>Lo que envías por WhatsApp es una solicitud. Tu pedido queda confirmado cuando validamos que la talla y el color que elegiste están disponibles.</p><h4>Derecho de retracto</h4><p>Como la compra es a distancia, puedes retractarte dentro de los <b>5 días hábiles</b> siguientes a la entrega (Ley 1480 de 2011, art. 47). Escríbenos por ${wl('Hola, quiero ejercer mi derecho de retracto. Mi código de pedido es: ')}, devuelve el producto sin uso, con sus etiquetas y empaque, y te reintegramos el dinero por el mismo medio de pago. El costo del envío de la devolución lo asume el cliente. No aplica a productos personalizados.</p>`},
  cam:{t:'Cambios y garantía',h:()=>`<h4>Cambios por talla o color</h4><p>Puedes cambiar tu producto dentro de los ${POL.dias} días hábiles siguientes a la entrega, siempre que esté sin uso, con etiquetas y sujeto a disponibilidad. Escríbenos por ${wl('Hola, quiero hacer un cambio. Mi código de pedido es: ')} con tu código de pedido (empieza por GX-). El envío del cambio lo asume el cliente, salvo que el producto haya llegado equivocado o con defecto.</p><h4>Garantía</h4><p>Nuestra garantía cubre los imperfectos de costura (puntadas sueltas, costuras abiertas o defectos de fabricación en las costuras). No cubre daños por mal uso, accidentes, lavado inadecuado ni desgaste normal.</p><h4>Cómo reclamar</h4><ul><li>Escríbenos por WhatsApp con tu código de pedido.</li><li>Envíanos fotos o un video del problema.</li><li>Revisamos tu caso y, si aplica, lo reparamos, lo cambiamos o te reintegramos el dinero.</li></ul><p>Esto es adicional a los derechos que tienes como consumidor según la Ley 1480 de 2011.</p>`},
- qui:{t:'Quiénes somos',h:()=>`<p><b>${esc(CFG.STORE)}</b> es una tienda colombiana especializada en gorras con estilo propio: más que gorras, es actitud.</p><h4>Lo que hacemos</h4><p>Seleccionamos productos de buena calidad, con visera plana, cortes cómodos y detalles que se notan, y los enviamos a todo el país.</p><h4>Lo que prometemos</h4><ul><li>Calidad garantizada: cubrimos imperfectos de costura.</li><li>Envío gratis desde ${money(CFG.FREE_SHIP)} ${CFG.COMBOS_ON?' y en todos los combos':''}.</li><li>Atención directa por ${wl('Hola, quiero más información')}.</li></ul>`},
+ qui:{t:'Quiénes somos',h:()=>`<p><b>${esc(CFG.STORE)}</b> es una tienda colombiana especializada en gorras con estilo propio: más que gorras, es actitud.</p><h4>Lo que hacemos</h4><p>Seleccionamos productos de buena calidad, con visera plana, cortes cómodos y detalles que se notan, y los enviamos a todo el país.</p><h4>Lo que prometemos</h4><ul><li>Calidad garantizada: cubrimos imperfectos de costura.</li><li>Envío gratis desde ${money(CFG.FREE_SHIP)}.</li><li>Atención directa por ${wl('Hola, quiero más información')}.</li></ul>`},
  dat:{t:'Política de datos',h:()=>`<h4>Quién es el responsable</h4><p>${esc(CFG.STORE)} es responsable del tratamiento de tus datos personales, conforme a la Ley 1581 de 2012. Contacto: ${wl('Hola, tengo una consulta sobre mis datos personales')}.</p><h4>Qué datos usamos</h4><p>Tu nombre (opcional), el detalle de tu pedido (productos, tallas, colores y valor) y el número de WhatsApp desde el que nos escribes. Si compras con «Finalizar compra», también tu celular, correo y dirección de entrega. Los datos de tarjeta nunca pasan por esta página.</p><h4>Para qué los usamos</h4><p>Solo para gestionar tu pedido, la entrega, los cambios y la garantía, y para contactarte sobre ellos. No vendemos ni compartimos tus datos con terceros para publicidad.</p><h4>Dónde se guardan</h4><p>Los pedidos se guardan en un servicio de base de datos en la nube al que solo accede el administrador de la tienda. Tu carrito se guarda en tu propio navegador y no sale de tu dispositivo hasta que envías el pedido. Esta página no usa cookies de publicidad ni de seguimiento.</p><h4>Tus derechos</h4><p>Puedes conocer, actualizar, rectificar y pedir la eliminación de tus datos, o revocar tu autorización, escribiéndonos por WhatsApp.</p>`}};
 document.querySelectorAll('[data-pol]').forEach(b=>b.onclick=()=>{const p=POLS[b.dataset.pol];$('polT').textContent=p.t;$('polB').innerHTML=p.h();$('pol').showModal()});
 $('polX').onclick=()=>$('pol').close();$('pol').addEventListener('click',e=>{if(e.target===$('pol'))$('pol').close()});
@@ -3397,7 +3297,7 @@ $('lbQp').onclick=()=>{LB.q=(LB.q||1)+1;LB.msg='';lbOpts()};
 $('hero').style.setProperty('--hp',CFG.HERO_POS||'center 62%');
 
 {const P=CFG.PAY||{},C={Nequi:'#da0081',Bancolombia:'#fdda24',Daviplata:'#ed1c24','Contra entrega':'#ff8a1f','Tarjeta / PSE':'#2f8cff'};$('pays').innerHTML='<span>Medios de pago</span>'+[...(P.cuentas||[]).map(c=>c.n),P.online?'Tarjeta / PSE':null,P.cod!==false?'Contra entrega':null].filter(Boolean).map(n=>`<i style="--c:${C[n]||'var(--gold)'}">${esc(n)}</i>`).join('')}
-$('ann').innerHTML=`<span class="annt"><i class="ai l"><img src="data:image/webp;base64,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" alt="" width="96" height="96"></i>Envío GRATIS en compras desde <b>${money(CFG.FREE_SHIP)}</b>${CFG.COMBOS_ON?' y en todos los combos':''}<i class="ai r"><img src="data:image/webp;base64,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" alt="" width="96" height="96"></i></span>`;buildMq();document.documentElement.classList.toggle('nocombos',!CFG.COMBOS_ON);{const A=$('ann'),hr=document.querySelector('header.top .hr');if(hr&&A)A.appendChild(hr);const sa=()=>document.documentElement.style.setProperty('--annh',(A?A.offsetHeight:0)+'px');sa();addEventListener('resize',sa);addEventListener('load',sa);try{new ResizeObserver(sa).observe(A)}catch(e){}}
+$('ann').innerHTML=`<span class="annt"><i class="ai l"><img src="data:image/webp;base64,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" alt="" width="96" height="96"></i>Envío GRATIS en compras desde <b>${money(CFG.FREE_SHIP)}</b>${CFG.COMBOS_ON?' y en todos los combos':''}<i class="ai r"><img src="data:image/webp;base64,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" alt="" width="96" height="96"></i></span>`;buildMq();{const A=$('ann'),hr=document.querySelector('header.top .hr');if(hr&&A)A.appendChild(hr);const sa=()=>document.documentElement.style.setProperty('--annh',(A?A.offsetHeight:0)+'px');sa();addEventListener('resize',sa);addEventListener('load',sa);try{new ResizeObserver(sa).observe(A)}catch(e){}}
 const tt=$('toTop'),td=$('toDown');
 const maxY=()=>document.documentElement.scrollHeight-innerHeight;
 const stops=()=>{const h=(document.querySelector('.top')||{}).offsetHeight||0,M=maxY(),ft=document.querySelector('.feat'),c0=document.querySelector('main .cat');
