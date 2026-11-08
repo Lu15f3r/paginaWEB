@@ -3692,9 +3692,9 @@ var st=document.createElement('style');st.id='gxAsp';st.textContent=out;document
 (function(){var W=window;W.dataLayer=W.dataLayer||[];var ev=function(n,o){try{W.dataLayer.push(Object.assign({event:n},o||{}))}catch(e){}};
 try{var q=new URLSearchParams(location.search);if(q.get('yo')==='1')localStorage.setItem('gx_me','1');if(q.get('yo')==='0')localStorage.removeItem('gx_me')}catch(e){}
 var me=false;try{me=localStorage.getItem('gx_me')==='1'}catch(e){}
-var done=me?1:0;function load(){if(done)return;done=1;W.dataLayer.push({'gtm.start':Date.now(),event:'gtm.js'});var g=document.createElement('script');g.async=true;g.src='https://www.googletagmanager.com/gtm.js?id=GTM-M5H3CJ8V';document.head.appendChild(g)}
+var dbg=/[?&]gtm_debug=/.test(location.search);var done=(me&&!dbg)?1:0;function load(){if(done)return;done=1;W.dataLayer.push({'gtm.start':Date.now(),event:'gtm.js'});var g=document.createElement('script');g.async=true;g.src='https://www.googletagmanager.com/gtm.js?id=GTM-M5H3CJ8V';document.head.appendChild(g)}
 function later(){var f=function(){('requestIdleCallback'in W)?requestIdleCallback(load,{timeout:3000}):setTimeout(load,2000)};if(document.readyState==='complete')f();else W.addEventListener('load',f)}
-later();['pointerdown','scroll','keydown'].forEach(function(t){W.addEventListener(t,load,{once:true,passive:true})});
+if(dbg)load();later();['pointerdown','scroll','keydown'].forEach(function(t){W.addEventListener(t,load,{once:true,passive:true})});
 document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="wa.me"],a[href*="whatsapp"]');if(!a)return;ev('clic_whatsapp',{pagina:location.hash||'/'})},true);
 })();
 /* limpia de la barra de direcciones los códigos de seguimiento (fbclid, utm…), después de que Analytics ya los leyó */
