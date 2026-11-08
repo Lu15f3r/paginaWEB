@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
+<meta name="google-site-verification" content="8A_c2F7kxXOeqlnic0tcbRl9Gq0Jy9FgCu3li5Vmi84" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>try{document.documentElement.dataset.theme=localStorage.getItem("theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}
 var GXF={urbana:"Bebas+Neue&family=Montserrat:wght@400;600;700;800",elegante:"Playfair+Display:wght@700;900&family=Lato:wght@400;700;900",futurista:"Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700",deportiva:"Anton&family=Barlow:wght@400;600;700;800",redondeada:"Fredoka:wght@500;700&family=Nunito:wght@400;700;800",moderna:"Poppins:wght@400;500;600;700;800",impacto:"Archivo+Black&family=Archivo:wght@400;600;700",retro:"Righteous&family=Quicksand:wght@400;600;700",clasica:"Cinzel:wght@600;800&family=Lora:wght@400;600;700",callejera:"Bungee&family=Space+Grotesk:wght@400;600;700",industrial:"Teko:wght@500;600;700&family=Rubik:wght@400;500;700",tecnica:"Russo+One&family=Exo+2:wght@400;600;700",militar:"Black+Ops+One&family=Chakra+Petch:wght@400;600;700",cursiva:"Lobster&family=Open+Sans:wght@400;600;700",condensada:"Oswald:wght@500;700&family=Source+Sans+3:wght@400;600;700",poster:"Staatliches&family=Karla:wght@400;600;700",slab:"Alfa+Slab+One&family=Roboto+Slab:wght@400;600;700",comic:"Bangers&family=Comic+Neue:wght@400;700",pixel:"Press+Start+2P&family=VT323",espacial:"Audiowide&family=Titillium+Web:wght@400;600;700",marcador:"Permanent+Marker&family=Patrick+Hand",moda:"Abril+Fatface&family=DM+Sans:wght@400;500;700",gotica:"UnifrakturCook:wght@700&family=Crimson+Text:wght@400;600;700",caniuse:"Open+Sans:wght@300;400;600;700",pacifico:"Pacifico&family=Nunito:wght@400;700;800",dancing:"Dancing+Script:wght@500;700&family=Quicksand:wght@400;600;700",kaushan:"Kaushan+Script&family=Poppins:wght@400;600;700",satisfy:"Satisfy&family=Lato:wght@400;700",courgette:"Courgette&family=Raleway:wght@400;600;700",italica:"Playfair+Display:ital,wght@1,700;1,900&family=Lora:ital,wght@1,400;1,600"};
@@ -3697,7 +3698,7 @@ later();['pointerdown','scroll','keydown'].forEach(function(t){W.addEventListene
 document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="wa.me"],a[href*="whatsapp"]');if(!a)return;ev('clic_whatsapp',{pagina:location.hash||'/'})},true);
 })();
 /* limpia de la barra de direcciones los códigos de seguimiento (fbclid, utm…), después de que Analytics ya los leyó */
-addEventListener('load',()=>setTimeout(()=>{try{const u=new URL(location.href),k=[...u.searchParams.keys()].filter(x=>/^(fbclid|gclid|igshid|_r|_t|utm_.+|mibextid|ttclid)$/i.test(x));if(!k.length)return;k.forEach(x=>u.searchParams.delete(x));history.replaceState(history.state,'',u.pathname+(u.search||'')+u.hash)}catch(e){}},4000));
+addEventListener('load',()=>setTimeout(()=>{try{const u=new URL(location.href),k=[...u.searchParams.keys()].filter(x=>/^(fbclid|gclid|gbraid|wbraid|msclkid|igshid|igsh|ttclid|_r|_t|utm_.+|fb_.+|mibextid|is_from_webapp|sender_device|web_id|_ga|_gl|ref|si)$/i.test(x));if(!k.length)return;k.forEach(x=>u.searchParams.delete(x));history.replaceState(history.state,'',u.pathname+(u.search||'')+u.hash)}catch(e){}},4000));
 </script>
 </body>
 </html>
