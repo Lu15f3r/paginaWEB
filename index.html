@@ -2991,7 +2991,7 @@ $('tCom').onclick=async e=>{const b=e.target.closest('[data-a]');if(!b)return;co
     window._pp={id:P.id,ix};showTab('prod');say('Completa categoría, precio y fotos, y guarda: la compra quedará enlazada al producto.',true);$('pn').scrollIntoView({block:'center'})}};
 
 /* ====== GASTOS (admin) ====== */
-let exps=[],expErr=false,gsM=today0().slice(0,7),gsP='',gsF='',gsT='',gsH={d:'',cat:'Arriendo',other:'',amt:'',note:''};
+let exps=[],expErr=false,gsM=today0().slice(0,7),gsP='',gsF='',gsT='',gsH={d:'',cat:'Arriendo',other:'',amt:'',note:'',rep:'una'},gsEd=null;
 const GS_DEF=['Arriendo','Agua','Luz','Internet','Dominio','Envíos de productos'];
 async function loadExps(){if(!sb)return;const{data,error}=await sb.from('expenses').select('*').order('spent_at',{ascending:false}).order('id',{ascending:false});expErr=!!error;exps=error?[]:data;if(tab==='gas')rGas()}
 const gsTypes=()=>{const m=new Map();[...GS_DEF,...exps.map(e=>e.category)].forEach(c=>{const k=slug(c||'');if(c&&!m.has(k))m.set(k,c)});return[...m.values()]};
@@ -3015,13 +3015,14 @@ function rGas(){
   ${plHTML(types)}
   <h3 class="t ghd">Registrar gasto</h3>
   <div class="tabs gsq">${types.map(t=>`<button type="button" class="btn ghost sm" data-a="gq" data-t="${esc(t)}">＋ ${esc(t)}</button>`).join('')}<button type="button" class="btn sm" data-a="gnew">＋ Nuevo tipo de gasto</button></div>
-  <div class="cmf"><div class="cmh"><label>Fecha<input type="date" id="gsDate" value="${gsH.d||today0()}" max="${today0()}"></label><label>Tipo de gasto<select id="gsCat">${types.map(t=>`<option${t===gsH.cat?' selected':''}>${esc(t)}</option>`).join('')}<option value="__o"${other?' selected':''}>＋ Otro tipo (escribir)…</option></select></label>${other?`<label>Nombre del nuevo tipo<input id="gsOther" value="${esc(gsH.other)}" placeholder="Ej: Publicidad, Empaques…" maxlength="40" autocomplete="off"></label>`:''}<label>Monto<input type="number" min="0" step="any" id="gsAmt" value="${gsH.amt}" inputmode="decimal" placeholder="$"></label><label class="cmw">Nota<input id="gsNote" value="${esc(gsH.note)}" placeholder="Opcional (mes que pagas, referencia…)" autocomplete="off"></label></div>
+  <div class="cmf"><div class="cmh"><label>Fecha<input type="date" id="gsDate" value="${gsH.d||today0()}" max="${today0()}"></label><label>Tipo de gasto<select id="gsCat">${types.map(t=>`<option${t===gsH.cat?' selected':''}>${esc(t)}</option>`).join('')}<option value="__o"${other?' selected':''}>＋ Otro tipo (escribir)…</option></select></label>${other?`<label>Nombre del nuevo tipo<input id="gsOther" value="${esc(gsH.other)}" placeholder="Ej: Publicidad, Empaques…" maxlength="40" autocomplete="off"></label>`:''}<label>Monto<input type="number" min="0" step="any" id="gsAmt" value="${gsH.amt}" inputmode="decimal" placeholder="$"></label><label class="cmw">Nota<input id="gsNote" value="${esc(gsH.note)}" placeholder="Opcional (mes que pagas, referencia…)" autocomplete="off"></label><label>¿Se repite?<select id="gsRep"><option value="una"${gsH.rep!=='mensual'&&gsH.rep!=='anual'?' selected':''}>No, solo esta vez</option><option value="mensual"${gsH.rep==='mensual'?' selected':''}>Sí, cada mes (arriendo, servicios…)</option><option value="anual"${gsH.rep==='anual'?' selected':''}>Sí, una vez al año (dominio…)</option></select></label></div>
+  ${gsH.rep==='mensual'||gsH.rep==='anual'?`<p class="desc" style="margin:6px 0 0">Además de anotar este gasto, lo agrego a <b>Pagos recurrentes</b> para avisarte cuando toque pagarlo ${gsH.rep==='mensual'?'otra vez (el mismo día de cada mes)':'de nuevo (en un año)'}. Los gastos ocasionales, como una suscripción puntual o una compra, déjalos en “No, solo esta vez”.</p>`:''}
   <div class="cmtot"><button type="button" class="btn" data-a="gsave">Guardar gasto</button></div></div>
   ${tl.length?`<h3 class="t ghd">Gastos por tipo · ${lbl}</h3>`+tl.map(([k,v])=>bar(k,v,mx,money(v)+(gasto?' · '+Math.round(v/gasto*100)+'%':''))).join(''):''}
   <h3 class="t ghd">Historial de gastos · ${lbl}</h3>
-  ${E.map(e=>`<div class="row cmr"><div><b>${esc(e.category)}</b> · ${cmD(e.spent_at)}${e.note?` <small>(${esc(e.note)})</small>`:''}</div><div style="text-align:right"><b>${money(e.amount)}</b><br><button type="button" class="btn ghost sm" data-a="gdel" data-id="${e.id}">Eliminar</button></div></div>`).join('')||'<p class="desc">Aún no hay gastos en este periodo. Usa los botones “＋” de arriba para registrar el primero.</p>'}`}
-function gsRead(){const g=id=>$(id)?$(id).value:'';gsH={d:g('gsDate')||gsH.d,cat:$('gsCat')?$('gsCat').value:gsH.cat,other:$('gsOther')?$('gsOther').value:gsH.other,amt:g('gsAmt'),note:g('gsNote')}}
-$('tGas').onchange=e=>{const i=e.target;if(i.id==='gsF'||i.id==='gsT'){const f=$('gsF').value,t=$('gsT').value;if(!f||!t)return;gsF=f;gsT=t;gsM='r';gsP='';gsRead();rGas();return}if(i.id==='plCat'||i.id==='plFreq'){gsRead();plRead();rGas();return}if(i.id==='gsCat'){gsRead();rGas();if(gsH.cat==='__o'&&$('gsOther'))$('gsOther').focus()}};
+  ${E.map(e=>gsEd&&String(gsEd.id)===String(e.id)?`<div class="row cmr" style="display:block"><div class="cmf" style="margin:0"><div class="cmh"><label>Nombre del gasto<input id="edC" value="${esc(gsEd.cat)}" maxlength="40" list="edTypes" autocomplete="off"></label><label>Monto<input type="number" min="0" step="any" id="edA" value="${esc(gsEd.amt)}" inputmode="decimal"></label><label>Fecha<input type="date" id="edD" value="${esc(gsEd.d)}" max="${today0()}"></label><label class="cmw">Nota<input id="edN" value="${esc(gsEd.note)}" autocomplete="off"></label></div></div><datalist id="edTypes">${types.map(t=>`<option value="${esc(t)}">`).join('')}</datalist><div style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end"><button type="button" class="btn ghost sm" data-a="gedcan">Cancelar</button><button type="button" class="btn sm" data-a="gedok" data-id="${e.id}">Guardar cambios</button></div></div>`:`<div class="row cmr"><div><b>${esc(e.category)}</b> · ${cmD(e.spent_at)}${e.note?` <small>(${esc(e.note)})</small>`:''}</div><div style="text-align:right"><b>${money(e.amount)}</b><br><button type="button" class="btn ghost sm" data-a="ged" data-id="${e.id}">Editar</button> <button type="button" class="btn ghost sm" data-a="gdel" data-id="${e.id}">Eliminar</button></div></div>`).join('')||'<p class="desc">Aún no hay gastos en este periodo. Usa los botones “＋” de arriba para registrar el primero.</p>'}`}
+function gsRead(){const g=id=>$(id)?$(id).value:'';gsH={d:g('gsDate')||gsH.d,cat:$('gsCat')?$('gsCat').value:gsH.cat,other:$('gsOther')?$('gsOther').value:gsH.other,amt:g('gsAmt'),note:g('gsNote'),rep:g('gsRep')||gsH.rep||'una'}}
+$('tGas').onchange=e=>{const i=e.target;if(i.id==='gsF'||i.id==='gsT'){const f=$('gsF').value,t=$('gsT').value;if(!f||!t)return;gsF=f;gsT=t;gsM='r';gsP='';gsRead();rGas();return}if(i.id==='plCat'||i.id==='plFreq'){gsRead();plRead();rGas();return}if(i.id==='gsRep'){gsRead();rGas();return}if(i.id==='gsCat'){gsRead();rGas();if(gsH.cat==='__o'&&$('gsOther'))$('gsOther').focus()}};
 $('tGas').onclick=async e=>{const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a;if(a.startsWith('pl')){plClick(a,b);return}
   if(a==='mon'){gsM=b.dataset.m;gsRead();rGas();return}
   if(a==='pre'){const k=b.dataset.k,t=today0();gsP=k;gsM='r';gsT=t;gsF=k==='today'?t:dAdd(t,-(+k-1));gsRead();rGas();return}
@@ -3031,9 +3032,27 @@ $('tGas').onclick=async e=>{const b=e.target.closest('[data-a]');if(!b)return;co
   if(a==='gnew'){gsRead();gsH.cat='__o';rGas();$('gsOther').focus();$('gsOther').scrollIntoView({block:'center'});return}
   if(a==='gsave'){gsRead();const cat=gsH.cat==='__o'?gsH.other.trim().replace(/\s+/g,' '):gsH.cat,amt=Number(gsH.amt);
     if(!cat){say('Escribe el nombre del tipo de gasto.');return}if(!(amt>0)){say('Escribe el monto del gasto.');$('gsAmt').focus();return}
-    b.disabled=true;const r=await sb.from('expenses').insert({spent_at:gsH.d||today0(),category:cat,amount:amt,note:gsH.note.trim()||null});b.disabled=false;
+    const fd=gsH.d||today0(),rp=gsH.rep;b.disabled=true;const r=await sb.from('expenses').insert({spent_at:fd,category:cat,amount:amt,note:gsH.note.trim()||null}).select('id');b.disabled=false;
     if(r.error){say('No se pudo guardar el gasto: '+r.error.message+' (¿ejecutaste crear-gastos.sql en Supabase?)');return}
-    gsH={d:gsH.d,cat,other:'',amt:'',note:''};await loadExps();say('Gasto guardado: '+cat+' por '+money(amt)+'.',true);toast('Gasto guardado');return}
+    let extra='';
+    if(rp==='mensual'||rp==='anual'){
+      if(!plLoaded)await loadPlans();
+      const ya=plans.some(p=>slug(p.category||'')===slug(cat)&&p.freq===rp);
+      if(ya)extra=' Ya tenías “'+cat+'” en Pagos recurrentes, no lo dupliqué.';
+      else{const eid=r.data&&r.data[0]?r.data[0].id:null;let row;
+        if(rp==='mensual'){const dd=Math.min(31,Math.max(1,+fd.slice(8,10)||1));row={category:cat,freq:'mensual',due_day:dd,est:amt,paid:{[fd.slice(0,7)]:{d:fd,a:amt,eid}}}}
+        else{const x=new Date(fd+'T12:00:00');x.setFullYear(x.getFullYear()+1);const en=x.toLocaleDateString('sv');row={category:cat,freq:'anual',start_date:fd,end_date:en,est:amt,paid:{[en]:{d:fd,a:amt,eid}}}}
+        const pr=await sb.from('expense_plans').insert(row);
+        extra=pr.error?' (El gasto quedó guardado, pero no pude crear el recordatorio: '+pr.error.message+')':' Agregado a Pagos recurrentes con aviso.'}}
+    gsH={d:gsH.d,cat,other:'',amt:'',note:'',rep:'una'};await loadExps();await loadPlans();say('Gasto guardado: '+cat+' por '+money(amt)+'.'+extra,true);toast('Gasto guardado');return}
+  if(a==='ged'){gsRead();const e=exps.find(x=>String(x.id)===String(b.dataset.id));if(!e)return;gsEd={id:e.id,cat:e.category||'',amt:e.amount,d:e.spent_at,note:e.note||''};rGas();const c=$('edC');if(c){c.focus();c.scrollIntoView({block:'center'})}return}
+  if(a==='gedcan'){gsEd=null;rGas();return}
+  if(a==='gedok'){const id=b.dataset.id,cat=$('edC').value.trim().replace(/\s+/g,' '),amt=Number($('edA').value),d=$('edD').value,note=$('edN').value.trim();
+    if(!cat){say('Escribe el nombre del gasto.');$('edC').focus();return}if(!(amt>0)){say('Escribe el monto.');$('edA').focus();return}if(!d){say('Elige la fecha.');return}
+    b.disabled=true;const r=await sb.from('expenses').update({category:cat,amount:amt,spent_at:d,note:note||null}).eq('id',id);
+    if(r.error){b.disabled=false;say('No se pudo guardar el cambio: '+r.error.message);return}
+    try{if(!plLoaded)await loadPlans();for(const p of plans){const ks=Object.keys(p.paid||{}).filter(k=>p.paid[k]&&String(p.paid[k].eid)===String(id));if(ks.length){const paid={...p.paid};ks.forEach(k=>{paid[k]={...paid[k],a:amt,d}});await sb.from('expense_plans').update({paid}).eq('id',p.id)}}}catch(_){}
+    gsEd=null;await loadExps();await loadPlans();say('Gasto actualizado: '+cat+' por '+money(amt)+'.',true);toast('Gasto actualizado');return}
   if(a==='gdel'){if(!b.dataset.ok){b.dataset.ok=1;b.textContent='¿Seguro? Clic otra vez';setTimeout(()=>{b.dataset.ok='';b.textContent='Eliminar'},3500);return}
     const r=await sb.from('expenses').delete().eq('id',b.dataset.id);if(r.error){say('Error: '+r.error.message);return}await loadExps();say('Gasto eliminado.',true)}};
 
