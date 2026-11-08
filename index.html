@@ -1542,7 +1542,9 @@ html[data-auto] #cartK,html[data-auto] #cartK::after{animation:none!important}
 .ann .ai{display:inline-block;vertical-align:-7px;width:26px;height:26px;margin:-4px 7px;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4));transform:skewX(14deg)}
 .ann .ai img{width:100%;height:100%;display:block}
 /* Barra superior en movimiento continuo (de izquierda a derecha) */
-.ann .annm{overflow:hidden;width:100%;white-space:nowrap}
+.ann .annm{overflow:hidden;white-space:nowrap;margin-left:calc(-1*max(86px,9vw));width:calc(100% + max(86px,9vw))}
+.ann .sbx input{background:color-mix(in srgb,#000 38%,var(--ann1,#c40000))!important}
+@media(max-width:640px){.ann .annm{margin-left:-8px;width:calc(100% + 8px)}}
 .ann .annk{display:flex;width:max-content;animation:annRun var(--gd,30s) linear infinite;will-change:transform}
 .ann .ang{display:flex;flex:none}
 .ann .ang .annt{flex:none;margin-right:70px}
