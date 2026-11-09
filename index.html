@@ -1541,6 +1541,9 @@ html.vt::view-transition-old(root),html.vt::view-transition-new(root){animation:
 html[data-auto] #cartK,html[data-auto] #cartK::after{animation:none!important}
 .ann .ai{display:inline-block;vertical-align:-7px;width:26px;height:26px;margin:-4px 7px;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4));transform:skewX(14deg)}
 .ann .ai img{width:100%;height:100%;display:block}
+/* Franja de confianza más pegada a la frase del inicio */
+.feat{padding-top:0!important;margin-top:-3px!important}
+@media(max-width:640px){.feat{margin-top:-2px!important}}
 /* Efecto agregar al carrito */
 .fxfly{position:fixed;left:0;top:0;width:64px;height:64px;border-radius:50%;background:#1a1a1a center/cover no-repeat;border:3px solid var(--gold);box-shadow:0 8px 24px rgba(0,0,0,.55),0 0 0 4px rgba(var(--goldrgb,245,196,81),.35);z-index:2147483000;pointer-events:none;display:flex;align-items:center;justify-content:center;color:var(--gold);will-change:transform}
 .fxfly svg{width:60%;height:60%}
