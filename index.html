@@ -3385,7 +3385,7 @@ const MQ_IN={
  gem:'<path d="M13 8h22l8 11-19 21L5 19z"/><path d="M5 19h38M17 8l7 11 7-11M13 19l11 21 11-21"/>',
  shield:'<path d="M24 4 8 10v12c0 10 7 17 16 20 9-3 16-10 16-20V10z"/><path d="m16 24 6 6 11-12"/>',
  pay:'<rect x="4" y="9" width="32" height="21" rx="3"/><path d="M4 16h32M9 24h9"/><rect x="26" y="26" width="17" height="14" rx="2.5" fill="#12100a"/><path d="M30 26v-4a4.5 4.5 0 0 1 9 0v4M34.5 31v4"/>'};
-const mqIco=k=>`<svg viewBox="3 3 50 50" aria-hidden="true"><g transform="translate(5 5) scale(.917)" fill="none" stroke="url(#gxG)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${MQ_IN[k]}</g></svg>`;
+const mqIco=k=>`<svg viewBox="3 3 50 50" aria-hidden="true"><g transform="translate(5 5) scale(.917)" fill="none" stroke="url(#gxG)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round">${MQ_IN[k]}</g></svg>`;
 function buildMq(){const T=[['truck','Envíos a nivel nacional'],['gem','Calidad garantizada'],['pay','Pago 100% seguro']],
   one=T.map(([k,t])=>`<li>${k==='shield'?'':mqIco(k)}<span>${esc(t)}</span></li>`).join('');
   $('mq').innerHTML=[0,1,2,3].map(i=>i?one.replace(/<li>/g,'<li aria-hidden="true">'):one).join('')}
