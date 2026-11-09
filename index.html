@@ -1833,6 +1833,23 @@ html:not(#z) body.pv #lb .lbf .lba{flex-wrap:nowrap!important;gap:10px!important
 html:not(#z) body.pv #lb .lbf .lba .btn{font-size:12px;padding-left:9px;padding-right:9px;letter-spacing:0}
 html:not(#z) body.pv #lb .lbf{padding-right:0}
 }
+/* ajustes 09-nov k: PC >=1200px sin logo GX, fotos mas a la izquierda, precio+cantidad en una fila y botones en otra */
+@media(min-width:1200px){
+html:not(#z) body.pv header.top>a.gxA,html:not(#z) body.pv #pvLogo{display:none!important}
+html:not(#z) body.pv #lb{padding-left:56px!important}
+html:not(#z) body.pv #lb .lbb,html:not(#z) body.pv #lb .dh{grid-template-columns:minmax(0,1.45fr) minmax(0,1fr)!important}
+html:not(#z) body.pv #pvMore{width:100%!important}
+html:not(#z) body.pv #lb .lbf{display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;align-items:center!important;gap:14px 18px!important;padding-right:0!important}
+html:not(#z) body.pv #lb .lbf::before{content:'';order:3;flex:0 0 100%;height:0}
+html:not(#z) body.pv #lb .lbf .lbpr{order:1;flex:0 1 auto}
+html:not(#z) body.pv #lb .lbf .lba{display:contents!important}
+html:not(#z) body.pv #lb .lbf .lbq{order:2}
+html:not(#z) body.pv #lb .lbf #lbC{order:4}
+html:not(#z) body.pv #lb .lbf #lbW{order:5}
+html:not(#z) body.pv #lb .lbf .lba>*:not(.lbq):not(#lbC):not(#lbW){order:6}
+html:not(#z) body.pv #lb .lbf .lba .btn{font-size:13px;white-space:nowrap}
+html:not(#z) #pvBack,html:not(#z) #pvBack.on{transition:opacity .25s!important}
+}
 </style>
 </head>
 <body>
@@ -4048,7 +4065,7 @@ var cat=document.getElementById('catalogo');if(cat){new MutationObserver(functio
 addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);new MutationObserver(function(){cur='';upd()}).observe(document.body,{attributes:true,attributeFilter:['class']});})();
 </script>
 <button type="button" id="pvBack" aria-label="Volver a la tienda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
-<script>(function(){var b=document.getElementById('pvBack'),x=document.getElementById('lbX');if(!b||!x)return;b.onclick=function(){x.click()};function u(){b.classList.toggle('on',document.body.classList.contains('pv'));var t=document.getElementById('lbT'),A=document.getElementById('ann'),ab=A?Math.max(0,A.getBoundingClientRect().bottom):0;if(innerWidth<=640&&t){var tr=t.getBoundingClientRect();b.style.top=(tr.height&&tr.top>=ab-4&&tr.bottom<innerHeight?Math.max(ab+4,tr.top+tr.height/2-b.offsetHeight/2):ab+8)+'px';return}var g1=document.querySelector('#lb .lbg>*');if(innerWidth>=900&&g1){var q1=g1.getBoundingClientRect();if(q1.height>0){b.style.top=Math.max(ab,q1.top)+12+'px';b.style.left=(q1.left+12)+'px';return}}var w=document.querySelector(document.body.classList.contains('hwm')?'header.top .logo.wm':'header.top .logo.gx');if(w){var q=w.getBoundingClientRect();if(q.height)b.style.top=Math.max(0,q.top+q.height/2-b.offsetHeight/2)+'px'}}addEventListener('scroll',u,{passive:true});addEventListener('resize',u);setInterval(u,300)})()</script>
+<script>(function(){var b=document.getElementById('pvBack'),x=document.getElementById('lbX');if(!b||!x)return;b.onclick=function(){x.click()};function u(){b.classList.toggle('on',document.body.classList.contains('pv'));var t=document.getElementById('lbT'),A=document.getElementById('ann'),ab=A?Math.max(0,A.getBoundingClientRect().bottom):0;if(innerWidth<=640&&t){var tr=t.getBoundingClientRect();b.style.top=(tr.height&&tr.top>=ab-4&&tr.bottom<innerHeight?Math.max(ab+4,tr.top+tr.height/2-b.offsetHeight/2):ab+8)+'px';return}var g1=document.querySelector('#lb .lbg>*');if(innerWidth>=900&&g1){var gl=document.querySelector('#lb .lbg').getBoundingClientRect().left;if(gl>0){b.style.top='62px';b.style.left=(Math.round(gl)+12)+'px';return}}var w=document.querySelector(document.body.classList.contains('hwm')?'header.top .logo.wm':'header.top .logo.gx');if(w){var q=w.getBoundingClientRect();if(q.height)b.style.top=Math.max(0,q.top+q.height/2-b.offsetHeight/2)+'px'}}addEventListener('scroll',u,{passive:true});addEventListener('resize',u);setInterval(u,300)})()</script>
 <script>(function(){var L=document.createElement('div');L.id='pvLogo';L.setAttribute('aria-hidden','true');var SP=[[0.0092, 0.9401], [1.0599, 0.7419], [1.8433, 0.7696], [2.659, 0.765], [3.4516, 0.7742], [4.2442, 0.8157]];for(var q=1;q<6;q++){var e=document.createElement('i');e.style.setProperty('--k',q);e.style.setProperty('--x0',SP[q][0]);e.style.setProperty('--ww',SP[q][1]);L.appendChild(e)}document.body.appendChild(L);var shown=false,src='';
 function pos(){var g=document.querySelector('header.top .logo.gx');if(!g)return;var r=g.getBoundingClientRect();if(!r.height)return;var im=document.querySelector('header.top .logo.wm'),ra=(im&&im.naturalWidth)?im.naturalWidth/im.naturalHeight:5;var gap=4,room=innerHeight-r.bottom-30,h=Math.max(28,Math.min(r.height*.94,(room-gap*4)/5)),w=h*ra/6;L.style.setProperty('--lh',Math.round(h)+'px');L.style.setProperty('--lw',Math.round(w)+'px');L.style.setProperty('--lgG',gap+'px');var tb=document.getElementById('toTop'),tr=tb&&tb.getBoundingClientRect(),want=(tr&&tr.width)?tr.left+tr.width/2:null,cur=parseFloat(document.documentElement.style.getPropertyValue('--gdx'))||0,gc=r.left-cur+r.width*.248,dx=want!==null?Math.round(want-gc):4;if(innerWidth<900)dx=0;document.documentElement.style.setProperty('--gdx',dx+'px');L.style.setProperty('--lgX',Math.round(gc+dx)+'px');L.style.setProperty('--lgT',Math.round(r.bottom+2)+'px')}
 function upd(){pos();var T=document.getElementById('lbT');var pv=document.body.classList.contains('pv')&&innerWidth>=900&&T;var want=pv&&T.getBoundingClientRect().bottom<70;
