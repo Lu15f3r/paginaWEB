@@ -1562,15 +1562,14 @@ header.top>a.wmA{grid-column:2;grid-row:1;justify-self:center;display:block;line
 body.hwm header.top>a.wmA{pointer-events:auto}
 header.top nav{grid-column:3;grid-row:1}
 header.top .logo.gx{opacity:calc(1 - var(--wm,0));transition:none}
-header.top .logo.wm{width:auto!important;height:46px!important;max-height:none!important;margin:0!important;object-fit:contain;opacity:var(--wm,0);transform:translateY(calc((1 - var(--wm,0))*-6px)) scale(calc(.92 + .08*var(--wm,0)))!important;filter:drop-shadow(0 0 2px rgba(0,0,0,.9)) drop-shadow(0 2px 6px rgba(0,0,0,.7))!important;box-shadow:none!important;background:none!important;animation:none!important}
+header.top .logo.wm{width:auto!important;height:40px!important;max-height:none!important;margin:0!important;object-fit:contain;opacity:var(--wm,0);transform:translateY(calc((1 - var(--wm,0))*-6px)) scale(calc(.92 + .08*var(--wm,0)))!important;filter:drop-shadow(0 0 2px rgba(0,0,0,.9)) drop-shadow(0 2px 6px rgba(0,0,0,.7))!important;box-shadow:none!important;background:none!important;animation:none!important}
 html[data-theme=light] header.top .logo.wm{filter:drop-shadow(0 0 1.5px #fff) drop-shadow(0 0 3px rgba(255,255,255,.9)) drop-shadow(0 0 9px rgba(255,255,255,.6))!important}
-@media(max-width:640px){header.top nav{grid-column:1/-1;grid-row:2}header.top .logo.wm{height:26px!important}}
+@media(max-width:640px){header.top nav{grid-column:1/-1;grid-row:2}header.top .logo.wm{height:23px!important}}
 body.pv header.top{top:var(--annh,38px)!important}
 /* Barra superior translúcida y borrosa (vidrio esmerilado) */
 html:not(#z) .ann{background:color-mix(in srgb,var(--ann1,#c40000) 48%,transparent)!important;-webkit-backdrop-filter:blur(14px) saturate(1.5);backdrop-filter:blur(14px) saturate(1.5);animation:none!important;box-shadow:0 1px 0 rgba(255,255,255,.18),0 6px 22px rgba(0,0,0,.18)!important;margin-bottom:calc(-1*var(--annh,38px))}
 html:not(#z) .ann .annm,html:not(#z) .ann .hr{text-shadow:0 1px 3px rgba(0,0,0,.35)}
 html:not(#z) .ann .sbx input,html:not(#z) .ann .sbx .sbf{background:rgba(0,0,0,.28)!important;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
-html:not(#z) .hero{padding-top:var(--annh,38px)}
 /* Filtro dentro del buscador */
 .sbx{position:relative}
 .sbx .sbf{flex:none;position:relative;align-self:stretch;width:34px;display:grid;place-items:center;background:transparent;border:0;border-bottom:2px solid var(--gold);color:inherit;cursor:pointer;padding:0}
