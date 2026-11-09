@@ -1809,6 +1809,12 @@ html:not(#z) body.pv #lb .lbg>*{position:sticky;top:50px}
 html:not(#z) body.pv #lb .lbg>*:nth-child(n){z-index:1}
 html:not(#z) body.pv #lb .lbr{position:sticky;top:var(--lbrT,50px);align-self:start}
 }
+@media(min-width:900px){
+html:not(#z) body.pv #lb .lbr{padding-right:clamp(120px,9vw,170px)!important;box-sizing:border-box}
+html:not(#z) body.pv #lb .lbf .lba{flex-wrap:wrap!important;gap:12px 16px!important}
+html:not(#z) body.pv #lb .lbf .lba .btn{font-size:12.5px;padding-left:10px;padding-right:10px}
+}
+@media(min-width:1500px){html:not(#z) body.pv #lb .lbf .lba{gap:12px 24px!important}}
 </style>
 </head>
 <body>
