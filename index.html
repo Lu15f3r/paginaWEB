@@ -1779,7 +1779,7 @@ body.pv #pvMore{display:block;margin:12px 0 0;width:calc(100% + clamp(60px,6vw,1
 
 /* ajustes 09-nov i */
 @media(min-width:1300px){
-html:not(#z) body.pv #lb .lbf .lba{flex-wrap:nowrap!important;gap:22px!important;align-items:center}
+html:not(#z) body.pv #lb .lbf .lba{flex-wrap:nowrap!important;gap:32px!important;align-items:center}
 html:not(#z) body.pv #lb .lbf .lba .btn{flex:0 1 auto;white-space:nowrap;padding-left:12px;padding-right:12px;font-size:13px}
 html:not(#z) body.pv #lb .lbf .lba .lbq{flex:none}
 }
@@ -1800,6 +1800,15 @@ html:not(#z) header.top .logo.wm.wmo{animation:wmOut .9s steps(1,end) forwards!i
 html:not(#z) header.top .logo.wm.wmi{animation:wmIn .9s steps(1,end) forwards!important}
 html:not(#z) header.top .logo.wm.wmh{clip-path:inset(0 0 0 100%)!important;animation:none!important}
 @media(prefers-reduced-motion:reduce){html:not(#z) header.top .logo.wm.wmo,html:not(#z) header.top .logo.wm.wmi,html:not(#z) header.top .logo.wm.wmh{animation:none!important;clip-path:none!important}}
+
+@keyframes fxPopS{0%{transform:scale(1)}40%{transform:scale(1.05)}100%{transform:scale(1)}}
+html:not(#z) #lb #lbC.fxpop{animation:fxPopS .5s ease-out}
+/* PC: las fotos grandes se apilan (la de abajo sube y tapa la anterior) y la columna de info queda fija */
+@media(min-width:900px){
+html:not(#z) body.pv #lb .lbg>*{position:sticky;top:50px}
+html:not(#z) body.pv #lb .lbg>*:nth-child(n){z-index:1}
+html:not(#z) body.pv #lb .lbr{position:sticky;top:var(--lbrT,50px);align-self:start}
+}
 </style>
 </head>
 <body>
@@ -4036,5 +4045,8 @@ var _lo=window.lbOpen;if(typeof _lo==='function'){window.lbOpen=function(){var x
 setInterval(function(){if(!document.body.classList.contains('hwm')){if(!vis){vis=true}rs();return}
 if(vis){rs();void im.offsetWidth;im.classList.add('wmo');vis=false;setTimeout(function(){if(!vis){rs();im.classList.add('wmh')}},950)}
 else{rs();void im.offsetWidth;im.classList.add('wmi');vis=true;setTimeout(function(){if(vis)rs()},950)}},3000)})()</script>
+<script>(function(){function st(){var g=document.querySelector('#lb .lbg'),r=document.querySelector('#lb .lbr');if(g){var k=g.children;for(var i=0;i<k.length;i++)k[i].style.zIndex=i+1}
+if(r){var t=Math.min(50,innerHeight-r.offsetHeight-14);document.documentElement.style.setProperty('--lbrT',t+'px')}}
+addEventListener('resize',st);new MutationObserver(function(){if(document.body.classList.contains('pv')){setTimeout(st,60);setTimeout(st,600)}}).observe(document.body,{attributes:true,attributeFilter:['class']});setInterval(function(){if(document.body.classList.contains('pv'))st()},1200)})()</script>
 </body>
 </html>
