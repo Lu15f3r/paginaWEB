@@ -1711,6 +1711,25 @@ body.pv #lb{padding-top:calc(var(--annh,38px) + var(--hh,70px) + 22px)!important
 html:not(#z) header.top .logo.wm,html:not(#z) header.top .logo.gx{filter:none!important}
 html:not(#z) header.top>a.wmA,html:not(#z) header.top>a.gxA{filter:drop-shadow(0 1px 5px rgba(0,0,0,.75))}
 html:not(#z) .hpv:hover,html:not(#z) .hnx:hover,html:not(#z) .hpv:active,html:not(#z) .hnx:active,html:not(#z) .hpv:focus-visible,html:not(#z) .hnx:focus-visible{background:#fff!important;color:#000!important}
+
+/* ajustes 09-nov c */
+@media(max-width:899px){html:not(#z) header.top .logo.gx{width:auto!important;height:22px!important}}
+#pvBack{display:none;position:fixed;z-index:60;top:calc(var(--annh,38px) + 58px);left:max(10px,calc((100vw - 1280px)/2 + 5vw - 62px));width:46px;height:46px;border:0;border-radius:50%;cursor:pointer;place-items:center;background:#fff;color:#000;box-shadow:0 2px 12px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;transform:translateX(-8px)}
+#pvBack svg{width:22px;height:22px}
+body.pv #pvBack{display:grid}
+body.pv #pvBack.on{opacity:1;pointer-events:auto;transform:none}
+#pvBack:hover,#pvBack:active{background:var(--wa,#25d366);color:#fff}
+html[data-theme=light] #pvBack{background:#111;color:#fff}
+html[data-theme=light] #pvBack:hover,html[data-theme=light] #pvBack:active{background:var(--wa,#25d366)}
+@media(max-width:640px){#pvBack{left:10px;top:calc(var(--annh,38px) + 52px);width:40px;height:40px}}
+
+/* ajustes 09-nov d: frases en una sola linea en celular */
+@media(max-width:640px){
+html:not(#z) .tw,html:not(#z) .tw .gh,html:not(#z) .tw .ty{white-space:nowrap!important}
+html:not(#z) .tw .ty{right:auto!important}
+html:not(#z) .hero-type{font-size:clamp(10px,3.5vw,16px)!important;padding-left:6px;padding-right:6px}
+html:not(#z) footer .hand{font-size:clamp(10px,3.5vw,16px)!important;padding:0 6px!important;letter-spacing:0}
+}
 </style>
 </head>
 <body>
@@ -3925,5 +3944,7 @@ function tyWatch(){document.querySelectorAll('.card .info h3[data-ty]:not(.tyo)'
 var cat=document.getElementById('catalogo');if(cat){new MutationObserver(function(){wrapCards();tyWatch()}).observe(cat,{childList:true,subtree:true});wrapCards();tyWatch()}
 addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);new MutationObserver(function(){cur='';upd()}).observe(document.body,{attributes:true,attributeFilter:['class']});})();
 </script>
+<button type="button" id="pvBack" aria-label="Volver a la tienda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
+<script>(function(){var b=document.getElementById('pvBack'),x=document.getElementById('lbX');if(!b||!x)return;b.onclick=function(){x.click()};function u(){var r=x.getBoundingClientRect();b.classList.toggle('on',document.body.classList.contains('pv')&&(r.bottom<60||r.top>innerHeight))}addEventListener('scroll',u,{passive:true});addEventListener('resize',u);setInterval(u,300)})()</script>
 </body>
 </html>
