@@ -1592,6 +1592,16 @@ html:not(#z)[data-pal=mono] :is(#lbW,.wa,.btn.grn):is(:hover,:focus-visible),htm
 #lb .fxburst{display:none!important}
 html:not(#z) #lb .lbf .lba{gap:14px!important;row-gap:12px}
 html:not(#z) #lb .lbf .lba .btn{margin:0}
+/* Página de producto: encabezado sin pegarse arriba + nombre vertical (letra por letra) al hacer scroll */
+body.pv #lb .dh{position:static!important}
+#pvName{display:none}
+@media(min-width:1100px){
+body.pv #pvName{display:block;position:fixed;right:96px;top:50%;transform:translateY(-50%);z-index:4;pointer-events:none;writing-mode:vertical-rl;text-orientation:mixed;font:900 clamp(24px,2.2vw,34px)/1.1 var(--fh,var(--fb)),sans-serif;font-style:italic;text-transform:uppercase;letter-spacing:.14em;color:var(--ink);white-space:nowrap;max-height:84vh;overflow:hidden;opacity:0;transition:opacity .25s}
+body.pv #pvName.on{opacity:1}
+#pvName i{font-style:inherit;display:inline-block;opacity:0;transform:translateY(-8px)}
+#pvName.on i{animation:pvTy .22s ease-out forwards;animation-delay:calc(var(--k)*55ms)}
+@keyframes pvTy{to{opacity:1;transform:none}}}
+@media(prefers-reduced-motion:reduce){#pvName.on i{animation:none;opacity:1;transform:none}}
 /* Filtro dentro del buscador */
 .sbx{position:relative}
 .sbx .sbf{flex:none;position:relative;align-self:stretch;width:34px;display:grid;place-items:center;background:transparent;border:0;border-bottom:2px solid var(--gold);color:inherit;cursor:pointer;padding:0}
@@ -3871,6 +3881,15 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
 })();
 /* limpia de la barra de direcciones los códigos de seguimiento (fbclid, utm…), después de que Analytics ya los leyó */
 addEventListener('load',()=>setTimeout(()=>{try{const u=new URL(location.href),k=[...u.searchParams.keys()].filter(x=>/^(fbclid|gclid|gbraid|wbraid|msclkid|igshid|igsh|ttclid|_r|_t|utm_.+|fb_.+|mibextid|is_from_webapp|sender_device|web_id|_ga|_gl|ref|si)$/i.test(x));if(!k.length)return;k.forEach(x=>u.searchParams.delete(x));history.replaceState(history.state,'',u.pathname+(u.search||'')+u.hash)}catch(e){}},4000));
+</script>
+<script>
+(function(){var el=document.createElement('div');el.id='pvName';el.setAttribute('aria-hidden','true');document.body.appendChild(el);var cur='',shown=false;
+function build(t){el.innerHTML='';el.style.fontSize=Math.max(14,Math.min(34,Math.round(innerHeight*.8/(t.length*.92))))+'px';Array.prototype.forEach.call(t,function(c,k){var i=document.createElement('i');i.style.setProperty('--k',k);i.textContent=c===' '?'\u00a0':c;el.appendChild(i)})}
+function upd(){var T=document.getElementById('lbT');if(!document.body.classList.contains('pv')||!T){if(shown){el.classList.remove('on');shown=false}return}
+var t=(T.textContent||'').trim(),r=T.getBoundingClientRect(),want=r.bottom<70&&t;
+if(want&&!shown){if(cur!==t){cur=t;build(t)}el.classList.remove('on');void el.offsetWidth;el.classList.add('on');shown=true}
+else if(!want&&shown){el.classList.remove('on');shown=false}}
+addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);new MutationObserver(function(){cur='';upd()}).observe(document.body,{attributes:true,attributeFilter:['class']});})();
 </script>
 </body>
 </html>
