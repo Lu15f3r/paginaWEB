@@ -1730,6 +1730,9 @@ html:not(#z) .tw .ty{right:auto!important}
 html:not(#z) .hero-type{font-size:clamp(10px,3.5vw,16px)!important;padding-left:6px;padding-right:6px}
 html:not(#z) footer .hand{font-size:clamp(10px,3.5vw,16px)!important;padding:0 6px!important;letter-spacing:0}
 }
+
+/* ajustes 09-nov e */
+@media(max-width:640px){html:not(#z) .sectH{text-align:center!important;padding-left:0!important;padding-right:0!important}html:not(#z) .sectH h2{padding:6px 20px 4px!important;margin-left:auto;margin-right:auto}}
 </style>
 </head>
 <body>
@@ -3945,6 +3948,6 @@ var cat=document.getElementById('catalogo');if(cat){new MutationObserver(functio
 addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);new MutationObserver(function(){cur='';upd()}).observe(document.body,{attributes:true,attributeFilter:['class']});})();
 </script>
 <button type="button" id="pvBack" aria-label="Volver a la tienda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
-<script>(function(){var b=document.getElementById('pvBack'),x=document.getElementById('lbX');if(!b||!x)return;b.onclick=function(){x.click()};function u(){var r=x.getBoundingClientRect();b.classList.toggle('on',document.body.classList.contains('pv')&&(r.bottom<60||r.top>innerHeight))}addEventListener('scroll',u,{passive:true});addEventListener('resize',u);setInterval(u,300)})()</script>
+<script>(function(){var b=document.getElementById('pvBack'),x=document.getElementById('lbX');if(!b||!x)return;b.onclick=function(){x.click()};function u(){var r=x.getBoundingClientRect();var w=document.querySelector('header.top .logo.wm');if(w){var q=w.getBoundingClientRect();if(q.height)b.style.top=Math.max(0,q.top+q.height/2-b.offsetHeight/2)+'px'}b.classList.toggle('on',document.body.classList.contains('pv')&&(r.bottom<60||r.top>innerHeight))}addEventListener('scroll',u,{passive:true});addEventListener('resize',u);setInterval(u,300)})()</script>
 </body>
 </html>
