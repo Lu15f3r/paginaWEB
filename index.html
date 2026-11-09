@@ -1850,6 +1850,13 @@ html:not(#z) body.pv #lb .lbf .lba>*:not(.lbq):not(#lbC):not(#lbW){order:6}
 html:not(#z) body.pv #lb .lbf .lba .btn{font-size:13px;white-space:nowrap}
 html:not(#z) #pvBack,html:not(#z) #pvBack.on{transition:opacity .25s!important}
 }
+/* ajustes 09-nov l: fotos pegadas arriba, titulo no se corta, subir/bajar 3mm a la izquierda */
+@media(min-width:900px){
+html:not(#z) body.pv #lb .lbg>*{top:0!important}
+html:not(#z) body.pv .totop{left:6px!important}
+html:not(#z) body.pv #lb{padding-top:56px!important}
+html:not(#z) body.pv #lb .dh h2.tcut{opacity:0!important;transition:opacity .12s}
+}
 </style>
 </head>
 <body>
@@ -4089,5 +4096,6 @@ else{rs();void im.offsetWidth;im.classList.add('wmi');vis=true;setTimeout(functi
 <script>(function(){function st(){var T=document.getElementById('lbT');if(T&&innerWidth>=900){var th=T.offsetHeight||0;document.documentElement.style.setProperty('--lbrPT',Math.max(74,th+34)+'px')}var gg=document.querySelector('#lb .lbg'),bb=document.getElementById('pvBack');if(gg&&bb&&innerWidth>=900){var gl=gg.getBoundingClientRect().left;if(gl>0)bb.style.left=(gl+12)+'px'}var g=document.querySelector('#lb .lbg'),r=document.querySelector('#lb .lbr');if(g){var k=g.children;for(var i=0;i<k.length;i++)k[i].style.zIndex=i+1}
 if(r){var t=Math.min(50,innerHeight-r.offsetHeight-14);document.documentElement.style.setProperty('--lbrT',t+'px')}}
 addEventListener('resize',st);new MutationObserver(function(){if(document.body.classList.contains('pv')){setTimeout(st,60);setTimeout(st,600)}}).observe(document.body,{attributes:true,attributeFilter:['class']});setInterval(function(){if(document.body.classList.contains('pv'))st()},1200)})()</script>
+<script>(function(){function f(){var T=document.getElementById('lbT');if(!T)return;var A=document.getElementById('ann'),ab=A?Math.max(0,A.getBoundingClientRect().bottom):0;var on=document.body.classList.contains('pv')&&innerWidth>=900&&T.getBoundingClientRect().top<ab+2;T.classList.toggle('tcut',on)}addEventListener('scroll',f,{passive:true});addEventListener('resize',f);setInterval(f,200)})()</script>
 </body>
 </html>
