@@ -1738,7 +1738,7 @@ html:not(#z) body.pv #lbX{display:none!important}
 
 /* ajustes 09-nov f: pagina de producto en celular */
 @media(max-width:640px){
-html:not(#z) body.pv #lb{padding-top:calc(var(--annh,38px) + 40px)!important}
+html:not(#z) body.pv #lb{padding-top:10px!important}
 html:not(#z) body.pv #lb .dh{justify-content:center!important;padding:0 52px 12px!important;min-height:44px}
 html:not(#z) body.pv #lb .dh h2{font-size:clamp(18px,6.2vw,28px)!important;text-align:center;line-height:1.1;max-width:100%;overflow-wrap:anywhere;text-wrap:balance}
 }
@@ -3560,7 +3560,7 @@ const AT=`<span class="annt"><i class="ai l"><img src="data:image/webp;base64,Uk
 const fit=()=>{const k=A.querySelector('.annk'),g=A.querySelector('.ang');if(!k||!g)return;const w=g.offsetWidth;if(!w)return;k.style.setProperty('--gw',w+'px');k.style.setProperty('--gd',Math.max(8,w/70).toFixed(1)+'s')};
 const need=()=>{const g=A.querySelector('.ang'),one=g&&nn?g.offsetWidth/nn:0;if(!one)return 3;return Math.max(2,Math.ceil((A.clientWidth||innerWidth)/one)+1)};
 build(1);build(need());addEventListener('resize',()=>{const n=need();if(n!==nn)build(n);else fit()});addEventListener('load',()=>{const n=need();if(n!==nn)build(n);else fit()})}buildMq();{const R=document.documentElement,ic=()=>{try{const g=e=>getComputedStyle(e).backgroundColor.match(/[\d.]+/g)||[];let c=g(document.body);if(c.length>3&&+c[3]<.5)c=g(R);const l=(.299*c[0]+.587*c[1]+.114*c[2])/255;R.style.setProperty('--icn',l>.5?'#000':'#fff')}catch(e){}};ic();new MutationObserver(()=>{setTimeout(ic,80);setTimeout(ic,500);setTimeout(ic,1100)}).observe(R,{attributes:true,attributeFilter:['data-theme','data-pal']});addEventListener('load',ic);setTimeout(ic,600);
-const hs=()=>{const p=Math.max(0,Math.min(1,(scrollY-10)/80));R.style.setProperty('--wm',p.toFixed(3));if(p>0)ic();{const h=p>.5;if(h!==document.body.classList.contains('hwm')){document.body.classList.toggle('hwm',h);const im=document.querySelector(h?'header.top .logo.wm':'header.top .logo.gx');if(im){im.classList.remove('lgT');void im.offsetWidth;im.classList.add('lgT');setTimeout(()=>im.classList.remove('lgT'),950)}}}};hs();addEventListener('scroll',hs,{passive:true})}
+const hs=()=>{const p=(document.body.classList.contains('pv')&&innerWidth<=640)?1:Math.max(0,Math.min(1,(scrollY-10)/80));R.style.setProperty('--wm',p.toFixed(3));if(p>0)ic();{const h=p>.5;if(h!==document.body.classList.contains('hwm')){document.body.classList.toggle('hwm',h);const im=document.querySelector(h?'header.top .logo.wm':'header.top .logo.gx');if(im){im.classList.remove('lgT');void im.offsetWidth;im.classList.add('lgT');setTimeout(()=>im.classList.remove('lgT'),950)}}}};hs();addEventListener('scroll',hs,{passive:true});addEventListener('resize',hs);try{new MutationObserver(hs).observe(document.body,{attributes:true,attributeFilter:['class']})}catch(e){}}
 {const A=$('ann'),hr=document.querySelector('header.top .hr');if(hr&&A)A.appendChild(hr);const sa=()=>document.documentElement.style.setProperty('--annh',(A?A.offsetHeight:0)+'px');sa();addEventListener('resize',sa);addEventListener('load',sa);try{new ResizeObserver(sa).observe(A)}catch(e){}}
 const tt=$('toTop'),td=$('toDown');
 const maxY=()=>document.documentElement.scrollHeight-innerHeight;
