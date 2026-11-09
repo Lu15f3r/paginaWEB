@@ -1567,7 +1567,14 @@ html[data-theme=light] header.top .logo.wm{filter:drop-shadow(0 0 1.5px #fff) dr
 @media(max-width:640px){header.top nav{grid-column:1/-1;grid-row:2}header.top .logo.wm{height:23px!important}}
 body.pv header.top{top:var(--annh,38px)!important}
 /* Barra superior translúcida y borrosa (vidrio esmerilado) */
-html:not(#z) .ann{background:color-mix(in srgb,var(--ann1,#c40000) 48%,transparent)!important;-webkit-backdrop-filter:blur(14px) saturate(1.5);backdrop-filter:blur(14px) saturate(1.5);animation:none!important;box-shadow:0 1px 0 rgba(255,255,255,.18),0 6px 22px rgba(0,0,0,.18)!important;margin-bottom:calc(-1*var(--annh,38px))}
+html:not(#z) .ann{background:transparent!important;-webkit-backdrop-filter:none;backdrop-filter:none;animation:none!important;box-shadow:none!important;margin-bottom:calc(-1*var(--annh,38px));pointer-events:none;color:color-mix(in srgb,var(--ink,#fff) calc(var(--wm,0)*100%),var(--annx,#fff))!important}
+html:not(#z) .ann::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.2)),color-mix(in srgb,var(--ann1,#c40000) 22%,transparent);-webkit-backdrop-filter:blur(10px) saturate(1.15);backdrop-filter:blur(10px) saturate(1.15);box-shadow:0 1px 0 rgba(255,255,255,.08);opacity:calc(1 - var(--wm,0))}
+html[data-pal=mono]:not([data-theme=light]) .ann{--annx:#fff;--annb:#fff}
+html:not(#z) .ann .annm{opacity:calc(1 - var(--wm,0));pointer-events:none}
+html:not(#z) .ann .hr,html:not(#z) .ann .sbx{pointer-events:auto}
+html:not(#z) .ann .hr .nv{color:inherit!important;filter:drop-shadow(0 0 2px color-mix(in srgb,var(--bg,#000) calc(var(--wm,0)*85%),transparent))}
+header.top{overflow:visible!important}
+header.top>a.wmA{transform:translateY(calc(var(--wm,0)*(var(--annh,38px)*-.5 - var(--hh,82px)*.5)))}
 html:not(#z) .ann .annm,html:not(#z) .ann .hr{text-shadow:0 1px 3px rgba(0,0,0,.35)}
 html:not(#z) .ann .sbx input,html:not(#z) .ann .sbx .sbf{background:rgba(0,0,0,.28)!important;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 /* Filtro dentro del buscador */
@@ -3453,7 +3460,7 @@ const AT=`<span class="annt"><i class="ai l"><img src="data:image/webp;base64,Uk
 {const A=$('ann');let nn=0;const build=n=>{nn=n;A.querySelectorAll(':scope>.annm').forEach(x=>x.remove());A.insertAdjacentHTML('afterbegin','<div class="annm"><div class="annk"><div class="ang">'+AT.repeat(n)+'</div><div class="ang" aria-hidden="true">'+AT.repeat(n)+'</div></div></div>');fit()};
 const fit=()=>{const k=A.querySelector('.annk'),g=A.querySelector('.ang');if(!k||!g)return;const w=g.offsetWidth;if(!w)return;k.style.setProperty('--gw',w+'px');k.style.setProperty('--gd',Math.max(8,w/70).toFixed(1)+'s')};
 const need=()=>{const g=A.querySelector('.ang'),one=g&&nn?g.offsetWidth/nn:0;if(!one)return 3;return Math.max(2,Math.ceil((A.clientWidth||innerWidth)/one)+1)};
-build(1);build(need());addEventListener('resize',()=>{const n=need();if(n!==nn)build(n);else fit()});addEventListener('load',()=>{const n=need();if(n!==nn)build(n);else fit()})}buildMq();{const R=document.documentElement,hs=()=>{const p=Math.max(0,Math.min(1,(scrollY-20)/170));R.style.setProperty('--wm',p.toFixed(3));document.body.classList.toggle('hwm',p>.5)};hs();addEventListener('scroll',hs,{passive:true})}
+build(1);build(need());addEventListener('resize',()=>{const n=need();if(n!==nn)build(n);else fit()});addEventListener('load',()=>{const n=need();if(n!==nn)build(n);else fit()})}buildMq();{const R=document.documentElement,hs=()=>{const p=Math.max(0,Math.min(1,(scrollY-10)/80));R.style.setProperty('--wm',p.toFixed(3));document.body.classList.toggle('hwm',p>.5)};hs();addEventListener('scroll',hs,{passive:true})}
 {const A=$('ann'),hr=document.querySelector('header.top .hr');if(hr&&A)A.appendChild(hr);const sa=()=>document.documentElement.style.setProperty('--annh',(A?A.offsetHeight:0)+'px');sa();addEventListener('resize',sa);addEventListener('load',sa);try{new ResizeObserver(sa).observe(A)}catch(e){}}
 const tt=$('toTop'),td=$('toDown');
 const maxY=()=>document.documentElement.scrollHeight-innerHeight;
