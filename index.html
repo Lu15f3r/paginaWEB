@@ -1894,6 +1894,9 @@ html:not(#z) #catalogo .grid.mz .ph .qa{z-index:4}
 html:not(#z) :is(.row img,.gi img,.ph,.ph img,.ri,.ri img,.stage,.stage img,.lbg,.lbg img,.lbth,.lbth img,#pvTh button,#pvTh img,#zvT button,#zvT img,#zvI,#pvMore .pgw,.hero img,.mzB,.mzB img,.card){clip-path:none!important;border-radius:0!important}
 html:not(#z) #catalogo .grid.mz .info .price{color:#fff!important}
 html:not(#z) #catalogo .grid.mz .info .price .old{color:#ffb3ae!important}
+/* ajustes 09-nov p: miniaturas y nombre vertical se ocultan al terminar la ficha (no llegan al footer) */
+html:not(#z) body.pv #pvName,html:not(#z) body.pv #pvTh{transition:opacity .25s,visibility .25s}
+html:not(#z) body.pv.pvend #pvName,html:not(#z) body.pv.pvend #pvTh{opacity:0!important;visibility:hidden!important;pointer-events:none!important}
 </style>
 </head>
 <body>
@@ -4140,5 +4143,14 @@ if(!cat.querySelector('.mzB')){var best=null,bn=0;cat.querySelectorAll('.cat .gr
 }catch(e){}busy=false}
 new MutationObserver(function(){setTimeout(deco,0)}).observe(cat,{childList:true});deco();
 cat.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('.mzB a');if(a&&window.lbOpen)lbOpen(a.getAttribute('data-id'))})})()</script>
+<script>(function(){
+/* 1) al quitar del carrito, la ficha vuelve a permitir agregar */
+try{var _cr=window.cartRender;if(typeof _cr==='function'){window.cartRender=cartRender=function(){var r=_cr.apply(this,arguments);try{var lb=document.getElementById('lb');if(lb&&lb.open&&typeof lbP!=='undefined'&&lbP&&typeof lbOpts==='function'){if(left(lbP,null,null)>0)LB.msg='';lbOpts()}}catch(e){}return r}}}catch(e){}
+/* 2) ocultar miniaturas/nombre vertical al terminar el bloque del producto */
+function pe(){var b=document.querySelector('#lb .lbb');var on=document.body.classList.contains('pv')&&b&&b.getBoundingClientRect().bottom<innerHeight*.5;document.body.classList.toggle('pvend',!!on)}
+addEventListener('scroll',pe,{passive:true});addEventListener('resize',pe);setInterval(pe,250);
+/* 3) rueda del mouse en el visor: pasa a la foto siguiente/anterior */
+var zv=document.getElementById('zv'),cool=0;if(zv)zv.addEventListener('wheel',function(e){var im=document.getElementById('zvI');if(im&&im.classList.contains('z'))return;e.preventDefault();var n=Date.now();if(n<cool||Math.abs(e.deltaY)<4)return;cool=n+300;zvShow(zI+(e.deltaY>0?1:-1))},{passive:false});
+})()</script>
 </body>
 </html>
