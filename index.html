@@ -1910,9 +1910,12 @@ html:not(#z) #catalogo .grid.mz>.card{grid-column:var(--gc,span 10)!important;he
 .mzB{margin:96px 0!important}
 }
 @media(min-width:700px) and (max-width:1100px){.mzB{margin:64px 0!important}}
-@media(max-width:699px){
-#catalogo .grid.mz{grid-auto-flow:dense}
-.mzB{display:block!important;grid-column:1/-1;height:150px;margin:40px 0!important}
+@media(max-width:699px){.mzB{display:none!important}}
+/* ajustes 09-nov s: nombre y precio a la izquierda sobre las fotos; carrusel solo en PC/tablet */
+@media(min-width:700px){
+html:not(#z) #catalogo .grid.mz .info{padding-left:18px!important;text-align:left!important}
+html:not(#z) #catalogo .grid.mz .info .prow{justify-content:flex-start!important;align-items:flex-start!important;padding:0!important;margin:0!important;width:100%}
+html:not(#z) #catalogo .grid.mz .info .price{flex:none!important;margin:0!important;padding:0!important;justify-content:flex-start!important}
 }
 </style>
 </head>
