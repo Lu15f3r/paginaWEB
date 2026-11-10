@@ -1921,7 +1921,10 @@ html:not(#z) #catalogo .grid.mz .info .price{flex:none!important;margin:0!import
 @media(max-width:699px){
 html:not(#z) .hero{margin-top:var(--annh,38px)!important}
 html:not(#z) .hero img{aspect-ratio:2080/950!important;height:auto!important;max-height:none!important;object-fit:cover}
-html:not(#z) .hero .hpv,html:not(#z) .hero .hnx{top:50%!important}
+html:not(#z) .hero .hpv,html:not(#z) .hero .hnx{top:calc(50% - 22px)!important}
+html:not(#z) .hero{padding-bottom:46px}
+html:not(#z) .hero::after{height:46px!important}
+html:not(#z) .hero-type{padding-top:8px!important;padding-bottom:12px!important;background:none!important}
 }
 </style>
 </head>
