@@ -1867,7 +1867,7 @@ html:not(#z) #zvX{top:12px;right:max(14px,calc(110px/2 - 20px))}
 /* ajustes 09-nov n: catalogo en mosaico pegado + banner automatico (>=700px) */
 .mzB{display:none}
 @media(min-width:700px){
-html:not(#z) #catalogo .grid.mz{display:grid!important;grid-template-columns:repeat(10,minmax(0,1fr))!important;gap:0!important;grid-auto-rows:clamp(340px,36vw,600px)}
+html:not(#z) #catalogo .grid.mz{display:grid!important;grid-template-columns:repeat(10,minmax(0,1fr))!important;gap:0!important;grid-auto-rows:auto}
 html:not(#z) #catalogo .grid.mz>.card{grid-column:span 5;border:0!important;border-radius:0!important;margin:0!important;position:relative;overflow:hidden!important;display:block;transform:none!important;box-shadow:none!important;background:#111!important;height:100%}
 html:not(#z) #catalogo .grid.mz>.card.m3,html:not(#z) #catalogo .grid.mz>.card.m5{grid-column:span 3}
 html:not(#z) #catalogo .grid.mz>.card.m4{grid-column:span 4}
@@ -1896,7 +1896,14 @@ html:not(#z) #catalogo .grid.mz .info .price{color:#fff!important}
 html:not(#z) #catalogo .grid.mz .info .price .old{color:#ffb3ae!important}
 /* ajustes 09-nov p: miniaturas y nombre vertical se ocultan al terminar la ficha (no llegan al footer) */
 html:not(#z) body.pv #pvName,html:not(#z) body.pv #pvTh{transition:opacity .25s,visibility .25s}
-html:not(#z) body.pv.pvend #pvName,html:not(#z) body.pv.pvend #pvTh{opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+html:not(#z) body.pv.pvend #pvName,html:not(#z) body.pv.pvend2 #pvTh{opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+html:not(#z) body.pv #lb .seals{justify-content:center!important;width:100%}
+/* ajustes 09-nov q: filas de 2 fotos en 30/70 (alternando) y banner que gira segun el mouse */
+@media(min-width:700px){
+html:not(#z) #catalogo .grid.mz>.card.sa{grid-column:span 3}
+html:not(#z) #catalogo .grid.mz>.card.sb{grid-column:span 7}
+.mzB .mzT{animation:none!important;will-change:transform}
+}
 </style>
 </head>
 <body>
@@ -4138,8 +4145,8 @@ if(r){var t=Math.min(50,innerHeight-r.offsetHeight-14);document.documentElement.
 addEventListener('resize',st);new MutationObserver(function(){if(document.body.classList.contains('pv')){setTimeout(st,60);setTimeout(st,600)}}).observe(document.body,{attributes:true,attributeFilter:['class']});setInterval(function(){if(document.body.classList.contains('pv'))st()},1200)})()</script>
 <script>(function(){function f(){var T=document.getElementById('lbT');if(!T)return;var A=document.getElementById('ann'),ab=A?Math.max(0,A.getBoundingClientRect().bottom):0;var on=document.body.classList.contains('pv')&&innerWidth>=900&&T.getBoundingClientRect().top<ab+2;T.classList.toggle('tcut',on)}addEventListener('scroll',f,{passive:true});addEventListener('resize',f);setInterval(f,200)})()</script>
 <script>(function(){var cat=document.getElementById('catalogo');if(!cat)return;var busy=false;
-function deco(){if(busy)return;busy=true;try{var gs=cat.querySelectorAll('.cat .grid:not(.mz)');gs.forEach(function(g){var cs=[].slice.call(g.children).filter(function(c){return c.classList&&c.classList.contains('card')});if(!cs.length)return;g.classList.add('mz');var n=cs.length;cs.forEach(function(c,i){var k=i%5;c.classList.add('m'+(k+1));if(i>=n-(n%5||5)){}});var r=n%5;if(r===1)cs[n-1].classList.add('mw');if(r===3)cs[n-1].classList.add('mw');if(r===4){cs[n-2].classList.add('mx');cs[n-1].classList.add('mx')}});
-if(!cat.querySelector('.mzB')){var best=null,bn=0;cat.querySelectorAll('.cat .grid.mz').forEach(function(g){var n=g.querySelectorAll(':scope>.card').length;if(n>bn){bn=n;best=g}});if(best&&bn>5){var L=[];try{(products||[]).forEach(function(p){var im=imgs(p);if(im&&im[0]&&String(p.active)!=='false')L.push({id:p.id,u:im[0],n:p.name})})}catch(e){}if(L.length){var base=L.slice(0,16),A=base.slice();while(A.length<8)A=A.concat(base);var seq=A.concat(A);var d=document.createElement('div');d.className='mzB';d.setAttribute('aria-label','Galería de gorras');d.innerHTML='<div class="mzT" style="--mzd:'+(A.length*2.2)+'s">'+seq.map(function(x){return '<a data-id="'+String(x.id).replace(/"/g,'')+'" aria-label="'+String(x.n||'').replace(/"/g,'')+'"><img src="'+x.u.replace(/"/g,'%22')+'" alt="" loading="lazy" decoding="async"></a>'}).join('')+'</div>';var cs=best.querySelectorAll(':scope>.card'),pos=Math.max(5,Math.round(bn/2/5)*5);if(pos>=bn)pos=Math.floor((bn-1)/5)*5;if(pos<1)pos=5;var ref=cs[pos];if(ref)best.insertBefore(d,ref);}}}
+function deco(){if(busy)return;busy=true;try{var gs=cat.querySelectorAll('.cat .grid:not(.mz)');gs.forEach(function(g){var cs=[].slice.call(g.children).filter(function(c){return c.classList&&c.classList.contains('card')});if(!cs.length)return;g.classList.add('mz');var n=cs.length,SZ=[2,3,5],SP={1:[10],2:[3,7],3:[3,4,3],4:[2,3,3,2],5:[2,2,2,2,2]},H={5:'clamp(280px,27vw,460px)',4:'clamp(300px,31vw,520px)'},i=0,ri=0,bd=[];while(i<n){var sz=Math.min(SZ[ri%3],n-i),sp=SP[sz].slice();if(sz===2&&Math.floor(ri/3)%2===1)sp.reverse();for(var j=0;j<sz;j++){var c=cs[i+j];c.style.gridColumn='span '+sp[j];c.style.height=H[sz]||'clamp(340px,36vw,600px)'}i+=sz;ri++;if(i<n)bd.push(i)}g.__bd=bd});
+if(!cat.querySelector('.mzB')){var best=null,bn=0;cat.querySelectorAll('.cat .grid.mz').forEach(function(g){var n=g.querySelectorAll(':scope>.card').length;if(n>bn){bn=n;best=g}});if(best&&bn>5){var L=[];try{(products||[]).forEach(function(p){var im=imgs(p);if(im&&im[0]&&String(p.active)!=='false')L.push({id:p.id,u:im[0],n:p.name})})}catch(e){}if(L.length){var base=L.slice(0,16),A=base.slice();while(A.length<8)A=A.concat(base);var seq=A.concat(A);var d=document.createElement('div');d.className='mzB';d.setAttribute('aria-label','Galería de gorras');d.innerHTML='<div class="mzT" style="--mzd:'+(A.length*2.2)+'s">'+seq.map(function(x){return '<a data-id="'+String(x.id).replace(/"/g,'')+'" aria-label="'+String(x.n||'').replace(/"/g,'')+'"><img src="'+x.u.replace(/"/g,'%22')+'" alt="" loading="lazy" decoding="async"></a>'}).join('')+'</div>';var cs=best.querySelectorAll(':scope>.card'),bd=(best.__bd||[]).filter(function(v){return v>0&&v<bn}),pos=bd.length?bd.reduce(function(a,b){return Math.abs(b-bn/2)<Math.abs(a-bn/2)?b:a}):0;var ref=pos?cs[pos]:null;if(ref)best.insertBefore(d,ref);}}}
 }catch(e){}busy=false}
 new MutationObserver(function(){setTimeout(deco,0)}).observe(cat,{childList:true});deco();
 cat.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('.mzB a');if(a&&window.lbOpen)lbOpen(a.getAttribute('data-id'))})})()</script>
@@ -4147,10 +4154,16 @@ cat.addEventListener('click',function(e){var a=e.target.closest&&e.target.closes
 /* 1) al quitar del carrito, la ficha vuelve a permitir agregar */
 try{var _cr=window.cartRender;if(typeof _cr==='function'){window.cartRender=cartRender=function(){var r=_cr.apply(this,arguments);try{var lb=document.getElementById('lb');if(lb&&lb.open&&typeof lbP!=='undefined'&&lbP&&typeof lbOpts==='function'){if(left(lbP,null,null)>0)LB.msg='';lbOpts()}}catch(e){}return r}}}catch(e){}
 /* 2) ocultar miniaturas/nombre vertical al terminar el bloque del producto */
-function pe(){var b=document.querySelector('#lb .lbb');var on=document.body.classList.contains('pv')&&b&&b.getBoundingClientRect().bottom<innerHeight*.5;document.body.classList.toggle('pvend',!!on)}
+function pe(){var b=document.querySelector('#lb .lbb');var on=document.body.classList.contains('pv')&&b&&b.getBoundingClientRect().bottom<innerHeight*.5;document.body.classList.toggle('pvend',!!on);var r=document.getElementById('lbRel');var on2=document.body.classList.contains('pv')&&r&&r.getBoundingClientRect().bottom<innerHeight*.6;document.body.classList.toggle('pvend2',!!on2)}
 addEventListener('scroll',pe,{passive:true});addEventListener('resize',pe);setInterval(pe,250);
 /* 3) rueda del mouse en el visor: pasa a la foto siguiente/anterior */
 var zv=document.getElementById('zv'),cool=0;if(zv)zv.addEventListener('wheel',function(e){var im=document.getElementById('zvI');if(im&&im.classList.contains('z'))return;e.preventDefault();var n=Date.now();if(n<cool||Math.abs(e.deltaY)<4)return;cool=n+300;zvShow(zI+(e.deltaY>0?1:-1))},{passive:false});
 })()</script>
+<script>(function(){if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;var x=0,v=0,last=0,dir=1,T=null,S=110;
+document.addEventListener('mousemove',function(e){var b=e.target.closest&&e.target.closest('.mzB');if(!b){dir=1;return}var r=b.getBoundingClientRect();dir=e.clientX<r.left+r.width/2?-1:1});
+document.addEventListener('mouseout',function(e){if(!e.relatedTarget)dir=1});
+function loop(t){var dt=Math.min(.05,(t-last)/1000);last=t;var t2=document.querySelector('.mzB .mzT');if(t2!==T){T=t2;x=0}
+if(T){var W=T.scrollWidth/2;v+=(dir*S-v)*Math.min(1,dt*6);x+=v*dt;if(W>0){x=((x%W)+W)%W-W}T.style.transform='translate3d('+x.toFixed(1)+'px,0,0)'}requestAnimationFrame(loop)}
+requestAnimationFrame(loop)})()</script>
 </body>
 </html>
