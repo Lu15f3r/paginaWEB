@@ -1857,6 +1857,13 @@ html:not(#z) body.pv .totop{left:6px!important}
 html:not(#z) body.pv #lb{padding-top:56px!important}
 html:not(#z) body.pv #lb .dh h2.tcut{opacity:0!important;transition:opacity .12s}
 }
+/* ajustes 09-nov m: fotos sin separacion, visor completo y boton X dentro de la pantalla */
+@media(min-width:900px){html:not(#z) body.pv #lb .lbg{gap:0!important;padding:0!important}}
+html:not(#z) dialog#zv{width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;inset:0}
+html:not(#z) #zvM{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr)}
+html:not(#z) #zvI{max-width:100%;max-height:100%;min-height:0;min-width:0}
+html:not(#z) #zvX{top:12px;right:max(14px,calc(110px/2 - 20px))}
+@media(max-width:640px){html:not(#z) #zvX{right:14px}}
 </style>
 </head>
 <body>
