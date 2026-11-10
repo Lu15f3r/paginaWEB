@@ -1917,6 +1917,12 @@ html:not(#z) #catalogo .grid.mz .info{padding-left:18px!important;text-align:lef
 html:not(#z) #catalogo .grid.mz .info .prow{justify-content:flex-start!important;align-items:flex-start!important;padding:0!important;margin:0!important;width:100%}
 html:not(#z) #catalogo .grid.mz .info .price{flex:none!important;margin:0!important;padding:0!important;justify-content:flex-start!important}
 }
+/* ajustes 09-nov t: banner principal en celular con altura completa (sin recortes ni tapado por el encabezado) */
+@media(max-width:699px){
+html:not(#z) .hero{margin-top:var(--annh,38px)!important}
+html:not(#z) .hero img{aspect-ratio:2080/950!important;height:auto!important;max-height:none!important;object-fit:cover}
+html:not(#z) .hero .hpv,html:not(#z) .hero .hnx{top:50%!important}
+}
 </style>
 </head>
 <body>
@@ -1932,7 +1938,7 @@ html:not(#z) #catalogo .grid.mz .info .price{flex:none!important;margin:0!import
 
 <section class="feat" aria-label="Beneficios de la tienda"><ul class="mq" id="mq"></ul></section>
 
-<div class="sectH"><h2>Última colección</h2></div>
+
 <main id="catalogo"><div class="empty">Cargando productos…</div></main>
 
 
