@@ -1964,6 +1964,8 @@ html[data-pal=jr] #jrFil{border:1px solid var(--line2)!important;border-radius:9
 html[data-pal=jr] #jrFil:hover{background:var(--btn)!important;color:var(--btnx)!important;border-color:var(--btn)!important}
 html[data-pal=jr] #jrFil:hover b{background:var(--btnx);color:var(--btn)}
 html[data-pal=jr][data-theme=dark] .jr-ec:not(.ph){background:var(--card)}
+/*GORRAX: tarjetas de categoría en celular con título de 2 líneas sin tapar la foto*/
+@media(max-width:760px){html[data-pal=jr] .jr-ec.ph img{inset:0 0 84px 0;height:calc(100% - 84px)}html[data-pal=jr] .jr-ec span{left:12px;right:54px;bottom:10px;font-size:14px;line-height:1.2}html[data-pal=jr] .jr-ec small{font-size:12px;line-height:1.25;margin-top:2px;white-space:normal;overflow:visible;text-overflow:clip}html[data-pal=jr] .jr-ec span{display:block;white-space:normal;max-width:calc(100% - 66px)}html[data-pal=jr] .jr-ec i{bottom:14px}}
 </style>
 </head>
 <body>
@@ -3806,7 +3808,7 @@ const JR_PH={};
 const JR_CATS=[
  {k:'curvas',n:'Curvas',t:'Gorras curvas',d:'Para todos los días',f:{t:['gorras'],s:['curva']}},
  {k:'hombre',n:'Hombre',t:'Gorras para hombre',d:'Estilo y actitud',f:{t:['gorras'],g:['Hombre']}},
- {k:'mujer',n:'Mujer',t:'Gorras para mujer',d:'Diseños con carácter',f:{t:['gorras'],g:['Mujer']}},
+ {k:'mujer',n:'Mujer',t:'Gorras para mujer',d:'Con carácter',f:{t:['gorras'],g:['Mujer']}},
  {k:'planas',n:'Planas',t:'Gorras planas',d:'Visera plana',h:1,f:{t:['gorras'],s:['plana']}}];
 const jrMk=f=>Object.assign(F0(),JSON.parse(JSON.stringify(f||{})));
 const jrSame=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
@@ -3941,6 +3943,10 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
 })();
 /* limpia de la barra de direcciones los códigos de seguimiento (fbclid, utm…), después de que Analytics ya los leyó */
 addEventListener('load',()=>setTimeout(()=>{try{const u=new URL(location.href),k=[...u.searchParams.keys()].filter(x=>/^(fbclid|gclid|gbraid|wbraid|msclkid|igshid|igsh|ttclid|_r|_t|utm_.+|fb_.+|mibextid|is_from_webapp|sender_device|web_id|_ga|_gl|ref|si)$/i.test(x));if(!k.length)return;k.forEach(x=>u.searchParams.delete(x));history.replaceState(history.state,'',u.pathname+(u.search||'')+u.hash)}catch(e){}},4000));
+</script>
+<script>
+/* al sacar productos del carrito con la ficha abierta, se actualiza el stock y el botón Agregar vuelve a funcionar */
+(function(){var c=cartRender;cartRender=function(){var x=c.apply(this,arguments);try{if(typeof lbP!=='undefined'&&lbP&&document.body.classList.contains('pv')){LB.msg='';var p=lbP;if(left(p,LB.z||null,LB.c||null)<=0){var nx=lbNext(p,LB.z||null,LB.c||null);if(nx){LB.z=nx.z;LB.c=nx.c}}lbOpts()}}catch(e){}return x}})();
 </script>
 </body>
 </html>
