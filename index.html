@@ -2035,6 +2035,42 @@ html:not(#z)[data-pal=jr] .jr-ec .jr-ar,html:not(#z)[data-pal=jr] .jr-ec i,html:
 html:not(#z)[data-pal=jr] .jr-exp>.jr-ec:first-child{aspect-ratio:16/10}
 html:not(#z)[data-pal=jr] .jr-ec i{width:26px!important;height:26px!important;right:8px!important;bottom:10px!important}
 }
+/* celular: "Únete a la comunidad" arriba a la izquierda y mucho más pequeña */
+@media(max-width:760px){
+html:not(#z)[data-pal=jr] .jr-join{align-items:flex-start!important;min-height:420px!important}
+html:not(#z)[data-pal=jr] .jr-jc{margin:0!important;align-self:flex-start!important;padding:9px 12px 11px!important;border-radius:0 0 14px 0!important;max-width:min(285px,86%)!important}
+html:not(#z)[data-pal=jr] .jr-jc h2{font-size:14px!important;margin:0 0 5px!important;line-height:1.2}
+html:not(#z)[data-pal=jr] .jr-jc p{font-size:11px!important;line-height:1.3!important;margin:0 0 8px!important}
+html:not(#z)[data-pal=jr] .jr-jc .jr-btns{gap:4px!important}
+html:not(#z)[data-pal=jr] .jr-jc .jr-btns .jr-pill{padding:5px 8px!important;font-size:11px!important;gap:4px!important}
+html:not(#z)[data-pal=jr] .jr-jc .jr-btns .jr-pill.dark{padding:7px 10px!important;font-size:12px!important}
+html:not(#z)[data-pal=jr] .jr-jc .jr-btns .jr-pill svg{width:13px!important;height:13px!important}
+}
+@media(max-width:760px){html:not(#z)[data-pal=jr] .jr-jc .jr-btns{grid-template-columns:repeat(3,auto)!important;justify-content:start!important}html:not(#z)[data-pal=jr] .jr-jc .jr-btns .jr-pill.dark{justify-self:stretch!important}}
+/* preguntas frecuentes: título sobre las preguntas y panel útil a la izquierda (PC) */
+@media(min-width:761px){
+html:not(#z)[data-pal=jr] .faq h3{grid-column:2!important;grid-row:1!important;margin:0 0 6px!important}
+html:not(#z)[data-pal=jr] .faq>details{grid-column:2}
+html:not(#z)[data-pal=jr] .faq .jr-faqi{grid-column:1;grid-row:1/span 9;align-self:start;max-width:440px}
+}
+html:not(#z)[data-pal=jr] .jr-faqi h4{font:500 clamp(20px,1.7vw,26px) var(--fh),sans-serif;margin:0 0 6px}
+html:not(#z)[data-pal=jr] .jr-faqi>p{margin:0 0 16px;color:var(--muted);font-size:15px;max-width:38ch}
+html:not(#z)[data-pal=jr] .jr-faqi ul{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:12px}
+html:not(#z)[data-pal=jr] .jr-faqi li{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;font-size:15px;line-height:1.35}
+html:not(#z)[data-pal=jr] .jr-faqi li svg{width:20px;height:20px;margin-top:1px;stroke:currentColor;fill:none;stroke-width:1.6}
+html:not(#z)[data-pal=jr] .jr-faqi li b{display:block;font-weight:500}
+html:not(#z)[data-pal=jr] .jr-faqi li span{color:var(--muted);font-size:13.5px}
+@media(max-width:760px){html:not(#z)[data-pal=jr] .faq .jr-faqi{order:5;margin-top:18px}}
+/* tablet: misma tarjeta arriba a la izquierda */
+@media(min-width:761px) and (max-width:1100px){
+html:not(#z)[data-pal=jr] .jr-join{align-items:flex-start!important;min-height:440px!important}
+html:not(#z)[data-pal=jr] .jr-jc{margin:0!important;align-self:flex-start!important;padding:10px 14px 12px!important;border-radius:0 0 16px 0!important;max-width:340px!important}
+html:not(#z)[data-pal=jr] .jr-jc h2{font-size:16px!important;margin:0 0 6px!important}
+html:not(#z)[data-pal=jr] .jr-jc p{font-size:12px!important;margin:0 0 9px!important}
+html:not(#z)[data-pal=jr] .jr-jc .jr-btns{grid-template-columns:repeat(3,auto)!important;justify-content:start!important;gap:5px!important}
+html:not(#z)[data-pal=jr] .jr-jc .jr-btns .jr-pill{padding:5px 9px!important;font-size:12px!important}
+html:not(#z)[data-pal=jr] .jr-jc .jr-btns .jr-pill.dark{padding:8px 12px!important;font-size:13px!important;justify-self:stretch!important}
+}
 </style>
 </head>
 <body>
@@ -4043,6 +4079,11 @@ var S=document.getElementById('jrSortS');if(S)S.addEventListener('change',functi
 <script>
 /* redes en la tarjeta del banner */
 {const c=document.getElementById('jrHC');if(c&&!c.querySelector('.jr-hsoc')){const d=document.createElement('span');d.className='jr-hsoc';d.innerHTML=['Instagram','Facebook','TikTok'].map(n=>{const u=CFG.SOCIAL[n];return `<a href="${u?esc(u):'#'}" ${u?'target="_blank" rel="noopener"':''} aria-label="${n}">${ICO[n]}</a>`}).join('');c.appendChild(d)}}
+</script>
+<script>
+/* panel de ayuda junto a las preguntas frecuentes */
+{const q=document.querySelector('.faq');if(q&&!q.querySelector('.jr-faqi')){const I={s:'<svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7zM7 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM17 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>',m:'<svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/></svg>',r:'<svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5l2-2v6h-6l2.4-2.4A5.5 5.5 0 1 0 17.5 12"/></svg>',w:'<svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg>'};
+const d=document.createElement('div');d.className='jr-faqi';d.innerHTML=`<h4>Compra tranquilo</h4><p>Lo que necesitas saber antes de pedir tu gorra.</p><ul><li>${I.s}<div><b>Envío gratis desde ${money(CFG.FREE_SHIP)}</b><span>Despachamos a toda Colombia.</span></div></li><li>${I.m}<div><b>Pago contra entrega</b><span>Paga cuando recibes, o por Nequi y Bancolombia.</span></div></li><li>${I.r}<div><b>Cambios y garantía</b><span>Si algo no está bien, te ayudamos a resolverlo.</span></div></li><li>${I.w}<div><b>Atención directa por WhatsApp</b><span>Resolvemos tus dudas de tallas y pedidos.</span></div></li></ul><a class="jr-pill dark" target="_blank" rel="noopener" href="${wa('Hola '+CFG.STORE+', tengo una pregunta.')}">Escríbenos por WhatsApp</a>`;q.insertBefore(d,q.children[1])}}
 </script>
 </body>
 </html>
