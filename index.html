@@ -2023,6 +2023,18 @@ html:not(#z)[data-pal=jr] .hero .jr-hcard>p,html:not(#z)[data-pal=jr] .hero .jr-
 html:not(#z)[data-pal=jr] .hero .hdt:not([hidden]){top:auto!important;bottom:12px!important}
 html:not(#z)[data-pal=jr] .jr-exp>.jr-ec:first-child{grid-column:1/-1;aspect-ratio:16/9}
 }
+/* celular: etiqueta más pequeña y categorías con más foto */
+@media(max-width:760px){
+html:not(#z)[data-pal=jr] .hero .jr-hcard{padding:6px 12px 6px 10px!important;border-radius:0 12px 0 0!important}
+html:not(#z)[data-pal=jr] .hero .jr-hcard h1{font-size:13px!important;gap:8px!important;line-height:1.2}
+html:not(#z)[data-pal=jr] .hero .jr-hcard h1 .jr-doo{width:1.5em!important;height:1.5em!important}
+html:not(#z)[data-pal=jr] .jr-ec.ph img{inset:0 0 46px 0!important;height:calc(100% - 46px)!important}
+html:not(#z)[data-pal=jr] .jr-ec span{bottom:6px!important;font-size:13px!important;line-height:1.15!important;left:10px!important;right:44px!important}
+html:not(#z)[data-pal=jr] .jr-ec small{font-size:11px!important}
+html:not(#z)[data-pal=jr] .jr-ec .jr-ar,html:not(#z)[data-pal=jr] .jr-ec i,html:not(#z)[data-pal=jr] .jr-ec svg{transform-origin:center}
+html:not(#z)[data-pal=jr] .jr-exp>.jr-ec:first-child{aspect-ratio:16/10}
+html:not(#z)[data-pal=jr] .jr-ec i{width:26px!important;height:26px!important;right:8px!important;bottom:10px!important}
+}
 </style>
 </head>
 <body>
