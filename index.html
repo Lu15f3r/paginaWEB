@@ -1981,6 +1981,18 @@ html:not(#z)[data-pal=jr][data-theme=dark] #jrSortS option,html:not(#z)[data-pal
 html:not(#z)[data-pal=jr][data-theme=light] #jrSortS{color-scheme:light}
 html:not(#z)[data-pal=jr][data-theme=light] #jrSortS option{background-color:#fff!important;color:#111!important}
 html:not(#z)[data-pal=jr] #jrSortS,html:not(#z)[data-pal=jr] #jrSortS:focus,html:not(#z)[data-pal=jr] #jrSortS:focus-visible{outline:none!important;box-shadow:none!important}
+/* tarjeta del banner más compacta + redes */
+html:not(#z)[data-pal=jr] .jr-hcard{padding:18px 20px 18px;border-radius:22px 22px 0 0}
+html:not(#z)[data-pal=jr] .jr-hcard h1{font-size:clamp(21px,1.9vw,26px)!important;margin-bottom:22px!important}
+html:not(#z)[data-pal=jr] .jr-hcard p{font-size:14px;line-height:1.4;margin:0 0 14px;max-width:34ch}
+html:not(#z)[data-pal=jr] .jr-hcard .jr-pill{padding:9px 18px;font-size:14px;min-height:0}
+html:not(#z)[data-pal=jr] .jr-hcard .jr-doo{width:1.2em!important;height:1.2em!important}
+@media(min-width:601px){html:not(#z)[data-pal=jr] .jr-hcard{width:min(360px,calc(100% - 2*var(--pad)))}}
+html:not(#z)[data-pal=jr] .jr-hsoc{display:inline-flex;gap:8px;vertical-align:middle;margin-left:10px;transition:max-height .45s ease,opacity .3s ease}
+html:not(#z)[data-pal=jr] .jr-hsoc a{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;border:1px solid var(--line,rgba(128,128,128,.45));color:inherit}
+html:not(#z)[data-pal=jr] .jr-hsoc a svg{width:18px;height:18px}
+html:not(#z)[data-pal=jr].jr-hmin .jr-hcard>.jr-hsoc{display:none}
+@media(max-width:600px){html:not(#z)[data-pal=jr] .jr-hcard{padding:14px 16px 16px}html:not(#z)[data-pal=jr] .jr-hcard h1{margin-bottom:12px!important;font-size:21px!important}html:not(#z)[data-pal=jr] .jr-hcard p{font-size:13px;margin-bottom:12px}html:not(#z)[data-pal=jr] .jr-hsoc a{width:34px;height:34px}}
 </style>
 </head>
 <body>
@@ -3985,6 +3997,10 @@ try{var _z=zvShow;zvShow=function(){rs();return _z.apply(this,arguments)}}catch(
 var zv=document.getElementById('zv');if(zv)zv.addEventListener('close',rs);
 var S=document.getElementById('jrSortS');if(S)S.addEventListener('change',function(){setTimeout(function(){S.blur()},50)});
 })();
+</script>
+<script>
+/* redes en la tarjeta del banner */
+{const c=document.getElementById('jrHC');if(c&&!c.querySelector('.jr-hsoc')){const d=document.createElement('span');d.className='jr-hsoc';d.innerHTML=['Instagram','TikTok'].map(n=>{const u=CFG.SOCIAL[n];return `<a href="${u?esc(u):'#'}" ${u?'target="_blank" rel="noopener"':''} aria-label="${n}">${ICO[n]}</a>`}).join('');c.appendChild(d)}}
 </script>
 </body>
 </html>
