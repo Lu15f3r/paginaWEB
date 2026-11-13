@@ -1998,6 +1998,15 @@ html:not(#z)[data-pal=jr].jr-hmin .jr-hcard{padding-bottom:16px!important;paddin
 html:not(#z)[data-pal=jr].jr-hmin .jr-hcard>.jr-hsoc{display:none!important}
 html:not(#z)[data-pal=jr].jr-hmin .jr-hcard>p,html:not(#z)[data-pal=jr].jr-hmin .jr-hcard>.jr-pill{padding:0!important;margin:0!important;border:0!important;max-height:0!important;min-height:0!important;height:0!important;opacity:0;overflow:hidden}
 html:not(#z)[data-pal=jr].jr-hmin .jr-hcard>.jr-pill{display:none!important}
+/* tarjeta pegada a la esquina, más delgada; banner completo en celular */
+@media(min-width:761px){html:not(#z)[data-pal=jr] .jr-hcard{left:0!important;padding:12px 18px 14px!important;border-radius:0 20px 0 0!important;width:min(340px,100%)!important}
+html:not(#z)[data-pal=jr] .jr-hcard h1{margin-bottom:12px!important}
+html:not(#z)[data-pal=jr] .jr-hcard p{margin-bottom:10px!important}}
+@media(max-width:760px){
+html:not(#z)[data-pal=jr] .hero .hs img{height:auto!important;min-height:0!important;max-height:none!important;aspect-ratio:2080/950!important;object-fit:cover!important;object-position:center!important;will-change:auto}
+html:not(#z)[data-pal=jr] .hero .jr-hcard{position:relative!important;left:auto!important;bottom:auto!important;width:100%!important;border-radius:0!important;padding:14px 16px 16px!important;transform:none!important}
+html:not(#z)[data-pal=jr] .hero .hdt:not([hidden]){top:auto!important;bottom:calc(100% - 100vw*950/2080 + 10px)!important}
+}
 </style>
 </head>
 <body>
@@ -3926,7 +3935,7 @@ $('jrAE').textContent=`Enviamos a toda Colombia. Envío GRATIS en compras desde 
 /* portada: efecto al bajar (la foto se desliza hacia arriba y la tarjeta se aparta) */
 {const H=$('hero'),R=document.documentElement;let tk=0;const f=()=>{tk=0;if(!H||document.body.classList.contains('pv'))return;const h=H.offsetHeight||1,p=Math.max(0,Math.min(1,scrollY/(h*.75)));R.style.setProperty('--jrpy',(p*50).toFixed(2));R.style.setProperty('--jrpc',Math.min(1,p*1.35).toFixed(3))};
  addEventListener('scroll',()=>{if(!tk)tk=requestAnimationFrame(f)},{passive:true});f();
- const mn=()=>R.classList.toggle('jr-hmin',scrollY>40);mn();addEventListener('scroll',mn,{passive:true})}
+ const mn=()=>R.classList.toggle('jr-hmin',scrollY>40&&innerWidth>760);mn();addEventListener('scroll',mn,{passive:true});addEventListener('resize',mn)}
 /* arriba del todo: logo grande en la esquina; al bajar: logo pequeño en el centro */
 {const R=document.documentElement,t=()=>R.classList.toggle('jr-top',scrollY<40);t();addEventListener('scroll',t,{passive:true});
  $('jrCL').onclick=e=>{e.preventDefault();if(document.body.classList.contains('pv'))pvClose();scrollTo({top:0,behavior:'smooth'})}}
@@ -4005,7 +4014,7 @@ var S=document.getElementById('jrSortS');if(S)S.addEventListener('change',functi
 </script>
 <script>
 /* redes en la tarjeta del banner */
-{const c=document.getElementById('jrHC');if(c&&!c.querySelector('.jr-hsoc')){const d=document.createElement('span');d.className='jr-hsoc';d.innerHTML=['Instagram','TikTok'].map(n=>{const u=CFG.SOCIAL[n];return `<a href="${u?esc(u):'#'}" ${u?'target="_blank" rel="noopener"':''} aria-label="${n}">${ICO[n]}</a>`}).join('');c.appendChild(d)}}
+{const c=document.getElementById('jrHC');if(c&&!c.querySelector('.jr-hsoc')){const d=document.createElement('span');d.className='jr-hsoc';d.innerHTML=['Instagram','Facebook','TikTok'].map(n=>{const u=CFG.SOCIAL[n];return `<a href="${u?esc(u):'#'}" ${u?'target="_blank" rel="noopener"':''} aria-label="${n}">${ICO[n]}</a>`}).join('');c.appendChild(d)}}
 </script>
 </body>
 </html>
