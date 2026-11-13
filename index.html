@@ -2007,6 +2007,22 @@ html:not(#z)[data-pal=jr] .hero .hs img{height:auto!important;min-height:0!impor
 html:not(#z)[data-pal=jr] .hero .jr-hcard{position:relative!important;left:auto!important;bottom:auto!important;width:100%!important;border-radius:0!important;padding:14px 16px 16px!important;transform:none!important}
 html:not(#z)[data-pal=jr] .hero .hdt:not([hidden]){top:auto!important;bottom:calc(100% - 100vw*950/2080 + 10px)!important}
 }
+/* tarjeta "Únete": más pequeña y pegada a la esquina */
+html:not(#z)[data-pal=jr] .jr-jc{margin:0!important;padding:14px 18px 16px!important;border-radius:0 0 20px 0!important;max-width:min(380px,100%)!important}
+html:not(#z)[data-pal=jr] .jr-jc h2{font-size:clamp(18px,1.5vw,22px)!important;margin-bottom:8px!important}
+html:not(#z)[data-pal=jr] .jr-jc p{font-size:13.5px!important;line-height:1.4;margin:0 0 12px!important;max-width:none!important}
+html:not(#z)[data-pal=jr] .jr-jc .jr-btns{gap:6px!important}
+html:not(#z)[data-pal=jr] .jr-jc .jr-btns .jr-pill{padding:7px 12px!important;font-size:13.5px!important}
+html:not(#z)[data-pal=jr] .jr-jc .jr-btns .jr-pill.dark{padding:9px 16px!important;font-size:14px!important}
+@media(max-width:760px){html:not(#z)[data-pal=jr] .jr-jc{border-radius:0 20px 0 0!important;max-width:min(360px,100%)!important}}
+/* celular: etiqueta "Tu estilo, habla por ti" sobre la esquina del banner, como en PC; categorías sin huecos */
+@media(max-width:760px){
+html:not(#z)[data-pal=jr] .hero .jr-hcard{position:absolute!important;left:0!important;bottom:0!important;width:auto!important;max-width:calc(100% - 70px)!important;border-radius:0 18px 0 0!important;padding:10px 16px!important}
+html:not(#z)[data-pal=jr] .hero .jr-hcard h1{font-size:18px!important;margin:0!important;gap:12px}
+html:not(#z)[data-pal=jr] .hero .jr-hcard>p,html:not(#z)[data-pal=jr] .hero .jr-hcard>.jr-pill,html:not(#z)[data-pal=jr] .hero .jr-hcard>.jr-hsoc{display:none!important}
+html:not(#z)[data-pal=jr] .hero .hdt:not([hidden]){top:auto!important;bottom:12px!important}
+html:not(#z)[data-pal=jr] .jr-exp>.jr-ec:first-child{grid-column:1/-1;aspect-ratio:16/9}
+}
 </style>
 </head>
 <body>
@@ -3848,8 +3864,8 @@ const JR_PH={};
 /* Categorías de la tienda (solo gorras). Para que un producto aparezca: categoría "Gorras"; en "Para quién es" marca Hombre y/o Mujer; subcategoría Plana o Curva. */
 const JR_CATS=[
  {k:'curvas',n:'Curvas',t:'Gorras curvas',d:'Para todos los días',f:{t:['gorras'],s:['curva']}},
- {k:'hombre',n:'Hombre',t:'Gorras para hombre',d:'Estilo y actitud',f:{t:['gorras'],g:['Hombre']}},
- {k:'mujer',n:'Mujer',t:'Gorras para mujer',d:'Con carácter',f:{t:['gorras'],g:['Mujer']}},
+ {k:'hombre',n:'Hombre',t:'Hombres',d:'Estilo y actitud',f:{t:['gorras'],g:['Hombre']}},
+ {k:'mujer',n:'Mujer',t:'Mujeres',d:'Con carácter',f:{t:['gorras'],g:['Mujer']}},
  {k:'planas',n:'Planas',t:'Gorras planas',d:'Visera plana',h:1,f:{t:['gorras'],s:['plana']}}];
 const jrMk=f=>Object.assign(F0(),JSON.parse(JSON.stringify(f||{})));
 const jrSame=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
