@@ -3947,7 +3947,7 @@ function jrAnn(){const P=CFG.PAY||{},L=['Envío GRATIS en compras desde '+money(
   const one=L.map(t=>`<span>${esc(t)}</span>`).join('').repeat(3);return `<div class="jr-mq"><div class="jr-mqt">${one}</div><div class="jr-mqt" aria-hidden="true">${one}</div></div>`}
 const jrOff=()=>(($('ann')||{}).offsetHeight||0)+((document.querySelector('.top')||{}).offsetHeight||0)-6;
 const jrTo=el=>{if(el)scrollTo({top:Math.max(0,el.getBoundingClientRect().top+scrollY-jrOff()),behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'})};
-const JR_PH={};
+const JR_PH={planas:['img/plana_portada.webp']};
 /* Categorías de la tienda (solo gorras). Para que un producto aparezca: categoría "Gorras"; en "Para quién es" marca Hombre y/o Mujer; subcategoría Plana o Curva. */
 const JR_CATS=[
  {k:'curvas',n:'Curvas',t:'Gorras curvas',d:'Para todos los días',f:{t:['gorras'],s:['curva']}},
@@ -3976,7 +3976,7 @@ function jrImg(list,alt,cls){const L=(list||[]).filter(Boolean);if(!L.length)ret
 function jrNext(i){let L=[];try{L=JSON.parse(i.dataset.alt||'[]')}catch(e){}if(L.length){i.dataset.alt=JSON.stringify(L.slice(1));i.src=L[0]}else i.remove()}
 function jrExp(items){const el=$('jrExpG');if(!el)return;const first=f=>{const p=products.find(x=>isAv(x)&&fOk(x,jrMk(f))&&imgs(x)[0])||products.find(x=>fOk(x,jrMk(f))&&imgs(x)[0]);return p?imgs(p)[0]:''};
   $('jrExpS').hidden=false;
-  el.innerHTML=items.filter(c=>c.k!=='ofertas'&&!c.k.startsWith('c-')&&!c.h).slice(0,6).map(c=>{const n=jrCount(c),ph=JR_PH[c.k]||[],pi=first(c.f);
+  el.innerHTML=items.filter(c=>c.k!=='ofertas'&&!c.k.startsWith('c-')&&!c.h).slice(0,6).map(c=>{const n=jrCount(c),ph=JR_PH[c.k]||[],pi=ph[0]||first(c.f);
     return `<button type="button" class="jr-ec${pi?' ph':''}" data-jk="${esc(c.k)}">${pi?jrImg([pi],c.n):''}<span>${esc(c.t||c.n)}<small>${esc(c.d||'')}</small></span><i>${JR_ARR}</i></button>`}).join('')}
 function jrPromo(){const off=products.some(p=>isAv(p)&&discPct(p)>0),b=$('jrPB');b.textContent=off?'Ver ofertas':'Ver la tienda';b.dataset.jk=off?'ofertas':'all';$('jrPromo').hidden=false}
 function jrBuild(){if(!$('jrTabs'))return;const items=jrItems(),st=jrState();
