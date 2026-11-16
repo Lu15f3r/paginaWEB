@@ -2110,6 +2110,13 @@ html:not(#z)[data-pal=jr][data-theme=dark] .top .logo.jr-lg{filter:drop-shadow(0
 html:not(#z)[data-pal=jr].jr-scrolled .top .logo.jr-lg,html:not(#z)[data-pal=jr]:not(.jr-top) .top .logo.jr-lg{filter:none}
 @media(min-width:761px){html:not(#z)[data-pal=jr].jr-top .top .logo.jr-lg{color:#fff!important;filter:drop-shadow(0 1px 3px rgba(0,0,0,.85)) drop-shadow(0 0 12px rgba(0,0,0,.5))!important}}
 html:not(#z)[data-pal=jr] .jr-flogo.jr-lg{height:clamp(32px,4vw,52px)!important}
+/* se quitan los logos "GX" pequeños (tarjeta del banner y "Envío gratis desde") */
+html:not(#z)[data-pal=jr] .jr-ico,html:not(#z)[data-pal=jr] .jr-hcard .jr-doo{display:none!important}
+html:not(#z)[data-pal=jr] .jr-hcard h1{display:block!important}
+/* sin animaciones que compitan al mostrar/ocultar la tarjeta */
+html:not(#z)[data-pal=jr] .jr-hcard,html:not(#z)[data-pal=jr] .jr-hcard>*{transition:none!important}
+html:not(#z)[data-pal=jr] .jr-hcard{will-change:auto;overflow-anchor:none}
+html:not(#z)[data-pal=jr]{overflow-anchor:none}
 </style>
 </head>
 <body>
@@ -4038,9 +4045,9 @@ $('jrAE').textContent=`Enviamos a toda Colombia. Envío GRATIS en compras desde 
 /* portada: efecto al bajar (la foto se desliza hacia arriba y la tarjeta se aparta) */
 {const H=$('hero'),R=document.documentElement;let tk=0;const f=()=>{tk=0;if(!H||document.body.classList.contains('pv'))return;const h=H.offsetHeight||1,p=Math.max(0,Math.min(1,scrollY/(h*.75)));R.style.setProperty('--jrpy',(p*50).toFixed(2));R.style.setProperty('--jrpc',Math.min(1,p*1.35).toFixed(3))};
  addEventListener('scroll',()=>{if(!tk)tk=requestAnimationFrame(f)},{passive:true});f();
- const mn=()=>R.classList.toggle('jr-hmin',scrollY>40&&innerWidth>760);mn();addEventListener('scroll',mn,{passive:true});addEventListener('resize',mn)}
+ const mn=()=>{const y=scrollY,on=R.classList.contains('jr-hmin');R.classList.toggle('jr-hmin',innerWidth>760&&(on?y>25:y>110))};mn();addEventListener('scroll',mn,{passive:true});addEventListener('resize',mn)}
 /* arriba del todo: logo grande en la esquina; al bajar: logo pequeño en el centro */
-{const R=document.documentElement,t=()=>R.classList.toggle('jr-top',scrollY<40);t();addEventListener('scroll',t,{passive:true});
+{const R=document.documentElement,t=()=>{const y=scrollY,on=R.classList.contains('jr-top');R.classList.toggle('jr-top',on?y<70:y<20)};t();addEventListener('scroll',t,{passive:true});
  $('jrCL').onclick=e=>{e.preventDefault();if(document.body.classList.contains('pv'))pvClose();scrollTo({top:0,behavior:'smooth'})}}
 try{jrPhotos()}catch(e){}
 try{jrBuild();cartRender()}catch(e){}
