@@ -2064,6 +2064,26 @@ html:not(#z)[data-pal=jr] .prs::before{background:#8a8a85!important;opacity:.55;
 html:not(#z)[data-pal=jr][data-theme=dark] .prs::before{background:#9a9a94!important;opacity:.6}
 html:not(#z)[data-pal=jr] .prt{background:var(--btn)!important;z-index:1}
 html:not(#z)[data-pal=jr] .prs input.pr{background:transparent!important;border:0!important;border-radius:0!important}
+/* celular: descripcion del producto dentro de un menu desplegable (+) */
+html:not(#z)[data-pal=jr] .jr-ddt{display:none}
+@media(max-width:760px){
+html:not(#z)[data-pal=jr] body.pv #lb .jr-ddt{display:flex;order:7;grid-column:1/-1;justify-content:space-between;align-items:center;width:100%;background:none!important;border:0;border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);padding:12px 0;font:inherit;font-size:14px;color:var(--ink);cursor:pointer;text-align:left;margin-top:6px}
+html:not(#z)[data-pal=jr] body.pv #lb .jr-ddt[hidden]{display:none}
+html:not(#z)[data-pal=jr] body.pv #lb .jr-ddt::after{content:"+";font-size:18px;line-height:1;transition:transform .2s}
+html:not(#z)[data-pal=jr] body.pv #lb .jr-ddt[aria-expanded=true]::after{transform:rotate(45deg)}
+html:not(#z)[data-pal=jr] body.pv #lb #lbD{display:none!important;order:7}
+html:not(#z)[data-pal=jr] body.pv #lb #lbD.ddo{display:block!important;order:8;padding:10px 0 4px}
+html:not(#z)[data-pal=jr] body.pv #lb .jr-acc{order:9}
+}
+/* PC: foto completa y centrada (sin recorte) segun el alto de la pantalla */
+@media(min-width:900px){
+html:not(#z)[data-pal=jr] .lbg img{height:calc(100vh - var(--annh,32px) - var(--hh,66px) - 64px)!important;min-height:300px;width:100%!important;object-fit:contain!important;object-position:center!important;background:var(--bg)!important}
+}
+/* celular: "Cantidad" y el selector pegados, en la misma fila */
+@media(max-width:760px){
+html:not(#z)[data-pal=jr] body.pv #lb .lbr{grid-template-columns:auto auto 1fr!important;column-gap:12px!important}
+html:not(#z)[data-pal=jr] body.pv #lb .lbq{justify-self:start!important}
+}
 </style>
 </head>
 <body>
@@ -2085,7 +2105,7 @@ html:not(#z)[data-pal=jr] .prs input.pr{background:transparent!important;border:
   <div class="dh"><button type="button" class="jr-back" id="jrBack" aria-label="Volver a la tienda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Volver</button><nav class="jr-bc" aria-label="Ruta"><button type="button" id="lbX">Inicio</button><i>›</i><button type="button" id="jrBcC" data-jk="all">Tienda</button><i>›</i><span id="jrBcN"></span></nav></div>
   <div class="lbb"><div class="lbl"><div class="lbth" id="pvTh" aria-label="Miniaturas"></div><div class="lbg" id="lbG"></div><div class="stage" id="lbS"><button class="lbn l" id="lbP" type="button" aria-label="Foto anterior">‹</button><img id="lbI" alt=""><button class="lbn r" id="lbN" type="button" aria-label="Foto siguiente">›</button></div>
   <div class="lbt" id="lbTh"></div>
-  </div><div class="lbr"><p class="jr-sku" id="jrSku"></p><h2 id="lbT"></h2><div class="lbd" id="lbD" hidden></div>
+  </div><div class="lbr"><p class="jr-sku" id="jrSku"></p><h2 id="lbT"></h2><button type="button" class="jr-ddt" id="jrDDt" aria-expanded="false" hidden>Descripción</button><div class="lbd" id="lbD" hidden></div>
   <div class="lbo" id="lbO"></div>
   <div class="lbf"><div class="lbpr"><span class="price" id="lbPr"></span><small class="saved" id="lbSv"></small></div><div class="lba"><span class="lbq" role="group" aria-label="Cantidad"><button type="button" id="lbQm" aria-label="Menos">−</button><b id="lbQn">1</b><button type="button" id="lbQp" aria-label="Más unidades">+</button></span><button type="button" class="btn ghost sm" id="lbC" aria-label="Agregar al carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a1 1 0 0 0 1 .8h8.6a1 1 0 0 0 1-.8L20 7H6"/></svg><span class="bt">Agregar al carrito</span></button><a class="btn grn" id="lbW" target="_blank" rel="noopener" aria-label="Pedir por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.06 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.78h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg><span class="bt">Pedir por WhatsApp</span></a></div></div>
   <div class="jr-acc"><details id="jrAI"><summary>Información del producto</summary><p id="jrAIt"></p></details><details><summary>Cambios y garantía</summary><p>Si tu producto llega con algún problema, te ayudamos. <button type="button" class="jr-lnk" data-pol="cam">Ver la política de cambios y garantía</button></p></details><details><summary>Envíos</summary><p id="jrAE"></p></details></div></div></div>
@@ -4053,11 +4073,17 @@ var S=document.getElementById('jrSortS');if(S)S.addEventListener('change',functi
 <script>
 /* panel de ayuda junto a las preguntas frecuentes */
 {const q=document.querySelector('.faq');if(q&&!q.querySelector('.jr-faqi')){const I={s:'<svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7zM7 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM17 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>',m:'<svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/></svg>',r:'<svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5l2-2v6h-6l2.4-2.4A5.5 5.5 0 1 0 17.5 12"/></svg>',w:'<svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg>'};
-const d=document.createElement('div');d.className='jr-faqi';d.innerHTML=`<h4>Compra tranquilo</h4><p>Lo que necesitas saber antes de pedir tu gorra.</p><ul><li>${I.s}<div><b>Envío gratis desde ${money(CFG.FREE_SHIP)}</b><span>Despachamos a toda Colombia.</span></div></li><li>${I.m}<div><b>Pago contra entrega</b><span>Paga cuando recibes, o por Nequi y Bancolombia.</span></div></li><li>${I.r}<div><b>Cambios y garantía</b><span>Si algo no está bien, te ayudamos a resolverlo.</span></div></li><li>${I.w}<div><b>Atención directa por WhatsApp</b><span>Resolvemos tus dudas de tallas y pedidos.</span></div></li></ul><a class="jr-pill dark" target="_blank" rel="noopener" href="${wa('Hola '+CFG.STORE+', tengo una pregunta.')}">Escríbenos por WhatsApp</a>`;q.insertBefore(d,q.children[1])}}
+const d=document.createElement('div');d.className='jr-faqi';d.innerHTML=`<h4>Compra tranquilo</h4><p>Lo que necesitas saber antes de pedir tu gorra.</p><ul><li>${I.s}<div><b>Envío gratis desde ${money(CFG.FREE_SHIP)}</b><span>Despachamos a toda Colombia.</span></div></li><li>${I.m}<div><b>Pago contra entrega</b><span>Paga cuando recibes, o por Nequi y Bancolombia.</span></div></li><li>${I.r}<div><b>Cambios y garantía</b><span>Si algo no está bien, te ayudamos a resolverlo.</span></div></li><li>${I.w}<div><b>Atención directa por WhatsApp</b><span>Resolvemos tus dudas de tallas y pedidos.</span></div></li></ul>`;q.insertBefore(d,q.children[1])}}
 </script>
 <script>
 /* X del buscador: borra y cierra */
 {const bx=document.getElementById('sbx'),q=document.getElementById('srQ'),b=document.getElementById('srchB');if(bx&&q&&b&&!document.getElementById('srX')){const x=document.createElement('button');x.type='button';x.id='srX';x.setAttribute('aria-label','Borrar y cerrar búsqueda');x.innerHTML='<svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>';x.onclick=e=>{e.stopPropagation();b.click();q.blur()};bx.appendChild(x)}}
+</script>
+<script>
+(function(){const d=document.getElementById('lbD'),b=document.getElementById('jrDDt');if(!d||!b)return;
+const sync=()=>{b.hidden=d.hidden;d.classList.remove('ddo');b.setAttribute('aria-expanded','false')};
+new MutationObserver(sync).observe(d,{childList:true,attributes:true,attributeFilter:['hidden']});
+b.addEventListener('click',()=>{const o=d.classList.toggle('ddo');b.setAttribute('aria-expanded',o?'true':'false')});sync()})();
 </script>
 </body>
 </html>
