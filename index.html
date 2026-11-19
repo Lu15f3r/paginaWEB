@@ -2015,6 +2015,20 @@ html:not(#z)[data-pal=jr] body.pv #lb .lbq{order:5!important}
 html:not(#z)[data-pal=jr] body.pv #lb #lbC{order:6!important}
 html:not(#z)[data-pal=jr] body.pv #lb .lbd{order:8}
 }
+/* tema oscuro: "Aplicar filtros" con letras legibles */
+html:not(#z)[data-pal=jr] #fA.btn.grn,html:not(#z)[data-pal=jr] #fA.btn.grn:not(.dis){color:var(--btnx)!important}
+/* celular, ficha de producto: sin botón flotante de WhatsApp; barra fija con los dos botones iguales */
+@media(max-width:760px){
+html:not(#z)[data-pal=jr] body.pv #fab{display:none!important}
+html:not(#z)[data-pal=jr] body.pv #lb .lbo{grid-column:1/-1!important}
+html:not(#z)[data-pal=jr] body.pv #lb .lbr::after{content:"";position:fixed;left:0;right:0;bottom:0;height:70px;background:var(--bg);border-top:1px solid var(--line);z-index:30;pointer-events:none}
+html:not(#z)[data-pal=jr] body.pv #lb #lbC,html:not(#z)[data-pal=jr] body.pv #lb #lbW{position:fixed!important;bottom:12px;z-index:31;width:calc(50% - 20px)!important;min-width:0!important;height:46px;min-height:46px!important;padding:0 8px!important;margin:0!important;font-size:13.5px!important;font-weight:600;display:flex!important;align-items:center;justify-content:center;gap:6px;border-radius:999px!important;white-space:nowrap;box-sizing:border-box}
+html:not(#z)[data-pal=jr] body.pv #lb #lbC{left:14px;right:auto;grid-column:auto!important;background:var(--btn)!important;color:var(--btnx)!important;border:1px solid var(--btn)!important}
+html:not(#z)[data-pal=jr] body.pv #lb #lbW{right:14px;left:auto;grid-column:auto!important;background:var(--wa)!important;color:#fff!important;border:1px solid var(--wa)!important}
+html:not(#z)[data-pal=jr] body.pv #lb #lbC.okk{background:var(--wa)!important;border-color:var(--wa)!important;color:#fff!important}
+html:not(#z)[data-pal=jr] body.pv #lb #lbC.dis,html:not(#z)[data-pal=jr] body.pv #lb #lbW.dis{opacity:.45}
+html:not(#z)[data-pal=jr] body.pv #lb{padding-bottom:84px}
+}
 </style>
 </head>
 <body>
