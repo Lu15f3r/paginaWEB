@@ -2091,6 +2091,14 @@ html:not(#z)[data-pal=jr] body.pv #lb .lbq{justify-self:start!important}
 html:not(#z) .jr-sups{width:100%;padding:12px 14px;font:inherit;font-size:15px;border-radius:12px;margin-top:6px}
 html:not(#z) .jr-supn{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
 html:not(#z) .jr-supn input{flex:1 1 200px;min-width:0}
+/* PC: flechas < > al pasar el mouse sobre la foto del producto */
+@media(hover:hover) and (min-width:900px){
+html:not(#z)[data-pal=jr] .card .ph .pa{display:flex!important;align-items:center;justify-content:center;width:36px!important;height:36px!important;padding:0 0 2px!important;border-radius:50%!important;clip-path:none!important;background:var(--chip)!important;color:var(--ink)!important;-webkit-text-fill-color:var(--ink);border:1px solid var(--line2)!important;font:400 18px/1 sans-serif!important;opacity:0!important;pointer-events:none;transition:opacity .2s,background .2s;box-shadow:0 2px 8px rgba(0,0,0,.18);z-index:6}
+html:not(#z)[data-pal=jr] .card .ph:hover .pa{opacity:1!important;pointer-events:auto}
+html:not(#z)[data-pal=jr] .card .ph .pa:hover{background:var(--btn)!important;color:var(--btnx)!important;-webkit-text-fill-color:var(--btnx)}
+html:not(#z)[data-pal=jr] .card .ph .pa.pv{left:10px!important;right:auto!important}
+html:not(#z)[data-pal=jr] .card .ph .pa.nx{right:10px!important;left:auto!important}
+}
 </style>
 </head>
 <body>
@@ -4107,7 +4115,13 @@ const d=document.createElement('div');d.className='jr-faqi';d.innerHTML=`<h4>Com
 (function(){const d=document.getElementById('lbD'),b=document.getElementById('jrDDt');if(!d||!b)return;
 const sync=()=>{b.hidden=d.hidden;d.classList.remove('ddo');b.setAttribute('aria-expanded','false')};
 new MutationObserver(sync).observe(d,{childList:true,attributes:true,attributeFilter:['hidden']});
-b.addEventListener('click',()=>{const o=d.classList.toggle('ddo');b.setAttribute('aria-expanded',o?'true':'false')});sync()})();
+const acc=()=>[...document.querySelectorAll('#lb .jr-acc details')];
+const closeD=()=>{d.classList.remove('ddo');b.setAttribute('aria-expanded','false')};
+const closeAcc=ex=>acc().forEach(x=>{if(x!==ex)x.open=false});
+b.addEventListener('click',e=>{e.stopPropagation();const o=!d.classList.contains('ddo');if(o){closeAcc();d.classList.add('ddo');b.setAttribute('aria-expanded','true')}else closeD()});
+acc().forEach(x=>x.addEventListener('toggle',()=>{if(x.open){closeD();closeAcc(x)}}));
+document.addEventListener('click',e=>{if(e.target.closest('#jrDDt,#lbD,.jr-acc'))return;closeD();closeAcc()});
+sync()})();
 </script>
 </body>
 </html>
