@@ -2041,6 +2041,29 @@ html:not(#z)[data-pal=jr] body.pv #ct.show{transform:translate(-50%,0)!important
 html:not(#z):has(#cartP.open) body.pv #lb #lbC,html:not(#z):has(#cartP.open) body.pv #lb #lbW,html:not(#z):has(#cartP.open) body.pv #lb .lbr::after{display:none!important}
 }
 html:not(#z)[data-pal=jr] #cartW,html:not(#z)[data-pal=jr] #cartW.btn.grn:not(.dis),html:not(#z)[data-pal=jr] #cartW:not(.dis):hover{background:var(--wa)!important;border-color:var(--wa)!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
+/* pedir por WhatsApp siempre verde; cantidad en una fila; fondo quieto con carrito abierto */
+html:not(#z)[data-pal=jr] #lbW,html:not(#z)[data-pal=jr] #lbW.btn.grn:not(.dis),html:not(#z)[data-pal=jr] #lbW:hover{background:var(--wa)!important;border-color:var(--wa)!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
+html:not(#z)[data-pal=jr] #lb .lba::before{margin-bottom:0!important;white-space:nowrap}
+html:not(#z)[data-pal=jr] #lb .lbq{justify-self:start}
+@media(min-width:761px){
+html:not(#z)[data-pal=jr] #lb .lba{grid-template-columns:auto 1fr!important;column-gap:14px;align-items:center}
+html:not(#z)[data-pal=jr] #lb .lba::before{grid-column:1}
+html:not(#z)[data-pal=jr] #lb .lbq{grid-column:2}
+html:not(#z)[data-pal=jr] #lb #lbC,html:not(#z)[data-pal=jr] #lb #lbW{grid-column:1/-1}
+}
+@media(max-width:760px){
+html:not(#z)[data-pal=jr] body.pv #lb .lba::before{order:4!important;grid-column:1!important;margin:0!important;align-self:center}
+html:not(#z)[data-pal=jr] body.pv #lb .lbq{order:4!important;grid-column:2!important;justify-self:end}
+}
+html:not(#z):has(#cartP.open),html:not(#z):has(#cartP.open) body,html:not(#z):has(#cartP.open) #lb{overflow:hidden!important;overscroll-behavior:none}
+#cartP,#cartL{overscroll-behavior:contain}
+/* el cliente no ve la cantidad de productos; linea del filtro de precio visible */
+html:not(#z) #jrN{display:none!important}
+html:not(#z) .jr-bar .jr-r{margin-left:auto}
+html:not(#z)[data-pal=jr] .prs::before{background:#8a8a85!important;opacity:.55;height:4px}
+html:not(#z)[data-pal=jr][data-theme=dark] .prs::before{background:#9a9a94!important;opacity:.6}
+html:not(#z)[data-pal=jr] .prt{background:var(--btn)!important;z-index:1}
+html:not(#z)[data-pal=jr] .prs input.pr{background:transparent!important;border:0!important;border-radius:0!important}
 </style>
 </head>
 <body>
