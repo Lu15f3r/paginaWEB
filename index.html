@@ -2036,6 +2036,11 @@ html:not(#z)[data-pal=jr] body.pv #lb #lbC.okk{opacity:1!important}
 html:not(#z)[data-pal=jr] body.pv #ct{white-space:nowrap;transform:translate(-50%,-10px)!important}
 html:not(#z)[data-pal=jr] body.pv #ct.show{transform:translate(-50%,0)!important}
 }
+/* carrito abierto: sin botones fijos del producto; "Pedir todo por WhatsApp" verde en cualquier tema */
+@media(max-width:760px){
+html:not(#z):has(#cartP.open) body.pv #lb #lbC,html:not(#z):has(#cartP.open) body.pv #lb #lbW,html:not(#z):has(#cartP.open) body.pv #lb .lbr::after{display:none!important}
+}
+html:not(#z)[data-pal=jr] #cartW,html:not(#z)[data-pal=jr] #cartW.btn.grn:not(.dis),html:not(#z)[data-pal=jr] #cartW:not(.dis):hover{background:var(--wa)!important;border-color:var(--wa)!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
 </style>
 </head>
 <body>
