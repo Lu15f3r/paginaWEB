@@ -2077,8 +2077,11 @@ html:not(#z)[data-pal=jr] body.pv #lb .jr-acc{order:9}
 }
 /* PC: foto completa y centrada (sin recorte) segun el alto de la pantalla */
 @media(min-width:900px){
-html:not(#z)[data-pal=jr] #lb .lbb{grid-template-columns:minmax(0,max(300px,min(58vw,calc((100vh - var(--annh,32px) - var(--hh,66px) - 64px)*.8)))) minmax(300px,1fr)!important;justify-content:center}
-html:not(#z)[data-pal=jr] .lbg img{height:auto!important;aspect-ratio:4/5!important;width:100%!important;object-fit:contain!important;object-position:center!important;background:var(--bg)!important}
+html:not(#z)[data-pal=jr] #lb .lbb{grid-template-columns:minmax(0,1.7fr) minmax(320px,1fr)!important;justify-content:stretch}
+html:not(#z)[data-pal=jr] #lb .lbg{display:grid!important;grid-template-columns:1fr 1fr!important;gap:6px!important}
+html:not(#z)[data-pal=jr] #lb .lbg img{position:static!important;height:auto!important;aspect-ratio:4/5!important;width:100%!important;object-fit:cover!important;margin:0!important;box-shadow:none!important}
+html:not(#z)[data-pal=jr] #lb .lbg img:only-child{grid-column:1/-1;aspect-ratio:auto!important;object-fit:contain!important}
+html:not(#z)[data-pal=jr] #lb .lbr{position:sticky;top:calc(var(--annh,32px) + var(--hh,66px) + 6px);align-self:start}
 }
 /* celular: "Cantidad" y el selector pegados, en la misma fila */
 @media(max-width:760px){
