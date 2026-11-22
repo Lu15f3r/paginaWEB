@@ -2209,10 +2209,10 @@ html:not(#z)[data-pal=jr] .jr-soc-b{order:5;flex:0 0 auto;align-self:center;heig
 .jr-rf-g .t{font-size:16.5px;font-weight:600}
 .jr-rf-n{margin:14px 0 0;font-size:13px;opacity:.75}
 @media (max-width:760px){.jr-rf{margin-top:28px;padding:0 16px}.jr-rf-g{grid-template-columns:1fr}.jr-rf-s,.jr-rf h3{text-align:left}}
-/* pantallas muy grandes: contenido centrado y no demasiado esparcido */
-html:not(#z)[data-pal] #jrExpS,html:not(#z)[data-pal] .sectH,html:not(#z)[data-pal] #jrPromo,html:not(#z)[data-pal] #catalogo,html:not(#z)[data-pal] .faq,html:not(#z)[data-pal] #contacto{max-width:1440px!important;margin-left:auto!important;margin-right:auto!important;box-sizing:border-box}
 @media (min-width:761px){html:not(#z)[data-pal] .faq{grid-template-columns:minmax(280px,440px) minmax(0,1fr)!important;column-gap:clamp(40px,6vw,120px)!important}}
-@media (min-width:1900px){html:not(#z) .jr-rf,html:not(#z) .jr-soc{max-width:1240px}}
+/* pantallas grandes: toda la página se escala con el ancho (diseño base 1440px) para que llene la pantalla sin franjas vacías */
+:root{--zm:1}
+@media (min-width:1441px){html:not(#z) #ann,html:not(#z) .top,html:not(#z) #hero,html:not(#z) #jrExpS,html:not(#z) #jrPromo,html:not(#z) #jrSoc,html:not(#z) .sectH,html:not(#z) #catalogo,html:not(#z) #jrSpotS,html:not(#z) #jrJoinS,html:not(#z) #jrRev,html:not(#z) #jrRf,html:not(#z) .faq,html:not(#z) #contacto{zoom:var(--zm)}}
 </style>
 </head>
 <body>
@@ -4376,6 +4376,11 @@ a.href='https://wa.me/'+CFG.WHATSAPP+'?text='+encodeURIComponent(t)})();
 /* valores del envío en las preguntas frecuentes */
 (function(){try{const m=n=>'$ '+Math.round(n).toLocaleString('es-CO');const fee=Math.round((CFG.SHIP_FULL||0)*(100-(CFG.SHIP_DTO||0))/100);
 document.querySelectorAll('.jr-fn').forEach(e=>e.textContent=m(CFG.SHIP_FULL));document.querySelectorAll('.jr-ff').forEach(e=>e.textContent=m(fee))}catch(e){}})();
+</script>
+
+<script>
+/* escala la página según el ancho de la pantalla (solo pantallas mayores a 1440px) */
+(function(){const r=document.documentElement,f=()=>{const z=Math.max(1,Math.min(2.7,innerWidth/1440));r.style.setProperty('--zm',z.toFixed(3))};f();addEventListener('resize',f)})();
 </script>
 </body>
 </html>
