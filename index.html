@@ -2249,6 +2249,17 @@ html:not(#z)[data-pal=jr] #jrSoc .jr-sc{flex:none;width:auto;justify-content:spa
 html:not(#z)[data-pal=jr] #jrPromo .jr-row li{padding:4px 14px;gap:6px}}
 html:not(#z)[data-pal=jr] #jrPromo .jr-cta{margin:14px 0 0}
 html:not(#z)[data-pal=jr] #jrPromo .jr-hd{margin-bottom:8px}
+@media(min-width:761px){html:not(#z) .jr-rf-g{gap:clamp(24px,2.2vw,36px)}
+html:not(#z)[data-pal=jr] #jrSoc{gap:clamp(24px,2.2vw,36px)}}
+@media(hover:hover){html:not(#z) .jr-rf-g li:not(:nth-child(2)):hover{transform:scale(1.015)}
+html:not(#z)[data-pal=jr] #jrSoc .jr-sc:not(#jrSocT):hover{transform:scale(1.015)}}
+@media(hover:hover){html:not(#z)[data-pal=jr] #jrSoc .jr-sc:hover{border-color:#000;border-width:1.5px;box-shadow:0 10px 26px rgba(0,0,0,.12)}
+html[data-theme=dark]:not(#z)[data-pal=jr] #jrSoc .jr-sc:hover{border-color:#fff;box-shadow:0 10px 26px rgba(0,0,0,.5)}
+html:not(#z)[data-pal=jr] #jrSoc .jr-sc:not(#jrSocT):hover,html:not(#z) .jr-rf-g li:not(:nth-child(2)):hover{transform:scale(1.02)}}
+html:not(#z)[data-pal=jr] #jrSoc .jr-sc{transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+@media(hover:hover){
+html:not(#z)[data-pal=jr] #jrSoc .jr-sc:not(#jrSocT):hover,html:not(#z) .jr-rf-g li:not(:nth-child(2)):hover{transform:translateY(-5px)}
+html:not(#z)[data-pal=jr] #jrSoc #jrSocT:hover,html:not(#z) .jr-rf-g li:nth-child(2):hover{transform:scale(1.03) translateY(-5px)}}
 </style>
 </head>
 <body>
