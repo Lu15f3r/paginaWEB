@@ -2227,6 +2227,14 @@ html:not(#z)[data-pal=jr] #jrPromo{padding-top:clamp(16px,2vw,28px)}
 html:not(#z)[data-pal=jr] #jrPromo .jr-hd{margin-bottom:14px}
 html:not(#z)[data-pal=jr] #jrPromo .jr-row{max-width:none;width:100%;margin-top:clamp(10px,1.4vw,18px)}
 @media(min-width:761px){html:not(#z)[data-pal=jr] #jrPromo .jr-row li{padding:10px 18px}}
+html:not(#z)[data-pal=jr] #jrJoinS{margin-top:clamp(28px,3vw,44px);padding:0 var(--pad)}
+html:not(#z)[data-pal=jr] #jrJoinS .jr-join{max-width:none!important;width:100%;margin:0}
+html:not(#z)[data-pal=jr] #jrJoinS .jr-jc{max-width:none!important;width:100%;box-sizing:border-box;margin:0}
+html:not(#z)[data-pal=jr] #jrRf{max-width:none;margin-top:clamp(28px,3vw,44px);padding:0 var(--pad)}
+html:not(#z)[data-pal=jr] #jrSoc{max-width:none;margin-top:clamp(28px,3vw,44px);padding:0 var(--pad)}
+html:not(#z)[data-pal=jr] #jrPromo{margin-top:clamp(28px,3vw,44px)}
+html:not(#z)[data-pal=jr] #jrPromo .jr-cta{margin:clamp(22px,2.4vw,32px) 0 0}
+html:not(#z)[data-pal=jr] #jrJoinS{padding-left:0;padding-right:0}
 </style>
 </head>
 <body>
@@ -4170,7 +4178,7 @@ const JR={sort:'rec'};
 const JR_ARR='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>';
 const JR_BACK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>';
 const JR_FIL='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>';
-function jrAnn(){const P=CFG.PAY||{},L=['50% de descuento en el envío','10% de descuento si nos sigues en redes','Refiere a un amigo y ambos ganan'];if(P.cod!==false)L.push('Pago contra entrega');
+function jrAnn(){const P=CFG.PAY||{},L=['Envíos a nivel nacional','50% de descuento en el envío','10% de descuento si nos sigues en redes'];if(P.cod!==false)L.push('Pago contra entrega');
   const one=L.map(t=>`<span>${esc(t)}</span>`).join('').repeat(3);return `<div class="jr-mq"><div class="jr-mqt">${one}</div><div class="jr-mqt" aria-hidden="true">${one}</div></div>`}
 const jrOff=()=>(($('ann')||{}).offsetHeight||0)+((document.querySelector('.top')||{}).offsetHeight||0)-6;
 const jrTo=el=>{if(el)scrollTo({top:Math.max(0,el.getBoundingClientRect().top+scrollY-jrOff()),behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'})};
