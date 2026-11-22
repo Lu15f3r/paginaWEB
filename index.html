@@ -340,7 +340,7 @@ dialog{margin:auto}
 #promo{scroll-margin-top:84px}
 .fin{max-width:1600px;margin:auto;padding:0 5vw}
 .btn.cyc{animation:cpBtn 1.6s ease-in-out infinite}
-@keyframes cpBtn{0%,100%{transform:scale(.93)}50%{transform:scale(1.1)}}
+@keyframes cpBtn{0%,100%{transform:scale(.93)}50%{transform:scale(1.08)}}
 @media(prefers-reduced-motion:reduce){.btn.cyc{animation:none}}
 .ph .tag{left:calc(var(--sk,28px) + 8px);top:12px;background:#151515;color:#fff;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:4px 18px}
 .card.sold .ph{filter:grayscale(1)}.card.sold .ph .im1{opacity:1}.card.sold .ph::after{content:"";position:absolute;inset:0;z-index:1;background:rgba(255,255,255,.5);pointer-events:none}
@@ -2196,9 +2196,10 @@ html:not(#z)[data-pal=jr] .jr-soc-b{order:5;flex:0 0 auto;align-self:center;heig
 }
 .cdr{display:flex;gap:8px;align-items:center;margin-bottom:2px}.cdr input{flex:1;min-width:0;text-transform:uppercase}.cdr input::placeholder{text-transform:none}.cdm{display:block;min-height:1.1em;margin:4px 0 8px;font-size:.82rem}.cdm.ok{color:var(--wa);font-weight:600}.cdm.bad{color:#e5484d}
 #cartNm{display:none!important}
-.jr-soc-h b{display:inline-block;animation:jrPulse 1.6s ease-in-out infinite;transform-origin:center}
-@keyframes jrPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.22)}}
+.jr-soc-h b{display:inline-block;margin:0 .6em;animation:jrPulse 1.6s ease-in-out infinite;transform-origin:center}
+@keyframes jrPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
 @media (prefers-reduced-motion:reduce){.jr-soc-h b{animation:none}}
+#cartCdX[hidden]{display:none!important}
 </style>
 </head>
 <body>
@@ -2215,7 +2216,7 @@ html:not(#z)[data-pal=jr] .jr-soc-b{order:5;flex:0 0 auto;align-self:center;heig
 <div class="sectH"><div class="jr-cath"><h2>Lo más nuevo</h2><p>Gorras que hablan por ti. Elige tus favoritas y pídelas en minutos.</p></div><div class="jr-tabs" id="jrTabs" role="group" aria-label="Categorías"></div><div class="jr-bar"><span class="jr-n" id="jrN"></span><span class="jr-r"><button type="button" class="jr-fil" id="jrFil">Filtrar</button><label class="jr-sort">Ordenar por: <select id="jrSortS"><option value="rec">Recomendado</option><option value="nw">Lo más nuevo</option><option value="pa">Precio: menor a mayor</option><option value="pd">Precio: mayor a menor</option><option value="az">Nombre: A–Z</option></select></label></span></div></div>
 <main id="catalogo"><div class="empty">Cargando productos…</div></main>
 <section class="fin jr-s jr-hide-sq" id="jrSpotS" hidden><div class="jr-hd"><h2>Vistos en GORRAX</h2><a class="jr-lk" id="jrIg" target="_blank" rel="noopener">Etiquétanos en Instagram &amp; TikTok para aparecer aquí ↗</a></div><div class="jr-spot" id="jrSpot"></div></section>
-<section class="fin jr-s jr-nopad jr-hide-sq" id="jrJoinS"><div class="jr-join" id="jrJoin"><div class="jr-jc"><h2>Únete a la comunidad GORRAX</h2><p>Escríbenos por WhatsApp &amp; síguenos en nuestras redes y entérate primero de los lanzamientos, las ofertas y lo que vuelve a llegar.</p><div class="jr-btns"><a class="jr-pill dark" id="jrJW" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>Escribir por WhatsApp</a><a class="jr-pill" id="jrJI" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Instagram</a><a class="jr-pill" id="jrJT" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 3c.4 2.3 1.9 3.8 4.2 4v3.1a7.3 7.3 0 0 1-4.1-1.3v6.4A5.8 5.8 0 1 1 10.9 9.4v3.2a2.7 2.7 0 1 0 2.6 2.7V3h3.1z"/></svg>TikTok</a><a class="jr-pill" id="jrJF" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H8v3h2.5V21h3z"/></svg>Facebook</a></div></div></div></section>
+<section class="fin jr-s jr-nopad jr-hide-sq" id="jrJoinS"><div class="jr-join" id="jrJoin"><div class="jr-jc"><h2>Premiamos tu lealtad</h2><p>En tu quinta compra te damos un obsequio totalmente gratis.</p><div class="jr-btns"><a class="jr-pill dark" id="jrJW" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>Habla con un asesor</a></div></div></div></section>
 
 <dialog id="lb" aria-label="Fotos del producto">
   <div class="dh"><button type="button" class="jr-back" id="jrBack" aria-label="Volver a la tienda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Volver</button><nav class="jr-bc" aria-label="Ruta"><button type="button" id="lbX">Inicio</button><i>›</i><button type="button" id="jrBcC" data-jk="all">Tienda</button><i>›</i><span id="jrBcN"></span></nav></div>
@@ -2234,7 +2235,7 @@ html:not(#z)[data-pal=jr] .jr-soc-b{order:5;flex:0 0 auto;align-self:center;heig
 <a class="fab" id="fab" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp" title="Escríbenos por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.06 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.78h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg></a>
 <button type="button" class="fab cartb" id="cartF" aria-label="Abrir carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.4 12.2a1 1 0 0 0 1 .8H18a1 1 0 0 0 1-.8L21 8H6"/></svg><b id="cartNf" class="cn" hidden>0</b></button>
 <div class="cartO" id="cartO"></div>
-<aside class="cartP" id="cartP" aria-label="Carrito de compras"><div class="cph"><h2>Tu carrito <small id="jrCartH"></small></h2><button type="button" class="btn red sm" id="cartX" aria-label="Cerrar carrito">✕</button></div><div class="cpb" id="cartL"></div><div class="cpf"><div class="ctot" id="cartT"></div><div class="cdr"><input id="cartCd" placeholder="¿Tienes un código de descuento?" autocomplete="off" autocapitalize="characters"><button type="button" class="btn ghost sm" id="cartCdB">Aplicar</button></div><small class="cdm" id="cartCdM"></small><input id="cartNm" placeholder="Tu nombre (opcional)" autocomplete="name"><button type="button" class="btn dis" id="cartK">Finalizar compra</button><a class="btn grn dis" id="cartW" target="_blank" rel="noopener">Pedir todo por WhatsApp</a><button type="button" class="btn ghost sm" id="cartC" hidden>Vaciar carrito</button><div class="ccf" id="cartCf" hidden><span>¿Vaciar todo el carrito?</span><button type="button" class="btn red sm" id="cartCy">Sí, vaciar</button><button type="button" class="btn ghost sm" id="cartCn">No</button></div><p class="jr-secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Compra segura</p></div></aside>
+<aside class="cartP" id="cartP" aria-label="Carrito de compras"><div class="cph"><h2>Tu carrito <small id="jrCartH"></small></h2><button type="button" class="btn red sm" id="cartX" aria-label="Cerrar carrito">✕</button></div><div class="cpb" id="cartL"></div><div class="cpf"><div class="ctot" id="cartT"></div><div class="cdr"><input id="cartCd" placeholder="¿Tienes un código de descuento?" autocomplete="off" autocapitalize="characters"><button type="button" class="btn ghost sm" id="cartCdB">Aplicar</button><button type="button" class="btn ghost sm" id="cartCdX" hidden>Quitar</button></div><small class="cdm" id="cartCdM"></small><input id="cartNm" placeholder="Tu nombre (opcional)" autocomplete="name"><button type="button" class="btn dis" id="cartK">Finalizar compra</button><a class="btn grn dis" id="cartW" target="_blank" rel="noopener">Pedir todo por WhatsApp</a><button type="button" class="btn ghost sm" id="cartC" hidden>Vaciar carrito</button><div class="ccf" id="cartCf" hidden><span>¿Vaciar todo el carrito?</span><button type="button" class="btn red sm" id="cartCy">Sí, vaciar</button><button type="button" class="btn ghost sm" id="cartCn">No</button></div><p class="jr-secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Compra segura</p></div></aside>
 <button type="button" class="totop" id="toTop" aria-label="Subir a la sección anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button><button type="button" class="totop" id="toDown" aria-label="Bajar a la siguiente sección"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></button>
 <div class="ctoast" id="ct" role="status"></div>
 <button type="button" class="fbtn" id="fFab" aria-label="Abrir filtros"></button>
@@ -2246,7 +2247,7 @@ html:not(#z)[data-pal=jr] .jr-soc-b{order:5;flex:0 0 auto;align-self:center;heig
 <div class="cof"><label class="w">Producto<select id="vfP"></select></label><label id="vfZw">Talla<select id="vfZ"></select></label><label id="vfCw">Color<select id="vfC"></select></label><label>Cantidad<input id="vfQ" type="number" min="1" value="1"></label><label>Precio unitario<input id="vfPr" type="number" min="0" step="500"></label><div class="w"><button class="btn ghost sm" id="vfA" type="button">Agregar a la venta</button></div></div>
 <div id="vfL" style="margin-top:10px"></div>
 <div class="cof" style="margin-top:12px"><label>Cliente (opcional)<input id="vfN" placeholder="Nombre"></label><label>Celular (opcional)<input id="vfT" type="tel" inputmode="numeric" maxlength="14" placeholder="3001234567"></label><label>Medio de pago<select id="vfPay"><option>Efectivo</option><option>Nequi</option><option>Bancolombia</option><option>Transferencia</option><option>Tarjeta (datáfono)</option></select></label></div>
-<div class="coe" id="vfM"></div><button class="btn grn" id="vfS" type="button">Registrar venta</button></div></dialog>
+<label style="display:flex;gap:8px;align-items:center;margin-top:10px"><input type="checkbox" id="vfG" checked style="width:auto;flex:none"> Generar su código para referir amigos (si pone celular)</label><div class="coe" id="vfM"></div><button class="btn grn" id="vfS" type="button">Registrar venta</button></div></dialog>
 
 <dialog id="xld" class="xld"><div class="dh"><h2>Exportar a Excel</h2><button class="btn red sm" id="xlX" type="button">Cerrar</button></div><div class="db" id="xlB"></div></dialog>
 <dialog id="cm"><div class="dh"><h2>Categorías</h2><button class="btn red sm" id="cmX" type="button">Cerrar</button></div><div class="db"><p class="desc" style="margin-bottom:8px">Cambia el nombre o elimina categorías. Las categorías vacías solo se pueden eliminar.</p><div class="coe" id="cmM"></div><div id="cmB"></div></div></dialog>
@@ -2378,7 +2379,7 @@ const DEMO_DATA=[
 
 ];
 
-function prodMsg(p,size,color,code,q){return `Hola ${CFG.STORE}, me interesa este producto:\n*${p.name}* (${p.category})\n${size?'Talla: '+size+'\n':''}${color?'Color: '+color+'\n':''}${q>1?'Cantidad: '+q+'\n':''}Precio: ${money(p.price)}${q>1?' c/u':''}${+p.price*(q||1)>CFG.FREE_SHIP?'\nEnvío: GRATIS':''}${code?'\nPedido: '+code:''}\n¿Está disponible?`}
+function prodMsg(p,size,color,code,q){return `Hola ${CFG.STORE}, me interesa este producto:\n*${p.name}* (${p.category})\n${size?'Talla: '+size+'\n':''}${color?'Color: '+color+'\n':''}${q>1?'Cantidad: '+q+'\n':''}Precio: ${money(p.price)}${q>1?' c/u':''}${+p.price*(q||1)>CFG.FREE_SHIP?'\nEnvío: GRATIS':'\nEnvío: 50% de descuento en mi primera compra (se cotiza según mi ciudad)'}${code?'\nPedido: '+code:''}\n¿Está disponible?`}
 
 async function load(){
   if(DEMO)products=DEMO_DATA;
@@ -2854,63 +2855,103 @@ function showTab(t){const _pt=tab;tab=t;const m={prod:'tProd',ped:'tPed',inv:'tI
   if(t!=='prod'&&ordErr&&t!=='inv'&&t!=='gas'&&t!=='com'&&t!=='cod'){$(m[t]).innerHTML='<p class="msg">No se pudieron leer los pedidos. Ejecuta actualizar-pedidos.sql en Supabase.</p>';return}
   if(t==='cod')rCod();if(t==='ped')rPed();if(t==='inv')rInv();if(t==='ven')rVen();if(t==='gra')rGra();if(t==='com'){if(_pt!=='com'){cmM='all';cmP='';cmC=''}rCom()}if(t==='gas'){rGas();if(!exps.length&&!expErr)loadExps();if(!plLoaded)loadPlans()}
   if(!showTab.q&&(t==='prod'||t==='inv')){showTab.q=1;load().then(()=>{showTab.q=0;if(tab==='prod')alist();if(tab==='inv'&&!$('tInv').querySelector('.stk-in.chg'))rInv()}).catch(()=>{showTab.q=0})}}
-/* ====== CÓDIGOS DE DESCUENTO Y CLUB ====== */
-const CLUB={N:5,MESES:12,G1:'Regalo de bienvenida (1ª compra)',G5:'Regalo grande (5 compras)'};
-let cdArr=null,cdGifts={},cdMsg='',cdLoaded=0;
+/* ====== CÓDIGOS DE DESCUENTO, REFERIDOS Y CLUB ====== */
+const CLUB={N:5,MESES:12,G1:'Regalo de bienvenida (1ª compra)',G5:'Regalo de fidelidad (5 compras)'};
+const REF={PCT:10,STEP:5,MAXD:20};
+let cdArr=null,cdGifts={},cdMsg='',cdLoaded=0,DLIST=[];
 const cdNorm=s=>String(s||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
+const isRef=c=>!!c&&(c.why==='ref'||c.why==='venta');
+const cdTipo=c=>isRef(c)?'ref':(c.why||'otro');
+const cdList=o=>{const m=String(o.customer||'').match(/Cód\. ([A-Z0-9,-]+)/);return m?m[1].split(',').filter(Boolean):[]};
+const cdNew=arr=>{const AL='ABCDEFGHJKMNPQRSTUVWXYZ23456789';let c;do{c='GX-'+Array.from({length:5},()=>AL[Math.floor(Math.random()*AL.length)]).join('')}while(arr.some(x=>cdNorm(x.c)===cdNorm(c)));return c};
 async function cdFetch(){if(!sb)return null;try{const g=await sb.from('site_settings').select('key,value').in('key',['gx_codes','gx_club_gifts']);if(g.error)return null;const m={};(g.data||[]).forEach(r=>m[r.key]=r.value);return{arr:Array.isArray(m.gx_codes)?m.gx_codes:[],gifts:m.gx_club_gifts&&typeof m.gx_club_gifts==='object'&&!Array.isArray(m.gx_club_gifts)?m.gx_club_gifts:{}}}catch(e){return null}}
-function cdUI(){const m=$('cartCdM'),b=$('cartCdB'),i=$('cartCd');if(!m)return;
-  if(DCODE){m.textContent='✓ Código '+DCODE.c+' aplicado: '+DCODE.pct+'% de descuento';m.className='cdm ok';b.textContent='Quitar';i.value=DCODE.c;i.disabled=true}
-  else{b.textContent='Aplicar';i.disabled=false;if(m.className.indexOf('ok')>-1){m.textContent='';m.className='cdm'}}}
-$('cartCdB').addEventListener('click',async()=>{const m=$('cartCdM'),b=$('cartCdB');
-  if(DCODE){DCODE=null;$('cartCd').value='';cartRender();return}
-  const v=cdNorm($('cartCd').value);if(!v){m.textContent='Escribe tu código.';m.className='cdm bad';return}
+async function cdSaveKey(key,val){if(!sb)return'Sin conexión con la base de datos.';try{const r=await sb.from('site_settings').upsert({key,value:val});return r.error?r.error.message:''}catch(e){return String(e.message||e)}}
+/* ---- carrito: hasta 2 códigos, tope 20% ---- */
+function cdSet(){if(!DLIST.length){DCODE=null;return}DCODE={c:DLIST.map(c=>c.c).join(','),pct:Math.min(REF.MAXD,DLIST.reduce((t,c)=>t+c.pct,0)),list:DLIST}}
+function cdUI(){const m=$('cartCdM'),b=$('cartCdB'),i=$('cartCd'),x=$('cartCdX');if(!m)return;
+  if(!DCODE&&DLIST.length)DLIST=[];
+  x.hidden=!DCODE;
+  if(DCODE){const s=DLIST.reduce((t,c)=>t+c.pct,0);
+    m.textContent='✓ '+DLIST.map(c=>c.c+(c.pct?' ('+c.pct+'%)':' (Club)')).join(' + ')+(DCODE.pct?' · Descuento total '+DCODE.pct+'%'+(s>REF.MAXD?' (máximo '+REF.MAXD+'%)':''):' · tu compra cuenta para el Club');m.className='cdm ok';b.disabled=i.disabled=DLIST.length>=2;if(DLIST.length>=2)i.value=''}
+  else{if(m.className.indexOf('ok')>-1){m.textContent='';m.className='cdm'}b.disabled=i.disabled=false}}
+$('cartCdX').addEventListener('click',()=>{DLIST=[];DCODE=null;$('cartCd').value='';cartRender()});
+$('cartCdB').addEventListener('click',async()=>{const m=$('cartCdM'),b=$('cartCdB'),bad=t=>{m.textContent=t;m.className='cdm bad'};
+  if(!DCODE)DLIST=[];
+  const v=cdNorm($('cartCd').value);if(!v)return bad('Escribe tu código.');
+  if(DLIST.length>=2)return bad('Ya aplicaste el máximo de códigos.');
   b.disabled=true;m.textContent='Validando…';m.className='cdm';
   const r=await cdFetch();b.disabled=false;
-  if(!r){m.textContent='No pudimos validar el código ahora. Escríbenos por WhatsApp y te ayudamos.';m.className='cdm bad';return}
-  const c=r.arr.find(x=>cdNorm(x.c)===v&&!x.off);
-  if(!c){m.textContent='Código no válido o ya no está disponible.';m.className='cdm bad';return}
-  DCODE={c:c.c,pct:Math.max(1,Math.min(50,Number(c.pct)||10))};cartRender()});
+  if(!r)return bad('No pudimos validar el código ahora. Escríbenos por WhatsApp y te ayudamos.');
+  const c=r.arr.find(x=>cdNorm(x.c)===v&&!x.off&&!x.used);
+  if(!c)return bad('Código no válido o ya no está disponible.');
+  if(DLIST.some(x=>x.c===c.c))return bad('Ya aplicaste ese código.');
+  const t=cdTipo(c);if((t==='ref'||t==='redes'||t==='reward')&&DLIST.some(x=>cdTipo(x)===t))return bad('Ya aplicaste un código de ese tipo.');
+  DLIST.push({c:c.c,pct:isNaN(Number(c.pct))?REF.PCT:Math.max(0,Math.min(REF.MAXD,Number(c.pct))),why:c.why,phone:c.phone||''});cdSet();$('cartCd').value='';cartRender()});
 $('cartCd').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();$('cartCdB').click()}});
+/* ---- clientes y Club ---- */
 function ordPhone(o){const k=o.checkout&&o.checkout.phone,d=String(k||'').replace(/\D/g,'').slice(-10);if(/^3\d{9}$/.test(d))return d;
   const m=String(o.customer||'').match(/(?:^|\D)(3\d{9})(?!\d)/);if(m)return m[1];
-  const cc=String(o.customer||'').match(/Cód\. ([A-Z0-9-]+)/),cn=cc?cdNorm(cc[1]):cdNorm(o.checkout&&o.checkout.codigo);
-  if(cn&&cdArr){const c=cdArr.find(x=>cdNorm(x.c)===cn&&x.phone);if(c)return c.phone}return ''}
+  if(cdArr)for(const cn of cdList(o)){const c=cdArr.find(x=>cdNorm(x.c)===cdNorm(cn)&&x.phone&&!isRef(x));if(c)return c.phone}return ''}
 function ordName(o){const p=String(o.customer||'').split(' · ').map(x=>x.trim()).filter(x=>x&&!/^Tienda física$/.test(x)&&!/^Cód\./.test(x)&&!/\d{10}/.test(x));if(p[0])return p[0];
-  const cc=String(o.customer||'').match(/Cód\. ([A-Z0-9-]+)/);if(cc&&cdArr){const c=cdArr.find(x=>cdNorm(x.c)===cdNorm(cc[1])&&x.name);if(c)return c.name}return ''}
+  if(cdArr)for(const cn of cdList(o)){const c=cdArr.find(x=>cdNorm(x.c)===cdNorm(cn)&&x.name&&!isRef(x));if(c)return c.name}return ''}
 function clubData(){const lim=new Date();lim.setMonth(lim.getMonth()-CLUB.MESES);const map={};
   orders.forEach(o=>{if(o.status!=='confirmado')return;const ph=ordPhone(o);if(!ph)return;const e=map[ph]||(map[ph]={ph,name:'',all:0,n:0,first:null,last:null});
     const t=new Date(o.created_at);e.all++;if(t>=lim)e.n++;if(!e.first||t<e.first)e.first=t;if(!e.last||t>e.last)e.last=t;if(!e.name)e.name=ordName(o)});
   return Object.values(map).sort((a,b)=>b.n-a.n||b.all-a.all)}
 function clubTxt(ph){const e=clubData().find(x=>x.ph===ph);if(!e)return '';return ' · Club: compra '+e.n+' de '+CLUB.N+(e.all===1?' (1ª compra: entregar '+CLUB.G1.toLowerCase()+')':'')+(e.n>=CLUB.N?' (¡completó '+CLUB.N+'! entregar '+CLUB.G5.toLowerCase()+')':'')}
+function cdCustomers(){const m={};orders.forEach(o=>{if(o.status==='cancelado')return;const p=ordPhone(o);if(!p)return;if(!m[p]||(!m[p].name&&ordName(o)))m[p]={ph:p,name:ordName(o)}});(cdArr||[]).forEach(c=>{if(c.phone&&!m[c.phone])m[c.phone]={ph:c.phone,name:c.name||''}});return Object.values(m).sort((a,b)=>(a.name||'~').localeCompare(b.name||'~'))}
+/* ---- automático: código personal para referir ---- */
+async function cdAuto(ph,name,oc){const r=await cdFetch();if(!r)return{err:'sin conexión'};cdArr=r.arr;cdGifts=r.gifts;
+  const ex=r.arr.find(x=>x.phone===ph&&isRef(x));if(ex)return{dup:ex.c};
+  const c=cdNew(r.arr),arr=[...r.arr,{c,pct:REF.PCT,why:'ref',name:name||'',phone:ph,at:new Date().toISOString(),order:oc,refs:[]}];const err=await cdSaveKey('gx_codes',arr);if(err)return{err};cdArr=arr;return{c}}
+/* ---- al confirmar un pedido: premios, usados y código personal ---- */
+async function cdConfirmAll(o){const out=[],r=await cdFetch();if(!r)return'';const arr=r.arr.map(x=>({...x}));cdArr=arr;cdGifts=r.gifts;
+  const ph=ordPhone(o);let dirty=false;
+  for(const cn of cdList(o)){const c=arr.find(x=>cdNorm(x.c)===cdNorm(cn));if(!c)continue;
+    if(isRef(c)){c.refs=c.refs||[];if(c.refs.some(x=>x.order===o.code))continue;
+      if(!ph){out.push('⚠ Usó el código de referido '+c.c+' pero el pedido no tiene celular: no pude verificar que sea cliente nuevo ni dar el premio.');continue}
+      if(ph===c.phone){out.push('⚠ El código '+c.c+' es de la misma persona: no cuenta como referido.');continue}
+      if(c.refs.some(x=>x.ph===ph)||orders.some(x=>x.code!==o.code&&x.status!=='cancelado'&&ordPhone(x)===ph)){out.push('⚠ El cliente '+ph+' ya había comprado antes: no cuenta como referido (revisa el descuento aplicado).');continue}
+      c.refs.push({ph,order:o.code,at:new Date().toISOString()});dirty=true;
+      if(!c.phone){out.push('Referido válido, pero el código '+c.c+' no tiene celular de dueño: no hay a quién dar el premio.');continue}
+      let rw=arr.find(x=>x.why==='reward'&&x.phone===c.phone&&!x.used&&!x.off);
+      if(rw){if(Number(rw.pct)>=REF.MAXD)out.push('Referido válido. '+(c.name||c.phone)+' ya tiene el máximo ('+REF.MAXD+'%) acumulado.');else{rw.pct=Math.min(REF.MAXD,Number(rw.pct)+REF.STEP);out.push('Referido válido: '+(c.name||c.phone)+' sube a '+rw.pct+'% en su próxima compra (código '+rw.c+').')}}
+      else{rw={c:cdNew(arr),pct:REF.PCT,why:'reward',name:c.name||'',phone:c.phone,at:new Date().toISOString()};arr.push(rw);out.push('Referido válido: '+(c.name||c.phone)+' recibe '+rw.pct+'% en su próxima compra (código '+rw.c+').')}
+    }else if(c.why!=='club'&&!c.used){c.used={order:o.code,at:new Date().toISOString()};dirty=true}}
+  if(dirty){const err=await cdSaveKey('gx_codes',arr);if(err)out.push('No se pudo guardar los códigos: '+err);else cdArr=arr}
+  if(ph&&o.type!=='fisica'&&Number(o.total)<=CFG.FREE_SHIP&&!(o.checkout&&o.checkout.free_shipping)&&orders.some(x=>x.code!==o.code&&x.status!=='cancelado'&&ordPhone(x)===ph))out.push('⚠ Este cliente ya había comprado antes: el envío con 50% era solo para la primera compra, cóbraselo completo.');
+  if(ph){const g=await cdAuto(ph,ordName(o),o.code);if(g.c)out.push('Código para que el cliente refiera: '+g.c+'.')}
+  return out.length?' '+out.join(' '):''}
 async function cdRefresh(){const r=await cdFetch();if(r){cdArr=r.arr;cdGifts=r.gifts;cdLoaded=1}else if(!cdLoaded){cdLoaded=-1}if(tab==='cod')rCod(1)}
-async function cdSaveKey(key,val){if(!sb)return'Sin conexión con la base de datos.';try{const r=await sb.from('site_settings').upsert({key,value:val});return r.error?r.error.message:''}catch(e){return String(e.message||e)}}
-function cdUse(c){const n=cdNorm(c.c);return orders.filter(o=>o.status!=='cancelado'&&(cdNorm(String(o.customer||'').replace(/^.*Cód\. /,'').split(' ')[0])===n&&/Cód\./.test(String(o.customer||''))||cdNorm(o.checkout&&o.checkout.codigo)===n))}
-function rCod(skip){const T=$('tCod');if(!skip&&!cdLoaded)cdRefresh();else if(!skip&&tab==='cod')cdRefresh();
-  const arr=cdArr||[],why={redes:'Redes sociales (10%)',club:'Club (compra virtual)',otro:'Otro'};
+function rCod(skip){const T=$('tCod');if(!skip)cdRefresh();
+  const arr=cdArr||[],why={redes:'Redes sociales',ref:'Referido (para compartir)',venta:'Referido (para compartir)',reward:'Premio por referir',club:'Solo Club',otro:'Otro'};
   const cl=clubData();
   T.innerHTML=(cdMsg?`<p class="msg">${esc(cdMsg)}</p>`:'')+(cdLoaded===-1?'<p class="msg">No se pudieron leer los códigos de la base de datos. Revisa la conexión y el permiso de la tabla site_settings.</p>':'')+
-  `<div class="ord"><b>Generar código de descuento</b><small>Un solo código sirve para dar el descuento en la página y para contar la compra en el Club. Envíalo al cliente por WhatsApp y él lo escribe en el carrito.</small>
-  <div class="cof"><label>Descuento %<input id="cdP" type="number" min="1" max="50" value="10"></label><label>Motivo<select id="cdW"><option value="redes">Redes sociales (10%)</option><option value="club">Club (compra virtual)</option><option value="otro">Otro</option></select></label><label>Nombre del cliente<input id="cdN" placeholder="Nombre"></label><label>Celular del cliente<input id="cdT" type="tel" inputmode="numeric" placeholder="3001234567"></label></div>
+  `<div class="ord"><b>Generar código</b><small>Casi todo es automático: cada cliente con celular recibe su código para referir al comprar, y quien refiere recibe su premio cuando el pedido del amigo se confirma. Aquí solo generas el código de <b>redes sociales</b> (cuando revisas la captura) o uno <b>Solo Club</b>. Cada celular recibe el descuento por redes una sola vez.</small>
+  <div class="cof"><label>Cliente ya registrado<select id="cdC"><option value="">— Cliente nuevo (escribe abajo) —</option>${cdCustomers().map(x=>`<option value="${x.ph}">${esc(x.name||'Sin nombre')} · ${x.ph}</option>`).join('')}</select></label><label>Motivo<select id="cdW"><option value="redes">Redes sociales (10%)</option><option value="club">Solo Club (0%, cuenta la compra)</option><option value="ref">Referido (10%, para compartir)</option><option value="otro">Otro (con descuento)</option></select></label><label>Descuento %<input id="cdP" type="number" min="0" max="20" value="10"></label><label>Nombre del cliente<input id="cdN" placeholder="Nombre"></label><label>Celular del cliente<input id="cdT" type="tel" inputmode="numeric" placeholder="3001234567"></label></div>
   <div><button type="button" class="btn grn sm" data-ca="gen">Generar código</button></div></div>`+
   `<h3 style="margin:16px 0 6px">Códigos (${arr.length})</h3>`+
-  (arr.length?arr.slice().reverse().map(c=>{const u=cdUse(c),st=c.off?'Desactivado':u.length?'Usado en '+u.map(o=>o.code).join(', '):'Disponible';
-    const wl=c.phone?`https://wa.me/57${c.phone}?text=${encodeURIComponent('Hola'+(c.name?' '+c.name:'')+', tu código de descuento '+(CFG.STORE||'GORRAX')+' es '+c.c+' ('+c.pct+'% de descuento). Escríbelo en el carrito de la página antes de pedir.')}`:'';
-    return `<div class="ord"><div style="display:flex;justify-content:space-between;gap:8px"><b style="letter-spacing:.06em">${esc(c.c)}</b><span class="st ${u.length?'cancelado':c.off?'cancelado':'confirmado'}">${esc(st)}</span></div><small>${c.pct}% · ${esc(why[c.why]||'')}${c.name?' · '+esc(c.name):''}${c.phone?' · '+esc(c.phone):''}${c.at?' · '+fd(c.at):''}</small>
-    <div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn ghost sm" data-ca="copy" data-c="${esc(c.c)}">Copiar</button>${wl?`<a class="btn ghost sm" href="${wl}" target="_blank" rel="noopener">Enviar por WhatsApp</a>`:''}<button type="button" class="btn ghost sm" data-ca="off" data-c="${esc(c.c)}">${c.off?'Activar':'Desactivar'}</button><button type="button" class="btn red sm" data-ca="del" data-c="${esc(c.c)}">Eliminar</button></div></div>`}).join(''):'<p class="desc">Aún no has generado códigos.</p>')+
-  `<h3 style="margin:18px 0 4px">Club GORRAX (últimos ${CLUB.MESES} meses)</h3><small class="desc">Cuenta pedidos <b>confirmados</b> por celular: ventas en tienda con celular, pedidos con checkout y pedidos de WhatsApp donde el cliente usó un código que tenga celular. Meta: ${CLUB.N} compras.</small>`+
-  (cl.length?cl.map(e=>{const g=cdGifts[e.ph]||{},p=Math.min(100,Math.round(e.n/CLUB.N*100));
-    return `<div class="ord"><div style="display:flex;justify-content:space-between;gap:8px"><b>${esc(e.name||'Cliente')} · ${esc(e.ph)}</b><span class="st ${e.n>=CLUB.N?'confirmado':'pendiente'}">${e.n}/${CLUB.N}</span></div><div style="height:6px;border-radius:6px;background:rgba(128,128,128,.25);overflow:hidden"><i style="display:block;height:100%;width:${p}%;background:var(--wa)"></i></div><small>Primera compra ${fd(e.first)} · última ${fd(e.last)}</small>
-    <div style="display:flex;gap:8px;flex-wrap:wrap">${g.g1?`<small>✓ ${esc(CLUB.G1)} entregado ${fd(g.g1)}</small>`:`<button type="button" class="btn ghost sm" data-ca="g1" data-ph="${e.ph}">Marcar entregado: ${esc(CLUB.G1)}</button>`}${e.n>=CLUB.N?(g.g5?`<small>✓ ${esc(CLUB.G5)} entregado ${fd(g.g5)}</small>`:`<button type="button" class="btn sm" data-ca="g5" data-ph="${e.ph}">Marcar entregado: ${esc(CLUB.G5)}</button>`):`<small>Faltan ${CLUB.N-e.n} compra(s) para el regalo grande</small>`}</div></div>`}).join(''):'<p class="desc">Todavía no hay clientes con celular registrado en pedidos confirmados.</p>')}
+  (arr.length?arr.slice().reverse().map(c=>{const ref=isRef(c),uses=orders.filter(o=>o.status!=='cancelado'&&cdList(o).some(x=>cdNorm(x)===cdNorm(c.c)));
+    const st=c.off?'Desactivado':ref?(c.refs||[]).length+' referido(s)':c.why==='club'?'Activo':c.used?'Usado en '+c.used.order:uses.length?'En pedido '+uses.map(o=>o.code).join(', ')+' (sin confirmar)':'Disponible';
+    const cls=c.off||c.used?'cancelado':'confirmado';
+    const msg=c.why==='reward'?'Hola'+(c.name?' '+c.name:'')+', ¡gracias por referir! Tienes '+c.pct+'% de descuento en tu próxima compra con el código '+c.c+'. Escríbelo en el carrito de la página antes de pedir.':ref?'Hola'+(c.name?' '+c.name:'')+', este es tu código para compartir: '+c.c+'. Tu amigo recibe '+c.pct+'% en su primera compra (y otro 10% si nos sigue en redes). Y tú recibes '+REF.PCT+'% en tu próxima compra cuando compre el primer amigo, +'+REF.STEP+'% por el segundo y +'+REF.STEP+'% por el tercero, hasta '+REF.MAXD+'%. Debe escribirlo en el carrito de la página.':'Hola'+(c.name?' '+c.name:'')+', tu código '+(CFG.STORE||'GORRAX')+' es '+c.c+(c.pct?' ('+c.pct+'% de descuento)':'')+'. Escríbelo en el carrito de la página antes de pedir.';
+    const wl=c.phone?`https://wa.me/57${c.phone}?text=${encodeURIComponent(msg)}`:'';
+    return `<div class="ord"><div style="display:flex;justify-content:space-between;gap:8px"><b style="letter-spacing:.06em">${esc(c.c)}</b><span class="st ${cls}">${esc(st)}</span></div><small>${c.pct}% · ${esc(why[c.why]||'')}${c.name?' · '+esc(c.name):''}${c.phone?' · '+esc(c.phone):''}${c.at?' · '+fd(c.at):''}</small>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn ghost sm" data-ca="copy" data-c="${esc(c.c)}">Copiar</button>${wl?`<a class="btn ghost sm" href="${wl}" target="_blank" rel="noopener">Enviar por WhatsApp</a>`:''}<button type="button" class="btn ghost sm" data-ca="off" data-c="${esc(c.c)}">${c.off?'Activar':'Desactivar'}</button><button type="button" class="btn red sm" data-ca="del" data-c="${esc(c.c)}">Eliminar</button></div></div>`}).join(''):'<p class="desc">Aún no hay códigos. Se crean solos al registrar ventas con celular.</p>')+
+  `<h3 style="margin:18px 0 4px">Clientes y Club GORRAX (últimos ${CLUB.MESES} meses)</h3><small class="desc">Cuenta pedidos <b>confirmados</b> por celular: ventas en tienda con celular, pedidos con checkout y pedidos de WhatsApp donde el cliente usó un código suyo. Meta: ${CLUB.N} compras.</small>`+
+  (cl.length?cl.map(e=>{const g=cdGifts[e.ph]||{},p=Math.min(100,Math.round(e.n/CLUB.N*100)),rc=arr.find(c=>c.phone===e.ph&&isRef(c)),nr=rc?(rc.refs||[]).length:0;
+    return `<div class="ord"><div style="display:flex;justify-content:space-between;gap:8px"><b>${esc(e.name||'Cliente')} · ${esc(e.ph)}</b><span class="st ${e.n>=CLUB.N?'confirmado':'pendiente'}">${e.n}/${CLUB.N}</span></div><div style="height:6px;border-radius:6px;background:rgba(128,128,128,.25);overflow:hidden"><i style="display:block;height:100%;width:${p}%;background:var(--wa)"></i></div><small>Primera compra ${fd(e.first)} · última ${fd(e.last)}${rc?' · Código para referir '+esc(rc.c)+' · Referidos: '+nr:''}</small>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">${g.g1?`<small>✓ ${esc(CLUB.G1)} entregado ${fd(g.g1)}</small>`:`<button type="button" class="btn ghost sm" data-ca="g1" data-ph="${e.ph}">Marcar entregado: ${esc(CLUB.G1)}</button>`}${e.n>=CLUB.N?(g.g5?`<small>✓ ${esc(CLUB.G5)} entregado ${fd(g.g5)}</small>`:`<button type="button" class="btn sm" data-ca="g5" data-ph="${e.ph}">Marcar entregado: ${esc(CLUB.G5)}</button>`):`<small>Faltan ${CLUB.N-e.n} compra(s) para el regalo de fidelidad</small>`}</div></div>`}).join(''):'<p class="desc">Todavía no hay clientes con celular registrado en pedidos confirmados.</p>')}
+$('tCod').addEventListener('change',e=>{if(e.target.id!=='cdC')return;const x=cdCustomers().find(y=>y.ph===e.target.value);$('cdT').value=x?x.ph:'';$('cdN').value=x?x.name:''});
 $('tCod').addEventListener('click',async e=>{const b=e.target.closest('[data-ca]');if(!b)return;const a=b.dataset.ca;
   if(a==='copy'){try{await navigator.clipboard.writeText(b.dataset.c);cdMsg='Código copiado: '+b.dataset.c}catch(x){cdMsg='Código: '+b.dataset.c}return rCod(1)}
   const r=await cdFetch();if(!r){cdMsg='No se pudo conectar con la base de datos.';return rCod(1)}
   let arr=r.arr,gifts=r.gifts,err='';
-  if(a==='gen'){const pct=Math.max(1,Math.min(50,Math.round(Number($('cdP').value)||10))),why=$('cdW').value,name=$('cdN').value.trim(),ph=$('cdT').value.replace(/\D/g,'').slice(-10);
+  if(a==='gen'){const why=$('cdW').value,name=$('cdN').value.trim(),ph=$('cdT').value.replace(/\D/g,'').slice(-10),pv=Number($('cdP').value),pct=why==='club'?0:Math.max(1,Math.min(REF.MAXD,Math.round(isNaN(pv)||!pv?10:pv)));
     if($('cdT').value.trim()&&!/^3\d{9}$/.test(ph)){cdMsg='El celular debe tener 10 dígitos y empezar por 3.';return rCod(1)}
-    if(why==='club'&&!ph){cdMsg='Para el Club necesito el celular del cliente, así cuento sus compras.';return rCod(1)}
-    const AL='ABCDEFGHJKMNPQRSTUVWXYZ23456789';let c;do{c='GX-'+Array.from({length:5},()=>AL[Math.floor(Math.random()*AL.length)]).join('')}while(arr.some(x=>cdNorm(x.c)===cdNorm(c)));
-    arr=[...arr,{c,pct,why,name,phone:ph,at:new Date().toISOString()}];err=await cdSaveKey('gx_codes',arr);cdMsg=err?'No se pudo guardar: '+err:'Código generado: '+c+' ('+pct+'%)'}
+    if((why==='club'||why==='ref')&&!ph){cdMsg='Para este código necesito el celular del cliente.';return rCod(1)}
+    if(ph&&(why==='redes'||why==='ref')){const ex=arr.find(x=>x.phone===ph&&(why==='ref'?isRef(x):x.why==='redes'));if(ex){cdMsg='Ese celular ya tiene su código de '+(why==='ref'?'referido':'redes')+' ('+ex.c+'). No se genera otro.';return rCod(1)}}
+    const c=cdNew(arr);arr=[...arr,{c,pct,why,name,phone:ph,at:new Date().toISOString(),...(why==='ref'?{refs:[]}:{})}];err=await cdSaveKey('gx_codes',arr);cdMsg=err?'No se pudo guardar: '+err:'Código generado: '+c+(pct?' ('+pct+'%)':' (solo Club)')}
   else if(a==='off'||a==='del'){const k=b.dataset.c;arr=a==='del'?arr.filter(x=>x.c!==k):arr.map(x=>x.c===k?{...x,off:!x.off}:x);err=await cdSaveKey('gx_codes',arr);cdMsg=err?'No se pudo guardar: '+err:(a==='del'?'Código eliminado.':'Código actualizado.')}
   else if(a==='g1'||a==='g5'){const ph=b.dataset.ph;gifts={...gifts,[ph]:{...(gifts[ph]||{}),[a]:new Date().toISOString()}};err=await cdSaveKey('gx_club_gifts',gifts);cdMsg=err?'No se pudo guardar: '+err:'Regalo marcado como entregado.'}
   if(!err){cdArr=arr;cdGifts=gifts}rCod(1)});
@@ -2925,7 +2966,8 @@ $('tPed').onclick=async e=>{const f=e.target.dataset.f;if(f){pfil=f;rPed();retur
   if(error&&/could not find|does not exist|schema cache/i.test(error.message)){srv=false;({error}=await sb.rpc('set_order_status',args))}
   if(error){say(error.message);e.target.disabled=false;return}
   await Promise.all([load(),loadOrders()]);const w=srv?'':await syncVars(o,prev,st);
-  if(w)say('Pedido actualizado, pero no se pudo ajustar el stock por talla/color: '+w);else say('Pedido actualizado.',true);
+  let gx='';if(st==='confirmado'&&o){try{gx=await cdConfirmAll(o)}catch(_){}}
+  if(w)say('Pedido actualizado, pero no se pudo ajustar el stock por talla/color: '+w+gx);else say('Pedido actualizado.'+gx,true);
   alist();showTab(tab)};
 let invCat='',invLow=false,invQ='';
 const stkC=n=>n===''||n==null?'':(Number(n)<=2?'r':Number(n)<=4?'y':'g');
@@ -3832,7 +3874,7 @@ $('tGra').onchange=e=>{if(e.target.id==='gF'||e.target.id==='gT'){gf=$('gF').val
 
 /* ====== VENTA EN TIENDA FÍSICA ====== */
 const VF={lines:[]},vfSay=(t,ok)=>{$('vfM').style.color=ok?'#128c4a':'#c62828';$('vfM').textContent=t||''};
-function vfOpen(){VF.lines=[];$('vfN').value='';$('vfT').value='';$('vfQ').value=1;vfSay('');$('vfP').innerHTML=products.filter(isAv).map(p=>`<option value="${esc(p.id)}">${esc(p.name)} · ${money(p.price)}</option>`).join('');vfOpt();vfR();$('vf').showModal()}
+function vfOpen(){VF.lines=[];$('vfN').value='';$('vfT').value='';$('vfG').checked=true;$('vfQ').value=1;vfSay('');$('vfP').innerHTML=products.filter(isAv).map(p=>`<option value="${esc(p.id)}">${esc(p.name)} · ${money(p.price)}</option>`).join('');vfOpt();vfR();$('vf').showModal()}
 function vfOpt(){const p=pBy($('vfP').value);if(!p)return;const sz=pSizes(p);$('vfZw').hidden=!sz.length;$('vfZ').innerHTML=sz.map(z=>`<option>${esc(z)}</option>`).join('');$('vfPr').value=p.price;vfCol()}
 function vfCol(){const p=pBy($('vfP').value);if(!p)return;const hc=hasColors(p),z=pSizes(p).length?$('vfZ').value:null;$('vfCw').hidden=!hc;$('vfC').innerHTML=hc?COLORS.filter(c=>vStock(p,z,c[0])>0).map(c=>`<option>${esc(c[0])}</option>`).join(''):''}
 function vfR(){const t=VF.lines.reduce((s,l)=>s+l.pr*l.q,0);$('vfL').innerHTML=VF.lines.length?VF.lines.map((l,i)=>`<div class="row"><div style="flex:1"><b>${l.q}× ${esc(l.p.name)}</b><br><small>${[l.z&&'Talla '+esc(l.z),l.c&&esc(l.c),money(l.pr)+' c/u'].filter(Boolean).join(' · ')}</small></div><b>${money(l.pr*l.q)}</b><button type="button" class="btn red sm" data-x="${i}">Quitar</button></div>`).join('')+`<p style="text-align:right;margin:8px 0"><b class="price">Total: ${money(t)}</b></p>`:'<p class="desc">Aún no has agregado productos.</p>'}
@@ -3858,7 +3900,8 @@ $('vfS').onclick=async()=>{if(!VF.lines.length)return vfSay('Agrega al menos un 
   if(error&&/could not find|does not exist|schema cache/i.test(error.message)){srv=false;({error}=await sb.rpc('set_order_status',args))}
   if(error){b.disabled=false;return vfSay('Venta guardada como pendiente ('+code+'), pero no se pudo confirmar: '+error.message)}
   await Promise.all([load(),loadOrders()]);const w=srv?'':await syncVars(o,'pendiente','confirmado');
-  const ct=ph?clubTxt(ph):'';b.disabled=false;$('vf').close();alist();showTab(tab);say(w?'Venta registrada '+code+', pero no se pudo ajustar el stock por talla/color: '+w:'Venta en tienda registrada: '+code+ct,!w)};
+  let gt='';if(ph&&$('vfG').checked){try{const g=await cdAuto(ph,name,code);gt=g.c?' · Código para que el cliente refiera: '+g.c+' (su amigo recibe 10%) — envíalo desde Códigos y Club':g.dup?' · Este cliente ya tiene su código para referir ('+g.dup+')':' · No se pudo generar el código: '+(g.err||'')}catch(e){}}
+  const ct=(ph?clubTxt(ph):'')+gt;b.disabled=false;$('vf').close();alist();showTab(tab);say(w?'Venta registrada '+code+', pero no se pudo ajustar el stock por talla/color: '+w:'Venta en tienda registrada: '+code+ct,!w)};
 
 $('tabs').onclick=e=>{const t=e.target.dataset.t;if(t)showTab(t)};
 
@@ -3875,9 +3918,9 @@ let DCODE=null;
 const cTot=L=>{const t0=L.reduce((t,l)=>t+l.unit*l.it.q,0),cd=DCODE?Math.round(t0*DCODE.pct/100):0;return{n:L.reduce((t,l)=>t+l.it.q,0),sub:L.reduce((t,l)=>t+l.list*l.it.q,0),tot:t0-cd,cd,t0}};
 function cMsg(L,code){const{sub,tot,cd,t0}=cTot(L),nm=$('cartNm').value.trim();
   return `Hola ${CFG.STORE}, quiero hacer este pedido:\n`+L.map((l,i)=>{const q=l.it.q;
-    return `${i+1}) *${l.name}*${l.it.z?' - Talla: '+l.it.z:''}${l.it.col?' - Color: '+l.it.col:''} × ${q} = ${money(l.unit*q)}`}).join('\n')+(sub>tot?`\nSubtotal: ${money(sub)}`:'')+(sub>t0?`\nDescuento combos: -${money(sub-t0)}`:'')+(cd?`\nCódigo ${DCODE.c} (${DCODE.pct}%): -${money(cd)}`:'')+`${cFree(L,t0)?'\nEnvío: GRATIS':''}\n*Total: ${money(tot)}*${code?'\nPedido: '+code:''}${nm?'\nNombre: '+nm:''}\n¿Están disponibles?`}
+    return `${i+1}) *${l.name}*${l.it.z?' - Talla: '+l.it.z:''}${l.it.col?' - Color: '+l.it.col:''} × ${q} = ${money(l.unit*q)}`}).join('\n')+(sub>tot?`\nSubtotal: ${money(sub)}`:'')+(sub>t0?`\nDescuento combos: -${money(sub-t0)}`:'')+(DCODE?`\nCódigo ${DCODE.c}${cd?` (${DCODE.pct}%): -${money(cd)}`:' (Club)'}`:'')+`${cFree(L,t0)?'\nEnvío: GRATIS':'\nEnvío: 50% de descuento en mi primera compra (se cotiza según mi ciudad)'}\n*Total: ${money(tot)}*${code?'\nPedido: '+code:''}${nm?'\nNombre: '+nm:''}\n¿Están disponibles?`}
 const cFree=(L,t)=>L.some(l=>l.it.t==='c')||t>CFG.FREE_SHIP;
-const shipHtml=(L,t)=>cFree(L,t)?'<div class="r"><span>Envío</span><span><b style="color:var(--wa)">GRATIS</b></span></div>':'<div class="fsb"><small>Agrega más de '+money(CFG.FREE_SHIP-t)+' y el envío es <b>gratis</b></small><span><i style="width:'+Math.min(100,Math.round(t/CFG.FREE_SHIP*100))+'%"></i></span></div>';
+const shipHtml=(L,t)=>cFree(L,t)?'<div class="r"><span>Envío</span><span><b style="color:var(--wa)">GRATIS</b></span></div>':'<div class="fsb"><small>Envío con <b>50% de descuento en tu primera compra</b>. Agrega más de '+money(CFG.FREE_SHIP-t)+' y es <b>gratis</b></small><span><i style="width:'+Math.min(100,Math.round(t/CFG.FREE_SHIP*100))+'%"></i></span></div>';
 function cartRender(){
   if(products.length){cart=cart.filter(it=>{const l=cLine(it);if(!l||l.max<=0)return false;if(it.q>l.max)it.q=l.max;return true});cSave()}
   const L=cart.map(cLine).filter(Boolean),{n,sub,tot,cd,t0}=cTot(L);
@@ -3901,7 +3944,7 @@ $('cartC').onclick=()=>{$('cartC').hidden=true;$('cartCf').hidden=false};
 $('cartCn').onclick=()=>{$('cartCf').hidden=true;$('cartC').hidden=false};
 $('cartCy').onclick=()=>{cart=[];cSave();$('cartCf').hidden=true;cartRender();cOpen(false);cToast('Carrito vaciado')};
 $('cartW').addEventListener('click',()=>{const L=cart.map(cLine).filter(Boolean);if(!L.length)return;
-  const code=newCode(),{n,sub,tot,cd}=cTot(L),nm=$('cartNm').value.trim(),cdt=cd?'Cód. '+DCODE.c:'';$('cartW').href=wa(cMsg(L,code));
+  const code=newCode(),{n,sub,tot,cd}=cTot(L),nm=$('cartNm').value.trim(),cdt=DCODE?'Cód. '+DCODE.c:'';$('cartW').href=wa(cMsg(L,code));
   saveOrder({code,type:'carrito',customer:(nm+(nm&&cdt?' · ':'')+cdt)||null,qty:n,items:L.flatMap(l=>l.it.t==='c'?l.ps.map((p,j)=>ordItem(p,l.it.parts[j].z,l.it.parts[j].col,l.it.q)):[ordItem(l.ps[0],l.it.z,l.it.col,l.it.q)]),subtotal:sub,discount:sub-tot,total:tot});setTimeout(()=>{cart=[];DCODE=null;$('cartCd').value='';cSave();$('cartNm').value='';cartRender();cOpen(false)},400)});
 $('catalogo').addEventListener('click',e=>{const a=e.target.closest('.card .cadd');if(!a||a.classList.contains('dis'))return;
   const c=a.closest('.card'),p=pBy(c.dataset.id),z=(c.querySelector('.sizes .on')||{dataset:{}}).dataset.s||'',col=(c.querySelector('.sw .on')||{dataset:{}}).dataset.col||'';
@@ -3913,7 +3956,7 @@ const PM=[['online','Tarjeta, PSE o Nequi','Pago seguro en línea: te llevamos a
 const oItems=L=>L.flatMap(l=>l.it.t==='c'?l.ps.map((p,j)=>ordItem(p,l.it.parts[j].z,l.it.parts[j].col,l.it.q)):[ordItem(l.ps[0],l.it.z,l.it.col,l.it.q)]);
 let CO={s:1,d:{},pm:'',err:''};
 const coL=()=>{cartRender();return cart.map(cLine).filter(Boolean)};
-const coSum=L=>{const{sub,tot,cd,t0}=cTot(L);return `<aside class="cos"><b>Tu pedido</b>${L.map(l=>`<div class="ci"><span class="cimg">${l.img?`<img src="${esc(l.img)}" alt="">`:''}</span><div><b>${esc(l.name)}</b><small>${l.sub}</small><small>Cant. ${l.it.q}</small></div><div class="cp"><b>${money(l.unit*l.it.q)}</b></div></div>`).join('')}${sub>t0?`<div class="r"><span>Descuento combos</span><span>-${money(sub-t0)}</span></div>`:''}${cd?`<div class="r"><span>Código ${esc(DCODE.c)} (${DCODE.pct}%)</span><span>-${money(cd)}</span></div>`:''}<div class="r"><span>Envío</span><span>${cFree(L,t0)?'<b style="color:var(--wa)">GRATIS</b>':'Se confirma por WhatsApp'}</span></div><div class="r tt"><span>Total</span><span>${money(tot)}</span></div></aside>`};
+const coSum=L=>{const{sub,tot,cd,t0}=cTot(L);return `<aside class="cos"><b>Tu pedido</b>${L.map(l=>`<div class="ci"><span class="cimg">${l.img?`<img src="${esc(l.img)}" alt="">`:''}</span><div><b>${esc(l.name)}</b><small>${l.sub}</small><small>Cant. ${l.it.q}</small></div><div class="cp"><b>${money(l.unit*l.it.q)}</b></div></div>`).join('')}${sub>t0?`<div class="r"><span>Descuento combos</span><span>-${money(sub-t0)}</span></div>`:''}${cd?`<div class="r"><span>Código ${esc(DCODE.c)} (${DCODE.pct}%)</span><span>-${money(cd)}</span></div>`:''}<div class="r"><span>Envío</span><span>${cFree(L,t0)?'<b style="color:var(--wa)">GRATIS</b>':'<b style="color:var(--wa)">50% de descuento</b> (primera compra) · se cotiza por WhatsApp'}</span></div><div class="r tt"><span>Total</span><span>${money(tot)}</span></div></aside>`};
 const coSteps=n=>`<div class="cst">${['Entrega','Pago','Listo'].map((t,i)=>`<span class="${i+1===n?'on':''}">${i+1}. ${t}</span>`).join('')}</div>`;
 function coR(){const L=coL(),d=CO.d,v=k=>esc(d[k]||'');
   if(CO.s===3){const m=CO.m;$('coB').innerHTML=coSteps(3)+`<div class="cok"><h3>¡Pedido recibido!</h3><div class="cd2">${esc(m.code)}</div><p>Total: <b>${money(m.tot)}</b> · ${esc(m.pay)}</p><p class="desc" style="white-space:pre-line">${esc(m.info)}</p><a class="btn grn" target="_blank" rel="noopener" href="${wa(m.msg)}">Enviar mi pedido por WhatsApp</a><button type="button" class="btn ghost sm" id="coDone">Seguir comprando</button></div>`;return}
@@ -3944,7 +3987,7 @@ $('coB').addEventListener('submit',async e=>{e.preventDefault();
     CO.err='';$('coGo').disabled=true;$('coGo').textContent='Procesando…';await coPlace()}});
 $('coB').addEventListener('click',e=>{if(e.target.id==='coBk'){CO.s=1;CO.err='';coR()}if(e.target.id==='coDone')$('co').close()});
 async function coPlace(){const L=cart.map(cLine).filter(Boolean);if(!L.length)return;const{n,sub,tot,cd,t0}=cTot(L),d=CO.d,code=newCode(),pm=CO.pm,lab=(PM.find(m=>m[0]===pm)||[])[1]||pm;
-  const ord={code,type:'checkout',customer:d.name+(cd?' · Cód. '+DCODE.c:''),qty:n,items:oItems(L),subtotal:sub,discount:sub-tot,total:tot,payment_method:pm,checkout:{...d,free_shipping:cFree(L,t0)}};
+  const ord={code,type:'checkout',customer:d.name+(DCODE?' · Cód. '+DCODE.c:''),qty:n,items:oItems(L),subtotal:sub,discount:sub-tot,total:tot,payment_method:pm,checkout:{...d,free_shipping:cFree(L,t0)}};
   $('cartNm').value=d.name;
   const msg=cMsg(L,code).replace(/\n¿Están disponibles\?$/,'')+`\nCelular: ${d.phone}\nEntrega: ${d.address}, ${d.city}, ${d.dept}${d.notes?'\nIndicaciones: '+d.notes:''}\nPago: ${lab}\n¿Me confirman disponibilidad y envío?`;
   await saveOrder(ord);
@@ -3956,9 +3999,9 @@ async function coPlace(){const L=cart.map(cLine).filter(Boolean);if(!L.length)re
 const POL={dias:5,garantia:'1 año'};
 const wl=t=>`<a href="${wa(t)}" target="_blank" rel="noopener">WhatsApp</a>`;
 const POLS={
- env:{t:'Envíos y devoluciones',h:()=>`<h4>Envíos</h4><p>Enviamos a todo el país. Cuando envías tu pedido por WhatsApp te confirmamos la disponibilidad, el valor del envío, el tiempo estimado de entrega y los medios de pago antes de que pagues.</p><p><b>Envío gratis en compras superiores a ${money(CFG.FREE_SHIP)}.</b> Si tu pedido suma ese valor, el envío de todo el pedido es gratis.</p><h4>Cómo se confirma tu pedido</h4><p>Lo que envías por WhatsApp es una solicitud. Tu pedido queda confirmado cuando validamos que la talla y el color que elegiste están disponibles.</p><h4>Derecho de retracto</h4><p>Como la compra es a distancia, puedes retractarte dentro de los <b>5 días hábiles</b> siguientes a la entrega (Ley 1480 de 2011, art. 47). Escríbenos por ${wl('Hola, quiero ejercer mi derecho de retracto. Mi código de pedido es: ')}, devuelve el producto sin uso, con sus etiquetas y empaque, y te reintegramos el dinero por el mismo medio de pago. El costo del envío de la devolución lo asume el cliente. No aplica a productos personalizados.</p>`},
+ env:{t:'Envíos y devoluciones',h:()=>`<h4>Envíos</h4><p>Enviamos a todo el país. Cuando envías tu pedido por WhatsApp te confirmamos la disponibilidad, el valor del envío, el tiempo estimado de entrega y los medios de pago antes de que pagues.</p><p><b>Envío gratis en compras superiores a ${money(CFG.FREE_SHIP)}.</b> Si tu pedido suma ese valor, el envío de todo el pedido es gratis. Si es menor, tienes 50% de descuento en el envío en tu primera compra; el valor se cotiza según tu ciudad.</p><h4>Cómo se confirma tu pedido</h4><p>Lo que envías por WhatsApp es una solicitud. Tu pedido queda confirmado cuando validamos que la talla y el color que elegiste están disponibles.</p><h4>Derecho de retracto</h4><p>Como la compra es a distancia, puedes retractarte dentro de los <b>5 días hábiles</b> siguientes a la entrega (Ley 1480 de 2011, art. 47). Escríbenos por ${wl('Hola, quiero ejercer mi derecho de retracto. Mi código de pedido es: ')}, devuelve el producto sin uso, con sus etiquetas y empaque, y te reintegramos el dinero por el mismo medio de pago. El costo del envío de la devolución lo asume el cliente. No aplica a productos personalizados.</p>`},
  cam:{t:'Cambios y garantía',h:()=>`<h4>Cambios por talla o color</h4><p>Puedes cambiar tu producto dentro de los ${POL.dias} días hábiles siguientes a la entrega, siempre que esté sin uso, con etiquetas y sujeto a disponibilidad. Escríbenos por ${wl('Hola, quiero hacer un cambio. Mi código de pedido es: ')} con tu código de pedido (empieza por GX-). El envío del cambio lo asume el cliente, salvo que el producto haya llegado equivocado o con defecto.</p><h4>Garantía</h4><p>Nuestra garantía cubre los imperfectos de costura (puntadas sueltas, costuras abiertas o defectos de fabricación en las costuras). No cubre daños por mal uso, accidentes, lavado inadecuado ni desgaste normal.</p><h4>Cómo reclamar</h4><ul><li>Escríbenos por WhatsApp con tu código de pedido.</li><li>Envíanos fotos o un video del problema.</li><li>Revisamos tu caso y, si aplica, lo reparamos, lo cambiamos o te reintegramos el dinero.</li></ul><p>Esto es adicional a los derechos que tienes como consumidor según la Ley 1480 de 2011.</p>`},
- qui:{t:'Quiénes somos',h:()=>`<p><b>${esc(CFG.STORE)}</b> es una tienda colombiana de gorras con estilo propio.</p><h4>Lo que hacemos</h4><p>Seleccionamos gorras de buena calidad, con visera plana, cortes cómodos y detalles que se notan, y las enviamos a todo el país.</p><h4>Lo que prometemos</h4><ul><li>Calidad garantizada: cubrimos imperfectos de costura.</li><li>Envío gratis en compras superiores a ${money(CFG.FREE_SHIP)}.</li><li>Atención directa por ${wl('Hola, quiero más información')}.</li></ul>`},
+ qui:{t:'Quiénes somos',h:()=>`<p><b>${esc(CFG.STORE)}</b> es una tienda colombiana de gorras con estilo propio.</p><h4>Lo que hacemos</h4><p>Seleccionamos gorras de buena calidad, con visera plana, cortes cómodos y detalles que se notan, y las enviamos a todo el país.</p><h4>Lo que prometemos</h4><ul><li>Calidad garantizada: cubrimos imperfectos de costura.</li><li>Envío gratis en compras superiores a ${money(CFG.FREE_SHIP)}; por debajo, 50% de descuento en el envío en tu primera compra.</li><li>Atención directa por ${wl('Hola, quiero más información')}.</li></ul>`},
  dat:{t:'Política de datos',h:()=>`<h4>Quién es el responsable</h4><p>${esc(CFG.STORE)} es responsable del tratamiento de tus datos personales, conforme a la Ley 1581 de 2012. Contacto: ${wl('Hola, tengo una consulta sobre mis datos personales')}.</p><h4>Qué datos usamos</h4><p>Tu nombre (opcional), el detalle de tu pedido (productos, tallas, colores y valor) y el número de WhatsApp desde el que nos escribes. Si compras con «Finalizar compra», también tu celular, correo y dirección de entrega. Los datos de tarjeta nunca pasan por esta página.</p><h4>Para qué los usamos</h4><p>Solo para gestionar tu pedido, la entrega, los cambios y la garantía, y para contactarte sobre ellos. No vendemos ni compartimos tus datos con terceros para publicidad.</p><h4>Dónde se guardan</h4><p>Los pedidos se guardan en un servicio de base de datos en la nube al que solo accede el administrador de la tienda. Tu carrito se guarda en tu propio navegador y no sale de tu dispositivo hasta que envías el pedido. Esta página no usa cookies de publicidad ni de seguimiento.</p><h4>Tus derechos</h4><p>Puedes conocer, actualizar, rectificar y pedir la eliminación de tus datos, o revocar tu autorización, escribiéndonos por WhatsApp.</p>`}};
 document.querySelectorAll('[data-pol]').forEach(b=>b.onclick=()=>{const p=POLS[b.dataset.pol];$('polT').textContent=p.t;$('polB').innerHTML=p.h();$('pol').showModal()});
 $('polX').onclick=()=>$('pol').close();$('pol').addEventListener('click',e=>{if(e.target===$('pol'))$('pol').close()});
@@ -4094,7 +4137,7 @@ const JR={sort:'rec'};
 const JR_ARR='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>';
 const JR_BACK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>';
 const JR_FIL='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>';
-function jrAnn(){const P=CFG.PAY||{},L=['Envío GRATIS en compras superiores a '+money(CFG.FREE_SHIP),'Envíos a toda Colombia'];if(P.cod!==false)L.push('Pago contra entrega');
+function jrAnn(){const P=CFG.PAY||{},L=['Envío GRATIS en compras superiores a '+money(CFG.FREE_SHIP),'Envíos a toda Colombia','50% de descuento en el envío en tu primera compra'];if(P.cod!==false)L.push('Pago contra entrega');
   const one=L.map(t=>`<span>${esc(t)}</span>`).join('').repeat(3);return `<div class="jr-mq"><div class="jr-mqt">${one}</div><div class="jr-mqt" aria-hidden="true">${one}</div></div>`}
 const jrOff=()=>(($('ann')||{}).offsetHeight||0)+((document.querySelector('.top')||{}).offsetHeight||0)-6;
 const jrTo=el=>{if(el)scrollTo({top:Math.max(0,el.getBoundingClientRect().top+scrollY-jrOff()),behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'})};
@@ -4145,9 +4188,7 @@ function jrPhotos(){const IG=(CFG.SOCIAL||{}).Instagram||'';
   const lk=$('jrIg');if(IG){lk.href=IG}else lk.remove();
   $('jrSpotS').hidden=true;
   {const L=[(CFG.HERO||[])[1],(CFG.HERO||[])[0]].filter(Boolean);const tryBg=i=>{const u=L[i];if(!u)return;const t=new Image();t.onload=()=>{$('jrJoin').style.backgroundImage=`url("${u}")`};t.onerror=()=>tryBg(i+1);t.src=u};tryBg(0)}
-  $('jrJW').href=wa(`Hola ${CFG.STORE}, quiero enterarme de los lanzamientos y las ofertas.`);
-  if(IG)$('jrJI').href=IG;else $('jrJI').remove();
-  const FB=(CFG.SOCIAL||{}).Facebook||'';if(FB)$('jrJF').href=FB;else $('jrJF').remove();const TT=(CFG.SOCIAL||{}).TikTok||'';if(TT)$('jrJT').href=TT;else $('jrJT').remove()}
+  $('jrJW').href=wa(`Hola ${CFG.STORE}, quiero hablar con un asesor.`)}
 /* migas de pan, nombre y acordeones de la ficha del producto */
 function jrPv(p){if(!p)return;$('jrBcN').textContent=p.name;const c=$('jrBcC'),g=gens(p),it=jrItems();
   const m=it.find(x=>x.k==='planas'&&slug(p.subcategory||'')==='plana'||x.k==='curvas'&&slug(p.subcategory||'')==='curva');
