@@ -2103,6 +2103,39 @@ html:not(#z)[data-pal=jr] .card .ph .pa.nx{right:10px!important;left:auto!import
 /* hover de los iconos sociales (igual que los botones de la pagina) */
 html:not(#z)[data-pal=jr] .jr-hsoc a{transition:background .2s,color .2s,border-color .2s,transform .2s}
 html:not(#z)[data-pal=jr] .jr-hsoc a:hover,html:not(#z)[data-pal=jr] .jr-hsoc a:focus-visible{background:var(--btn)!important;color:var(--btnx)!important;border-color:var(--btn)!important;transform:translateY(-2px)}
+/* opiniones reales de clientes (solo se muestra si hay reseñas en CFG.REVIEWS o link de Google) */
+html:not(#z)[data-pal=jr] .jr-rev{max-width:1240px;margin:56px auto 0;padding:0 20px}
+html:not(#z)[data-pal=jr] .jr-rev[hidden]{display:none}
+html:not(#z)[data-pal=jr] .jr-rev h3{font-size:clamp(22px,3vw,30px);font-weight:500;margin:0 0 18px;text-align:center}
+html:not(#z)[data-pal=jr] .jr-rl{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+html:not(#z)[data-pal=jr] .jr-rc{background:var(--chip);border:1px solid var(--line);border-radius:18px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:8px}
+html:not(#z)[data-pal=jr] .jr-rc .st{color:#f5b301;letter-spacing:2px;font-size:15px}
+html:not(#z)[data-pal=jr] .jr-rc p{margin:0;font-size:14.5px;line-height:1.5;flex:1}
+html:not(#z)[data-pal=jr] .jr-rc .au{display:flex;align-items:center;gap:10px;font-size:13px;opacity:.85}
+html:not(#z)[data-pal=jr] .jr-rc .av{width:32px;height:32px;border-radius:50%;background:var(--btn);color:var(--btnx);display:grid;place-items:center;font-weight:600;font-size:14px;flex:none}
+html:not(#z)[data-pal=jr] .jr-rc .au b{display:block;font-weight:600}
+html:not(#z)[data-pal=jr] .jr-rb{text-align:center;margin-top:18px}
+@media(max-width:760px){
+html:not(#z)[data-pal=jr] .jr-rev{margin-top:40px;padding:0 16px}
+html:not(#z)[data-pal=jr] .jr-rl{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:6px;-webkit-overflow-scrolling:touch}
+html:not(#z)[data-pal=jr] .jr-rc{flex:0 0 82%;scroll-snap-align:start}
+}
+/* redes: Instagram y TikTok */
+html:not(#z)[data-pal=jr] .jr-soc{max-width:1240px;margin:40px auto 0;padding:0 20px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+html:not(#z)[data-pal=jr] .jr-soc[hidden]{display:none}
+html:not(#z)[data-pal=jr] .jr-sc{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 26px;border:1px solid var(--line);border-radius:22px;background:var(--chip);color:inherit;text-decoration:none;transition:transform .2s,border-color .2s}
+html:not(#z)[data-pal=jr] .jr-sc:hover{transform:translateY(-2px);border-color:var(--btn)}
+html:not(#z)[data-pal=jr] .jr-sc .tx{display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0}
+html:not(#z)[data-pal=jr] .jr-sc b{font-size:clamp(18px,2.2vw,24px);font-weight:600;overflow-wrap:anywhere}
+html:not(#z)[data-pal=jr] .jr-sc .tx>span{font-size:15px;opacity:.85}
+html:not(#z)[data-pal=jr] .jr-sc .jr-pill{font-style:normal;margin-top:8px;font-size:13.5px;pointer-events:none}
+html:not(#z)[data-pal=jr] .jr-sc:hover .jr-pill{background:var(--btn);color:var(--btnx)}
+html:not(#z)[data-pal=jr] .jr-sc .ic{flex:none;width:clamp(64px,8vw,96px);height:clamp(64px,8vw,96px)}
+html:not(#z)[data-pal=jr] .jr-sc .ic svg{width:100%;height:100%;display:block}
+@media(max-width:760px){
+html:not(#z)[data-pal=jr] .jr-soc{grid-template-columns:1fr;margin-top:28px;padding:0 16px;gap:12px}
+html:not(#z)[data-pal=jr] .jr-sc{padding:18px 18px}
+}
 </style>
 </head>
 <body>
@@ -2114,6 +2147,7 @@ html:not(#z)[data-pal=jr] .jr-hsoc a:hover,html:not(#z)[data-pal=jr] .jr-hsoc a:
 
 <section class="fin jr-s jr-hide-sq" id="jrExpS" hidden><div class="jr-hd"><div class="jr-ht"><h2>Compra por categoría</h2><button type="button" class="jr-fil jr-filb" id="jrFil2">Filtrar</button></div><p>Gorras curvas, para hombre y para mujer. Elige por dónde empezar.</p></div><div class="jr-exp" id="jrExpG"></div></section>
 <section class="fin jr-s jr-hide-sq" id="jrPromo" hidden><div class="jr-hd"><h2>Más estilo, más calidad, mejor precio</h2><p>Combina varias gorras en un mismo pedido y aprovecha el envío gratis. Despachamos a todo el país.</p></div><div class="jr-big"><span id="jrBigT">Envío gratis</span><span class="jr-ico" aria-hidden="true"></span></div><ul class="jr-row"><li>Gorras con estilo propio</li><li>Calidad garantizada</li><li>Envíos a toda Colombia</li><li class="jr-lock">Compra segura</li></ul><div class="jr-cta"><a href="#catalogo" class="jr-pill dark" id="jrPB" data-jk="all">Ver la tienda</a></div></section>
+<section class="jr-soc" id="jrSoc" aria-label="Nuestras redes"><a class="jr-sc" id="jrSocI" target="_blank" rel="noopener"><span class="tx"><b data-h>@gorraxcol</b><span>Síguenos y descubre lo nuevo</span><i class="jr-pill dark">Seguir en Instagram →</i></span><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="jrIgG" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#fdb53a"/><stop offset=".35" stop-color="#f1313f"/><stop offset=".7" stop-color="#c5239b"/><stop offset="1" stop-color="#6a3cff"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#jrIgG)"/><rect x="5" y="5" width="14" height="14" rx="4.2" fill="none" stroke="#fff" stroke-width="1.7"/><circle cx="12" cy="12" r="3.3" fill="none" stroke="#fff" stroke-width="1.7"/><circle cx="16.1" cy="7.9" r="1" fill="#fff"/></svg></span></a><a class="jr-sc" id="jrSocT" target="_blank" rel="noopener"><span class="tx"><b data-h>@gorraxcolombia</b><span>Mira nuestros videos y lanzamientos</span><i class="jr-pill dark">Seguir en TikTok →</i></span><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#000"/><g transform="translate(5.2 4.6) scale(.6)"><path fill="#25f4ee" transform="translate(-.9 .7)" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/><path fill="#fe2c55" transform="translate(.9 -.7)" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/><path fill="#fff" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></g></svg></span></a></section>
 
 <div class="sectH"><div class="jr-cath"><h2>Lo más nuevo</h2><p>Gorras que hablan por ti. Elige tus favoritas y pídelas en minutos.</p></div><div class="jr-tabs" id="jrTabs" role="group" aria-label="Categorías"></div><div class="jr-bar"><span class="jr-n" id="jrN"></span><span class="jr-r"><button type="button" class="jr-fil" id="jrFil">Filtrar</button><label class="jr-sort">Ordenar por: <select id="jrSortS"><option value="rec">Recomendado</option><option value="nw">Lo más nuevo</option><option value="pa">Precio: menor a mayor</option><option value="pd">Precio: mayor a menor</option><option value="az">Nombre: A–Z</option></select></label></span></div></div>
 <main id="catalogo"><div class="empty">Cargando productos…</div></main>
@@ -2130,6 +2164,7 @@ html:not(#z)[data-pal=jr] .jr-hsoc a:hover,html:not(#z)[data-pal=jr] .jr-hsoc a:
   <div class="jr-acc"><details id="jrAI"><summary>Información del producto</summary><p id="jrAIt"></p></details><details><summary>Cambios y garantía</summary><p>Si tu producto llega con algún problema, te ayudamos. <button type="button" class="jr-lnk" data-pol="cam">Ver la política de cambios y garantía</button></p></details><details><summary>Envíos</summary><p id="jrAE"></p></details></div></div></div>
   <div class="rel" id="lbRel"></div>
 </dialog>
+<section class="jr-rev" id="jrRev" aria-label="Opiniones de clientes" hidden><h3>Lo que dicen nuestros clientes</h3><div class="jr-rl" id="jrRL"></div><div class="jr-rb" id="jrRB" hidden><a class="jr-pill" id="jrRG" target="_blank" rel="noopener">Déjanos tu reseña en Google</a></div></section>
 <section class="faq" aria-label="Preguntas frecuentes"><h3>Preguntas frecuentes</h3><details><summary>¿Cuánto demora el envío?</summary><p>Enviamos a todo el país. El tiempo depende de tu ciudad; al hacer tu pedido te confirmamos la fecha estimada por WhatsApp.</p></details><details><summary>¿Por dónde realizan los envíos?</summary><p>Despachamos a nivel nacional con transportadora. Te compartimos la guía de seguimiento cuando tu pedido sale.</p></details><details><summary>¿Cómo pago mi pedido?</summary><p>Con Nequi, Bancolombia o contra entrega. Elige tu medio de pago al finalizar la compra.</p></details></section>
 <footer id="contacto"><div class="jr-fcols"><div><h4>Tienda</h4><ul id="jrFShop"></ul></div><div><h4>Redes</h4><div class="links" id="social"></div></div><div><h4>Contacto</h4><ul><li><a id="jrFWa" target="_blank" rel="noopener"></a></li><li>Envíos a toda Colombia</li></ul></div><div class="jr-fpay"><h4>Medios de pago</h4><div class="pays" id="pays" aria-label="Medios de pago"></div></div><div><h4>Legal</h4><nav class="legal" aria-label="Políticas de la tienda"><button type="button" data-pol="env">Envíos y devoluciones</button><button type="button" data-pol="cam">Cambios y garantía</button><button type="button" data-pol="dat">Política de datos</button><button type="button" data-pol="qui">Quiénes somos</button></nav></div></div><div class="jr-fbot"><span class="jr-flogo jr-lg" role="img" aria-label="GORRAX"></span><p class="jr-fsl">Tu estilo, habla por ti.<small>Gorras de excelente calidad, enviadas a toda Colombia.</small></p><span id="secret">© <span id="yr"></span> <span id="stn"></span>. Todos los derechos reservados.</span></div></footer>
 
@@ -2218,6 +2253,10 @@ const CFG={
   NAV_ON:false,   // true = vuelve a mostrar el menú de categorías (Gorras…) arriba
   // ▼▼ FOTOS DEL BANNER PRINCIPAL: guarda cada foto en la carpeta img/ y escribe su nombre aquí, separado por comas ▼▼
   HERO:['img/banner-1.webp','img/banner-2.webp','img/banner-3.webp','img/banner-4.webp','img/banner-5.webp'],   // sin extensión: sirve .png, .jpg o .webp   // para agregar más: escribe aquí el nombre de la foto nueva (guardada en la carpeta img/)
+  // ▼▼ RESEÑAS REALES DE CLIENTES: agrega solo comentarios reales (con permiso del cliente). Mientras esté vacío, la sección no se muestra ▼▼
+  // formato: {n:'Nombre',c:'Ciudad',s:5,t:'Comentario tal cual lo escribió',f:'WhatsApp'},   (s=estrellas 1-5, f=donde lo recibiste: WhatsApp, Instagram, TikTok, Google...)
+  REVIEWS:[],
+  GOOGLE_REVIEW_URL:'',   // link para que el cliente deje su reseña en tu ficha de Google (opcional; si lo pones, aparece el botón)
   HERO_MS:3200,   // milisegundos entre foto y foto (2000 = 2 segundos)
   HERO_OLD:['img/herov1.png','img/banner-cruces.jpg','img/banner-colombia.jpg','img/banner-777.jpg','img/banner-samurai.jpg','img/banner-fugaz.jpg','img/banner-royal.jpg'],   // respaldo: solo se usan si NINGUNA foto de HERO carga
   HERO_POS:'center 28%',   // centrado vertical de las fotos del banner (0% = arriba, 50% = centro, 100% = abajo)
@@ -4126,6 +4165,23 @@ b.addEventListener('click',e=>{e.stopPropagation();const o=!d.classList.contains
 acc().forEach(x=>x.addEventListener('toggle',()=>{if(x.open){closeD();closeAcc(x)}}));
 document.addEventListener('click',e=>{if(e.target.closest('#jrDDt,#lbD,.jr-acc'))return;closeD();closeAcc()});
 sync()})();
+</script>
+<script>
+/* Reseñas reales: se arman con CFG.REVIEWS (nada inventado: si esta vacio, la seccion no aparece) */
+window.jrRevRender=function(){const s=document.getElementById('jrRev');if(!s)return;const esc=x=>String(x==null?'':x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const R=(CFG.REVIEWS||[]).filter(r=>r&&r.t&&r.n),G=CFG.GOOGLE_REVIEW_URL||'';
+const L=document.getElementById('jrRL'),B=document.getElementById('jrRB'),A=document.getElementById('jrRG');
+L.innerHTML=R.map(r=>{const n=Math.max(1,Math.min(5,+r.s||5));return `<div class="jr-rc"><div class="st" aria-label="${n} de 5 estrellas">${'★'.repeat(n)}${'☆'.repeat(5-n)}</div><p>${esc(r.t)}</p><div class="au"><span class="av">${esc(String(r.n).trim().charAt(0).toUpperCase())}</span><span><b>${esc(r.n)}</b>${[r.c,r.f].filter(Boolean).map(esc).join(' · ')}</span></div></div>`}).join('');
+if(G){A.href=G;B.hidden=false}else B.hidden=true;
+s.hidden=!(R.length||G)};
+jrRevRender();
+</script>
+<script>
+/* redes: toma los enlaces de CFG.SOCIAL (Instagram y TikTok) */
+(function(){const S=document.getElementById('jrSoc');if(!S)return;const U=CFG.SOCIAL||{};let n=0;
+[['jrSocI','Instagram'],['jrSocT','TikTok']].forEach(([id,k])=>{const a=document.getElementById(id),u=U[k];if(!a)return;if(!u){a.remove();return}n++;a.href=u;
+const m=String(u).replace(/[?#].*$/,'').replace(/\/+$/,'').split('/').pop().replace(/^@/,'');if(m)a.querySelector('[data-h]').textContent='@'+m});
+if(!n)S.hidden=true;else if(n===1)S.style.gridTemplateColumns='1fr'})();
 </script>
 </body>
 </html>
