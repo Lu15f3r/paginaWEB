@@ -2260,6 +2260,10 @@ html:not(#z)[data-pal=jr] #jrSoc .jr-sc{transition:transform .25s ease,box-shado
 @media(hover:hover){
 html:not(#z)[data-pal=jr] #jrSoc .jr-sc:not(#jrSocT):hover,html:not(#z) .jr-rf-g li:not(:nth-child(2)):hover{transform:translateY(-5px)}
 html:not(#z)[data-pal=jr] #jrSoc #jrSocT:hover,html:not(#z) .jr-rf-g li:nth-child(2):hover{transform:scale(1.03) translateY(-5px)}}
+html:not(#z) .jr-rf-g li{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:12px;row-gap:10px;align-items:center;align-content:start}
+html:not(#z) .jr-rf-g li>b{grid-column:1;grid-row:1}
+html:not(#z) .jr-rf-g li>.t{grid-column:2;grid-row:1;margin:0}
+html:not(#z) .jr-rf-g li>span:not(.t){grid-column:1/-1;grid-row:2}
 </style>
 </head>
 <body>
