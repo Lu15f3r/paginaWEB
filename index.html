@@ -2329,6 +2329,43 @@ html:not(#z)[data-pal=jr] body.sq .sectH .jr-bar{grid-row:auto}
 html:not(#z)[data-pal=jr] .sectH{padding-top:clamp(20px,2.2vw,34px)!important}
 html:not(#z)[data-pal=jr] body.pv .sectH,html:not(#z)[data-pal=jr] body.pv .jr-tabs,html:not(#z)[data-pal=jr] body.pv .jr-bar{display:none!important}
 html:not(#z) #jrRf{display:none!important}
+
+/* ===== Reseñas por producto ===== */
+.pv-rs{display:inline-flex;align-items:center;gap:6px;background:none;border:0;padding:0;margin:2px 0 10px;font:inherit;font-size:14.5px;color:var(--ink);cursor:pointer}
+.pv-rs .rstar,.pv-rev .rstar{color:#e8a200;letter-spacing:1px;padding:0!important;background:none!important}
+.pv-rev{max-width:1240px;margin:34px auto 0;box-sizing:border-box;color:var(--ink)}
+.pv-rh{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:14px}
+.pv-rh h3{margin:0 0 4px;font-size:clamp(20px,2.4vw,26px);font-weight:600}
+.pv-sum{font-size:14.5px;color:var(--muted)}
+.pv-rl{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-top:16px}
+.pv-rc{border:1px solid var(--line);border-radius:16px;background:var(--chip,var(--panel));padding:16px 18px;display:flex;flex-direction:column;gap:8px;font-size:15px;line-height:1.45}
+.pv-rc .rt{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.pv-rc .vf{font-style:normal;font-size:12.5px;padding:3px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.pv-rc .bd{margin:0;white-space:pre-wrap;word-break:break-word}
+.pv-rc .au{display:flex;gap:8px;align-items:baseline;font-size:13.5px;color:var(--muted)}
+.pv-rc .au b{color:var(--ink);font-weight:600}
+.pv-rc .rp{font-size:14px;border-top:1px solid var(--line);padding-top:8px;color:var(--muted)}
+.pv-rc .rp b{color:var(--ink)}
+dialog.rvd{width:min(520px,94vw);padding:26px 26px 22px;border-radius:20px;position:relative;font-size:15px}
+dialog.rvd::backdrop{background:rgba(0,0,0,.55)}
+.rvd h3{margin:0 0 4px;font-size:21px;font-weight:600;text-align:center}
+.rvd .rvp{margin:0 0 14px;text-align:center;color:var(--muted);font-weight:600}
+.rvd .rvx{position:absolute;top:10px;right:14px;background:none;border:0;font-size:30px;line-height:1;color:var(--ink);cursor:pointer}
+.rvd label{display:block;margin:12px 0 5px;font-weight:600;font-size:14px}
+.rvd label small{font-weight:400;color:var(--muted)}
+.rvd textarea,.rvd input:not([type=checkbox]){width:100%;box-sizing:border-box;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:10px 12px;font:inherit}
+.rvd .rvc{display:flex;align-items:center;gap:8px;font-weight:400;margin-top:10px}
+.rvd .rvh{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.rv-s{display:flex;justify-content:center;gap:6px;margin:8px 0 4px}
+.rv-s button{background:none;border:0;cursor:pointer;font-size:42px;line-height:1;color:var(--line2,#c9c6bd);padding:2px 4px;transition:transform .15s,color .15s}
+.rv-s button.on{color:#e8a200}
+.rv-s button:hover{transform:scale(1.12)}
+.rvd .rvm{min-height:18px;margin:10px 0 0;color:#c62828;font-size:14px}
+.rvd .rvn{margin:4px 0 12px;font-size:13px;color:var(--muted)}
+.rvd .rvs{width:100%;border:0;border-radius:999px;padding:12px 20px;font:600 16px inherit;font-family:inherit;background:var(--btn,#111);color:var(--btnx,#fff);cursor:pointer}
+.rvd .rvs:disabled{opacity:.6;cursor:default}
+.rvok{text-align:center;padding:14px 0 4px}
+.rvok p{color:var(--muted);margin:6px 0 18px}
 </style>
 </head>
 <body>
@@ -2351,11 +2388,29 @@ html:not(#z) #jrRf{display:none!important}
   <div class="dh"><button type="button" class="jr-back" id="jrBack" aria-label="Volver a la tienda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Volver</button><nav class="jr-bc" aria-label="Ruta"><button type="button" id="lbX">Inicio</button><i>›</i><button type="button" id="jrBcC" data-jk="all">Tienda</button><i>›</i><span id="jrBcN"></span></nav></div>
   <div class="lbb"><div class="lbl"><div class="lbth" id="pvTh" aria-label="Miniaturas"></div><div class="lbg" id="lbG"></div><div class="stage" id="lbS"><button class="lbn l" id="lbP" type="button" aria-label="Foto anterior">‹</button><img id="lbI" alt=""><button class="lbn r" id="lbN" type="button" aria-label="Foto siguiente">›</button></div>
   <div class="lbt" id="lbTh"></div>
-  </div><div class="lbr"><p class="jr-sku" id="jrSku"></p><h2 id="lbT"></h2><button type="button" class="jr-ddt" id="jrDDt" aria-expanded="false" hidden>Descripción</button><div class="lbd" id="lbD" hidden></div>
+  </div><div class="lbr"><p class="jr-sku" id="jrSku"></p><h2 id="lbT"></h2><button type="button" class="pv-rs" id="pvRS" hidden></button><button type="button" class="jr-ddt" id="jrDDt" aria-expanded="false" hidden>Descripción</button><div class="lbd" id="lbD" hidden></div>
   <div class="lbo" id="lbO"></div>
   <div class="lbf"><div class="lbpr"><span class="price" id="lbPr"></span><small class="saved" id="lbSv"></small></div><div class="lba"><span class="lbq" role="group" aria-label="Cantidad"><button type="button" id="lbQm" aria-label="Menos">−</button><b id="lbQn">1</b><button type="button" id="lbQp" aria-label="Más unidades">+</button></span><button type="button" class="btn ghost sm" id="lbC" aria-label="Agregar al carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a1 1 0 0 0 1 .8h8.6a1 1 0 0 0 1-.8L20 7H6"/></svg><span class="bt">Agregar al carrito</span></button><a class="btn grn" id="lbW" target="_blank" rel="noopener" aria-label="Pedir por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.06 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.78h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg><span class="bt">Pedir por WhatsApp</span></a></div></div>
   <div class="jr-acc"><details id="jrAI"><summary>Información del producto</summary><p id="jrAIt"></p></details><details><summary>Cambios y garantía</summary><p>Si tu producto llega con algún problema, te ayudamos. <button type="button" class="jr-lnk" data-pol="cam">Ver la política de cambios y garantía</button></p></details><details><summary>Envíos</summary><p id="jrAE"></p></details></div></div></div>
+  <section class="pv-rev" id="pvRev" aria-label="Reseñas del producto" hidden><div class="pv-rh"><div><h3>Reseñas</h3><div class="pv-sum" id="pvSum"></div></div><button type="button" class="jr-pill" id="pvWr">Escribir una reseña</button></div><div class="pv-rl" id="pvRL"></div></section>
   <div class="rel" id="lbRel"></div>
+</dialog>
+<dialog id="rvD" class="rvd" aria-labelledby="rvT">
+<form id="rvF" novalidate>
+<button type="button" class="rvx" id="rvX" aria-label="Cerrar">&times;</button>
+<h3 id="rvT">¿Qué te pareció este producto?</h3>
+<p class="rvp" id="rvPn"></p>
+<div class="rv-s" id="rvS" role="group" aria-label="Calificación"><button type="button" data-v="1" aria-label="1 estrella" aria-pressed="false">★</button><button type="button" data-v="2" aria-label="2 estrellas" aria-pressed="false">★</button><button type="button" data-v="3" aria-label="3 estrellas" aria-pressed="false">★</button><button type="button" data-v="4" aria-label="4 estrellas" aria-pressed="false">★</button><button type="button" data-v="5" aria-label="5 estrellas" aria-pressed="false">★</button></div>
+<label for="rvB">Tu reseña</label><textarea id="rvB" rows="5" maxlength="800" placeholder="Cuéntanos cómo te quedó, la calidad, el ajuste…"></textarea>
+<label for="rvN">Tu nombre</label><input id="rvN" maxlength="60" autocomplete="given-name">
+<label class="rvc"><input type="checkbox" id="rvA"> Publicar como anónimo</label>
+<label for="rvC">Correo o WhatsApp <small>(opcional, no se muestra)</small></label><input id="rvC" maxlength="120" autocomplete="off">
+<input id="rvH" class="rvh" tabindex="-1" autocomplete="off" aria-hidden="true">
+<p class="rvm" id="rvM" role="alert"></p>
+<p class="rvn">Revisamos cada reseña antes de publicarla.</p>
+<button type="submit" class="rvs" id="rvSb">Enviar reseña</button>
+</form>
+<div class="rvok" id="rvOk" hidden><h3>¡Gracias por tu opinión!</h3><p>Tu reseña quedará visible en cuanto la revisemos.</p><button type="button" class="rvs" id="rvOkB">Cerrar</button></div>
 </dialog>
 <section class="jr-rev" id="jrRev" aria-label="Opiniones de clientes" hidden><h3>Lo que dicen nuestros clientes</h3><div class="jr-rl" id="jrRL"></div><div class="jr-rb" id="jrRB" hidden><a class="jr-pill" id="jrRG" target="_blank" rel="noopener">Déjanos tu reseña en Google</a></div></section>
 <section class="jr-rf" id="jrRf" aria-label="Refiere y gana"><h3>Refiere a un amigo y ganen los dos</h3><p class="jr-rf-s">Tu amigo recibe <b>5%</b> en su primera compra, y tú recibes descuento en la tuya.</p><ol class="jr-rf-g"><li><b>1</b><span class="t">Compra y recibe tu cupón</span><span>Con tu compra te enviamos por WhatsApp tu cupón personal para compartir.</span></li><li><b>2</b><span class="t">Compártelo con un amigo</span><span>Tu amigo lo escribe en el carrito y recibe 5% en su primera compra. Si tu amigo empieza a seguirnos recibe un 10% de descuento adicional en el producto, para un total de 15%.</span></li><li><b>3</b><span class="t">Gana en tu próxima compra</span><span>Ganas 10% de descuento en tu próxima compra por tu primer amigo. Si refieres a un segundo amigo, se suma 5% más, para un total de 15% en tu próxima compra.</span></li></ol></section>
@@ -2393,7 +2448,7 @@ html:not(#z) #jrRf{display:none!important}
     </form>
     <div id="panel" hidden>
       <div id="gAv" class="gavs" hidden></div>
-      <div class="tabs" id="tabs"><button type="button" class="btn ghost sm on" data-t="prod">Productos</button><button type="button" class="btn ghost sm" data-t="ped">Pedidos</button><button type="button" class="btn ghost sm" data-t="inv">Inventario</button><button type="button" class="btn ghost sm" data-t="ven">Ventas</button><button type="button" class="btn ghost sm" data-t="com">Compras</button><button type="button" class="btn ghost sm" data-t="gas">Gastos</button><button type="button" class="btn ghost sm" data-t="gra">Gráfica</button><button type="button" class="btn ghost sm" data-t="cod">Cupones y Club</button></div>
+      <div class="tabs" id="tabs"><button type="button" class="btn ghost sm on" data-t="prod">Productos</button><button type="button" class="btn ghost sm" data-t="ped">Pedidos</button><button type="button" class="btn ghost sm" data-t="inv">Inventario</button><button type="button" class="btn ghost sm" data-t="ven">Ventas</button><button type="button" class="btn ghost sm" data-t="com">Compras</button><button type="button" class="btn ghost sm" data-t="gas">Gastos</button><button type="button" class="btn ghost sm" data-t="gra">Gráfica</button><button type="button" class="btn ghost sm" data-t="cod">Cupones y Club</button><button type="button" class="btn ghost sm" data-t="res">Reseñas</button></div>
       <div id="tProd"><form id="pf" class="f">
         <input type="hidden" id="pid">
         
@@ -2424,7 +2479,7 @@ html:not(#z) #jrRf{display:none!important}
         <div class="w"><button class="btn" id="sv">Guardar producto</button> <button type="button" class="btn ghost" id="cl">Limpiar</button></div>
       </form>
       <div style="margin-top:22px"><input id="pq" type="search" class="invq" placeholder="Buscar productos por nombre, categoría o proveedor…" autocomplete="off"><div style="margin-top:8px"><button type="button" class="btn ghost sm" data-xl="prod">⬇ Exportar productos a Excel</button></div></div><div style="margin-top:10px" id="alist"></div></div>
-      <div id="tPed" hidden></div><div id="tInv" hidden></div><div id="tVen" hidden></div><div id="tCom" hidden></div><div id="tGas" hidden></div><div id="tGra" hidden></div><div id="tCod" hidden></div>
+      <div id="tPed" hidden></div><div id="tInv" hidden></div><div id="tVen" hidden></div><div id="tCom" hidden></div><div id="tGas" hidden></div><div id="tGra" hidden></div><div id="tRes" hidden></div><div id="tCod" hidden></div>
     </div>
     <p class="msg" id="msg"></p>
   </div>
@@ -2452,7 +2507,7 @@ const CFG={
   // ▼▼ RESEÑAS REALES DE CLIENTES: agrega solo comentarios reales (con permiso del cliente). Mientras esté vacío, la sección no se muestra ▼▼
   // formato: {n:'Nombre',c:'Ciudad',s:5,t:'Comentario tal cual lo escribió',f:'WhatsApp'},   (s=estrellas 1-5, f=donde lo recibiste: WhatsApp, Instagram, TikTok, Google...)
   REVIEWS:[],
-  GOOGLE_REVIEW_URL:'',   // link para que el cliente deje su reseña en tu ficha de Google (opcional; si lo pones, aparece el botón)
+  GOOGLE_REVIEW_URL:'',   // PEGA AQUÍ el enlace para dejar reseña de tu ficha de Google (ej: 'https://g.page/r/XXXX/review' o 'https://search.google.com/local/writereview?placeid=TU_PLACE_ID'). Si está vacío, el botón no aparece
   HERO_MS:3200,   // milisegundos entre foto y foto (2000 = 2 segundos)
   HERO_OLD:['img/herov1.png','img/banner-cruces.jpg','img/banner-colombia.jpg','img/banner-777.jpg','img/banner-samurai.jpg','img/banner-fugaz.jpg','img/banner-royal.jpg'],   // respaldo: solo se usan si NINGUNA foto de HERO carga
   HERO_POS:'center 28%',   // centrado vertical de las fotos del banner (0% = arriba, 50% = centro, 100% = abajo)
@@ -2639,7 +2694,7 @@ function updMg(){const c=parseFloat($('pco').value),el=$('pmg'),L=[];let neg=fal
   if(!L.length){el.textContent='';el.className='w mg';return}
   el.className='w mg '+(neg?'neg':'ok');el.innerHTML=L.map(esc).join('<br>')}
 $('pco').oninput=$('pcmp').oninput=$('pp').oninput=updMg;
-function gate(on){$('login').hidden=on;$('panel').hidden=!on;$('out').hidden=!on;$('admT').textContent=on?'Panel de administración':'Administrador';say('');if(on){alist();loadOrders();loadPurch();loadExps();loadPlans();loadCosts().then(()=>{if($('pid').value)$('pco').value=costs[$('pid').value]??'';updMg()})}}
+function gate(on){$('login').hidden=on;$('panel').hidden=!on;$('out').hidden=!on;$('admT').textContent=on?'Panel de administración':'Administrador';say('');if(on){alist();rvAdmLoad();loadOrders();loadPurch();loadExps();loadPlans();loadCosts().then(()=>{if($('pid').value)$('pco').value=costs[$('pid').value]??'';updMg()})}}
 $('x').onclick=()=>dlg.close();
 $('login').onsubmit=async e=>{e.preventDefault();
   const{error}=await sb.auth.signInWithPassword({email:$('em').value,password:$('pw').value});
@@ -2905,6 +2960,7 @@ function lbOpen(id,intent){const p=products.find(x=>String(x.id)===String(id));i
   {const A=imgs(p),T=$('pvTh');T.innerHTML=A.map((u,k)=>`<button type="button" data-k="${k}" aria-label="Foto ${k+1}"><img src="${esc(u)}" alt="" draggable="false"></button>`).join('');T.classList.toggle('on',A.length>1);T.firstChild&&T.firstChild.classList.add('a')}
   {const o=products.filter(x=>String(x.id)!==String(p.id)&&isAv(x)).sort((a,b)=>(slug(b.category||'')===slug(p.category||''))-(slug(a.category||'')===slug(p.category||''))).slice(0,8);
    $('lbRel').innerHTML=o.length?`<h4>Aprovecha para llevar tus preferidas</h4><div class="rg">${o.map(x=>{const im=imgs(x);return `<div class="rl" data-id="${esc(x.id)}" role="link" tabindex="0"><span class="ri" data-i="0">${x.compare_price&&+x.compare_price>+x.price?'<em class="of">Oferta</em>':''}${im[0]?`<img src="${esc(im[0])}" alt="" loading="lazy" draggable="false">`:''}${im.length>1?'<button type="button" class="ra l" aria-label="Foto anterior">❮</button><button type="button" class="ra r" aria-label="Foto siguiente">❯</button>':''}</span><b>${esc(x.name)}</b><span class="price">${money(x.price)}${x.compare_price&&+x.compare_price>+x.price?`<span class="old">${money(x.compare_price)}</span>`:''}</span></div>`}).join('')}</div>`:''}
+  try{pvRev(p)}catch(_){}
   lbShow(0);pvOpen();lbFit();requestAnimationFrame(lbFit)}
 /* la ficha del producto es una página completa (no una ventana encima) */
 let PV_Y=0;
@@ -2982,10 +3038,10 @@ const fd=d=>new Date(d).toLocaleString('es-CO',{dateStyle:'medium',timeStyle:'sh
 const itx=o=>(o.items||[]).map(i=>`${i.qty>1?i.qty+'× ':''}${esc(i.name)}${i.size?' ('+esc(i.size)+')':''}${i.color?' · '+esc(i.color):''}`).join(' + ');
 const ym=o=>{const d=new Date(o.confirmed_at||o.created_at);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')};
 async function loadOrders(){if(!sb)return;const{data,error}=await sb.from('orders').select('*').order('created_at',{ascending:false});ordErr=!!error;orders=error?[]:data;showTab(tab)}
-function showTab(t){const _pt=tab;tab=t;const m={prod:'tProd',ped:'tPed',inv:'tInv',ven:'tVen',com:'tCom',gas:'tGas',gra:'tGra',cod:'tCod'};for(const k in m)$(m[k]).hidden=k!==t;
+function showTab(t){const _pt=tab;tab=t;const m={prod:'tProd',ped:'tPed',inv:'tInv',ven:'tVen',com:'tCom',gas:'tGas',gra:'tGra',cod:'tCod',res:'tRes'};for(const k in m)$(m[k]).hidden=k!==t;
   $('tabs').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
-  if(t!=='prod'&&ordErr&&t!=='inv'&&t!=='gas'&&t!=='com'&&t!=='cod'){$(m[t]).innerHTML='<p class="msg">No se pudieron leer los pedidos. Ejecuta actualizar-pedidos.sql en Supabase.</p>';return}
-  if(t==='cod')rCod();if(t==='ped')rPed();if(t==='inv')rInv();if(t==='ven')rVen();if(t==='gra')rGra();if(t==='com'){if(_pt!=='com'){cmM='all';cmP='';cmC=''}rCom()}if(t==='gas'){rGas();if(!exps.length&&!expErr)loadExps();if(!plLoaded)loadPlans()}
+  if(t!=='prod'&&ordErr&&t!=='inv'&&t!=='gas'&&t!=='com'&&t!=='cod'&&t!=='res'){$(m[t]).innerHTML='<p class="msg">No se pudieron leer los pedidos. Ejecuta actualizar-pedidos.sql en Supabase.</p>';return}
+  if(t==='res')rRes();if(t==='cod')rCod();if(t==='ped')rPed();if(t==='inv')rInv();if(t==='ven')rVen();if(t==='gra')rGra();if(t==='com'){if(_pt!=='com'){cmM='all';cmP='';cmC=''}rCom()}if(t==='gas'){rGas();if(!exps.length&&!expErr)loadExps();if(!plLoaded)loadPlans()}
   if(!showTab.q&&(t==='prod'||t==='inv')){showTab.q=1;load().then(()=>{showTab.q=0;if(tab==='prod')alist();if(tab==='inv'&&!$('tInv').querySelector('.stk-in.chg'))rInv()}).catch(()=>{showTab.q=0})}}
 /* ====== CÓDIGOS DE DESCUENTO, REFERIDOS Y CLUB ====== */
 const CLUB={N:3,MESES:12,G1:'Regalo de bienvenida (1ª compra)',G5:'Regalo de fidelidad (3 compras)'};
@@ -4475,6 +4531,7 @@ const R=(CFG.REVIEWS||[]).filter(r=>r&&r.t&&r.n),G=CFG.GOOGLE_REVIEW_URL||'';
 const L=document.getElementById('jrRL'),B=document.getElementById('jrRB'),A=document.getElementById('jrRG');
 L.innerHTML=R.map(r=>{const n=Math.max(1,Math.min(5,+r.s||5));return `<div class="jr-rc"><div class="st" aria-label="${n} de 5 estrellas">${'★'.repeat(n)}${'☆'.repeat(5-n)}</div><p>${esc(r.t)}</p><div class="au"><span class="av">${esc(String(r.n).trim().charAt(0).toUpperCase())}</span><span><b>${esc(r.n)}</b>${[r.c,r.f].filter(Boolean).map(esc).join(' · ')}</span></div></div>`}).join('');
 if(G){A.href=G;B.hidden=false}else B.hidden=true;
+const H=s.querySelector('h3');if(H)H.textContent=R.length?'Lo que dicen nuestros clientes':'¿Ya tienes tu gorra? Cuéntanos cómo te fue';
 s.hidden=!(R.length||G)};
 jrRevRender();
 </script>
@@ -4509,6 +4566,87 @@ document.querySelectorAll('.jr-fn').forEach(e=>e.textContent=m(CFG.SHIP_FULL));d
 <script>
 /* referidos apagados: oculta la casilla de cupón para referir en Registrar venta */
 (function(){try{if(!REF.ON){var l=document.getElementById('vfG');l=l&&l.closest('label');if(l)l.style.display='none'}}catch(e){}})();
+</script>
+<script>
+/* ===== Reseñas por producto: se envían "pendientes" y solo se ven cuando las apruebas en el admin ===== */
+(function(){
+const RV={cache:{},p:null,rating:0,t0:0};
+const stars=n=>'★'.repeat(n)+'☆'.repeat(5-n);
+const fdt=d=>{try{return new Date(d).toLocaleDateString('es-CO',{day:'numeric',month:'short',year:'numeric'})}catch(e){return ''}};
+function render(list){
+  const n=list.length,avg=n?list.reduce((t,r)=>t+r.rating,0)/n:0,lab=n+' '+(n===1?'reseña':'reseñas');
+  const rs=$('pvRS');rs.hidden=!n;
+  if(n){rs.innerHTML='<span class="rstar" aria-hidden="true">'+stars(Math.round(avg))+'</span> <b>'+avg.toFixed(1).replace('.',',')+'</b> · '+lab;rs.setAttribute('aria-label','Calificación '+avg.toFixed(1)+' de 5, '+lab+'. Ver reseñas')}
+  $('pvSum').innerHTML=n?'<span class="rstar" aria-hidden="true">'+stars(Math.round(avg))+'</span> '+avg.toFixed(1).replace('.',',')+' de 5 · '+lab:'Aún no hay reseñas de este producto. ¡Sé el primero en opinar!';
+  $('pvRL').innerHTML=list.map(r=>'<article class="pv-rc"><div class="rt"><span class="rstar" aria-label="'+r.rating+' de 5 estrellas">'+stars(r.rating)+'</span>'+(r.verified?'<em class="vf">Compra verificada</em>':'')+'</div><p class="bd">'+esc(r.body)+'</p><div class="au"><b>'+esc(r.name)+'</b><span>'+fdt(r.created_at)+'</span></div>'+(r.reply?'<div class="rp"><b>Respuesta de '+esc(CFG.STORE||'GORRAX')+':</b> '+esc(r.reply)+'</div>':'')+'</article>').join('');
+  $('pvRev').hidden=false}
+window.pvRevClear=()=>{RV.cache={}};
+window.pvRev=async function(p){
+  RV.p=p;const sec=$('pvRev');
+  if(!sb){sec.hidden=true;$('pvRS').hidden=true;return}
+  const k=String(p.id);
+  if(RV.cache[k]){render(RV.cache[k]);return}
+  $('pvRL').innerHTML='';$('pvRS').hidden=true;$('pvSum').textContent='';sec.hidden=false;
+  try{
+    const r=await sb.from('product_reviews').select('id,rating,body,name,verified,reply,created_at').eq('product_id',k).order('created_at',{ascending:false}).limit(50);
+    if(r.error)throw r.error;
+    RV.cache[k]=r.data||[];
+    if(RV.p&&String(RV.p.id)===k)render(RV.cache[k]);
+  }catch(e){if(RV.p&&String(RV.p.id)===k){sec.hidden=true;$('pvRS').hidden=true}}
+};
+$('pvRS').onclick=()=>$('pvRev').scrollIntoView({behavior:'smooth',block:'start'});
+const D=$('rvD'),M=m=>{$('rvM').textContent=m||''};
+function setStar(v){RV.rating=v;D.querySelectorAll('#rvS button').forEach(b=>{const on=+b.dataset.v<=v;b.classList.toggle('on',on);b.setAttribute('aria-pressed',+b.dataset.v===v?'true':'false')})}
+$('rvS').addEventListener('click',e=>{const b=e.target.closest('button');if(b){setStar(+b.dataset.v);M('')}});
+$('pvWr').onclick=()=>{if(!RV.p)return;
+  $('rvF').reset();setStar(0);M('');$('rvF').hidden=false;$('rvOk').hidden=true;$('rvSb').disabled=false;
+  $('rvPn').textContent=RV.p.name||'';RV.t0=Date.now();D.showModal()};
+$('rvX').onclick=$('rvOkB').onclick=()=>D.close();
+D.addEventListener('click',e=>{if(e.target===D)D.close()});
+$('rvF').addEventListener('submit',async e=>{e.preventDefault();
+  const p=RV.p;if(!p)return;
+  const body=$('rvB').value.trim(),anon=$('rvA').checked,name=anon?'Anónimo':$('rvN').value.trim(),contact=$('rvC').value.trim();
+  if(!RV.rating)return M('Elige cuántas estrellas le das al producto.');
+  if(body.length<5)return M('Cuéntanos un poco más en tu reseña (mínimo 5 letras).');
+  if(!name)return M('Escribe tu nombre o marca "Publicar como anónimo".');
+  if($('rvH').value||Date.now()-RV.t0<2500){$('rvF').hidden=true;$('rvOk').hidden=false;return}
+  const key='gx_rv_'+p.id;
+  try{const t=+localStorage.getItem(key)||0;if(Date.now()-t<864e5)return M('Ya enviaste una reseña de este producto. ¡Gracias!')}catch(_){}
+  $('rvSb').disabled=true;M('Enviando…');
+  const r=await sb.from('product_reviews').insert({product_id:String(p.id),product_name:p.name||null,rating:RV.rating,body:body.slice(0,800),name:name.slice(0,60),contact:contact?contact.slice(0,120):null});
+  if(r.error){$('rvSb').disabled=false;return M('No pudimos enviar tu reseña ahora. Inténtalo de nuevo o escríbenos por WhatsApp.')}
+  try{localStorage.setItem(key,String(Date.now()))}catch(_){}
+  M('');$('rvF').hidden=true;$('rvOk').hidden=false});
+})();
+
+/* ===== Admin: pestaña Reseñas ===== */
+let rvAdm=[],rvErr='',rvMsg='';
+async function rvAdmLoad(){if(!sb)return;try{const r=await sb.from('product_reviews').select('*').order('created_at',{ascending:false}).limit(300);rvErr=r.error?r.error.message:'';rvAdm=r.data||[]}catch(e){rvErr=String(e.message||e)}
+  const n=rvAdm.filter(x=>x.status==='pendiente').length,b=document.querySelector('#tabs [data-t="res"]');if(b)b.textContent='Reseñas'+(n?' ('+n+')':'')}
+function rRes(skip){const T=$('tRes');
+  if(!skip){T.innerHTML='<p class="msg">Cargando reseñas…</p>';rvAdmLoad().then(()=>{if(tab==='res')rRes(1)});return}
+  if(rvErr){T.innerHTML='<p class="msg">No se pudieron leer las reseñas ('+esc(rvErr)+'). Ejecuta resenas-productos.sql en Supabase > SQL Editor.</p>';return}
+  const lab={pendiente:'Pendiente',aprobada:'Aprobada',oculta:'Oculta'},cls={pendiente:'pendiente',aprobada:'confirmado',oculta:'cancelado'};
+  const ord={pendiente:0,aprobada:1,oculta:2},L=rvAdm.slice().sort((a,b)=>ord[a.status]-ord[b.status]||new Date(b.created_at)-new Date(a.created_at));
+  const np=rvAdm.filter(x=>x.status==='pendiente').length;
+  T.innerHTML=(rvMsg?'<p class="msg">'+esc(rvMsg)+'</p>':'')+'<div class="ord"><b>Reseñas de productos ('+rvAdm.length+')</b><small>Las reseñas nuevas llegan como <b>pendientes</b> y no se ven en la tienda hasta que las apruebes. Revisa que sean de clientes reales; marca "Compra verificada" solo si comprobaste el pedido. '+(np?'<b>Tienes '+np+' por revisar.</b>':'')+'</small></div>'+
+  (L.length?L.map(r=>'<div class="ord"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><b>'+esc(r.product_name||r.product_id)+'</b><span class="st '+cls[r.status]+'">'+lab[r.status]+'</span></div>'+
+   '<div><span style="color:#e8a200;letter-spacing:1px">'+'★'.repeat(r.rating)+'☆'.repeat(5-r.rating)+'</span> · '+esc(r.name)+' · '+fd(r.created_at)+(r.contact?' · Contacto (privado): '+esc(r.contact):'')+(r.verified?' · ✓ Compra verificada':'')+'</div>'+
+   '<p style="margin:6px 0;white-space:pre-wrap">'+esc(r.body)+'</p>'+
+   '<textarea id="rvr'+r.id+'" rows="2" maxlength="600" placeholder="Respuesta de la tienda (opcional, se muestra debajo de la reseña)" style="width:100%;box-sizing:border-box">'+esc(r.reply||'')+'</textarea>'+
+   '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">'+(r.status!=='aprobada'?'<button type="button" class="btn grn sm" data-rv="ok" data-id="'+r.id+'">Aprobar</button>':'<button type="button" class="btn ghost sm" data-rv="hide" data-id="'+r.id+'">Ocultar</button>')+
+   '<button type="button" class="btn ghost sm" data-rv="ver" data-id="'+r.id+'">'+(r.verified?'Quitar compra verificada':'Marcar compra verificada')+'</button><button type="button" class="btn ghost sm" data-rv="rep" data-id="'+r.id+'">Guardar respuesta</button><button type="button" class="btn red sm" data-rv="del" data-id="'+r.id+'">Eliminar</button></div></div>').join(''):'<p class="desc">Todavía no hay reseñas. Cuando un cliente escriba una, aparecerá aquí.</p>')}
+$('tRes').addEventListener('click',async e=>{const b=e.target.closest('[data-rv]');if(!b)return;const a=b.dataset.rv,id=b.dataset.id,r=rvAdm.find(x=>String(x.id)===String(id));if(!r)return;
+  if(a==='del'&&!b.dataset.arm){b.dataset.arm=1;const t=b.textContent;b.textContent='Toca de nuevo para eliminar';setTimeout(()=>{if(b.isConnected){delete b.dataset.arm;b.textContent=t}},3500);return}
+  b.disabled=true;const T=sb.from('product_reviews');let q;
+  if(a==='ok')q=T.update({status:'aprobada'}).eq('id',r.id);
+  else if(a==='hide')q=T.update({status:'oculta'}).eq('id',r.id);
+  else if(a==='ver')q=T.update({verified:!r.verified}).eq('id',r.id);
+  else if(a==='rep'){const v=($('rvr'+id).value||'').trim();q=T.update({reply:v||null}).eq('id',r.id)}
+  else q=T.delete().eq('id',r.id);
+  const x=await q.select('id');
+  rvMsg=x.error?'No se pudo guardar: '+x.error.message:(!x.data||!x.data.length)?'Supabase no permitió el cambio. Ejecuta resenas-productos.sql en Supabase > SQL Editor.':'Listo.';
+  await rvAdmLoad();if(window.pvRevClear)pvRevClear();rRes(1)});
 </script>
 </body>
 </html>
