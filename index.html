@@ -2366,6 +2366,38 @@ dialog.rvd::backdrop{background:rgba(0,0,0,.55)}
 .rvd .rvs:disabled{opacity:.6;cursor:default}
 .rvok{text-align:center;padding:14px 0 4px}
 .rvok p{color:var(--muted);margin:6px 0 18px}
+html:not(#z) body.pv #jrRev,html:not(#z) body.sq #jrRev{display:none!important}
+
+/* reseñas inicio: carrusel estilo Google */
+html:not(#z)[data-pal=jr] .rv-sum{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:6px 10px;margin:-6px 0 18px;font-size:14px;color:var(--muted);letter-spacing:.3px}
+html:not(#z)[data-pal=jr] .rv-sum[hidden]{display:none}
+html:not(#z)[data-pal=jr] .rv-sum b{font-weight:700;color:var(--muted);letter-spacing:.8px}
+html:not(#z)[data-pal=jr] .rv-sum .n{font-weight:700;color:var(--ink);font-size:16px}
+html:not(#z)[data-pal=jr] .rstar2{color:#f5b301;letter-spacing:1px;font-size:16px;line-height:1}
+html:not(#z)[data-pal=jr] .rv-wrap{position:relative}
+html:not(#z)[data-pal=jr] .jr-rl{display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding:2px 2px 8px;scrollbar-width:none;scroll-behavior:smooth;align-items:flex-start}
+html:not(#z)[data-pal=jr] .jr-rl::-webkit-scrollbar{display:none}
+html:not(#z)[data-pal=jr] .jr-rc{flex:0 0 calc((100% - 42px)/4);min-width:240px;scroll-snap-align:start;background:#f2f2f2;border:0;border-radius:24px;padding:20px 20px 18px;gap:10px;color:#222}
+html[data-theme=dark]:not(#z)[data-pal=jr] .jr-rc{background:var(--chip);color:var(--ink)}
+html:not(#z)[data-pal=jr] .jr-rc .rh{display:flex;align-items:center;gap:12px}
+html:not(#z)[data-pal=jr] .jr-rc .av{width:46px;height:46px;font-size:19px;color:#fff}
+html:not(#z)[data-pal=jr] .jr-rc .rn{display:flex;flex-direction:column;min-width:0}
+html:not(#z)[data-pal=jr] .jr-rc .rn b{font-size:16px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+html:not(#z)[data-pal=jr] .jr-rc .rn small{font-size:13px;opacity:.6}
+html:not(#z)[data-pal=jr] .jr-rc .rs{display:flex;align-items:center;gap:8px}
+html:not(#z)[data-pal=jr] .rvf{width:16px;height:16px;border-radius:50%;background:#4285f4;color:#fff;font-size:10px;display:grid;place-items:center;font-weight:700}
+html:not(#z)[data-pal=jr] .jr-rc p{font-size:15px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden;flex:none}
+html:not(#z)[data-pal=jr] .jr-rc.open p{display:block;-webkit-line-clamp:unset}
+html:not(#z)[data-pal=jr] .rmore{background:none;border:0;padding:0;font:inherit;font-size:14.5px;font-weight:600;opacity:.65;cursor:pointer;text-align:left;color:inherit}
+html:not(#z)[data-pal=jr] .rmore[hidden]{display:none}
+html:not(#z)[data-pal=jr] .rv-ar{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--panel,#fff);color:var(--ink);font-size:22px;line-height:1;cursor:pointer;z-index:2;box-shadow:0 2px 8px rgba(0,0,0,.12);display:grid;place-items:center;padding:0 0 3px}
+html:not(#z)[data-pal=jr] .rv-ar.l{left:-8px}html:not(#z)[data-pal=jr] .rv-ar.r{right:-8px}
+html:not(#z)[data-pal=jr] .rv-wrap.noar .rv-ar{display:none}
+html:not(#z)[data-pal=jr] .jr-rb{margin-top:20px}
+html:not(#z)[data-pal=jr] #jrRG{background:#1a73e8;border-color:#1a73e8;color:#fff;font-weight:600;padding:13px 26px;font-size:16px}
+html:not(#z)[data-pal=jr] #jrRG:hover{background:#1765cc;border-color:#1765cc;color:#fff}
+@media(max-width:1000px){html:not(#z)[data-pal=jr] .jr-rc{flex-basis:calc((100% - 14px)/2)}}
+@media(max-width:620px){html:not(#z)[data-pal=jr] .jr-rc{flex-basis:84%}html:not(#z)[data-pal=jr] .rv-ar{display:none}}
 </style>
 </head>
 <body>
@@ -2412,7 +2444,7 @@ dialog.rvd::backdrop{background:rgba(0,0,0,.55)}
 </form>
 <div class="rvok" id="rvOk" hidden><h3>¡Gracias por tu opinión!</h3><p>Tu reseña quedará visible en cuanto la revisemos.</p><button type="button" class="rvs" id="rvOkB">Cerrar</button></div>
 </dialog>
-<section class="jr-rev" id="jrRev" aria-label="Opiniones de clientes" hidden><h3>Lo que dicen nuestros clientes</h3><div class="jr-rl" id="jrRL"></div><div class="jr-rb" id="jrRB" hidden><a class="jr-pill" id="jrRG" target="_blank" rel="noopener">Déjanos tu reseña en Google</a></div></section>
+<section class="jr-rev" id="jrRev" aria-label="Opiniones de clientes" hidden><h3>Lo que dicen nuestros clientes</h3><div class="rv-sum" id="jrRS" hidden></div><div class="rv-wrap"><button type="button" class="rv-ar l" id="jrRP" aria-label="Anterior">‹</button><div class="jr-rl" id="jrRL"></div><button type="button" class="rv-ar r" id="jrRN" aria-label="Siguiente">›</button></div><div class="jr-rb" id="jrRB" hidden><a class="jr-pill" id="jrRG" target="_blank" rel="noopener">Déjanos tu reseña en Google</a></div></section>
 <section class="jr-rf" id="jrRf" aria-label="Refiere y gana"><h3>Refiere a un amigo y ganen los dos</h3><p class="jr-rf-s">Tu amigo recibe <b>5%</b> en su primera compra, y tú recibes descuento en la tuya.</p><ol class="jr-rf-g"><li><b>1</b><span class="t">Compra y recibe tu cupón</span><span>Con tu compra te enviamos por WhatsApp tu cupón personal para compartir.</span></li><li><b>2</b><span class="t">Compártelo con un amigo</span><span>Tu amigo lo escribe en el carrito y recibe 5% en su primera compra. Si tu amigo empieza a seguirnos recibe un 10% de descuento adicional en el producto, para un total de 15%.</span></li><li><b>3</b><span class="t">Gana en tu próxima compra</span><span>Ganas 10% de descuento en tu próxima compra por tu primer amigo. Si refieres a un segundo amigo, se suma 5% más, para un total de 15% en tu próxima compra.</span></li></ol></section>
 <section class="faq" aria-label="Preguntas frecuentes"><h3>Preguntas frecuentes</h3><details><summary>¿Cuánto demora el envío?</summary><p>Enviamos a todo el país. El tiempo depende de tu ciudad; al hacer tu pedido te confirmamos la fecha estimada por WhatsApp.</p></details><details><summary>¿Por dónde realizan los envíos?</summary><p>Despachamos a nivel nacional con transportadora. Te compartimos la guía de seguimiento cuando tu pedido sale.</p></details><details><summary>¿Cuánto cuesta el envío?</summary><p>GORRAX asume la mitad del costo del envío, el restante es asumido por el cliente. En promedio un cliente suele cancelar entre $10.000 COP a $14.000 COP, según la ciudad de destino.</p></details><details><summary>¿Cómo funcionan los cupones de descuento?</summary><p><b>1. Cupón por seguirnos.</b> Síguenos en nuestras redes y escríbenos por WhatsApp con la captura: te damos un cupón de <b>10%</b> de descuento.</p><p><b>2. Cómo usarlo.</b> Escribe tu cupón en el carrito antes de pedir. Es de un solo uso por persona.</p><p><b>3. Club GORRAX.</b> En tu tercera compra te damos un obsequio totalmente gratis.</p></details><details><summary>¿Cómo pago mi pedido?</summary><p>Con Nequi o Bancolombia. El pago contra entrega solo está disponible en Medellín, Envigado, Itagüí y Bello. Elige tu medio de pago al finalizar la compra.</p></details></section>
 <footer id="contacto"><div class="jr-fcols"><div><h4>Tienda</h4><ul id="jrFShop"></ul></div><div><h4>Redes</h4><div class="links" id="social"></div></div><div><h4>Contacto</h4><ul><li><a id="jrFWa" target="_blank" rel="noopener"></a></li><li>Envíos a toda Colombia</li></ul></div><div class="jr-fpay"><h4>Medios de pago</h4><div class="pays" id="pays" aria-label="Medios de pago"></div></div><div><h4>Legal</h4><nav class="legal" aria-label="Políticas de la tienda"><button type="button" data-pol="env">Envíos y devoluciones</button><button type="button" data-pol="cam">Cambios y garantía</button><button type="button" data-pol="dat">Política de datos</button><button type="button" data-pol="qui">Quiénes somos</button></nav></div></div><div class="jr-fbot"><span class="jr-flogo jr-lg" role="img" aria-label="GORRAX"></span><p class="jr-fsl">Tu estilo, habla por ti.<small>Gorras de excelente calidad, enviadas a toda Colombia.</small></p><span id="secret">© <span id="yr"></span> <span id="stn"></span>. Todos los derechos reservados.</span></div></footer>
@@ -4527,13 +4559,31 @@ sync()})();
 <script>
 /* Reseñas reales: se arman con CFG.REVIEWS (nada inventado: si esta vacio, la seccion no aparece) */
 window.jrRevRender=function(){const s=document.getElementById('jrRev');if(!s)return;const esc=x=>String(x==null?'':x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const R=(CFG.REVIEWS||[]).filter(r=>r&&r.t&&r.n),G=CFG.GOOGLE_REVIEW_URL||'';
+const R=[...(CFG.REVIEWS||[]),...(window.__homeRevs||[])].filter(r=>r&&r.t&&r.n),G=CFG.GOOGLE_REVIEW_URL||'';
 const L=document.getElementById('jrRL'),B=document.getElementById('jrRB'),A=document.getElementById('jrRG');
-L.innerHTML=R.map(r=>{const n=Math.max(1,Math.min(5,+r.s||5));return `<div class="jr-rc"><div class="st" aria-label="${n} de 5 estrellas">${'★'.repeat(n)}${'☆'.repeat(5-n)}</div><p>${esc(r.t)}</p><div class="au"><span class="av">${esc(String(r.n).trim().charAt(0).toUpperCase())}</span><span><b>${esc(r.n)}</b>${[r.c,r.f].filter(Boolean).map(esc).join(' · ')}</span></div></div>`}).join('');
+const ago=d=>{if(!d)return '';const m=Math.floor((Date.now()-new Date(d))/2592e6);if(isNaN(m))return '';if(m<=0){const w=Math.floor((Date.now()-new Date(d))/6048e5);return w<=0?'hace unos días':'hace '+w+(w==1?' semana':' semanas')}return 'hace '+(m>=12?Math.floor(m/12)+(m<24?' año':' años'):m+(m==1?' mes':' meses'))};
+const col=n=>{let h=0;for(const c of String(n))h=(h*31+c.charCodeAt(0))%360;return `hsl(${h} 45% 45%)`};
+L.innerHTML=R.map(r=>{const n=Math.max(1,Math.min(5,+r.s||5)),sub=[r.c,ago(r.d)].filter(Boolean).map(esc).join(' · ');return `<div class="jr-rc"><div class="rh"><span class="av" style="background:${col(r.n)}">${esc(String(r.n).trim().charAt(0).toUpperCase())}</span><span class="rn"><b>${esc(r.n)}</b>${sub?`<small>${sub}</small>`:''}</span></div><div class="rs"><span class="rstar2" aria-label="${n} de 5 estrellas">${'★'.repeat(n)}${'☆'.repeat(5-n)}</span>${r.f?`<span class="rvf" title="${esc(r.f)}">✓</span>`:''}</div><p>${esc(r.t)}</p><button type="button" class="rmore" hidden>Leer más</button></div>`}).join('');
+const S=document.getElementById('jrRS');if(R.length){const avg=R.reduce((a,r)=>a+Math.max(1,Math.min(5,+r.s||5)),0)/R.length,lab=avg>=4.5?'EXCELENTE':avg>=4?'MUY BUENO':avg>=3?'BUENO':'REGULAR';S.hidden=false;S.innerHTML=`<b>${lab}</b><span class="n">${avg.toFixed(1).replace('.0','.0')}</span><span class="rstar2">${'★'.repeat(Math.round(avg))}${'☆'.repeat(5-Math.round(avg))}</span><span>${R.length} ${R.length==1?'reseña':'reseñas'}</span>`}else S.hidden=true;
+requestAnimationFrame(()=>{L.querySelectorAll('.jr-rc').forEach(c=>{const p=c.querySelector('p'),m=c.querySelector('.rmore');if(p.scrollHeight>p.clientHeight+2)m.hidden=false});const w=L.parentNode;const u=()=>{w.classList.toggle('noar',L.scrollWidth<=L.clientWidth+4)};u();setTimeout(u,300)})
 if(G){A.href=G;B.hidden=false}else B.hidden=true;
 const H=s.querySelector('h3');if(H)H.textContent=R.length?'Lo que dicen nuestros clientes':'¿Ya tienes tu gorra? Cuéntanos cómo te fue';
 s.hidden=!(R.length||G)};
+(function(){const L=document.getElementById('jrRL');if(!L)return;
+document.getElementById('jrRP').onclick=()=>L.scrollBy({left:-(L.clientWidth*.8),behavior:'smooth'});
+document.getElementById('jrRN').onclick=()=>L.scrollBy({left:L.clientWidth*.8,behavior:'smooth'});
+L.addEventListener('click',e=>{const b=e.target.closest('.rmore');if(!b)return;const c=b.closest('.jr-rc');const o=c.classList.toggle('open');b.textContent=o?'Leer menos':'Leer más'})})();
 jrRevRender();
+/* Inicio: muestra también las reseñas APROBADAS de los productos (las pendientes u ocultas nunca salen) */
+window.jrRevLoad=async function(){try{
+  if(typeof sb==='undefined'||!sb)return;
+  const ses=(await sb.auth.getSession()).data.session;
+  const r=await sb.from('product_reviews').select('id,product_id,rating,body,name,verified,created_at'+(ses?',status':'')).order('created_at',{ascending:false}).limit(24);
+  if(r.error||!r.data)return;
+  const nm=id=>{try{return (products.find(p=>String(p.id)===String(id))||{}).name||''}catch(e){return ''}};
+  window.__homeRevs=r.data.filter(x=>!ses||x.status==='aprobada').slice(0,12).map(x=>({s:x.rating,t:x.body,n:x.name,get c(){return nm(x.product_id)},f:x.verified?'Compra verificada':'',d:x.created_at}));
+  jrRevRender();setTimeout(jrRevRender,2500)}catch(e){}};
+jrRevLoad();
 </script>
 <script>
 /* redes: toma los enlaces de CFG.SOCIAL (Instagram y TikTok) */
@@ -4588,9 +4638,10 @@ window.pvRev=async function(p){
   if(RV.cache[k]){render(RV.cache[k]);return}
   $('pvRL').innerHTML='';$('pvRS').hidden=true;$('pvSum').textContent='';sec.hidden=false;
   try{
-    const r=await sb.from('product_reviews').select('id,rating,body,name,verified,reply,created_at').eq('product_id',k).order('created_at',{ascending:false}).limit(50);
+    const ses=(await sb.auth.getSession()).data.session;
+    const r=await sb.from('product_reviews').select('id,rating,body,name,verified,reply,created_at'+(ses?',status':'')).eq('product_id',k).order('created_at',{ascending:false}).limit(50);
     if(r.error)throw r.error;
-    RV.cache[k]=r.data||[];
+    RV.cache[k]=(r.data||[]).filter(x=>!ses||x.status==='aprobada');
     if(RV.p&&String(RV.p.id)===k)render(RV.cache[k]);
   }catch(e){if(RV.p&&String(RV.p.id)===k){sec.hidden=true;$('pvRS').hidden=true}}
 };
@@ -4646,7 +4697,7 @@ $('tRes').addEventListener('click',async e=>{const b=e.target.closest('[data-rv]
   else q=T.delete().eq('id',r.id);
   const x=await q.select('id');
   rvMsg=x.error?'No se pudo guardar: '+x.error.message:(!x.data||!x.data.length)?'Supabase no permitió el cambio. Ejecuta resenas-productos.sql en Supabase > SQL Editor.':'Listo.';
-  await rvAdmLoad();if(window.pvRevClear)pvRevClear();rRes(1)});
+  await rvAdmLoad();if(window.pvRevClear)pvRevClear();if(window.jrRevLoad)jrRevLoad();rRes(1)});
 </script>
 </body>
 </html>
