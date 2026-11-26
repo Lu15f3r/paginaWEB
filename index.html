@@ -2398,6 +2398,10 @@ html:not(#z)[data-pal=jr] #jrRG{background:#1a73e8;border-color:#1a73e8;color:#f
 html:not(#z)[data-pal=jr] #jrRG:hover{background:#1765cc;border-color:#1765cc;color:#fff}
 @media(max-width:1000px){html:not(#z)[data-pal=jr] .jr-rc{flex-basis:calc((100% - 14px)/2)}}
 @media(max-width:620px){html:not(#z)[data-pal=jr] .jr-rc{flex-basis:84%}html:not(#z)[data-pal=jr] .rv-ar{display:none}}
+html:not(#z)[data-pal=jr] .rsrc{margin-left:auto;font-size:11.5px;font-weight:600;opacity:.6;white-space:nowrap}
+html:not(#z)[data-pal=jr] .rsrc.g{opacity:1;color:#1a73e8;background:#e8f0fe;border-radius:999px;padding:3px 9px}
+html[data-theme=dark]:not(#z)[data-pal=jr] .rsrc.g{background:#1f3a5f;color:#8ab4f8}
+html:not(#z)[data-pal=jr] .rsrc.g{font-size:11px}
 </style>
 </head>
 <body>
@@ -2538,8 +2542,9 @@ const CFG={
   HERO:['img/banner-1.webp','img/banner-2.webp','img/banner-3.webp','img/banner-4.webp','img/banner-5.webp'],   // sin extensión: sirve .png, .jpg o .webp   // para agregar más: escribe aquí el nombre de la foto nueva (guardada en la carpeta img/)
   // ▼▼ RESEÑAS REALES DE CLIENTES: agrega solo comentarios reales (con permiso del cliente). Mientras esté vacío, la sección no se muestra ▼▼
   // formato: {n:'Nombre',c:'Ciudad',s:5,t:'Comentario tal cual lo escribió',f:'WhatsApp'},   (s=estrellas 1-5, f=donde lo recibiste: WhatsApp, Instagram, TikTok, Google...)
-  REVIEWS:[],
-  GOOGLE_REVIEW_URL:'',   // PEGA AQUÍ el enlace para dejar reseña de tu ficha de Google (ej: 'https://g.page/r/XXXX/review' o 'https://search.google.com/local/writereview?placeid=TU_PLACE_ID'). Si está vacío, el botón no aparece
+  REVIEWS:[],   // Reseñas de GOOGLE (pega solo las reales, tal cual): {s:5,t:'texto',n:'Nombre',d:'2026-11-20',g:1}  -> salen con la etiqueta "Reseña de Google"
+  
+  GOOGLE_REVIEW_URL:'https://g.page/r/CbQFUq4wRuC8EBM/review',   // PEGA AQUÍ el enlace para dejar reseña de tu ficha de Google (ej: 'https://g.page/r/XXXX/review' o 'https://search.google.com/local/writereview?placeid=TU_PLACE_ID'). Si está vacío, el botón no aparece
   HERO_MS:3200,   // milisegundos entre foto y foto (2000 = 2 segundos)
   HERO_OLD:['img/herov1.png','img/banner-cruces.jpg','img/banner-colombia.jpg','img/banner-777.jpg','img/banner-samurai.jpg','img/banner-fugaz.jpg','img/banner-royal.jpg'],   // respaldo: solo se usan si NINGUNA foto de HERO carga
   HERO_POS:'center 28%',   // centrado vertical de las fotos del banner (0% = arriba, 50% = centro, 100% = abajo)
@@ -4559,11 +4564,11 @@ sync()})();
 <script>
 /* Reseñas reales: se arman con CFG.REVIEWS (nada inventado: si esta vacio, la seccion no aparece) */
 window.jrRevRender=function(){const s=document.getElementById('jrRev');if(!s)return;const esc=x=>String(x==null?'':x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const R=[...(CFG.REVIEWS||[]),...(window.__homeRevs||[])].filter(r=>r&&r.t&&r.n),G=CFG.GOOGLE_REVIEW_URL||'';
+const R=[...(CFG.REVIEWS||[]),...(window.__googleRevs||[]),...(window.__homeRevs||[])].filter(r=>r&&r.t&&r.n),G=CFG.GOOGLE_REVIEW_URL||'';
 const L=document.getElementById('jrRL'),B=document.getElementById('jrRB'),A=document.getElementById('jrRG');
 const ago=d=>{if(!d)return '';const m=Math.floor((Date.now()-new Date(d))/2592e6);if(isNaN(m))return '';if(m<=0){const w=Math.floor((Date.now()-new Date(d))/6048e5);return w<=0?'hace unos días':'hace '+w+(w==1?' semana':' semanas')}return 'hace '+(m>=12?Math.floor(m/12)+(m<24?' año':' años'):m+(m==1?' mes':' meses'))};
 const col=n=>{let h=0;for(const c of String(n))h=(h*31+c.charCodeAt(0))%360;return `hsl(${h} 45% 45%)`};
-L.innerHTML=R.map(r=>{const n=Math.max(1,Math.min(5,+r.s||5)),sub=[r.c,ago(r.d)].filter(Boolean).map(esc).join(' · ');return `<div class="jr-rc"><div class="rh"><span class="av" style="background:${col(r.n)}">${esc(String(r.n).trim().charAt(0).toUpperCase())}</span><span class="rn"><b>${esc(r.n)}</b>${sub?`<small>${sub}</small>`:''}</span></div><div class="rs"><span class="rstar2" aria-label="${n} de 5 estrellas">${'★'.repeat(n)}${'☆'.repeat(5-n)}</span>${r.f?`<span class="rvf" title="${esc(r.f)}">✓</span>`:''}</div><p>${esc(r.t)}</p><button type="button" class="rmore" hidden>Leer más</button></div>`}).join('');
+L.innerHTML=R.map(r=>{const n=Math.max(1,Math.min(5,+r.s||5)),sub=[r.c,ago(r.d)].filter(Boolean).map(esc).join(' · ');return `<div class="jr-rc"><div class="rh"><span class="av" style="background:${col(r.n)}">${esc(String(r.n).trim().charAt(0).toUpperCase())}</span><span class="rn"><b>${esc(r.n)}</b>${sub?`<small>${sub}</small>`:''}</span></div><div class="rs"><span class="rstar2" aria-label="${n} de 5 estrellas">${'★'.repeat(n)}${'☆'.repeat(5-n)}</span>${r.f?`<span class="rvf" title="${esc(r.f)}">✓</span>`:''}<span class="rsrc${r.g?' g':''}">${r.g?'✓ Reseña verificada de Google':'Reseña en GORRAX'}</span></div><p>${esc(r.t)}</p><button type="button" class="rmore" hidden>Leer más</button></div>`}).join('');
 const S=document.getElementById('jrRS');if(R.length){const avg=R.reduce((a,r)=>a+Math.max(1,Math.min(5,+r.s||5)),0)/R.length,lab=avg>=4.5?'EXCELENTE':avg>=4?'MUY BUENO':avg>=3?'BUENO':'REGULAR';S.hidden=false;S.innerHTML=`<b>${lab}</b><span class="n">${avg.toFixed(1).replace('.0','.0')}</span><span class="rstar2">${'★'.repeat(Math.round(avg))}${'☆'.repeat(5-Math.round(avg))}</span><span>${R.length} ${R.length==1?'reseña':'reseñas'}</span>`}else S.hidden=true;
 requestAnimationFrame(()=>{L.querySelectorAll('.jr-rc').forEach(c=>{const p=c.querySelector('p'),m=c.querySelector('.rmore');if(p.scrollHeight>p.clientHeight+2)m.hidden=false});const w=L.parentNode;const u=()=>{w.classList.toggle('noar',L.scrollWidth<=L.clientWidth+4)};u();setTimeout(u,300)})
 if(G){A.href=G;B.hidden=false}else B.hidden=true;
@@ -4575,7 +4580,8 @@ document.getElementById('jrRN').onclick=()=>L.scrollBy({left:L.clientWidth*.8,be
 L.addEventListener('click',e=>{const b=e.target.closest('.rmore');if(!b)return;const c=b.closest('.jr-rc');const o=c.classList.toggle('open');b.textContent=o?'Leer menos':'Leer más'})})();
 jrRevRender();
 /* Inicio: muestra también las reseñas APROBADAS de los productos (las pendientes u ocultas nunca salen) */
-window.jrRevLoad=async function(){try{
+window.jrGLoad=async function(){try{if(typeof sb==='undefined'||!sb)return;const g=await sb.from('site_settings').select('value').eq('key','google_reviews').limit(1);const v=g.data&&g.data[0]&&g.data[0].value;if(Array.isArray(v)){window.__googleRevs=v.filter(x=>x&&x.t&&x.n).map(x=>({s:x.s,t:x.t,n:x.n,d:x.d,g:1}));jrRevRender()}}catch(e){}};
+window.jrRevLoad=async function(){await jrGLoad();try{
   if(typeof sb==='undefined'||!sb)return;
   const ses=(await sb.auth.getSession()).data.session;
   const r=await sb.from('product_reviews').select('id,product_id,rating,body,name,verified,created_at'+(ses?',status':'')).order('created_at',{ascending:false}).limit(24);
@@ -4671,22 +4677,35 @@ $('rvF').addEventListener('submit',async e=>{e.preventDefault();
 })();
 
 /* ===== Admin: pestaña Reseñas ===== */
-let rvAdm=[],rvErr='',rvMsg='';
-async function rvAdmLoad(){if(!sb)return;try{const r=await sb.from('product_reviews').select('*').order('created_at',{ascending:false}).limit(300);rvErr=r.error?r.error.message:'';rvAdm=r.data||[]}catch(e){rvErr=String(e.message||e)}
+let rvAdm=[],rvErr='',rvMsg='',gAdm=[],gMsg='';
+async function gAdmLoad(){try{const g=await sb.from('site_settings').select('value').eq('key','google_reviews').limit(1);const v=g.data&&g.data[0]&&g.data[0].value;gAdm=Array.isArray(v)?v:[]}catch(e){gAdm=[]}}
+function gBlock(){const today=new Date().toISOString().slice(0,10);return '<div class="ord"><b>Reseñas de Google ('+gAdm.length+')</b><small>Copia aquí reseñas que de verdad estén publicadas en tu perfil de Google, tal cual las escribieron. En la tienda salen con la etiqueta "✓ Reseña verificada de Google".</small>'+(gMsg?'<p class="msg">'+esc(gMsg)+'</p>':'')+'<div style="display:grid;gap:6px;margin-top:8px"><input id="gN" maxlength="60" placeholder="Nombre (como sale en Google)"><div style="display:flex;gap:6px;flex-wrap:wrap"><select id="gS"><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select><input id="gD" type="date" value="'+today+'" max="'+today+'"></div><textarea id="gT" rows="3" maxlength="800" placeholder="Texto de la reseña, tal cual"></textarea><label style="font-size:13px"><input type="checkbox" id="gC"> Confirmo que esta reseña es real y está publicada en el perfil de Google de GORRAX</label><button type="button" class="btn grn sm" data-gr="add">Agregar reseña de Google</button></div></div>'+gAdm.map((r,i)=>'<div class="ord"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><b>'+esc(r.n)+'</b><span class="st confirmado">Google</span></div><div><span style="color:#e8a200">'+'★'.repeat(r.s)+'☆'.repeat(5-r.s)+'</span> · '+esc(r.d||'')+'</div><p style="margin:6px 0;white-space:pre-wrap">'+esc(r.t)+'</p><button type="button" class="btn red sm" data-gr="del" data-i="'+i+'">Eliminar</button></div>').join('')}
+async function rvAdmLoad(){if(!sb)return;await gAdmLoad();try{const r=await sb.from('product_reviews').select('*').order('created_at',{ascending:false}).limit(300);rvErr=r.error?r.error.message:'';rvAdm=r.data||[]}catch(e){rvErr=String(e.message||e)}
   const n=rvAdm.filter(x=>x.status==='pendiente').length,b=document.querySelector('#tabs [data-t="res"]');if(b)b.textContent='Reseñas'+(n?' ('+n+')':'')}
 function rRes(skip){const T=$('tRes');
   if(!skip){T.innerHTML='<p class="msg">Cargando reseñas…</p>';rvAdmLoad().then(()=>{if(tab==='res')rRes(1)});return}
-  if(rvErr){T.innerHTML='<p class="msg">No se pudieron leer las reseñas ('+esc(rvErr)+'). Ejecuta resenas-productos.sql en Supabase > SQL Editor.</p>';return}
+  if(rvErr){T.innerHTML=gBlock()+'<p class="msg">No se pudieron leer las reseñas de productos ('+esc(rvErr)+'). Ejecuta resenas-productos.sql en Supabase > SQL Editor.</p>';return}
   const lab={pendiente:'Pendiente',aprobada:'Aprobada',oculta:'Oculta'},cls={pendiente:'pendiente',aprobada:'confirmado',oculta:'cancelado'};
   const ord={pendiente:0,aprobada:1,oculta:2},L=rvAdm.slice().sort((a,b)=>ord[a.status]-ord[b.status]||new Date(b.created_at)-new Date(a.created_at));
   const np=rvAdm.filter(x=>x.status==='pendiente').length;
-  T.innerHTML=(rvMsg?'<p class="msg">'+esc(rvMsg)+'</p>':'')+'<div class="ord"><b>Reseñas de productos ('+rvAdm.length+')</b><small>Las reseñas nuevas llegan como <b>pendientes</b> y no se ven en la tienda hasta que las apruebes. Revisa que sean de clientes reales; marca "Compra verificada" solo si comprobaste el pedido. '+(np?'<b>Tienes '+np+' por revisar.</b>':'')+'</small></div>'+
+  T.innerHTML=gBlock()+(rvMsg?'<p class="msg">'+esc(rvMsg)+'</p>':'')+'<div class="ord"><b>Reseñas de productos ('+rvAdm.length+')</b><small>Las reseñas nuevas llegan como <b>pendientes</b> y no se ven en la tienda hasta que las apruebes. Revisa que sean de clientes reales; marca "Compra verificada" solo si comprobaste el pedido. '+(np?'<b>Tienes '+np+' por revisar.</b>':'')+'</small></div>'+
   (L.length?L.map(r=>'<div class="ord"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><b>'+esc(r.product_name||r.product_id)+'</b><span class="st '+cls[r.status]+'">'+lab[r.status]+'</span></div>'+
    '<div><span style="color:#e8a200;letter-spacing:1px">'+'★'.repeat(r.rating)+'☆'.repeat(5-r.rating)+'</span> · '+esc(r.name)+' · '+fd(r.created_at)+(r.contact?' · Contacto (privado): '+esc(r.contact):'')+(r.verified?' · ✓ Compra verificada':'')+'</div>'+
    '<p style="margin:6px 0;white-space:pre-wrap">'+esc(r.body)+'</p>'+
    '<textarea id="rvr'+r.id+'" rows="2" maxlength="600" placeholder="Respuesta de la tienda (opcional, se muestra debajo de la reseña)" style="width:100%;box-sizing:border-box">'+esc(r.reply||'')+'</textarea>'+
    '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">'+(r.status!=='aprobada'?'<button type="button" class="btn grn sm" data-rv="ok" data-id="'+r.id+'">Aprobar</button>':'<button type="button" class="btn ghost sm" data-rv="hide" data-id="'+r.id+'">Ocultar</button>')+
    '<button type="button" class="btn ghost sm" data-rv="ver" data-id="'+r.id+'">'+(r.verified?'Quitar compra verificada':'Marcar compra verificada')+'</button><button type="button" class="btn ghost sm" data-rv="rep" data-id="'+r.id+'">Guardar respuesta</button><button type="button" class="btn red sm" data-rv="del" data-id="'+r.id+'">Eliminar</button></div></div>').join(''):'<p class="desc">Todavía no hay reseñas. Cuando un cliente escriba una, aparecerá aquí.</p>')}
+$('tRes').addEventListener('click',async e=>{const g=e.target.closest('[data-gr]');if(!g)return;
+  if(g.dataset.gr==='del'&&!g.dataset.arm){g.dataset.arm=1;const t=g.textContent;g.textContent='Toca de nuevo para eliminar';setTimeout(()=>{if(g.isConnected){delete g.dataset.arm;g.textContent=t}},3500);return}
+  let arr=gAdm.slice();
+  if(g.dataset.gr==='add'){const n=($('gN').value||'').trim(),t=($('gT').value||'').trim(),sv=+$('gS').value,d=$('gD').value;
+    if(!n||t.length<3){gMsg='Escribe el nombre y el texto de la reseña.';rRes(1);return}
+    if(!$('gC').checked){gMsg='Marca la casilla para confirmar que la reseña es real y está en Google.';rRes(1);return}
+    arr.unshift({n,t,s:sv,d});}
+  else arr.splice(+g.dataset.i,1);
+  g.disabled=true;const r=await sb.from('site_settings').upsert({key:'google_reviews',value:arr});
+  if(r.error){gMsg='No se pudo guardar: '+r.error.message}else{gAdm=arr;gMsg=g.dataset.gr==='add'?'Reseña de Google guardada.':'Reseña eliminada.';if(window.jrGLoad)jrGLoad()}
+  rRes(1)});
 $('tRes').addEventListener('click',async e=>{const b=e.target.closest('[data-rv]');if(!b)return;const a=b.dataset.rv,id=b.dataset.id,r=rvAdm.find(x=>String(x.id)===String(id));if(!r)return;
   if(a==='del'&&!b.dataset.arm){b.dataset.arm=1;const t=b.textContent;b.textContent='Toca de nuevo para eliminar';setTimeout(()=>{if(b.isConnected){delete b.dataset.arm;b.textContent=t}},3500);return}
   b.disabled=true;const T=sb.from('product_reviews');let q;
