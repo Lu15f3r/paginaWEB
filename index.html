@@ -2414,6 +2414,13 @@ html:not(#z)[data-pal=jr] .cpg .cgb u{display:block;height:8px;text-decoration:n
 html:not(#z)[data-pal=jr] .cpg.s3 .cgb u{background:#1a7f37}
 html:not(#z)[data-pal=jr] .cpg .cgl{display:flex;justify-content:space-between;gap:6px;margin-top:6px;font-size:11.5px;opacity:.7}
 html:not(#z)[data-pal=jr] #ct{white-space:normal!important;max-width:min(92vw,420px);text-align:center;border-radius:18px!important;line-height:1.3}
+
+/* aviso verde al agregar: llama la atención (rebote + aro que pulsa) */
+html:not(#z):not(#y)[data-pal=jr] #ct{background:#1fa855!important;color:#fff!important;-webkit-text-fill-color:#fff!important;font-weight:700;font-size:15px;padding:13px 22px!important;box-shadow:0 8px 26px rgba(31,168,85,.45)}
+html:not(#z):not(#y)[data-pal=jr] #ct.show{animation:ctPop .55s cubic-bezier(.2,1.4,.4,1) both,ctRing 1.2s ease-out .15s 2}
+@keyframes ctPop{0%{scale:.6}60%{scale:1.12}100%{scale:1}}
+@keyframes ctRing{0%{box-shadow:0 8px 26px rgba(31,168,85,.45),0 0 0 0 rgba(31,168,85,.7)}100%{box-shadow:0 8px 26px rgba(31,168,85,.45),0 0 0 18px rgba(31,168,85,0)}}
+@media(prefers-reduced-motion:reduce){html:not(#z):not(#y)[data-pal=jr] #ct.show{animation:none}}
 </style>
 </head>
 <body>
@@ -2995,7 +3002,7 @@ $('lbO').onclick=e=>{const b=e.target.closest('button');if(!b||b.disabled)return
   lbOpts();
   if(LB.intent&&LB.need&&!LB.need.z&&!LB.need.c){const k=LB.intent;LB.intent=null;lbOpts();(k==='cart'?$('lbC'):$('lbW')).click()}};
 $('lbC').onclick=()=>{const p=lbP;if(!p||!isAv(p))return;const z=LB.z||'',col=LB.c||'';
-  if(cartAdd({t:'p',id:p.id,z,col,q:LB.q||1})){LB.q=1;const t=$('lbC').querySelector('.bt');t.textContent='✓ Agregado';$('lbC').classList.add('okk');LB.msg='';clearTimeout(window._lbT);window._lbT=setTimeout(lbBtn,1200);
+  if(cartAdd({t:'p',id:p.id,z,col,q:LB.q||1})){LB.q=1;LB.msg='';clearTimeout(window._lbT);window._lbT=setTimeout(lbBtn,1200);
     if(left(p,z||null,col||null)<=0){const nx=lbNext(p,z||null,col||null);if(nx){LB.z=nx.z;LB.c=nx.c}else LB.msg='Sin stock disponible: ya tienes todas las unidades en tu carrito.'}}
   else{const nx=lbNext(p,z||null,col||null);LB.msg=nx?`Sin stock de ${lbLab(z,col)}. Te pasé a ${lbLab(nx.z,nx.c)}.`:'Sin stock disponible.';if(nx){LB.z=nx.z;LB.c=nx.c}}
   lbOpts()};
@@ -4197,7 +4204,7 @@ $('cartW').addEventListener('click',()=>{const L=cart.map(cLine).filter(Boolean)
   saveOrder({code,type:'carrito',customer:(nm+(nm&&cdt?' · ':'')+cdt)||null,qty:n,items:L.flatMap(l=>l.it.t==='c'?l.ps.map((p,j)=>ordItem(p,l.it.parts[j].z,l.it.parts[j].col,l.it.q)):[ordItem(l.ps[0],l.it.z,l.it.col,l.it.q)]),subtotal:sub,discount:sub-tot,total:tot});setTimeout(()=>{cart=[];DCODE=null;$('cartCd').value='';cSave();$('cartNm').value='';cartRender();cOpen(false)},400)});
 $('catalogo').addEventListener('click',e=>{const a=e.target.closest('.card .cadd');if(!a||a.classList.contains('dis'))return;
   const c=a.closest('.card'),p=pBy(c.dataset.id),z=(c.querySelector('.sizes .on')||{dataset:{}}).dataset.s||'',col=(c.querySelector('.sw .on')||{dataset:{}}).dataset.col||'';
-  if(p&&cartAdd({t:'p',id:p.id,z,col,q:1})){const t=a.querySelector('.bt');t.textContent='✓ Agregado';a.classList.add('okk');setTimeout(()=>{t.textContent='Agregar al carrito';a.classList.remove('okk')},1200)}});
+  if(p)cartAdd({t:'p',id:p.id,z,col,q:1})});
 
 /* ====== CHECKOUT ====== */
 const PAY=CFG.PAY||{},DEPTS=['Amazonas','Antioquia','Arauca','Atlántico','Bogotá D.C.','Bolívar','Boyacá','Caldas','Caquetá','Casanare','Cauca','Cesar','Chocó','Córdoba','Cundinamarca','Guainía','Guaviare','Huila','La Guajira','Magdalena','Meta','Nariño','Norte de Santander','Putumayo','Quindío','Risaralda','San Andrés y Providencia','Santander','Sucre','Tolima','Valle del Cauca','Vaupés','Vichada'];
