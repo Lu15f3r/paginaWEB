@@ -2402,6 +2402,18 @@ html:not(#z)[data-pal=jr] .rsrc{margin-left:auto;font-size:11.5px;font-weight:60
 html:not(#z)[data-pal=jr] .rsrc.g{opacity:1;color:#1a73e8;background:#e8f0fe;border-radius:999px;padding:3px 9px}
 html[data-theme=dark]:not(#z)[data-pal=jr] .rsrc.g{background:#1f3a5f;color:#8ab4f8}
 html:not(#z)[data-pal=jr] .rsrc.g{font-size:11px}
+
+/* aviso de envío (barra en el carrito + mensaje al agregar) */
+html:not(#z)[data-pal=jr] .cpg{margin:0 0 4px;padding:12px 16px;background:var(--chip);border-bottom:1px solid var(--line);font-size:14px;line-height:1.35}
+html:not(#z)[data-pal=jr] .cpg[hidden]{display:none}
+html:not(#z)[data-pal=jr] .cpg b{display:block;font-weight:600;margin-bottom:8px}
+html:not(#z)[data-pal=jr] .cpg.s3 b{color:#1a7f37}
+html[data-theme=dark]:not(#z)[data-pal=jr] .cpg.s3 b{color:#5fd68a}
+html:not(#z)[data-pal=jr] .cpg .cgb{height:8px!important;min-height:0;padding:0;margin:0;border-radius:99px;background:rgba(128,128,128,.25);overflow:hidden}
+html:not(#z)[data-pal=jr] .cpg .cgb u{display:block;height:8px;text-decoration:none;border-radius:99px;background:var(--btn);transition:width .35s ease}
+html:not(#z)[data-pal=jr] .cpg.s3 .cgb u{background:#1a7f37}
+html:not(#z)[data-pal=jr] .cpg .cgl{display:flex;justify-content:space-between;gap:6px;margin-top:6px;font-size:11.5px;opacity:.7}
+html:not(#z)[data-pal=jr] #ct{white-space:normal!important;max-width:min(92vw,420px);text-align:center;border-radius:18px!important;line-height:1.3}
 </style>
 </head>
 <body>
@@ -2456,7 +2468,7 @@ html:not(#z)[data-pal=jr] .rsrc.g{font-size:11px}
 <a class="fab" id="fab" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp" title="Escríbenos por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.06 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.78h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg></a>
 <button type="button" class="fab cartb" id="cartF" aria-label="Abrir carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.4 12.2a1 1 0 0 0 1 .8H18a1 1 0 0 0 1-.8L21 8H6"/></svg><b id="cartNf" class="cn" hidden>0</b></button>
 <div class="cartO" id="cartO"></div>
-<aside class="cartP" id="cartP" aria-label="Carrito de compras"><div class="cph"><h2>Tu carrito <small id="jrCartH"></small></h2><button type="button" class="btn red sm" id="cartX" aria-label="Cerrar carrito">✕</button></div><div class="cpb" id="cartL"></div><div class="cpf"><div class="ctot" id="cartT"></div><div class="cdr"><input id="cartCd" placeholder="¿Tienes un cupón de descuento?" autocomplete="off" autocapitalize="characters"><button type="button" class="btn ghost sm" id="cartCdB">Aplicar</button><button type="button" class="btn ghost sm" id="cartCdX" hidden>Quitar</button></div><small class="cdm" id="cartCdM"></small><input id="cartNm" placeholder="Tu nombre (opcional)" autocomplete="name"><button type="button" class="btn dis" id="cartK">Finalizar compra</button><a class="btn grn dis" id="cartW" target="_blank" rel="noopener">Pedir todo por WhatsApp</a><button type="button" class="btn ghost sm" id="cartC" hidden>Vaciar carrito</button><div class="ccf" id="cartCf" hidden><span>¿Vaciar todo el carrito?</span><button type="button" class="btn red sm" id="cartCy">Sí, vaciar</button><button type="button" class="btn ghost sm" id="cartCn">No</button></div><p class="jr-secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Compra segura</p></div></aside>
+<aside class="cartP" id="cartP" aria-label="Carrito de compras"><div class="cph"><h2>Tu carrito <small id="jrCartH"></small></h2><button type="button" class="btn red sm" id="cartX" aria-label="Cerrar carrito">✕</button></div><div id="cartPg" class="cpg" hidden></div><div class="cpb" id="cartL"></div><div class="cpf"><div class="ctot" id="cartT"></div><div class="cdr"><input id="cartCd" placeholder="¿Tienes un cupón de descuento?" autocomplete="off" autocapitalize="characters"><button type="button" class="btn ghost sm" id="cartCdB">Aplicar</button><button type="button" class="btn ghost sm" id="cartCdX" hidden>Quitar</button></div><small class="cdm" id="cartCdM"></small><input id="cartNm" placeholder="Tu nombre (opcional)" autocomplete="name"><button type="button" class="btn dis" id="cartK">Finalizar compra</button><a class="btn grn dis" id="cartW" target="_blank" rel="noopener">Pedir todo por WhatsApp</a><button type="button" class="btn ghost sm" id="cartC" hidden>Vaciar carrito</button><div class="ccf" id="cartCf" hidden><span>¿Vaciar todo el carrito?</span><button type="button" class="btn red sm" id="cartCy">Sí, vaciar</button><button type="button" class="btn ghost sm" id="cartCn">No</button></div><p class="jr-secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Compra segura</p></div></aside>
 <button type="button" class="totop" id="toTop" aria-label="Subir a la sección anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button><button type="button" class="totop" id="toDown" aria-label="Bajar a la siguiente sección"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></button>
 <div class="ctoast" id="ct" role="status"></div>
 <button type="button" class="fbtn" id="fFab" aria-label="Abrir filtros"></button>
@@ -2536,7 +2548,8 @@ const CFG={
   STORE:'GORRAX',
   SHIP_FULL:24000,   // valor normal del envío a todo el país (COP)
   SHIP_DTO:50,       // % de descuento en el envío (24.000 - 50% = 12.000), desde SHIP_MINQ gorras
-  SHIP_MINQ:1,       // cantidad mínima de gorras para tener el descuento en el envío (1 = desde una gorra; 2 = solo desde 2 gorras)
+  SHIP_FREE_MINQ:3,  // ENVÍO GRATIS desde esta cantidad de gorras (3 = combo de 3; 1 = envío gratis para todos; 0 = apagado). También es gratis si el carrito trae un producto de la categoría "Combos".
+  SHIP_MINQ:2,       // cantidad mínima de gorras para tener el descuento en el envío (1 = desde una gorra; 2 = solo desde 2 gorras)
   NAV_ON:false,   // true = vuelve a mostrar el menú de categorías (Gorras…) arriba
   // ▼▼ FOTOS DEL BANNER PRINCIPAL: guarda cada foto en la carpeta img/ y escribe su nombre aquí, separado por comas ▼▼
   HERO:['img/banner-1.webp','img/banner-2.webp','img/banner-3.webp','img/banner-4.webp','img/banner-5.webp'],   // sin extensión: sirve .png, .jpg o .webp   // para agregar más: escribe aquí el nombre de la foto nueva (guardada en la carpeta img/)
@@ -2603,7 +2616,7 @@ const DEMO_DATA=[
 
 ];
 
-function prodMsg(p,size,color,code,q){return `Hola ${CFG.STORE}, me interesa este producto:\n*${p.name}* (${p.category})\n${size?'Talla: '+size+'\n':''}${color?'Color: '+color+'\n':''}${q>1?'Cantidad: '+q+'\n':''}Precio: ${money(p.price)}${q>1?' c/u':''}${'\nEnvío: '+money(cShip(q||1))+(cShip(q||1)<CFG.SHIP_FULL?' ('+CFG.SHIP_DTO+'% de descuento sobre '+money(CFG.SHIP_FULL)+')':'')}${code?'\nPedido: '+code:''}\n¿Está disponible?`}
+function prodMsg(p,size,color,code,q){return `Hola ${CFG.STORE}, me interesa este producto:\n*${p.name}* (${p.category})\n${size?'Talla: '+size+'\n':''}${color?'Color: '+color+'\n':''}${q>1?'Cantidad: '+q+'\n':''}Precio: ${money(p.price)}${q>1?' c/u':''}${'\nEnvío: '+((CFG.SHIP_FREE_MINQ>0&&(q||1)>=CFG.SHIP_FREE_MINQ)?'GRATIS':money(cShip(q||1)))+((CFG.SHIP_FREE_MINQ>0&&(q||1)>=CFG.SHIP_FREE_MINQ)?'':cShip(q||1)<CFG.SHIP_FULL?' ('+CFG.SHIP_DTO+'% de descuento sobre '+money(CFG.SHIP_FULL)+')':'')}${code?'\nPedido: '+code:''}\n¿Está disponible?`}
 
 async function load(){
   if(DEMO)products=DEMO_DATA;
@@ -4145,21 +4158,31 @@ function cMsg(L,code){const{sub,tot,cd,t0,ship}=cTot(L),nm=$('cartNm').value.tri
   return `Hola ${CFG.STORE}, quiero hacer este pedido:\n`+L.map((l,i)=>{const q=l.it.q;
     return `${i+1}) *${l.name}*${l.it.z?' - Talla: '+l.it.z:''}${l.it.col?' - Color: '+l.it.col:''} × ${q} = ${money(l.unit*q)}`}).join('\n')+(sub>tot?`\nSubtotal: ${money(sub)}`:'')+(sub>t0?`\nDescuento combos: -${money(sub-t0)}`:'')+(DCODE?`\nCupón ${DCODE.c}${cd?` (${DCODE.pct}%): -${money(cd)}`:' (Club)'}`:'')+`${ship?`\nEnvío: ${money(ship)}${ship<CFG.SHIP_FULL?' ('+CFG.SHIP_DTO+'% de descuento sobre '+money(CFG.SHIP_FULL)+')':''}`:'\nEnvío: GRATIS'}\n*Total a pagar: ${money(tot+ship)}*${code?'\nPedido: '+code:''}${nm?'\nNombre: '+nm:''}\n¿Están disponibles?`}
 const cFee=()=>Math.round((CFG.SHIP_FULL||0)*(100-(CFG.SHIP_DTO||0))/100); const cShip=n=>n>=(CFG.SHIP_MINQ||1)?cFee():(CFG.SHIP_FULL||0);
-const cFree=()=>false;
-const shipHtml=L=>{const f=cShip((L||[]).reduce((t,l)=>t+l.it.q,0));return '<div class="r"><span>Envío (flete promedio)</span><span>'+(f<CFG.SHIP_FULL?'<s>'+money(CFG.SHIP_FULL)+'</s> ':'')+'<b>'+money(f)+'</b></span></div>'};
+const cFree=L=>{try{const n=(L||[]).reduce((t,l)=>t+l.it.q,0),m=CFG.SHIP_FREE_MINQ||0;return n>0&&((m>0&&n>=m)||(L||[]).some(l=>l.ps&&l.ps[0]&&slug(l.ps[0].category)==='combos'))}catch(e){return false}};
+const shipHtml=L=>{const fr=cFree(L),f=fr?0:cShip((L||[]).reduce((t,l)=>t+l.it.q,0));return '<div class="r"><span>Envío (flete promedio)</span><span>'+(f<CFG.SHIP_FULL?'<s>'+money(CFG.SHIP_FULL)+'</s> ':'')+'<b>'+(fr?'GRATIS':money(f))+'</b></span></div>'};
+function shipHint(L){const n=(L||[]).reduce((t,l)=>t+l.it.q,0),m=CFG.SHIP_MINQ||1,f=CFG.SHIP_FREE_MINQ||0,d=CFG.SHIP_DTO||0,pl=k=>k+' producto'+(k>1?'s':'');
+  if(!n)return null;
+  if(cFree(L))return{st:3,msg:'¡Felicidades! Tu envío es GRATIS',sh:'Agregado · ¡tu envío es GRATIS!',pct:100};
+  if(n>=m){const r=f>n?f-n:0;return{st:2,msg:'¡Tienes '+d+'% de descuento en el envío!'+(r?' Agrega '+pl(r)+' más y es GRATIS':''),sh:'Agregado · '+d+'% de descuento en el envío'+(r?' · +'+r+' más y es GRATIS':''),pct:f>0?Math.min(100,Math.round(n/f*100)):100}}
+  const r=m-n;return{st:1,msg:'Agrega '+pl(r)+' más y tu envío tiene '+d+'% de descuento'+(f>m?'; con '+pl(f)+' es GRATIS':''),sh:'Agregado · agrega '+r+' más y el envío tiene '+d+'% de descuento',pct:Math.round(n/(f>0?f:m)*100)}}
+function shipBar(L){const B=$('cartPg');if(!B)return;const h=shipHint(L);if(!h){B.hidden=true;B.innerHTML='';return}
+  const m=CFG.SHIP_MINQ||1,f=CFG.SHIP_FREE_MINQ||0,d=CFG.SHIP_DTO||0;
+  B.hidden=false;B.className='cpg s'+h.st;
+  B.innerHTML='<b>'+esc(h.msg)+'</b><div class="cgb"><u style="width:'+h.pct+'%"></u></div><div class="cgl"><span>1 producto: envío normal</span>'+(m>1?'<span>'+m+': '+d+'% dcto.</span>':'')+(f>0?'<span>'+f+': GRATIS</span>':'')+'</div>'}
 function cartRender(){
   if(products.length){cart=cart.filter(it=>{const l=cLine(it);if(!l||l.max<=0)return false;if(it.q>l.max)it.q=l.max;return true});cSave()}
   const L=cart.map(cLine).filter(Boolean),{n,sub,tot,cd,t0,ship}=cTot(L);
   ['cartN','cartNf'].forEach(id=>{$(id).textContent=n;$(id).hidden=!n});
   $('cartL').innerHTML=L.length?L.map((l,i)=>`<div class="ci"><span class="cimg">${l.img?`<img src="${esc(l.img)}" alt="">`:''}</span><div><b>${esc(l.name)}</b><small>${l.sub}</small><div class="cq"><button type="button" data-cq="-1" data-i="${i}" aria-label="Menos">−</button><span>${l.it.q}</span><button type="button" data-cq="1" data-i="${i}" aria-label="Más"${l.it.q>=l.max?' disabled':''}>+</button><button type="button" class="cx" data-cx="${i}">Quitar</button></div></div><div class="cp">${l.unit<l.list?`<s>${money(l.list*l.it.q)}</s>`:''}<b>${money(l.unit*l.it.q)}</b></div></div>`).join(''):'<p class="desc" style="padding:28px 0;text-align:center">Tu carrito está vacío.<br>Agrega productos con «Agregar al carrito».</p>';
   $('cartT').innerHTML=L.length?(sub>tot?`<div class="r"><span>Subtotal</span><span>${money(sub)}</span></div>`:'')+(sub>t0?`<div class="r"><span>Descuento combos</span><span>-${money(sub-t0)}</span></div>`:'')+(cd?`<div class="r"><span>Cupón ${esc(DCODE.c)} (${DCODE.pct}%)</span><span>-${money(cd)}</span></div>`:'')+shipHtml(L,t0)+`<div class="r tt"><span>Total</span><span>${money(tot+ship)}</span></div>`:'';
+  shipBar(L);
   $('cartW').classList.toggle('dis',!L.length);$('cartK').classList.toggle('dis',!L.length);$('cartC').hidden=!L.length||!$('cartCf').hidden;if(!L.length)$('cartCf').hidden=true;
   if(L.length)$('cartW').href=wa(cMsg(L,''));else $('cartW').removeAttribute('href');cdUI()}
-let cTm;const cToast=t=>{const el=$('ct');el.textContent=t;el.classList.add('show');clearTimeout(cTm);cTm=setTimeout(()=>el.classList.remove('show'),1800)};
+let cTm;const cToast=t=>{const el=$('ct');el.textContent=t;el.classList.add('show');clearTimeout(cTm);cTm=setTimeout(()=>el.classList.remove('show'),t.length>24?3600:1800)};
 function cartAdd(it){const ex=cart.find(x=>cKey(x)===cKey(it)),l=cLine(ex||it),max=l?l.max:0;
   if(max<=0){cToast('Sin stock disponible');return false}
   if(ex){if(ex.q>=max){cToast('Ya tienes todo el stock en el carrito');return false}ex.q=Math.min(max,ex.q+(it.q||1))}else cart.push({...it,q:Math.min(it.q||1,max)});
-  cSave();cartRender();['cartB','cartF'].forEach(id=>{const b=$(id);b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump')});cToast('Agregado al carrito');try{const pr=it.t==='p'?products.find(x=>String(x.id)===String(it.id)):null;(window.dataLayer=window.dataLayer||[]).push({event:'agregar_carrito',pagina:location.hash||'/',producto:pr?pSlug(pr):(it.t==='c'?'combo':''),nombre:pr?String(pr.name||''):(it.t==='c'?'Combo':''),cantidad:it.q||1,talla:it.z||'',color:it.col||'',valor:pr?Number(pr.price)*(it.q||1):0})}catch(e){}return true}
+  cSave();cartRender();['cartB','cartF'].forEach(id=>{const b=$(id);b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump')});{let h=null;try{h=shipHint(cart.map(cLine).filter(Boolean))}catch(e){}cToast(h?h.sh:'Agregado al carrito')};try{const pr=it.t==='p'?products.find(x=>String(x.id)===String(it.id)):null;(window.dataLayer=window.dataLayer||[]).push({event:'agregar_carrito',pagina:location.hash||'/',producto:pr?pSlug(pr):(it.t==='c'?'combo':''),nombre:pr?String(pr.name||''):(it.t==='c'?'Combo':''),cantidad:it.q||1,talla:it.z||'',color:it.col||'',valor:pr?Number(pr.price)*(it.q||1):0})}catch(e){}return true}
 const cOpen=o=>{if(o)cartRender();$('cartP').classList.toggle('open',o);$('cartO').classList.toggle('open',o);document.body.style.overflow=o?'hidden':''};
 $('cartB').onclick=$('cartF').onclick=()=>cOpen(true);$('cartX').onclick=$('cartO').onclick=()=>cOpen(false);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')cOpen(false)});
@@ -4366,7 +4389,7 @@ const JR={sort:'rec'};
 const JR_ARR='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>';
 const JR_BACK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>';
 const JR_FIL='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>';
-function jrAnn(){const P=CFG.PAY||{},L=['Envíos a nivel nacional','50% de descuento en el envío','10% de descuento si nos sigues en redes'];if(P.cod!==false)L.push('Pago contra entrega');
+function jrAnn(){const P=CFG.PAY||{},L=['Envíos a nivel nacional','50% de descuento en el envío con 2 productos','Envío GRATIS con 3 productos','10% de descuento si nos sigues en redes'];if(P.cod!==false)L.push('Pago contra entrega');
   const one=L.map(t=>`<span>${esc(t)}</span>`).join('').repeat(3);return `<div class="jr-mq"><div class="jr-mqt">${one}</div><div class="jr-mqt" aria-hidden="true">${one}</div></div>`}
 const jrOff=()=>(($('ann')||{}).offsetHeight||0)+((document.querySelector('.top')||{}).offsetHeight||0)-6;
 const jrTo=el=>{if(el)scrollTo({top:Math.max(0,el.getBoundingClientRect().top+scrollY-jrOff()),behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'})};
@@ -4454,7 +4477,7 @@ $('jrFil2').onclick=()=>fOpen(true);
 $('fA').addEventListener('click',()=>setTimeout(()=>jrTo(document.querySelector('.sectH')),60));
 $('jrSortS').onchange=e=>{JR.sort=e.target.value;render()};
 $('jrBigT').textContent='Envío a todo el país '+money(cFee());
-$('jrAE').textContent=`Enviamos a toda Colombia. Envío a todo el país con ${CFG.SHIP_DTO}% de descuento.\nAl hacer tu pedido te confirmamos la fecha estimada por WhatsApp.`;
+$('jrAE').textContent=`Enviamos a toda Colombia. Con ${CFG.SHIP_MINQ||2} productos el envío tiene ${CFG.SHIP_DTO}% de descuento y con ${CFG.SHIP_FREE_MINQ||3} productos es GRATIS (se aplica solo en el carrito).\nAl hacer tu pedido te confirmamos la fecha estimada por WhatsApp.`;
 {const n=String(CFG.WHATSAPP||''),f=n.length===12?'+'+n.slice(0,2)+' '+n.slice(2,5)+' '+n.slice(5,8)+' '+n.slice(8):'+'+n,w=$('jrFWa');w.textContent='WhatsApp: '+f;w.href=wa(`Hola ${CFG.STORE}, quiero más información.`)}
 /* portada: efecto al bajar (la foto se desliza hacia arriba y la tarjeta se aparta) */
 {const H=$('hero'),R=document.documentElement;let tk=0;const f=()=>{tk=0;if(!H||document.body.classList.contains('pv'))return;const h=H.offsetHeight||1,p=Math.max(0,Math.min(1,scrollY/(h*.75)));R.style.setProperty('--jrpy',(p*50).toFixed(2));R.style.setProperty('--jrpc',Math.min(1,p*1.35).toFixed(3))};
